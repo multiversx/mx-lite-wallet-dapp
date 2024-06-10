@@ -11,3 +11,5 @@ export type {
   TransactionsDisplayInfoType,
   RawTransactionType
 } from '@multiversx/sdk-dapp/types/transactions.types';
+export type { IDappProvider } from '@multiversx/sdk-dapp/types/dappProvider.types';
+export type { TokenLoginType } from '@multiversx/sdk-dapp/types';

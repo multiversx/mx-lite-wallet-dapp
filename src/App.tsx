@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 
 import {
   AxiosInterceptorContext, // using this is optional
@@ -78,12 +79,26 @@ export const App = () => {
       <AxiosInterceptorContext.Interceptor
         authenticatedDomains={sampleAuthenticatedDomains}
       >
-        <Router>
-          <BatchTransactionsContextProvider>
-            <AppContent />
-          </BatchTransactionsContextProvider>
-        </Router>
+        <BatchTransactionsContextProvider>
+          <AppContent />
+        </BatchTransactionsContextProvider>
       </AxiosInterceptorContext.Interceptor>
     </AxiosInterceptorContext.Provider>
   );
 };
+
+export const ProviderApp = () => (
+  <Provider store={store}>
+    <PersistGate persistor={persistor} loading={null}>
+      <ErrorBoundaryComponent>
+        <MainApp />
+      </ErrorBoundaryComponent>
+    </PersistGate>
+  </Provider>
+);
+
+export const App = () => (
+  <Router>
+    <ProviderApp />
+  </Router>
+);
