@@ -3,10 +3,11 @@ import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { useGetAccountInfo } from 'hooks';
 import { useEffect } from 'react';
 import { NFTRow } from './components';
+import { PartialNftType } from '@multiversx/sdk-dapp-form';
 
 export const NFTs = () => {
   const { websocketEvent, address } = useGetAccountInfo();
-  const [fetchNFTs, { data: nfts, isError, isLoading }] = useLazyGetNftsQuery();
+  const [fetchNFTs, { data: nfts, isLoading }] = useLazyGetNftsQuery();
 
   useEffect(() => {
     fetchNFTs({ address });
@@ -23,7 +24,9 @@ export const NFTs = () => {
   return (
     <div className='flex flex-col'>
       <OutputContainer isLoading={isLoading} className='p-0'>
-        {nfts?.map((nft) => <NFTRow key={nft.identifier} nft={nft} />)}
+        {nfts?.map((nft: PartialNftType) => (
+          <NFTRow key={nft.identifier} nft={nft} />
+        ))}
       </OutputContainer>
     </div>
   );

@@ -1,7 +1,8 @@
 import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
-import { RootApi } from 'redux/rootApi';
+import { RootApi } from '../rootApi';
 import {
   ACCOUNTS_ENDPOINT,
+  NFTS_ENDPOINT,
   TOKENS_ENDPOINT
 } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import { PartialNftType } from '@multiversx/sdk-dapp-form';
@@ -15,7 +16,7 @@ const nftsEndpoints = RootApi.injectEndpoints({
       keepUnusedDataFor: API_CACHE_DURATION_SECONDS,
       query: (props) => ({
         baseURL: getBaseURL(),
-        url: `/${ACCOUNTS_ENDPOINT}/${props.address}/${TOKENS_ENDPOINT}`,
+        url: `/${ACCOUNTS_ENDPOINT}/${props.address}/${NFTS_ENDPOINT}`,
         method: 'GET',
         params: { size: MAX_API_SIZE, ...props }
       })

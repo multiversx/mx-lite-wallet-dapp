@@ -3,7 +3,6 @@ import type {
   LedgerLoginButtonPropsType,
   WalletConnectLoginButtonPropsType
 } from '@multiversx/sdk-dapp/UI';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
@@ -13,27 +12,8 @@ import {
 } from 'components/sdkDapp.components';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
+import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
-import { WebWalletLoginWrapper, WebWalletLoginConfigEnum } from './components';
-import { networkSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
-import { sdkDappStore } from 'redux/sdkDapp.store';
-import { useInitToken } from './helpers';
-import { useRedirectPathname } from './Keystore/helpers/useRedirectPathname';
-import {
-  accountSelector,
-  hookSelector,
-  walletOriginSelector
-} from 'redux/selectors';
-import { useGetLoginInfo } from 'hooks/sdkDapp.hooks';
-import { useNavigate } from 'hooks/navigation/useNavigate';
-import {
-  decodeLoginToken,
-  getIsNativeAuthSingingForbidden
-} from 'helpers/sdkDapp/sdkDapp.helpers';
-import { useOnLoginHookRedirect } from './helpers/useOnLoginHookRedirect';
-import { useEffect } from 'react';
-import { HooksEnum, routeNames } from 'routes';
-import { setWalletOrigin } from 'redux/slices';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -41,55 +21,7 @@ type CommonPropsType =
   | WalletConnectLoginButtonPropsType;
 
 export const Unlock = () => {
-  const activeNetwork = networkSelector(sdkDappStore.getState());
-  const dispatch = useDispatch();
-  const getInitToken = useInitToken();
-  const redirectPathName = useRedirectPathname();
   const navigate = useNavigate();
-  const walletOrigin = useSelector(walletOriginSelector);
-  const { tokenLogin, isLoggedIn } = useGetLoginInfo();
-  const { token: initToken } = useSelector(accountSelector);
-  const onLoginHookRedirect = useOnLoginHookRedirect();
-  const { type: hook, loginToken: hookLoginToken } = useSelector(hookSelector);
-  const token = hook ? hookLoginToken : initToken;
-  const disabledConnectButton = getIsNativeAuthSingingForbidden(token);
-
-  useEffect(() => {
-    if (!hookLoginToken) {
-      getInitToken();
-    }
-  }, [hook, activeNetwork.id]);
-
-  const onLoginRedirect = () => {
-    if (!isLoggedIn) {
-      return;
-    }
-
-    const shouldSetDashboardBgPage =
-      walletOrigin.pathname !== routeNames.dashboard;
-
-    if (shouldSetDashboardBgPage) {
-      dispatch(
-        setWalletOrigin({
-          pathname: routeNames.dashboard,
-          search: ''
-        })
-      );
-      navigate(routeNames.dashboard);
-    }
-
-    if (hook === HooksEnum.login) {
-      onLoginHookRedirect();
-    }
-
-    return navigate(redirectPathName, { replace: true });
-  };
-
-  useEffect(onLoginRedirect, [hook, tokenLogin, isLoggedIn, walletOrigin]);
-
-  const isProxyLoginFromHook =
-    decodeLoginToken(String(hookLoginToken)) != null || disabledConnectButton;
-
   const commonProps: CommonPropsType = {
     callbackRoute: RouteNamesEnum.dashboard,
     nativeAuth,

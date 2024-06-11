@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/dist/query/react';
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { REHYDRATE } from 'redux-persist';
+import { API_CACHE_DURATION_SECONDS } from 'localConstants';
 
 const axiosBaseQuery =
   (): BaseQueryFn<AxiosRequestConfig, unknown, unknown> => async (props) => {
@@ -51,6 +52,7 @@ const axiosBaseQuery =
 export const RootApi = createApi({
   reducerPath: 'API',
   baseQuery: axiosBaseQuery(),
+  keepUnusedDataFor: API_CACHE_DURATION_SECONDS,
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === REHYDRATE && action.payload) {
       return action.payload[reducerPath];

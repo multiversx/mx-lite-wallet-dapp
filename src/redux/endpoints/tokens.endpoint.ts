@@ -1,5 +1,5 @@
 import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
-import { RootApi } from 'redux/rootApi';
+import { RootApi } from '../rootApi';
 import {
   ACCOUNTS_ENDPOINT,
   TOKENS_ENDPOINT

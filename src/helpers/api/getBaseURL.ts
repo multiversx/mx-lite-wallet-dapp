@@ -1,13 +1,8 @@
-import { networksSelector } from 'redux/selectors';
-import { RootState } from 'redux/store';
+import { apiAddressSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
+import { store } from '@multiversx/sdk-dapp/reduxStore/store';
 
-export function getBaseURL() {
-  // eslint-disable-next-line
-  const { store } = require('redux/store');
-  const state: RootState = store.getState();
-  const {
-    activeNetwork: { apiAddress }
-  } = networksSelector(state);
+export const getBaseURL = () => {
+  const state = store.getState();
 
-  return apiAddress;
-}
+  return apiAddressSelector(state);
+};

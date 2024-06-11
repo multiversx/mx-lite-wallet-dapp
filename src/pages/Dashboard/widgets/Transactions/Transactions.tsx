@@ -1,34 +1,44 @@
 import { useEffect } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
 import { TransactionRow } from 'components/sdkDapp.components';
-import { useGetActiveTransactionsStatus } from 'hooks';
-import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';
+import { useGetAccountInfo } from 'hooks';
+import { useLazyGetTransactionsQuery } from 'redux/endpoints';
+import { getInterpretedTransaction } from '../../../../utils';
+import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
+import { useGetNetworkConfig } from '../../../../hooks';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
 export const Transactions = (props: TransactionsPropsType) => {
-  const { success } = useGetActiveTransactionsStatus();
-  const { isLoading, getTransactions, transactions } =
-    useGetTransactions(props);
+  const { websocketEvent, address } = useGetAccountInfo();
+  const {
+    network: { explorerAddress }
+  } = useGetNetworkConfig();
+
+  const [fetchTransactions, { data: transactions, isLoading }] =
+    useLazyGetTransactionsQuery();
 
   useEffect(() => {
-    if (success) {
-      getTransactions();
-    }
-  }, [success]);
+    fetchTransactions(address);
+  }, [address, websocketEvent]);
 
-  useEffect(() => {
-    getTransactions();
-  }, []);
-
-  if (!isLoading && transactions.length === 0) {
+  if (!isLoading && transactions?.length === 0) {
     return (
       <OutputContainer>
         <p className='text-gray-400'>No transactions found</p>
       </OutputContainer>
     );
   }
+
+  const interpretedTransactions = transactions?.map(
+    (transaction: ServerTransactionType) =>
+      getInterpretedTransaction({
+        transaction,
+        address,
+        explorerAddress
+      })
+  );
 
   return (
     <div className='flex flex-col'>
@@ -49,7 +59,7 @@ export const Transactions = (props: TransactionsPropsType) => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {transactions.map((transaction) => (
+              {interpretedTransactions?.map((transaction) => (
                 <TransactionRow
                   key={transaction.txHash}
                   className='mx-transactions text-gray-500'

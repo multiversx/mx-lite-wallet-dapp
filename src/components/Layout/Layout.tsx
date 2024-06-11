@@ -1,10 +1,10 @@
 import type { PropsWithChildren } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AuthenticatedRoutesWrapper } from 'components/sdkDappComponents';
+import { AuthenticatedRoutesWrapper } from 'components';
 import { RouteNamesEnum } from 'localConstants/routes';
 import { routes } from 'routes/routes';
-import { Footer } from './components/Footer';
-import { Header } from './components/Header';
+import { Footer } from './Footer';
+import { Header } from './Header';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const { search } = useLocation();

@@ -3,12 +3,12 @@ import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { useGetAccountInfo } from 'hooks';
 import { useEffect } from 'react';
 import { TokenRow } from './components';
+import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 
 export const Tokens = () => {
   const { websocketEvent, address } = useGetAccountInfo();
 
-  const [fetchTokens, { data: tokens, isError, isLoading }] =
-    useLazyGetTokensQuery();
+  const [fetchTokens, { data: tokens, isLoading }] = useLazyGetTokensQuery();
 
   useEffect(() => {
     fetchTokens(address);
@@ -25,7 +25,7 @@ export const Tokens = () => {
   return (
     <div className='flex flex-col'>
       <OutputContainer isLoading={isLoading} className='p-0'>
-        {tokens?.map((token) => (
+        {tokens?.map((token: TokenType) => (
           <TokenRow key={token.identifier} token={token} />
         ))}
       </OutputContainer>

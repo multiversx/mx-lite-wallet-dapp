@@ -1,13 +1,13 @@
 import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
-import { activeNetworkSelector } from 'redux/selectors';
+import { egldLabelSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
+import { useSelector } from '@multiversx/sdk-dapp/reduxStore/DappProviderContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Balance } from '@multiversx/sdk-dapp/UI';
 
 export const TokenRow = ({ token }: { token: TokenType }) => {
-  const { egldLabel } = useSelector(activeNetworkSelector);
+  const egldLabel = useSelector(egldLabelSelector);
   const logo = token.assets?.svgUrl;
 
   return (

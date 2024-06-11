@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { createSubscription } from 'react-redux/es/utils/Subscription';
 import {
   persistStore,
   persistReducer,
@@ -11,14 +10,13 @@ import {
   REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { rootReducer, ignoredSliceNames } from './reducers';
+import { rootReducer } from './reducers';
 import { RootApi } from './rootApi';
 
 const persistConfig = {
   key: 'root',
   version: 1,
-  storage,
-  blacklist: [...ignoredSliceNames]
+  storage
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -33,7 +31,6 @@ export const store = configureStore({
     }).concat(RootApi.middleware)
 });
 
-export const subscription = createSubscription(store);
 export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

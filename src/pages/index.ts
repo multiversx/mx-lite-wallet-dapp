@@ -3,7 +3,4 @@ export * from './Home';
 export * from './PageNotFound';
 export * from './Unlock';
 export * from './Disclaimer';
-export * from './Logout';
 export * from './Send';
-export * from './Sign';
-export * from './SignMessage';

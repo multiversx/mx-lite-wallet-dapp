@@ -1,10 +1,9 @@
 import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 import classNames from 'classnames';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
+import { PartialNftType } from '@multiversx/sdk-dapp-form/types';
 import { CollectionTypeByNftEnum } from 'localConstants';
 
 export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
-  const url = 'url' in nft ? String(nft.url) : '';
   const isSft = nft.type === NftEnumType.SemiFungibleESDT;
   const nftType =
     CollectionTypeByNftEnum[nft.type as NftEnumType].toUpperCase();

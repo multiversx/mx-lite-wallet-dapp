@@ -1,5 +1,5 @@
 import { AuthRedirectWrapper } from 'wrappers';
-import { Account, Tokens, Transactions } from './widgets';
+import { Account, NFTs, Tokens, Transactions } from './widgets';
 import { useScrollToElement } from 'hooks';
 import { Widget } from './components';
 import { WidgetType } from 'types/widget.types';
@@ -20,8 +20,8 @@ const WIDGETS: WidgetType[] = [
   },
   {
     title: 'NFTs',
-    widget: Transactions,
-    description: 'NFTs fo the connected account',
+    widget: NFTs,
+    description: 'NFTs f the connected account',
     reference:
       'https://api.multiversx.com/#/accounts/AccountController_getAccountNfts'
   },
