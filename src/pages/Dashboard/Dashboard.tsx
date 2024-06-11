@@ -1,5 +1,5 @@
 import { AuthRedirectWrapper } from 'wrappers';
-import { Account, Transactions } from './widgets';
+import { Account, Tokens, Transactions } from './widgets';
 import { useScrollToElement } from 'hooks';
 import { Widget } from './components';
 import { WidgetType } from 'types/widget.types';
@@ -12,11 +12,25 @@ const WIDGETS: WidgetType[] = [
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account'
   },
   {
-    title: 'Transactions (All)',
-    widget: Transactions,
-    description: 'List transactions for the connected account',
+    title: 'Tokens',
+    widget: Tokens,
+    description: 'Tokens of the connected account',
     reference:
-      'https://api.elrond.com/#/accounts/AccountController_getAccountTransactions'
+      'https://api.multiversx.com/#/accounts/AccountController_getAccountTokens'
+  },
+  {
+    title: 'NFTs',
+    widget: Transactions,
+    description: 'NFTs fo the connected account',
+    reference:
+      'https://api.multiversx.com/#/accounts/AccountController_getAccountNfts'
+  },
+  {
+    title: 'Transactions',
+    widget: Transactions,
+    description: 'Transactions list for the connected account',
+    reference:
+      'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
   }
 ];
 
