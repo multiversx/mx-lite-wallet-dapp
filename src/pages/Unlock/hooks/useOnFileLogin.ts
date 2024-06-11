@@ -125,7 +125,7 @@ export const useOnFileLogin = (props?: UseOnFileLoginType) => {
 
     const navigateRoute = privateKeyCheckRedirectRoute || redirectPathName;
 
-    if ([routeNames['sign-message'], routeNames.sign].includes(navigateRoute)) {
+    if ([routeNames.sign].includes(navigateRoute)) {
       dispatch(
         setWalletOrigin({
           pathname: routeNames.dashboard,
