@@ -9,6 +9,7 @@ export type { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 export type {
   SignedTransactionType,
   TransactionsDisplayInfoType,
+  SendTransactionsPropsType,
   RawTransactionType
 } from '@multiversx/sdk-dapp/types/transactions.types';
 export type { IDappProvider } from '@multiversx/sdk-dapp/types/dappProvider.types';

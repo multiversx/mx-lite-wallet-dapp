@@ -15,7 +15,6 @@ export interface FormSliceType {
   gasLimit: ExtendedValuesType['gasLimit'];
   gasPrice: ExtendedValuesType['gasPrice'];
   isBurn?: boolean;
-  multisigContractAddress?: string;
   processingMessage?: string;
   readonly?: ExtendedValuesType['readonly'];
   receiver: ExtendedValuesType['receiver'];

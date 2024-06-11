@@ -2,15 +2,6 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import reduxLocalStorage from 'redux-persist/lib/storage';
 import reduxSessionStorage from 'redux-persist/lib/storage/session';
-import { isExtension } from 'config';
-import {
-  extensionReducers,
-  extensionSessionStorageIgnoredReducers
-} from 'extension/popup/redux/extensionReducers';
-import {
-  moduleReducers,
-  moduleSessionStorageIgnoredReducers
-} from 'modules/moduleReducers';
 import { RootApi } from './rootApi';
 import {
   accountReducer,
@@ -25,7 +16,7 @@ const asyncIgnoredSlices = {};
 
 const accountPersisted = {
   key: 'account',
-  storage: isExtension ? reduxLocalStorage : reduxSessionStorage,
+  storage: reduxSessionStorage,
   blacklist: ['tokenLogin', 'token']
 };
 
@@ -36,7 +27,7 @@ const loginPersisted = {
 
 const networkPersisted = {
   key: 'networks',
-  storage: isExtension ? reduxLocalStorage : reduxSessionStorage,
+  storage: reduxSessionStorage,
   blacklist: []
 };
 
@@ -52,12 +43,7 @@ const interfacePersisted = {
   ]
 };
 
-const simpleIgnoredSlices = [
-  'form',
-  'hook',
-  ...moduleSessionStorageIgnoredReducers,
-  ...extensionSessionStorageIgnoredReducers
-];
+const simpleIgnoredSlices = ['form', 'hook'];
 
 const customIgnoredSlices = {
   account: persistReducer(accountPersisted, accountReducer),
@@ -90,20 +76,21 @@ function wrapReducer<
   return persistReducerFunc(persistedSlice(name), sliceObject);
 }
 
-const ignoredSlices = Object.keys(asyncIgnoredSlices).reduce((acc, entry) => {
-  const name = entry as keyof typeof asyncIgnoredSlices;
-  return {
-    ...acc,
-    [name]: wrapReducer(persistReducer as any, asyncIgnoredSlices[name], name)
-  };
-}, {} as typeof asyncIgnoredSlices);
+const ignoredSlices = Object.keys(asyncIgnoredSlices).reduce(
+  (acc, entry) => {
+    const name = entry as keyof typeof asyncIgnoredSlices;
+    return {
+      ...acc,
+      [name]: wrapReducer(persistReducer as any, asyncIgnoredSlices[name], name)
+    };
+  },
+  {} as typeof asyncIgnoredSlices
+);
 
 export const rootReducer = combineReducers({
   ...ignoredSlices,
   ...customIgnoredSlices,
   form: formReducer,
   hook: hookReducer,
-  [RootApi.reducerPath]: RootApi.reducer,
-  ...moduleReducers,
-  ...extensionReducers
+  [RootApi.reducerPath]: RootApi.reducer
 });

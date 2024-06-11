@@ -53,7 +53,6 @@ export const RootApi = createApi({
   reducerPath: 'API',
   baseQuery: axiosBaseQuery(),
   keepUnusedDataFor: API_CACHE_DURATION_SECONDS,
-  tagTypes: ['MultiSigContract', 'ExtrasSettings'],
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === REHYDRATE && action.payload) {
       return action.payload[reducerPath];

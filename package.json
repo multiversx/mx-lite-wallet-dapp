@@ -11,15 +11,20 @@
     "@fortawesome/react-fontawesome": "0.2.0",
     "@multiversx/sdk-core": "13.0.1",
     "@multiversx/sdk-dapp": "2.32.0",
+    "@multiversx/sdk-dapp-form": "^0.10.10",
+    "@multiversx/sdk-js-web-wallet-io": "^0.0.1",
     "@multiversx/sdk-network-providers": "2.2.1",
-    "@reduxjs/toolkit": "^2.2.5",
+    "@reduxjs/toolkit": "1.9.1",
     "axios": "1.6.5",
     "classnames": "2.3.2",
+    "immer": "9.0.18",
     "lodash": "^4.17.21",
     "moment": "2.29.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.16.0"
+    "react-redux": "8.0.5",
+    "react-router-dom": "6.16.0",
+    "redux-persist": "6.0.0"
   },
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src",

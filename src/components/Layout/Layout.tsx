@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { AuthenticatedRoutesWrapper } from 'components/sdkDappComponents';
 import { RouteNamesEnum } from 'localConstants/routes';
 import { routes } from 'routes/routes';
-import { Footer } from './Footer';
-import { Header } from './Header';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const { search } = useLocation();
