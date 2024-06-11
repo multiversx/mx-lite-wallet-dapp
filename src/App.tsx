@@ -22,6 +22,8 @@ import {
 } from './components';
 import { routeNames, routes } from './routes';
 
+import './assets/sass/main.scss';
+
 const RoutesComponent = memo(() => (
   <Routes>
     {routes.map((route, index) => (
