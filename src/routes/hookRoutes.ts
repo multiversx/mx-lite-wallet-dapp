@@ -1,8 +1,6 @@
 import { LoginHook } from 'pages/Hook/LoginHook';
 import { LogoutHook } from 'pages/Hook/LogoutHook';
 import { SignHook } from 'pages/Hook/SignHook';
-import { SignMessageHook } from 'pages/Hook/SignMessageHook';
-import { TransactionHook } from 'pages/Hook/TransactionHook';
 import { HooksEnum, HooksPageEnum, RouteType } from './routeTypes';
 
 export const hookRoutes: { [key: string]: RouteType } = {
@@ -17,10 +15,6 @@ export const hookRoutes: { [key: string]: RouteType } = {
   [HooksPageEnum.sign]: {
     path: `/hook/${HooksEnum.sign}`,
     component: SignHook
-  },
-  [HooksPageEnum.signMessage]: {
-    path: `/hook/${HooksEnum.signMessage}`,
-    component: SignMessageHook
   }
 };
 

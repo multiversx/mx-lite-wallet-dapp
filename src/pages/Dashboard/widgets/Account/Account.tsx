@@ -1,6 +1,6 @@
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
-import { FormatAmount } from 'components/sdkDappComponents';
+import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
 import { Username } from './components';
 

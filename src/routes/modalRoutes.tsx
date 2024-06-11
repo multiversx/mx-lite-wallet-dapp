@@ -1,8 +1,8 @@
 import React from 'react';
-import { Keystore, Ledger, Pem, WalletConnect } from 'pages/Unlock/providers';
+import { Keystore, Ledger, Pem, WalletConnect } from 'pages/Unlock';
 import { BackgroundRoutesEnum, RouteType } from './routeTypes';
 import { LayoutsEnum } from 'components/Layout/types/layouts.enum';
-import { Send, Sign, SignMessage } from 'pages';
+import { Send, Sign } from 'pages';
 import { PrivateKeyCheckWrapper } from 'components/Layout/components/PrivateKeyCheckWrapper';
 
 enum ModalRoutesEnum {
@@ -11,7 +11,6 @@ enum ModalRoutesEnum {
   pem = 'pem',
   send = 'send',
   sign = 'sign',
-  signMessage = 'sign-message',
   walletconnect = 'walletconnect'
 }
 
@@ -36,20 +35,6 @@ export const modalRoutes: Record<ModalRoutesType, RouteType> = {
       </PrivateKeyCheckWrapper>
     ),
     authenticatedRoute: true
-  },
-
-  [ModalRoutesEnum.signMessage]: {
-    path: `/${ModalRoutes.signMessage}`,
-    className: 'sign-message-modal',
-    'data-testid': 'signMessageModal',
-    layout: LayoutsEnum.modal,
-    hideHeaderCloseBtn: true,
-    authenticatedRoute: true,
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <SignMessage />
-      </PrivateKeyCheckWrapper>
-    )
   },
   [ModalRoutesEnum.sign]: {
     path: `/${ModalRoutesEnum.sign}`,

@@ -64,12 +64,7 @@ export const HookValidationOutcome = ({
   if (
     isValid &&
     registeredHook &&
-    [
-      HooksEnum.sign,
-      HooksEnum.signMessage,
-      HooksEnum.transaction,
-      HooksEnum.login
-    ].includes(registeredHook)
+    [HooksEnum.sign, HooksEnum.login].includes(registeredHook)
   ) {
     switch (loginMethod) {
       case LoginMethodsEnum.none: {

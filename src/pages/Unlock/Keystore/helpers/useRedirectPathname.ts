@@ -18,10 +18,6 @@ export const useRedirectPathname = () => {
   switch (hook) {
     case HooksEnum.sign:
       return routeNames.sign;
-    case HooksEnum.transaction:
-      return routeNames.send;
-    case HooksEnum.signMessage:
-      return routeNames['sign-message'];
     case HooksEnum.login:
       return isLoggedIn ? routeNames.dashboard : routeNames.unlock;
     case HooksEnum.logout:
