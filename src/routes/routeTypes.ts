@@ -41,7 +41,5 @@ export enum HooksEnum {
 export enum HooksPageEnum {
   login = 'loginHook',
   logout = 'logoutHook',
-  sign = 'signHook',
-  twoFa = '2FaHook',
-  transaction = 'transactionHook'
+  sign = 'signHook'
 }

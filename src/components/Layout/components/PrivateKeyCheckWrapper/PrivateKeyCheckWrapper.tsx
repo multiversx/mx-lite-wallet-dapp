@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 import { provider } from 'helpers';
 import { accountSelector } from 'redux/selectors';
-import { PrivateKeyRedirectLogin } from './PrivateKeyRedirectLogin';
+import { PrivateKeyRedirectLogin } from '../PrivateKeyRedirectLogin';
 import { usePrivateKeyCheckRedirectRoute } from 'hooks/navigation';
 
 export const PrivateKeyCheckWrapper = ({ children }: PropsWithChildren) => {

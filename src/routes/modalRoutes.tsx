@@ -3,7 +3,7 @@ import { Keystore, Ledger, Pem, WalletConnect } from 'pages/Unlock';
 import { BackgroundRoutesEnum, RouteType } from './routeTypes';
 import { LayoutsEnum } from 'components/Layout/types/layouts.enum';
 import { Send, Sign } from 'pages';
-import { PrivateKeyCheckWrapper } from 'components/Layout/components/PrivateKeyCheckWrapper';
+import { PrivateKeyCheckWrapper } from 'components/Layout/components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
 
 enum ModalRoutesEnum {
   keystore = 'keystore',
