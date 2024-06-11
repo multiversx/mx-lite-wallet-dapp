@@ -4,9 +4,9 @@ import { TransactionRow } from 'components/sdkDapp.components';
 import { TransactionsPropsType } from './types';
 import { useGetAccountInfo } from 'hooks';
 import { useLazyGetTransactionsQuery } from 'redux/endpoints';
-import { getInterpretedTransaction } from '../../../../utils';
+import { getInterpretedTransaction } from 'utils';
 import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
-import { useGetNetworkConfig } from '../../../../hooks';
+import { useGetNetworkConfig } from 'hooks';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
