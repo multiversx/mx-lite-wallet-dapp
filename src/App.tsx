@@ -1,88 +1,86 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { memo } from 'react';
+import { Provider, useSelector } from 'react-redux';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+
+import { PersistGate } from 'redux-persist/integration/react';
+import { provider } from 'helpers';
+import { PageNotFound } from 'pages/PageNotFound';
+import { activeNetworkSelector } from 'redux/selectors';
+import { store, persistor } from 'redux/store';
+import { EnvironmentsEnum } from 'types';
 
 import {
-  AxiosInterceptorContext, // using this is optional
-  DappProvider,
   Layout,
-  TransactionsToastList,
-  NotificationModal,
-  SignTransactionsModals
-  // uncomment this to use the custom transaction tracker
-  // TransactionsTracker
-} from 'components';
+  MainLayout,
+  AxiosInterceptor,
+  AxiosInterceptorContext,
+  DappProvider,
+  ErrorBoundaryComponent,
+  TransactionsTracker,
+  DappCoreUtilities,
+  WalletUtilities
+} from './components';
+import { routeNames, routes } from './routes';
 
-import {
-  apiTimeout,
-  walletConnectV2ProjectId,
-  environment,
-  sampleAuthenticatedDomains
-} from 'config';
-import { RouteNamesEnum } from 'localConstants';
-import { PageNotFound, Unlock } from 'pages';
-import { routes } from 'routes';
-import { BatchTransactionsContextProvider } from 'wrappers';
+const RoutesComponent = memo(() => (
+  <Routes>
+    {routes.map((route, index) => (
+      <Route
+        key={route.path + index}
+        path={route.path}
+        element={<route.component />}
+      >
+        {route.nestedRoutes?.map((nestedRoute) => (
+          <Route
+            index={nestedRoute.path === ''}
+            key={`${route.path}-${nestedRoute.path}`}
+            path={nestedRoute.path}
+            element={<nestedRoute.component />}
+          />
+        ))}
+      </Route>
+    ))}
 
-const AppContent = () => {
-  return (
-    <DappProvider
-      environment={environment}
-      customNetworkConfig={{
-        name: 'customConfig',
-        apiTimeout,
-        walletConnectV2ProjectId
-      }}
-      dappConfig={{
-        shouldUseWebViewProvider: true,
-        logoutRoute: RouteNamesEnum.unlock
-      }}
-      customComponents={{
-        transactionTracker: {
-          // uncomment this to use the custom transaction tracker
-          // component: TransactionsTracker,
-          props: {
-            onSuccess: (sessionId: string) => {
-              console.log(`Session ${sessionId} successfully completed`);
-            },
-            onFail: (sessionId: string, errorMessage: string) => {
-              console.log(`Session ${sessionId} failed. ${errorMessage ?? ''}`);
-            }
-          }
-        }
-      }}
-    >
-      <AxiosInterceptorContext.Listener>
-        <Layout>
-          <TransactionsToastList />
-          <NotificationModal />
-          <SignTransactionsModals />
-          <Routes>
-            <Route path={RouteNamesEnum.unlock} element={<Unlock />} />
-            {routes.map((route) => (
-              <Route
-                path={route.path}
-                key={`route-key-'${route.path}`}
-                element={<route.component />}
-              />
-            ))}
-            <Route path='*' element={<PageNotFound />} />
-          </Routes>
-        </Layout>
-      </AxiosInterceptorContext.Listener>
-    </DappProvider>
-  );
-};
+    <Route
+      path='*'
+      element={
+        <MainLayout>
+          <PageNotFound />
+        </MainLayout>
+      }
+    />
+  </Routes>
+));
 
-export const App = () => {
+const MainApp = () => {
+  const network = useSelector(activeNetworkSelector);
+
   return (
     <AxiosInterceptorContext.Provider>
-      <AxiosInterceptorContext.Interceptor
-        authenticatedDomains={sampleAuthenticatedDomains}
-      >
-        <BatchTransactionsContextProvider>
-          <AppContent />
-        </BatchTransactionsContextProvider>
-      </AxiosInterceptorContext.Interceptor>
+      <AxiosInterceptor>
+        <DappProvider
+          environment={EnvironmentsEnum.devnet}
+          externalProvider={provider}
+          dappConfig={{
+            logoutRoute: routeNames.unlock
+          }}
+          customNetworkConfig={{
+            ...network,
+            skipFetchFromServer: true
+          }}
+          customComponents={{
+            transactionTracker: {
+              component: TransactionsTracker
+            }
+          }}
+        >
+          <Layout>
+            <DappCoreUtilities />
+            <WalletUtilities />
+            <RoutesComponent />
+          </Layout>
+        </DappProvider>
+      </AxiosInterceptor>
     </AxiosInterceptorContext.Provider>
   );
 };
@@ -90,7 +88,7 @@ export const App = () => {
 export const ProviderApp = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor} loading={null}>
-      <ErrorBoundaryComponent>
+      <ErrorBoundaryComponent standalone>
         <MainApp />
       </ErrorBoundaryComponent>
     </PersistGate>

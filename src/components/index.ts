@@ -11,3 +11,4 @@ export * from './Label';
 export * from './Navigate';
 export * from './Dropzone';
 export * from './LargeLoader';
+export * from './ErrorBoundary';
