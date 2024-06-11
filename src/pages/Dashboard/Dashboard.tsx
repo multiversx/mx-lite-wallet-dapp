@@ -1,5 +1,9 @@
 import { AuthRedirectWrapper } from 'wrappers';
-import { Account, SignMessage, Transactions } from './widgets';
+import {
+  Account,
+  SignMessage,
+  Transactions
+} from './widgets';
 import { useScrollToElement } from 'hooks';
 import { Widget } from './components';
 import { WidgetType } from 'types/widget.types';
@@ -11,7 +15,6 @@ const WIDGETS: WidgetType[] = [
     description: 'Connected account details',
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account'
   },
-
   {
     title: 'Sign message',
     widget: SignMessage,
@@ -19,7 +22,6 @@ const WIDGETS: WidgetType[] = [
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1',
     anchor: 'sign-message'
   },
-
   {
     title: 'Transactions (All)',
     widget: Transactions,
