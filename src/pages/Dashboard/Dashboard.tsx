@@ -14,14 +14,14 @@ const WIDGETS: WidgetType[] = [
   {
     title: 'Tokens',
     widget: Tokens,
-    description: 'Tokens of the connected account',
+    description: 'Tokens for the connected account',
     reference:
       'https://api.multiversx.com/#/accounts/AccountController_getAccountTokens'
   },
   {
     title: 'NFTs',
     widget: NFTs,
-    description: 'NFTs f the connected account',
+    description: 'NFTs for the connected account',
     reference:
       'https://api.multiversx.com/#/accounts/AccountController_getAccountNfts'
   },
