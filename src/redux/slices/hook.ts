@@ -10,11 +10,6 @@ export interface HookSliceType {
   type: HooksEnum | null;
   wasCancelled?: boolean;
   isWalletConnectV2Initializing?: boolean;
-  signMessageOptions?: {
-    title?: string;
-    subtitle?: string;
-    signMessageSource?: string;
-  };
 }
 
 export const initialHookState: HookSliceType = {

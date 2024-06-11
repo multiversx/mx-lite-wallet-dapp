@@ -35,8 +35,7 @@ export type BackgroundRoutesType = keyof typeof BackgroundRoutesEnum;
 export enum HooksEnum {
   login = 'login',
   logout = 'logout',
-  sign = 'sign',
-  signMessage = 'sign-message'
+  sign = 'sign'
 }
 
 export enum HooksPageEnum {
@@ -44,6 +43,5 @@ export enum HooksPageEnum {
   logout = 'logoutHook',
   sign = 'signHook',
   twoFa = '2FaHook',
-  signMessage = 'signMessageHook',
   transaction = 'transactionHook'
 }

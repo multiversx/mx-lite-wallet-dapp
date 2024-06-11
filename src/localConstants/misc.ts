@@ -10,7 +10,3 @@ export const CUSTOM_TOAST_DEFAULT_DURATION = 5000;
  */
 export const MAX_ALLOWED_TRANSACTIONS_TO_SIGN = 5;
 export const ZERO = '0';
-
-// Maximum API response of transactions, tokens, etc.
-export const MAX_API_SIZE = 5000;
-export const API_CACHE_DURATION_SECONDS = 0;

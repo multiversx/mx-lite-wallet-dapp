@@ -1,3 +1,3 @@
-export * from './sdkDapp';
+export * from './api';
 export * from './app';
-export * from './signAndSendTransactions';
+export * from './sdkDapp';
