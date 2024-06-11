@@ -4,4 +4,6 @@ export { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccoun
 export { logout } from '@multiversx/sdk-dapp/utils/logout';
 export { signTransactions } from '@multiversx/sdk-dapp/services/transactions/signTransactions';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers';
+export { getAccount } from '@multiversx/sdk-dapp/utils/account/getAccount';
+export { getAddress } from '@multiversx/sdk-dapp/utils/account/getAddress';
 export { newTransaction } from '@multiversx/sdk-dapp/models';
