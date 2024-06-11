@@ -20,5 +20,6 @@ export { parseQueryParams } from '@multiversx/sdk-js-web-wallet-io/out/helpers/n
 export { replyToDapp } from './replyToDapp';
 export { CrossWindowProviderResponseEnums } from '@multiversx/sdk-js-web-wallet-io/out/lib/sdkDappUtils';
 export type { ReplyWithPostMessageType } from '@multiversx/sdk-js-web-wallet-io/out/lib/sdkDappUtils';
+export { HookResponseStatusEnum } from '@multiversx/sdk-js-web-wallet-io/out/types/hooks.enum';
 
 export const getLoginHookData = originalGetLoginHookData;

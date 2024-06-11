@@ -7,3 +7,4 @@ export * from './sdkDappForm.types';
 export * from './transaction.types';
 export * from './walletOrigin';
 export * from './widget.types';
+export * from './interface';

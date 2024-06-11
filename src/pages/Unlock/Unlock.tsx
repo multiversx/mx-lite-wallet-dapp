@@ -10,18 +10,30 @@ import {
   OperaWalletLoginButton,
   WalletConnectLoginButton,
   XaliasLoginButton
-} from 'components/sdkDappComponents';
+} from 'components/sdkDapp.components';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
-import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
 import { WebWalletLoginWrapper, WebWalletLoginConfigEnum } from './components';
 import { networkSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
 import { sdkDappStore } from 'redux/sdkDapp.store';
 import { useInitToken } from './helpers';
 import { useRedirectPathname } from './Keystore/helpers/useRedirectPathname';
-import { walletOriginSelector } from 'redux/selectors';
-import { useGetLoginInfo } from 'hooks/sdkDappHooks';
+import {
+  accountSelector,
+  hookSelector,
+  walletOriginSelector
+} from 'redux/selectors';
+import { useGetLoginInfo } from 'hooks/sdkDapp.hooks';
+import { useNavigate } from 'hooks/navigation/useNavigate';
+import {
+  decodeLoginToken,
+  getIsNativeAuthSingingForbidden
+} from 'helpers/sdkDapp/sdkDapp.helpers';
+import { useOnLoginHookRedirect } from './helpers/useOnLoginHookRedirect';
+import { useEffect } from 'react';
+import { HooksEnum, routeNames } from 'routes';
+import { setWalletOrigin } from 'redux/slices';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -78,7 +90,6 @@ export const Unlock = () => {
   const isProxyLoginFromHook =
     decodeLoginToken(String(hookLoginToken)) != null || disabledConnectButton;
 
-  const navigate = useNavigate();
   const commonProps: CommonPropsType = {
     callbackRoute: RouteNamesEnum.dashboard,
     nativeAuth,

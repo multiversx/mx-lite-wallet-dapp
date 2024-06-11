@@ -1,10 +1,8 @@
 import { FormikHelpers } from 'formik';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useGetAccountInfo, usePrivateKeyCheckRedirectRoute } from 'hooks';
 import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants/misc';
-import { useOnFileLogin } from 'pages/Unlock/helpers';
 import { accountSelector } from 'redux/selectors';
 import {
   setKeystoreLogin,
@@ -12,6 +10,7 @@ import {
 } from 'redux/slices';
 import { accessWallet } from './accessWallet';
 import { useRedirectPathname } from './useRedirectPathname';
+import { useOnFileLogin } from 'pages/Unlock/hooks';
 
 export interface KeystoreValuesType {
   accessPass: string;
@@ -20,7 +19,6 @@ export interface KeystoreValuesType {
 }
 
 export const useOnKeystoreSubmit = () => {
-  const { t } = useTranslation(['unlock']);
   const onFileLogin = useOnFileLogin();
   const dispatch = useDispatch();
   const { token, addressIndex } = useSelector(accountSelector);
@@ -36,7 +34,6 @@ export const useOnKeystoreSubmit = () => {
     const { success, error, privateKey, accountAddress } = accessWallet({
       kdContent: walletFile,
       accessPassVal: accessPass,
-      t,
       index: addressIndex ?? 0
     });
 
@@ -64,9 +61,8 @@ export const useOnKeystoreSubmit = () => {
 
     if (accountAddress !== loggedInAddress) {
       return helpers?.setErrors({
-        [WALLET_FILE]: t(
+        [WALLET_FILE]:
           'This is not the wallet you initiated the transaction with.'
-        )
       });
     }
 

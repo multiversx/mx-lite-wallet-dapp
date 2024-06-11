@@ -24,3 +24,5 @@ export { TransactionRow } from '@multiversx/sdk-dapp/UI/TransactionsTable/compon
 export { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 export { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 export { AddressTable } from '@multiversx/sdk-dapp/UI/ledger/LedgerLoginContainer/AddressTable';
+export { Trim } from '@multiversx/sdk-dapp/UI/Trim/Trim';
+export { ModalContainer } from '@multiversx/sdk-dapp/UI/ModalContainer/ModalContainer';

@@ -1,5 +1,4 @@
 import { UserSecretKey, UserWallet } from '@multiversx/sdk-wallet';
-import { TFunction } from 'i18next';
 
 export interface AccessWalletType {
   kdContent: { [key: string]: any };
@@ -7,11 +6,10 @@ export interface AccessWalletType {
 }
 
 export const accessWallet = ({
-  t,
   kdContent,
   accessPassVal,
   index
-}: { t: TFunction; index: number } & AccessWalletType) => {
+}: { index: number } & AccessWalletType) => {
   try {
     let privateKey = '';
     let accountAddress = '';
@@ -48,7 +46,7 @@ export const accessWallet = ({
     };
   } catch (e) {
     return {
-      error: t('Please check your uploaded file or your password'),
+      error: 'Please check your uploaded file or your password',
       success: false,
       privateKey: '',
       accountAddress: ''

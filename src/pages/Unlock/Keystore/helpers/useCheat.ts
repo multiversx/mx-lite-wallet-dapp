@@ -1,16 +1,14 @@
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants/misc';
-import { useOnFileLogin } from 'pages/Unlock/helpers';
 import { accountSelector } from 'redux/selectors';
 import { setKeystoreLogin } from 'redux/slices';
 import { accessWallet } from './accessWallet';
+import { useOnFileLogin } from 'pages/Unlock/hooks';
 
 const FILE = process.env.REACT_APP_KEYSTORE || '';
 const PASSWORD = process.env.REACT_APP_PASSWORD || '';
 
 export const useCheat = () => {
-  const { t } = useTranslation(['unlock']);
   const onFileLogin = useOnFileLogin();
   const dispatch = useDispatch();
   const { token } = useSelector(accountSelector);
@@ -19,7 +17,6 @@ export const useCheat = () => {
     const { success, privateKey, accountAddress } = accessWallet({
       kdContent: JSON.parse(FILE),
       accessPassVal: PASSWORD,
-      t,
       index: 0
     });
 

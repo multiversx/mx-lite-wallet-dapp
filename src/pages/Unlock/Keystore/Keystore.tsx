@@ -1,12 +1,10 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Formik, FormikHelpers } from 'formik';
-import { Trans, useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { LargeLoader, FileType } from 'components';
-import { ModalCloseButton } from 'components/Layout/ModalLayout/components/ModalCloseButton';
 import { getIsNativeAuthSingingForbidden } from 'helpers';
 import {
   useGetAccountInfo,
@@ -14,7 +12,6 @@ import {
   useReplyWithCancelled,
   useWalletOrigin
 } from 'hooks';
-import { DataTestIdsEnum } from 'localConstants';
 import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants/misc';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { clearPrivateKeyCheckRedirectRoute } from 'redux/slices';
@@ -33,14 +30,13 @@ import {
   useOnKeystoreSubmit
 } from './helpers';
 import { useInitToken } from '../helpers';
+import { ModalCloseButton } from 'components/Layout/ModalLayout/components/ModalCloseButton';
 
 const isDevelopment = ['development', 'test'].includes(
   process.env.NODE_ENV as string
 );
 
 export const Keystore = () => {
-  const { t: c } = useTranslation(['common']);
-  const { t } = useTranslation(['unlock']);
   const { token: initToken, keystoreFile } = useSelector(accountSelector);
   const { address } = useGetAccountInfo();
   const navigate = useNavigate();
@@ -52,6 +48,7 @@ export const Keystore = () => {
   const dispatch = useDispatch();
   const [walletFileV5andPassword, setWalletFileV5andPassword] =
     useState<AccessWalletType | null>();
+  const onRead = getOnKeystoreRead();
 
   const token = hook ? loginToken : initToken;
   const disabledConnectButton = getIsNativeAuthSingingForbidden(token);
@@ -73,7 +70,6 @@ export const Keystore = () => {
   const replyWithCancelled = useReplyWithCancelled();
   const { file, setFile, initialWalletFile } = useKeystoreFileData();
   const onKeystoreSubmit = useOnKeystoreSubmit();
-  const onRead = getOnKeystoreRead(t);
   const processedFile: FileType | undefined = file
     ? { fileName: initialWalletFile?.name ?? file?.fileName }
     : undefined;
@@ -121,12 +117,9 @@ export const Keystore = () => {
     return (
       <div
         className={classNames('keystore-wrapper', { cheat: isDevelopment })}
-        data-testid={DataTestIdsEnum.keystoreModal}
+        data-testid='keystoreModal'
       >
-        <div
-          className='modal-layout-title'
-          data-testid={DataTestIdsEnum.modalTitle}
-        >
+        <div className='modal-layout-title' data-testid='modalTitle'>
           Login using Keystore
         </div>
         <div className='modal-layout-subtitle'>
@@ -154,18 +147,15 @@ export const Keystore = () => {
   return (
     <div
       className={classNames('keystore-wrapper', { cheat: isDevelopment })}
-      data-testid={DataTestIdsEnum.keystoreModal}
+      data-testid='keystoreModal'
     >
       <ModalCloseButton
         className='keystore-close'
         onClick={onClose}
-        data-testid={DataTestIdsEnum.keystoreCloseModalBtn}
+        data-testid='keystoreCloseModalBtn'
       />
 
-      <div
-        className='modal-layout-title'
-        data-testid={DataTestIdsEnum.modalTitle}
-      >
+      <div className='modal-layout-title' data-testid='modalTitle'>
         Login using Keystore
       </div>
       <div className='modal-layout-subtitle'>
@@ -203,17 +193,17 @@ export const Keystore = () => {
               <button
                 disabled={!isValid || disabledConnectButton}
                 onClick={submitForm}
-                data-testid={DataTestIdsEnum.submitButton}
+                data-testid='submitButton'
                 className='btn btn-primary modal-layout-button'
               >
-                <Trans t={c}>Access Wallet</Trans>
+                Access Wallet
               </button>
 
               {isDevelopment && (
                 <button
                   disabled={disabledConnectButton}
                   onClick={handleCheat}
-                  data-testid={DataTestIdsEnum.cheatBtn}
+                  data-testid='cheatBtn'
                   className='modal-layout-text'
                 >
                   Cheat

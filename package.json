@@ -15,6 +15,7 @@
     "@multiversx/sdk-js-web-wallet-io": "^0.0.1",
     "@multiversx/sdk-network-providers": "2.2.1",
     "@reduxjs/toolkit": "1.9.1",
+    "react-dropzone": "11.5.1",
     "axios": "1.6.5",
     "classnames": "2.3.2",
     "immer": "9.0.18",

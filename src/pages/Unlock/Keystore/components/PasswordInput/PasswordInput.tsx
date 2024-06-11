@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import { ErrorMessage, FormikProps } from 'formik';
-import { DataTestIdsEnum } from 'localConstants';
 
 interface PasswordInputPropsType<T> {
   formikProps: FormikProps<T>;
@@ -24,7 +23,7 @@ export function PasswordInput<
         type='password'
         autoComplete='new-password'
         id={ACCESS_PASS}
-        data-testid={DataTestIdsEnum[ACCESS_PASS]}
+        data-testid={ACCESS_PASS}
         value={values[ACCESS_PASS]}
         onChange={handleChange}
         onBlur={handleBlur}

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setProviderPrivateKey } from 'helpers';
 import { logoutAction } from 'redux/commonActions';
-import { TokenLoginType } from 'types/sdkDapp.types';
+import { TokenLoginType } from 'types';
 
 export enum FileLoginEnum {
   pem = 'pem',
@@ -10,23 +10,21 @@ export enum FileLoginEnum {
 
 interface AccountSliceType {
   fileLogin: FileLoginEnum | null;
-  keystoreFileName: string;
+  keystoreFile: string;
   tokenLogin: TokenLoginType | null;
   token?: string;
   address?: string;
-  canImpersonate?: boolean;
   /**
    * computed from login hook tokenLogin
    */
   externalNativeAuthToken?: string;
   addressIndex: number | null;
   isWebview?: boolean;
-  keystoreSessionKey?: string;
 }
 
 const initialState: AccountSliceType = {
   fileLogin: null,
-  keystoreFileName: '',
+  keystoreFile: '',
   tokenLogin: null,
   addressIndex: null
 };
@@ -42,12 +40,12 @@ export const accountSlice = createSlice({
     setKeystoreLogin: (
       state: AccountSliceType,
       action: PayloadAction<{
-        keystoreFileName: string;
+        keystoreFile: string;
         privateKey: string;
       }>
     ) => {
       setProviderPrivateKey(action.payload.privateKey);
-      state.keystoreFileName = action.payload.keystoreFileName;
+      state.keystoreFile = action.payload.keystoreFile;
       state.fileLogin = FileLoginEnum.keystore;
     },
     setAddressIndex: (
@@ -70,23 +68,17 @@ export const accountSlice = createSlice({
     ) => {
       state.token = action.payload;
     },
-    setIsWebview: (
-      state: AccountSliceType,
-      action: PayloadAction<AccountSliceType['isWebview']>
-    ) => {
-      state.isWebview = action.payload;
-    },
     setExternalNativeAuthToken: (
       state: AccountSliceType,
       action: PayloadAction<AccountSliceType['externalNativeAuthToken']>
     ) => {
       state.externalNativeAuthToken = action.payload;
     },
-    setKeystoreSessionKey: (
+    setAccountAddress: (
       state: AccountSliceType,
-      action: PayloadAction<string>
+      action: PayloadAction<AccountSliceType['address']>
     ) => {
-      state.keystoreSessionKey = action.payload;
+      state.address = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -99,10 +91,6 @@ export const accountSlice = createSlice({
 
         if (payload?.keepCurrentExtensionState) {
           newState.address = address;
-        }
-
-        if (payload?.keystoreSessionKey) {
-          newState.keystoreSessionKey = payload.keystoreSessionKey;
         }
 
         return newState;
@@ -118,8 +106,7 @@ export const {
   setToken,
   setExternalNativeAuthToken,
   setAddressIndex,
-  setIsWebview,
-  setKeystoreSessionKey
+  setAccountAddress
 } = accountSlice.actions;
 
 export const accountReducer = accountSlice.reducer;
