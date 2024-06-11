@@ -15,10 +15,10 @@ import {
   AxiosInterceptor,
   AxiosInterceptorContext,
   DappProvider,
-  ErrorBoundaryComponent,
   TransactionsTracker,
   DappCoreUtilities,
-  WalletUtilities
+  WalletUtilities,
+  ErrorBoundaryComponent
 } from './components';
 import { routeNames, routes } from './routes';
 
@@ -88,7 +88,7 @@ const MainApp = () => {
 export const ProviderApp = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor} loading={null}>
-      <ErrorBoundaryComponent standalone>
+      <ErrorBoundaryComponent>
         <MainApp />
       </ErrorBoundaryComponent>
     </PersistGate>
