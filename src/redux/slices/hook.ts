@@ -9,7 +9,6 @@ export interface HookSliceType {
   hasNativeAuthToken?: boolean;
   type: HooksEnum | null;
   wasCancelled?: boolean;
-  isWalletConnectV2Initializing?: boolean;
   signMessageOptions?: {
     title?: string;
     subtitle?: string;
@@ -20,8 +19,7 @@ export interface HookSliceType {
 export const initialHookState: HookSliceType = {
   callbackUrl: '',
   hookUrl: '',
-  type: null,
-  isWalletConnectV2Initializing: false
+  type: null
 };
 
 export const hookSlice = createSlice({
