@@ -13,8 +13,8 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   const getInitToken = useInitToken();
   const { token: initToken } = useSelector(accountSelector);
 
-  const { type: hook, loginToken } = useSelector(hookSelector);
-  const token = hook ? loginToken : initToken;
+  const { type: hook, loginToken: hookInitToken } = useSelector(hookSelector);
+  const token = hook ? hookInitToken : initToken;
 
   const onFileLogin = useOnFileLogin();
 
@@ -43,7 +43,7 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
     onFileLogin({
       address: data.address,
       privateKey: data.privateKey,
-      token: String(token)
+      token
     });
   };
 
