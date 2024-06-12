@@ -1,9 +1,9 @@
-import { OutputContainer } from 'components';
-import { useLazyGetNftsQuery } from 'redux/endpoints';
-import { useGetAccountInfo } from 'hooks';
 import { useEffect } from 'react';
-import { NFTRow } from './components';
 import { PartialNftType } from '@multiversx/sdk-dapp-form';
+import { OutputContainer } from 'components';
+import { useGetAccountInfo } from 'hooks';
+import { useLazyGetNftsQuery } from 'redux/endpoints';
+import { NFTRow } from './components';
 
 export const NFTs = () => {
   const { websocketEvent, address } = useGetAccountInfo();
