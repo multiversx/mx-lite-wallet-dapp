@@ -7,12 +7,12 @@ export const Send = () => {
       <form>
         <div className='flex flex-col gap-4'>
           <div className='flex flex-row gap-4 justify-between'>
-            <label htmlFor='number' className='block text-sm font-bold mb-2'>
-              Number:
+            <label htmlFor='amount' className='block text-sm font-bold mb-2'>
+              Amount:
             </label>
             <input
               type='number'
-              id='number'
+              id='amount'
               className='block w-full p-2 pl-10 text-sm text-gray-700 placeholder-gray-400'
               placeholder='Enter a number'
             />
@@ -26,7 +26,7 @@ export const Send = () => {
               <option value='option3'>Option 3</option>
             </select>
           </div>
-          <div>
+          <div className='flex row gap-4'>
             <label htmlFor='gasLimit' className='block text-sm font-bold mb-2'>
               Gas Limit:
             </label>
@@ -37,7 +37,7 @@ export const Send = () => {
               placeholder='Enter a gas limit'
             />
           </div>
-          <div>
+          <div className='flex row gap-4'>
             <label htmlFor='data' className='block text-sm font-bold mb-2'>
               Data:
             </label>
