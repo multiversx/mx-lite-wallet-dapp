@@ -7,7 +7,6 @@ import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 
 export const Tokens = () => {
   const { websocketEvent, address } = useGetAccountInfo();
-
   const [fetchTokens, { data: tokens, isLoading }] = useLazyGetTokensQuery();
 
   useEffect(() => {

@@ -1,46 +1,28 @@
 import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
-import classNames from 'classnames';
 import { PartialNftType } from '@multiversx/sdk-dapp-form/types';
 import { CollectionTypeByNftEnum } from 'localConstants';
 
 export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
-  const isSft = nft.type === NftEnumType.SemiFungibleESDT;
   const nftType =
     CollectionTypeByNftEnum[nft.type as NftEnumType].toUpperCase();
 
   return (
-    <div className='nft' data-testid={`${nft.identifier}-${nftType}-container`}>
+    <div className='bg-black rounded-lg w-48'>
       <img
-        className='nft-img'
         src={nft.media?.[0]?.thumbnailUrl}
         alt={`${nft.identifier} ${nftType} Image`}
+        className='w-full h-48 object-cover rounded-lg'
       />
-      <div className='centered p-3'>
-        <div className='column flex'>
-          <span className='mb-1 d-flex gap-2 align-items-center'>
-            <span className='nft-name'>
-              {nft.balance && (
-                <span className='nft-balance me-2'>{nft.balance}</span>
-              )}
-              {nft.name}
-            </span>
-            <span
-              className={classNames('badge badge-outline', {
-                'badge-outline-orange': isSft,
-                'badge-outline-yellow': !isSft
-              })}
-            >
-              {nftType}
-            </span>
-          </span>
-          <span className='nft-artist'>{nft.collection}</span>
+      <div className='mt-2 p-4'>
+        <div className='flex flex-row justify-between align-middle'>
+          <div className='text-lg text-white'>
+            {nft.balance ?? ''} {nft.name}
+          </div>
+          <div className='text-white text-xs my-auto'>{nftType}</div>
         </div>
-        {/*<SendNFTButton*/}
-        {/*  disabled={disabled}*/}
-        {/*  identifier={identifier}*/}
-        {/*  isSuspicious={isSuspicious}*/}
-        {/*  type={nftType}*/}
-        {/*/>*/}
+        <div className='flex items-center justify-between mt-1'>
+          <div className='text-xs text-gray-400'>{nft.collection}</div>
+        </div>
       </div>
     </div>
   );

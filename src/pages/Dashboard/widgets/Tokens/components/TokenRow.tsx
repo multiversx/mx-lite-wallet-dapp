@@ -1,39 +1,26 @@
 import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
-import { egldLabelSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
-import { useSelector } from '@multiversx/sdk-dapp/reduxStore/DappProviderContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Balance } from '@multiversx/sdk-dapp/UI';
+import { FormatAmount } from 'components';
 
 export const TokenRow = ({ token }: { token: TokenType }) => {
-  const egldLabel = useSelector(egldLabelSelector);
   const logo = token.assets?.svgUrl;
 
   return (
-    <div className='token-item' data-testid={token.identifier}>
-      <div
-        className={classNames('token-item-logo', {
-          egld: egldLabel === token.ticker,
-          empty: !logo
-        })}
-      >
+    <div className='flex items-center justify-between p-4 rounded-lg'>
+      <div className='flex items-center space-x-4'>
         {logo ? (
-          <img src={logo} className='token-item-logo-icon' />
+          <img src={logo} alt={token.ticker} className='w-8 h-8' />
         ) : (
           <FontAwesomeIcon icon={faCoins} className='token-item-logo-coins' />
         )}
+        <div>{token.ticker}</div>
       </div>
-
-      <div className='token-item-wrapper'>
-        <div className='token-item-left'>
-          <div className='token-item-ticker'>{token.ticker}</div>
+      {token.balance && (
+        <div className='text-right'>
+          <FormatAmount value={token.balance} showLabel={false} />
         </div>
-
-        <div className='token-item-right'>
-          <Balance amount={String(token.balance)} showTokenLabel={false} />
-        </div>
-      </div>
+      )}
     </div>
   );
 };
