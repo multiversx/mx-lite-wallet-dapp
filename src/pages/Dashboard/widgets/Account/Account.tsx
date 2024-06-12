@@ -4,7 +4,7 @@ import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
 import { explorerAddressSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
 import { useSelector } from '@multiversx/sdk-dapp/reduxStore/DappProviderContext';
 import { Copy, MxLink } from 'components';
-import { RouteNamesEnum } from '../../../../localConstants';
+import { RouteNamesEnum } from 'localConstants';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();

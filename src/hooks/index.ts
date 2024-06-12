@@ -1,4 +1,5 @@
 export * from './sdkDapp.hooks';
-export * from './withPageTitle';
-export * from './useScrollToElement';
+export * from './tokens';
 export * from './useIsWebProvider';
+export * from './useScrollToElement';
+export * from './withPageTitle';
