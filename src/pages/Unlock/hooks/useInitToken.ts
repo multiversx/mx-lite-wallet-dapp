@@ -4,23 +4,19 @@ import { hookSelector } from 'redux/selectors';
 import { setToken } from 'redux/slices';
 import { HooksEnum } from 'routes';
 
-interface InitTokenType {
-  renewToken?: boolean;
-}
-
 export const useInitToken = () => {
   const dispatch = useDispatch();
   const { type: hook, loginToken } = useSelector(hookSelector);
   const { isLoggedIn } = useGetLoginInfo();
   const loginService = useLoginService();
 
-  const getInitToken = async (props?: InitTokenType) => {
+  const getInitToken = async () => {
     if (hook === HooksEnum.login) {
       dispatch(setToken(loginToken ?? ''));
       return loginToken;
     }
 
-    if (!isLoggedIn || props?.renewToken) {
+    if (!isLoggedIn) {
       try {
         const newToken = await loginService.getNativeAuthLoginToken();
         dispatch(setToken(newToken));
