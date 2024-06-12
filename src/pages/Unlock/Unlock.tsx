@@ -14,6 +14,7 @@ import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
+import { Pem } from './components';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -63,6 +64,8 @@ export const Unlock = () => {
               data-testid='xAliasLoginBtn'
               {...commonProps}
             />
+
+            <Pem />
           </div>
         </div>
       </div>
