@@ -2,16 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { Button, ModalContainer, PageState } from 'components';
+import { UseModalReturnType } from 'hooks';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { parsePem } from './helpers';
 
-interface DepositModalPropsType {
-  handleClose: () => void;
-  show: boolean;
-}
-
-export const PemModal = ({ handleClose, show }: DepositModalPropsType) => {
+export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const getInitToken = useInitToken();
