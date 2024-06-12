@@ -1,13 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
-import { getAccount, getToken, loginWithExternalProvider } from 'helpers';
+import { getToken, loginWithExternalProvider } from 'helpers';
 import { useLoginService } from 'hooks';
-import {
-  sdkDappSetAccount,
-  sdkDappSetAddress,
-  sdkDappStore
-} from 'redux/sdkDapp.store';
 import { hookSelector } from 'redux/selectors';
 
 import {
@@ -24,10 +19,6 @@ interface UseOnLoginType {
   privateKey: string;
 }
 
-interface UseOnFileLoginType {
-  shouldFetchAccount: boolean;
-}
-
 export const generateTokenSignature = ({
   address,
   loginToken,
@@ -37,7 +28,7 @@ export const generateTokenSignature = ({
   return signMessage({ message, privateKey });
 };
 
-export const useOnFileLogin = (props?: UseOnFileLoginType) => {
+export const useOnFileLogin = () => {
   const dispatch = useDispatch();
   const { loginToken, hasNativeAuthToken } = useSelector(hookSelector);
   const loginService = useLoginService();
@@ -82,21 +73,6 @@ export const useOnFileLogin = (props?: UseOnFileLoginType) => {
           signature,
           address
         });
-      }
-    }
-
-    if (props?.shouldFetchAccount) {
-      const account = await getAccount(address);
-
-      if (account) {
-        sdkDappStore.dispatch(sdkDappSetAddress(address));
-        sdkDappStore.dispatch(
-          sdkDappSetAccount({
-            ...account,
-            address,
-            nonce: account.nonce.valueOf()
-          })
-        );
       }
     }
 
