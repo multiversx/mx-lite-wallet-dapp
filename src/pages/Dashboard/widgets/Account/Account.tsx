@@ -12,7 +12,7 @@ export const Account = () => {
   const explorerAddress = useSelector(explorerAddressSelector);
 
   return (
-    <div className='mb-6 rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
+    <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
       <div className='flex flex-col gap-6 sm:flex-row'>
         <div className='flex grow flex-col gap-4 overflow-hidden'>
           <div className='overflow-hidden text-ellipsis text-xl font-medium xs:text-2xl'>
