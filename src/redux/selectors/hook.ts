@@ -19,8 +19,3 @@ export const hookUrlSelector = createSelector(
   stateSelector,
   (state) => state.hookUrl
 );
-
-export const hookIsWalletConnectV2InitializingSelector = createSelector(
-  stateSelector,
-  (state) => state.isWalletConnectV2Initializing
-);

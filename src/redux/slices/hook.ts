@@ -44,19 +44,10 @@ export const hookSlice = createSlice({
         ...initialHookState,
         wasCancelled: action?.payload?.wasCancelled ?? false
       };
-    },
-
-    setIsWalletConnectV2Initializing: (
-      state: HookSliceType,
-      action: PayloadAction<boolean>
-    ) => {
-      state.isWalletConnectV2Initializing = action.payload;
-      return state;
     }
   }
 });
 
-export const { setHook, resetHook, setIsWalletConnectV2Initializing } =
-  hookSlice.actions;
+export const { setHook, resetHook } = hookSlice.actions;
 
 export const hookReducer = hookSlice.reducer;
