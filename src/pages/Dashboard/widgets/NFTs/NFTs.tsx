@@ -7,7 +7,7 @@ import { PartialNftType } from '@multiversx/sdk-dapp-form';
 
 export const NFTs = () => {
   const { websocketEvent, address } = useGetAccountInfo();
-  const [fetchNFTs, { data: nfts = [], isLoading }] = useLazyGetNftsQuery();
+  const [fetchNFTs, { data: nfts, isLoading }] = useLazyGetNftsQuery();
 
   useEffect(() => {
     fetchNFTs({ address });
@@ -27,16 +27,7 @@ export const NFTs = () => {
         isLoading={isLoading}
         className='p-0 flex flex-wrap gap-4'
       >
-        {[
-          ...nfts,
-          ...nfts,
-          ...nfts,
-          ...nfts,
-          ...nfts,
-          ...nfts,
-          ...nfts,
-          ...nfts
-        ].map((nft: PartialNftType) => (
+        {nfts?.map((nft: PartialNftType) => (
           <NFTRow key={nft.identifier} nft={nft} />
         ))}
       </OutputContainer>
