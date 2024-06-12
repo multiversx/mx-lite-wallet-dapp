@@ -8,12 +8,6 @@ export enum HooksEnum {
   sign = 'sign'
 }
 
-export enum HooksPageEnum {
-  login = 'loginHook',
-  logout = 'logoutHook',
-  sign = 'signHook'
-}
-
 interface RouteWithTitleType extends RouteType {
   title: string;
 }
