@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -18,17 +19,18 @@ import {
   environment,
   sampleAuthenticatedDomains
 } from 'config';
+import { provider } from 'helpers/app';
 import { RouteNamesEnum } from 'localConstants';
 import { PageNotFound, Unlock } from 'pages';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
-import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 
 const AppContent = () => {
   return (
     <DappProvider
       environment={environment}
+      externalProvider={provider}
       customNetworkConfig={{
         name: 'customConfig',
         apiTimeout,

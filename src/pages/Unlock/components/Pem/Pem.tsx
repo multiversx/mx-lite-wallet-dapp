@@ -1,10 +1,7 @@
 import { useModal } from 'hooks';
-import React from 'react';
 import { PemModal } from './components/PemModal';
 
-interface PemPropsType {}
-
-export const Pem = ({}: PemPropsType) => {
+export const Pem = () => {
   const { show, handleShow, handleClose } = useModal();
 
   return (

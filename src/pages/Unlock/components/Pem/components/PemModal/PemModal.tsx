@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
 import { Button, ModalContainer, PageState } from 'components';
+import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
+import { accountSelector, hookSelector } from 'redux/selectors';
 import { parsePem } from './helpers';
 
 interface DepositModalPropsType {
@@ -11,10 +14,26 @@ interface DepositModalPropsType {
 export const PemModal = ({ handleClose, show }: DepositModalPropsType) => {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const getInitToken = useInitToken();
+  const { token: initToken } = useSelector(accountSelector);
+
+  const { type: hook, loginToken } = useSelector(hookSelector);
+  const token = hook ? loginToken : initToken;
+
+  const onFileLogin = useOnFileLogin();
+
+  useEffect(() => {
+    if (hook) {
+      return;
+    }
+
+    getInitToken();
+  }, [hook]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
+      setError(null);
     }
   };
 
@@ -24,7 +43,12 @@ export const PemModal = ({ handleClose, show }: DepositModalPropsType) => {
     if (data == null) {
       return setError('Please check your loaded file');
     }
-    console.log(11, { data });
+
+    onFileLogin({
+      address: data.address,
+      privateKey: data.privateKey,
+      token: String(token)
+    });
   };
 
   return (
