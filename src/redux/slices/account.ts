@@ -68,12 +68,6 @@ export const accountSlice = createSlice({
     ) => {
       state.token = action.payload;
     },
-    setIsWebview: (
-      state: AccountSliceType,
-      action: PayloadAction<AccountSliceType['isWebview']>
-    ) => {
-      state.isWebview = action.payload;
-    },
     setExternalNativeAuthToken: (
       state: AccountSliceType,
       action: PayloadAction<AccountSliceType['externalNativeAuthToken']>
@@ -103,7 +97,6 @@ export const {
   setToken,
   setExternalNativeAuthToken,
   setAddressIndex,
-  setIsWebview,
   setAccountAddress
 } = accountSlice.actions;
 
