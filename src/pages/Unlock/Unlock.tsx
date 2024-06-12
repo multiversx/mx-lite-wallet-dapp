@@ -3,6 +3,7 @@ import type {
   LedgerLoginButtonPropsType,
   WalletConnectLoginButtonPropsType
 } from '@multiversx/sdk-dapp/UI';
+import { useNavigate } from 'react-router-dom';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
@@ -12,7 +13,6 @@ import {
 } from 'components/sdkDapp.components';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
-import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Pem } from './components';
 

@@ -1,6 +1,6 @@
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { FormatAmount } from 'components';
 
 export const TokenRow = ({ token }: { token: TokenType }) => {

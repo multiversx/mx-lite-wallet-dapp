@@ -1,7 +1,7 @@
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
-import { useGetAccountInfo, useGetNetworkConfig } from '../sdkDapp.hooks';
-import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { useEffect } from 'react';
+import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
+import { useLazyGetTokensQuery } from 'redux/endpoints';
+import { useGetAccountInfo, useGetNetworkConfig } from '../sdkDapp.hooks';
 
 export const useGetTokensWithEgld = () => {
   const { websocketEvent, address, account } = useGetAccountInfo();

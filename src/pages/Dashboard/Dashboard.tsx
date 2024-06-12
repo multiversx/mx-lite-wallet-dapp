@@ -1,8 +1,8 @@
-import { AuthRedirectWrapper } from 'wrappers';
-import { Account, NFTs, Tokens, Transactions } from './widgets';
 import { useScrollToElement } from 'hooks';
-import { Widget } from './components';
 import { WidgetType } from 'types/widget.types';
+import { AuthRedirectWrapper } from 'wrappers';
+import { Widget } from './components';
+import { Account, NFTs, Tokens, Transactions } from './widgets';
 
 const WIDGETS: WidgetType[] = [
   {

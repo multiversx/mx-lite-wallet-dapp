@@ -1,16 +1,16 @@
-import React from 'react';
-import Select from 'react-select';
-import { useGetTokensWithEgld } from 'hooks';
-import { useFormik } from 'formik';
-import { number, object, string } from 'yup';
-import { addressIsValid, formatAmount } from 'utils';
-import BigNumber from 'bignumber.js';
-import { GAS_LIMIT, GAS_PRICE, RouteNamesEnum } from 'localConstants';
-import { calculateGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateGasLimit';
+import React, { MouseEvent } from 'react';
 import { prepareTransaction } from '@multiversx/sdk-dapp-form/hooks/useFetchGasLimit/prepareTransaction';
-import { useGetAccountInfo, useGetNetworkConfig } from 'hooks/sdkDapp.hooks';
-import { sendTransactions } from 'helpers';
+import { calculateGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateGasLimit';
+import BigNumber from 'bignumber.js';
+import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import { number, object, string } from 'yup';
+import { sendTransactions } from 'helpers';
+import { useGetTokensWithEgld } from 'hooks';
+import { useGetAccountInfo, useGetNetworkConfig } from 'hooks/sdkDapp.hooks';
+import { GAS_LIMIT, GAS_PRICE, RouteNamesEnum } from 'localConstants';
+import { addressIsValid, formatAmount } from 'utils';
 
 interface TokenOptionType {
   value: string;
@@ -163,25 +163,27 @@ export const Send = () => {
                   </div>
                 )}
                 {formik.touched.amount && formik.errors.amount && (
-                  <div className='text-red-600 text-sm'>
+                  <div className='text-red-600 text-sm mt-1'>
                     {formik.errors.amount}
                   </div>
                 )}
               </div>
-              <Select
-                className='block w-1/2 text-sm text-gray-700 placeholder-gray-400'
-                isLoading={isLoading}
-                options={tokenOptions}
-                name='token'
-                onChange={(option) => formik.setFieldValue('token', option)}
-                onBlur={() => formik.setFieldTouched('token', true)}
-                value={formik.values.token}
-              />
-              {formik.touched.token && formik.errors.token && (
-                <div className='text-red-600 text-sm'>
-                  {formik.errors.token}
-                </div>
-              )}
+              <div className='flex flex-col block w-1/2'>
+                <Select
+                  className='text-sm text-gray-700 placeholder-gray-400'
+                  isLoading={isLoading}
+                  options={tokenOptions}
+                  name='token'
+                  onChange={(option) => formik.setFieldValue('token', option)}
+                  onBlur={() => formik.setFieldTouched('token', true)}
+                  value={formik.values.token}
+                />
+                {formik.touched.token && formik.errors.token && (
+                  <div className='text-red-600 text-sm mt-1'>
+                    {formik.errors.token}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className='flex flex-col'>
@@ -199,7 +201,7 @@ export const Send = () => {
               placeholder='Enter gas limit'
             />
             {formik.touched.gasLimit && formik.errors.gasLimit && (
-              <div className='text-red-600 text-sm'>
+              <div className='text-red-600 text-sm mt-1'>
                 {formik.errors.gasLimit}
               </div>
             )}
