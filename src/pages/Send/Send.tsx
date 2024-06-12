@@ -2,11 +2,11 @@ import React from 'react';
 
 export const Send = () => {
   return (
-    <div className='max-w-md mx-auto p-4 bg-white shadow-md rounded'>
+    <div className='flex flex-col p-4 max-w-2xl w-full bg-white shadow-md rounded'>
       <h2 className='text-3xl font-bold mb-4'>Send Form</h2>
       <form>
-        <div className='grid grid-cols-1 gap-4'>
-          <div>
+        <div className='flex flex-col gap-4'>
+          <div className='flex flex-row gap-4 justify-between'>
             <label htmlFor='number' className='block text-sm font-bold mb-2'>
               Number:
             </label>
@@ -48,7 +48,7 @@ export const Send = () => {
             />
           </div>
           <div>
-            <button className='bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded'>
+            <button className='w-full rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'>
               Send
             </button>
           </div>

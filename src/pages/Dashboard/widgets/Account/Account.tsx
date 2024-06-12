@@ -3,7 +3,8 @@ import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
 import { explorerAddressSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
 import { useSelector } from '@multiversx/sdk-dapp/reduxStore/DappProviderContext';
-import { Copy } from 'components';
+import { Copy, MxLink } from 'components';
+import { RouteNamesEnum } from '../../../../localConstants';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
@@ -46,14 +47,20 @@ export const Account = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className='flex flex-row gap-4'>
             <a
               href={`${explorerAddress}/accounts/${address}`}
               target='_blank'
-              className='inline-block whitespace-nowrap rounded-lg bg-blue-500 px-4 py-2 text-sm leading-tight text-white transition duration-150 ease-in-out hover:no-underline focus:outline-none focus:ring-0 active:text-sm active:leading-tight'
+              className='inline-block rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
             >
               Open in Explorer
             </a>
+            <MxLink
+              to={`${RouteNamesEnum.send}`}
+              className='inline-block rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+            >
+              Send
+            </MxLink>
           </div>
         </div>
         <div className='mb-2 hidden justify-center sm:block'>
