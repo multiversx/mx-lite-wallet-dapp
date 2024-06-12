@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import {
   AxiosInterceptorContext, // using this is optional
@@ -21,6 +22,8 @@ import { RouteNamesEnum } from 'localConstants';
 import { PageNotFound, Unlock } from 'pages';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
+import { Provider } from 'react-redux';
+import { persistor, store } from './redux/store';
 
 const AppContent = () => {
   return (
@@ -72,18 +75,30 @@ const AppContent = () => {
   );
 };
 
-export const App = () => {
+export const MainApp = () => {
   return (
     <AxiosInterceptorContext.Provider>
       <AxiosInterceptorContext.Interceptor
         authenticatedDomains={sampleAuthenticatedDomains}
       >
-        <Router>
-          <BatchTransactionsContextProvider>
-            <AppContent />
-          </BatchTransactionsContextProvider>
-        </Router>
+        <BatchTransactionsContextProvider>
+          <AppContent />
+        </BatchTransactionsContextProvider>
       </AxiosInterceptorContext.Interceptor>
     </AxiosInterceptorContext.Provider>
   );
 };
+
+export const ProviderApp = () => (
+  <Provider store={store}>
+    <PersistGate persistor={persistor} loading={null}>
+      <MainApp />
+    </PersistGate>
+  </Provider>
+);
+
+export const App = () => (
+  <Router>
+    <ProviderApp />
+  </Router>
+);

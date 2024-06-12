@@ -1,3 +1,2 @@
-export * from './sdkDappHelpers';
-export * from './pingPong';
-export * from './signAndSendTransactions';
+export * from './api';
+export * from './sdkDapp';
