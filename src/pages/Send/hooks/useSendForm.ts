@@ -97,6 +97,8 @@ export const useSendForm = ({
         },
         redirectAfterSign: false
       });
+
+      formik.resetForm();
     }
   });
 

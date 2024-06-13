@@ -4,11 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { PartialNftType } from '@multiversx/sdk-dapp-form/types';
 import { useNavigate } from 'react-router-dom';
-import {
-  CollectionTypeByNftEnum,
-  RouteNamesEnum,
-  SearchParamsEnum
-} from 'localConstants';
+import { CollectionTypeByNftEnum, SearchParamsEnum } from 'localConstants';
+import { sendRouteBuilder } from 'routes';
 
 export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
   const navigate = useNavigate();
@@ -20,7 +17,10 @@ export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
     event.stopPropagation();
 
     navigate(
-      `${RouteNamesEnum.send}?${SearchParamsEnum.tokenId}=${nft.identifier}&${SearchParamsEnum.isNFT}=true`
+      sendRouteBuilder({
+        [SearchParamsEnum.tokenId]: nft.identifier,
+        [SearchParamsEnum.isNFT]: 'true'
+      })
     );
   };
 

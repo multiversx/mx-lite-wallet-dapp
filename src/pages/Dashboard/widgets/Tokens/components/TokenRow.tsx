@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { useNavigate } from 'react-router-dom';
 import { FormatAmount } from 'components';
-import { RouteNamesEnum, SearchParamsEnum } from 'localConstants';
+import { SearchParamsEnum } from 'localConstants';
+import { sendRouteBuilder } from 'routes';
 
 export const TokenRow = ({ token }: { token: TokenType }) => {
   const navigate = useNavigate();
@@ -15,7 +16,9 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
     event.stopPropagation();
 
     navigate(
-      `${RouteNamesEnum.send}?${SearchParamsEnum.tokenId}=${token.identifier}`
+      sendRouteBuilder({
+        [SearchParamsEnum.tokenId]: token.identifier
+      })
     );
   };
 

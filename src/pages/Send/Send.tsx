@@ -55,10 +55,10 @@ export const Send = () => {
   };
 
   useEffect(() => {
-    if (
-      tokenIdParam &&
-      formik.values[FormFieldsEnum.token]?.value !== selectedToken?.value
-    ) {
+    const formTokenValue = formik.values[FormFieldsEnum.token]?.value;
+    const selectedTokenValue = selectedToken?.value;
+
+    if (!formTokenValue && formTokenValue !== selectedTokenValue) {
       formik.setFieldValue(FormFieldsEnum.token, selectedToken);
       resetFormAndGetBalance();
       setSearchParams();
