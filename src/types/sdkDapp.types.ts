@@ -15,3 +15,5 @@ export type {
 export type { IDappProvider } from '@multiversx/sdk-dapp/types/dappProvider.types';
 export type { TokenLoginType } from '@multiversx/sdk-dapp/types';
 export type { OnProviderLoginType } from '@multiversx/sdk-dapp/types';
+export type { SignModalPropsType } from '@multiversx/sdk-dapp/types/transactions.types';
+export type { MultiSignTransactionType } from '@multiversx/sdk-dapp/types/transactions.types';

@@ -5,6 +5,7 @@ export * from './Label';
 export * from './Layout';
 export * from './MissingNativeAuthError';
 export * from './MxLink';
+export * from './Utilities';
 export * from './OutputContainer';
 export * from './TransactionsTracker';
 export * from './sdkDapp.components';
