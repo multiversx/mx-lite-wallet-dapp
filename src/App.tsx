@@ -3,14 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import {
-  AxiosInterceptorContext, // using this is optional
+  AxiosInterceptorContext,
   DappProvider,
   Layout,
-  TransactionsToastList,
-  NotificationModal,
-  SignTransactionsModals
-  // uncomment this to use the custom transaction tracker
-  // TransactionsTracker
+  Utilities
 } from 'components';
 
 import {
@@ -57,9 +53,6 @@ const AppContent = () => {
     >
       <AxiosInterceptorContext.Listener>
         <Layout>
-          <TransactionsToastList />
-          <NotificationModal />
-          <SignTransactionsModals />
           <Routes>
             <Route path={RouteNamesEnum.unlock} element={<Unlock />} />
             {routes.map((route) => (
@@ -71,6 +64,7 @@ const AppContent = () => {
             ))}
             <Route path='*' element={<PageNotFound />} />
           </Routes>
+          <Utilities />
         </Layout>
       </AxiosInterceptorContext.Listener>
     </DappProvider>

@@ -18,3 +18,8 @@ export { useGetSignedTransactions } from '@multiversx/sdk-dapp/hooks/transaction
 export { useGetAccountProvider } from '@multiversx/sdk-dapp/hooks/account/useGetAccountProvider';
 export { useAddressScreens } from '@multiversx/sdk-dapp/hooks/login/useAddressScreens';
 export { useLoginService } from '@multiversx/sdk-dapp/hooks/login/useLoginService';
+export { useSignTransactionsWithDevice } from '@multiversx/sdk-dapp/hooks/transactions/useSignTransactionsWithDevice';
+export { useSignTransactionsWithLedger } from '@multiversx/sdk-dapp/hooks/transactions/useSignTransactionsWithLedger';
+export { useGetLastPendingTransactionHash } from '@multiversx/sdk-dapp/hooks/transactions/useGetLastPendingTransactionHash';
+export { useSignTransactionsCommonData } from '@multiversx/sdk-dapp/hooks/transactions/useSignTransactionsCommonData';
+export { useGetSignTransactionsError } from '@multiversx/sdk-dapp/hooks/transactions/useGetSignTransactionsError';

@@ -14,7 +14,7 @@ import {
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { AuthRedirectWrapper } from 'wrappers';
-import { Pem } from './components';
+import { Keystore, Pem } from './components';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -66,6 +66,7 @@ export const Unlock = () => {
             />
 
             <Pem />
+            <Keystore />
           </div>
         </div>
       </div>

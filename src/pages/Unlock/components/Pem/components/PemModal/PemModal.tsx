@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, ModalContainer, PageState } from 'components';
 import { UseModalReturnType } from 'hooks';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
+import { setPemLogin } from 'redux/slices';
 import { parsePem } from './helpers';
 
 export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
-  const [file, setFile] = useState<File | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const getInitToken = useInitToken();
   const { token: initToken } = useSelector(accountSelector);
-
+  const dispatch = useDispatch();
   const { type: hook, loginToken: hookInitToken } = useSelector(hookSelector);
+
+  const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
   const token = hook ? hookInitToken : initToken;
 
   const onFileLogin = useOnFileLogin();
@@ -39,6 +42,8 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
     if (data == null) {
       return setError('Please check your loaded file');
     }
+
+    dispatch(setPemLogin(data.privateKey));
 
     onFileLogin({
       address: data.address,
