@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
+import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
 import { OutputContainer } from 'components/OutputContainer';
 import { TransactionRow } from 'components/sdkDapp.components';
-import { TransactionsPropsType } from './types';
 import { useGetAccountInfo } from 'hooks';
+import { useGetNetworkConfig } from 'hooks';
 import { useLazyGetTransactionsQuery } from 'redux/endpoints';
 import { getInterpretedTransaction } from 'utils';
-import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
-import { useGetNetworkConfig } from 'hooks';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
-export const Transactions = (props: TransactionsPropsType) => {
+export const Transactions = () => {
   const { websocketEvent, address } = useGetAccountInfo();
   const {
     network: { explorerAddress }

@@ -1,55 +1,287 @@
-import React from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
+import { calculateGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateGasLimit';
+import { calculateNftGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateNftGasLimit';
+import { computeNftDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
+import BigNumber from 'bignumber.js';
+
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import { GAS_LIMIT, RouteNamesEnum } from 'localConstants';
+import { getSelectedTokenBalance } from './helpers';
+import { useTokenOptions, useSendForm } from './hooks';
+import { SendTypeEnum, FormFieldsEnum } from './types';
 
 export const Send = () => {
+  const navigate = useNavigate();
+  const [sendType, setSendType] = useState(SendTypeEnum.esdt);
+  const isNFT = sendType === SendTypeEnum.nft;
+  const { tokenOptions, isLoading, tokens } = useTokenOptions(sendType);
+
+  const formik = useSendForm({ isNFT, tokens, tokenOptions });
+
+  const availableAmount = getSelectedTokenBalance({
+    tokens,
+    tokenOption: formik.values[FormFieldsEnum.token]
+  });
+
+  const canEditNftAmount = new BigNumber(availableAmount).isGreaterThan(1);
+
+  const cancelSend = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    navigate(RouteNamesEnum.dashboard);
+  };
+
+  useEffect(() => {
+    const selectedToken = tokenOptions?.[0] ?? null;
+    const balance = selectedToken
+      ? getSelectedTokenBalance({ tokens, tokenOption: selectedToken })
+      : '';
+    formik.setFieldValue(FormFieldsEnum.data, '');
+    formik.setFieldValue(FormFieldsEnum.amount, balance);
+    formik.setFieldValue(FormFieldsEnum.token, selectedToken);
+    formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
+
+    if (!isNFT || !selectedToken) {
+      return;
+    }
+
+    const data = computeNftDataField({
+      nft: selectedToken,
+      amount: balance,
+      receiver: formik.values[FormFieldsEnum.receiver],
+      errors: false
+    });
+
+    formik.setFieldValue(FormFieldsEnum.data, data);
+  }, [sendType]);
+
+  useEffect(() => {
+    if (!isNFT || !formik.values[FormFieldsEnum.token]) {
+      return;
+    }
+
+    const selectedNft = tokens?.find(
+      (nft) => nft.identifier === formik.values[FormFieldsEnum.token]?.value
+    );
+
+    if (!selectedNft) {
+      return;
+    }
+
+    const data = computeNftDataField({
+      nft: selectedNft,
+      amount: formik.values[FormFieldsEnum.amount],
+      receiver: formik.values[FormFieldsEnum.receiver],
+      errors: false
+    });
+
+    const gasLimit = calculateNftGasLimit(data);
+    formik.setFieldValue(FormFieldsEnum.data, data);
+    formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
+  }, [
+    formik.values[FormFieldsEnum.amount],
+    formik.values[FormFieldsEnum.receiver],
+    formik.values[FormFieldsEnum.token]
+  ]);
+
   return (
-    <div className='flex flex-col p-4 max-w-2xl w-full bg-white shadow-md rounded'>
-      <h2 className='text-3xl font-bold mb-4'>Send Form</h2>
-      <form>
+    <div className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded'>
+      <h2 className='text-3xl font-bold mb-4'>Send</h2>
+      <form onSubmit={formik.handleSubmit}>
         <div className='flex flex-col gap-4'>
-          <div className='flex flex-row gap-4 justify-between'>
-            <label htmlFor='amount' className='block text-sm font-bold mb-2'>
-              Amount:
+          <div className='flex flex-col'>
+            <label
+              htmlFor={FormFieldsEnum.receiver}
+              className='block text-sm font-bold mb-2'
+            >
+              Receiver:
             </label>
             <input
-              type='number'
-              id='amount'
-              className='block w-full p-2 pl-10 text-sm text-gray-700 placeholder-gray-400'
-              placeholder='Enter a number'
+              className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+              id={FormFieldsEnum.receiver}
+              name={FormFieldsEnum.receiver}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              placeholder='Enter receiver'
+              value={formik.values[FormFieldsEnum.receiver]}
             />
-            <select
-              id='autocomplete'
-              className='block w-full p-2 pl-10 text-sm text-gray-700 placeholder-gray-400'
-              placeholder='Select an option'
-            >
-              <option value='option1'>Option 1</option>
-              <option value='option2'>Option 2</option>
-              <option value='option3'>Option 3</option>
-            </select>
+            {formik.touched[FormFieldsEnum.receiver] &&
+              formik.errors[FormFieldsEnum.receiver] && (
+                <div className='text-red-600 text-sm'>
+                  {formik.errors[FormFieldsEnum.receiver]}
+                </div>
+              )}
           </div>
-          <div className='flex row gap-4'>
-            <label htmlFor='gasLimit' className='block text-sm font-bold mb-2'>
+          <div className='flex flex-col'>
+            <label
+              htmlFor={FormFieldsEnum.type}
+              className='block text-sm font-bold mb-2'
+            >
+              Type:
+            </label>
+            <div className='flex flex-row gap-4'>
+              <div>
+                <input
+                  checked={!isNFT}
+                  className='mr-2'
+                  id={SendTypeEnum.esdt}
+                  name={FormFieldsEnum.type}
+                  onChange={(event) => {
+                    setSendType(SendTypeEnum.esdt);
+
+                    return formik.handleChange(event);
+                  }}
+                  type='radio'
+                  value={SendTypeEnum.esdt}
+                />
+                <label htmlFor={SendTypeEnum.esdt} className='text-sm'>
+                  {SendTypeEnum.esdt}
+                </label>
+              </div>
+              <div>
+                <input
+                  checked={isNFT}
+                  className='mr-2'
+                  id={SendTypeEnum.nft}
+                  name={FormFieldsEnum.type}
+                  onChange={(event) => {
+                    setSendType(SendTypeEnum.nft);
+
+                    return formik.handleChange(event);
+                  }}
+                  type='radio'
+                  value={SendTypeEnum.nft}
+                />
+                <label htmlFor={SendTypeEnum.nft} className='text-sm'>
+                  {SendTypeEnum.nft}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <label
+              htmlFor={FormFieldsEnum.amount}
+              className='block text-sm font-bold mb-2'
+            >
+              Amount:
+            </label>
+            <div className='flex flex-row gap-2'>
+              <div className='flex flex-col w-full'>
+                <input
+                  className='p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+                  disabled={isNFT && !canEditNftAmount}
+                  id={FormFieldsEnum.amount}
+                  name={FormFieldsEnum.amount}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  placeholder='Enter amount'
+                  type='number'
+                  value={formik.values[FormFieldsEnum.amount]}
+                />
+                {formik.values[FormFieldsEnum.token] && (
+                  <div className='text-sm text-gray-400 mt-1'>
+                    Available: {availableAmount}
+                  </div>
+                )}
+                {formik.touched[FormFieldsEnum.amount] &&
+                  formik.errors[FormFieldsEnum.amount] && (
+                    <div className='text-red-600 text-sm mt-1'>
+                      {formik.errors[FormFieldsEnum.amount]}
+                    </div>
+                  )}
+              </div>
+              <div className='flex flex-col w-1/2'>
+                <Select
+                  className='text-sm text-gray-700 placeholder-gray-400'
+                  isLoading={isLoading}
+                  options={tokenOptions}
+                  name={FormFieldsEnum.token}
+                  onChange={(option) =>
+                    formik.setFieldValue(FormFieldsEnum.token, option)
+                  }
+                  onBlur={() =>
+                    formik.setFieldTouched(FormFieldsEnum.token, true)
+                  }
+                  value={formik.values[FormFieldsEnum.token]}
+                />
+                {formik.touched[FormFieldsEnum.token] &&
+                  formik.errors[FormFieldsEnum.token] && (
+                    <div className='text-red-600 text-sm mt-1'>
+                      {formik.errors[FormFieldsEnum.token]}
+                    </div>
+                  )}
+              </div>
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <label
+              htmlFor={FormFieldsEnum.gasLimit}
+              className='block text-sm font-bold mb-2'
+            >
               Gas Limit:
             </label>
             <input
+              className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+              disabled={isNFT}
+              id={FormFieldsEnum.gasLimit}
+              name={FormFieldsEnum.gasLimit}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              placeholder='Enter gas limit'
               type='number'
-              id='gasLimit'
-              className='block w-full p-2 pl-10 text-sm text-gray-700 placeholder-gray-400'
-              placeholder='Enter a gas limit'
+              value={formik.values[FormFieldsEnum.gasLimit]}
             />
+            {formik.touched[FormFieldsEnum.gasLimit] &&
+              formik.errors[FormFieldsEnum.gasLimit] && (
+                <div className='text-red-600 text-sm mt-1'>
+                  {formik.errors[FormFieldsEnum.gasLimit]}
+                </div>
+              )}
           </div>
-          <div className='flex row gap-4'>
-            <label htmlFor='data' className='block text-sm font-bold mb-2'>
+          <div className='flex flex-col'>
+            <label
+              htmlFor={FormFieldsEnum.data}
+              className='block text-sm font-bold mb-2'
+            >
               Data:
             </label>
             <textarea
-              id='data'
-              className='block w-full p-2 pl-10 text-sm text-gray-700 placeholder-gray-400'
+              className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+              disabled={isNFT}
+              id={FormFieldsEnum.data}
+              name={FormFieldsEnum.data}
+              onBlur={formik.handleBlur}
+              onChange={(event) => {
+                if (isNFT) {
+                  return;
+                }
+
+                const gasLimit = calculateGasLimit({
+                  data: event.target.value
+                });
+
+                formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
+
+                return formik.handleChange(event);
+              }}
               placeholder='Enter your data'
+              value={formik.values[FormFieldsEnum.data]}
             />
           </div>
           <div>
-            <button className='w-full rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'>
+            <button
+              className='w-full mt-4 rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              type='submit'
+            >
               Send
+            </button>
+            <button
+              className='w-full mt-4 px-4 py-2 text-sm'
+              onClick={cancelSend}
+              type='button'
+            >
+              Cancel
             </button>
           </div>
         </div>

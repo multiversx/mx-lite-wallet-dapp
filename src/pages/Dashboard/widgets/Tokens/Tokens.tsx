@@ -1,9 +1,9 @@
-import { OutputContainer } from 'components';
-import { useLazyGetTokensQuery } from 'redux/endpoints';
-import { useGetAccountInfo } from 'hooks';
 import { useEffect } from 'react';
-import { TokenRow } from './components';
 import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
+import { OutputContainer } from 'components';
+import { useGetAccountInfo } from 'hooks';
+import { useLazyGetTokensQuery } from 'redux/endpoints';
+import { TokenRow } from './components';
 
 export const Tokens = () => {
   const { websocketEvent, address } = useGetAccountInfo();
