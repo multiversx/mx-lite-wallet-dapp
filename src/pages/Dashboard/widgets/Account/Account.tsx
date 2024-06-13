@@ -4,7 +4,7 @@ import QRCode from 'react-qr-code';
 import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
-import { routeNames } from '../../../../routes';
+import { routeNames } from 'routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
