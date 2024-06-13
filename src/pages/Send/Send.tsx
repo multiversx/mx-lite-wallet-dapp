@@ -1,162 +1,28 @@
-import React, { MouseEvent, useEffect, useMemo, useState } from 'react';
-import { prepareTransaction } from '@multiversx/sdk-dapp-form/hooks/useFetchGasLimit/prepareTransaction';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { calculateGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateGasLimit';
 import { calculateNftGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateNftGasLimit';
 import { computeNftDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
 import BigNumber from 'bignumber.js';
-import { useFormik } from 'formik';
+
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { number, object, string } from 'yup';
-import { sendTransactions } from 'helpers';
-import { useGetTokensWithEgld } from 'hooks';
-import { useGetAccountInfo, useGetNetworkConfig } from 'hooks/sdkDapp.hooks';
-import { GAS_LIMIT, GAS_PRICE, RouteNamesEnum } from 'localConstants';
-import { useLazyGetNftsQuery } from 'redux/endpoints';
-import { addressIsValid, formatAmount } from 'utils';
-
-interface TokenOptionType {
-  label: string;
-  value: string;
-}
-
-enum SendTypeEnum {
-  esdt = 'ESDT',
-  nft = 'NFT'
-}
-
-enum FormFieldsEnum {
-  amount = 'amount',
-  data = 'data',
-  gasLimit = 'gasLimit',
-  receiver = 'receiver',
-  token = 'token',
-  type = 'type'
-}
+import { GAS_LIMIT, RouteNamesEnum } from 'localConstants';
+import { getSelectedTokenBalance } from './helpers';
+import { useTokenOptions, useSendForm } from './hooks';
+import { SendTypeEnum, FormFieldsEnum } from './types';
 
 export const Send = () => {
-  const { address, account, websocketEvent } = useGetAccountInfo();
-  const { chainID } = useGetNetworkConfig();
   const navigate = useNavigate();
-  const { tokens, isLoading: isLoadingTokens } = useGetTokensWithEgld();
-  const [fetchNFTs, { data: nfts, isLoading: isLoadingNfts }] =
-    useLazyGetNftsQuery();
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
-  const isLoading = isLoadingNfts || isLoadingTokens;
   const isNFT = sendType === SendTypeEnum.nft;
+  const { tokenOptions, isLoading, tokens } = useTokenOptions(sendType);
 
-  const tokenOptions = useMemo(() => {
-    if (!isNFT) {
-      return tokens.map((token) => ({
-        value: token.identifier,
-        label: token.name
-      }));
-    }
+  const formik = useSendForm({ isNFT, tokens, tokenOptions });
 
-    return nfts?.map((token) => ({
-      value: token.identifier,
-      label: token.name
-    }));
-  }, [nfts, tokens, sendType]);
-
-  const getSelectedTokenBalance = (tokenOption: TokenOptionType | null) => {
-    const items = isNFT ? nfts : tokens;
-    const currentToken = items?.find(
-      (token) => token.identifier === tokenOption?.value
-    );
-
-    if (!currentToken) {
-      return '0';
-    }
-
-    if (!currentToken.decimals) {
-      return currentToken.balance ?? '0';
-    }
-
-    return formatAmount({
-      input: currentToken.balance ?? '0',
-      decimals: currentToken.decimals
-    });
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      [FormFieldsEnum.amount]: '',
-      [FormFieldsEnum.data]: '',
-      [FormFieldsEnum.gasLimit]: GAS_LIMIT,
-      [FormFieldsEnum.receiver]: '',
-      [FormFieldsEnum.token]: tokenOptions?.[0] ?? null,
-      [FormFieldsEnum.type]: SendTypeEnum.esdt
-    },
-    validationSchema: object({
-      [FormFieldsEnum.receiver]: string()
-        .test(
-          'addressIsValid',
-          'Address is invalid',
-          (value) => !value || addressIsValid(value)
-        )
-        .test(
-          'differentSender',
-          'Sender should be different than current account',
-          (value) => !value || !isNFT || value !== address
-        )
-        .required('Receiver is required'),
-      [FormFieldsEnum.amount]: number()
-        .required('Amount is required')
-        .min(0, 'Amount must be greater than or equal to 0')
-        .test('insufficientBalance', 'Insufficient balance', (value) => {
-          if (!value || !formik.values[FormFieldsEnum.token]) {
-            return true;
-          }
-
-          const selectedTokenOption = formik.values[
-            FormFieldsEnum.token
-          ] as TokenOptionType;
-
-          const selectedTokenBalance =
-            getSelectedTokenBalance(selectedTokenOption);
-
-          return new BigNumber(selectedTokenBalance).isGreaterThanOrEqualTo(
-            new BigNumber(value)
-          );
-        }),
-      [FormFieldsEnum.gasLimit]: number()
-        .required('Gas limit is required')
-        .positive('Gas limit must be a positive number'),
-      [FormFieldsEnum.token]: object().nullable().required('Token is required'),
-      [FormFieldsEnum.type]: string().required('Type is required')
-    }),
-    onSubmit: async (values) => {
-      const transaction = prepareTransaction({
-        amount: isNFT ? '0' : String(values.amount),
-        balance: account.balance,
-        chainId: chainID,
-        data: values[FormFieldsEnum.data].trim(),
-        gasLimit: String(values[FormFieldsEnum.gasLimit]),
-        gasPrice: String(GAS_PRICE),
-        nonce: account.nonce,
-        receiver: isNFT ? address : values.receiver,
-        sender: address
-      });
-
-      await sendTransactions({
-        transactions: [transaction],
-        signWithoutSending: false,
-        transactionsDisplayInfo: {
-          successMessage: 'Transactions successfully sent',
-          errorMessage: 'An error has occurred',
-          submittedMessage: 'Success',
-          processingMessage: 'Processing transactions',
-          transactionDuration: 10000
-        },
-        redirectAfterSign: false
-      });
-    }
+  const availableAmount = getSelectedTokenBalance({
+    tokens,
+    tokenOption: formik.values[FormFieldsEnum.token]
   });
-
-  const availableAmount = getSelectedTokenBalance(
-    formik.values[FormFieldsEnum.token]
-  );
 
   const canEditNftAmount = new BigNumber(availableAmount).isGreaterThan(1);
 
@@ -167,12 +33,10 @@ export const Send = () => {
   };
 
   useEffect(() => {
-    fetchNFTs({ address });
-  }, [address, websocketEvent]);
-
-  useEffect(() => {
     const selectedToken = tokenOptions?.[0] ?? null;
-    const balance = selectedToken ? getSelectedTokenBalance(selectedToken) : '';
+    const balance = selectedToken
+      ? getSelectedTokenBalance({ tokens, tokenOption: selectedToken })
+      : '';
     formik.setFieldValue(FormFieldsEnum.data, '');
     formik.setFieldValue(FormFieldsEnum.amount, balance);
     formik.setFieldValue(FormFieldsEnum.token, selectedToken);
@@ -197,7 +61,7 @@ export const Send = () => {
       return;
     }
 
-    const selectedNft = nfts?.find(
+    const selectedNft = tokens?.find(
       (nft) => nft.identifier === formik.values[FormFieldsEnum.token]?.value
     );
 
@@ -303,7 +167,7 @@ export const Send = () => {
               Amount:
             </label>
             <div className='flex flex-row gap-2'>
-              <div className='flex flex-col block w-full'>
+              <div className='flex flex-col w-full'>
                 <input
                   className='p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
                   disabled={isNFT && !canEditNftAmount}
@@ -327,7 +191,7 @@ export const Send = () => {
                     </div>
                   )}
               </div>
-              <div className='flex flex-col block w-1/2'>
+              <div className='flex flex-col w-1/2'>
                 <Select
                   className='text-sm text-gray-700 placeholder-gray-400'
                   isLoading={isLoading}
