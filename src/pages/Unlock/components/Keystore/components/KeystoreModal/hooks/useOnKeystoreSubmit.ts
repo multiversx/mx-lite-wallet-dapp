@@ -64,6 +64,7 @@ export const useOnKeystoreSubmit = () => {
           'This is not the wallet you initiated the transaction with.'
       });
     }
+    console.log('\x1b[42m%s\x1b[0m', 'setting here', privateKey);
 
     dispatch(
       setKeystoreLogin({

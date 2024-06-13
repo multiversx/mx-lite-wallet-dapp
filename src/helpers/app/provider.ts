@@ -7,8 +7,11 @@ import { IDappProvider } from 'types';
 
 let privateKey: string | null = null;
 
-export const setProviderPrivateKey = (key: typeof privateKey) =>
-  (privateKey = key);
+export const setProviderPrivateKey = (key: typeof privateKey) => {
+  console.log('\x1b[42m%s\x1b[0m', 'done setting provider private key', key);
+
+  privateKey = key;
+};
 
 const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
@@ -44,6 +47,8 @@ export const provider: IDappProvider = {
   isConnected: async () => false,
   sendTransaction: notInitializedError('sendTransaction'),
   signTransaction: async (transaction: Transaction) => {
+    console.log('\x1b[42m%s\x1b[0m', 'signTransaction', privateKey);
+
     if (!privateKey) {
       const throwError = notInitializedError('signTransaction');
       return throwError();

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AddressTable } from 'components';
 import { useAddressScreens } from 'hooks';
+import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants';
 import { setAddressIndex } from 'redux/slices';
 
 import { AccessWalletType, getKeystoreAddresses } from '../../helpers';
@@ -56,10 +57,6 @@ export const AddressScreens = ({
 
     handleSelectAddress(address);
   };
-
-  if (isRelogin) {
-    return null;
-  }
 
   return (
     <AddressTable

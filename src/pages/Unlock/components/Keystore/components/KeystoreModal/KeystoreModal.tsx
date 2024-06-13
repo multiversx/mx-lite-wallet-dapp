@@ -5,15 +5,15 @@ import { useSelector } from 'react-redux';
 import { Button, ModalContainer, PageState } from 'components';
 import { UseModalReturnType } from 'hooks';
 import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants/misc';
-import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
-import { accountSelector, hookSelector } from 'redux/selectors';
+import { useInitToken } from 'pages/Unlock/hooks';
+import { hookSelector } from 'redux/selectors';
 import { AddressScreens } from './components';
 import {
   accessWallet,
   keystoreValidationSchema,
   parseKeystoreJSON
 } from './helpers';
-import { KeystoreValuesType } from './hooks';
+import { KeystoreValuesType, useOnKeystoreSubmit } from './hooks';
 
 interface AccessWalletType {
   kdContent: { [key: string]: any };
@@ -33,12 +33,9 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
   const [walletFileV5andPassword, setWalletFileV5andPassword] =
     useState<AccessWalletType | null>();
   const getInitToken = useInitToken();
-  const { token: initToken } = useSelector(accountSelector);
+  const onKeystoreSubmit = useOnKeystoreSubmit();
 
-  const { type: hook, loginToken: hookInitToken } = useSelector(hookSelector);
-  const token = hook ? hookInitToken : initToken;
-
-  const onFileLogin = useOnFileLogin();
+  const { type: hook } = useSelector(hookSelector);
 
   useEffect(() => {
     if (hook) {
@@ -77,10 +74,10 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
       });
     }
 
-    onFileLogin({
-      address: accountData.address,
-      privateKey: accountData.privateKey,
-      token
+    onKeystoreSubmit({
+      [WALLET_FILE_NAME]: String(fileName),
+      [WALLET_FILE]: data,
+      accessPass: values.accessPass
     });
   };
 
