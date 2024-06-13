@@ -1,10 +1,28 @@
+import { MouseEvent } from 'react';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { PartialNftType } from '@multiversx/sdk-dapp-form/types';
-import { CollectionTypeByNftEnum } from 'localConstants';
+import { useNavigate } from 'react-router-dom';
+import {
+  CollectionTypeByNftEnum,
+  RouteNamesEnum,
+  SearchParamsEnum
+} from 'localConstants';
 
 export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
+  const navigate = useNavigate();
   const nftType =
     CollectionTypeByNftEnum[nft.type as NftEnumType].toUpperCase();
+
+  const handleSend = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    navigate(
+      `${RouteNamesEnum.send}?${SearchParamsEnum.tokenId}=${nft.identifier}&${SearchParamsEnum.isNFT}=true`
+    );
+  };
 
   return (
     <div className='bg-black rounded-lg w-48'>
@@ -22,6 +40,12 @@ export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
         </div>
         <div className='flex items-center justify-between mt-1'>
           <div className='text-xs text-gray-400'>{nft.collection}</div>
+          <button
+            className='text-white rounded bg-blue-500 px-2 py-1'
+            onClick={handleSend}
+          >
+            <FontAwesomeIcon icon={faArrowUp} />
+          </button>
         </div>
       </div>
     </div>
