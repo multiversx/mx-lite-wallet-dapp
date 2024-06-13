@@ -1,4 +1,5 @@
 import { useModal } from 'hooks';
+import { KeystoreModal } from './components';
 
 export const Keystore = () => {
   const { show, handleShow, handleClose } = useModal();
@@ -14,7 +15,7 @@ export const Keystore = () => {
           Keystore
         </span>
       </button>
-      {/* <PemModal handleClose={handleClose} show={show} /> */}
+      <KeystoreModal handleClose={handleClose} show={show} />
     </>
   );
 };
