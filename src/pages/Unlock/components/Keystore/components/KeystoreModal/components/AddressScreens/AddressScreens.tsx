@@ -67,22 +67,7 @@ export const AddressScreens = ({
       onSelectAddress={onSelectAddress}
       startIndex={startIndex}
       selectedAddress={selectedAddress?.address}
-      className='p-0'
       onConfirmSelectedAddress={onConfirmSelectedAddress}
-      addressTableClassNames={{
-        ledgerModalTitleClassName: 'ledger-modal-title',
-        ledgerModalSubtitleClassName: 'ledger-modal-subtitle',
-        ledgerModalTableHeadClassName: 'ledger-modal-table-head',
-        ledgerModalTableItemClassName: 'ledger-modal-table-item',
-        ledgerModalButtonClassName:
-          'btn btn-primary w-auto m-0 ledger-modal-button',
-        ledgerModalTableNavigationButtonClassName:
-          'ledger-modal-navigation-button',
-        ledgerModalTableNavigationButtonDisabledClassName:
-          'ledger-modal-navigation-button-disabled',
-        ledgerModalTableSelectedItemClassName:
-          'ledger-modal-table-selected-item'
-      }}
     />
   );
 };
