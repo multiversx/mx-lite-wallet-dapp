@@ -8,7 +8,7 @@ export const getSelectedTokenBalance = ({
   tokenOption
 }: {
   tokens?: PartialNftType[] | TokenType[];
-  tokenOption: TokenOptionType | null;
+  tokenOption?: TokenOptionType;
 }) => {
   if (!tokens || tokens.length === 0) {
     return '0';

@@ -1,10 +1,26 @@
-import { faCoins } from '@fortawesome/free-solid-svg-icons';
+import { MouseEvent } from 'react';
+import { faArrowUp, faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
+import { useNavigate } from 'react-router-dom';
 import { FormatAmount } from 'components';
+import { SearchParamsEnum } from 'localConstants';
+import { sendRouteBuilder } from 'routes';
 
 export const TokenRow = ({ token }: { token: TokenType }) => {
+  const navigate = useNavigate();
   const logo = token.assets?.svgUrl;
+
+  const handleSend = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    navigate(
+      sendRouteBuilder({
+        [SearchParamsEnum.tokenId]: token.identifier
+      })
+    );
+  };
 
   return (
     <div className='flex items-center justify-between p-4 rounded-lg'>
@@ -21,6 +37,12 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
           <FormatAmount value={token.balance} showLabel={false} />
         </div>
       )}
+      <button
+        className='text-white rounded bg-blue-500 px-2 py-1'
+        onClick={handleSend}
+      >
+        <FontAwesomeIcon icon={faArrowUp} />
+      </button>
     </div>
   );
 };

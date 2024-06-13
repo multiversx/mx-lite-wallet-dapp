@@ -4,20 +4,29 @@ import { calculateNftGasLimit } from '@multiversx/sdk-dapp-form/operations/calcu
 import { computeNftDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
 import BigNumber from 'bignumber.js';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
-import { GAS_LIMIT, RouteNamesEnum } from 'localConstants';
+import { GAS_LIMIT, RouteNamesEnum, SearchParamsEnum } from 'localConstants';
 import { getSelectedTokenBalance } from './helpers';
-import { useTokenOptions, useSendForm } from './hooks';
-import { SendTypeEnum, FormFieldsEnum } from './types';
+import { useSendForm, useTokenOptions } from './hooks';
+import { FormFieldsEnum, SendTypeEnum } from './types';
 
 export const Send = () => {
   const navigate = useNavigate();
-  const [sendType, setSendType] = useState(SendTypeEnum.esdt);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tokenIdParam = searchParams.get(SearchParamsEnum.tokenId);
+  const isNftParam = searchParams.get(SearchParamsEnum.isNFT);
+  const [sendType, setSendType] = useState(
+    isNftParam ? SendTypeEnum.nft : SendTypeEnum.esdt
+  );
+
   const isNFT = sendType === SendTypeEnum.nft;
   const { tokenOptions, isLoading, tokens } = useTokenOptions(sendType);
+  const selectedToken = tokenIdParam
+    ? tokenOptions?.find((option) => option.value === tokenIdParam)
+    : tokenOptions?.[0];
 
-  const formik = useSendForm({ isNFT, tokens, tokenOptions });
+  const formik = useSendForm({ isNFT, tokens, selectedToken });
 
   const availableAmount = getSelectedTokenBalance({
     tokens,
@@ -32,15 +41,32 @@ export const Send = () => {
     navigate(RouteNamesEnum.dashboard);
   };
 
-  useEffect(() => {
-    const selectedToken = tokenOptions?.[0] ?? null;
+  const resetFormAndGetBalance = () => {
     const balance = selectedToken
       ? getSelectedTokenBalance({ tokens, tokenOption: selectedToken })
       : '';
+
     formik.setFieldValue(FormFieldsEnum.data, '');
-    formik.setFieldValue(FormFieldsEnum.amount, balance);
     formik.setFieldValue(FormFieldsEnum.token, selectedToken);
+    formik.setFieldValue(FormFieldsEnum.amount, isNFT ? balance : '0');
     formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
+
+    return balance;
+  };
+
+  useEffect(() => {
+    const formTokenValue = formik.values[FormFieldsEnum.token]?.value;
+    const selectedTokenValue = selectedToken?.value;
+
+    if (!formTokenValue && formTokenValue !== selectedTokenValue) {
+      formik.setFieldValue(FormFieldsEnum.token, selectedToken);
+      resetFormAndGetBalance();
+      setSearchParams();
+    }
+  }, [selectedToken, tokenIdParam]);
+
+  useEffect(() => {
+    const balance = resetFormAndGetBalance();
 
     if (!isNFT || !selectedToken) {
       return;

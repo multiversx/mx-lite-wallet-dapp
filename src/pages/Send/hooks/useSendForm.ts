@@ -8,17 +8,17 @@ import { sendTransactions } from 'helpers';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 import { addressIsValid } from 'utils';
-import { getSelectedTokenBalance } from '../helpers/getSelectedTokenBalance';
+import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
 
 export const useSendForm = ({
   isNFT,
   tokens,
-  tokenOptions
+  selectedToken
 }: {
   isNFT: boolean;
   tokens?: PartialNftType[] | TokenType[];
-  tokenOptions?: TokenOptionType[];
+  selectedToken?: TokenOptionType;
 }) => {
   const { address, account } = useGetAccountInfo();
   const { chainID } = useGetNetworkConfig();
@@ -29,7 +29,7 @@ export const useSendForm = ({
       [FormFieldsEnum.data]: '',
       [FormFieldsEnum.gasLimit]: GAS_LIMIT,
       [FormFieldsEnum.receiver]: '',
-      [FormFieldsEnum.token]: tokenOptions?.[0] ?? null,
+      [FormFieldsEnum.token]: selectedToken,
       [FormFieldsEnum.type]: SendTypeEnum.esdt
     },
     validationSchema: object({
@@ -97,6 +97,8 @@ export const useSendForm = ({
         },
         redirectAfterSign: false
       });
+
+      formik.resetForm();
     }
   });
 
