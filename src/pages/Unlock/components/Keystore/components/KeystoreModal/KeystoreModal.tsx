@@ -5,10 +5,20 @@ import { Button, ModalContainer, PageState } from 'components';
 import { UseModalReturnType } from 'hooks';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
+import { AddressScreens } from './components';
+import { accessWallet, parseKeystoreJSON } from './helpers';
+
+interface AccessWalletType {
+  kdContent: { [key: string]: any };
+  accessPassVal: string;
+}
 
 export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
   const [file, setFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [walletFileV5andPassword, setWalletFileV5andPassword] =
+    useState<AccessWalletType | null>();
   const [error, setError] = useState<string | null>(null);
   const getInitToken = useInitToken();
   const { token: initToken } = useSelector(accountSelector);
@@ -29,6 +39,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
+      setFileName(e.target.files[0].name);
       setError(null);
     }
   };
@@ -45,12 +56,47 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
       return setError('Please check your loaded file');
     }
 
+    const accountData = accessWallet({
+      kdContent: data,
+      accessPassVal: String(password),
+      index: 0
+    });
+
+    if (accountData == null) {
+      return setError('Please check your uploaded file or password');
+    }
+
+    if (data.kind === 'mnemonic') {
+      return setWalletFileV5andPassword({
+        kdContent: data,
+        accessPassVal: String(password)
+      });
+    }
+
     onFileLogin({
       address: data.address,
       privateKey: data.privateKey,
       token
     });
   };
+
+  if (walletFileV5andPassword) {
+    return (
+      <ModalContainer onClose={handleClose} visible={show}>
+        <PageState
+          icon={faFileAlt}
+          iconSize='3x'
+          title='Login using PEM'
+          description={
+            <AddressScreens
+              {...walletFileV5andPassword}
+              fileName={fileName || ''}
+            />
+          }
+        />
+      </ModalContainer>
+    );
+  }
 
   return (
     <ModalContainer onClose={handleClose} visible={show}>
