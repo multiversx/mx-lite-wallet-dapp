@@ -1,13 +1,16 @@
 import { PrivateKeyCheckWrapper } from 'components';
 import { RouteNamesEnum } from 'localConstants';
 import { Dashboard, Disclaimer, Home, Logout, Send, Unlock } from 'pages';
+import {
+  Dashboard,
+  Disclaimer,
+  Home,
+  Send,
+  Unlock,
+  Sign,
+  LoginHook
+} from 'pages';
 import { RouteType } from 'types';
-
-export enum HooksEnum {
-  login = 'login',
-  logout = 'logout',
-  sign = 'sign'
-}
 
 interface RouteWithTitleType extends RouteType {
   title: string;
@@ -49,6 +52,16 @@ const routesObject: Record<RouteNamesEnum, RouteWithTitleType> = {
         <Send />
       </PrivateKeyCheckWrapper>
     )
+  },
+  [RouteNamesEnum.sign]: {
+    path: RouteNamesEnum.sign,
+    title: 'Sign',
+    component: Sign
+  },
+  [RouteNamesEnum.loginHook]: {
+    path: RouteNamesEnum.loginHook,
+    title: 'Login',
+    component: LoginHook
   }
 };
 

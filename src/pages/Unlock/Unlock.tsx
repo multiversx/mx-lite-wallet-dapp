@@ -3,7 +3,6 @@ import type {
   LedgerLoginButtonPropsType,
   WalletConnectLoginButtonPropsType
 } from '@multiversx/sdk-dapp/UI';
-import { useNavigate } from 'react-router-dom';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
@@ -12,9 +11,10 @@ import {
   XaliasLoginButton
 } from 'components/sdkDapp.components';
 import { nativeAuth } from 'config';
-import { RouteNamesEnum } from 'localConstants';
+import { routeNames } from 'routes';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
+import { useUnlockRedirect } from './hooks';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -22,12 +22,13 @@ type CommonPropsType =
   | WalletConnectLoginButtonPropsType;
 
 export const Unlock = () => {
-  const navigate = useNavigate();
+  const onUnlockRedirect = useUnlockRedirect();
+
   const commonProps: CommonPropsType = {
-    callbackRoute: RouteNamesEnum.dashboard,
+    callbackRoute: routeNames.dashboard,
     nativeAuth,
     onLoginRedirect: () => {
-      navigate(RouteNamesEnum.dashboard);
+      onUnlockRedirect();
     }
   };
 

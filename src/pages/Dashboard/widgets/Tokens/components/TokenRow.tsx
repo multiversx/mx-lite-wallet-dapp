@@ -23,7 +23,7 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
   };
 
   return (
-    <div className='flex items-center justify-between p-4 rounded-lg'>
+    <div className='flex items-center justify-between p-4 rounded-lg border-b border-gray-200'>
       <div className='flex items-center space-x-4'>
         {logo ? (
           <img src={logo} alt={token.ticker} className='w-8 h-8' />
@@ -32,17 +32,19 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
         )}
         <div>{token.ticker}</div>
       </div>
-      {token.balance && (
-        <div className='text-right'>
-          <FormatAmount value={token.balance} showLabel={false} />
-        </div>
-      )}
-      <button
-        className='text-white rounded bg-blue-500 px-2 py-1'
-        onClick={handleSend}
-      >
-        <FontAwesomeIcon icon={faArrowUp} />
-      </button>
+      <div className='flex items-center space-x-4'>
+        {token.balance && (
+          <div className='text-right'>
+            <FormatAmount value={token.balance} showLabel={false} />
+          </div>
+        )}
+        <button
+          className='text-white rounded bg-blue-500 px-2 py-1'
+          onClick={handleSend}
+        >
+          <FontAwesomeIcon icon={faArrowUp} />
+        </button>
+      </div>
     </div>
   );
 };

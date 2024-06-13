@@ -16,9 +16,8 @@ import {
   sampleAuthenticatedDomains
 } from 'config';
 import { provider } from 'helpers/app';
-import { RouteNamesEnum } from 'localConstants';
 import { PageNotFound, Unlock } from 'pages';
-import { routes } from 'routes';
+import { routeNames, routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
 import { persistor, store } from './redux/store';
 
@@ -34,7 +33,7 @@ const AppContent = () => {
       }}
       dappConfig={{
         shouldUseWebViewProvider: true,
-        logoutRoute: RouteNamesEnum.unlock
+        logoutRoute: routeNames.unlock
       }}
       customComponents={{
         transactionTracker: {
@@ -54,7 +53,7 @@ const AppContent = () => {
       <AxiosInterceptorContext.Listener>
         <Layout>
           <Routes>
-            <Route path={RouteNamesEnum.unlock} element={<Unlock />} />
+            <Route path={routeNames.unlock} element={<Unlock />} />
             {routes.map((route) => (
               <Route
                 path={route.path}
