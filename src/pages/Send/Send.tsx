@@ -39,8 +39,6 @@ export const Send = () => {
   const cancelSend = (event: MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log('\x1b[42m%s\x1b[0m', 'Send: cancelSend');
-
     navigate(routeNames.dashboard);
   };
 
