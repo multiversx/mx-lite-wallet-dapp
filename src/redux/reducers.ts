@@ -1,7 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { RootApi } from './rootApi';
-import { hookReducer } from './slices';
-import { accountReducer } from './slices/account';
+import { hookReducer, accountReducer } from './slices';
+
+export const storageIgnoredSlices = ['hook'];
 
 export const rootReducer = combineReducers({
   hook: hookReducer,

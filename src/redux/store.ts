@@ -10,13 +10,14 @@ import {
   REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { rootReducer } from './reducers';
+import { rootReducer, storageIgnoredSlices } from './reducers';
 import { RootApi } from './rootApi';
 
 const persistConfig = {
   key: 'root',
   version: 1,
-  storage
+  storage,
+  blacklist: storageIgnoredSlices
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
