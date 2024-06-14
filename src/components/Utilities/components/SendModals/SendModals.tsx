@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import uniq from 'lodash/uniq';
 
-import { SignTransactionsModals } from 'components/index';
+import { SignTransactionsModals } from 'components';
 
 import {
   useGetAccountProvider,
