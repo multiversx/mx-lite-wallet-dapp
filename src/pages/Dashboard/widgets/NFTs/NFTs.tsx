@@ -25,7 +25,7 @@ export const NFTs = () => {
     <div className='flex flex-col'>
       <OutputContainer
         isLoading={isLoading}
-        className='p-0 max-h-screen flex flex-wrap gap-4'
+        className='p-0 max-h-screen flex flex-wrap justify-center gap-3 py-3'
       >
         {nfts?.map((nft: PartialNftType) => (
           <NFTRow key={nft.identifier} nft={nft} />

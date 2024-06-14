@@ -12,7 +12,6 @@ export const useUnlockRedirect = () => {
   const navigate = useNavigate();
   const { type: hook } = useSelector(hookSelector);
   const { getRedirectPathname, pathname } = useRedirectPathname();
-  // const persistCrossWindowLogin = usePersistCrossWindowLogin();
   const shouldRedirect = isLoggedIn && pathname;
 
   const onUnlockRedirect = () => {
@@ -29,7 +28,6 @@ export const useUnlockRedirect = () => {
       return;
     }
 
-    // persistCrossWindowLogin();
     onUnlockRedirect();
   }, [hook, isLoggedIn, shouldRedirect]);
 

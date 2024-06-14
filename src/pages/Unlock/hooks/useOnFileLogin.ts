@@ -2,12 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { getToken, loginWithExternalProvider } from 'helpers';
-import {
-  useLoginService,
-  useRedirectPathname,
-  useGetAccountInfo,
-  useLoginService
-} from 'hooks';
+import { useLoginService, useRedirectPathname, useGetAccountInfo } from 'hooks';
 import { hookSelector } from 'redux/selectors';
 
 import {

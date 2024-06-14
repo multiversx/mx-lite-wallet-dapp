@@ -15,7 +15,7 @@ export const OutputContainer = (props: OutputContainerPropsType) => {
   return (
     <div
       className={classNames(
-        'text-sm border border-gray-200 rounded overflow-auto',
+        'text-sm border border-gray-200 rounded overflow-auto output-container',
         className
       )}
       data-testid={props['data-testid']}

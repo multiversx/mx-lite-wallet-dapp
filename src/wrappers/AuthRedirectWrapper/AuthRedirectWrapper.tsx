@@ -2,8 +2,8 @@ import type { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useGetIsLoggedIn } from 'hooks';
+import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { hookSelector } from '../../redux/selectors';
 
 interface AuthRedirectWrapperPropsType extends PropsWithChildren {
   requireAuth?: boolean;

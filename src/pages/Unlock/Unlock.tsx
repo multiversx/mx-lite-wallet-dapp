@@ -27,9 +27,7 @@ export const Unlock = () => {
   const commonProps: CommonPropsType = {
     callbackRoute: routeNames.dashboard,
     nativeAuth,
-    onLoginRedirect: () => {
-      onUnlockRedirect();
-    }
+    onLoginRedirect: () => onUnlockRedirect()
   };
 
   return (

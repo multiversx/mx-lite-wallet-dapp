@@ -23,3 +23,7 @@
 .mx-transactions td > div > a {
   @apply text-blue-600;
 }
+
+.output-container {
+  max-height: 800px;
+}

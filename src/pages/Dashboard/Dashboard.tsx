@@ -33,7 +33,7 @@ export const Dashboard = () => {
 
   return (
     <AuthRedirectWrapper>
-      <div className='flex flex-col gap-6 max-w-3xl w-full'>
+      <div className='flex flex-col gap-6 max-w-2xl w-full'>
         <Account />
         {WIDGETS.map((element) => (
           <Widget key={element.title} {...element} />

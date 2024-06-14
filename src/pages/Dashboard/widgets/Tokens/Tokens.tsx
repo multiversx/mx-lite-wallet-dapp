@@ -23,7 +23,7 @@ export const Tokens = () => {
 
   return (
     <div className='flex flex-col'>
-      <OutputContainer isLoading={isLoading} className='p-0 max-h-screen'>
+      <OutputContainer isLoading={isLoading} className='p-0'>
         {tokens?.map((token: TokenType) => (
           <TokenRow key={token.identifier} token={token} />
         ))}

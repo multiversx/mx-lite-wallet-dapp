@@ -1,9 +1,9 @@
 import {
+  faInfo,
   faCheck,
   faHourglass,
   faTimes
-} from '@fortawesome/pro-regular-svg-icons';
-import { faInfo } from '@fortawesome/pro-solid-svg-icons';
+} from '@fortawesome/free-solid-svg-icons';
 
 import { StatusTypeEnum } from '../status.types';
 

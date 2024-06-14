@@ -41,7 +41,7 @@ export const Transactions = () => {
 
   return (
     <div className='flex flex-col'>
-      <OutputContainer isLoading={isLoading} className='p-0 max-h-screen'>
+      <OutputContainer isLoading={isLoading} className='p-0'>
         <div className='w-full h-full overflow-x-auto bg-white shadow rounded-lg'>
           <table className='w-full divide-y divide-gray-200 overflow-auto table-auto'>
             <thead className='bg-gray-50'>
