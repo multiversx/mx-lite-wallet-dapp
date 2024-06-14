@@ -4,3 +4,4 @@ export * from './PageNotFound';
 export * from './Unlock';
 export * from './Disclaimer';
 export * from './Send';
+export * from './Logout';

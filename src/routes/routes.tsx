@@ -1,5 +1,6 @@
+import { PrivateKeyCheckWrapper } from 'components';
 import { RouteNamesEnum } from 'localConstants';
-import { Dashboard, Disclaimer, Home, Send, Unlock } from 'pages';
+import { Dashboard, Disclaimer, Home, Logout, Send, Unlock } from 'pages';
 import { RouteType } from 'types';
 
 export enum HooksEnum {
@@ -23,8 +24,14 @@ const routesObject: Record<RouteNamesEnum, RouteWithTitleType> = {
     title: 'Unlock',
     component: Unlock
   },
+  [RouteNamesEnum.logout]: {
+    path: RouteNamesEnum.logout,
+    title: 'Logout',
+    component: Logout
+  },
   [RouteNamesEnum.dashboard]: {
     path: RouteNamesEnum.dashboard,
+    authenticatedRoute: true,
     title: 'Dashboard',
     component: Dashboard
   },
@@ -35,8 +42,13 @@ const routesObject: Record<RouteNamesEnum, RouteWithTitleType> = {
   },
   [RouteNamesEnum.send]: {
     path: RouteNamesEnum.send,
+    authenticatedRoute: true,
     title: 'Send',
-    component: Send
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <Send />
+      </PrivateKeyCheckWrapper>
+    )
   }
 };
 

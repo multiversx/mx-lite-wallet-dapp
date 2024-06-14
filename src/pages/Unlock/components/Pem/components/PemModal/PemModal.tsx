@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, ModalContainer, PageState } from 'components';
 import { UseModalReturnType } from 'hooks';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { setPemLogin } from 'redux/slices';
+import { routeNames } from 'routes';
 import { parsePem } from './helpers';
 
 export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   const getInitToken = useInitToken();
-  const { token: initToken } = useSelector(accountSelector);
+  const { token: initToken, address } = useSelector(accountSelector);
   const dispatch = useDispatch();
   const { type: hook, loginToken: hookInitToken } = useSelector(hookSelector);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -25,9 +29,15 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
     if (hook) {
       return;
     }
-
     getInitToken();
   }, [hook]);
+
+  const handleModalClose = () => {
+    handleClose();
+    if (!address && pathname !== routeNames.unlock) {
+      navigate(routeNames.logout);
+    }
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -45,15 +55,17 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
 
     dispatch(setPemLogin(data.privateKey));
 
-    onFileLogin({
+    await onFileLogin({
       address: data.address,
       privateKey: data.privateKey,
       token
     });
+
+    handleClose();
   };
 
   return (
-    <ModalContainer onClose={handleClose} visible={show}>
+    <ModalContainer onClose={handleModalClose} visible={show}>
       <PageState
         icon={faFileAlt}
         iconSize='3x'

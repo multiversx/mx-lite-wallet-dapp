@@ -6,7 +6,8 @@ import BigNumber from 'bignumber.js';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
-import { GAS_LIMIT, RouteNamesEnum, SearchParamsEnum } from 'localConstants';
+import { GAS_LIMIT, SearchParamsEnum } from 'localConstants';
+import { routeNames } from 'routes';
 import { getSelectedTokenBalance } from './helpers';
 import { useSendForm, useTokenOptions } from './hooks';
 import { FormFieldsEnum, SendTypeEnum } from './types';
@@ -38,7 +39,7 @@ export const Send = () => {
   const cancelSend = (event: MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    navigate(RouteNamesEnum.dashboard);
+    navigate(routeNames.dashboard);
   };
 
   const resetFormAndGetBalance = () => {
