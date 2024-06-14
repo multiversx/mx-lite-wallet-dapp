@@ -4,3 +4,4 @@ export * from './useIsWebProvider';
 export * from './interface';
 export * from './useScrollToElement';
 export * from './withPageTitle';
+export * from './useLogout';

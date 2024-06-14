@@ -1,23 +1,42 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { usePrivateKeyCheckRedirectRoute } from 'hooks';
+import { useNavigate } from 'react-router-dom';
+import { provider } from 'helpers/app';
+import { useModal } from 'hooks';
+import { KeystoreModal } from 'pages/Unlock/components/Keystore/components/KeystoreModal';
+import { PemModal } from 'pages/Unlock/components/Pem/components/PemModal';
 import { accountSelector } from 'redux/selectors';
-import { PrivateKeyRedirectLogin } from './components';
+import { FileLoginEnum } from 'redux/slices';
+import { routeNames } from 'routes';
 
 export const PrivateKeyCheckWrapper = ({ children }: PropsWithChildren) => {
   const { fileLogin } = useSelector(accountSelector);
-
-  const existingRedirectRoute = usePrivateKeyCheckRedirectRoute();
-  const isWaitingForLoginModal = Boolean(existingRedirectRoute);
+  const { show, handleShow, handleClose } = useModal();
+  const navigate = useNavigate();
   const shouldRelogin = !provider.isInitialized() && Boolean(fileLogin);
 
-  if (shouldRelogin) {
-    return <PrivateKeyRedirectLogin />;
-  }
+  useEffect(() => {
+    if (shouldRelogin) {
+      handleShow();
+    }
+  }, []);
 
-  if (isWaitingForLoginModal) {
-    return null;
-  }
+  const handleModalClose = () => {
+    handleClose();
+    if (shouldRelogin) {
+      navigate(routeNames.logout);
+    }
+  };
 
-  return <>{children}</>;
+  return (
+    <>
+      {fileLogin === FileLoginEnum.keystore && (
+        <KeystoreModal handleClose={handleModalClose} show={show} />
+      )}
+      {fileLogin === FileLoginEnum.pem && (
+        <PemModal handleClose={handleModalClose} show={show} />
+      )}
+      {children}
+    </>
+  );
 };
