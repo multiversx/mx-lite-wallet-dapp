@@ -1,14 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { Formik, FormikHelpers } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { mixed, object } from 'yup';
 import { Button, ModalContainer, PageState } from 'components';
-import { UseModalReturnType } from 'hooks';
+import { UseModalReturnType, useCloseModalOnEsc } from 'hooks';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { setPemLogin } from 'redux/slices';
 import { routeNames } from 'routes';
 import { parsePem } from './helpers';
+
+const PEM_FIELD = 'pem';
+
+type PemValuesType = {
+  pem: File | null;
+};
+
+const initialValues: PemValuesType = {
+  [PEM_FIELD]: null
+};
 
 export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   const getInitToken = useInitToken();
@@ -17,9 +29,20 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   const { type: hook, loginToken: hookInitToken } = useSelector(hookSelector);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const handleModalClose = () => {
+    handleClose();
 
-  const [file, setFile] = useState<File | null>(null);
-  const [error, setError] = useState<string | null>(null);
+    const shouldLogoutIfReloginNotConfirmed =
+      address && pathname !== routeNames.unlock;
+
+    if (shouldLogoutIfReloginNotConfirmed) {
+      navigate(routeNames.logout);
+    }
+  };
+  useCloseModalOnEsc({
+    onClose: handleModalClose,
+    isOpen: show
+  });
 
   const token = hook ? hookInitToken : initToken;
 
@@ -32,35 +55,20 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
     getInitToken();
   }, [hook]);
 
-  const handleModalClose = () => {
-    handleClose();
-    if (!address && pathname !== routeNames.unlock) {
-      navigate(routeNames.logout);
-    }
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
-      setError(null);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = await parsePem(file);
+  const onSubmit = async (
+    values: PemValuesType,
+    props: FormikHelpers<PemValuesType>
+  ) => {
+    const data = await parsePem(values.pem);
     if (data == null) {
-      return setError('Please check your loaded file');
+      return props.setFieldError('pem', 'Please check your loaded file');
     }
-
     dispatch(setPemLogin(data.privateKey));
-
     await onFileLogin({
       address: data.address,
       privateKey: data.privateKey,
       token
     });
-
     handleClose();
   };
 
@@ -71,42 +79,80 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
         iconSize='3x'
         title='Login using PEM'
         description={
-          <form
-            className='flex flex-col mx-auto items-center'
-            onSubmit={handleSubmit}
+          <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validationSchema={object().shape({
+              pem: mixed()
+                .required('Required')
+                .test('isFile', 'Invalid pem file', (value) => {
+                  const isValid = value && value !== null;
+                  return isValid;
+                })
+                .test(
+                  'sameAccount',
+                  'This is not the wallet you initiated the transaction with',
+                  async (file) => {
+                    if (!file || !address) {
+                      return true;
+                    }
+                    const data = await parsePem(file as File);
+                    console.log('data', data, address);
+
+                    return data?.address === address;
+                  }
+                )
+            })}
           >
-            <label htmlFor='pem' className='mb-2'>
-              Select file
-            </label>
-            <input
-              className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
-              type='file'
-              required
-              id='pem'
-              name='pem'
-              accept='.pem'
-              onChange={handleFileChange}
-            />
-            {error && <div className='text-red-600 mb-4'>{error}</div>}
-            <div className='flex flex-col mx-auto items-center gap-2 mt-4'>
-              <Button
-                data-testid='submitButton'
-                type='submit'
-                onClick={() => {}}
-              >
-                Submit
-              </Button>
-              <button
-                id='closeButton'
-                data-testid='closeButton'
-                onClick={handleClose}
-                type='button'
-                className='mt-2'
-              >
-                Close
-              </button>
-            </div>
-          </form>
+            {(formikProps) => {
+              const { submitForm, errors, isValid, setFieldValue } =
+                formikProps;
+
+              return (
+                <div className='flex flex-col mx-auto items-center'>
+                  <label htmlFor='pem' className='mb-2'>
+                    Select file
+                  </label>
+                  <input
+                    className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
+                    type='file'
+                    required
+                    id='pem'
+                    name='pem'
+                    accept='.pem'
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        setFieldValue(PEM_FIELD, file);
+                      }
+                    }}
+                  />
+                  {errors.pem && (
+                    <div className='text-red-600 mb-4'>{errors.pem}</div>
+                  )}
+                  <div className='flex flex-col mx-auto items-center gap-2 mt-4'>
+                    <Button
+                      data-testid='submitButton'
+                      type='submit'
+                      disabled={!isValid}
+                      onClick={submitForm}
+                    >
+                      Submit
+                    </Button>
+                    <button
+                      id='closeButton'
+                      data-testid='closeButton'
+                      onClick={handleModalClose}
+                      type='button'
+                      className='mt-2'
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              );
+            }}
+          </Formik>
         }
       />
     </ModalContainer>
