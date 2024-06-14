@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Transaction } from '@multiversx/sdk-core';
 import { getLoginHookData } from '@multiversx/sdk-js-web-wallet-io/out/hooks/loginHook/getLoginHookData';
 import { getSignHookData } from '@multiversx/sdk-js-web-wallet-io/out/url/signHook';
@@ -19,7 +19,6 @@ import {
   CrossWindowProviderResponseEnums,
   RequestMessageType
 } from 'types';
-import { IdleModal } from './components';
 import {
   buildTransactionsQueryString,
   buildWalletQueryString,
@@ -188,5 +187,5 @@ export const PostMessageListener = () => {
     isHandShakeSent = true;
   }, []);
 
-  return <IdleModal />;
+  return null;
 };
