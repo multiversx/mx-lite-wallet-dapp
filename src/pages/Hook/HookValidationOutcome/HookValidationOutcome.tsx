@@ -1,5 +1,4 @@
 import React from 'react';
-import { CrossWindowProviderResponseEnums } from '@multiversx/sdk-dapp-utils/out/enums';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Loader } from 'components';
@@ -13,6 +12,7 @@ import {
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
+import { CrossWindowProviderResponseEnums } from 'types';
 import { LoginMethodsEnum } from 'types';
 import { HookStateEnum } from '../types';
 

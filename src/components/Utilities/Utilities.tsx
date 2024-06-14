@@ -1,7 +1,7 @@
 import { TransactionsToastList, NotificationModal } from 'components';
 import { useGetIsLoggedIn } from 'hooks';
 import { CUSTOM_TOAST_DEFAULT_DURATION } from 'localConstants';
-import { SendModals } from './components';
+import { PostMessageListener, SendModals } from './components';
 
 export const Utilities = () => {
   const isLoggedIn = useGetIsLoggedIn();
@@ -21,6 +21,7 @@ export const Utilities = () => {
       />
       <NotificationModal />
       <SignTransactionsModals />
+      <PostMessageListener />
     </>
   );
 };

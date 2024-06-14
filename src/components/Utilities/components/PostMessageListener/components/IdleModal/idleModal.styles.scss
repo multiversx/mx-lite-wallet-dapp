@@ -1,0 +1,33 @@
+.idle-modal {
+  display: flex;
+  flex-direction: column;
+
+  .modal-layout-content {
+    min-height: min(605px, calc(100vh - 64px - var(--modal-margin)));
+
+    @media (min-width: 576px) {
+      min-height: min(510px, calc(100vh - 48px - var(--modal-margin)));
+    }
+
+    .idle-modal-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      padding: 0 64px;
+
+      .idle-modal-description {
+        font-size: 16px;
+        margin-top: 32px;
+        color: var(--muted);
+        line-height: 1.25;
+
+        a {
+          color: var(--primary);
+        }
+      }
+    }
+  }
+}

@@ -2,8 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { getLoginHookData } from '@multiversx/sdk-js-web-wallet-io/out/hooks/loginHook/getLoginHookData';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { logout } from 'helpers';
-import { useGetAccount } from 'hooks';
+import { useGetAccount, useLogout } from 'hooks';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { HookValidationOutcome } from '../HookValidationOutcome';
@@ -13,6 +12,7 @@ export const LoginHook = () => {
   const { address } = useGetAccount();
   const dispatch = useDispatch();
   const { pathname, search } = useLocation();
+  const logout = useLogout();
 
   const data = useMemo(() => {
     return pathname.includes(HooksEnum.login) ? getLoginHookData(search) : null;

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useGetAccount } from 'hooks';
+import { useGetAccount } from 'hooks/index';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';

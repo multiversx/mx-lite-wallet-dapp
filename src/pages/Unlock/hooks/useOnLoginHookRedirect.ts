@@ -1,8 +1,8 @@
-import { CrossWindowProviderResponseEnums } from '@multiversx/sdk-dapp-utils/out/enums';
 import { useSelector } from 'react-redux';
 import { decodeNativeAuthToken } from 'helpers';
 import { useGetAccount, useGetLoginInfo, useReplyToDapp } from 'hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
+import { CrossWindowProviderResponseEnums } from 'types';
 
 export const useOnLoginHookRedirect = () => {
   const { callbackUrl } = useSelector(hookSelector);
