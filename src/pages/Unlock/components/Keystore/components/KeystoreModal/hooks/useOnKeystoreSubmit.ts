@@ -75,8 +75,10 @@ export const useOnKeystoreSubmit = () => {
       })
     );
 
-    navigate(routeNames.dashboard, {
-      replace: true
-    });
+    if (!loggedInAddress) {
+      navigate(routeNames.dashboard, {
+        replace: true
+      });
+    }
   };
 };

@@ -74,6 +74,8 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
       });
     }
 
+    handleClose();
+
     onKeystoreSubmit({
       [WALLET_FILE_NAME]: String(fileName),
       [WALLET_FILE]: data,
@@ -87,7 +89,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
         <PageState
           icon={faFileAlt}
           iconSize='3x'
-          title='Login using PEM'
+          title='Login using Keystore'
           description={
             <AddressScreens
               {...walletFileV5andPassword}
@@ -104,7 +106,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
       <PageState
         icon={faFileAlt}
         iconSize='3x'
-        title='Login using PEM'
+        title='Login using Keystore'
         description={
           <Formik
             initialValues={initialValues}

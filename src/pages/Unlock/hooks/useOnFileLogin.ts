@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { getToken, loginWithExternalProvider } from 'helpers';
-import { useLoginService } from 'hooks';
+import { useGetAccountInfo, useLoginService } from 'hooks';
 import { hookSelector } from 'redux/selectors';
 
 import {
@@ -31,6 +31,7 @@ export const generateTokenSignature = ({
 export const useOnFileLogin = () => {
   const dispatch = useDispatch();
   const { loginToken, hasNativeAuthToken } = useSelector(hookSelector);
+  const { address: loggedInAddress } = useGetAccountInfo();
   const loginService = useLoginService();
   const navigate = useNavigate();
 
@@ -83,8 +84,10 @@ export const useOnFileLogin = () => {
       return;
     }
 
-    navigate(routeNames.dashboard, {
-      replace: true
-    });
+    if (!loggedInAddress) {
+      navigate(routeNames.dashboard, {
+        replace: true
+      });
+    }
   };
 };
