@@ -1,5 +1,5 @@
 import React from 'react';
-import { Status, StatusTypeEnum } from 'components';
+import { ModalContainer, Status, StatusTypeEnum } from 'components';
 
 type PendingConnectionProps = {
   title?: string;
@@ -11,7 +11,7 @@ export const PendingConnection = ({
   subtitle = ''
 }: PendingConnectionProps) => {
   return (
-    <ModalContainer show hideHeaderCloseBtn narrowModal className='idle-modal'>
+    <ModalContainer visible className='idle-modal'>
       <div className='idle-modal-wrapper'>
         <Status
           title={title}

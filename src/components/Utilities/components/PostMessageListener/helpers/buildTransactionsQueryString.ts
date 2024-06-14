@@ -1,6 +1,6 @@
 import { IPlainTransactionObject, Transaction } from '@multiversx/sdk-core/out';
-import { buildWalletQueryString } from './buildWalletQueryString';
 import { processBase64Fields } from '@multiversx/sdk-js-web-wallet-io/out/helpers';
+import { buildWalletQueryString } from './buildWalletQueryString';
 
 export const buildTransactionsQueryString = ({
   transactions,

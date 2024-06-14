@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { Loader } from 'components';
+import { PendingConnection } from 'components';
 import {
   useReplyToDapp,
   useGetAccount,
@@ -40,7 +40,7 @@ export const HookValidationOutcome = ({
   const isPending = validUrl === HookStateEnum.pending;
 
   if (isWalletConnectV2Initializing) {
-    return <Loader />;
+    return <PendingConnection />;
   }
 
   if (isPending) {

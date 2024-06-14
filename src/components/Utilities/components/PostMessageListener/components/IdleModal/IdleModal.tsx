@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ModalContainer, Status, StatusTypeEnum } from 'components';
-import { useGetAccount } from 'hooks';
+import { useGetAccount, useGetIsWalletConnectV2Initialized } from 'hooks';
+import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
-import { HooksEnum } from 'routes';
+import { PendingConnection } from './PendingConnection';
 
 let persistedHook: HooksEnum | null = null;
 
 export const IdleModal = () => {
   const { type: hook, wasCancelled, callbackUrl } = useSelector(hookSelector);
+  const isWalletConnectV2Initializing = useGetIsWalletConnectV2Initialized();
   const { address } = useGetAccount();
   const isLoggedIn = Boolean(address);
   const [lastHookAction, setlastHookAction] = useState<HooksEnum | null>(
@@ -28,6 +30,10 @@ export const IdleModal = () => {
       ? '❌ Transactions signing cancelled'
       : 'Transactions signed'
   };
+
+  if (isWalletConnectV2Initializing) {
+    return <PendingConnection />;
+  }
 
   if (!window.opener || hook || !isLoggedIn) {
     return null;
