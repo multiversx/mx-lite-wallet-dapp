@@ -1,5 +1,6 @@
 export { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
 export { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
+export { sendBatchTransactions as sendBatchTransactionsSdkDapp } from '@multiversx/sdk-dapp/services/transactions/sendBatchTransactions';
 export { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 export { logout } from '@multiversx/sdk-dapp/utils/logout';
 export { signTransactions } from '@multiversx/sdk-dapp/services/transactions/signTransactions';
@@ -19,3 +20,6 @@ export { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsVali
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp/utils/transactions/getInterpretedTransaction';
 export { formatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
 export { getIsProviderEqualTo } from '@multiversx/sdk-dapp/utils/account/getIsProviderEqualTo';
+export { removeTransactionsToSign } from '@multiversx/sdk-dapp/services/transactions/clearTransactions';
+export { extractSessionId } from '@multiversx/sdk-dapp/hooks/transactions/helpers/extractSessionId';
+export { checkIsValidSender } from '@multiversx/sdk-dapp/hooks/transactions/helpers/checkIsValidSender';

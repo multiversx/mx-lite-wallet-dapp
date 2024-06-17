@@ -11,3 +11,4 @@ export {
   TOKENS_ENDPOINT,
   NFTS_ENDPOINT
 } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+export { TransactionBatchStatusesEnum } from '@multiversx/sdk-dapp/types/enums.types';
