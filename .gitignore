@@ -10,6 +10,7 @@
 screenshots
 videos
 wdio/node_modules
+/chrome-headless-shell
 
 # production
 /build

@@ -27,3 +27,11 @@
 .output-container {
   max-height: 800px;
 }
+
+.dapp-core-component__dappModalStyles__dappModalContent {
+  max-width: 800px !important;
+}
+
+.dapp-core-component__addressTableStyles__ledger-address-table-wrapper {
+  padding: 40px 0 !important;
+}
