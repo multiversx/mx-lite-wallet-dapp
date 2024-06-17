@@ -42,7 +42,6 @@ describe('New wallet login with keystore test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.confirmBtn));
-
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.userAddress,
       text: `${emptyWalletAccount.address}`
