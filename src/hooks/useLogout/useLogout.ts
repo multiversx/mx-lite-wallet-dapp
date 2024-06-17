@@ -1,8 +1,12 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from 'helpers';
+import { HooksEnum } from 'localConstants';
 import { logoutAction } from 'redux/commonActions';
+import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
+import { CrossWindowProviderResponseEnums } from 'types';
+import { useReplyToDapp } from '../useReplyToDapp';
 
 const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
 const options = {
@@ -23,15 +27,33 @@ const options = {
 export const useLogout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { type: hook } = useSelector(hookSelector);
+  const replyToDapp = useReplyToDapp();
 
   const onRedirect = () => {
     dispatch(logoutAction());
-    navigate(routeNames.unlock);
-  };
-
-  return () => {
     localStorage.clear();
     sessionStorage.clear();
+
+    const shouldReplyToDapp = window.opener;
+
+    if (!shouldReplyToDapp) {
+      return navigate(routeNames.unlock);
+    }
+
+    replyToDapp({
+      type: CrossWindowProviderResponseEnums.disconnectResponse,
+      payload: {
+        data: true
+      }
+    });
+
+    window.close();
+  };
+
+  options.shouldBroadcastLogoutAcrossTabs = hook !== HooksEnum.logout;
+
+  return () =>
     logout(
       routeNames.unlock,
       /*
@@ -41,5 +63,4 @@ export const useLogout = () => {
       shouldAttemptReLogin,
       options
     );
-  };
 };
