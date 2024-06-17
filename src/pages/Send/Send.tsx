@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { calculateGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateGasLimit';
 import { calculateNftGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateNftGasLimit';
 import { computeNftDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';

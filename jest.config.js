@@ -1,24 +1,21 @@
 module.exports = {
   roots: ['<rootDir>/src'],
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/mocks/**'
-  ],
+  collectCoverageFrom: ['src/**/tests/*.{test.ts,test.tsx,spec.tsx,spec.ts}'],
   coveragePathIgnorePatterns: [],
+  setupFiles: ['./config/setupJest.js'],
+  setupFilesAfterEnv: ['./src/setupTests.ts'],
   testEnvironment: 'jsdom',
   modulePaths: ['<rootDir>/src'],
   transform: {
-    '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest'
+    '^.+\\.(ts|js|tsx|jsx)$': ['@swc/jest'],
+    '^.+\\.svg$': '<rootDir>/config/svgTransform.js',
+    '^.+\\.(png|jpg|webp)$': '<rootDir>/config/pngTransform.js'
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!@multiversx/sdk-guardians-provider|@multiversx/sdk-dapp-form|@multiversx/sdk-dapp-nft|@multiversx/sdk-dapp|@multiversx/sdk-wallet-connect-provider|@multiversx/sdk-guardians-provider|react-redux|swiper|ssr-window|dom7|axios|react-tooltip|uuid|uint8arrays|multiformats|@lifeomic/axios-fetch)'
-  ],
+  transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)'],
+  testMatch: ['**/src/**/?(*.)+(spec|test|bgTest).ts?(x)'],
   moduleNameMapper: {
-    '^react-native$': 'react-native-web',
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
+    '\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
-  setupFilesAfterEnv: ['./src/setupTests.ts'],
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team
     // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
@@ -29,15 +26,15 @@ module.exports = {
     'web.ts',
     'web.tsx',
     'json',
-    'web.jsx',
-    'jsx',
     'node'
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname'
   ],
-  clearMocks: true,
-  resetMocks: true,
-  restoreMocks: true
+  moduleDirectories: ['node_modules', 'src'],
+  bail: 1,
+  workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
+  maxWorkers: '40%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
+  resetMocks: false
 };
