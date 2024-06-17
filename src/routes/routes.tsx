@@ -1,56 +1,70 @@
 import { PrivateKeyCheckWrapper } from 'components';
-import { RouteNamesEnum } from 'localConstants';
-import { Dashboard, Disclaimer, Home, Logout, Send, Unlock } from 'pages';
+import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
+import {
+  Dashboard,
+  Disclaimer,
+  Home,
+  Send,
+  Unlock,
+  Sign,
+  LoginHook,
+  Logout
+} from 'pages';
 import { RouteType } from 'types';
-
-export enum HooksEnum {
-  login = 'login',
-  logout = 'logout',
-  sign = 'sign'
-}
 
 interface RouteWithTitleType extends RouteType {
   title: string;
 }
 
-const routesObject: Record<RouteNamesEnum, RouteWithTitleType> = {
-  [RouteNamesEnum.home]: {
-    path: RouteNamesEnum.home,
-    title: 'Home',
-    component: Home
-  },
-  [RouteNamesEnum.unlock]: {
-    path: RouteNamesEnum.unlock,
-    title: 'Unlock',
-    component: Unlock
-  },
-  [RouteNamesEnum.logout]: {
-    path: RouteNamesEnum.logout,
-    title: 'Logout',
-    component: Logout
-  },
-  [RouteNamesEnum.dashboard]: {
-    path: RouteNamesEnum.dashboard,
-    authenticatedRoute: true,
-    title: 'Dashboard',
-    component: Dashboard
-  },
-  [RouteNamesEnum.disclaimer]: {
-    path: RouteNamesEnum.disclaimer,
-    title: 'Disclaimer',
-    component: Disclaimer
-  },
-  [RouteNamesEnum.send]: {
-    path: RouteNamesEnum.send,
-    authenticatedRoute: true,
-    title: 'Send',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Send />
-      </PrivateKeyCheckWrapper>
-    )
-  }
-};
+const routesObject: Record<RouteNamesEnum | HooksPageEnum, RouteWithTitleType> =
+  {
+    [RouteNamesEnum.home]: {
+      path: RouteNamesEnum.home,
+      title: 'Home',
+      component: Home
+    },
+    [RouteNamesEnum.unlock]: {
+      path: RouteNamesEnum.unlock,
+      title: 'Unlock',
+      component: Unlock
+    },
+    [RouteNamesEnum.logout]: {
+      path: RouteNamesEnum.logout,
+      title: 'Logout',
+      component: Logout
+    },
+    [RouteNamesEnum.dashboard]: {
+      path: RouteNamesEnum.dashboard,
+      authenticatedRoute: true,
+      title: 'Dashboard',
+      component: Dashboard
+    },
+    [RouteNamesEnum.disclaimer]: {
+      path: RouteNamesEnum.disclaimer,
+      title: 'Disclaimer',
+      component: Disclaimer
+    },
+    [RouteNamesEnum.send]: {
+      path: RouteNamesEnum.send,
+      authenticatedRoute: true,
+      title: 'Send',
+      component: () => (
+        <PrivateKeyCheckWrapper>
+          <Send />
+        </PrivateKeyCheckWrapper>
+      )
+    },
+    [RouteNamesEnum.sign]: {
+      path: RouteNamesEnum.sign,
+      title: 'Sign',
+      component: Sign
+    },
+    [HooksPageEnum.loginHook]: {
+      path: HooksPageEnum.loginHook,
+      title: 'Login',
+      component: LoginHook
+    }
+  };
 
 export const routes: RouteWithTitleType[] = Object.values(routesObject);
 

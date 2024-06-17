@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { getToken, loginWithExternalProvider } from 'helpers';
-import { useGetAccountInfo, useLoginService } from 'hooks';
+import { useLoginService, useRedirectPathname, useGetAccountInfo } from 'hooks';
 import { hookSelector } from 'redux/selectors';
 
 import {
@@ -10,7 +10,6 @@ import {
   setExternalNativeAuthToken,
   setTokenLogin
 } from 'redux/slices';
-import { routeNames } from 'routes';
 import { signMessage } from '../helpers';
 
 interface UseOnLoginType {
@@ -34,6 +33,7 @@ export const useOnFileLogin = () => {
   const { address: loggedInAddress } = useGetAccountInfo();
   const loginService = useLoginService();
   const navigate = useNavigate();
+  const { getRedirectPathname } = useRedirectPathname();
 
   return async ({
     address,
@@ -84,8 +84,10 @@ export const useOnFileLogin = () => {
       return;
     }
 
+    const redirectPathName = getRedirectPathname();
+
     if (!loggedInAddress) {
-      navigate(routeNames.dashboard, {
+      navigate(redirectPathName, {
         replace: true
       });
     }

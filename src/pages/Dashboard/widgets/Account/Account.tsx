@@ -4,7 +4,7 @@ import QRCode from 'react-qr-code';
 import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
-import { RouteNamesEnum } from 'localConstants';
+import { routeNames } from 'routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
@@ -56,7 +56,7 @@ export const Account = () => {
               Open in Explorer
             </a>
             <MxLink
-              to={`${RouteNamesEnum.send}`}
+              to={`${routeNames.send}`}
               className='inline-block rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
             >
               Send

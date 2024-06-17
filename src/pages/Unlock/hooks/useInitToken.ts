@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetLoginInfo, useLoginService } from 'hooks';
+import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { setToken } from 'redux/slices';
-import { HooksEnum } from 'routes';
 
 export const useInitToken = () => {
   const dispatch = useDispatch();

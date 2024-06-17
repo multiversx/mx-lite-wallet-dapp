@@ -1,12 +1,11 @@
 import { FormikHelpers } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useGetAccountInfo } from 'hooks';
+import { useGetAccountInfo, useRedirectPathname } from 'hooks';
 import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants/misc';
 import { useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector } from 'redux/selectors';
 import { setKeystoreLogin } from 'redux/slices';
-import { routeNames } from 'routes';
 import { accessWallet } from '../helpers';
 
 export interface KeystoreValuesType {
@@ -21,6 +20,7 @@ export const useOnKeystoreSubmit = () => {
   const { token, addressIndex } = useSelector(accountSelector);
   const { address: loggedInAddress } = useGetAccountInfo();
   const navigate = useNavigate();
+  const { pathname: redirectPathName } = useRedirectPathname();
 
   return (
     { accessPass, walletFile, fileName }: KeystoreValuesType,
@@ -76,7 +76,7 @@ export const useOnKeystoreSubmit = () => {
     );
 
     if (!loggedInAddress) {
-      navigate(routeNames.dashboard, {
+      navigate(redirectPathName, {
         replace: true
       });
     }
