@@ -1,7 +1,26 @@
 import { Card } from 'components/Card';
 import { useIsWebProvider } from 'hooks';
 import { WidgetType } from 'types/widget.types';
-import { getCallbackRoute } from 'utils/getCallbackRoute';
+
+const getCallbackRoute = ({
+  anchor,
+  isWebProvider
+}: {
+  anchor?: string;
+  isWebProvider?: boolean;
+}) => {
+  if (!isWebProvider) {
+    return '';
+  }
+
+  const basePath = `${window.location.pathname}`;
+
+  if (anchor) {
+    return `${basePath}#${anchor}`;
+  }
+
+  return basePath;
+};
 
 export const Widget = ({
   title,

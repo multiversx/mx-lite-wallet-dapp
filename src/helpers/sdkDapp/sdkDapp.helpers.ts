@@ -15,3 +15,7 @@ import { nativeAuth } from '@multiversx/sdk-dapp/services/nativeAuth/nativeAuth'
 const { getToken } = nativeAuth();
 export { getToken };
 export { loginWithExternalProvider } from '@multiversx/sdk-dapp/utils/account/loginWithExternalProvider';
+export { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
+export { getInterpretedTransaction } from '@multiversx/sdk-dapp/utils/transactions/getInterpretedTransaction';
+export { formatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
+export { getIsProviderEqualTo } from '@multiversx/sdk-dapp/utils/account/getIsProviderEqualTo';

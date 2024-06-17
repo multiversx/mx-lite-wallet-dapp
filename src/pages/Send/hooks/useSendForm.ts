@@ -4,10 +4,9 @@ import { prepareTransaction } from '@multiversx/sdk-dapp-form/hooks/useFetchGasL
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
-import { sendTransactions } from 'helpers';
+import { addressIsValid, sendTransactions } from 'helpers';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { addressIsValid } from 'utils';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
 
