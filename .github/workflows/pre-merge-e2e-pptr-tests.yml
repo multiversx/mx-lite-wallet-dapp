@@ -1,0 +1,59 @@
+name: "Puppeteer E2E Tests"
+on:
+  pull_request:
+    branches: [main, development]
+    paths:
+      - 'src/**'
+      - '**.js'
+      - '**.ts'
+      - '**.json'
+  repository_dispatch:
+    types: run-pptr-e2e-tests
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          if: ${{ !github.event.pull_request.draft }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Get node_modules cache
+        uses: actions/cache@v3.2.2
+        id: node_modules
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Remove node_modules
+        if: steps.node_modules.outputs.cache-hit != 'true'
+        run: rm -rf node_modules
+      - name: Install Dependencies
+        uses: nick-fields/retry@v3
+        if: steps.node_modules.outputs.cache-hit != 'true'
+        with:
+          timeout_minutes: 120
+          retry_on: error
+          max_attempts: 5
+          command: npm install --legacy-peer-deps
+      - name: Get build cache
+        uses: actions/cache@v3.2.2
+        id: build
+        with:
+          path: |
+            **/build
+          key: ${{ runner.os }}-build-${{ github.sha }}
+      - name: Build devnet puppeteer
+        if: steps.build.outputs.cache-hit != 'true'
+        run: npm run build:devnet
+      - name: Run Puppeteer tests
+        run: npm run test:pptr-headless
