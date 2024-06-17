@@ -1,21 +1,21 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { useGetAccount, useLogout } from 'hooks';
-import { getLoginHookData } from 'lib';
+import { useSignTxSchema } from 'hooks/useSignTxSchema';
+import { getSignHookData } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { HookValidationOutcome } from '../HookValidationOutcome';
 import { HookStateEnum } from '../types';
 
-export const LoginHook = () => {
-  const { address } = useGetAccount();
+export const SignHook = () => {
   const dispatch = useDispatch();
+  const schema = useSignTxSchema();
+  const getData = getSignHookData(schema);
   const { pathname, search } = useLocation();
-  const logout = useLogout();
 
   const data = useMemo(() => {
-    return pathname.includes(HooksEnum.login) ? getLoginHookData(search) : null;
+    return pathname.includes(HooksEnum.sign) ? getData(search) : null;
   }, [pathname]);
 
   const [validUrl, setValidUrl] = useState<HookStateEnum>(
@@ -23,31 +23,24 @@ export const LoginHook = () => {
   );
 
   useEffect(() => {
-    // Prevent re-login
-    if (address) {
-      logout();
-      return;
-    }
-
-    if (!data) {
+    if (data == null) {
       return setValidUrl(HookStateEnum.invalid);
     }
 
     dispatch(
       setHook({
-        type: HooksEnum.login,
+        type: HooksEnum.sign,
         hookUrl: data.hookUrl,
-        callbackUrl: data.callbackUrl,
-        loginToken: data.token
+        callbackUrl: data.callbackUrl ?? ''
       })
     );
 
     setValidUrl(HookStateEnum.valid);
-  }, [address]);
+  }, []);
 
   return (
     <HookValidationOutcome
-      hook={HooksEnum.login}
+      hook={HooksEnum.sign}
       callbackUrl={data?.callbackUrl}
       validUrl={validUrl}
     />
