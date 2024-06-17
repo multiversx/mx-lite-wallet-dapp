@@ -1,11 +1,12 @@
+import { getBaseURL } from 'helpers';
 import {
   ACCOUNTS_ENDPOINT,
+  API_CACHE_DURATION_SECONDS,
+  MAX_API_SIZE,
   TRANSACTIONS_ENDPOINT
-} from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
-import { getBaseURL } from 'helpers';
-import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
+} from 'localConstants';
 import { RootApi } from 'redux/rootApi';
+import { ServerTransactionType } from 'types';
 
 const transactionsEndpoints = RootApi.injectEndpoints({
   overrideExisting: true,

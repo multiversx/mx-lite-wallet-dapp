@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Transaction } from '@multiversx/sdk-core';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -9,7 +8,7 @@ import {
   useReplyWithCancelled,
   useSignTxSchema
 } from 'hooks';
-import { getLoginHookData, getSignHookData } from 'lib';
+import { getLoginHookData, getSignHookData, Transaction } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';

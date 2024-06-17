@@ -1,10 +1,11 @@
+import { getBaseURL } from 'helpers';
 import {
   ACCOUNTS_ENDPOINT,
+  API_CACHE_DURATION_SECONDS,
+  MAX_API_SIZE,
   TOKENS_ENDPOINT
-} from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
-import { getBaseURL } from 'helpers';
-import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
+} from 'localConstants';
+import { TokenType } from 'types';
 import { RootApi } from '../rootApi';
 
 const tokensEndpoints = RootApi.injectEndpoints({

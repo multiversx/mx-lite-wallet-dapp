@@ -1,12 +1,11 @@
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
-import { prepareTransaction } from '@multiversx/sdk-dapp-form/hooks/useFetchGasLimit/prepareTransaction';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
 import { addressIsValid, sendTransactions } from 'helpers';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
+import { PartialNftType, prepareTransaction } from 'lib';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
+import { TokenType } from 'types';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
 

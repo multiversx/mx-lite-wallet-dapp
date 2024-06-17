@@ -1,15 +1,17 @@
-import { useSelector } from '@multiversx/sdk-dapp/reduxStore/DappProviderContext';
-import { explorerAddressSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
 import QRCode from 'react-qr-code';
 import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
+import {
+  explorerAddressSelector,
+  useSdkDappSelector
+} from 'redux/sdkDapp.store';
 import { routeNames } from 'routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-  const explorerAddress = useSelector(explorerAddressSelector);
+  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>

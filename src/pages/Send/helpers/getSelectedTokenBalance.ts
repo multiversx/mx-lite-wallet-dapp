@@ -1,6 +1,6 @@
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import { formatAmount } from 'helpers';
+import { PartialNftType } from 'lib';
+import { TokenType } from 'types';
 import { TokenOptionType } from '../types';
 
 export const getSelectedTokenBalance = ({

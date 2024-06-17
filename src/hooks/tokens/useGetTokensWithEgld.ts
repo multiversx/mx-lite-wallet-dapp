@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
+import { TokenType } from 'types';
 import { useGetAccountInfo, useGetNetworkConfig } from '../sdkDapp.hooks';
 
 export const useGetTokensWithEgld = () => {

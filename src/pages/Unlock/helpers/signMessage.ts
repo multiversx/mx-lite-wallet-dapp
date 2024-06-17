@@ -1,5 +1,4 @@
-import { UserSecretKey, UserSigner } from '@multiversx/sdk-wallet';
-import { Address, SignableMessage } from 'lib';
+import { Address, SignableMessage, UserSecretKey, UserSigner } from 'lib';
 
 interface SignMessageParams {
   message: string;

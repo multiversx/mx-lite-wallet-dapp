@@ -1,8 +1,3 @@
-import type {
-  OperaWalletLoginButtonPropsType,
-  LedgerLoginButtonPropsType,
-  WalletConnectLoginButtonPropsType
-} from '@multiversx/sdk-dapp/UI';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
@@ -12,6 +7,11 @@ import {
 } from 'components/sdkDapp.components';
 import { nativeAuth } from 'config';
 import { routeNames } from 'routes';
+import {
+  LedgerLoginButtonPropsType,
+  OperaWalletLoginButtonPropsType,
+  WalletConnectLoginButtonPropsType
+} from 'types';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';

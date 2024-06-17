@@ -1,6 +1,5 @@
-import { Transaction } from '@multiversx/sdk-core';
-import { UserSecretKey, UserSigner } from '@multiversx/sdk-wallet';
 import { getAddress } from 'helpers';
+import { Transaction, UserSecretKey, UserSigner } from 'lib';
 import { setKeystoreLogin } from 'redux/slices/account';
 import { store as reduxStore } from 'redux/store';
 import { IDappProvider } from 'types';
