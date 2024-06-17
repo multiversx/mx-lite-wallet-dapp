@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import { useGetIsLoggedIn } from 'hooks';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useGetIsLoggedIn, useRedirectPathname } from 'hooks';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
@@ -14,13 +14,20 @@ export const AuthRedirectWrapper = ({
   requireAuth = true
 }: AuthRedirectWrapperPropsType) => {
   const isLoggedIn = useGetIsLoggedIn();
-  const { type } = useSelector(hookSelector);
+  const { type: hook } = useSelector(hookSelector);
+  const { pathname } = useLocation();
 
-  if (isLoggedIn && !requireAuth && !type) {
+  const shouldGoToDashboard =
+    isLoggedIn && pathname !== routeNames.dashboard && !requireAuth && !hook;
+
+  if (shouldGoToDashboard) {
     return <Navigate to={routeNames.dashboard} />;
   }
 
-  if (!isLoggedIn && requireAuth) {
+  const shouldGoToUnlock =
+    !isLoggedIn && pathname !== routeNames.unlock && (requireAuth || hook);
+
+  if (shouldGoToUnlock) {
     return <Navigate to={routeNames.unlock} />;
   }
 

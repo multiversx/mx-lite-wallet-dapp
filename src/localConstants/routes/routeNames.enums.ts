@@ -15,5 +15,6 @@ export enum RouteNamesEnum {
 }
 
 export enum HooksPageEnum {
-  loginHook = `/hook/${HooksEnum.login}`
+  loginHook = `/hook/${HooksEnum.login}`,
+  logoutHook = `/hook/${HooksEnum.logout}`
 }

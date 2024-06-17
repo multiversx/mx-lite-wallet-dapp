@@ -1,6 +1,14 @@
 import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
-import { Dashboard, Disclaimer, Home, Unlock, LoginHook, Logout } from 'pages';
+import {
+  Dashboard,
+  Disclaimer,
+  Home,
+  Unlock,
+  LoginHook,
+  Logout,
+  LogoutHook
+} from 'pages';
 import { Send } from 'pages/Send/Send';
 import { Sign } from 'pages/Sign/Sign';
 import { RouteType } from 'types';
@@ -60,6 +68,11 @@ const routesObject: Record<RouteNamesEnum | HooksPageEnum, RouteWithTitleType> =
       path: HooksPageEnum.loginHook,
       title: 'Login',
       component: LoginHook
+    },
+    [HooksPageEnum.logoutHook]: {
+      path: HooksPageEnum.logoutHook,
+      title: 'Logout',
+      component: LogoutHook
     }
   };
 
