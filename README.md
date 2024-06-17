@@ -1,6 +1,6 @@
-# @multiversx/template-dapp
+# MultiversX Lite Wallet DApp
 
-The **MultiversX Lite Wallet dApp**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
+The **MultiversX Lite Wallet DApp**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
 
 See [Lite Wallet dApp](https://lite-wallet-dapp.multiversx.com/) for live demo.
