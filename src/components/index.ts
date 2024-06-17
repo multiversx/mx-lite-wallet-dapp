@@ -7,7 +7,6 @@ export * from './MissingNativeAuthError';
 export * from './MxLink';
 export * from './OutputContainer';
 export * from './PrivateKeyCheckWrapper';
-export * from './Status';
 export * from './TransactionsTracker';
 export * from './Utilities';
 export * from './sdkDapp.components';
