@@ -41,7 +41,7 @@ export const useSendForm = ({
         )
         .test(
           'differentSender',
-          'Sender should be different than current pemAccount',
+          'Sender should be different than current account',
           (value) => !value || !isNFT || value !== address
         )
         .required('Receiver is required'),
