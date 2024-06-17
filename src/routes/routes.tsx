@@ -8,7 +8,8 @@ import {
   Unlock,
   Sign,
   LoginHook,
-  Logout
+  Logout,
+  LogoutHook
 } from 'pages';
 import { RouteType } from 'types';
 
@@ -63,6 +64,11 @@ const routesObject: Record<RouteNamesEnum | HooksPageEnum, RouteWithTitleType> =
       path: HooksPageEnum.loginHook,
       title: 'Login',
       component: LoginHook
+    },
+    [HooksPageEnum.logoutHook]: {
+      path: HooksPageEnum.logoutHook,
+      title: 'Logout',
+      component: LogoutHook
     }
   };
 
