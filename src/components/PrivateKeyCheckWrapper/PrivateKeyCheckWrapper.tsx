@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { provider } from 'helpers/app';
 import { useModal } from 'hooks';

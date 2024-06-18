@@ -2,6 +2,7 @@ import QRCode from 'react-qr-code';
 import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
+import { DataTestIdsEnum } from 'localConstants';
 import {
   explorerAddressSelector,
   useSdkDappSelector
@@ -22,7 +23,10 @@ export const Account = () => {
           </div>
           <div>
             <div className='text-sm text-gray-400'>Your address:</div>
-            <div className='overflow-hidden break-all text-sm'>
+            <div
+              className='overflow-hidden break-all text-sm'
+              data-testid={DataTestIdsEnum.userAddress}
+            >
               {address}
               <Copy value={address} />
             </div>

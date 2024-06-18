@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { Formik, FormikHelpers } from 'formik';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, ModalContainer, PageState } from 'components';
 import { UseModalReturnType, useCloseModalOnEsc } from 'hooks';
-import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants/misc';
+import { WALLET_FILE, WALLET_FILE_NAME, DataTestIdsEnum } from 'localConstants';
 import { useInitToken } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
@@ -173,6 +173,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                       required
                       id={WALLET_FILE}
                       name={WALLET_FILE}
+                      data-testid={DataTestIdsEnum.walletFile}
                       accept='.json'
                       onChange={(e) => {
                         const file = e.target.files?.[0];
@@ -192,6 +193,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                     required
                     id={ACCESS_PASS}
                     name={ACCESS_PASS}
+                    data-testid={DataTestIdsEnum.accessPass}
                     onChange={handleChange}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
@@ -213,8 +215,8 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                       Submit
                     </Button>
                     <button
-                      id='closeButton'
-                      data-testid='closeButton'
+                      id={DataTestIdsEnum.closeButton}
+                      data-testid={DataTestIdsEnum.closeButton}
                       onClick={handleModalClose}
                       type='button'
                       className='mt-2'

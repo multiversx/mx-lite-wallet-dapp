@@ -1,8 +1,7 @@
-import { MouseEvent, useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
 
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import {
   calculateGasLimit,
@@ -16,7 +15,6 @@ import { useSendForm, useTokenOptions } from './hooks';
 import { FormFieldsEnum, SendTypeEnum } from './types';
 
 export const Send = () => {
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const tokenIdParam = searchParams.get(SearchParamsEnum.tokenId);
   const isNftParam = searchParams.get(SearchParamsEnum.isNFT);
@@ -38,12 +36,6 @@ export const Send = () => {
   });
 
   const canEditNftAmount = new BigNumber(availableAmount).isGreaterThan(1);
-
-  const cancelSend = (event: MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    navigate(routeNames.dashboard);
-  };
 
   const resetFormAndGetBalance = () => {
     const balance = selectedToken
@@ -306,13 +298,12 @@ export const Send = () => {
             >
               Send
             </button>
-            <button
+            <Link
               className='w-full mt-4 px-4 py-2 text-sm'
-              onClick={cancelSend}
-              type='button'
+              to={routeNames.dashboard}
             >
               Cancel
-            </button>
+            </Link>
           </div>
         </div>
       </form>
