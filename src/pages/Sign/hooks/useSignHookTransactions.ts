@@ -23,7 +23,7 @@ interface ValidatedTxsStateType {
   multiSigContract?: string | null;
 }
 
-interface UseValidateAndSignTxsReturnType extends ValidatedTxsStateType {
+export interface ValidateAndSignTxsReturnType extends ValidatedTxsStateType {
   sessionId: string | null;
 }
 
@@ -53,7 +53,7 @@ export const useSignHookTransactions = () => {
 
   const signHookTransactions = async (
     hookUrl: string
-  ): Promise<UseValidateAndSignTxsReturnType> => {
+  ): Promise<ValidateAndSignTxsReturnType> => {
     // 1. get the raw transactions
 
     const { txs: rawTxs, executeAfterSign } =

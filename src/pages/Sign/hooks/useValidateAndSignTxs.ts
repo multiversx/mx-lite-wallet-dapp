@@ -2,55 +2,27 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
-  extractSessionId,
-  sendBatchTransactionsSdkDapp,
-  sendTransactions
-} from 'helpers/sdkDapp/sdkDapp.helpers';
-import {
   useGetAccountInfo,
-  useGetNetworkConfig,
   useGetSignedTransactions,
   useReplyWithCancelled
 } from 'hooks';
 import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
-import {
-  IPlainTransactionObject,
-  parseSignUrl,
-  validateSignTransactions
-} from 'lib';
 
 import { TransactionBatchStatusesEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { MultiSignTransactionType, TransactionsDataTokensType } from 'types';
-import {
-  SendBatchTransactionsPropsType,
-  SignedTransactionType,
-  TransactionSignatureDataType
-} from 'types';
+import { SignedTransactionType, TransactionSignatureDataType } from 'types';
 import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
-import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFromRaw';
+import {
+  ValidateAndSignTxsReturnType,
+  useSignHookTransactions
+} from './useSignHookTransactions';
 import { mapSignedTransactions } from '../helpers/mapSignedTransactions';
 
-interface ValidatedTxsStateType {
-  executeAfterSign?: string;
-  multiSignTxs: MultiSignTransactionType[];
-  rawTxs: IPlainTransactionObject[];
-  txErrors: { [key: string]: string };
-  txsDataTokens: TransactionsDataTokensType;
-  multiSigContract?: string | null;
-}
-
-interface UseValidateAndSignTxsReturnType extends ValidatedTxsStateType {
-  sessionId: string | null;
-}
-
-export const useValidateAndSignTxs = (): UseValidateAndSignTxsReturnType => {
+export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
   const { hookUrl, callbackUrl } = useSelector(hookSelector);
-  const {
-    network: { chainId, apiAddress, apiTimeout, egldLabel }
-  } = useGetNetworkConfig();
+
   const replyWithSignedTransactions = useReplyWithSignedTransactions();
   const navigate = useNavigate();
 
@@ -62,115 +34,34 @@ export const useValidateAndSignTxs = (): UseValidateAndSignTxsReturnType => {
 
   const { signedTransactions } = useGetSignedTransactions();
   const {
-    account: { address, balance },
+    account: { address },
     ledgerAccount
   } = useGetAccountInfo();
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [state, setState] = useState<ValidatedTxsStateType>({
+  const [state, setState] = useState<ValidateAndSignTxsReturnType>({
     multiSignTxs: [],
     txErrors: {},
     txsDataTokens: {},
-    rawTxs: []
+    rawTxs: [],
+    sessionId: null
   });
 
-  const apiConfig = {
-    baseURL: apiAddress,
-    timeout: parseInt(String(apiTimeout))
-  };
+  const signHookTransactions = useSignHookTransactions();
 
-  const completeSignTransaction = async () => {
-    // 1. get the raw transactions
-
-    const { txs: rawTxs, executeAfterSign } =
-      parseSignUrl<IPlainTransactionObject>(hookUrl);
-
-    const txData = await validateSignTransactions({
-      extractedTxs: rawTxs,
-      address,
-      egldLabel: String(egldLabel),
-      balance,
-      chainId: String(chainId),
-      apiConfig
-    });
-
-    setState((existing) => ({
-      ...existing,
-      txErrors: txData?.errors || {}
-    }));
-
-    if (!txData || Object.keys(txData.errors).length > 0) {
-      return;
-    }
-
-    // 2. stign the transactions
-
-    const mappedTransactions = createNewTransactionsFromRaw({
-      address,
-      chainId,
-      transactions: rawTxs
-    });
-
-    const transactionsDisplayInfo = {
-      successMessage: 'Transactions successfully sent',
-      errorMessage: 'An error has occurred',
-      submittedMessage: 'Success',
-      processingMessage: 'Processing transactions',
-      transactionDuration: 10000
-    };
-
-    setState({
-      executeAfterSign,
-      multiSignTxs: txData.parsedTransactions,
-      rawTxs,
-      txErrors: txData.errors,
-      txsDataTokens: txData.txsDataTokens
-    });
-
-    if (executeAfterSign === 'true') {
-      const props: SendBatchTransactionsPropsType = {
-        transactions: [rawTxs],
-        signWithoutSending: false,
-        transactionsDisplayInfo: transactionsDisplayInfo ?? {
-          successMessage: 'Transactions successful',
-          errorMessage: 'An error has occurred',
-          submittedMessage: 'Success',
-          processingMessage: 'Processing transactions',
-          transactionDuration: 10000
-        },
-        redirectAfterSign: false
-      };
-
-      const { batchId } = await sendBatchTransactionsSdkDapp(props);
-      const batchSessionId = extractSessionId(batchId);
-
-      if (!batchSessionId) {
-        console.error('Batch transactions session id is invalid');
-        return;
-      }
-
-      return setSessionId(batchSessionId.toString());
-    }
-
-    const { sessionId: id } = await sendTransactions({
-      transactions: mappedTransactions,
-      signWithoutSending: executeAfterSign !== 'true',
-      transactionsDisplayInfo,
-      redirectAfterSign: false
-    });
-
-    setSessionId(id);
+  const validateAndSign = async () => {
+    const newState = await signHookTransactions(hookUrl);
+    setState(newState);
   };
 
   useEffect(() => {
-    completeSignTransaction();
+    validateAndSign();
   }, [hookUrl]);
 
-  const reply = () => {
-    if (sessionId == null) {
+  const sendReplyToDapp = () => {
+    if (state.sessionId == null) {
       return [];
     }
 
-    const sessionObject = signedTransactions[sessionId];
+    const sessionObject = signedTransactions[state.sessionId];
 
     if (sessionObject == null) {
       return [];
@@ -237,11 +128,8 @@ export const useValidateAndSignTxs = (): UseValidateAndSignTxsReturnType => {
   };
 
   useEffect(() => {
-    reply();
-  }, [sessionId, signedTransactions, state.rawTxs]);
+    sendReplyToDapp();
+  }, [signedTransactions, state]);
 
-  return {
-    sessionId,
-    ...state
-  };
+  return state;
 };
