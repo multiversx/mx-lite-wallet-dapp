@@ -9,19 +9,21 @@ import { TokenType } from 'types';
 import { useSendTransactions } from './useSendTransactions';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
+import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
 
 export const useSendForm = ({
   isNFT,
   tokens,
-  selectedToken
+  defaultTokenOption
 }: {
   isNFT: boolean;
   tokens?: PartialNftType[] | TokenType[];
-  selectedToken?: TokenOptionType;
+  defaultTokenOption?: TokenOptionType;
 }) => {
   const { address, account } = useGetAccountInfo();
   const { chainID } = useGetNetworkConfig();
   const { sendTransactions } = useSendTransactions();
+  const egldLabel = getEgldLabel();
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +31,7 @@ export const useSendForm = ({
       [FormFieldsEnum.data]: '',
       [FormFieldsEnum.gasLimit]: GAS_LIMIT,
       [FormFieldsEnum.receiver]: '',
-      [FormFieldsEnum.token]: selectedToken,
+      [FormFieldsEnum.token]: defaultTokenOption,
       [FormFieldsEnum.type]: SendTypeEnum.esdt
     },
     validationSchema: object({
@@ -73,8 +75,10 @@ export const useSendForm = ({
       [FormFieldsEnum.type]: string().required('Type is required')
     }),
     onSubmit: async (values) => {
+      const isEgldSend = values[FormFieldsEnum.token]?.value === egldLabel;
+
       const transaction = prepareTransaction({
-        amount: isNFT ? '0' : String(values.amount),
+        amount: isEgldSend ? String(values.amount) : '0',
         balance: account.balance,
         chainId: chainID,
         data: values[FormFieldsEnum.data].trim(),

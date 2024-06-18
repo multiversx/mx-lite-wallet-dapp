@@ -98,7 +98,6 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                       return true;
                     }
                     const data = await parsePem(file as File);
-                    console.log('data', data, address);
 
                     return data?.address === address;
                   }

@@ -1,4 +1,8 @@
-import { DEFAULT_PAGE_LOAD_DELAY_MS, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import {
+  DEFAULT_PAGE_LOAD_DELAY_MS,
+  keystoreAccount,
+  WALLET_SOURCE_ORIGIN
+} from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -12,7 +16,7 @@ import {
 
 describe('Validate and send EGLD tests', () => {
   it('should validate form and send EGLD successfully', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/unlock`, {
+    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
       waitUntil: 'domcontentloaded'
     });
 
@@ -78,7 +82,7 @@ describe('Validate and send EGLD tests', () => {
 
     await changeInputText({
       dataTestId: DataTestIdsEnum.receiverInput,
-      text: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex'
+      text: keystoreAccount.address
     });
 
     await expectInputToHaveValue({
@@ -92,7 +96,5 @@ describe('Validate and send EGLD tests', () => {
       dataTestId: DataTestIdsEnum.transactionToastTitle,
       text: 'Processing transaction'
     });
-
-    await page.click(getByDataTestId(DataTestIdsEnum.logoutBtn));
   });
 });

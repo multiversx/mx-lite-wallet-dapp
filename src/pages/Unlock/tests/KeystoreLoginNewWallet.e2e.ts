@@ -14,7 +14,7 @@ import {
 
 describe('New wallet login with keystore test', () => {
   it('should select address and login new wallet with keystore file', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/unlock`, {
+    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
       waitUntil: 'domcontentloaded'
     });
 
@@ -48,6 +48,5 @@ describe('New wallet login with keystore test', () => {
     });
 
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/dashboard`);
-    await page.click(getByDataTestId(DataTestIdsEnum.logoutBtn));
   });
 });
