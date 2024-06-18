@@ -1,5 +1,5 @@
-import { Mnemonic, UserSecretKey, UserWallet } from '@multiversx/sdk-wallet';
 import _ from 'lodash';
+import { Mnemonic, UserSecretKey, UserWallet } from 'lib/sdkWallet';
 import { AccessWalletType } from './accessWallet';
 
 const getAddressAndPrivateKeyForIndex = (mnemonic: Mnemonic, index: number) => {

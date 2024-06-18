@@ -1,8 +1,7 @@
-import { apiAddressSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
-import { store } from '@multiversx/sdk-dapp/reduxStore/store';
+import { apiAddressSelector, sdkDappStore } from 'redux/sdkDapp.store';
 
 export const getBaseURL = () => {
-  const state = store.getState();
+  const state = sdkDappStore.getState();
 
   return apiAddressSelector(state);
 };

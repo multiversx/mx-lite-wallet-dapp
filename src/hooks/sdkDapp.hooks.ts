@@ -24,3 +24,5 @@ export { useSignTransactionsWithDevice } from '@multiversx/sdk-dapp/hooks/transa
 export { useSignTransactionsWithLedger } from '@multiversx/sdk-dapp/hooks/transactions/useSignTransactionsWithLedger';
 export { useTrackTransactionStatus } from '@multiversx/sdk-dapp/hooks/transactions/useTrackTransactionStatus';
 export { verifyMessage } from '@multiversx/sdk-dapp/hooks/signMessage/verifyMessage';
+export { useTransactionsTracker } from '@multiversx/sdk-dapp/hooks/transactions/useTransactionsTracker';
+export { useGetAccountFromApi } from '@multiversx/sdk-dapp/apiCalls/accounts/useGetAccountFromApi';

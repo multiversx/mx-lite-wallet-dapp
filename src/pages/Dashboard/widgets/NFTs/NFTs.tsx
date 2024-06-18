@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import { OutputContainer } from 'components';
 import { useGetAccountInfo } from 'hooks';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
@@ -27,9 +26,7 @@ export const NFTs = () => {
         isLoading={isLoading}
         className='p-0 max-h-screen flex flex-wrap justify-center gap-3 py-3'
       >
-        {nfts?.map((nft: PartialNftType) => (
-          <NFTRow key={nft.identifier} nft={nft} />
-        ))}
+        {nfts?.map((nft) => <NFTRow key={nft.identifier} nft={nft} />)}
       </OutputContainer>
     </div>
   );

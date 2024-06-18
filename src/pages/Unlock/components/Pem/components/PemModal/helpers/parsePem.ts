@@ -1,4 +1,4 @@
-import { UserSecretKey } from '@multiversx/sdk-wallet';
+import { UserSecretKey } from 'lib/sdkWallet';
 
 type ParsedPemReturnType = {
   address: string;

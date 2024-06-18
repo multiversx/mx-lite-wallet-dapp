@@ -1,9 +1,13 @@
+import { useSelector } from 'react-redux';
 import { TransactionsToastList, NotificationModal } from 'components';
 import { CUSTOM_TOAST_DEFAULT_DURATION } from 'localConstants';
-import { PostMessageListener, SendModals } from './components';
+import { hookSelector } from 'redux/selectors';
+import { PostMessageListener, SendModals, SignModals } from './components';
 
 export const Utilities = () => {
-  const SignTransactionsModals = SendModals; // hook ? SignModals : SendModals;
+  const { type: hook } = useSelector(hookSelector); 
+
+  const SignTransactionsModals = hook ? SignModals : SendModals;
 
   return (
     <>

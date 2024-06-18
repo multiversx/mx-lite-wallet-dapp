@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useGetIsLoggedIn, useRedirectPathname } from 'hooks';
+import { useGetIsLoggedIn } from 'hooks';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 

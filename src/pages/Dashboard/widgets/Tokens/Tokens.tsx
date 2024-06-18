@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { OutputContainer } from 'components';
 import { useGetAccountInfo } from 'hooks';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
+import { TokenType } from 'types';
 import { TokenRow } from './components';
 
 export const Tokens = () => {

@@ -1,4 +1,4 @@
-import { signTxSchema } from '@multiversx/sdk-js-web-wallet-io/out/url/helpers/sign';
+import { signTxSchema } from 'lib';
 import { useGetNetworkConfig } from '../sdkDapp.hooks';
 
 export function useSignTxSchema() {

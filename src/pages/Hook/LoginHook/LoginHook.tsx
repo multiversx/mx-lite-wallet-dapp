@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getLoginHookData } from '@multiversx/sdk-js-web-wallet-io/out/hooks/loginHook/getLoginHookData';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useGetAccount, useLogout } from 'hooks';
+import { getLoginHookData } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { HookValidationOutcome } from '../HookValidationOutcome';

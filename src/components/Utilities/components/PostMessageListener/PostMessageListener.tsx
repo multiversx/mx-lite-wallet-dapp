@@ -1,7 +1,4 @@
 import { useEffect } from 'react';
-import { Transaction } from '@multiversx/sdk-core';
-import { getLoginHookData } from '@multiversx/sdk-js-web-wallet-io/out/hooks/loginHook/getLoginHookData';
-import { getSignHookData } from '@multiversx/sdk-js-web-wallet-io/out/url/signHook';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,6 +8,7 @@ import {
   useReplyWithCancelled,
   useSignTxSchema
 } from 'hooks';
+import { getLoginHookData, getSignHookData, Transaction } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
