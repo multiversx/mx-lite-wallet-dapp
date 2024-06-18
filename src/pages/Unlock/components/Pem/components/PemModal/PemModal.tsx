@@ -6,12 +6,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { mixed, object } from 'yup';
 import { Button, ModalContainer, PageState } from 'components';
 import { UseModalReturnType, useCloseModalOnEsc } from 'hooks';
+import { DataTestIdsEnum } from 'localConstants';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { setPemLogin } from 'redux/slices';
 import { routeNames } from 'routes';
 import { parsePem } from './helpers';
-import { DataTestIdsEnum } from '../../../../../../localConstants';
 
 const PEM_FIELD = 'pem';
 

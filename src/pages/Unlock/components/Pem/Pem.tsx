@@ -1,6 +1,6 @@
 import { useModal } from 'hooks';
-import { PemModal } from './components/PemModal';
 import { DataTestIdsEnum } from 'localConstants';
+import { PemModal } from './components/PemModal';
 
 export const Pem = () => {
   const { show, handleShow, handleClose } = useModal();
