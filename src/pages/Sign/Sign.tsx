@@ -16,6 +16,10 @@ import { routeNames } from 'routes';
 import { LoginMethodsEnum } from 'types';
 import { useValidateAndSignTxs } from './hooks';
 
+/*
+  The Sign page does not render any UI elements except for the error messages.
+  The signing process takes place in sdk-dapp and sdk-dapp opens the necessary modals.
+*/
 export const Sign = () => {
   const { hookUrl } = useSelector(hookSelector);
   const { loginMethod } = useGetLoginInfo();
@@ -28,6 +32,8 @@ export const Sign = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // The useValidateAndSignTxs hook is used to validate, sign, and reply with signed transactions
+  // but, since we only need to show errors in this page, if any, we just use the rawTxs and txErrors objects
   const { rawTxs, txErrors } = useValidateAndSignTxs();
 
   const hasErrors = Object.keys(txErrors).length > 0;
@@ -44,7 +50,9 @@ export const Sign = () => {
   );
 
   const validateHook = async () => {
-    if (rawTxs.length === 0) {
+    const hasNoTransactions = rawTxs.length === 0;
+
+    if (hasNoTransactions) {
       return;
     }
 
