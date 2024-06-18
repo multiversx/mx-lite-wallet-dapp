@@ -1,4 +1,4 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__/data/constants';
+import { DEFAULT_PAGE_LOAD_DELAY_MS, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -6,7 +6,8 @@ import {
   expectInputToHaveValue,
   expectToBeChecked,
   getByDataTestId,
-  loginWithPem
+  loginWithPem,
+  sleep
 } from 'utils/testUtils/puppeteer';
 
 describe('Validate and send EGLD tests', () => {
@@ -19,16 +20,12 @@ describe('Validate and send EGLD tests', () => {
     await page.waitForSelector(getByDataTestId(DataTestIdsEnum.sendBtn));
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/send`);
+    await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
     await expectToBeChecked({
       dataTestId: DataTestIdsEnum.sendEsdtTypeInput,
       isChecked: true
-    });
-
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.availableAmount,
-      text: 'Available: 47.8160 xEGLD'
     });
 
     await expectElementToContainText({

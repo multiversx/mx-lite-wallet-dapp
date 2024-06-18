@@ -52,7 +52,7 @@ jobs:
           path: |
             **/build
           key: ${{ runner.os }}-build-${{ github.sha }}
-      - name: Build devnet puppeteer
+      - name: Build devnet
         if: steps.build.outputs.cache-hit != 'true'
         run: npm run build:devnet
       - name: Run Puppeteer tests
