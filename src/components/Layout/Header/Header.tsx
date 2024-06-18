@@ -2,7 +2,7 @@ import { useMatch } from 'react-router-dom';
 import { MxLink } from 'components/MxLink';
 import { environment } from 'config';
 import { useGetIsLoggedIn } from 'hooks';
-import { RouteNamesEnum } from 'localConstants';
+import { DataTestIdsEnum, RouteNamesEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 
@@ -32,8 +32,9 @@ export const Header = () => {
 
           {isLoggedIn ? (
             <MxLink
-              to={routeNames.logout}
               className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
+              data-testid={DataTestIdsEnum.logoutBtn}
+              to={routeNames.logout}
             >
               Close
             </MxLink>

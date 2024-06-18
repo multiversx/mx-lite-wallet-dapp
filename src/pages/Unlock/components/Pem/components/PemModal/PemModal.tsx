@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { mixed, object } from 'yup';
 import { Button, ModalContainer, PageState } from 'components';
 import { UseModalReturnType, useCloseModalOnEsc } from 'hooks';
+import { DataTestIdsEnum } from 'localConstants';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { setPemLogin } from 'redux/slices';
@@ -97,7 +98,6 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                       return true;
                     }
                     const data = await parsePem(file as File);
-                    console.log('data', data, address);
 
                     return data?.address === address;
                   }
@@ -114,37 +114,38 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                     Select file
                   </label>
                   <input
+                    accept='.pem'
                     className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
-                    type='file'
-                    required
+                    data-testid={DataTestIdsEnum.walletFile}
                     id='pem'
                     name='pem'
-                    accept='.pem'
                     onChange={(e) => {
                       const file = e.target.files?.[0];
                       if (file) {
                         setFieldValue(PEM_FIELD, file);
                       }
                     }}
+                    required
+                    type='file'
                   />
                   {errors.pem && (
                     <div className='text-red-600 mb-4'>{errors.pem}</div>
                   )}
                   <div className='flex flex-col mx-auto items-center gap-2 mt-4'>
                     <Button
-                      data-testid='submitButton'
-                      type='submit'
+                      data-testid={DataTestIdsEnum.submitButton}
                       disabled={!isValid}
                       onClick={submitForm}
+                      type='submit'
                     >
                       Submit
                     </Button>
                     <button
-                      id='closeButton'
-                      data-testid='closeButton'
+                      className='mt-2'
+                      data-testid={DataTestIdsEnum.closeButton}
+                      id={DataTestIdsEnum.closeButton}
                       onClick={handleModalClose}
                       type='button'
-                      className='mt-2'
                     >
                       Close
                     </button>

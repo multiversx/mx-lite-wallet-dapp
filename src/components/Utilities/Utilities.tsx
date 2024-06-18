@@ -5,7 +5,7 @@ import { hookSelector } from 'redux/selectors';
 import { PostMessageListener, SendModals, SignModals } from './components';
 
 export const Utilities = () => {
-  const { type: hook } = useSelector(hookSelector); 
+  const { type: hook } = useSelector(hookSelector);
 
   const SignTransactionsModals = hook ? SignModals : SendModals;
 
