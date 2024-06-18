@@ -1,4 +1,5 @@
 import { useModal } from 'hooks';
+import { DataTestIdsEnum } from 'localConstants';
 import { PemModal } from './components/PemModal';
 
 export const Pem = () => {
@@ -7,7 +8,7 @@ export const Pem = () => {
   return (
     <>
       <button
-        data-testid='pemLoginButton'
+        data-testid={DataTestIdsEnum.pemBtn}
         onClick={handleShow}
         className='dapp-core-component__main__btn dapp-core-component__main__btn-primary dapp-core-component__main__px-4 dapp-core-component__main__m-1 dapp-core-component__main__mx-3 dapp-pem-login-button'
       >

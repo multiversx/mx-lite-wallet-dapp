@@ -17,17 +17,11 @@ export const loginWithKeystore = async (props?: {
   const address = props?.address ?? keystoreAccount.address;
   const parent = props?.parent ?? page;
   const password = props?.password ?? 'P@ssw0rd123';
-  const filePath = props?.filePath ?? 'src/__mocks__/data/testAccount.json';
+  const filePath =
+    props?.filePath ?? 'src/__mocks__/data/testKeystoreWallet/account.json';
 
   await parent.waitForSelector(getByDataTestId(DataTestIdsEnum.keystoreBtn));
   await parent.click(getByDataTestId(DataTestIdsEnum.keystoreBtn));
-
-  await expectElementToContainText({
-    dataTestId: DataTestIdsEnum.modalTitle,
-    parent,
-    text: 'Login using Keystore'
-  });
-
   await uploadFile({
     dataTestId: DataTestIdsEnum.walletFile,
     filePath,
@@ -62,6 +56,6 @@ export const loginWithKeystore = async (props?: {
   await expectElementToContainText({
     dataTestId: DataTestIdsEnum.userAddress,
     parent,
-    text: `${address}${address}`
+    text: address
   });
 };

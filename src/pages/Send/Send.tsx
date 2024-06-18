@@ -1,18 +1,26 @@
 import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
 
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import {
   calculateGasLimit,
   calculateNftGasLimit,
   computeNftDataField
 } from 'lib';
-import { GAS_LIMIT, SearchParamsEnum } from 'localConstants';
-import { routeNames } from 'routes';
+import {
+  DataTestIdsEnum,
+  DECIMALS,
+  GAS_LIMIT,
+  SearchParamsEnum
+} from 'localConstants';
 import { getSelectedTokenBalance } from './helpers';
 import { useSendForm, useTokenOptions } from './hooks';
 import { FormFieldsEnum, SendTypeEnum } from './types';
+import { MxLink } from 'components';
+import { routeNames } from 'routes';
+import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
+import { computeTokenDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
 
 export const Send = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,14 +30,24 @@ export const Send = () => {
     isNftParam ? SendTypeEnum.nft : SendTypeEnum.esdt
   );
 
+  const egldLabel = getEgldLabel();
   const isNFT = sendType === SendTypeEnum.nft;
   const { tokenOptions, isLoading, tokens } = useTokenOptions(sendType);
-  const selectedToken = tokenIdParam
+  const defaultTokenOption = tokenIdParam
     ? tokenOptions?.find((option) => option.value === tokenIdParam)
     : tokenOptions?.[0];
 
-  const formik = useSendForm({ isNFT, tokens, selectedToken });
+  const formik = useSendForm({
+    isNFT,
+    tokens,
+    defaultTokenOption
+  });
 
+  const selectedToken = tokens?.find(
+    (token) => token.identifier === formik.values[FormFieldsEnum.token]?.value
+  );
+
+  const isEgldToken = selectedToken?.identifier === egldLabel;
   const availableAmount = getSelectedTokenBalance({
     tokens,
     tokenOption: formik.values[FormFieldsEnum.token]
@@ -38,12 +56,12 @@ export const Send = () => {
   const canEditNftAmount = new BigNumber(availableAmount).isGreaterThan(1);
 
   const resetFormAndGetBalance = () => {
-    const balance = selectedToken
-      ? getSelectedTokenBalance({ tokens, tokenOption: selectedToken })
+    const balance = defaultTokenOption
+      ? getSelectedTokenBalance({ tokens, tokenOption: defaultTokenOption })
       : '';
 
     formik.setFieldValue(FormFieldsEnum.data, '');
-    formik.setFieldValue(FormFieldsEnum.token, selectedToken);
+    formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
     formik.setFieldValue(FormFieldsEnum.amount, isNFT ? balance : '0');
     formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
 
@@ -52,51 +70,63 @@ export const Send = () => {
 
   useEffect(() => {
     const formTokenValue = formik.values[FormFieldsEnum.token]?.value;
-    const selectedTokenValue = selectedToken?.value;
+    const selectedTokenValue = defaultTokenOption?.value;
 
     if (!formTokenValue && formTokenValue !== selectedTokenValue) {
-      formik.setFieldValue(FormFieldsEnum.token, selectedToken);
+      formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
       resetFormAndGetBalance();
       setSearchParams();
     }
-  }, [selectedToken, tokenIdParam]);
+  }, [defaultTokenOption, tokenIdParam]);
 
   useEffect(() => {
     const balance = resetFormAndGetBalance();
 
-    if (!isNFT || !selectedToken) {
+    if (!defaultTokenOption || isEgldToken) {
       return;
     }
 
-    const data = computeNftDataField({
-      nft: selectedToken,
-      amount: balance,
-      receiver: formik.values[FormFieldsEnum.receiver],
-      errors: false
-    });
+    let data;
+
+    if (isNFT) {
+      data = computeNftDataField({
+        nft: defaultTokenOption,
+        amount: balance,
+        receiver: formik.values[FormFieldsEnum.receiver],
+        errors: false
+      });
+    } else {
+      data = computeTokenDataField({
+        tokenId: defaultTokenOption.value,
+        amount: balance,
+        decimals: selectedToken?.decimals ?? DECIMALS
+      });
+    }
 
     formik.setFieldValue(FormFieldsEnum.data, data);
   }, [sendType]);
 
   useEffect(() => {
-    if (!isNFT || !formik.values[FormFieldsEnum.token]) {
+    if (!selectedToken || isEgldToken) {
       return;
     }
 
-    const selectedNft = tokens?.find(
-      (nft) => nft.identifier === formik.values[FormFieldsEnum.token]?.value
-    );
+    let data;
 
-    if (!selectedNft) {
-      return;
+    if (isNFT) {
+      data = computeNftDataField({
+        nft: selectedToken,
+        amount: formik.values[FormFieldsEnum.amount],
+        receiver: formik.values[FormFieldsEnum.receiver],
+        errors: false
+      });
+    } else {
+      data = computeTokenDataField({
+        tokenId: selectedToken.identifier,
+        amount: formik.values[FormFieldsEnum.amount],
+        decimals: selectedToken?.decimals ?? DECIMALS
+      });
     }
-
-    const data = computeNftDataField({
-      nft: selectedNft,
-      amount: formik.values[FormFieldsEnum.amount],
-      receiver: formik.values[FormFieldsEnum.receiver],
-      errors: false
-    });
 
     const gasLimit = calculateNftGasLimit(data);
     formik.setFieldValue(FormFieldsEnum.data, data);
@@ -121,6 +151,7 @@ export const Send = () => {
             </label>
             <input
               className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+              data-testid={DataTestIdsEnum.receiverInput}
               id={FormFieldsEnum.receiver}
               name={FormFieldsEnum.receiver}
               onBlur={formik.handleBlur}
@@ -130,7 +161,10 @@ export const Send = () => {
             />
             {formik.touched[FormFieldsEnum.receiver] &&
               formik.errors[FormFieldsEnum.receiver] && (
-                <div className='text-red-600 text-sm'>
+                <div
+                  className='text-red-600 text-sm'
+                  data-testid={DataTestIdsEnum.receiverError}
+                >
                   {formik.errors[FormFieldsEnum.receiver]}
                 </div>
               )}
@@ -147,6 +181,7 @@ export const Send = () => {
                 <input
                   checked={!isNFT}
                   className='mr-2'
+                  data-testid={DataTestIdsEnum.sendEsdtTypeInput}
                   id={SendTypeEnum.esdt}
                   name={FormFieldsEnum.type}
                   onChange={(event) => {
@@ -165,6 +200,7 @@ export const Send = () => {
                 <input
                   checked={isNFT}
                   className='mr-2'
+                  data-testid={DataTestIdsEnum.sendNFtTypeInput}
                   id={SendTypeEnum.nft}
                   name={FormFieldsEnum.type}
                   onChange={(event) => {
@@ -193,6 +229,7 @@ export const Send = () => {
                 <input
                   className='p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
                   disabled={isNFT && !canEditNftAmount}
+                  data-testid={DataTestIdsEnum.amountInput}
                   id={FormFieldsEnum.amount}
                   name={FormFieldsEnum.amount}
                   onBlur={formik.handleBlur}
@@ -202,13 +239,20 @@ export const Send = () => {
                   value={formik.values[FormFieldsEnum.amount]}
                 />
                 {formik.values[FormFieldsEnum.token] && (
-                  <div className='text-sm text-gray-400 mt-1'>
-                    Available: {availableAmount}
+                  <div
+                    className='text-sm text-gray-400 mt-1'
+                    data-testid={DataTestIdsEnum.availableAmount}
+                  >
+                    Available: {availableAmount}{' '}
+                    {formik.values[FormFieldsEnum.token].label}
                   </div>
                 )}
                 {formik.touched[FormFieldsEnum.amount] &&
                   formik.errors[FormFieldsEnum.amount] && (
-                    <div className='text-red-600 text-sm mt-1'>
+                    <div
+                      className='text-red-600 text-sm mt-1'
+                      data-testid={DataTestIdsEnum.amountError}
+                    >
                       {formik.errors[FormFieldsEnum.amount]}
                     </div>
                   )}
@@ -229,7 +273,10 @@ export const Send = () => {
                 />
                 {formik.touched[FormFieldsEnum.token] &&
                   formik.errors[FormFieldsEnum.token] && (
-                    <div className='text-red-600 text-sm mt-1'>
+                    <div
+                      className='text-red-600 text-sm mt-1'
+                      data-testid={DataTestIdsEnum.tokenError}
+                    >
                       {formik.errors[FormFieldsEnum.token]}
                     </div>
                   )}
@@ -245,7 +292,8 @@ export const Send = () => {
             </label>
             <input
               className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
-              disabled={isNFT}
+              data-testid={DataTestIdsEnum.gasLimitInput}
+              disabled={!isEgldToken}
               id={FormFieldsEnum.gasLimit}
               name={FormFieldsEnum.gasLimit}
               onBlur={formik.handleBlur}
@@ -256,7 +304,10 @@ export const Send = () => {
             />
             {formik.touched[FormFieldsEnum.gasLimit] &&
               formik.errors[FormFieldsEnum.gasLimit] && (
-                <div className='text-red-600 text-sm mt-1'>
+                <div
+                  className='text-red-600 text-sm mt-1'
+                  data-testid={DataTestIdsEnum.gasLimitError}
+                >
                   {formik.errors[FormFieldsEnum.gasLimit]}
                 </div>
               )}
@@ -270,12 +321,13 @@ export const Send = () => {
             </label>
             <textarea
               className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
-              disabled={isNFT}
+              data-testid={DataTestIdsEnum.dataInput}
+              disabled={!isEgldToken}
               id={FormFieldsEnum.data}
               name={FormFieldsEnum.data}
               onBlur={formik.handleBlur}
               onChange={(event) => {
-                if (isNFT) {
+                if (!isEgldToken) {
                   return;
                 }
 
@@ -294,16 +346,18 @@ export const Send = () => {
           <div>
             <button
               className='w-full mt-4 rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              data-testid={DataTestIdsEnum.sendBtn}
               type='submit'
             >
               Send
             </button>
-            <Link
-              className='w-full mt-4 px-4 py-2 text-sm'
+            <MxLink
+              className='block w-full mt-2 px-4 py-2 text-sm text-center'
+              data-testid={DataTestIdsEnum.cancelBtn}
               to={routeNames.dashboard}
             >
               Cancel
-            </Link>
+            </MxLink>
           </div>
         </div>
       </form>

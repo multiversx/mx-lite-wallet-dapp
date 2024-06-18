@@ -33,7 +33,7 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
       - name: Remove node_modules
         if: steps.node_modules.outputs.cache-hit != 'true'
         run: rm -rf node_modules
@@ -52,7 +52,7 @@ jobs:
           path: |
             **/build
           key: ${{ runner.os }}-build-${{ github.sha }}
-      - name: Build devnet puppeteer
+      - name: Build devnet
         if: steps.build.outputs.cache-hit != 'true'
         run: npm run build:devnet
       - name: Run Puppeteer tests
