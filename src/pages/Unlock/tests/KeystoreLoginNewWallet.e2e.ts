@@ -48,5 +48,6 @@ describe('New wallet login with keystore test', () => {
     });
 
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/dashboard`);
+    await page.click(getByDataTestId(DataTestIdsEnum.logoutBtn));
   });
 });

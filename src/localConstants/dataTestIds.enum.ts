@@ -14,6 +14,7 @@ export enum DataTestIdsEnum {
   gasLimitError = 'gasLimitError',
   gasLimitInput = 'gasLimitInput',
   keystoreBtn = 'keystoreBtn',
+  logoutBtn = 'logoutBtn',
   pemBtn = 'pemBtn',
   receiverError = 'receiverError',
   receiverInput = 'receiverInput',

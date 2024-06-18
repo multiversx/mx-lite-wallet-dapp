@@ -92,5 +92,7 @@ describe('Validate and send EGLD tests', () => {
       dataTestId: DataTestIdsEnum.transactionToastTitle,
       text: 'Processing transaction'
     });
+
+    await page.click(getByDataTestId(DataTestIdsEnum.logoutBtn));
   });
 });
