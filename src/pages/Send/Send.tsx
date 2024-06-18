@@ -6,7 +6,7 @@ import BigNumber from 'bignumber.js';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
-import { GAS_LIMIT, SearchParamsEnum } from 'localConstants';
+import { DataTestIdsEnum, GAS_LIMIT, SearchParamsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { getSelectedTokenBalance } from './helpers';
 import { useSendForm, useTokenOptions } from './hooks';
@@ -126,6 +126,7 @@ export const Send = () => {
             </label>
             <input
               className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+              data-testid={DataTestIdsEnum.receiverInput}
               id={FormFieldsEnum.receiver}
               name={FormFieldsEnum.receiver}
               onBlur={formik.handleBlur}
@@ -135,7 +136,10 @@ export const Send = () => {
             />
             {formik.touched[FormFieldsEnum.receiver] &&
               formik.errors[FormFieldsEnum.receiver] && (
-                <div className='text-red-600 text-sm'>
+                <div
+                  className='text-red-600 text-sm'
+                  data-testid={DataTestIdsEnum.receiverError}
+                >
                   {formik.errors[FormFieldsEnum.receiver]}
                 </div>
               )}
@@ -152,6 +156,7 @@ export const Send = () => {
                 <input
                   checked={!isNFT}
                   className='mr-2'
+                  data-testid={DataTestIdsEnum.sendEsdtTypeInput}
                   id={SendTypeEnum.esdt}
                   name={FormFieldsEnum.type}
                   onChange={(event) => {
@@ -170,6 +175,7 @@ export const Send = () => {
                 <input
                   checked={isNFT}
                   className='mr-2'
+                  data-testid={DataTestIdsEnum.sendNFtTypeInput}
                   id={SendTypeEnum.nft}
                   name={FormFieldsEnum.type}
                   onChange={(event) => {
@@ -198,6 +204,7 @@ export const Send = () => {
                 <input
                   className='p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
                   disabled={isNFT && !canEditNftAmount}
+                  data-testid={DataTestIdsEnum.amountInput}
                   id={FormFieldsEnum.amount}
                   name={FormFieldsEnum.amount}
                   onBlur={formik.handleBlur}
@@ -207,13 +214,19 @@ export const Send = () => {
                   value={formik.values[FormFieldsEnum.amount]}
                 />
                 {formik.values[FormFieldsEnum.token] && (
-                  <div className='text-sm text-gray-400 mt-1'>
-                    Available: {availableAmount}
+                  <div
+                    className='text-sm text-gray-400 mt-1'
+                    data-testid={DataTestIdsEnum.availableAmount}
+                  >
+                    Available: {availableAmount} {selectedToken?.value}
                   </div>
                 )}
                 {formik.touched[FormFieldsEnum.amount] &&
                   formik.errors[FormFieldsEnum.amount] && (
-                    <div className='text-red-600 text-sm mt-1'>
+                    <div
+                      className='text-red-600 text-sm mt-1'
+                      data-testid={DataTestIdsEnum.amountError}
+                    >
                       {formik.errors[FormFieldsEnum.amount]}
                     </div>
                   )}
@@ -234,7 +247,10 @@ export const Send = () => {
                 />
                 {formik.touched[FormFieldsEnum.token] &&
                   formik.errors[FormFieldsEnum.token] && (
-                    <div className='text-red-600 text-sm mt-1'>
+                    <div
+                      className='text-red-600 text-sm mt-1'
+                      data-testid={DataTestIdsEnum.tokenError}
+                    >
                       {formik.errors[FormFieldsEnum.token]}
                     </div>
                   )}
@@ -250,6 +266,7 @@ export const Send = () => {
             </label>
             <input
               className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+              data-testid={DataTestIdsEnum.gasLimitInput}
               disabled={isNFT}
               id={FormFieldsEnum.gasLimit}
               name={FormFieldsEnum.gasLimit}
@@ -261,7 +278,10 @@ export const Send = () => {
             />
             {formik.touched[FormFieldsEnum.gasLimit] &&
               formik.errors[FormFieldsEnum.gasLimit] && (
-                <div className='text-red-600 text-sm mt-1'>
+                <div
+                  className='text-red-600 text-sm mt-1'
+                  data-testid={DataTestIdsEnum.gasLimitError}
+                >
                   {formik.errors[FormFieldsEnum.gasLimit]}
                 </div>
               )}
@@ -275,6 +295,7 @@ export const Send = () => {
             </label>
             <textarea
               className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+              data-testid={DataTestIdsEnum.dataInput}
               disabled={isNFT}
               id={FormFieldsEnum.data}
               name={FormFieldsEnum.data}
@@ -299,12 +320,14 @@ export const Send = () => {
           <div>
             <button
               className='w-full mt-4 rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              data-testid={DataTestIdsEnum.sendBtn}
               type='submit'
             >
               Send
             </button>
             <button
               className='w-full mt-4 px-4 py-2 text-sm'
+              data-testid={DataTestIdsEnum.cancelBtn}
               onClick={cancelSend}
               type='button'
             >

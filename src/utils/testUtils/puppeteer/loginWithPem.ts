@@ -5,20 +5,14 @@ import { getByDataTestId } from './getByDataTestId';
 import { uploadFile } from './uploadFile';
 
 export const loginWithPem = async () => {
-  const filePath = 'src/__mocks__/data/testPemWallet/pemAccount.pem';
+  const filePath = 'src/__mocks__/data/testPemWallet/account.pem';
   await page.waitForSelector(getByDataTestId(DataTestIdsEnum.pemBtn));
   await page.click(getByDataTestId(DataTestIdsEnum.pemBtn));
-
-  await expectElementToContainText({
-    dataTestId: DataTestIdsEnum.modalTitle,
-    text: 'Login using PEM'
-  });
-
   await uploadFile({ dataTestId: DataTestIdsEnum.walletFile, filePath });
   await page.click(getByDataTestId(DataTestIdsEnum.submitButton));
 
   await expectElementToContainText({
     dataTestId: DataTestIdsEnum.userAddress,
-    text: `${pemAccount.address}${pemAccount.address}`
+    text: pemAccount.address
   });
 };

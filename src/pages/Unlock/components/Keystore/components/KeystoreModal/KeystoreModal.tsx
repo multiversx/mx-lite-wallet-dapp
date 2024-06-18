@@ -167,14 +167,11 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                     />
                   ) : (
                     <input
+                      accept='.json'
                       className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
-                      type='file'
-                      placeholder='Select file'
-                      required
+                      data-testid={DataTestIdsEnum.walletFile}
                       id={WALLET_FILE}
                       name={WALLET_FILE}
-                      data-testid={DataTestIdsEnum.walletFile}
-                      accept='.json'
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
@@ -182,6 +179,9 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                           setFieldValue(WALLET_FILE, file);
                         }
                       }}
+                      placeholder='Select file'
+                      required
+                      type='file'
                     />
                   )}
                   <label htmlFor={ACCESS_PASS} className='mb-2'>
@@ -207,7 +207,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                   )}
                   <div className='flex flex-col mx-auto items-center gap-2 mt-4'>
                     <Button
-                      data-testid='submitButton'
+                      data-testid={DataTestIdsEnum.submitButton}
                       type='submit'
                       disabled={!isValid}
                       onClick={submitForm}
@@ -215,11 +215,11 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                       Submit
                     </Button>
                     <button
-                      id={DataTestIdsEnum.closeButton}
+                      className='mt-2'
                       data-testid={DataTestIdsEnum.closeButton}
+                      id={DataTestIdsEnum.closeButton}
                       onClick={handleModalClose}
                       type='button'
-                      className='mt-2'
                     >
                       Close
                     </button>
