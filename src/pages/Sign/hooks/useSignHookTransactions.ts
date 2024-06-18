@@ -55,10 +55,10 @@ export const useSignHookTransactions = () => {
     hookUrl: string
   ): Promise<ValidateAndSignTxsReturnType> => {
     // 1. get the raw transactions
-
     const { txs: rawTxs, executeAfterSign } =
       parseSignUrl<IPlainTransactionObject>(hookUrl);
 
+    // Step 1. Validate the transactions
     const txData = await validateSignTransactions({
       extractedTxs: rawTxs,
       address,
@@ -75,8 +75,7 @@ export const useSignHookTransactions = () => {
       };
     }
 
-    // 2. stign the transactions
-
+    // Step 2. Send individual or batch transactions
     const mappedTransactions = createNewTransactionsFromRaw({
       address,
       chainId,

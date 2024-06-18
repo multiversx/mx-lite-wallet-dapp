@@ -20,6 +20,9 @@ import {
 } from './useSignHookTransactions';
 import { mapSignedTransactions } from '../helpers/mapSignedTransactions';
 
+/*
+  This is a hook that validates and signs transactions as a two-step process
+*/
 export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
   const { hookUrl, callbackUrl } = useSelector(hookSelector);
 
@@ -46,15 +49,6 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
   });
 
   const signHookTransactions = useSignHookTransactions();
-
-  const validateAndSign = async () => {
-    const newState = await signHookTransactions(hookUrl);
-    setState(newState);
-  };
-
-  useEffect(() => {
-    validateAndSign();
-  }, [hookUrl]);
 
   const sendReplyToDapp = () => {
     if (state.sessionId == null) {
@@ -127,6 +121,17 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
     navigate(routeNames.dashboard);
   };
 
+  const validateAndSign = async () => {
+    const newState = await signHookTransactions(hookUrl);
+    setState(newState);
+  };
+
+  // 1. Validate and sign transactions
+  useEffect(() => {
+    validateAndSign();
+  }, [hookUrl]);
+
+  // 2. Reply with signed transactions
   useEffect(() => {
     sendReplyToDapp();
   }, [signedTransactions, state]);
