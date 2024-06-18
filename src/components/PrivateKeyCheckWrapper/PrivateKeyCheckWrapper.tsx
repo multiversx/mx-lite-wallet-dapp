@@ -4,10 +4,11 @@ import { provider } from 'helpers/app';
 import { useModal } from 'hooks';
 import { KeystoreModal } from 'pages/Unlock/components/Keystore/components/KeystoreModal';
 import { PemModal } from 'pages/Unlock/components/Pem/components/PemModal';
-import { accountSelector } from 'redux/selectors';
+import { accountSelector, hookSelector } from 'redux/selectors';
 import { FileLoginEnum } from 'redux/slices';
 
 export const PrivateKeyCheckWrapper = ({ children }: PropsWithChildren) => {
+  const { type: hook } = useSelector(hookSelector);
   const { fileLogin } = useSelector(accountSelector);
   const { show, handleShow, handleClose } = useModal();
   const shouldRelogin = !provider.isInitialized() && Boolean(fileLogin);
@@ -22,6 +23,8 @@ export const PrivateKeyCheckWrapper = ({ children }: PropsWithChildren) => {
     handleClose();
   };
 
+  const hideChildren = show && hook;
+
   return (
     <>
       {fileLogin === FileLoginEnum.keystore && (
@@ -30,7 +33,7 @@ export const PrivateKeyCheckWrapper = ({ children }: PropsWithChildren) => {
       {fileLogin === FileLoginEnum.pem && (
         <PemModal handleClose={handleModalClose} show={show} />
       )}
-      {children}
+      {hideChildren ? null : children}
     </>
   );
 };

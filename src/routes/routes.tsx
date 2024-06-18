@@ -1,17 +1,18 @@
-import { PrivateKeyCheckWrapper } from 'components';
+import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
   Disclaimer,
   Home,
-  Send,
   Unlock,
-  Sign,
   LoginHook,
   Logout,
-  LogoutHook
+  LogoutHook,
+  SignHook
 } from 'pages';
-import { RouteType } from 'types';
+import { Send } from 'pages/Send/Send';
+import { Sign } from 'pages/Sign/Sign';
+import { RouteType } from 'types/sdkDapp.types';
 
 interface RouteWithTitleType extends RouteType {
   title: string;
@@ -58,12 +59,21 @@ const routesObject: Record<RouteNamesEnum | HooksPageEnum, RouteWithTitleType> =
     [RouteNamesEnum.sign]: {
       path: RouteNamesEnum.sign,
       title: 'Sign',
-      component: Sign
+      component: () => (
+        <PrivateKeyCheckWrapper>
+          <Sign />
+        </PrivateKeyCheckWrapper>
+      )
     },
     [HooksPageEnum.loginHook]: {
       path: HooksPageEnum.loginHook,
       title: 'Login',
       component: LoginHook
+    },
+    [HooksPageEnum.signHook]: {
+      path: HooksPageEnum.signHook,
+      title: 'Sign',
+      component: SignHook
     },
     [HooksPageEnum.logoutHook]: {
       path: HooksPageEnum.logoutHook,

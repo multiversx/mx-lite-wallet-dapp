@@ -1,5 +1,4 @@
-import { useTransactionsTracker } from '@multiversx/sdk-dapp/hooks/transactions/useTransactionsTracker';
-import { useBatchTransactionsTracker } from 'hooks';
+import { useBatchTransactionsTracker, useTransactionsTracker } from 'hooks';
 
 export const TransactionsTracker = () => {
   useTransactionsTracker({

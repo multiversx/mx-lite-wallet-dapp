@@ -1,5 +1,5 @@
-import { replyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';
 import { useSelector } from 'react-redux';
+import { replyToDapp } from 'lib';
 import { hookSelector } from 'redux/selectors/hook';
 import { ReplyWithPostMessageType } from 'types';
 

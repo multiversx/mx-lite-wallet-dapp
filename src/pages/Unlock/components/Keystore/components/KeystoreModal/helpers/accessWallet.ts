@@ -1,4 +1,4 @@
-import { UserSecretKey, UserWallet } from '@multiversx/sdk-wallet';
+import { UserSecretKey, UserWallet } from 'lib/sdkWallet';
 
 export interface AccessWalletType {
   kdContent: { [key: string]: any };

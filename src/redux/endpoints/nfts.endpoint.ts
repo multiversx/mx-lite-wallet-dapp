@@ -1,10 +1,11 @@
+import { getBaseURL } from 'helpers';
+import { PartialNftType } from 'lib';
 import {
   ACCOUNTS_ENDPOINT,
+  API_CACHE_DURATION_SECONDS,
+  MAX_API_SIZE,
   NFTS_ENDPOINT
-} from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
-import { getBaseURL } from 'helpers';
-import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
+} from 'localConstants';
 import { GetNftsType } from 'types';
 import { RootApi } from '../rootApi';
 

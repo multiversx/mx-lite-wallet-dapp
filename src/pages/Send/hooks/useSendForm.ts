@@ -1,13 +1,12 @@
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
-import { prepareTransaction } from '@multiversx/sdk-dapp-form/hooks/useFetchGasLimit/prepareTransaction';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
-import { sendTransactions } from 'helpers';
+import { addressIsValid } from 'helpers/sdkDapp/sdkDapp.helpers';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
+import { PartialNftType, prepareTransaction } from 'lib';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { addressIsValid } from 'utils';
+import { TokenType } from 'types';
+import { useSendTransactions } from './useSendTransactions';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
 
@@ -22,6 +21,7 @@ export const useSendForm = ({
 }) => {
   const { address, account } = useGetAccountInfo();
   const { chainID } = useGetNetworkConfig();
+  const { sendTransactions } = useSendTransactions();
 
   const formik = useFormik({
     initialValues: {
@@ -85,18 +85,7 @@ export const useSendForm = ({
         sender: address
       });
 
-      await sendTransactions({
-        transactions: [transaction],
-        signWithoutSending: false,
-        transactionsDisplayInfo: {
-          successMessage: 'Transactions successfully sent',
-          errorMessage: 'An error has occurred',
-          submittedMessage: 'Success',
-          processingMessage: 'Processing transactions',
-          transactionDuration: 10000
-        },
-        redirectAfterSign: false
-      });
+      await sendTransactions([transaction]);
 
       formik.resetForm();
     }
