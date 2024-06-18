@@ -1,6 +1,6 @@
 import { WALLET_SOURCE_ORIGIN } from '__mocks__/data/constants';
-import { getByDataTestId, loginWithPem } from 'utils/testUtils/puppeteer';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
+import { getByDataTestId, loginWithPem } from 'utils/testUtils/puppeteer';
 
 describe('Pem login test', () => {
   it('should login with pem file successfully', async () => {

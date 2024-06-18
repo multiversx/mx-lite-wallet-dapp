@@ -1,11 +1,13 @@
 import { MouseEvent, useEffect, useState } from 'react';
-import { calculateGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateGasLimit';
-import { calculateNftGasLimit } from '@multiversx/sdk-dapp-form/operations/calculateNftGasLimit';
-import { computeNftDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
 import BigNumber from 'bignumber.js';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
+import {
+  calculateGasLimit,
+  calculateNftGasLimit,
+  computeNftDataField
+} from 'lib';
 import { DataTestIdsEnum, GAS_LIMIT, SearchParamsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { getSelectedTokenBalance } from './helpers';

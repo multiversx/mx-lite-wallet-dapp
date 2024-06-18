@@ -1,8 +1,8 @@
 import { DIGITS } from '@multiversx/sdk-dapp/constants';
 import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { PartialNftType } from '@multiversx/sdk-dapp-form';
+import { formatAmount } from 'helpers';
 import { DECIMALS } from 'localConstants';
-import { formatAmount } from 'utils';
 import { TokenOptionType } from '../types';
 
 export const getSelectedTokenBalance = ({

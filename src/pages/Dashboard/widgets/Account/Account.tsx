@@ -64,7 +64,7 @@ export const Account = () => {
             <MxLink
               className='inline-block rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.sendBtn}
-              to={`${routeNames.send}`}
+              to={routeNames.send}
             >
               Send
             </MxLink>
