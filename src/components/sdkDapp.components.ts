@@ -26,3 +26,6 @@ export { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 export { AddressTable } from '@multiversx/sdk-dapp/UI/ledger/LedgerLoginContainer/AddressTable';
 export { Trim } from '@multiversx/sdk-dapp/UI/Trim/Trim';
 export { ModalContainer } from '@multiversx/sdk-dapp/UI/ModalContainer/ModalContainer';
+export { SignWithDeviceModal } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/SignWithDeviceModal';
+export { SignWithExtensionModal } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithExtensionModal/SignWithExtensionModal';
+export { SignWithLedgerModal } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithLedgerModal/SignWithLedgerModal';

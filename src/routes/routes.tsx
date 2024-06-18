@@ -7,11 +7,12 @@ import {
   Unlock,
   LoginHook,
   Logout,
-  LogoutHook
+  LogoutHook,
+  SignHook
 } from 'pages';
 import { Send } from 'pages/Send/Send';
 import { Sign } from 'pages/Sign/Sign';
-import { RouteType } from 'types';
+import { RouteType } from 'types/sdkDapp.types';
 
 interface RouteWithTitleType extends RouteType {
   title: string;
@@ -68,6 +69,11 @@ const routesObject: Record<RouteNamesEnum | HooksPageEnum, RouteWithTitleType> =
       path: HooksPageEnum.loginHook,
       title: 'Login',
       component: LoginHook
+    },
+    [HooksPageEnum.signHook]: {
+      path: HooksPageEnum.signHook,
+      title: 'Sign',
+      component: SignHook
     },
     [HooksPageEnum.logoutHook]: {
       path: HooksPageEnum.logoutHook,
