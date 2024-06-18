@@ -51,6 +51,10 @@ yarn build:testnet
 yarn build:mainnet
 ```
 
+If you want to set the account persistance to `sessionStorage`, you can do so in the `.env` file by configuring the `VITE_APP_PERSIST` variable. This will allow multiple logins in different tabs but force providing both keystore and passsword on every sign transaction action from a connected dApp.
+
+```bash
+
 ## Roadmap
 
 See the [open issues](https://github.com/multiversx/mx-template-dapp/issues) for a list of proposed features (and known issues).
