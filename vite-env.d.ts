@@ -3,6 +3,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_APP_PERSIST: 'sessionStorage' | 'localStorage';
+  readonly VITE_APP_MSW: 'true' | 'false';
 }
 
 interface ImportMeta {

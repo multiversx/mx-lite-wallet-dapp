@@ -1,4 +1,8 @@
-import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import {
+  DEFAULT_DELAY_MS,
+  keystoreAccount,
+  WALLET_SOURCE_ORIGIN
+} from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -6,11 +10,12 @@ import {
   expectElementToContainText,
   expectInputToHaveValue,
   getByDataTestId,
-  loginWithPem
+  loginWithPem,
+  sleep
 } from 'utils/testUtils/puppeteer';
 
 describe('Send ESDT tests', () => {
-  it('shouldsend ESDT successfully', async () => {
+  it('should send ESDT successfully', async () => {
     await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
       waitUntil: 'domcontentloaded'
     });
@@ -35,6 +40,15 @@ describe('Send ESDT tests', () => {
     await page.keyboard.type('ASH');
     await page.keyboard.press('Enter');
     await page.keyboard.press('Tab');
+
+    await sleep(DEFAULT_DELAY_MS);
+
+    await jestPuppeteer.debug();
+
+    await expectElementToContainText({
+      dataTestId: DataTestIdsEnum.availableAmount,
+      text: 'Available: 431.8354 ASH'
+    });
 
     await expectInputToHaveValue({
       dataTestId: DataTestIdsEnum.gasLimitInput,

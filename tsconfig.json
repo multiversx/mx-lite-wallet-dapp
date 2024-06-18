@@ -40,6 +40,5 @@
     "useUnknownInCatchVariables": false,
   },
   "include": ["src", "scripts", "assets"],
-  "exclude": ["enableDevHmr.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
