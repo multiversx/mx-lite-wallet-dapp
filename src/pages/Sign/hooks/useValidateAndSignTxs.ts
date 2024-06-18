@@ -1,90 +1,140 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
-  useGetAccount,
-  useGetNetworkConfig,
-  useGetSignedTransactions
+  useGetAccountInfo,
+  useGetSignedTransactions,
+  useReplyWithCancelled
 } from 'hooks';
-import { useSendTransactions } from 'pages/Send/hooks';
+import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
+
+import { TransactionBatchStatusesEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
+import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { useSignTransactions } from './useSignTransactions';
+import { SignedTransactionType, TransactionSignatureDataType } from 'types';
+import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
 import {
-  ValidatedTxsStateType,
-  useValidateAndBuildUrlTransactions
-} from './useValidateAndBuildTransactions';
-import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFromRaw';
+  ValidateAndSignTxsReturnType,
+  useSignHookTransactions
+} from './useSignHookTransactions';
+import { mapSignedTransactions } from '../helpers/mapSignedTransactions';
 
-interface UseValidateAndSignTxsReturnType extends ValidatedTxsStateType {
-  sessionId: string | null;
-}
+/*
+  This is a hook that validates and signs transactions as a two-step process
+*/
+export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
+  const { hookUrl, callbackUrl } = useSelector(hookSelector);
 
-export const useValidateAndSignTxs = (): UseValidateAndSignTxsReturnType => {
-  const { hookUrl } = useSelector(hookSelector);
-  const {
-    network: { chainId }
-  } = useGetNetworkConfig();
-  const { address } = useGetAccount();
+  const replyWithSignedTransactions = useReplyWithSignedTransactions();
+  const navigate = useNavigate();
+
+  const replyWithCancelled = useReplyWithCancelled({
+    caller: 'useSignTransactions'
+  });
+  const dispatch = useDispatch();
+  const removeAllTransactions = useAbortAndRemoveAllTxs();
+
   const { signedTransactions } = useGetSignedTransactions();
-
   const {
-    executeAfterSign,
-    multiSignTxs,
-    rawTxs,
-    txsDataTokens,
-    txErrors,
-    multiSigContract
-  } = useValidateAndBuildUrlTransactions({
-    hookUrl
+    account: { address },
+    ledgerAccount
+  } = useGetAccountInfo();
+  const [state, setState] = useState<ValidateAndSignTxsReturnType>({
+    multiSignTxs: [],
+    txErrors: {},
+    txsDataTokens: {},
+    rawTxs: [],
+    sessionId: null
   });
 
-  const { sessionId: batchId, sendBatchTransactions } = useSendTransactions(
-    routeNames.dashboard
-  );
+  const signHookTransactions = useSignHookTransactions();
 
-  const { sessionId: signSessionId, signTransactions } = useSignTransactions({
-    address,
-    chainId,
-    rawTxs,
-    signedTransactions,
-    txErrors
-  });
-
-  const sessionId = batchId || signSessionId;
-
-  const completeSignTransaction = async () => {
-    if (rawTxs.length === 0) {
-      return;
+  const sendReplyToDapp = () => {
+    if (state.sessionId == null) {
+      return [];
     }
 
-    if (executeAfterSign === 'true') {
-      await sendBatchTransactions({
-        transactions: [
-          createNewTransactionsFromRaw({
-            address,
-            chainId: String(chainId),
-            transactions: rawTxs
-          })
-        ]
+    const sessionObject = signedTransactions[state.sessionId];
+
+    if (sessionObject == null) {
+      return [];
+    }
+
+    const signedTxs: SignedTransactionType[] = sessionObject.transactions ?? [];
+
+    const status = sessionObject.status;
+
+    if (
+      status === TransactionBatchStatusesEnum.cancelled ||
+      status === TransactionBatchStatusesEnum.fail ||
+      status === TransactionBatchStatusesEnum.invalid
+    ) {
+      replyWithCancelled();
+    }
+
+    if (!signedTxs) {
+      return [];
+    }
+
+    const txsSignatures = signedTxs
+      .filter((tx) => Boolean(tx.signature))
+      .map(({ options, signature, version }) => {
+        const txSignature: TransactionSignatureDataType = {
+          signature: String(signature),
+          version: String(version),
+          options: String(options)
+        };
+
+        return txSignature;
       });
 
+    if (txsSignatures.length === 0) {
+      return [];
+    }
+
+    const txs = state.rawTxs;
+
+    const signingEnabled =
+      txs.length > 0 && txsSignatures.length === txs.length;
+
+    if (!signingEnabled) {
       return;
     }
 
-    const signWithoutSending = executeAfterSign !== 'true';
+    const transactions = mapSignedTransactions({
+      txs,
+      signatureData: txsSignatures,
+      address,
+      isLedgerWithHashSign: Boolean(ledgerAccount?.version)
+    });
 
-    await signTransactions({ signWithoutSending });
+    const isValidHook = Boolean(callbackUrl);
+
+    if (isValidHook) {
+      replyWithSignedTransactions(transactions);
+    }
+
+    dispatch(resetHook());
+    removeAllTransactions();
+
+    navigate(routeNames.dashboard);
   };
 
+  const validateAndSign = async () => {
+    const newState = await signHookTransactions(hookUrl);
+    setState(newState);
+  };
+
+  // 1. Validate and sign transactions
   useEffect(() => {
-    completeSignTransaction();
-  }, [txErrors, rawTxs, multiSigContract]);
+    validateAndSign();
+  }, [hookUrl]);
 
-  return {
-    sessionId,
-    multiSignTxs,
-    txErrors,
-    txsDataTokens,
-    rawTxs
-  };
+  // 2. Reply with signed transactions
+  useEffect(() => {
+    sendReplyToDapp();
+  }, [signedTransactions, state]);
+
+  return state;
 };
