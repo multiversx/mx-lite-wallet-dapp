@@ -44,7 +44,7 @@ describe('New wallet login with keystore test', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.confirmBtn));
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.userAddress,
-      text: `${emptyWalletAccount.address}`
+      text: emptyWalletAccount.address
     });
 
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/dashboard`);
