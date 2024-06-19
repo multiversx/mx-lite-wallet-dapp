@@ -52,8 +52,8 @@ jobs:
           path: |
             **/build
           key: ${{ runner.os }}-build-${{ github.sha }}
-      - name: Build devnet
+      - name: Build devnet MSW
         if: steps.build.outputs.cache-hit != 'true'
-        run: npm run build:devnet
+        run: npm run build:devnet-msw
       - name: Run Puppeteer tests
         run: npm run test:pptr-headless
