@@ -53,7 +53,7 @@ yarn build:mainnet
 
 If you want to set the account persistance to `sessionStorage`, you can do so in the `.env` file by configuring the `VITE_APP_PERSIST` variable. This will allow multiple logins in different tabs but force providing both keystore and passsword on every sign transaction action from a connected dApp.
 
-```bash
+
 
 ## Roadmap
 
@@ -70,5 +70,13 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 
 
