@@ -61,8 +61,6 @@ export const pemWalletNfts = [
     tags: ['test'],
     metadata: {
       name: 'EPONYMOUS #8',
-      description:
-        "EPONYMOUS #8 | 'Sweet Lullaby' is a song by the world known French musical group Deep Forest that originally appeared on their Eponymous album (1992). The album gained great global popularity in 1992 and 1993 when it was released as a single, becoming a Top 30 hit in many European and Oceanian countries. In 1994, it was re-released in remixed versions. Its accompanying music video was nominated for several awards at the 1994 MTV Video Music Awards.",
       itheum_data_stream_url:
         'eyJBIjoiM2EzZTFhMjVkMDU5NTg1MjhhZWM0MWE3YzA3ZDkxZTljYzk0MTMwMDY4NTU2ODA4IiwiQiI6ImY1NGVmNWQ2ZWUyYTgxNDdhMDQzNWMzYWE4ZThmMzcxNjUxODM4N2U5MDNlMTc0MTEzOWYyZDRkMDg5MTdkODAiLCJDIjoiNGY0MGI3ZjUxYWFlMGE2MzU1ZjU5NTYxODA1NGJmNzc5YzcxY2UxMTJjNTk3NWRlMmQyOGVmYTdiM2E3ZWJmZSIsIkQiOiJiNmI3NDBhNDczZmJhZGZmNDkyMTU2ZDlhODc2Nzg2MGZmNzg3MzMzMjMwMjZlMjRkMWYyNDRhMmE4ZjNjODg3ODhkYzQwZDBkODI1NTViYWFiNzE4ZDczNDJhMzY3NzdlMWQ5NDQzYWQyOTM5MTIzYzFkYjE0Yzc0OWE2MDg5NWE2NjZkNWJiZjUxNjIyOTlmYmFkMTkwZTVkZDJkYjVlNDFjNDZkYjQ5NzhkNzI4OTY0N2I4NzY5Nzk4M2Y4MTRkNDk2MzRhODE5OWI1MzAzZWQwNDM2YTcyOGZkNTE1Y2UyM2U4NzQ4MDUzMzY2NDBkMDhkNGU4NWVlMjFmZmM2YWE3MzA0MDFhNmY2YjEyZTIxMDM0NDE5MWIwZThmMzljZTNjMWNmYjg5N2NiNGFmNzA1NGYzMTc1M2MwY2QxZWQ1OGE1NWY0M2JhZmYzN2M3NWI0OTA0ZGQxNTZkZWYwMzJkOTljNTRmYzIxMjJlYjkzODFjMTYzYWNlNzNjYjc2OGY5ZjZkYmFjMGJiMjE4OTE2ZjQyMWEzYjlhNTUwMThiODc5NDJiMmJmYjE3NDkiLCJFIjoiYzc0MzVjOGQ1NzNjZTliOTVhZWIwYmExMmE1MWQ5YzdkODZkNmRlMjhhM2ZhMmJjZWNjNTQ1YmU5NDVmZTZiMmUxZGQ2MzM5NjVhMzA4NGQ4ZGJlMDM3OTczMWUwMWE5ZjBhODE0MTkxZGI2MTI2YjNkNDZlZmEwM2ZiN2UyMDcifQ==',
       itheum_creator:
@@ -110,8 +108,7 @@ export const pemWalletNfts = [
     tags: ['test'],
     metadata: {
       name: 'EPONYMOUS #5',
-      description:
-        "EPONYMOUS #5 | 'Sweet Lullaby' is a song by the world known French musical group Deep Forest that originally appeared on their Eponymous album (1992). The album gained great global popularity in 1992 and 1993 when it was released as a single, becoming a Top 30 hit in many European and Oceanian countries. In 1994, it was re-released in remixed versions. Its accompanying music video was nominated for several awards at the 1994 MTV Video Music Awards.",
+      description: '',
       itheum_data_stream_url:
         'eyJBIjoiM2EzZTFhMjVkMDU5NTg1MjhhZWM0MWE3YzA3ZDkxZTljYzk0MTMwMDY4NTU2ODA4IiwiQiI6ImY1NGVmNWQ2ZWUyYTgxNDdhMDQzNWMzYWE4ZThmMzcxNjUxODM4N2U5MDNlMTc0MTEzOWYyZDRkMDg5MTdkODAiLCJDIjoiNGY0MGI3ZjUxYWFlMGE2MzU1ZjU5NTYxODA1NGJmNzc5YzcxY2UxMTJjNTk3NWRlMmQyOGVmYTdiM2E3ZWJmZSIsIkQiOiJiNmI3NDBhNDczZmJhZGZmNDkyMTU2ZDlhODc2Nzg2MGZmNzg3MzMzMjMwMjZlMjRkMWYyNDRhMmE4ZjNjODg3ODhkYzQwZDBkODI1NTViYWFiNzE4ZDczNDJhMzY3NzdlMWQ5NDQzYWQyOTM5MTIzYzFkYjE0Yzc0OWE2MDg5NWE2NjZkNWJiZjUxNjIyOTlmYmFkMTkwZTVkZDJkYjVlNDFjNDZkYjQ5NzhkNzI4OTY0N2I4NzY5Nzk4M2Y4MTRkNDk2MzRhODE5OWI1MzAzZWQwNDM2YTcyOGZkNTE1Y2UyM2U4NzQ4MDUzMzY2NDBkMDhkNGU4NWVlMjFmZmM2YWE3MzA0MDFhNmY2YjEyZTIxMDM0NDE5MWIwZThmMzljZTNjMWNmYjg5N2NiNGFmNzA1NGYzMTc1M2MwY2QxZWQ1OGE1NWY0M2JhZmYzN2M3NWI0OTA0ZGQxNTZkZWYwMzJkOTljNTRmYzIxMjJlYjkzODFjMTYzYWNlNzNjYjc2OGY5ZjZkYmFjMGJiMjE4OTE2ZjQyMWEzYjlhNTUwMThiODc5NDJiMmJmYjE3NDkiLCJFIjoiYzc0MzVjOGQ1NzNjZTliOTVhZWIwYmExMmE1MWQ5YzdkODZkNmRlMjhhM2ZhMmJjZWNjNTQ1YmU5NDVmZTZiMmUxZGQ2MzM5NjVhMzA4NGQ4ZGJlMDM3OTczMWUwMWE5ZjBhODE0MTkxZGI2MTI2YjNkNDZlZmEwM2ZiN2UyMDcifQ==',
       itheum_creator:
@@ -159,8 +156,7 @@ export const pemWalletNfts = [
     tags: ['test'],
     metadata: {
       name: 'EPONYMOUS #2',
-      description:
-        "EPONYMOUS #2 | 'Sweet Lullaby' is a song by the world known French musical group Deep Forest that originally appeared on their Eponymous album (1992). The album gained great global popularity in 1992 and 1993 when it was released as a single, becoming a Top 30 hit in many European and Oceanian countries. In 1994, it was re-released in remixed versions. Its accompanying music video was nominated for several awards at the 1994 MTV Video Music Awards.",
+      description: '',
       itheum_data_stream_url:
         'eyJBIjoiM2EzZTFhMjVkMDU5NTg1MjhhZWM0MWE3YzA3ZDkxZTljYzk0MTMwMDY4NTU2ODA4IiwiQiI6ImY1NGVmNWQ2ZWUyYTgxNDdhMDQzNWMzYWE4ZThmMzcxNjUxODM4N2U5MDNlMTc0MTEzOWYyZDRkMDg5MTdkODAiLCJDIjoiNGY0MGI3ZjUxYWFlMGE2MzU1ZjU5NTYxODA1NGJmNzc5YzcxY2UxMTJjNTk3NWRlMmQyOGVmYTdiM2E3ZWJmZSIsIkQiOiJiNmI3NDBhNDczZmJhZGZmNDkyMTU2ZDlhODc2Nzg2MGZmNzg3MzMzMjMwMjZlMjRkMWYyNDRhMmE4ZjNjODg3ODhkYzQwZDBkODI1NTViYWFiNzE4ZDczNDJhMzY3NzdlMWQ5NDQzYWQyOTM5MTIzYzFkYjE0Yzc0OWE2MDg5NWE2NjZkNWJiZjUxNjIyOTlmYmFkMTkwZTVkZDJkYjVlNDFjNDZkYjQ5NzhkNzI4OTY0N2I4NzY5Nzk4M2Y4MTRkNDk2MzRhODE5OWI1MzAzZWQwNDM2YTcyOGZkNTE1Y2UyM2U4NzQ4MDUzMzY2NDBkMDhkNGU4NWVlMjFmZmM2YWE3MzA0MDFhNmY2YjEyZTIxMDM0NDE5MWIwZThmMzljZTNjMWNmYjg5N2NiNGFmNzA1NGYzMTc1M2MwY2QxZWQ1OGE1NWY0M2JhZmYzN2M3NWI0OTA0ZGQxNTZkZWYwMzJkOTljNTRmYzIxMjJlYjkzODFjMTYzYWNlNzNjYjc2OGY5ZjZkYmFjMGJiMjE4OTE2ZjQyMWEzYjlhNTUwMThiODc5NDJiMmJmYjE3NDkiLCJFIjoiYzc0MzVjOGQ1NzNjZTliOTVhZWIwYmExMmE1MWQ5YzdkODZkNmRlMjhhM2ZhMmJjZWNjNTQ1YmU5NDVmZTZiMmUxZGQ2MzM5NjVhMzA4NGQ4ZGJlMDM3OTczMWUwMWE5ZjBhODE0MTkxZGI2MTI2YjNkNDZlZmEwM2ZiN2UyMDcifQ==',
       itheum_creator:
@@ -209,8 +205,7 @@ export const pemWalletNfts = [
     tags: ['test'],
     metadata: {
       name: 'EPONYMOUS #6',
-      description:
-        "EPONYMOUS #6 | 'Sweet Lullaby' is a song by the world known French musical group Deep Forest that originally appeared on their Eponymous album (1992). The album gained great global popularity in 1992 and 1993 when it was released as a single, becoming a Top 30 hit in many European and Oceanian countries. In 1994, it was re-released in remixed versions. Its accompanying music video was nominated for several awards at the 1994 MTV Video Music Awards.",
+      description: '',
       itheum_data_stream_url:
         'eyJBIjoiM2EzZTFhMjVkMDU5NTg1MjhhZWM0MWE3YzA3ZDkxZTljYzk0MTMwMDY4NTU2ODA4IiwiQiI6ImY1NGVmNWQ2ZWUyYTgxNDdhMDQzNWMzYWE4ZThmMzcxNjUxODM4N2U5MDNlMTc0MTEzOWYyZDRkMDg5MTdkODAiLCJDIjoiNGY0MGI3ZjUxYWFlMGE2MzU1ZjU5NTYxODA1NGJmNzc5YzcxY2UxMTJjNTk3NWRlMmQyOGVmYTdiM2E3ZWJmZSIsIkQiOiJiNmI3NDBhNDczZmJhZGZmNDkyMTU2ZDlhODc2Nzg2MGZmNzg3MzMzMjMwMjZlMjRkMWYyNDRhMmE4ZjNjODg3ODhkYzQwZDBkODI1NTViYWFiNzE4ZDczNDJhMzY3NzdlMWQ5NDQzYWQyOTM5MTIzYzFkYjE0Yzc0OWE2MDg5NWE2NjZkNWJiZjUxNjIyOTlmYmFkMTkwZTVkZDJkYjVlNDFjNDZkYjQ5NzhkNzI4OTY0N2I4NzY5Nzk4M2Y4MTRkNDk2MzRhODE5OWI1MzAzZWQwNDM2YTcyOGZkNTE1Y2UyM2U4NzQ4MDUzMzY2NDBkMDhkNGU4NWVlMjFmZmM2YWE3MzA0MDFhNmY2YjEyZTIxMDM0NDE5MWIwZThmMzljZTNjMWNmYjg5N2NiNGFmNzA1NGYzMTc1M2MwY2QxZWQ1OGE1NWY0M2JhZmYzN2M3NWI0OTA0ZGQxNTZkZWYwMzJkOTljNTRmYzIxMjJlYjkzODFjMTYzYWNlNzNjYjc2OGY5ZjZkYmFjMGJiMjE4OTE2ZjQyMWEzYjlhNTUwMThiODc5NDJiMmJmYjE3NDkiLCJFIjoiYzc0MzVjOGQ1NzNjZTliOTVhZWIwYmExMmE1MWQ5YzdkODZkNmRlMjhhM2ZhMmJjZWNjNTQ1YmU5NDVmZTZiMmUxZGQ2MzM5NjVhMzA4NGQ4ZGJlMDM3OTczMWUwMWE5ZjBhODE0MTkxZGI2MTI2YjNkNDZlZmEwM2ZiN2UyMDcifQ==',
       itheum_creator:
@@ -452,13 +447,7 @@ export const pemWalletNfts = [
     ],
     isWhitelistedStorage: true,
     tags: [''],
-    metadata: {
-      error: {
-        code: 'invalid_content_type',
-        message: "Invalid content type 'application/octet-stream",
-        timestamp: 1702638076
-      }
-    },
+    metadata: {},
     ticker: 'TEST-aba7d4',
     isNsfw: false
   },

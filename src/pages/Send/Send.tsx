@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
+import { computeTokenDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
 import BigNumber from 'bignumber.js';
 
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
+import { MxLink } from 'components';
 import {
   calculateGasLimit,
   calculateNftGasLimit,
@@ -14,13 +17,10 @@ import {
   GAS_LIMIT,
   SearchParamsEnum
 } from 'localConstants';
+import { routeNames } from 'routes';
 import { getSelectedTokenBalance } from './helpers';
 import { useSendForm, useTokenOptions } from './hooks';
 import { FormFieldsEnum, SendTypeEnum } from './types';
-import { MxLink } from 'components';
-import { routeNames } from 'routes';
-import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
-import { computeTokenDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
 
 export const Send = () => {
   const [searchParams, setSearchParams] = useSearchParams();

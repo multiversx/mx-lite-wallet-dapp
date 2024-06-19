@@ -1,3 +1,4 @@
+import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
@@ -9,7 +10,6 @@ import { TokenType } from 'types';
 import { useSendTransactions } from './useSendTransactions';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
-import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
 
 export const useSendForm = ({
   isNFT,
