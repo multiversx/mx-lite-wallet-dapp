@@ -43,7 +43,6 @@ export const handlers = [
 
 // This configures a request mocking server with the given request handlers.
 const server = setupServer(...handlers);
-const worker =
-  process.env.NODE_ENV === 'test' ? null : setupWorker(...handlers);
+const worker = setupWorker(...handlers);
 
 export { server, rest, worker };

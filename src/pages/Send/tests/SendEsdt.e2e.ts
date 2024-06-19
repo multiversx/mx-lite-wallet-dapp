@@ -43,8 +43,6 @@ describe('Send ESDT tests', () => {
 
     await sleep(DEFAULT_DELAY_MS);
 
-    await jestPuppeteer.debug();
-
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
       text: 'Available: 431.8354 ASH'
