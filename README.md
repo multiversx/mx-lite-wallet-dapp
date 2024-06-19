@@ -71,10 +71,4 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+
