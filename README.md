@@ -95,6 +95,7 @@ flowchart TB;
 ```
 
 #### File login transaction signing
+There is a difference in the user journey when the user chooses to login with a file-based provider (pem or keystore). Since the private key is stored in local memory, the user must provide the same file on every page refresh. If the user provides a different file, the login will not succeed. If the user will cancel the re-login pricess he will be logged out and redirected to the `/unlock` page.
 
 
 ```mermaid
@@ -106,8 +107,9 @@ flowchart TB;
 	id0{`PrivateKeyCheckWrapper`} -- 2. --> id1([other login]) --> /send
 	id0{`PrivateKeyCheckWrapper`} -- 2. --> id2([pem or keystore login]) --> id3{`PemModal`}
 	id3{`Pem` or `KeystoreModal`} -- 3. provide same file --> /send
-	id3{`Pem` or `KeystoreModal`} -- provide different file - ERROR --> id3{`Pem` or `KeystoreModal`}
+	id3{`Pem` or `KeystoreModal`} -- provide different file - retry --> id3{`Pem` or `KeystoreModal`}
 	id3{`Pem` or `KeystoreModal`} -- 3. cancel login --> /logout
+	/logout -- 4. is redirected --> /unlock
 
 ```
 
