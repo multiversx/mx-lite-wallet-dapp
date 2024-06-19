@@ -1,9 +1,9 @@
 import react from '@vitejs/plugin-react';
-import mkcert from 'vite-plugin-mkcert';
 import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgrPlugin from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 export default defineConfig({
   server: {
@@ -21,7 +21,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    mkcert(),
+    basicSsl(),
     tsconfigPaths(),
     svgrPlugin(),
     nodePolyfills({
