@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js';
 
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
-import { MxLink } from 'components';
+import { Button, MxLink } from 'components';
 import { getEgldLabel, computeTokenDataField } from 'lib';
 import {
   calculateGasLimit,
@@ -142,10 +142,10 @@ export const Send = () => {
   ]);
 
   return (
-    <div className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded'>
-      <h2 className='text-3xl font-bold mb-4'>Send</h2>
+    <div className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'>
+      <h2 className='text-3xl font-bold p-2 mb-2 text-center'>Send</h2>
       <form onSubmit={formik.handleSubmit}>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 h-full'>
           <div className='flex flex-col'>
             <label
               htmlFor={FormFieldsEnum.receiver}
@@ -347,22 +347,22 @@ export const Send = () => {
               value={formik.values[FormFieldsEnum.data]}
             />
           </div>
-          <div>
-            <button
-              className='w-full mt-4 rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
-              data-testid={DataTestIdsEnum.sendBtn}
-              type='submit'
-            >
-              Send
-            </button>
-            <MxLink
-              className='block w-full mt-2 px-4 py-2 text-sm text-center'
-              data-testid={DataTestIdsEnum.cancelBtn}
-              to={routeNames.dashboard}
-            >
-              Cancel
-            </MxLink>
-          </div>
+        </div>
+        <div className='mt-4 flex flex-col align-middle'>
+          <Button
+            className='mt-4 mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+            dataTestId={DataTestIdsEnum.sendBtn}
+            type='submit'
+          >
+            Send
+          </Button>
+          <MxLink
+            className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+            data-testid={DataTestIdsEnum.cancelBtn}
+            to={routeNames.dashboard}
+          >
+            Cancel
+          </MxLink>
         </div>
       </form>
     </div>

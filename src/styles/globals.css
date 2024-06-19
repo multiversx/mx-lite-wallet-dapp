@@ -29,9 +29,75 @@
 }
 
 .dapp-core-component__dappModalStyles__dappModalContent {
+  max-width: 600px !important;
+}
+
+.dapp-core-component__dappModalStyles__dappModalBody, .dapp-core-component__dappModalStyles__dappModalContent, .dapp-core-component__dappModalStyles__dappModal {
+  border-radius: 12px !important;
+}
+
+.login-modal .dapp-core-component__dappModalStyles__dappModalContent {
   max-width: 800px !important;
+}
+
+.login-modal .dapp-core-component__dappModalStyles__dappModalHeader {
+  padding: 0 !important;
+}
+
+.login-modal .dapp-core-component__main__h4 {
+  margin: 0 !important;
+}
+
+.dapp-core-component__signWithDeviceModalStyles__title, .dapp-core-component__confirmAmountDataStyles__confirmAmountDataBalance {
+  color: #000 !important;
+  font-size: 1.5em !important;
+  margin-bottom: 10px !important;
+}
+
+.dapp-core-component__signWithDeviceModalStyles__sign-button-cancel {
+  @apply text-blue-600 !important;
+  margin-top: 24px !important;
+}
+
+.dapp-core-component__main__btn-primary {
+  @apply bg-blue-600 !important;
+}
+
+.dapp-core-component__signWithDeviceModalStyles__sign-buttons {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.dapp-core-component__confirmReceiverStyles__receiverLabel,
+.dapp-core-component__confirmAmountLabelStyles__confirmAmountLabel,
+.dapp-core-component__confirmFeeStyles__confirmFeeLabel,
+.dapp-core-component__confirmAmountDataStyles__confirmAmountDataPrice,
+.dapp-core-component__TransactionDataStyles__transactionDataLabel {
+  @apply text-gray-400 !important;
+  margin-bottom: 4px !important;
+}
+
+.dapp-core-component__confirmAmountDataStyles__confirmAmountDataPrice {
+  margin: 0 !important;
 }
 
 .dapp-core-component__addressTableStyles__ledger-address-table-wrapper {
   padding: 40px 0 !important;
+}
+
+.dapp-core-component__main__card-body, .dapp-core-component__dappModalStyles__dappModalBody {
+  padding: 0 !important;
+}
+
+/* Input styles */
+.dapp-core-component__TransactionDataStyles__transactionData .dapp-core-component__TransactionDataStyles__transactionDataValueWrapper {
+  width: 100% !important;
+  padding: 10px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+  box-sizing: border-box !important;
+}
+
+.dapp-core-component__balanceStyles__balanceSymbol {
+  color: #0ac2ae !important;
 }

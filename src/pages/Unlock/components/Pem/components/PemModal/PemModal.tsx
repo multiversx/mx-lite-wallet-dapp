@@ -74,7 +74,11 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   };
 
   return (
-    <ModalContainer onClose={handleModalClose} visible={show}>
+    <ModalContainer
+      className='login-modal'
+      onClose={handleModalClose}
+      visible={show}
+    >
       <PageState
         icon={faFileAlt}
         iconSize='3x'
@@ -109,13 +113,16 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                 formikProps;
 
               return (
-                <div className='flex flex-col mx-auto items-center'>
-                  <label htmlFor='pem' className='mb-2'>
-                    Select file
+                <div className='flex flex-col mx-auto items-center pt-6'>
+                  <label
+                    className='block text-gray-700 text-sm font-bold mb-2'
+                    htmlFor='pem'
+                  >
+                    Choose File
                   </label>
                   <input
                     accept='.pem'
-                    className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
+                    className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     data-testid={DataTestIdsEnum.walletFile}
                     id='pem'
                     name='pem'
@@ -131,7 +138,7 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                   {errors.pem && (
                     <div className='text-red-600 mb-4'>{errors.pem}</div>
                   )}
-                  <div className='flex flex-col mx-auto items-center gap-2 mt-4'>
+                  <div className='flex flex-col mx-auto items-center gap-2 mt-8'>
                     <Button
                       data-testid={DataTestIdsEnum.submitButton}
                       disabled={!isValid}
@@ -141,7 +148,7 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                       Submit
                     </Button>
                     <button
-                      className='mt-2'
+                      className='mt-2 text-blue-600'
                       data-testid={DataTestIdsEnum.closeButton}
                       id={DataTestIdsEnum.closeButton}
                       onClick={handleModalClose}

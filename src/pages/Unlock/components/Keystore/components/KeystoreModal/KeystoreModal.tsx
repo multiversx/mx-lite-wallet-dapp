@@ -112,7 +112,11 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
 
   if (walletFileV5andPassword) {
     return (
-      <ModalContainer onClose={handleModalClose} visible={show}>
+      <ModalContainer
+        className='login-modal'
+        onClose={handleModalClose}
+        visible={show}
+      >
         <PageState
           icon={faFileAlt}
           iconSize='3x'
@@ -129,7 +133,11 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
   }
 
   return (
-    <ModalContainer onClose={handleModalClose} visible={show}>
+    <ModalContainer
+      className='login-modal'
+      onClose={handleModalClose}
+      visible={show}
+    >
       <PageState
         icon={faFileAlt}
         iconSize='3x'
@@ -153,13 +161,16 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
               const disabled = Boolean(initialFile);
 
               return (
-                <div className='flex flex-col mx-auto items-center'>
-                  <label htmlFor={WALLET_FILE} className='mb-2'>
+                <div className='flex flex-col mx-auto items-center pt-6'>
+                  <label
+                    htmlFor={WALLET_FILE}
+                    className='block text-gray-700 text-sm font-bold mb-2'
+                  >
                     Keystore file
                   </label>
                   {disabled ? (
                     <input
-                      className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
+                      className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                       type='text'
                       disabled
                       id={WALLET_FILE}
@@ -168,7 +179,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                   ) : (
                     <input
                       accept='.json'
-                      className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
+                      className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                       data-testid={DataTestIdsEnum.walletFile}
                       id={WALLET_FILE}
                       name={WALLET_FILE}
@@ -184,11 +195,14 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                       type='file'
                     />
                   )}
-                  <label htmlFor={ACCESS_PASS} className='mb-2'>
+                  <label
+                    htmlFor={ACCESS_PASS}
+                    className='block text-gray-700 text-sm font-bold mb-2 mt-4'
+                  >
                     Password
                   </label>
                   <input
-                    className='border border-dotted border-gray-500 hover:border-solid hover:border-gray-800 mb-4 p-1'
+                    className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     type='password'
                     required
                     id={ACCESS_PASS}
@@ -205,7 +219,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                   {touched.accessPass && errors.accessPass && (
                     <div className='text-red-600 mb-4'>{errors.accessPass}</div>
                   )}
-                  <div className='flex flex-col mx-auto items-center gap-2 mt-4'>
+                  <div className='flex flex-col mx-auto items-center gap-2 mt-8'>
                     <Button
                       data-testid={DataTestIdsEnum.submitButton}
                       type='submit'
@@ -215,7 +229,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                       Submit
                     </Button>
                     <button
-                      className='mt-2'
+                      className='mt-2 text-blue-600'
                       data-testid={DataTestIdsEnum.closeButton}
                       id={DataTestIdsEnum.closeButton}
                       onClick={handleModalClose}
