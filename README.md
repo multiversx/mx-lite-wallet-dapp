@@ -1,8 +1,8 @@
+
 # MultiversX Lite Wallet DApp
 
 The **MultiversX Lite Wallet DApp**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
-
+It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and transaction signing.
 See [Lite Wallet dApp](https://lite-wallet-dapp.multiversx.com/) for live demo.
 
 ## Requirements
@@ -14,46 +14,90 @@ See [Lite Wallet dApp](https://lite-wallet-dapp.multiversx.com/) for live demo.
 
 The dapp is a client side only project and is built using the [Create React App](https://create-react-app.dev) scripts.
 
-### Instalation and running
+### Installation and running
 
-### Step 1. Install modules
+#### Step 1. Install modules
 
 From a terminal, navigate to the project folder and run:
 
 ```bash
-yarn install
+yarn  install
 ```
 
-### Step 2. Running in development mode
+#### Step 2. Create the main config file
+
+Go to `src/config` folder and create a new `index.ts` file with the contents of `config.devnet.ts`
+
+#### Step 3. Running in development mode
 
 In the project folder run:
 
 ```bash
-yarn start:devnet
-yarn start:testnet
-yarn start:mainnet
+yarn  start:devnet
+yarn  start:testnet
+yarn  start:mainnet
 ```
-
+  
 This will start the React app in development mode, using the configs found in the `vite.config.ts` file.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
+
 You will also see any lint errors in the console.
 
-### Step 3. Build for testing and production use
+#### Step 3. Build for testing and production use
 
-A build of the app is necessary to deploy for testing purposes or for production use.
+A build of the app is necessary to deploy for testing purposes or production use.
+
 To build the project run:
 
 ```bash
-yarn build:devnet
-yarn build:testnet
-yarn build:mainnet
+yarn  build:devnet
+yarn  build:testnet
+yarn  build:mainnet
 ```
 
-If you want to set the account persistance to `sessionStorage`, you can do so in the `.env` file by configuring the `VITE_APP_PERSIST` variable. This will allow multiple logins in different tabs but force providing both keystore and passsword on every sign transaction action from a connected dApp.
+> **NOTE**
+> If you want to set the account persistence to `sessionStorage`, you can do so in the `.env` file by configuring the `VITE_APP_PERSIST` variable. This will allow multiple address logins in different tabs but force providing both keystore and password on every sign transaction action from a connected dApp. In the default setting the wallet will only allow one address at a time to be logged in.
 
-```bash
+### Wallet Architecture
+
+#### Basic user journey
+
+The wallet is a dApp that allows the user to view his account balance and assets, send transactions, and sign transaction requests coming from another dApp. 
+To achieve these goals, it has public pages and private pages. 
+1. The user journey starts while not logged in, and accessing the home page (`/`). 
+2. The user clicks Connect and accesses the `/unlock` page
+3. He chooses one of the login options and once done, gets redirected to the `/dashboard`, where he can check his balance and assets
+4. From here, he can press the Send button to go to the `/send` page and make a transaction
+5. By pressing Close, the journey ends and the user is redirected to `/unlock`
+
+```mermaid
+flowchart TB;
+
+	subgraph public
+	/unlock
+	/
+	/ -- 2. Connect --> /unlock
+	end
+
+	subgraph private
+	/dashboard -- 4. press Send --> /send
+	end
+    
+    id0{Start} -- 1. --> /
+
+	public --> id1([access page and is logged in]) -- is redirected --> /dashboard
+	/unlock -- 3. Perform login --> /dashboard
+	private -->  id2{End} -- 5. press Close --> /logout -- is redirected--> /unlock
+
+```
+
+
+
+
+### Installation and running
 
 ## Roadmap
 
@@ -61,7 +105,7 @@ See the [open issues](https://github.com/multiversx/mx-template-dapp/issues) for
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 One can contribute by creating _pull requests_, or by opening _issues_ for discovered bugs or desired features.
 
