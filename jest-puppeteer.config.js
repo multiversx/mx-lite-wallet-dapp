@@ -51,7 +51,7 @@ const config = {
   modulePaths: ['<rootDir>/src'],
   bail: 1,
   workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
-  maxWorkers: '40%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
+  maxWorkers: '50%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
   launch: {
     headless: isHeadless,
     product: 'chrome',
