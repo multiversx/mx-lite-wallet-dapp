@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from 'helpers';
+import { logout } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { logoutAction } from 'redux/commonActions';
 import { hookSelector } from 'redux/selectors';

@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
-import reduxSessionStorage from 'redux-persist/lib/storage/session';
 import reduxLocalStorage from 'redux-persist/lib/storage';
+import reduxSessionStorage from 'redux-persist/lib/storage/session';
 import { RootApi } from './rootApi';
 import { hookReducer, accountReducer } from './slices';
 

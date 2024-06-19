@@ -1,4 +1,4 @@
-import { useBatchTransactionsTracker, useTransactionsTracker } from 'hooks';
+import { useBatchTransactionsTracker, useTransactionsTracker } from 'lib';
 
 export const TransactionsTracker = () => {
   useTransactionsTracker({

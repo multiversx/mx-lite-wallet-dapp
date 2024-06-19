@@ -1,8 +1,4 @@
-import {
-  DEFAULT_DELAY_MS,
-  keystoreAccount,
-  WALLET_SOURCE_ORIGIN
-} from '__mocks__';
+import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -10,38 +6,21 @@ import {
   expectElementToContainText,
   expectInputToHaveValue,
   getByDataTestId,
-  loginWithPem,
-  sleep
+  loginWithPem
 } from 'utils/testUtils/puppeteer';
 
-describe('Send ESDT tests', () => {
-  it('should send ESDT successfully', async () => {
+describe('Send ESDT from dashboard tests', () => {
+  it('should autocomplete the send form and send ESDT successfully', async () => {
     await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
       waitUntil: 'domcontentloaded'
     });
 
+    const tokenId = 'ASH-e3d1b7';
+    const testId = `send-${tokenId}`;
     await loginWithPem();
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
+    await page.waitForSelector(getByDataTestId(testId));
+    await page.click(getByDataTestId(testId));
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/send`);
-
-    await changeInputText({
-      dataTestId: DataTestIdsEnum.receiverInput,
-      text: keystoreAccount.address
-    });
-
-    await changeInputText({
-      dataTestId: DataTestIdsEnum.amountInput,
-      shouldOverride: true,
-      text: '1'
-    });
-
-    await page.keyboard.press('Tab');
-    await page.keyboard.type('ASH');
-    await page.keyboard.press('Enter');
-    await page.keyboard.press('Tab');
-
-    await sleep(DEFAULT_DELAY_MS);
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
@@ -60,12 +39,28 @@ describe('Send ESDT tests', () => {
 
     await expectInputToHaveValue({
       dataTestId: DataTestIdsEnum.dataInput,
-      value: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
+      value: 'ESDTTransfer@4153482d653364316237@00'
     });
 
     await expectElementToBeDisabled({
       dataTestId: DataTestIdsEnum.dataInput,
       isDisabled: true
+    });
+
+    await changeInputText({
+      dataTestId: DataTestIdsEnum.receiverInput,
+      text: keystoreAccount.address
+    });
+
+    await changeInputText({
+      dataTestId: DataTestIdsEnum.amountInput,
+      shouldOverride: true,
+      text: '1'
+    });
+
+    await expectInputToHaveValue({
+      dataTestId: DataTestIdsEnum.dataInput,
+      value: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));

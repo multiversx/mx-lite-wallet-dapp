@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import BigNumber from 'bignumber.js';
 
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
+import { MxLink } from 'components';
+import { getEgldLabel, computeTokenDataField } from 'lib';
 import {
   calculateGasLimit,
   calculateNftGasLimit,
@@ -14,13 +17,10 @@ import {
   GAS_LIMIT,
   SearchParamsEnum
 } from 'localConstants';
+import { routeNames } from 'routes';
 import { getSelectedTokenBalance } from './helpers';
 import { useSendForm, useTokenOptions } from './hooks';
 import { FormFieldsEnum, SendTypeEnum } from './types';
-import { MxLink } from 'components';
-import { routeNames } from 'routes';
-import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
-import { computeTokenDataField } from '@multiversx/sdk-dapp-form/operations/computeDataField';
 
 export const Send = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -89,8 +89,12 @@ export const Send = () => {
     let data;
 
     if (isNFT) {
+      const defaultToken = tokens?.find(
+        (token) => token.identifier === defaultTokenOption.value
+      );
+
       data = computeNftDataField({
-        nft: defaultTokenOption,
+        nft: defaultToken as PartialNftType,
         amount: balance,
         receiver: formik.values[FormFieldsEnum.receiver],
         errors: false
@@ -115,7 +119,7 @@ export const Send = () => {
 
     if (isNFT) {
       data = computeNftDataField({
-        nft: selectedToken,
+        nft: selectedToken as PartialNftType,
         amount: formik.values[FormFieldsEnum.amount],
         receiver: formik.values[FormFieldsEnum.receiver],
         errors: false

@@ -1,15 +1,18 @@
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
-import { addressIsValid } from 'helpers/sdkDapp/sdkDapp.helpers';
-import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
-import { PartialNftType, prepareTransaction } from 'lib';
+import {
+  prepareTransaction,
+  getEgldLabel,
+  useGetAccountInfo,
+  useGetNetworkConfig
+} from 'lib';
+import { addressIsValid } from 'lib/sdkDapp';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { TokenType } from 'types';
+import { TokenType, PartialNftType } from 'types';
 import { useSendTransactions } from './useSendTransactions';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
-import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
 
 export const useSendForm = ({
   isNFT,
@@ -43,7 +46,7 @@ export const useSendForm = ({
         )
         .test(
           'differentSender',
-          'Sender should be different than current account',
+          'Receiver should be different than current account',
           (value) => !value || !isNFT || value !== address
         )
         .required('Receiver is required'),

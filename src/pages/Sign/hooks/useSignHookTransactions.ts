@@ -1,14 +1,14 @@
-import {
-  extractSessionId,
-  sendBatchTransactionsSdkDapp,
-  sendTransactions
-} from 'helpers/sdkDapp/sdkDapp.helpers';
-import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
+import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import {
   IPlainTransactionObject,
   parseSignUrl,
   validateSignTransactions
 } from 'lib';
+import {
+  extractSessionId,
+  sendBatchTransactionsSdkDapp,
+  sendTransactions
+} from 'lib/sdkDapp';
 
 import { MultiSignTransactionType, TransactionsDataTokensType } from 'types';
 import { SendBatchTransactionsPropsType } from 'types';

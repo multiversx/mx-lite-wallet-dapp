@@ -1,5 +1,4 @@
-import { getAddress } from 'helpers';
-import { Transaction, UserSecretKey, UserSigner } from 'lib';
+import { Transaction, UserSecretKey, UserSigner, getAddress } from 'lib';
 import { setKeystoreLogin } from 'redux/slices/account';
 import { store as reduxStore } from 'redux/store';
 import { IDappProvider } from 'types';

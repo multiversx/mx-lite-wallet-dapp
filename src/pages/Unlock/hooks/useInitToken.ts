@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetLoginInfo, useLoginService } from 'hooks';
+import { useGetLoginInfo, useLoginService } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { setToken } from 'redux/slices';

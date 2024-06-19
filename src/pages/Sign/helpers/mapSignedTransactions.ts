@@ -4,8 +4,7 @@ import {
   TransactionVersion
 } from '@multiversx/sdk-core/out';
 import omit from 'lodash/omit';
-import { ZERO } from 'lib';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
+import { GAS_LIMIT, GAS_PRICE, ZERO } from 'localConstants';
 import { TransactionSignatureDataType } from 'types';
 
 export interface MapSignedTransactionsParamsType {

@@ -1,7 +1,8 @@
 import { FormikHelpers } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useGetAccountInfo, useRedirectPathname } from 'hooks';
+import { useRedirectPathname } from 'hooks';
+import { useGetAccountInfo } from 'lib';
 import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants/misc';
 import { useOnFileLogin } from 'pages/Unlock/hooks';
 import { accountSelector } from 'redux/selectors';

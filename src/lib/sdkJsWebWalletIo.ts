@@ -4,3 +4,4 @@ export { processBase64Fields } from '@multiversx/sdk-js-web-wallet-io/out/helper
 export { replyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';
 export { signTxSchema } from '@multiversx/sdk-js-web-wallet-io/out/url/helpers/sign';
 export { parseSignUrl } from '@multiversx/sdk-js-web-wallet-io/out/hooks/helpers/sign';
+export { getLogoutHookData } from '@multiversx/sdk-js-web-wallet-io/out/hooks/logoutHook/getLogoutHookData';

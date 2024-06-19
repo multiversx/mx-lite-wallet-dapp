@@ -11,7 +11,7 @@ import {
   useGetLastPendingTransactionHash,
   useSignTransactionsCommonData,
   useGetSignTransactionsError
-} from 'hooks';
+} from 'lib';
 
 import { MAX_ALLOWED_TRANSACTIONS_TO_SIGN } from 'localConstants';
 import { signTransactionsCancelMessageSelector } from 'redux/sdkDapp.selectors';

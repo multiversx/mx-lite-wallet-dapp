@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AddressTable } from 'components';
-import { useAddressScreens } from 'hooks';
+import { useAddressScreens } from 'lib';
 import { WALLET_FILE, WALLET_FILE_NAME } from 'localConstants';
 import { setAddressIndex } from 'redux/slices';
 

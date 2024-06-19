@@ -2,14 +2,14 @@ import { MouseEventHandler, useEffect } from 'react';
 import uniq from 'lodash/uniq';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { checkIsValidSender } from 'helpers/sdkDapp/sdkDapp.helpers';
+import { useReplyWithCancelled } from 'hooks';
+import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
 import {
   useGetAccount,
   useGetAccountFromApi,
   useGetLoginInfo,
-  useReplyWithCancelled
-} from 'hooks';
-import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
+  checkIsValidSender
+} from 'lib';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';

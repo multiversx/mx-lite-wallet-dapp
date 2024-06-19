@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { decodeLoginToken } from 'helpers/sdkDapp/sdkDapp.helpers';
+import { decodeLoginToken } from 'lib/sdkDapp';
 import { HooksEnum } from 'localConstants';
 
 export interface HookSliceType {

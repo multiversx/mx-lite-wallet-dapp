@@ -1,8 +1,8 @@
 import {
+  useSignTransactionsCommonData,
   removeAllSignedTransactions,
   removeAllTransactionsToSign
-} from 'services';
-import { useSignTransactionsCommonData } from '../sdkDapp.hooks';
+} from 'lib';
 
 export const useAbortAndRemoveAllTxs = () => {
   const { onAbort, transactionsToSign } = useSignTransactionsCommonData();

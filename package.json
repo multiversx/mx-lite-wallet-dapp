@@ -36,18 +36,19 @@
     "lint": "eslint --fix --ext js,ts,tsx src",
     "run-cypress": "npx cypress run",
     "start": "tsc && npm run set-storage-persist && vite dev",
-    "start:devnet": "tsc && yarn run copy:devnet-config && npm run start",
-    "start:testnet": "tsc && yarn run copy:testnet-config && npm run start",
-    "start:mainnet": "tsc && yarn run copy:mainnet-config && npm run start",
+    "start:devnet": "tsc && npm run copy:devnet-config && npm run start",
+    "start:testnet": "tsc && npm run copy:testnet-config && npm run start",
+    "start:mainnet": "tsc && npm run copy:mainnet-config && npm run start",
     "build": "tsc && npm run set-storage-persist && vite build",
-    "build:devnet": "yarn run copy:devnet-config && npm run build",
-    "build:testnet": "yarn run copy:testnet-config & npm run build",
-    "build:mainnet": "yarn run copy:mainnet-config & npm run build",
+    "build:devnet": "npm run copy:devnet-config && npm run build",
+    "build:devnet-msw": "npm run copy:devnet-config & VITE_APP_MSW=true npm run build",
+    "build:testnet": "npm run copy:testnet-config & npm run build",
+    "build:mainnet": "npm run copy:mainnet-config & npm run build",
     "copy:devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
-    "test:pptr-headless": "npx @puppeteer/browsers install chrome-headless-shell@125.0.6420.0 && DEV_ENV=test jest --config=jest-puppeteer.config.js",
-    "test:pptr": "DEV_ENV=test JEST_PPTR_RETRY_TIMES=0 HEADLESS=false jest --config=jest-puppeteer.config.js",
+    "test:pptr-headless": "npx @puppeteer/browsers install chrome-headless-shell@125.0.6420.0 && jest --config=jest-puppeteer.config.js",
+    "test:pptr": "JEST_PPTR_RETRY_TIMES=0 HEADLESS=false jest --config=jest-puppeteer.config.js",
     "test": "jest"
   },
   "browserslist": [
@@ -103,6 +104,7 @@
     "jest-resolve": "29.7.0",
     "mochawesome-merge": "4.3.0",
     "mochawesome-report-generator": "6.2.0",
+    "msw": "^2.3.1",
     "postcss": "8.4.30",
     "prettier": "3.0.3",
     "puppeteer": "22.11.1",
@@ -116,5 +118,8 @@
   },
   "resolutions": {
     "**/*/nth-check": "2.0.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

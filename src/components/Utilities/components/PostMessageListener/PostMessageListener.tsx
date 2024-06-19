@@ -2,13 +2,17 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
-  useGetLoginInfo,
   useLogout,
   useReplyToDapp,
   useReplyWithCancelled,
   useSignTxSchema
 } from 'hooks';
-import { getLoginHookData, getSignHookData, Transaction } from 'lib';
+import {
+  getLoginHookData,
+  getSignHookData,
+  Transaction,
+  useGetLoginInfo
+} from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';

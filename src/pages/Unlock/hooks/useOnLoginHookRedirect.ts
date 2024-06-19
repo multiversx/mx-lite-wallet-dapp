@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { decodeNativeAuthToken } from 'helpers';
-import { useGetAccount, useGetLoginInfo, useReplyToDapp } from 'hooks';
+import { useReplyToDapp } from 'hooks';
+import { useGetAccount, useGetLoginInfo, decodeNativeAuthToken } from 'lib';
 import { accountSelector, hookSelector } from 'redux/selectors';
 import { CrossWindowProviderResponseEnums } from 'types';
 

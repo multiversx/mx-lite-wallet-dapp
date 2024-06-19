@@ -27,6 +27,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Setup yarn
+        run: npm install -g yarn
       - name: Get node_modules cache
         uses: actions/cache@v3.2.2
         id: node_modules
@@ -44,7 +46,7 @@ jobs:
           timeout_minutes: 120
           retry_on: error
           max_attempts: 5
-          command: npm install --legacy-peer-deps
+          command: yarn install
       - name: Get build cache
         uses: actions/cache@v3.2.2
         id: build
@@ -52,8 +54,8 @@ jobs:
           path: |
             **/build
           key: ${{ runner.os }}-build-${{ github.sha }}
-      - name: Build devnet
+      - name: Build devnet MSW
         if: steps.build.outputs.cache-hit != 'true'
-        run: npm run build:devnet
+        run: yarn build:devnet-msw
       - name: Run Puppeteer tests
-        run: npm run test:pptr-headless
+        run: yarn test:pptr-headless

@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  useGetAccountInfo,
-  useGetSignedTransactions,
-  useReplyWithCancelled
-} from 'hooks';
+import { useReplyWithCancelled } from 'hooks';
 import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
+import { useGetAccountInfo, useGetSignedTransactions } from 'lib';
 
 import { TransactionBatchStatusesEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
@@ -18,7 +15,7 @@ import {
   ValidateAndSignTxsReturnType,
   useSignHookTransactions
 } from './useSignHookTransactions';
-import { mapSignedTransactions } from '../helpers/mapSignedTransactions';
+import { mapSignedTransactions } from '../helpers';
 
 /*
   This is a hook that validates and signs transactions as a two-step process
