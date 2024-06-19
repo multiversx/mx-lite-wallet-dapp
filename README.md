@@ -112,6 +112,34 @@ flowchart TB;
 	/logout -- 4. is redirected --> /unlock
 
 ```
+#### Hook flow
+The web-wallet allows the user to connect a dApp and sign transactions. The dApp can make several requests to the wallet, called hooks:
+- login
+- logout
+- signTransaction
+
+These requests can be in two ways:
+1. The dApp makes a URL redirect to the wallet in the same tab. In this case the web-wallet will redirect back to the dApp after the action is completed.
+2. The dApp opens the web wallet in a new tab as a child tab. In this case the web-wallet will send a post message to the parent tab with the result of the action.
+
+The same principles apply to all hooks:
+- The dApp sends a request to the wallet
+- The wallet validates the request
+- If the request is invalid, nothing happens
+- If the request is valid, the wallet leads the user to the appropriate page
+- The user performs the action
+- The wallet sends the result back to the dApp
+
+Below is an example of the login hook flow:
+
+```mermaid
+flowchart TB;
+    id1{Start} -- 1. dApp redirects to wallet --> /hook/login?data&callbackUrl -- 2. hook component gets mounted --> id2{data validation} -- 3. data is saved in redux store --> HookOutcome -- 4. redirect --> /unlock -- 5. response --> https://callbackUrl?result
+	id2{data validation} -- 3. data is invalid --> noRedirect
+```
+
+With the PostMessageListener, the HookOutcomeComponent is skipped and the user is redirected to appropriate page.
+
 
 
 ### Installation and running
