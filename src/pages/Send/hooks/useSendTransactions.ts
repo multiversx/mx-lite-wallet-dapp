@@ -1,20 +1,19 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import {
   extractSessionId,
   removeTransactionsToSign,
   sendBatchTransactionsSdkDapp,
-  sendTransactions as sendTransactionsSdkDapp
-} from 'helpers';
-import {
+  sendTransactions as sendTransactionsSdkDapp,
   useGetAccountInfo,
   useGetAccountProvider,
   useGetActiveTransactionsStatus,
-  useGetPendingTransactions
-} from 'hooks';
-import { Transaction } from 'lib';
+  useGetPendingTransactions,
+  Transaction
+} from 'lib';
 
-import { TransactionBatchStatusesEnum } from 'localConstants/sdkDapp.constants';
+import { TransactionBatchStatusesEnum } from 'localConstants/sdkDapp';
 import {
   LoginMethodsEnum,
   SendBatchTransactionsPropsType,

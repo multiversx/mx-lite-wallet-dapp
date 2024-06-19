@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getLogoutHookData } from '@multiversx/sdk-js-web-wallet-io';
-import { replyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from 'hooks';
+import { getLogoutHookData, replyToDapp } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';

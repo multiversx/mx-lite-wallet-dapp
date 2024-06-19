@@ -1,5 +1,4 @@
-import { newTransaction } from 'helpers';
-import { Transaction } from 'lib';
+import { Transaction, newTransaction } from 'lib';
 import {
   CreateNewTransactionsFromRawParamsType,
   prepareRawTransactions

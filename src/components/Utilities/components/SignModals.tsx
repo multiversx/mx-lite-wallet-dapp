@@ -7,8 +7,8 @@ import {
   SignWithExtensionModal,
   SignWithLedgerModal
 } from 'components';
-import { useGetActiveTransactionsStatus, useReplyWithCancelled } from 'hooks';
-
+import { useReplyWithCancelled } from 'hooks';
+import { useGetActiveTransactionsStatus } from 'lib';
 import { HooksEnum } from 'localConstants/routes/routeNames.enums';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';

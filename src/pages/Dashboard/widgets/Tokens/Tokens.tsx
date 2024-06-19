@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { OutputContainer } from 'components';
-import { useGetAccountInfo } from 'hooks';
+import { useGetAccountInfo } from 'lib';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { TokenType } from 'types';
 import { TokenRow } from './components';

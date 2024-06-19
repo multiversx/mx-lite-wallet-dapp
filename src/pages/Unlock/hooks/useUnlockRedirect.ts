@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useGetIsLoggedIn, useRedirectPathname } from 'hooks';
+import { useRedirectPathname } from 'hooks';
+import { useGetIsLoggedIn } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { useOnLoginHookRedirect } from './useOnLoginHookRedirect';

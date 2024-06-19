@@ -1,7 +1,7 @@
 import QRCode from 'react-qr-code';
 import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
-import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
+import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import {
   explorerAddressSelector,

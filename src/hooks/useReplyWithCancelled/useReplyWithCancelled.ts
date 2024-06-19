@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useGetAccount } from 'hooks';
+import { useGetAccount } from 'lib';
 import { resetHook } from 'redux/slices';
 import { CrossWindowProviderResponseEnums } from 'types';
 import { useAbortAndRemoveAllTxs } from '../useAbortAndRemoveAllTx';

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
+import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { TokenType } from 'types';
-import { useGetAccountInfo, useGetNetworkConfig } from '../sdkDapp.hooks';
 
 export const useGetTokensWithEgld = () => {
   const { websocketEvent, address, account } = useGetAccountInfo();

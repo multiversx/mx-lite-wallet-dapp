@@ -1,12 +1,11 @@
 import { getBaseURL } from 'helpers';
-import { PartialNftType } from 'lib';
 import {
   ACCOUNTS_ENDPOINT,
   API_CACHE_DURATION_SECONDS,
   MAX_API_SIZE,
   NFTS_ENDPOINT
 } from 'localConstants';
-import { GetNftsType } from 'types';
+import { GetNftsType, PartialNftType } from 'types';
 import { RootApi } from '../rootApi';
 
 const nftsEndpoints = RootApi.injectEndpoints({

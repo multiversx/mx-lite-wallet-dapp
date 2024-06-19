@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
 import { TransactionRow } from 'components/sdkDapp.components';
-import { getInterpretedTransaction } from 'helpers';
-import { useGetAccountInfo } from 'hooks';
-import { useGetNetworkConfig } from 'hooks';
+import {
+  getInterpretedTransaction,
+  useGetNetworkConfig,
+  useGetAccountInfo
+} from 'lib';
 import { useLazyGetTransactionsQuery } from 'redux/endpoints';
 import { ServerTransactionType } from 'types';
 

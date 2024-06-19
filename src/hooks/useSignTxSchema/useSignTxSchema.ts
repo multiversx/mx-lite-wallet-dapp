@@ -1,5 +1,4 @@
-import { signTxSchema } from 'lib';
-import { useGetNetworkConfig } from '../sdkDapp.hooks';
+import { signTxSchema, useGetNetworkConfig } from 'lib';
 
 export function useSignTxSchema() {
   const { chainID } = useGetNetworkConfig();

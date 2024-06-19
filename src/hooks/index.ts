@@ -1,5 +1,4 @@
 export * from './interface';
-export * from './sdkDapp.hooks';
 export * from './tokens';
 export * from './useIsWebProvider';
 export * from './useLogout';

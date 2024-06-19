@@ -1,12 +1,15 @@
-import { getEgldLabel } from '@multiversx/sdk-dapp/utils';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
-import { addressIsValid } from 'helpers/sdkDapp/sdkDapp.helpers';
-import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
-import { PartialNftType, prepareTransaction } from 'lib';
+import {
+  prepareTransaction,
+  getEgldLabel,
+  useGetAccountInfo,
+  useGetNetworkConfig
+} from 'lib';
+import { addressIsValid } from 'lib/sdkDapp';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { TokenType } from 'types';
+import { TokenType, PartialNftType } from 'types';
 import { useSendTransactions } from './useSendTransactions';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';

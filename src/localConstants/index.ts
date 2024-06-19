@@ -3,4 +3,5 @@ export * from './dataTestIds.enum';
 export * from './misc';
 export * from './nfts';
 export * from './routes';
-export * from './sdkDapp.constants';
+export * from './sdkDapp';
+export * from './sdkDappForm';
