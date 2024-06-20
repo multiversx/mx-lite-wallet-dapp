@@ -142,6 +142,7 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                       id='pem'
                       name='pem'
                       type='file'
+                      data-testid={DataTestIdsEnum.walletFile}
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
@@ -151,12 +152,9 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                       }}
                       required
                     />
-                    <label
-                      htmlFor='pem'
-                      className='text-gray-400 cursor-pointer text-sm'
-                    >
+                    <label htmlFor='pem' className='text-gray-400 text-sm'>
                       {fileName ? (
-                        <div className='flex flex-row items-center gap-1'>
+                        <div className='flex flex-row items-center cursor-pointer gap-1'>
                           <span>{fileName}</span>
                           <FontAwesomeIcon icon={faPencilAlt} />
                         </div>
@@ -165,7 +163,9 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                           {errors[PEM_FIELD] as string}
                         </div>
                       ) : (
-                        'Select a file'
+                        <span className='cursor-pointer'>
+                          Click here to select a file
+                        </span>
                       )}
                     </label>
                   </div>

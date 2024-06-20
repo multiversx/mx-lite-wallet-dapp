@@ -216,6 +216,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                         className='hidden'
                         id={WALLET_FILE}
                         name={WALLET_FILE}
+                        data-testid={DataTestIdsEnum.walletFile}
                         type='file'
                         onChange={(e) => {
                           const file = e.target.files?.[0];
@@ -228,10 +229,10 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                       />
                       <label
                         htmlFor={WALLET_FILE}
-                        className='text-gray-400 cursor-pointer text-sm'
+                        className='text-gray-400 text-sm'
                       >
                         {fileName ? (
-                          <div className='flex flex-row items-center gap-1'>
+                          <div className='flex flex-row items-center cursor-pointer gap-1'>
                             <span>{fileName}</span>
                             <FontAwesomeIcon icon={faPencilAlt} />
                           </div>
@@ -240,7 +241,9 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                             {errors[WALLET_FILE] as string}
                           </div>
                         ) : (
-                          'Click here to select a file'
+                          <span className='cursor-pointer'>
+                            Click here to select a file
+                          </span>
                         )}
                       </label>
                     </div>
