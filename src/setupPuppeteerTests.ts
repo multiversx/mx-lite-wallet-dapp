@@ -14,7 +14,3 @@ jest.retryTimes(
     ? Number(process.env.JEST_PPTR_RETRY_TIMES)
     : 5
 );
-
-beforeAll(async () => {
-  await page.setCacheEnabled(false);
-});
