@@ -61,3 +61,4 @@ export {
   setTransactionsToSignedState
 } from '@multiversx/sdk-dapp/services/transactions/updateSignedTransactions';
 export { sendBatchTransactions } from '@multiversx/sdk-dapp/services/transactions/sendBatchTransactions';
+export { CANCELLED } from '@multiversx/sdk-dapp/constants/errorsMessages';

@@ -2,7 +2,7 @@ export enum HooksEnum {
   login = 'login',
   logout = 'logout',
   sign = 'sign',
-  signMessage = 'signMessage'
+  signMessage = 'sign-message'
 }
 
 export enum RouteNamesEnum {

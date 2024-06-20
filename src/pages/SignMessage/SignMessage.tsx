@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { MouseEvent } from 'react';
 import {
   faFileSignature,
@@ -7,20 +7,37 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { MxLink } from 'components';
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
-import { useSignMessage } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
+import { useReplyWithCancelled } from 'hooks';
+import { CANCELLED, parseQueryParams, useSignMessage } from 'lib';
+import { DataTestIdsEnum, HooksEnum } from 'localConstants';
+import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { SignedMessageStatusesEnum } from 'types';
 import { SignFailure, SignSuccess } from './components';
+import { useSignMessageCompleted } from './hooks';
 
 export const SignMessage = () => {
-  const { sessionId, signMessage, onAbort } = useSignMessage();
+  const { sessionId, signMessage, onAbort, onCancel } = useSignMessage();
   const messageSession = useGetSignMessageSession(sessionId);
+  const { type: hook, callbackUrl, hookUrl } = useSelector(hookSelector);
+  const navigate = useNavigate();
+  const replyWithCancelled = useReplyWithCancelled({
+    caller: 'SignModals'
+  });
+  const signMessageCompleted = useSignMessageCompleted();
 
-  const [message, setMessage] = useState('');
+  const isSignMessageHook = hook === HooksEnum.signMessage;
+
+  const [message, setMessage] = useState<string>(
+    isSignMessageHook ? String(parseQueryParams(hookUrl).message) : ''
+  );
+
+  console.log('\x1b[42m%s\x1b[0m', message);
 
   const handleSubmit = (e: MouseEvent) => {
     e.preventDefault();
@@ -41,10 +58,35 @@ export const SignMessage = () => {
     setMessage('');
   };
 
-  const handleClear = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onAbort();
+  const isSuccess =
+    messageSession?.message &&
+    messageSession?.status === SignedMessageStatusesEnum.signed;
+
+  useEffect(() => {
+    if (isSuccess) {
+      signMessageCompleted({ isSuccess, signedMessageInfo: messageSession });
+    }
+
+    return () => {
+      onAbort();
+      setMessage('');
+    };
+  }, [isSuccess]);
+
+  const handleSignMessageCloseFlow = () => {
+    if (!isSignMessageHook) {
+      onAbort();
+      navigate(routeNames.dashboard);
+      return;
+    }
+
+    onCancel({
+      errorMessage: CANCELLED,
+      callbackRoute: callbackUrl ?? window.location.href
+    });
+
+    replyWithCancelled();
+    navigate(routeNames.dashboard);
   };
 
   const isError = messageSession
@@ -52,10 +94,6 @@ export const SignMessage = () => {
         (SignedMessageStatusesEnum.cancelled, SignedMessageStatusesEnum.failed)
       ].includes(messageSession.status) && messageSession?.message
     : false;
-
-  const isSuccess =
-    messageSession?.message &&
-    messageSession?.status === SignedMessageStatusesEnum.signed;
 
   return (
     <div className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'>
@@ -65,6 +103,8 @@ export const SignMessage = () => {
           {!isSuccess && !isError && (
             <textarea
               placeholder='Write message here'
+              disabled={isSignMessageHook}
+              value={message}
               className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
               onChange={(event) => setMessage(event.currentTarget.value)}
             />
@@ -81,7 +121,7 @@ export const SignMessage = () => {
             data-testid={DataTestIdsEnum.cancelSignMessageBtn}
             className='mt-4 mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
             id='closeButton'
-            onClick={handleClear}
+            onClick={handleSignMessageCloseFlow}
           >
             <FontAwesomeIcon
               icon={isSuccess ? faBroom : faArrowsRotate}
