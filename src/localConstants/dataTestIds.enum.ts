@@ -19,6 +19,8 @@ export enum DataTestIdsEnum {
   receiverError = 'receiverError',
   receiverInput = 'receiverInput',
   sendBtn = 'sendBtn',
+  signMessageBtn = 'signMessageBtn',
+  cancelSignMessageBtn = 'cancelSignMessageBtn',
   sendEsdtTypeInput = 'sendEsdtTypeInput',
   sendNFtTypeInput = 'sendNFtTypeInput',
   submitButton = 'submitButton',
