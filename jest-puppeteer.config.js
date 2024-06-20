@@ -67,8 +67,7 @@ const config = {
   server: {
     command: 'vite preview'
   },
-  browserContext: 'incognito',
-  browserPerWorker: isHeadless
+  browserContext: 'incognito'
 };
 
 if (!isHeadless) {
