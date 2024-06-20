@@ -56,13 +56,8 @@ export const Sign = () => {
       return;
     }
 
-    // Extension has '/' as wallet origin and we need to navigate to dashboard
-    // in case an error occurs in the hook validation
-
     const redirectPathname = routeNames.dashboard;
-
     const invalidHook = !hookUrl || hasErrors;
-
     const isValidSender = checkIsValidSender(senderAccount, [address]);
 
     if (invalidHook) {

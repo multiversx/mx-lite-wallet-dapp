@@ -15,6 +15,7 @@ import {
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';
+import { DataTestIdsEnum } from 'localConstants';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -35,7 +36,7 @@ export const Unlock = () => {
       <div className='flex justify-center items-center'>
         <div
           className='flex flex-col p-6 items-center justify-center gap-4 rounded-xl bg-[#f6f8fa]'
-          data-testid='unlockPage'
+          data-testid={DataTestIdsEnum.unlockPage}
         >
           <div className='flex flex-col items-center gap-1'>
             <h2 className='text-2xl'>Login</h2>
