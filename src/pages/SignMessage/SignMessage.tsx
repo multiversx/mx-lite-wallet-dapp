@@ -56,46 +56,48 @@ export const SignMessage = () => {
     messageSession?.status === SignedMessageStatusesEnum.signed;
 
   return (
-    <div className='flex flex-col gap-6'>
-      <div className='flex gap-2 items-start'>
-        <Button
-          data-testid='signMsgBtn'
-          onClick={handleSubmit}
-          disabled={!message}
-        >
-          <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
-          Sign
-        </Button>
-
-        {(isSuccess || isError) && (
+    <div className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'>
+      <div className='flex flex-col gap-6'>
+        <div className='flex gap-2 items-start'>
           <Button
-            data-testid='closeTransactionSuccessBtn'
-            id='closeButton'
-            onClick={handleClear}
+            data-testid='signMsgBtn'
+            onClick={handleSubmit}
+            disabled={!message}
           >
-            <FontAwesomeIcon
-              icon={isSuccess ? faBroom : faArrowsRotate}
-              className='mr-1'
-            />
-            {isError ? 'Try again' : 'Clear'}
+            <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
+            Sign
           </Button>
-        )}
+
+          {(isSuccess || isError) && (
+            <Button
+              data-testid='closeTransactionSuccessBtn'
+              id='closeButton'
+              onClick={handleClear}
+            >
+              <FontAwesomeIcon
+                icon={isSuccess ? faBroom : faArrowsRotate}
+                className='mr-1'
+              />
+              {isError ? 'Try again' : 'Clear'}
+            </Button>
+          )}
+        </div>
+        <OutputContainer>
+          {!isSuccess && !isError && (
+            <textarea
+              placeholder='Write message here'
+              className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
+              onChange={(event) => setMessage(event.currentTarget.value)}
+            />
+          )}
+
+          {isSuccess && (
+            <SignSuccess messageToSign={messageSession?.message ?? ''} />
+          )}
+
+          {isError && <SignFailure />}
+        </OutputContainer>
       </div>
-      <OutputContainer>
-        {!isSuccess && !isError && (
-          <textarea
-            placeholder='Write message here'
-            className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
-            onChange={(event) => setMessage(event.currentTarget.value)}
-          />
-        )}
-
-        {isSuccess && (
-          <SignSuccess messageToSign={messageSession?.message ?? ''} />
-        )}
-
-        {isError && <SignFailure />}
-      </OutputContainer>
     </div>
   );
 };
