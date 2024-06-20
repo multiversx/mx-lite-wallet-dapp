@@ -16,7 +16,7 @@ describe('Sign ping tests', () => {
       }
     );
 
-    await loginWithKeystore();
+    await loginWithKeystore({ skipLoggedInCheck: true });
     await page.waitForSelector(getByDataTestId(DataTestIdsEnum.dappModal));
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/sign`);
 

@@ -15,7 +15,7 @@ describe('Sign hook with guardian of sender test', () => {
       }
     );
 
-    await loginWithKeystore();
+    await loginWithKeystore({ skipLoggedInCheck: true });
     await page.waitForSelector(getByDataTestId(DataTestIdsEnum.dappModal));
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/sign`);
 
