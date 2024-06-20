@@ -351,7 +351,7 @@ export const Send = () => {
         <div className='mt-4 flex flex-col align-middle'>
           <Button
             className='mt-4 mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
-            dataTestId={DataTestIdsEnum.sendBtn}
+            data-testid={DataTestIdsEnum.sendBtn}
             type='submit'
           >
             Send

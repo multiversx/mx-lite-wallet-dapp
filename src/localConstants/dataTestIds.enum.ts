@@ -10,6 +10,7 @@ export enum DataTestIdsEnum {
   confirmData = 'confirmData',
   confirmFee = 'confirmFee',
   confirmReceiver = 'confirmReceiver',
+  dappModal = 'dappModal',
   dataInput = 'dataInput',
   gasLimitError = 'gasLimitError',
   gasLimitInput = 'gasLimitInput',
@@ -23,9 +24,12 @@ export enum DataTestIdsEnum {
   cancelSignMessageBtn = 'cancelSignMessageBtn',
   sendEsdtTypeInput = 'sendEsdtTypeInput',
   sendNFtTypeInput = 'sendNFtTypeInput',
+  signBtn = 'signBtn',
+  signStepTitle = 'signStepTitle',
   submitButton = 'submitButton',
   tokenError = 'tokenError',
   transactionToastTitle = 'transactionToastTitle',
+  unlockPage = 'unlockPage',
   userAddress = 'userAddress',
   walletFile = 'walletFile'
 }

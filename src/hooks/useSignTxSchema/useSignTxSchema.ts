@@ -1,12 +1,14 @@
 import { signTxSchema, useGetNetworkConfig } from 'lib';
 
 export function useSignTxSchema() {
-  const { chainID } = useGetNetworkConfig();
-  const isMainnet = chainID === '1';
+  const {
+    network: { chainId }
+  } = useGetNetworkConfig();
+  const isMainnet = chainId === '1';
 
   return signTxSchema({
     isMainnet,
-    chainId: chainID,
+    chainId,
     hookWhitelist: [],
     isSignHook: true
   });

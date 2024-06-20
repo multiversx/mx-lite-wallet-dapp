@@ -32,7 +32,6 @@ const AppContent = () => {
         walletConnectV2ProjectId
       }}
       dappConfig={{
-        shouldUseWebViewProvider: true,
         logoutRoute: routeNames.unlock
       }}
       customComponents={{
