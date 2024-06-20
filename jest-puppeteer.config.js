@@ -50,8 +50,8 @@ const config = {
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/src'],
   bail: 1,
-  // workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
-  // maxWorkers: '50%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
+  workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
+  maxWorkers: '65%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
   launch: {
     headless: isHeadless,
     product: 'chrome',
@@ -67,9 +67,7 @@ const config = {
   server: {
     command: 'vite preview'
   },
-  browserContext: 'incognito',
-  browserPerWorker: true,
-  runBeforeUnload: true
+  browserContext: 'incognito'
 };
 
 if (!isHeadless) {

@@ -20,6 +20,8 @@ export enum DataTestIdsEnum {
   receiverError = 'receiverError',
   receiverInput = 'receiverInput',
   sendBtn = 'sendBtn',
+  signMessageBtn = 'signMessageBtn',
+  cancelSignMessageBtn = 'cancelSignMessageBtn',
   sendEsdtTypeInput = 'sendEsdtTypeInput',
   sendNFtTypeInput = 'sendNFtTypeInput',
   signBtn = 'signBtn',
@@ -29,5 +31,6 @@ export enum DataTestIdsEnum {
   transactionToastTitle = 'transactionToastTitle',
   unlockPage = 'unlockPage',
   userAddress = 'userAddress',
-  walletFile = 'walletFile'
+  walletFile = 'walletFile',
+  signMessagePage = 'signMessagePage'
 }

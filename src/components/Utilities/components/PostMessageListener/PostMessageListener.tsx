@@ -10,6 +10,7 @@ import {
 import {
   getLoginHookData,
   getSignHookData,
+  getSignMessageHookData,
   Transaction,
   useGetLoginInfo
 } from 'lib';
@@ -127,6 +128,31 @@ export const PostMessageListener = () => {
         );
 
         navigate(routeNames.sign);
+        break;
+      }
+
+      case CrossWindowProviderRequestEnums.signMessageRequest: {
+        const payloadString = buildWalletQueryString({
+          params: { ...payload, callbackUrl }
+        });
+
+        const serializedPayload = `?${payloadString}`;
+
+        const data = getSignMessageHookData(serializedPayload);
+
+        if (data == null) {
+          return;
+        }
+
+        dispatch(
+          setHook({
+            type: HooksEnum.signMessage,
+            hookUrl: data.hookUrl,
+            callbackUrl
+          })
+        );
+
+        navigate(routeNames.signMessage);
         break;
       }
 

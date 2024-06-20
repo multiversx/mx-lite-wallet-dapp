@@ -1,7 +1,8 @@
 export enum HooksEnum {
   login = 'login',
   logout = 'logout',
-  sign = 'sign'
+  sign = 'sign',
+  signMessage = 'sign-message'
 }
 
 export enum RouteNamesEnum {
@@ -11,11 +12,13 @@ export enum RouteNamesEnum {
   disclaimer = '/disclaimer',
   send = '/send',
   logout = '/logout',
-  sign = '/sign'
+  sign = '/sign',
+  signMessage = '/sign-message'
 }
 
 export enum HooksPageEnum {
-  signHook = `/hook/${HooksEnum.sign}`,
-  loginHook = `/hook/${HooksEnum.login}`,
-  logoutHook = `/hook/${HooksEnum.logout}`
+  sign = `/hook/${HooksEnum.sign}`,
+  login = `/hook/${HooksEnum.login}`,
+  logout = `/hook/${HooksEnum.logout}`,
+  signMessage = `/hook/${HooksEnum.signMessage}`
 }

@@ -6,6 +6,7 @@ import {
   XaliasLoginButton
 } from 'components/sdkDapp.components';
 import { nativeAuth } from 'config';
+import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import {
   LedgerLoginButtonPropsType,
@@ -15,7 +16,6 @@ import {
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';
-import { DataTestIdsEnum } from 'localConstants';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType

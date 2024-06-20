@@ -1,7 +1,7 @@
 import { WALLET_SOURCE_ORIGIN, keystoreAccount, pemAccount } from '__mocks__';
-import { pingSC } from './data/pingSC';
-import { expectElementToContainText } from 'utils/testUtils/puppeteer';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
+import { expectElementToContainText } from 'utils/testUtils/puppeteer';
+import { pingSC } from './data/pingSC';
 
 describe('Invalid sign hook tests', () => {
   it('should navigate to /unlock page without signing when callbackUrl is missing', async () => {
