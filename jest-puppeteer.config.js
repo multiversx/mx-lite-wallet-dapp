@@ -62,7 +62,7 @@ const config = {
       '--ignore-certificate-errors' // Required for HTTPS to work
     ],
     executablePath: getChromeExecutablePath(), // optional locally, required on Git Action
-    devtools: false
+    devtools: true
   },
   server: {
     command: 'vite preview'

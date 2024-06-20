@@ -68,6 +68,10 @@
   padding: 0 !important;
 }
 
+.dapp-core-component__main__text-muted {
+  @apply text-gray-400 !important;
+}
+
 .dapp-core-component__confirmReceiverStyles__receiverLabel,
 .dapp-core-component__confirmAmountLabelStyles__confirmAmountLabel,
 .dapp-core-component__confirmFeeStyles__confirmFeeLabel,
