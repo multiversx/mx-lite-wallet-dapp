@@ -18,9 +18,9 @@ export const provider: IDappProvider = {
     return Boolean(address);
   },
   login: notInitializedError('login'),
-  logout: () => {
+  logout: async () => {
     // eslint-disable-next-line
-    const storeObject = require('redux/store');
+    const storeObject = await import('redux/store');
     const store: typeof reduxStore = storeObject.store;
     store.dispatch(
       setKeystoreLogin({
