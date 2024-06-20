@@ -8,18 +8,18 @@ import {
   keystoreWalletNfts,
   pemAccount,
   pemWalletTokens,
-  pemWalletNfts
-  // dappConfig,
-  // networkConfig
+  pemWalletNfts,
+  dappConfig,
+  networkConfig
 } from './data';
 import { mockResponse } from './serverUtils';
 
 export const handlers = [
-  // http.get(`${testNetwork.apiAddress}/dapp/config`, mockResponse(dappConfig)),
-  // http.get(
-  //   `${testNetwork.apiAddress}/network/config`,
-  //   mockResponse(networkConfig)
-  // ),
+  http.get(`${testNetwork.apiAddress}/dapp/config`, mockResponse(dappConfig)),
+  http.get(
+    `${testNetwork.apiAddress}/network/config`,
+    mockResponse(networkConfig)
+  ),
   http.get(
     `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}`,
     mockResponse(keystoreAccount)
