@@ -105,7 +105,7 @@ export const SignMessage = () => {
               placeholder='Write message here'
               disabled={isSignMessageHook}
               value={message}
-              className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
+              className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-600'
               onChange={(event) => setMessage(event.currentTarget.value)}
             />
           )}
@@ -120,7 +120,7 @@ export const SignMessage = () => {
           {isSuccess || isError ? (
             <Button
               data-testid={DataTestIdsEnum.cancelSignMessageBtn}
-              className='mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              className='mx-auto rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               id='closeButton'
               onClick={handleSignMessageCloseFlow}
             >
@@ -132,7 +132,7 @@ export const SignMessage = () => {
             </Button>
           ) : (
             <Button
-              className='mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              className='mx-auto rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.signMessageBtn}
               onClick={handleSubmit}
             >
