@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
 import type { MouseEvent } from 'react';
-import {
-  faFileSignature,
-  faBroom,
-  faArrowsRotate
-} from '@fortawesome/free-solid-svg-icons';
+import { faBroom, faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { MxLink } from 'components';
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
 import { useReplyWithCancelled } from 'hooks';
@@ -37,8 +32,6 @@ export const SignMessage = () => {
     isSignMessageHook ? String(parseQueryParams(hookUrl).message) : ''
   );
 
-  console.log('\x1b[42m%s\x1b[0m', message);
-
   const handleSubmit = (e: MouseEvent) => {
     e.preventDefault();
 
@@ -52,10 +45,8 @@ export const SignMessage = () => {
 
     signMessage({
       message,
-      callbackRoute: routeNames.signMessage
+      callbackRoute: window.location.href
     });
-
-    setMessage('');
   };
 
   const isSuccess =
@@ -63,15 +54,19 @@ export const SignMessage = () => {
     messageSession?.status === SignedMessageStatusesEnum.signed;
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && isSignMessageHook) {
       signMessageCompleted({ isSuccess, signedMessageInfo: messageSession });
     }
+  }, [isSuccess]);
 
-    return () => {
+  // Clear state on destroy
+  useEffect(
+    () => () => {
       onAbort();
       setMessage('');
-    };
-  }, [isSuccess]);
+    },
+    []
+  );
 
   const handleSignMessageCloseFlow = () => {
     if (!isSignMessageHook) {
@@ -96,9 +91,14 @@ export const SignMessage = () => {
     : false;
 
   return (
-    <div className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'>
+    <div
+      className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'
+      data-testid={DataTestIdsEnum.signMessagePage}
+    >
       <div className='flex flex-col gap-6'>
-        <div className='flex gap-2 items-start'></div>
+        <h2 className='text-2xl font-bold p-2 mb-2 text-center'>
+          Sign Message
+        </h2>
         <OutputContainer>
           {!isSuccess && !isError && (
             <textarea
@@ -116,37 +116,39 @@ export const SignMessage = () => {
 
           {isError && <SignFailure />}
         </OutputContainer>
-        {isSuccess || isError ? (
+        <div className='my-2 flex flex-col gap-4'>
+          {isSuccess || isError ? (
+            <Button
+              data-testid={DataTestIdsEnum.cancelSignMessageBtn}
+              className='mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              id='closeButton'
+              onClick={handleSignMessageCloseFlow}
+            >
+              <FontAwesomeIcon
+                icon={isSuccess ? faBroom : faArrowsRotate}
+                className='mr-1'
+              />
+              {isError ? 'Try again' : 'Clear'}
+            </Button>
+          ) : (
+            <Button
+              className='mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              data-testid={DataTestIdsEnum.signMessageBtn}
+              onClick={handleSubmit}
+            >
+              Sign Message
+            </Button>
+          )}
+
           <Button
             data-testid={DataTestIdsEnum.cancelSignMessageBtn}
-            className='mt-4 mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+            className='mx-auto text-blue-600 text-sm'
             id='closeButton'
             onClick={handleSignMessageCloseFlow}
           >
-            <FontAwesomeIcon
-              icon={isSuccess ? faBroom : faArrowsRotate}
-              className='mr-1'
-            />
-            {isError ? 'Try again' : 'Clear'}
+            Cancel
           </Button>
-        ) : (
-          <Button
-            className='mt-4 mx-auto rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
-            dataTestId={DataTestIdsEnum.signMessageBtn}
-            onClick={handleSubmit}
-          >
-            <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
-            Sign Message
-          </Button>
-        )}
-
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
-          data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
-        >
-          Cancel
-        </MxLink>
+        </div>
       </div>
     </div>
   );
