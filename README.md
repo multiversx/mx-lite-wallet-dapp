@@ -1,6 +1,13 @@
 
 # MultiversX Lite Wallet DApp
 
+[![Project Status: Not Production Ready](https://img.shields.io/badge/status-not--production--ready-red)](https://github.com/your-repo)
+
+🚧 **Notice: This project is not production-ready.** 🚧
+
+> This repository is currently under development and not recommended for production use. Expect frequent changes and potential instability. Contributions and feedback are welcome, but please use this code at your own risk in a non-production environment.
+
+
 The **MultiversX Lite Wallet DApp**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and transaction signing.
 See [Lite Wallet dApp](https://lite-wallet-dapp.multiversx.com/) for live demo.
