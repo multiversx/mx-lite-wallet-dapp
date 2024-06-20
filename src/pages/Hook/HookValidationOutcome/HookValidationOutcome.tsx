@@ -47,7 +47,9 @@ export const HookValidationOutcome = ({
 
   if (isInvalid) {
     // login hook is invalid, meaning user cannot see dashboard
-    if ([HooksEnum.login, HooksEnum.sign].includes(hook)) {
+    if (
+      [HooksEnum.login, HooksEnum.sign, HooksEnum.signMessage].includes(hook)
+    ) {
       return <Navigate to={routeNames.unlock} replace />;
     }
 
@@ -59,7 +61,9 @@ export const HookValidationOutcome = ({
   if (
     isValid &&
     registeredHook &&
-    [HooksEnum.sign, HooksEnum.login].includes(registeredHook)
+    [HooksEnum.login, HooksEnum.sign, HooksEnum.signMessage].includes(
+      registeredHook
+    )
   ) {
     switch (loginMethod) {
       case LoginMethodsEnum.none: {

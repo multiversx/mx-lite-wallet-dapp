@@ -68,6 +68,13 @@ export const Account = () => {
             >
               Send
             </MxLink>
+            <MxLink
+              className='inline-block rounded-lg bg-blue-500 px-4 py-2 text-sm text-white'
+              data-testid={DataTestIdsEnum.sendBtn}
+              to={routeNames.signMessage}
+            >
+              Sign Message
+            </MxLink>
           </div>
         </div>
         <div className='mb-2 hidden justify-center sm:block'>

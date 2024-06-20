@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useLogout } from 'hooks';
 import { getLoginHookData, useGetAccount } from 'lib';
-import { HooksEnum } from 'localConstants';
+import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { HookValidationOutcome } from '../HookValidationOutcome';
 import { HookStateEnum } from '../types';
@@ -15,7 +15,9 @@ export const LoginHook = () => {
   const logout = useLogout();
 
   const data = useMemo(() => {
-    return pathname.includes(HooksEnum.login) ? getLoginHookData(search) : null;
+    return pathname.includes(HooksPageEnum.login)
+      ? getLoginHookData(search)
+      : null;
   }, [pathname]);
 
   const [validUrl, setValidUrl] = useState<HookStateEnum>(

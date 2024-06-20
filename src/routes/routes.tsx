@@ -8,7 +8,9 @@ import {
   LoginHook,
   Logout,
   LogoutHook,
-  SignHook
+  SignHook,
+  SignMessage,
+  SignMessageHook
 } from 'pages';
 import { Send } from 'pages/Send/Send';
 import { Sign } from 'pages/Sign/Sign';
@@ -65,18 +67,32 @@ const routesObject: Record<RouteNamesEnum | HooksPageEnum, RouteWithTitleType> =
         </PrivateKeyCheckWrapper>
       )
     },
-    [HooksPageEnum.loginHook]: {
-      path: HooksPageEnum.loginHook,
+    [RouteNamesEnum.signMessage]: {
+      path: RouteNamesEnum.signMessage,
+      title: 'Sign Message',
+      component: () => (
+        <PrivateKeyCheckWrapper>
+          <SignMessage />
+        </PrivateKeyCheckWrapper>
+      )
+    },
+    [HooksPageEnum.login]: {
+      path: HooksPageEnum.login,
       title: 'Login',
       component: LoginHook
     },
-    [HooksPageEnum.signHook]: {
-      path: HooksPageEnum.signHook,
+    [HooksPageEnum.sign]: {
+      path: HooksPageEnum.sign,
       title: 'Sign',
       component: SignHook
     },
-    [HooksPageEnum.logoutHook]: {
-      path: HooksPageEnum.logoutHook,
+    [HooksPageEnum.signMessage]: {
+      path: HooksPageEnum.signMessage,
+      title: 'Sign Message',
+      component: SignMessageHook
+    },
+    [HooksPageEnum.logout]: {
+      path: HooksPageEnum.logout,
       title: 'Logout',
       component: LogoutHook
     }

@@ -7,3 +7,4 @@ export * from './Send';
 export * from './Logout';
 export * from './Sign';
 export * from './Unlock';
+export * from './SignMessage';
