@@ -20,7 +20,7 @@ export enum FormFieldsEnum {
 export interface SendFormType {
   amount: string;
   data: string;
-  gasLimit: string;
+  gasLimit: number;
   receiver: string;
   token: TokenOptionType;
   type: string;
