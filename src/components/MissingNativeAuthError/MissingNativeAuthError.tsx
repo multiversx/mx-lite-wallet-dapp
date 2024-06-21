@@ -9,7 +9,7 @@ export const MissingNativeAuthError = () => (
           NOT
         </span>
         be displayed because
-        <span className='ml-1 mr-1 inline-block px-2 py-1 text-sm font-semibold leading-none bg-blue-500 text-white rounded'>
+        <span className='ml-1 mr-1 inline-block px-2 py-1 text-sm font-semibold leading-none bg-blue-600 text-white rounded'>
           nativeAuth
         </span>
         is not active

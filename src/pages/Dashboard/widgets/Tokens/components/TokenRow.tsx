@@ -39,7 +39,7 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
           </div>
         )}
         <button
-          className='text-white rounded bg-blue-500 px-2 py-1'
+          className='text-white rounded bg-blue-600 px-2 py-1'
           data-testid={`send-${token.identifier}`}
           onClick={handleSend}
         >

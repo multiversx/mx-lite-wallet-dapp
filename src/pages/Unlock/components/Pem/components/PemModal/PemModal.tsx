@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
-import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { faCheck, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { Formik, FormikHelpers } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -30,16 +32,17 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   const { type: hook, loginToken: hookInitToken } = useSelector(hookSelector);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [fileName, setFileName] = useState<string>('');
+
   const handleModalClose = () => {
     handleClose();
-
     const shouldLogoutIfReloginNotConfirmed =
       address && pathname !== routeNames.unlock;
-
     if (shouldLogoutIfReloginNotConfirmed) {
       navigate(routeNames.logout);
     }
   };
+
   useCloseModalOnEsc({
     onClose: handleModalClose,
     isOpen: show
@@ -75,25 +78,19 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
 
   return (
     <ModalContainer
-      className='login-modal'
+      className='login-modal rounded shadow-lg p-6'
       onClose={handleModalClose}
       visible={show}
     >
       <PageState
-        icon={faFileAlt}
-        iconSize='3x'
-        title='Login using PEM'
         description={
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={object().shape({
               pem: mixed()
-                .required('Required')
-                .test('isFile', 'Invalid pem file', (value) => {
-                  const isValid = value && value !== null;
-                  return isValid;
-                })
+                .required('PEM file is required')
+                .test('isFile', 'Invalid pem file', (value) => Boolean(value))
                 .test(
                   'sameAccount',
                   'This is not the wallet you initiated the transaction with',
@@ -101,51 +98,90 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
                     if (!file || !address) {
                       return true;
                     }
-                    const data = await parsePem(file as File);
 
+                    const data = await parsePem(file as File);
                     return data?.address === address;
                   }
                 )
             })}
           >
             {(formikProps) => {
-              const { submitForm, errors, isValid, setFieldValue } =
+              const { submitForm, errors, setFieldValue, touched } =
                 formikProps;
 
               return (
-                <div className='flex flex-col mx-auto items-center pt-6'>
+                <div className='flex flex-col items-center'>
+                  <h2 className='text-2xl mt-4 mb-2'>Login using PEM</h2>
                   <label
-                    className='block text-gray-700 text-sm font-bold mb-2'
                     htmlFor='pem'
+                    className='block text-gray-500 text-sm font-bold mb-4'
                   >
-                    Choose File
+                    Select a PEM file
                   </label>
-                  <input
-                    accept='.pem'
-                    className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                    data-testid={DataTestIdsEnum.walletFile}
-                    id='pem'
-                    name='pem'
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        setFieldValue(PEM_FIELD, file);
+                  <div
+                    className={classNames(
+                      'w-full my-6 flex flex-col border-dashed border-2 rounded-md p-6 flex items-center justify-center mb-4 h-[200px]',
+                      {
+                        'border-gray-300': !errors.pem,
+                        'border-red-300': errors.pem
                       }
-                    }}
-                    required
-                    type='file'
-                  />
-                  {errors.pem && (
-                    <div className='text-red-600 mb-4'>{errors.pem}</div>
+                    )}
+                  >
+                    {fileName && (
+                      <div className='flex flex-row items-center gap-1'>
+                        <FontAwesomeIcon
+                          className='text-green-500'
+                          icon={faCheck}
+                        />
+                        <span className='text-green-500'>PEM loaded</span>
+                      </div>
+                    )}
+                    <input
+                      accept='.pem'
+                      className='hidden'
+                      id='pem'
+                      name='pem'
+                      type='file'
+                      data-testid={DataTestIdsEnum.walletFile}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setFileName(file.name);
+                          setFieldValue(PEM_FIELD, file);
+                        }
+                      }}
+                      required
+                    />
+                    <label htmlFor='pem' className='text-gray-400 text-sm'>
+                      {fileName ? (
+                        <div className='flex flex-row items-center cursor-pointer gap-1'>
+                          <span>{fileName}</span>
+                          <FontAwesomeIcon icon={faPencilAlt} />
+                        </div>
+                      ) : errors[PEM_FIELD] ? (
+                        <div className='text-red-500 mt-2 text-sm'>
+                          {errors[PEM_FIELD] as string}
+                        </div>
+                      ) : (
+                        <span className='cursor-pointer'>
+                          Click here to select a file
+                        </span>
+                      )}
+                    </label>
+                  </div>
+
+                  {fileName && touched[PEM_FIELD] && errors[PEM_FIELD] && (
+                    <div className='text-red-500 mt-2 text-sm'>
+                      {errors[PEM_FIELD]}
+                    </div>
                   )}
-                  <div className='flex flex-col mx-auto items-center gap-2 mt-8'>
+                  <div className='flex flex-col items-center gap-4 mt-8'>
                     <Button
                       data-testid={DataTestIdsEnum.submitButton}
-                      disabled={!isValid}
-                      onClick={submitForm}
                       type='submit'
+                      onClick={submitForm}
                     >
-                      Submit
+                      Access Wallet
                     </Button>
                     <button
                       className='mt-2 text-blue-600'
