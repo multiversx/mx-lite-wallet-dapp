@@ -1,32 +1,48 @@
+import { ChangeEventHandler, useEffect, useState } from 'react';
+import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
+import { useSearchParams } from 'react-router-dom';
 import { number, object, string } from 'yup';
 import {
   prepareTransaction,
   getEgldLabel,
   useGetAccountInfo,
-  useGetNetworkConfig
+  useGetNetworkConfig,
+  computeNftDataField,
+  computeTokenDataField,
+  calculateNftGasLimit,
+  addressIsValid,
+  calculateGasLimit
 } from 'lib';
-import { addressIsValid } from 'lib/sdkDapp';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { TokenType, PartialNftType } from 'types';
+import {
+  DECIMALS,
+  GAS_LIMIT,
+  GAS_PRICE,
+  SearchParamsEnum
+} from 'localConstants';
 import { useSendTransactions } from './useSendTransactions';
+import { useTokenOptions } from './useTokenOptions';
 import { getSelectedTokenBalance } from '../helpers';
 import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
 
-export const useSendForm = ({
-  isNFT,
-  tokens,
-  defaultTokenOption
-}: {
-  isNFT: boolean;
-  tokens?: PartialNftType[] | TokenType[];
-  defaultTokenOption?: TokenOptionType;
-}) => {
+export const useSendForm = () => {
   const { address, account } = useGetAccountInfo();
   const { chainID } = useGetNetworkConfig();
   const { sendTransactions } = useSendTransactions();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tokenIdParam = searchParams.get(SearchParamsEnum.tokenId);
+  const isNftParam = searchParams.get(SearchParamsEnum.isNFT);
+  const [sendType, setSendType] = useState(
+    isNftParam ? SendTypeEnum.nft : SendTypeEnum.esdt
+  );
+
   const egldLabel = getEgldLabel();
+  const isNFT = sendType === SendTypeEnum.nft;
+  const { tokenOptions, isLoading, tokens } = useTokenOptions(sendType);
+  const defaultTokenOption = tokenIdParam
+    ? tokenOptions?.find((option) => option.value === tokenIdParam)
+    : tokenOptions?.[0];
 
   const formik = useFormik({
     initialValues: {
@@ -63,6 +79,7 @@ export const useSendForm = ({
           ] as TokenOptionType;
 
           const selectedTokenBalance = getSelectedTokenBalance({
+            isNFT,
             tokens,
             tokenOption: selectedTokenOption
           });
@@ -98,5 +115,143 @@ export const useSendForm = ({
     }
   });
 
-  return formik;
+  const selectedToken = tokens?.find(
+    (token) => token.identifier === formik.values[FormFieldsEnum.token]?.value
+  );
+
+  const isEgldToken = selectedToken?.identifier === egldLabel;
+  const availableAmount = getSelectedTokenBalance({
+    isNFT,
+    tokens,
+    tokenOption: formik.values[FormFieldsEnum.token]
+  });
+
+  const canEditNftAmount = new BigNumber(availableAmount).isGreaterThan(1);
+
+  const resetFormAndGetBalance = () => {
+    const balance = defaultTokenOption
+      ? getSelectedTokenBalance({
+          isNFT,
+          tokens,
+          tokenOption: defaultTokenOption
+        })
+      : '';
+
+    formik.setFieldValue(FormFieldsEnum.data, '');
+    formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
+    formik.setFieldValue(FormFieldsEnum.amount, isNFT ? balance : '0');
+    formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
+
+    return balance;
+  };
+
+  const handleOnDataChange: ChangeEventHandler<HTMLTextAreaElement> = (
+    event
+  ) => {
+    if (!isEgldToken) {
+      return;
+    }
+
+    const gasLimit = calculateGasLimit({
+      data: event.target.value
+    });
+
+    formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
+
+    return formik.handleChange(event);
+  };
+
+  const handleOnSendTypeChange: (
+    sendType: SendTypeEnum
+  ) => ChangeEventHandler<HTMLInputElement> =
+    (selectedType: SendTypeEnum) => (event) => {
+      setSendType(selectedType);
+
+      return formik.handleChange(event);
+    };
+
+  useEffect(() => {
+    const formTokenValue = formik.values[FormFieldsEnum.token]?.value;
+    const selectedTokenValue = defaultTokenOption?.value;
+
+    if (!formTokenValue && formTokenValue !== selectedTokenValue) {
+      formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
+      resetFormAndGetBalance();
+      setSearchParams();
+    }
+  }, [defaultTokenOption, tokenIdParam]);
+
+  useEffect(() => {
+    const balance = resetFormAndGetBalance();
+
+    if (!defaultTokenOption || !isNFT) {
+      return;
+    }
+
+    const defaultToken = tokens?.find(
+      (token) => token.identifier === defaultTokenOption.value
+    );
+
+    const data = computeNftDataField({
+      nft: defaultToken as PartialNftType,
+      amount: balance,
+      receiver: formik.values[FormFieldsEnum.receiver],
+      errors: false
+    });
+
+    formik.setFieldValue(FormFieldsEnum.data, data);
+  }, [sendType]);
+
+  const calculateDataFieldAndGasLimit = () => {
+    if (!selectedToken) {
+      formik.setFieldValue(FormFieldsEnum.data, '');
+      formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
+      return;
+    }
+
+    let data = formik.values[FormFieldsEnum.data];
+    let gasLimit = calculateGasLimit({ data });
+
+    if (isNFT) {
+      data = computeNftDataField({
+        nft: selectedToken as PartialNftType,
+        amount: formik.values[FormFieldsEnum.amount],
+        receiver: formik.values[FormFieldsEnum.receiver],
+        errors: false
+      });
+
+      gasLimit = calculateNftGasLimit(data);
+    } else if (!isEgldToken) {
+      data = computeTokenDataField({
+        tokenId: selectedToken.identifier,
+        amount: formik.values[FormFieldsEnum.amount],
+        decimals: selectedToken?.decimals ?? DECIMALS
+      });
+
+      gasLimit = calculateNftGasLimit(data);
+    }
+
+    formik.setFieldValue(FormFieldsEnum.data, data);
+    formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
+  };
+
+  useEffect(() => {
+    calculateDataFieldAndGasLimit();
+  }, [
+    formik.values[FormFieldsEnum.amount],
+    formik.values[FormFieldsEnum.receiver],
+    formik.values[FormFieldsEnum.token]
+  ]);
+
+  return {
+    availableAmount,
+    canEditNftAmount,
+    formik,
+    handleOnDataChange,
+    handleOnSendTypeChange,
+    isEgldToken,
+    isLoading,
+    isNFT,
+    tokenOptions
+  };
 };

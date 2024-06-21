@@ -4,9 +4,11 @@ import { PartialNftType, TokenType } from 'types';
 import { TokenOptionType } from '../types';
 
 export const getSelectedTokenBalance = ({
+  isNFT,
   tokens,
   tokenOption
 }: {
+  isNFT: boolean;
   tokens?: PartialNftType[] | TokenType[];
   tokenOption?: TokenOptionType;
 }) => {
@@ -20,6 +22,11 @@ export const getSelectedTokenBalance = ({
 
   if (!currentToken) {
     return '0';
+  }
+
+  // There may be NFTs without balance, so we return 1 by default
+  if (!('balance' in currentToken) && isNFT) {
+    return '1';
   }
 
   if (!currentToken.decimals) {
