@@ -197,13 +197,14 @@ export const useSendForm = () => {
   }, [sendType]);
 
   useEffect(() => {
-    if (!selectedToken || isEgldToken) {
+    if (!selectedToken) {
       formik.setFieldValue(FormFieldsEnum.data, '');
       formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
       return;
     }
 
-    let data, gasLimit;
+    let data = formik.values[FormFieldsEnum.data];
+    let gasLimit = calculateGasLimit({ data });
 
     if (isNFT) {
       data = computeNftDataField({
@@ -214,7 +215,7 @@ export const useSendForm = () => {
       });
 
       gasLimit = calculateNftGasLimit(data);
-    } else {
+    } else if (!isEgldToken) {
       data = computeTokenDataField({
         tokenId: selectedToken.identifier,
         amount: formik.values[FormFieldsEnum.amount],
