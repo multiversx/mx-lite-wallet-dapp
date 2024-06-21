@@ -181,6 +181,27 @@ export const useSendForm = () => {
     }
   }, [defaultTokenOption, tokenIdParam]);
 
+  useEffect(() => {
+    const balance = resetFormAndGetBalance();
+
+    if (!defaultTokenOption || !isNFT) {
+      return;
+    }
+
+    const defaultToken = tokens?.find(
+      (token) => token.identifier === defaultTokenOption.value
+    );
+
+    const data = computeNftDataField({
+      nft: defaultToken as PartialNftType,
+      amount: balance,
+      receiver: formik.values[FormFieldsEnum.receiver],
+      errors: false
+    });
+
+    formik.setFieldValue(FormFieldsEnum.data, data);
+  }, [sendType]);
+
   const calculateDataFieldAndGasLimit = () => {
     if (!selectedToken) {
       formik.setFieldValue(FormFieldsEnum.data, '');
@@ -217,7 +238,6 @@ export const useSendForm = () => {
   useEffect(() => {
     calculateDataFieldAndGasLimit();
   }, [
-    sendType,
     formik.values[FormFieldsEnum.amount],
     formik.values[FormFieldsEnum.receiver],
     formik.values[FormFieldsEnum.token]
