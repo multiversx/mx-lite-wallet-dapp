@@ -178,40 +178,32 @@ export const useSendForm = () => {
   useEffect(() => {
     const balance = resetFormAndGetBalance();
 
-    if (!defaultTokenOption || isEgldToken) {
+    if (!defaultTokenOption || !isNFT) {
       return;
     }
 
-    let data;
+    const defaultToken = tokens?.find(
+      (token) => token.identifier === defaultTokenOption.value
+    );
 
-    if (isNFT) {
-      const defaultToken = tokens?.find(
-        (token) => token.identifier === defaultTokenOption.value
-      );
-
-      data = computeNftDataField({
-        nft: defaultToken as PartialNftType,
-        amount: balance,
-        receiver: formik.values[FormFieldsEnum.receiver],
-        errors: false
-      });
-    } else {
-      data = computeTokenDataField({
-        tokenId: defaultTokenOption.value,
-        amount: balance,
-        decimals: selectedToken?.decimals ?? DECIMALS
-      });
-    }
+    const data = computeNftDataField({
+      nft: defaultToken as PartialNftType,
+      amount: balance,
+      receiver: formik.values[FormFieldsEnum.receiver],
+      errors: false
+    });
 
     formik.setFieldValue(FormFieldsEnum.data, data);
   }, [sendType]);
 
   useEffect(() => {
     if (!selectedToken || isEgldToken) {
+      formik.setFieldValue(FormFieldsEnum.data, '');
+      formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
       return;
     }
 
-    let data;
+    let data, gasLimit;
 
     if (isNFT) {
       data = computeNftDataField({
@@ -220,15 +212,18 @@ export const useSendForm = () => {
         receiver: formik.values[FormFieldsEnum.receiver],
         errors: false
       });
+
+      gasLimit = calculateNftGasLimit(data);
     } else {
       data = computeTokenDataField({
         tokenId: selectedToken.identifier,
         amount: formik.values[FormFieldsEnum.amount],
         decimals: selectedToken?.decimals ?? DECIMALS
       });
+
+      gasLimit = calculateGasLimit({ data });
     }
 
-    const gasLimit = calculateNftGasLimit(data);
     formik.setFieldValue(FormFieldsEnum.data, data);
     formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
   }, [
