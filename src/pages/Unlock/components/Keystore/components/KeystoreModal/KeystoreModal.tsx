@@ -273,7 +273,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                       {errors.accessPass}
                     </div>
                   )}
-                  <div className='flex flex-col items-center gap-4 mt-8'>
+                  <div className='flex flex-col items-center gap-2 mt-8'>
                     <Button
                       data-testid={DataTestIdsEnum.submitButton}
                       type='submit'

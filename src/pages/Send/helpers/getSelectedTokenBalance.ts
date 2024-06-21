@@ -23,11 +23,11 @@ export const getSelectedTokenBalance = ({
   }
 
   if (!currentToken.decimals) {
-    return currentToken.balance ?? '0';
+    return currentToken.balance ?? '1';
   }
 
   return formatAmount({
-    input: currentToken.balance ?? '0',
+    input: currentToken.balance ?? '1',
     decimals: currentToken.decimals ?? DECIMALS,
     digits: DIGITS,
     showLastNonZeroDecimal: false

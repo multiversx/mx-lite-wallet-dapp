@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSearchParams } from 'react-router-dom';
@@ -7,10 +8,18 @@ import {
   prepareTransaction,
   getEgldLabel,
   useGetAccountInfo,
-  useGetNetworkConfig
+  useGetNetworkConfig,
+  computeNftDataField,
+  computeTokenDataField,
+  calculateNftGasLimit,
+  addressIsValid
 } from 'lib';
-import { addressIsValid } from 'lib/sdkDapp';
-import { GAS_LIMIT, GAS_PRICE, SearchParamsEnum } from 'localConstants';
+import {
+  DECIMALS,
+  GAS_LIMIT,
+  GAS_PRICE,
+  SearchParamsEnum
+} from 'localConstants';
 import { useSendTransactions } from './useSendTransactions';
 import { useTokenOptions } from './useTokenOptions';
 import { getSelectedTokenBalance } from '../helpers';
@@ -27,12 +36,12 @@ export const useSendForm = () => {
     isNftParam ? SendTypeEnum.nft : SendTypeEnum.esdt
   );
 
+  const egldLabel = getEgldLabel();
+  const isNFT = sendType === SendTypeEnum.nft;
   const { tokenOptions, isLoading, tokens } = useTokenOptions(sendType);
   const defaultTokenOption = tokenIdParam
     ? tokenOptions?.find((option) => option.value === tokenIdParam)
     : tokenOptions?.[0];
-
-  const egldLabel = getEgldLabel();
 
   const formik = useFormik({
     initialValues: {
@@ -104,23 +113,11 @@ export const useSendForm = () => {
     }
   });
 
-  useEffect(() => {
-    formik.setFieldValue('token', defaultTokenOption);
-    formik.resetForm();
-    setSearchParams();
-  }, [defaultTokenOption, tokenIdParam]);
-
-  useEffect(() => {
-    formik.resetForm();
-  }, [sendType]);
-
-  const isNFT = sendType === SendTypeEnum.nft;
-
   const selectedToken = tokens?.find(
     (token) => token.identifier === formik.values[FormFieldsEnum.token]?.value
   );
 
-  const isEgldToken = selectedToken?.identifier === getEgldLabel();
+  const isEgldToken = selectedToken?.identifier === egldLabel;
   const availableAmount = getSelectedTokenBalance({
     tokens,
     tokenOption: formik.values[FormFieldsEnum.token]
@@ -128,12 +125,17 @@ export const useSendForm = () => {
 
   const canEditNftAmount = new BigNumber(availableAmount).isGreaterThan(1);
 
-  const handleTypeChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    type: SendTypeEnum
-  ) => {
-    setSendType(type);
-    formik.handleChange(event);
+  const resetFormAndGetBalance = () => {
+    const balance = defaultTokenOption
+      ? getSelectedTokenBalance({ tokens, tokenOption: defaultTokenOption })
+      : '';
+
+    formik.setFieldValue(FormFieldsEnum.data, '');
+    formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
+    formik.setFieldValue(FormFieldsEnum.amount, isNFT ? balance : '0');
+    formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
+
+    return balance;
   };
 
   useEffect(() => {
@@ -142,19 +144,78 @@ export const useSendForm = () => {
 
     if (!formTokenValue && formTokenValue !== selectedTokenValue) {
       formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
-      formik.resetForm();
+      resetFormAndGetBalance();
+      setSearchParams();
     }
   }, [defaultTokenOption, tokenIdParam]);
 
   useEffect(() => {
-    formik.resetForm();
+    const balance = resetFormAndGetBalance();
+
+    if (!defaultTokenOption || isEgldToken) {
+      return;
+    }
+
+    let data;
+
+    if (isNFT) {
+      const defaultToken = tokens?.find(
+        (token) => token.identifier === defaultTokenOption.value
+      );
+
+      data = computeNftDataField({
+        nft: defaultToken as PartialNftType,
+        amount: balance,
+        receiver: formik.values[FormFieldsEnum.receiver],
+        errors: false
+      });
+    } else {
+      data = computeTokenDataField({
+        tokenId: defaultTokenOption.value,
+        amount: balance,
+        decimals: selectedToken?.decimals ?? DECIMALS
+      });
+    }
+
+    formik.setFieldValue(FormFieldsEnum.data, data);
   }, [sendType]);
+
+  useEffect(() => {
+    if (!selectedToken || isEgldToken) {
+      return;
+    }
+
+    let data;
+
+    if (isNFT) {
+      data = computeNftDataField({
+        nft: selectedToken as PartialNftType,
+        amount: formik.values[FormFieldsEnum.amount],
+        receiver: formik.values[FormFieldsEnum.receiver],
+        errors: false
+      });
+    } else {
+      data = computeTokenDataField({
+        tokenId: selectedToken.identifier,
+        amount: formik.values[FormFieldsEnum.amount],
+        decimals: selectedToken?.decimals ?? DECIMALS
+      });
+    }
+
+    const gasLimit = calculateNftGasLimit(data);
+    formik.setFieldValue(FormFieldsEnum.data, data);
+    formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
+  }, [
+    formik.values[FormFieldsEnum.amount],
+    formik.values[FormFieldsEnum.receiver],
+    formik.values[FormFieldsEnum.token]
+  ]);
 
   return {
     availableAmount,
     canEditNftAmount,
     formik,
-    handleTypeChange,
+    setSendType,
     isEgldToken,
     isLoading,
     isNFT,
