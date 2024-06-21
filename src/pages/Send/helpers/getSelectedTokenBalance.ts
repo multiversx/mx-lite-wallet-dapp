@@ -22,12 +22,17 @@ export const getSelectedTokenBalance = ({
     return '0';
   }
 
+  // There may be NFTs without balance, so we return 1 by default
+  if (!('balance' in currentToken)) {
+    return '1';
+  }
+
   if (!currentToken.decimals) {
-    return currentToken.balance ?? '1';
+    return currentToken.balance ?? '0';
   }
 
   return formatAmount({
-    input: currentToken.balance ?? '1',
+    input: currentToken.balance ?? '0',
     decimals: currentToken.decimals ?? DECIMALS,
     digits: DIGITS,
     showLastNonZeroDecimal: false

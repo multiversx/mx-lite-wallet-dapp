@@ -33,7 +33,7 @@ export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
       <div className='mt-2 p-4'>
         <div className='flex flex-row justify-between align-middle'>
           <div className='text-lg text-white'>
-            {nft.balance ?? ''} {nft.name}
+            {nft.balance ?? '1'} {nft.name}
           </div>
           <div className='text-white text-xs my-auto'>{nftType}</div>
         </div>

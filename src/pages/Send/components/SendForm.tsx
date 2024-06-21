@@ -1,6 +1,5 @@
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { calculateGasLimit } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { useSendForm } from '../hooks';
@@ -11,10 +10,11 @@ export const SendForm = () => {
     availableAmount,
     canEditNftAmount,
     formik,
+    handleOnDataChange,
+    handleOnSendTypeChange,
     isEgldToken,
     isLoading,
     isNFT,
-    setSendType,
     tokenOptions
   } = useSendForm();
 
@@ -63,11 +63,7 @@ export const SendForm = () => {
                 data-testid={DataTestIdsEnum.sendEsdtTypeInput}
                 id={SendTypeEnum.esdt}
                 name={FormFieldsEnum.type}
-                onChange={(event) => {
-                  setSendType(SendTypeEnum.esdt);
-
-                  return formik.handleChange(event);
-                }}
+                onChange={handleOnSendTypeChange(SendTypeEnum.esdt)}
                 type='radio'
                 value={SendTypeEnum.esdt}
               />
@@ -82,11 +78,7 @@ export const SendForm = () => {
                 data-testid={DataTestIdsEnum.sendNFtTypeInput}
                 id={SendTypeEnum.nft}
                 name={FormFieldsEnum.type}
-                onChange={(event) => {
-                  setSendType(SendTypeEnum.nft);
-
-                  return formik.handleChange(event);
-                }}
+                onChange={handleOnSendTypeChange(SendTypeEnum.nft)}
                 type='radio'
                 value={SendTypeEnum.nft}
               />
@@ -205,19 +197,7 @@ export const SendForm = () => {
             id={FormFieldsEnum.data}
             name={FormFieldsEnum.data}
             onBlur={formik.handleBlur}
-            onChange={(event) => {
-              if (!isEgldToken) {
-                return;
-              }
-
-              const gasLimit = calculateGasLimit({
-                data: event.target.value
-              });
-
-              formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
-
-              return formik.handleChange(event);
-            }}
+            onChange={handleOnDataChange}
             placeholder='Enter your data'
             value={formik.values[FormFieldsEnum.data]}
           />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
@@ -12,7 +12,8 @@ import {
   computeNftDataField,
   computeTokenDataField,
   calculateNftGasLimit,
-  addressIsValid
+  addressIsValid,
+  calculateGasLimit
 } from 'lib';
 import {
   DECIMALS,
@@ -138,6 +139,31 @@ export const useSendForm = () => {
     return balance;
   };
 
+  const handleOnDataChange: ChangeEventHandler<HTMLTextAreaElement> = (
+    event
+  ) => {
+    if (!isEgldToken) {
+      return;
+    }
+
+    const gasLimit = calculateGasLimit({
+      data: event.target.value
+    });
+
+    formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
+
+    return formik.handleChange(event);
+  };
+
+  const handleOnSendTypeChange: (
+    sendType: SendTypeEnum
+  ) => ChangeEventHandler<HTMLInputElement> =
+    (selectedType: SendTypeEnum) => (event) => {
+      setSendType(selectedType);
+
+      return formik.handleChange(event);
+    };
+
   useEffect(() => {
     const formTokenValue = formik.values[FormFieldsEnum.token]?.value;
     const selectedTokenValue = defaultTokenOption?.value;
@@ -215,7 +241,8 @@ export const useSendForm = () => {
     availableAmount,
     canEditNftAmount,
     formik,
-    setSendType,
+    handleOnDataChange,
+    handleOnSendTypeChange,
     isEgldToken,
     isLoading,
     isNFT,
