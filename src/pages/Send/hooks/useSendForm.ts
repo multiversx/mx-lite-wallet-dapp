@@ -79,6 +79,7 @@ export const useSendForm = () => {
           ] as TokenOptionType;
 
           const selectedTokenBalance = getSelectedTokenBalance({
+            isNFT,
             tokens,
             tokenOption: selectedTokenOption
           });
@@ -120,6 +121,7 @@ export const useSendForm = () => {
 
   const isEgldToken = selectedToken?.identifier === egldLabel;
   const availableAmount = getSelectedTokenBalance({
+    isNFT,
     tokens,
     tokenOption: formik.values[FormFieldsEnum.token]
   });
@@ -128,7 +130,11 @@ export const useSendForm = () => {
 
   const resetFormAndGetBalance = () => {
     const balance = defaultTokenOption
-      ? getSelectedTokenBalance({ tokens, tokenOption: defaultTokenOption })
+      ? getSelectedTokenBalance({
+          isNFT,
+          tokens,
+          tokenOption: defaultTokenOption
+        })
       : '';
 
     formik.setFieldValue(FormFieldsEnum.data, '');
@@ -175,28 +181,7 @@ export const useSendForm = () => {
     }
   }, [defaultTokenOption, tokenIdParam]);
 
-  useEffect(() => {
-    const balance = resetFormAndGetBalance();
-
-    if (!defaultTokenOption || !isNFT) {
-      return;
-    }
-
-    const defaultToken = tokens?.find(
-      (token) => token.identifier === defaultTokenOption.value
-    );
-
-    const data = computeNftDataField({
-      nft: defaultToken as PartialNftType,
-      amount: balance,
-      receiver: formik.values[FormFieldsEnum.receiver],
-      errors: false
-    });
-
-    formik.setFieldValue(FormFieldsEnum.data, data);
-  }, [sendType]);
-
-  useEffect(() => {
+  const calculateDataFieldAndGasLimit = () => {
     if (!selectedToken) {
       formik.setFieldValue(FormFieldsEnum.data, '');
       formik.setFieldValue(FormFieldsEnum.gasLimit, GAS_LIMIT);
@@ -222,12 +207,17 @@ export const useSendForm = () => {
         decimals: selectedToken?.decimals ?? DECIMALS
       });
 
-      gasLimit = calculateGasLimit({ data });
+      gasLimit = calculateNftGasLimit(data);
     }
 
     formik.setFieldValue(FormFieldsEnum.data, data);
     formik.setFieldValue(FormFieldsEnum.gasLimit, gasLimit);
+  };
+
+  useEffect(() => {
+    calculateDataFieldAndGasLimit();
   }, [
+    sendType,
     formik.values[FormFieldsEnum.amount],
     formik.values[FormFieldsEnum.receiver],
     formik.values[FormFieldsEnum.token]
