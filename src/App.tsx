@@ -13,7 +13,8 @@ import {
   apiTimeout,
   walletConnectV2ProjectId,
   environment,
-  sampleAuthenticatedDomains
+  sampleAuthenticatedDomains,
+  API_URL
 } from 'config';
 import { provider } from 'helpers/app';
 import { PageNotFound, Unlock } from 'pages';
@@ -28,6 +29,7 @@ const AppContent = () => {
       externalProvider={provider}
       customNetworkConfig={{
         name: 'customConfig',
+        apiAddress: API_URL,
         apiTimeout,
         walletConnectV2ProjectId
       }}
