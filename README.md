@@ -33,13 +33,16 @@ yarn  install
 
 #### Step 2. Create the main config file
 
-Go to `src/config` folder and create a new `index.ts` file with the contents of `config.devnet.ts`
+
+Go to `src/config` folder and edit the `config.sovereign.ts` file.
+Create a new `index.ts` file with the contents of `config.sovereign.ts`.
 
 #### Step 3. Running in development mode
 
 In the project folder run:
 
 ```bash
+yarn  start:sovereign
 yarn  start:devnet
 yarn  start:testnet
 yarn  start:mainnet
@@ -60,6 +63,7 @@ A build of the app is necessary to deploy for testing purposes or production use
 To build the project run:
 
 ```bash
+yarn  build:sovereign
 yarn  build:devnet
 yarn  build:testnet
 yarn  build:mainnet
