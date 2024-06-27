@@ -1,3 +1,3 @@
 export const testNetwork = {
-  apiAddress: 'https://devnet-api.multiversx.com'
+  apiAddress: 'https://devnet-api.cyber.network'
 };

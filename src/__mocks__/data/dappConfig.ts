@@ -9,8 +9,8 @@ export const dappConfig = {
   walletConnectDeepLink:
     'https://maiar.page.link/?apn=com.multiversx.maiar.wallet&isi=1519405832&ibi=com.multiversx.maiar.wallet&link=https://maiar.com/',
   walletConnectBridgeAddresses: ['https://bridge.walletconnect.org'],
-  walletAddress: 'https://devnet-wallet.multiversx.com',
-  apiAddress: 'https://devnet-api.multiversx.com',
-  explorerAddress: 'http://devnet-explorer.multiversx.com',
+  walletAddress: 'https://devnet-wallet.cyber.network',
+  apiAddress: 'https://devnet-api.cyber.network',
+  explorerAddress: 'http://devnet-explorer.cyber.network',
   chainId: 'D'
 };

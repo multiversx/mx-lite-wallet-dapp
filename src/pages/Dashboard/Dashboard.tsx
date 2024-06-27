@@ -10,21 +10,21 @@ const WIDGETS: WidgetType[] = [
     widget: Tokens,
     description: 'Tokens for the connected account',
     reference:
-      'https://api.multiversx.com/#/accounts/AccountController_getAccountTokens'
+      'https://testnet-api.cyber.network/#/accounts/AccountController_getAccountTokens'
   },
   {
     title: 'NFTs',
     widget: NFTs,
     description: 'NFTs for the connected account',
     reference:
-      'https://api.multiversx.com/#/accounts/AccountController_getAccountNfts'
+      'https://testnet-api.cyber.network/#/accounts/AccountController_getAccountNfts'
   },
   {
     title: 'Transactions',
     widget: Transactions,
     description: 'Transactions list for the connected account',
     reference:
-      'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
+      'https://testnet-api.cyber.network/#/accounts/AccountController_getAccountTransactions'
   }
 ];
 
