@@ -55,7 +55,8 @@ export const Account = () => {
           </div>
           <div className='flex flex-row gap-4'>
             <a
-              href={`${explorerAddress}/accounts/${address}`}
+              //href={`${explorerAddress}/accounts/${address}`}
+              href={`https://testnet-explorer.cyber.network/accounts/${address}`}
               target='_blank'
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             >
