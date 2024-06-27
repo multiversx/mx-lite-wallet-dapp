@@ -4,7 +4,7 @@ import { environment } from 'config';
 import { useGetIsLoggedIn } from 'lib';
 import { DataTestIdsEnum, RouteNamesEnum } from 'localConstants';
 import { routeNames } from 'routes';
-import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
+import MultiversXLogo from '../../../assets/img/cybernetwork-logo.svg?react';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
@@ -20,10 +20,10 @@ export const Header = () => {
         className='flex items-center justify-between'
         to={isLoggedIn ? routeNames.dashboard : routeNames.home}
       >
-        <MultiversXLogo className='w-full h-6' />
+        <MultiversXLogo className='w-full h-8' />
       </MxLink>
 
-      <nav className='h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
+      <nav className='h-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
         <div className='flex justify-end container mx-auto items-center gap-2'>
           <div className='flex gap-1 items-center'>
             <div className='w-2 h-2 rounded-full bg-green-500' />
