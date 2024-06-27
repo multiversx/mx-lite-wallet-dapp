@@ -13,6 +13,7 @@ export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const explorerAddress = useSdkDappSelector(explorerAddressSelector);
+  console.log(explorerAddress);
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
