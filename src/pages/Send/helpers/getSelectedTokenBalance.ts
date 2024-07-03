@@ -1,4 +1,4 @@
-import { formatAmount } from 'lib';
+import { formatAmount, getEgldLabel } from 'lib';
 import { DECIMALS, DIGITS } from 'localConstants';
 import { PartialNftType, TokenType } from 'types';
 import { TokenOptionType } from '../types';
@@ -29,7 +29,7 @@ export const getSelectedTokenBalance = ({
     return '1';
   }
 
-  if (!currentToken.decimals) {
+  if (!currentToken.decimals && currentToken.identifier !== getEgldLabel()) {
     return currentToken.balance ?? '0';
   }
 
