@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import {
   faFileAlt,
   faCheck,
-  faPencilAlt
+  faPencilAlt,
+  faLock
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -166,8 +167,11 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
               } = formikProps;
 
               const disabled = Boolean(initialFile);
-              const hasErrors =
-                Object.values(errors).map((error) => error).length > 0;
+              const dropzoneClassNames = {
+                'border-gray-300': !fileName && !errors[WALLET_FILE],
+                'border-red-300': fileName && errors[WALLET_FILE],
+                'border-green-300': fileName && !errors[WALLET_FILE_NAME]
+              };
 
               return (
                 <div className='flex flex-col items-center'>
@@ -181,23 +185,17 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                   {disabled ? (
                     <div
                       className={classNames(
-                        'w-full p-2 border  rounded-md bg-gray-800 text-gray-500',
-                        {
-                          'border-gray-300': !hasErrors,
-                          'border-red-300': hasErrors
-                        }
+                        'w-full p-2 border rounded-md bg-gray-400 text-white flex flex-row items-center justify-center gap-1'
                       )}
                     >
+                      <FontAwesomeIcon className='text-white' icon={faLock} />
                       {initialValues.fileName}
                     </div>
                   ) : (
                     <div
                       className={classNames(
                         'w-full my-6 flex flex-col border-dashed border-2 rounded-md p-6 flex items-center justify-center mb-4 h-[200px]',
-                        {
-                          'border-gray-300': !hasErrors,
-                          'border-red-300': hasErrors
-                        }
+                        dropzoneClassNames
                       )}
                     >
                       {fileName && (
