@@ -9,14 +9,13 @@ import { uploadFile } from './uploadFile';
 export const loginWithKeystore = async (props?: {
   address?: string;
   filePath?: string;
-  hasAddressSelection?: boolean;
   parent?: any;
   password?: string;
   skipLoggedInCheck?: boolean;
 }) => {
   const address = props?.address ?? keystoreAccount.address;
   const parent = props?.parent ?? page;
-  const password = props?.password ?? 'P@ssw0rd123';
+  const password = props?.password ?? 'Zxcv789)';
   const filePath =
     props?.filePath ?? 'src/__mocks__/data/testKeystoreWallet/account.json';
 
@@ -35,19 +34,17 @@ export const loginWithKeystore = async (props?: {
   });
 
   await parent.click(getByDataTestId(DataTestIdsEnum.submitButton));
+  const dataTestId = `check_${address}`;
+  await parent.waitForSelector(getByDataTestId(dataTestId));
+  await parent.click(getByDataTestId(dataTestId));
 
-  if (props?.hasAddressSelection) {
-    const dataTestId = `check_${address}`;
-    await parent.click(getByDataTestId(dataTestId));
+  await expectToBeChecked({
+    dataTestId,
+    isChecked: true,
+    parent
+  });
 
-    await expectToBeChecked({
-      dataTestId,
-      isChecked: true,
-      parent
-    });
-
-    await parent.click(getByDataTestId(DataTestIdsEnum.confirmBtn));
-  }
+  await parent.click(getByDataTestId(DataTestIdsEnum.confirmBtn));
 
   if (props?.skipLoggedInCheck) {
     return;

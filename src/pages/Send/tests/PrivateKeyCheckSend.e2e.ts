@@ -22,7 +22,7 @@ describe('Send NFT tests', () => {
 
     await changeInputText({
       dataTestId: DataTestIdsEnum.accessPass,
-      text: 'P@ssw0rd123'
+      text: 'Zxcv789)'
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.submitButton));
