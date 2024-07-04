@@ -1,5 +1,5 @@
 export const keystoreAccount = {
-  address: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+  address: 'erd1q4teee5c32dw6dk2wg5hgcr356u0vqlewqjlzhk3d3chtzm2mnvsdmhppa',
   balance: '31455422924671253900800',
   developerReward: '0',
   nonce: 2529,

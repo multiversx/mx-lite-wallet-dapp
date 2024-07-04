@@ -1,3 +1,5 @@
+import { keystoreAccount } from '../testKeystoreWallet';
+
 export const pemWalletNfts = [
   {
     identifier: 'CHRISTMAS-27d3e2-01',
@@ -6,7 +8,7 @@ export const pemWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'Day One',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1iZkd4d1dER25VTmNXNHIxRHdQdkU5aFJtMTl2azZQdmtGSG1pQnJjSEsyVw=='

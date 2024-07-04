@@ -18,7 +18,7 @@ describe('Login hook with token test', () => {
     await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
 
     expect(page.url()).toMatch(
-      `https://devnet.xexchange.com/dashboard?address=${keystoreAccount.address}&signature=80f88acd3326b54d69613a56a50cd1aa74ad6485d4031d92ec2e661253491fc1d933da672251333b2a88f0a18cb486a97764816459953e84dc72700048da0c05`
+      `https://devnet.xexchange.com/dashboard?address=${keystoreAccount.address}&signature=5c68b59538a80f7eaf0b581cd5541dd698c83569c31b4eaa90ba9a17358ada57805f24ad7391d9018b1d5d1b69f890746a69686621b8bdbea33f77836f9b370b`
     );
   });
 });

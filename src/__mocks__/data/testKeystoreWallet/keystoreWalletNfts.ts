@@ -1,3 +1,5 @@
+import { keystoreAccount } from './keystoreAccount';
+
 export const keystoreWalletNfts = [
   {
     identifier: 'CHRISTMAS-27d3e2-01',
@@ -6,7 +8,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'Day One',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1iZkd4d1dER25VTmNXNHIxRHdQdkU5aFJtMTl2azZQdmtGSG1pQnJjSEsyVw=='
@@ -38,7 +40,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'CONDA',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -72,7 +74,7 @@ export const keystoreWalletNfts = [
     nonce: 5,
     type: 'SemiFungibleESDT',
     name: 'minnie',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -106,7 +108,7 @@ export const keystoreWalletNfts = [
     nonce: 11,
     type: 'SemiFungibleESDT',
     name: 'jimmi',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.01,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -139,7 +141,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -177,7 +179,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -215,7 +217,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -253,7 +255,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -290,7 +292,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -328,7 +330,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -366,7 +368,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -404,7 +406,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -442,7 +444,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -480,7 +482,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'super',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -517,7 +519,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'Ticket v2',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -548,7 +550,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'dyor',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -580,7 +582,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'asdasd',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -658,7 +660,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'General Access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 1,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -690,7 +692,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'dsa',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -722,7 +724,7 @@ export const keystoreWalletNfts = [
     nonce: 2,
     type: 'SemiFungibleESDT',
     name: 'dsadsa',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -756,7 +758,7 @@ export const keystoreWalletNfts = [
     nonce: 3,
     type: 'SemiFungibleESDT',
     name: 'dsa',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -790,7 +792,7 @@ export const keystoreWalletNfts = [
     nonce: 4,
     type: 'SemiFungibleESDT',
     name: 'das',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -839,7 +841,7 @@ export const keystoreWalletNfts = [
     nonce: 2,
     type: 'SemiFungibleESDT',
     name: 'February',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1iZkd4d1dER25VTmNXNHIxRHdQdkU5aFJtMTl2azZQdmtGSG1pQnJjSEsyVw=='
@@ -870,7 +872,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'General',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -998,7 +1000,7 @@ export const keystoreWalletNfts = [
     nonce: 2,
     type: 'SemiFungibleESDT',
     name: 'Active',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1iZkd4d1dER25VTmNXNHIxRHdQdkU5aFJtMTl2azZQdmtGSG1pQnJjSEsyVw=='
@@ -1029,7 +1031,7 @@ export const keystoreWalletNfts = [
     nonce: 3,
     type: 'SemiFungibleESDT',
     name: 'details',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1060,7 +1062,7 @@ export const keystoreWalletNfts = [
     nonce: 4,
     type: 'SemiFungibleESDT',
     name: 'details',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1091,7 +1093,7 @@ export const keystoreWalletNfts = [
     nonce: 4,
     type: 'SemiFungibleESDT',
     name: 'Tino',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1122,7 +1124,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'hometicket',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 1,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1166,7 +1168,7 @@ export const keystoreWalletNfts = [
     nonce: 4,
     type: 'SemiFungibleESDT',
     name: 'WWW',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1198,7 +1200,7 @@ export const keystoreWalletNfts = [
     nonce: 5,
     type: 'SemiFungibleESDT',
     name: 'Test123$%^',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 25,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1OblJuMXdMTTZBVHRyWnh6eGtwTTd0RjN5MUVmRzJxdksxOVA3MnI5U3pTbw=='
@@ -1276,7 +1278,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'MetaESDT',
     name: 'Burn me',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     isWhitelistedStorage: false,
     balance: '100000',
     decimals: 3,
@@ -1288,7 +1290,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'MetaESDT',
     name: 'META',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     isWhitelistedStorage: false,
     balance: '10',
     decimals: 1,
@@ -1327,7 +1329,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1358,7 +1360,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1396,7 +1398,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1434,7 +1436,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1472,7 +1474,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1510,7 +1512,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1548,7 +1550,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1586,7 +1588,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1624,7 +1626,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'general access',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 0.04,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1662,7 +1664,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'Ticket1',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1693,7 +1695,7 @@ export const keystoreWalletNfts = [
     nonce: 2,
     type: 'SemiFungibleESDT',
     name: 'dsadsa',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1724,7 +1726,7 @@ export const keystoreWalletNfts = [
     nonce: 3,
     type: 'SemiFungibleESDT',
     name: 'ion',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1755,7 +1757,7 @@ export const keystoreWalletNfts = [
     nonce: 4,
     type: 'SemiFungibleESDT',
     name: 'new unsold',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1786,7 +1788,7 @@ export const keystoreWalletNfts = [
     nonce: 14,
     type: 'SemiFungibleESDT',
     name: 'published',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1iZkd4d1dER25VTmNXNHIxRHdQdkU5aFJtMTl2azZQdmtGSG1pQnJjSEsyVw=='
@@ -1817,7 +1819,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'mirio',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1881,7 +1883,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'dsadsa',
-    creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+    creator: keystoreAccount.address,
     royalties: 20,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='

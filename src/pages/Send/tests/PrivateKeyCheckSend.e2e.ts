@@ -1,4 +1,4 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { DEFAULT_PASSWORD, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -22,7 +22,7 @@ describe('Send NFT tests', () => {
 
     await changeInputText({
       dataTestId: DataTestIdsEnum.accessPass,
-      text: 'P@ssw0rd123'
+      text: DEFAULT_PASSWORD
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.submitButton));

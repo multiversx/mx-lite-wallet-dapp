@@ -20,7 +20,7 @@ describe('Cancel sign message tests', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.signMessageBtn));
 
     expect(page.url()).toMatch(
-      'https://devnet.xexchange.com/?status=signed&signature=1f0e1b40b1d83dcde5a62271c676f0d541adf4fbfa55daac4885911ae59c435d313179fab5ba5dc50918dae31909f1d4bf28bd2b68f47a1301c0745c6e039506'
+      'https://devnet.xexchange.com/?status=signed&signature=87ff670447448bdd1fa93c70b04627514b2ea220c8f98d0cc8e5be6113b47cef922fb6339b67aba7c292ab3ac73edc019aeb8da74880250390d7f9eb4f1d5f09'
     );
   });
 });
