@@ -1,4 +1,4 @@
-import { keystoreAccount } from '__mocks__';
+import { DEFAULT_PASSWORD, keystoreAccount } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { changeInputText } from './changeInputText';
 import { expectElementToContainText } from './expectElementToContainText';
@@ -15,7 +15,7 @@ export const loginWithKeystore = async (props?: {
 }) => {
   const address = props?.address ?? keystoreAccount.address;
   const parent = props?.parent ?? page;
-  const password = props?.password ?? 'Zxcv789)';
+  const password = props?.password ?? DEFAULT_PASSWORD;
   const filePath =
     props?.filePath ?? 'src/__mocks__/data/testKeystoreWallet/account.json';
 
