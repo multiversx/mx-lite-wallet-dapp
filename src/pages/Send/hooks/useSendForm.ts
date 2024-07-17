@@ -28,7 +28,9 @@ import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
 
 export const useSendForm = () => {
   const { address, account } = useGetAccountInfo();
-  const { chainID } = useGetNetworkConfig();
+  const {
+    network: { chainId }
+  } = useGetNetworkConfig();
   const { sendTransactions } = useSendTransactions();
   const [searchParams, setSearchParams] = useSearchParams();
   const tokenIdParam = searchParams.get(SearchParamsEnum.tokenId);
@@ -100,7 +102,7 @@ export const useSendForm = () => {
       const transaction = prepareTransaction({
         amount: isEgldSend ? String(values.amount) : '0',
         balance: account.balance,
-        chainId: chainID,
+        chainId,
         data: values[FormFieldsEnum.data].trim(),
         gasLimit: String(values[FormFieldsEnum.gasLimit]),
         gasPrice: String(GAS_PRICE),

@@ -10,7 +10,7 @@
     "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "0.2.0",
     "@multiversx/sdk-core": "13.0.1",
-    "@multiversx/sdk-dapp": "2.33.5",
+    "@multiversx/sdk-dapp": "2.34.0",
     "@multiversx/sdk-dapp-core": "0.0.0-alpha.6",
     "@multiversx/sdk-dapp-form": "0.10.10",
     "@multiversx/sdk-js-web-wallet-io": "0.1.0",
