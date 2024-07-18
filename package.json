@@ -1,7 +1,7 @@
 {
   "name": "@multiversx/mx-lite-wallet-dapp",
   "description": "MultiversX Lite Wallet DApp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
   "repository": "@multiversx/mx-lite-wallet-dapp",
