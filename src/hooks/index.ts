@@ -2,6 +2,7 @@ export * from './interface';
 export * from './tokens';
 export * from './useIsWebProvider';
 export * from './useLogout';
+export * from './usePushAndNavigate';
 export * from './useRedirectPathname';
 export * from './useReplyToDapp';
 export * from './useReplyWithCancelled';

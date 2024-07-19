@@ -22,3 +22,17 @@ export enum HooksPageEnum {
   logout = `/hook/${HooksEnum.logout}`,
   signMessage = `/hook/${HooksEnum.signMessage}`
 }
+
+export enum CreateRoutesEnum {
+  info = '/create',
+  mnemonicPhrase = '/create/mnemonic',
+  checkMnemonic = '/create/check',
+  setPassword = '/create/password',
+  download = '/create/download'
+}
+
+export enum RecoverRoutesEnum {
+  mnemonicPhrase = '/recover',
+  setPassword = '/recover/password',
+  download = '/recover/download'
+}

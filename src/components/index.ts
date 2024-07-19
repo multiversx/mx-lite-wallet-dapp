@@ -6,6 +6,7 @@ export * from './Layout';
 export * from './MissingNativeAuthError';
 export * from './MxLink';
 export * from './OutputContainer';
+export * from './ProgressBar';
 export * from './PrivateKeyCheckWrapper';
 export * from './TransactionsTracker';
 export * from './Utilities';
