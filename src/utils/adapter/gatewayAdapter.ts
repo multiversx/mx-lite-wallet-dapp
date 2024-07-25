@@ -23,6 +23,13 @@ const getData = async <T extends AxiosResponse>(response: T) => {
   }
 };
 
+const jsonToArrayBuffer = (json: Record<string, unknown>) => {
+  const jsonString = JSON.stringify(json);
+  const encoder = new TextEncoder();
+  const arrayBuffer = encoder.encode(jsonString);
+  return arrayBuffer;
+};
+
 axios.interceptors.request.use(
   function (config) {
     const { url } = config;
@@ -49,7 +56,7 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(
-  function (response) {
+  async function (response) {
     const {
       config: { url }
     } = response;
@@ -59,9 +66,11 @@ axios.interceptors.response.use(
     }
 
     if (url?.includes('address')) {
+      const account = await getData(response);
+
       return {
         ...response,
-        data: getData(response)
+        data: jsonToArrayBuffer(account.data.account)
       };
     }
 
