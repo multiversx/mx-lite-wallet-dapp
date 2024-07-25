@@ -1,19 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Formik } from 'formik';
 
 import { Link } from 'react-router-dom';
 import { SingleValue } from 'react-select';
-import { Select } from 'components/Select';
-import { useCreateRecoverContext } from 'contexts/createRecover';
-import { mnemonicWords as allMnemonicWords } from 'helpers';
+import { useCreateRecoverContext } from 'pages/CreateRecover/contexts/createRecover';
+import { mnemonicWords as allMnemonicWords } from '../../../helpers';
 import { usePushAndNavigate } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
-
-import { CreateRoutesEnum, routeNames } from 'routes';
 
 import { getCompareObject } from './getCompareObject';
 import { mnemonicValidation } from './mnemonicValidation';
 import { randomThree } from './randomThree';
+import { CreateRecoverRoutesEnum } from '../../../routes';
+import Autosuggest from 'react-autosuggest';
 
 type KeyType = 'first' | 'second' | 'third';
 
@@ -28,15 +27,10 @@ export interface MnemonicOptionType {
 
 export const MnemonicForm = () => {
   const { mnemonic } = useCreateRecoverContext();
-
   const mnemonicArray = mnemonic.split(' ');
   const [shuffledArray] = useState<string[]>(randomThree([...mnemonicArray]));
   const pushAndNavigate = usePushAndNavigate();
-
   const initialValues: InitialValuesType = { first: '', second: '', third: '' };
-  const { t } = useTranslation(['createAndRecover']);
-  const { t: c } = useTranslation(['common']);
-
   const compareObject = getCompareObject(shuffledArray, mnemonicArray);
 
   const refFirstInput = useRef<any>(null);
@@ -49,7 +43,7 @@ export const MnemonicForm = () => {
   const validationSchema = mnemonicValidation(compareObject);
 
   const onSubmit = () => {
-    pushAndNavigate(CreateRoutesEnum.setPassword);
+    pushAndNavigate(CreateRecoverRoutesEnum.createPassword);
   };
 
   const mnemonicOptions: MnemonicOptionType[] = allMnemonicWords.map(
@@ -88,37 +82,38 @@ export const MnemonicForm = () => {
                 className='modal-layout-subtitle'
                 data-testid={DataTestIdsEnum.modalSubtitle}
               >
-                <Trans t={t}>
-                  Enter the words from your Secret Phrase as indicated below.
-                </Trans>
+                Enter the words from your Secret Phrase as indicated below.
               </p>
 
               <div className='modal-layout-fields'>
-                {Object.keys(initialValues).map((ordinal) => (
-                  <div
-                    key={ordinal}
-                    data-testid={ordinal}
-                    className='form-group modal-layout-field'
-                  >
-                    <label htmlFor={ordinal}>
-                      <Trans t={t}>Word</Trans>{' '}
-                      <span data-testid={`${ordinal}Label`}>
-                        {(compareObject as any)[ordinal].label}
-                      </span>
-                    </label>
+                {Object.keys(initialValues).map((ordinal) => {
+                  const renderInputComponent = (inputProps: any) => (
+                    <input {...inputProps} data-testid={`${ordinal}Input`} />
+                  );
 
-                    <Select
-                      data-testid={`${ordinal}Input`}
-                      identifier={ordinal}
-                      isInvalid={Boolean(errorMessage && fieldsTouched)}
-                      menuPlacement={ordinal === 'third' ? 'top' : 'bottom'}
-                      onChange={onChange(ordinal)}
-                      options={mnemonicOptions}
-                      searchPattern='startsWith'
-                      tabSelectsValue
-                    />
-                  </div>
-                ))}
+                  const autosuggestProps: any = {
+                    suggestions: mnemonicOptions,
+                    renderInputComponent,
+                    onSuggestionSelected: onChange(ordinal)
+                  };
+
+                  return (
+                    <div
+                      key={ordinal}
+                      data-testid={ordinal}
+                      className='form-group modal-layout-field'
+                    >
+                      <label htmlFor={ordinal}>
+                        Word{' '}
+                        <span data-testid={`${ordinal}Label`}>
+                          {(compareObject as any)[ordinal].label}
+                        </span>
+                      </label>
+
+                      <Autosuggest {...autosuggestProps} />
+                    </div>
+                  );
+                })}
               </div>
 
               {errorMessage && fieldsTouched && (
@@ -133,15 +128,15 @@ export const MnemonicForm = () => {
               id='createWalletBtn'
               data-testid={DataTestIdsEnum.goToDownloadButton}
             >
-              <Trans t={c}>Continue</Trans>
+              Continue
             </button>
 
             <div className='modal-layout-text'>
               <Link
-                to={`/${routeNames.create}/${CreateRoutesEnum.mnemonicPhrase}`}
+                to={CreateRecoverRoutesEnum.createMnemonic}
                 data-testid={DataTestIdsEnum.backToWordsButton}
               >
-                <Trans t={t}>Back to words</Trans>
+                Back to words
               </Link>
             </div>
           </form>

@@ -1,5 +1,5 @@
-import { decodeMessage } from '../decodeMessage';
 import { keystoreAccount } from '__mocks__';
+import { decodeMessage } from '../decodeMessage';
 
 const address = keystoreAccount.address;
 const signature =

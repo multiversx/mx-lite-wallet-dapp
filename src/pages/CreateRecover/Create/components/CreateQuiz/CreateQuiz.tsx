@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { useCreateRecoverContext } from 'contexts/createRecover';
-import { useNavigate } from 'hooks';
-
-import { CreateRoutesEnum, routeNames } from 'routes';
-
+import { useEffect } from 'react';
+import { useCreateRecoverContext } from 'pages/CreateRecover/contexts/createRecover';
+import { useNavigate } from 'react-router-dom';
+import { routeNames } from 'routes';
 import { MnemonicForm } from './MnemonicForm';
+import { CreateRecoverRoutesEnum } from '../../../routes';
 
 export const CreateQuiz = () => {
   const { createRecoverWalletRoutes } = useCreateRecoverContext();
-  const navigate = useNavigate({ from: 'CreateQuiz' });
+  const navigate = useNavigate();
   const routeNotInArray = !createRecoverWalletRoutes.includes(
-    CreateRoutesEnum.checkMnemonic
+    CreateRecoverRoutesEnum.createCheckMnemonic
   );
+
   const returnFromPassword = createRecoverWalletRoutes.includes(
-    CreateRoutesEnum.setPassword
+    CreateRecoverRoutesEnum.createPassword
   );
 
   const forbidden = routeNotInArray || returnFromPassword;

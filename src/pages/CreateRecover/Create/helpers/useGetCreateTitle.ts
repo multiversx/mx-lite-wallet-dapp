@@ -1,26 +1,20 @@
-import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import {
-  AWESOME_NOW_CREATE_A_PASSWORD,
-  WALLET_CREATED
-} from 'extension/popup/pages/Create/create.constants';
-import { CreateRoutesEnum } from 'routes/routeTypes';
+import { CreateRecoverRoutesEnum } from '../../routes';
 
 export function useGetCreateTitle() {
-  const { t } = useTranslation(['createAndRecover']);
   const { pathname } = useLocation();
 
-  if (pathname.includes(CreateRoutesEnum.download)) {
-    return t(WALLET_CREATED);
+  if (pathname.includes(CreateRecoverRoutesEnum.createDownload)) {
+    return 'Wallet created';
   }
 
-  if (pathname.includes(CreateRoutesEnum.setPassword)) {
-    return t(AWESOME_NOW_CREATE_A_PASSWORD);
+  if (pathname.includes(CreateRecoverRoutesEnum.createPassword)) {
+    return 'Awesome, now create a password';
   }
 
-  if (pathname.includes(CreateRoutesEnum.checkMnemonic)) {
-    return t('Surprise quiz');
+  if (pathname.includes(CreateRecoverRoutesEnum.createCheckMnemonic)) {
+    return 'Surprise quiz';
   }
 
-  return t('Create wallet');
+  return 'Create wallet';
 }

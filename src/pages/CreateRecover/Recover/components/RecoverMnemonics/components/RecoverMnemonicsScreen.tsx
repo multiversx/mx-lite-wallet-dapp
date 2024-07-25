@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { faClose, faPaste } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { DraggableArea } from 'react-draggable-tags';
 
-import { isChromeIOS } from '../../../../helpers';
 import { DataTestIdsEnum } from 'localConstants';
+import { isChromeIOS } from '../../../../helpers';
 import {
   SelectAutocompleteMnemonicInput,
   WordType
@@ -17,7 +17,6 @@ interface RecoverMnemonicsType {
   handleRemoveTag: (
     word: WordType
   ) => (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-  setOriginToUnlock: () => void;
   setMnemonicWords: Dispatch<SetStateAction<string[]>>;
   error: string;
   words: WordType[];

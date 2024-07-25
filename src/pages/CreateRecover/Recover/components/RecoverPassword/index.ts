@@ -1,1 +1,1 @@
-export { CreateRecoverPassword as RecoverPassword } from 'components';
+export { CreateRecoverPassword as RecoverPassword } from '../../../components';

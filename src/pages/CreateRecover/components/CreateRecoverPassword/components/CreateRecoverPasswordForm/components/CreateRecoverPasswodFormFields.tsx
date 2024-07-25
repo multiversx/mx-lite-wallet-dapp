@@ -1,22 +1,19 @@
 import classNames from 'classnames';
-
-import { CreateRecoverFieldNamesEnum } from 'components/CreateRecoverPassword/types';
-import { PasswordVisibilityToggle } from 'components/PasswordVisibilityToggle';
-import { useBooleanStateToggle } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
 
 import {
   CreateRecoverPasswordFormFieldsPropsType,
   CreateRecoverPasswordFormFieldType
 } from './createRecoverPasswordFormFields.types';
+import { CreateRecoverFieldNamesEnum } from '../../../types';
+import { useBooleanStateToggle } from 'hooks';
+import { PasswordVisibilityToggle } from 'components';
 
 export const CreateRecoverPasswordFormFields = ({
   formikProps,
   inputRef,
   infoSection
 }: CreateRecoverPasswordFormFieldsPropsType) => {
-  const { t } = useTranslation(['createAndRecover']);
-  const { t: c } = useTranslation(['common']);
   const { isSet, toggleState } = useBooleanStateToggle(false);
 
   const showError = (fieldName: CreateRecoverFieldNamesEnum) =>
@@ -48,9 +45,7 @@ export const CreateRecoverPasswordFormFields = ({
         <div className='modal-layout-fields'>
           {fields.map((field) => (
             <div key={field.name} className='form-group modal-layout-field'>
-              <label htmlFor={field.name}>
-                <Trans t={c}>{field.label}</Trans>
-              </label>
+              <label htmlFor={field.name}>{field.label}</label>
               <input
                 className={classNames('form-control', 'modal-layout-input', {
                   invalid: showError(field.name)
@@ -79,10 +74,8 @@ export const CreateRecoverPasswordFormFields = ({
 
               {!showError(field.name) && field.inputRef && (
                 <small className='modal-layout-small create-small recover-small'>
-                  <Trans t={t}>
-                    At least 8 characters, an uppercase letter, a symbol & a
-                    number.
-                  </Trans>
+                  At least 8 characters, an uppercase letter, a symbol & a
+                  number.
                 </small>
               )}
             </div>
@@ -97,7 +90,7 @@ export const CreateRecoverPasswordFormFields = ({
         id='createWalletBtn'
         className='btn btn-primary modal-layout-button'
       >
-        <Trans t={c}>Continue</Trans>
+        Continue
       </button>
     </form>
   );

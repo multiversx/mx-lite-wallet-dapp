@@ -1,16 +1,16 @@
 import { useEffect, useRef } from 'react';
-import { CreateRecoverFieldNamesEnum } from 'components/CreateRecoverPassword/types';
+import { CreateRecoverFieldNamesEnum } from '../../types';
 import {
   useCreateRecoverContext,
   useCreateRecoverDispatch
-} from 'contexts/createRecover';
-import { getKeysFromMnemonic } from 'helpers';
+} from 'pages/CreateRecover/contexts/createRecover';
 import { usePushAndNavigate } from 'hooks';
-import { CreateRoutesEnum } from 'routes';
 import {
   PasswordFormInitialValuesType,
   PasswordFormPasswordFieldType
 } from './useCreateRecoverPasswordForm.types';
+import { getKeysFromMnemonic } from '../../../../helpers';
+import { CreateRecoverRoutesEnum } from '../../../../routes';
 
 const initialValues: PasswordFormInitialValuesType = {
   [CreateRecoverFieldNamesEnum.password]: '',
@@ -50,7 +50,7 @@ export const useCreateRecoverPasswordForm = () => {
       keystoreString: JSON.stringify(privateKey)
     });
 
-    pushAndNavigate(CreateRoutesEnum.download);
+    pushAndNavigate(CreateRecoverRoutesEnum.createDownload);
   };
 
   return {

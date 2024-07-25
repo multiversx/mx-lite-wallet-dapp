@@ -1,11 +1,9 @@
-import React, { RefObject } from 'react';
+import { RefObject } from 'react';
 import { Formik } from 'formik';
-import { useTranslation } from 'react-i18next';
-
-import { PasswordFormInitialValuesType } from 'components/CreateRecoverPassword/hooks';
-import { passwordFormSchema } from 'helpers';
 
 import { CreateRecoverPasswordFormFields } from './components';
+import { PasswordFormInitialValuesType } from '../../hooks';
+import { passwordFormSchema } from 'helpers';
 
 export interface CreateRecoverPasswordFormType {
   initialValues: PasswordFormInitialValuesType;
@@ -20,14 +18,11 @@ export const CreateRecoverPasswordForm = ({
   inputRef,
   infoSection
 }: CreateRecoverPasswordFormType) => {
-  const { t } = useTranslation(['createAndRecover']);
-  const { t: c } = useTranslation(['common']);
-
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
-      validationSchema={passwordFormSchema({ t, c })}
+      validationSchema={passwordFormSchema()}
     >
       {(formikProps) => (
         <CreateRecoverPasswordFormFields

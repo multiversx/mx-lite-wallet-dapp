@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
-import { Navigate } from 'components';
+import { Link, Navigate } from 'react-router-dom';
 import {
   useCreateRecoverContext,
   useCreateRecoverDispatch
-} from 'contexts/createRecover';
+} from 'pages/CreateRecover/contexts/createRecover';
 
 import { usePushAndNavigate } from 'hooks';
-import { CreateRoutesEnum, routeNames } from 'routes';
+import { routeNames } from 'routes';
 import { CreateDisclaimerScreen } from './components';
 import { useCreateDisclaimer } from './hooks';
+import { CreateRecoverRoutesEnum } from '../../../routes';
 
 export const CreateDisclaimer = () => {
   const { createRecoverWalletRoutes, mnemonic } = useCreateRecoverContext();
@@ -31,7 +31,7 @@ export const CreateDisclaimer = () => {
 
   useEffect(() => {
     if (mnemonic) {
-      pushAndNavigate(CreateRoutesEnum.mnemonicPhrase);
+      pushAndNavigate(CreateRecoverRoutesEnum.createMnemonic);
     }
   }, [mnemonic]);
 
@@ -42,7 +42,7 @@ export const CreateDisclaimer = () => {
   useEffect(resetOnInit, []);
 
   if (isReturnFromWizard) {
-    return <Navigate to={routeNames.home} from='CreateDisclaimer' />;
+    return <Navigate to={routeNames.home} />;
   }
 
   const accessWalletSection = (

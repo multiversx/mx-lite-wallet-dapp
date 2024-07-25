@@ -1,8 +1,7 @@
 import { RefObject } from 'react';
 import { FormikProps } from 'formik';
-
-import { PasswordFormInitialValuesType } from 'components/CreateRecoverPassword/hooks';
-import { CreateRecoverFieldNamesEnum } from 'components/CreateRecoverPassword/types';
+import { PasswordFormInitialValuesType } from '../../../hooks';
+import { CreateRecoverFieldNamesEnum } from '../../../types';
 
 export interface CreateRecoverPasswordFormFieldsPropsType {
   formikProps: FormikProps<PasswordFormInitialValuesType>;

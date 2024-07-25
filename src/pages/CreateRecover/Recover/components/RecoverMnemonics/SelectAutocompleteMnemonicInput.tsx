@@ -1,7 +1,7 @@
 import { useRef, Dispatch, SetStateAction } from 'react';
-import { mnemonicWords as allMnemonicWords } from '../../../helpers';
 import Autosuggest from 'react-autosuggest';
 import { DataTestIdsEnum } from 'localConstants';
+import { mnemonicWords as allMnemonicWords } from '../../../helpers';
 
 export interface WordType {
   content: string;
@@ -41,12 +41,8 @@ export const SelectAutocompleteMnemonicInput = (props: TypeaheadInputType) => {
     (ref.current as any)?.clear();
   };
 
-  const renderSuggestion = (suggestion: string) => (
-    <input
-      data-testid={DataTestIdsEnum.mnemonicInput}
-      type='text'
-      value={suggestion}
-    />
+  const renderInputComponent = (inputProps: any) => (
+    <input {...inputProps} data-testid={DataTestIdsEnum.mnemonicInput} />
   );
 
   const inputProps = {
@@ -56,7 +52,7 @@ export const SelectAutocompleteMnemonicInput = (props: TypeaheadInputType) => {
 
   const autosuggestProps: any = {
     suggestions: mnemonicWords,
-    renderSuggestion,
+    renderInputComponent,
     inputProps,
     onSuggestionSelected: onChange
   };

@@ -1,17 +1,16 @@
-import { MouseEvent, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useCreateRecoverDispatch } from 'contexts/createRecover';
-import { downloadFile } from '../../helpers';
+import { useCreateRecoverDispatch } from 'pages/CreateRecover/contexts/createRecover';
 import { IS_TEST } from 'localConstants';
 import { routeNames } from 'routes';
 
 import { CreateRecoverDownloadScreen } from './components/CreateRecoverDownloadScreen';
 import { useCreateRecoverDownload } from './hooks';
+import { downloadFile } from '../../helpers';
 import { CreateRecoverRoutesEnum } from '../../routes';
 
 export interface CreateRecoverDownloadType {
   createRecoverWalletRoutes: Array<CreateRecoverRoutesEnum>;
-  accessWalletBtnHandler: (event: MouseEvent<HTMLAnchorElement>) => void;
   keystoreString: string;
   createdAddress: string;
   infoSection: JSX.Element;
@@ -19,12 +18,8 @@ export interface CreateRecoverDownloadType {
   accessWalletBtnLabel?: string;
 }
 export const CreateRecoverDownload = () => {
-  const {
-    createRecoverWalletRoutes,
-    accessWalletBtnHandler,
-    keystoreString,
-    createdAddress
-  } = useCreateRecoverDownload();
+  const { createRecoverWalletRoutes, keystoreString, createdAddress } =
+    useCreateRecoverDownload();
 
   const createDispatch = useCreateRecoverDispatch();
 
@@ -59,7 +54,6 @@ export const CreateRecoverDownload = () => {
 
   return (
     <CreateRecoverDownloadScreen
-      accessWalletBtnHandler={accessWalletBtnHandler}
       keystoreString={keystoreString}
       createdAddress={createdAddress}
       createRecoverWalletRoutes={createRecoverWalletRoutes}

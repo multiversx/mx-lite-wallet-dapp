@@ -2,11 +2,11 @@ import { ChangeEvent, useState } from 'react';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import { Navigate } from 'react-router-dom';
 import { CopyButton } from 'components';
-import { useCreateRecoverContext } from 'contexts/createRecover';
+import { useCreateRecoverContext } from 'pages/CreateRecover/contexts/createRecover';
 import { usePushAndNavigate } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
-import { Navigate } from 'react-router-dom';
 import { CreateRecoverRoutesEnum } from '../../../routes';
 
 export const CreateMnemonics = () => {

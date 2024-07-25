@@ -1,10 +1,10 @@
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { DataTestIdsEnum } from 'localConstants';
-import { CreateDisclaimerType } from '../hooks';
 import { getEgldLabel } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 import { isChromeIOS } from '../../../../helpers';
+import { CreateDisclaimerType } from '../hooks';
 
 export const CreateDisclaimerScreen = ({
   handleNetworkCheckboxChange,

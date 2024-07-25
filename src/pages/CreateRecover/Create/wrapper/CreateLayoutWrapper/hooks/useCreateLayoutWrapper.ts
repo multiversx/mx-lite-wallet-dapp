@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CreateRecoverRoutesEnum } from '../../../../routes';
 import { useGetCurrentStep } from '../../../../hooks';
+import { CreateRecoverRoutesEnum } from '../../../../routes';
 import { useGetCreateTitle } from '../../../helpers';
 
 export const useCreateLayoutWrapper = () => {

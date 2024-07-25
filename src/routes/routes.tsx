@@ -1,10 +1,5 @@
 import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
-import {
-  CreateRoutesEnum,
-  HooksPageEnum,
-  RecoverRoutesEnum,
-  RouteNamesEnum
-} from 'localConstants';
+import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
   Disclaimer,
@@ -20,13 +15,17 @@ import {
   Sign
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
+import {
+  CreateRecoverRoutes,
+  CreateRecoverRoutesEnum
+} from '../pages/CreateRecover/routes';
 
 export interface RouteWithTitleType extends RouteType {
   title: string;
 }
 
 const routesObject: Record<
-  RouteNamesEnum | HooksPageEnum | CreateRoutesEnum | RecoverRoutesEnum,
+  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
   RouteWithTitleType
 > = {
   [RouteNamesEnum.home]: {
@@ -102,7 +101,8 @@ const routesObject: Record<
     path: HooksPageEnum.logout,
     title: 'Logout',
     component: LogoutHook
-  }
+  },
+  ...CreateRecoverRoutes
 };
 
 export const routes: RouteWithTitleType[] = Object.values(routesObject);

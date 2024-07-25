@@ -1,42 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { readFromClipboard } from 'components/shared/CopyButton/helpers';
+import { readFromClipboard } from 'components';
 import {
   useCreateRecoverContext,
   useCreateRecoverDispatch
-} from 'contexts/createRecover';
-import { mnemonicWords as allMnemonicWords } from 'helpers';
+} from 'pages/CreateRecover/contexts/createRecover';
+import { mnemonicWords as allMnemonicWords } from '../../../../helpers';
 import { usePushAndNavigate } from 'hooks';
 import { routeNames } from 'routes';
 import { extractValidWordsFromText } from '../extractValidWordsFromText';
 import { mnemonicSchema } from '../mnemonicSchema';
 import { WordType } from '../SelectAutocompleteMnemonicInput';
+import { CreateRecoverRoutesEnum } from '../../../../routes';
+import { useNavigate } from 'react-router-dom';
 
 export const useRecoverMnemonics = () => {
-  const { t } = useTranslation(['createAndRecover']);
-  const { t: c } = useTranslation(['common']);
   const recoverDispatch = useCreateRecoverDispatch();
-  const dispatch = useDispatch();
-
   const { createRecoverWalletRoutes } = useCreateRecoverContext();
   const pushAndNavigate = usePushAndNavigate();
-  const navigate = useNavigate({ from: 'RecoverMnemonics' });
+  const navigate = useNavigate();
 
   const [words, setWords] = useState<WordType[]>([]);
   const [error, setError] = useState<string>('');
   const [mnemonicWords, setMnemonicWords] =
     useState<string[]>(allMnemonicWords);
 
-  const schema = mnemonicSchema({ t, c });
-
-  const setOriginToUnlock = () => {
-    dispatch(
-      setWalletOrigin({
-        pathname: routeNames.unlock,
-        search: ''
-      })
-    );
-  };
+  const schema = mnemonicSchema();
 
   const reordeWords = (reorderedWords: WordType[]) => {
     const newWords = reorderedWords.map((word, i) => ({
@@ -66,7 +54,7 @@ export const useRecoverMnemonics = () => {
         mnemonic: mnemonicPhrase
       });
 
-      pushAndNavigate(RecoverRoutesEnum.setPassword);
+      pushAndNavigate(CreateRecoverRoutesEnum.recoverPassword);
     } catch (err) {
       setError((err as any).errors[0]);
     }
@@ -74,7 +62,11 @@ export const useRecoverMnemonics = () => {
 
   const checkRoute = () => {
     recoverDispatch({ type: 'resetWizard' });
-    if (createRecoverWalletRoutes.includes(RecoverRoutesEnum.setPassword)) {
+    if (
+      createRecoverWalletRoutes.includes(
+        CreateRecoverRoutesEnum.recoverPassword
+      )
+    ) {
       navigate(routeNames.home);
     }
   };
@@ -96,7 +88,6 @@ export const useRecoverMnemonics = () => {
     handlePasteWords,
     onSubmit,
     handleRemoveTag,
-    setOriginToUnlock,
     setMnemonicWords,
     error,
     words,

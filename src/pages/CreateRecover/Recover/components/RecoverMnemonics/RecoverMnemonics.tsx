@@ -8,7 +8,6 @@ export const RecoverMnemonics = () => {
     handlePasteWords,
     onSubmit,
     handleRemoveTag,
-    setOriginToUnlock,
     setMnemonicWords,
     error,
     words,
@@ -21,7 +20,6 @@ export const RecoverMnemonics = () => {
   const goToUnlockSection = (
     <Link
       id='backButton'
-      onClick={setOriginToUnlock}
       to={UnlockRoutesEnum.keystore}
       className='modal-layout-text'
     >
@@ -34,7 +32,6 @@ export const RecoverMnemonics = () => {
       handlePasteWords={handlePasteWords}
       onSubmit={onSubmit}
       handleRemoveTag={handleRemoveTag}
-      setOriginToUnlock={setOriginToUnlock}
       setMnemonicWords={setMnemonicWords}
       error={error}
       words={words}

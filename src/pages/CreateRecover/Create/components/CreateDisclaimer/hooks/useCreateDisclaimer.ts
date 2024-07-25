@@ -1,6 +1,5 @@
 import { ChangeEvent, MutableRefObject, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useCreateRecoverDispatch } from 'contexts/createRecover';
+import { useCreateRecoverDispatch } from 'pages/CreateRecover/contexts/createRecover';
 import { generateMnemonic } from '../generateMnemonic';
 
 export interface CreateDisclaimerType {
@@ -17,7 +16,6 @@ export interface CreateDisclaimerType {
 }
 
 export const useCreateDisclaimer = () => {
-  const { t } = useTranslation(['createAndRecover']);
   const [isValid, setIsValid] = useState(true);
   const [touched, setTouched] = useState(false);
   const [isValidNetwork, setIsValidNetwork] = useState(true);
@@ -53,7 +51,7 @@ export const useCreateDisclaimer = () => {
       setIsValid(true);
     } else {
       setIsValid(false);
-      event.target.setCustomValidity(t('Please select a date in the past.'));
+      event.target.setCustomValidity('Please select a date in the past.');
     }
   };
 
@@ -68,7 +66,7 @@ export const useCreateDisclaimer = () => {
     } else {
       setIsValidNetwork(false);
       event.target.setCustomValidity(
-        t('Please confirm by clicking the checkbox.')
+        'Please confirm by clicking the checkbox.'
       );
     }
   };

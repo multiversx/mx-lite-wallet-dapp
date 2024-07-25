@@ -1,1 +1,1 @@
-export { CreateRecoverDownload as CreateDownload } from 'components';
+export { CreateRecoverDownload as CreateDownload } from '../../../components';

@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
-import { useCreateRecoverContext } from 'contexts/createRecover';
+import { useCreateRecoverContext } from 'pages/CreateRecover/contexts/createRecover';
 import { routeNames } from 'routes';
 
 import { CreateRecoverPasswordForm } from './components';
 import { useCreateRecoverPasswordForm } from './hooks';
-import { CreateRoutesEnum } from './types';
+import { CreateRecoverRoutesEnum } from '../../routes';
 
 export const CreateRecoverPassword = () => {
   const { createRecoverWalletRoutes } = useCreateRecoverContext();
@@ -12,10 +12,10 @@ export const CreateRecoverPassword = () => {
     useCreateRecoverPasswordForm();
 
   const routeNotInArray = !createRecoverWalletRoutes.includes(
-    CreateRoutesEnum.setPassword
+    CreateRecoverRoutesEnum.createPassword
   );
   const returnFromDownload = createRecoverWalletRoutes.includes(
-    CreateRoutesEnum.download
+    CreateRecoverRoutesEnum.createDownload
   );
 
   const infoSection = (

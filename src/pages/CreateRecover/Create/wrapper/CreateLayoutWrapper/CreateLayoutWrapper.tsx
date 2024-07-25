@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
+import { ModalContainer, ProgressBar } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { useCreateLayoutWrapper } from './hooks';
-import { ModalContainer, ProgressBar } from 'components';
 
 export const CreateLayoutWrapper = ({ children }: PropsWithChildren) => {
   const { currentStep, routesArray, title } = useCreateLayoutWrapper();

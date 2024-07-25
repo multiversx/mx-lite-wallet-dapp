@@ -1,5 +1,5 @@
 import uniq from 'lodash/uniq';
-import { CreateRoutesEnum, RecoverRoutesEnum } from 'localConstants';
+import { CreateRecoverRoutesEnum } from '../../routes';
 
 export enum CreateRecoverProviderTypeEnum {
   recover = 'recover',
@@ -10,7 +10,7 @@ export interface CreateRecoverContextStateType {
   mnemonic: string;
   createdAddress: string;
   keystoreString: string;
-  createRecoverWalletRoutes: Array<CreateRoutesEnum | RecoverRoutesEnum>;
+  createRecoverWalletRoutes: Array<CreateRecoverRoutesEnum>;
   providerType: CreateRecoverProviderTypeEnum;
 }
 
@@ -30,7 +30,7 @@ export type ActionType =
   | { type: 'resetWizard' }
   | {
       type: 'pushToWalletRoutes';
-      nextRoute: CreateRoutesEnum | RecoverRoutesEnum;
+      nextRoute: CreateRecoverRoutesEnum;
     }
   | {
       type: 'setCreatedAddress';
@@ -49,6 +49,7 @@ export function createReducer(
     case 'setMnemonic': {
       return { ...state, mnemonic: action.mnemonic };
     }
+
     case 'setKeystoreString': {
       return {
         ...state,
@@ -56,21 +57,24 @@ export function createReducer(
         mnemonic: initialState.mnemonic
       };
     }
+
     case 'setCreatedAddress': {
       return { ...state, createdAddress: action.createdAddress };
     }
+
     case 'pushToWalletRoutes': {
       const { nextRoute } = action;
       const uniqueRoutes = uniq([
         ...state.createRecoverWalletRoutes,
         nextRoute
       ]);
-      const newState = {
+
+      return {
         ...state,
         createRecoverWalletRoutes: Array.from(uniqueRoutes)
       };
-      return newState;
     }
+
     case 'resetWizard': {
       return { ...initialState, providerType: state.providerType };
     }

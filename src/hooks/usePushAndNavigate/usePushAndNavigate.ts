@@ -1,9 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import {
   useCreateRecoverContext,
   useCreateRecoverDispatch
-} from 'contexts/createRecover';
-import { CreateRoutesEnum, RecoverRoutesEnum, routeNames } from 'routes';
-import { useNavigate } from 'react-router-dom';
+} from 'pages/CreateRecover/contexts/createRecover';
+import { CreateRecoverRoutesEnum } from '../../pages/CreateRecover/routes';
 
 /**
  * Because Recover and Create flow has custom navigation conditions, every route must
@@ -14,13 +14,12 @@ export const usePushAndNavigate = () => {
   const { providerType } = useCreateRecoverContext();
   const navigate = useNavigate();
 
-  return function registerNextRoute(
-    nextRoute: RecoverRoutesEnum | CreateRoutesEnum
-  ) {
+  return (nextRoute: CreateRecoverRoutesEnum) => {
     recoverDispatch({
       type: 'pushToWalletRoutes',
       nextRoute
     });
-    navigate(`/${routeNames[providerType]}/${nextRoute}`);
+
+    navigate(`/${providerType}/${nextRoute}`);
   };
 };

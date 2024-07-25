@@ -1,4 +1,3 @@
-import { RouteType } from '../../types/sdkDapp.types';
 import {
   CreateDisclaimer,
   CreateDownload,
@@ -7,6 +6,7 @@ import {
   CreateQuiz
 } from './Create';
 import { RecoverDownload, RecoverMnemonics, RecoverPassword } from './Recover';
+import { RouteType } from '../../types/sdkDapp.types';
 
 export enum CreateRecoverRoutesEnum {
   info = '/create',

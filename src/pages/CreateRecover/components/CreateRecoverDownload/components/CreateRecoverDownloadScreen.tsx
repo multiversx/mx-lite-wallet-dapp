@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { PageState } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 
+import { UnlockRoutesEnum } from '../../../routes';
 import { CreateRecoverDownloadType } from '../CreateRecoverDownload';
 import { ReDownloadButton } from '../ReDownloadButton';
-import { UnlockRoutesEnum } from '../../../routes';
 
 export const CreateRecoverDownloadScreen = ({
-  accessWalletBtnHandler,
   keystoreString,
   createdAddress,
   infoSection,
@@ -30,7 +29,6 @@ export const CreateRecoverDownloadScreen = ({
         <Link
           className='btn btn-primary modal-layout-button'
           data-testid={DataTestIdsEnum.accessWalletBtn}
-          onClick={accessWalletBtnHandler}
           to={UnlockRoutesEnum.keystore}
         >
           {accessWalletBtnLabel}

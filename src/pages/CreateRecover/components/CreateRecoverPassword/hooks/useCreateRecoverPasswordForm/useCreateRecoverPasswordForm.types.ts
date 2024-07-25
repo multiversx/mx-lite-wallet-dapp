@@ -1,4 +1,4 @@
-import { CreateRecoverFieldNamesEnum } from 'components/CreateRecoverPassword/types';
+import { CreateRecoverFieldNamesEnum } from '../../types';
 
 export interface PasswordFormInitialValuesType {
   [CreateRecoverFieldNamesEnum.password]: string;
