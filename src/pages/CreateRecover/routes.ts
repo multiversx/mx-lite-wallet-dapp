@@ -1,20 +1,28 @@
 import {
+  Create,
   CreateDisclaimer,
   CreateDownload,
   CreateMnemonics,
   CreatePassword,
   CreateQuiz
 } from './Create';
-import { RecoverDownload, RecoverMnemonics, RecoverPassword } from './Recover';
+import {
+  Recover,
+  RecoverDownload,
+  RecoverMnemonics,
+  RecoverPassword
+} from './Recover';
 import { RouteType } from '../../types/sdkDapp.types';
 
 export enum CreateRecoverRoutesEnum {
-  info = '/create',
+  create = '/create',
+  createDisclaimer = '/create/disclaimer',
   createMnemonic = '/create/mnemonic',
   createCheckMnemonic = '/create/check',
   createPassword = '/create/password',
   createDownload = '/create/download',
-  recoverMnemonic = '/recover',
+  recover = '/recover',
+  recoverMnemonic = '/recover/mnemonic',
   recoverPassword = '/recover/password',
   recoverDownload = '/recover/download'
 }
@@ -32,8 +40,13 @@ export const CreateRecoverRoutes: Record<
   CreateRecoverRoutesEnum,
   RouteWithTitleType
 > = {
-  [CreateRecoverRoutesEnum.info]: {
-    path: CreateRecoverRoutesEnum.info,
+  [CreateRecoverRoutesEnum.create]: {
+    path: CreateRecoverRoutesEnum.create,
+    title: 'Create',
+    component: Create
+  },
+  [CreateRecoverRoutesEnum.createDisclaimer]: {
+    path: CreateRecoverRoutesEnum.createDisclaimer,
     title: 'Create Disclaimer',
     component: CreateDisclaimer
   },
@@ -56,6 +69,11 @@ export const CreateRecoverRoutes: Record<
     path: CreateRecoverRoutesEnum.createDownload,
     title: 'Create Download',
     component: CreateDownload
+  },
+  [CreateRecoverRoutesEnum.recover]: {
+    path: CreateRecoverRoutesEnum.recover,
+    title: 'Recover',
+    component: Recover
   },
   [CreateRecoverRoutesEnum.recoverMnemonic]: {
     path: CreateRecoverRoutesEnum.recoverMnemonic,

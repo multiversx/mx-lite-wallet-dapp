@@ -16,6 +16,8 @@ import {
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';
+import { Link } from 'react-router-dom';
+import { CreateRecoverRoutesEnum } from '../CreateRecover/routes';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -67,6 +69,21 @@ export const Unlock = () => {
 
             <Pem />
             <Keystore />
+          </div>
+          <p className='text-center text-gray-400'>Don't have a wallet?</p>
+          <div className='flex flex-col md:flex-row gap-4'>
+            <Link
+              className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+              to={CreateRecoverRoutesEnum.info}
+            >
+              Create
+            </Link>
+            <Link
+              className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+              to={CreateRecoverRoutesEnum.recoverMnemonic}
+            >
+              Recover
+            </Link>
           </div>
         </div>
       </div>
