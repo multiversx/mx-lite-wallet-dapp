@@ -1,5 +1,10 @@
 export enum DataTestIdsEnum {
+  accessWalletBtn = 'accessWalletBtn',
+  createWalletModal = 'createWalletModal',
+  pasteMenemonicBtn = 'pasteMenemonicBtn',
+  disclaimerCheck = 'disclaimerCheck',
   createWalletBtn = 'createWalletBtn',
+  recoverMnemonicsInput = 'recoverMnemonicsInput',
   mnemonicsDisclaimer = 'mnemonicsDisclaimer',
   mnemonicWords = 'mnemonicWords',
   accessPass = 'accessPass',

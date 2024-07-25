@@ -20,16 +20,8 @@ import {
   Sign
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
-import { CreateDisclaimer } from '../pages/Create/components/CreateDisclaimer';
-import { CreateMnemonics } from '../pages/Create/components/CreateMnemonics';
-import { CreateQuiz } from '../pages/Create/components/CreateQuiz';
-import { CreatePassword } from '../pages/Create/components/CreatePassword';
-import { CreateDownload } from '../pages/Create/components/CreateDownload';
-import { RecoverMnemonics } from '../pages/Recover/components/RecoverMnemonics';
-import { RecoverPassword } from '../pages/Recover/components/RecoverPassword';
-import { RecoverDownload } from '../pages/Recover/components/RecoverDownload';
 
-interface RouteWithTitleType extends RouteType {
+export interface RouteWithTitleType extends RouteType {
   title: string;
 }
 
@@ -110,46 +102,6 @@ const routesObject: Record<
     path: HooksPageEnum.logout,
     title: 'Logout',
     component: LogoutHook
-  },
-  [CreateRoutesEnum.info]: {
-    path: CreateRoutesEnum.info,
-    title: 'Create Disclaimer',
-    component: CreateDisclaimer
-  },
-  [CreateRoutesEnum.mnemonicPhrase]: {
-    path: CreateRoutesEnum.mnemonicPhrase,
-    title: 'Create Mnemonics',
-    component: CreateMnemonics
-  },
-  [CreateRoutesEnum.checkMnemonic]: {
-    path: CreateRoutesEnum.checkMnemonic,
-    title: 'Create Mnemonics',
-    component: CreateQuiz
-  },
-  [CreateRoutesEnum.setPassword]: {
-    path: CreateRoutesEnum.setPassword,
-    title: 'Create Password',
-    component: CreatePassword
-  },
-  [CreateRoutesEnum.download]: {
-    path: CreateRoutesEnum.download,
-    title: 'Create Download',
-    component: CreateDownload
-  },
-  [RecoverRoutesEnum.mnemonicPhrase]: {
-    path: RecoverRoutesEnum.mnemonicPhrase,
-    title: 'Recover Mnemonics',
-    component: RecoverMnemonics
-  },
-  [RecoverRoutesEnum.setPassword]: {
-    path: RecoverRoutesEnum.setPassword,
-    title: 'Recover Password',
-    component: RecoverPassword
-  },
-  [RecoverRoutesEnum.download]: {
-    path: RecoverRoutesEnum.download,
-    title: 'Recover Download',
-    component: RecoverDownload
   }
 };
 
