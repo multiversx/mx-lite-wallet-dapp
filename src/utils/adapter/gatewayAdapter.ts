@@ -30,6 +30,12 @@ const jsonToArrayBuffer = (json: Record<string, unknown>) => {
   return arrayBuffer;
 };
 
+const gatewayUrl = 'https://devnet-gateway.multiversx.com';
+
+const endpointMap = {
+  [ACCOUNTS_ENDPOINT]: 'address'
+};
+
 axios.interceptors.request.use(
   function (config) {
     const { url } = config;
