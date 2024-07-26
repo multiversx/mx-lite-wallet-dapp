@@ -16,8 +16,8 @@ import {
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';
-import { Link } from 'react-router-dom';
 import { CreateRecoverRoutesEnum } from '../CreateRecover/routes';
+import { MxLink } from 'components';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -70,20 +70,22 @@ export const Unlock = () => {
             <Pem />
             <Keystore />
           </div>
-          <p className='text-center text-gray-400'>Don't have a wallet?</p>
-          <div className='flex flex-col md:flex-row gap-4'>
-            <Link
-              className='text-blue-400 underline decoration-dotted hover:decoration-solid'
-              to={CreateRecoverRoutesEnum.info}
-            >
-              Create
-            </Link>
-            <Link
-              className='text-blue-400 underline decoration-dotted hover:decoration-solid'
-              to={CreateRecoverRoutesEnum.recoverMnemonic}
-            >
-              Recover
-            </Link>
+          <div className='flex flex-col items-center justify-center mt-1 gap-1'>
+            <p className='text-center text-gray-400'>Don't have a wallet?</p>
+            <div className='flex flex-col md:flex-row md:gap-4 items-center justify-center'>
+              <MxLink
+                className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+                to={CreateRecoverRoutesEnum.create}
+              >
+                Create
+              </MxLink>
+              <MxLink
+                className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+                to={CreateRecoverRoutesEnum.recoverMnemonic}
+              >
+                Recover
+              </MxLink>
+            </div>
           </div>
         </div>
       </div>

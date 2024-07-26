@@ -146,7 +146,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
 
   return (
     <ModalContainer
-      className='login-modal rounded shadow-lg p-6'
+      className='login-modal p-6'
       onClose={handleModalClose}
       visible={show}
     >

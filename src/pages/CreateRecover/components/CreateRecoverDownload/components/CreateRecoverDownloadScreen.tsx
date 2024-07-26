@@ -1,11 +1,9 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import { PageState } from 'components';
+import { MxLink, PageState } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
-
-import { UnlockRoutesEnum } from '../../../routes';
 import { CreateRecoverDownloadType } from '../CreateRecoverDownload';
 import { ReDownloadButton } from '../ReDownloadButton';
+import { routeNames } from 'routes';
 
 export const CreateRecoverDownloadScreen = ({
   keystoreString,
@@ -16,23 +14,20 @@ export const CreateRecoverDownloadScreen = ({
 }: CreateRecoverDownloadType) => {
   return (
     <>
-      <div className='create-wrapper recover-wrapper'>
-        <div className='create-top recover-top'>
-          <PageState
-            className='create-state'
-            icon={faCheckCircle}
-            iconClass='fa-3x primary'
-            description={infoSection}
-          />
-        </div>
+      <div className='flex flex-col items-center justify-center gap-4 w-full mt-4'>
+        <PageState
+          icon={faCheckCircle}
+          iconClass='fa-3x text-blue-600'
+          description={infoSection}
+        />
 
-        <Link
-          className='btn btn-primary modal-layout-button'
+        <MxLink
+          className='text-blue-400 underline decoration-dotted hover:decoration-solid'
           data-testid={DataTestIdsEnum.accessWalletBtn}
-          to={UnlockRoutesEnum.keystore}
+          to={routeNames.unlock}
         >
           {accessWalletBtnLabel}
-        </Link>
+        </MxLink>
 
         {hasDownload && (
           <ReDownloadButton

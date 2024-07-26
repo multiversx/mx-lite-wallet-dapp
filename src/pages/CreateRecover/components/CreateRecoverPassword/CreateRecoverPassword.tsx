@@ -1,40 +1,60 @@
-import { Navigate } from 'react-router-dom';
-import { useCreateRecoverContext } from 'pages/CreateRecover/contexts/createRecover';
-import { routeNames } from 'routes';
+import { Formik } from 'formik';
+import { passwordFormSchema } from 'helpers';
+import { CreateRecoverPasswordFormFields } from './components';
+import { DataTestIdsEnum } from 'localConstants';
+import {
+  CreateRecoverFieldNamesEnum,
+  CreateRecoverPasswordPropsType,
+  PasswordFormInitialValuesType,
+  PasswordFormPasswordFieldType
+} from './types';
+import { getKeysFromMnemonic } from '../../helpers';
 
-import { CreateRecoverPasswordForm } from './components';
-import { useCreateRecoverPasswordForm } from './hooks';
-import { CreateRecoverRoutesEnum } from '../../routes';
+const initialValues: PasswordFormInitialValuesType = {
+  [CreateRecoverFieldNamesEnum.password]: '',
+  [CreateRecoverFieldNamesEnum.passwordRepeat]: '',
+  [CreateRecoverFieldNamesEnum.check]: false
+};
 
-export const CreateRecoverPassword = () => {
-  const { createRecoverWalletRoutes } = useCreateRecoverContext();
-  const { saveToContextAndNavigate, initialValues, inputRef } =
-    useCreateRecoverPasswordForm();
-
-  const routeNotInArray = !createRecoverWalletRoutes.includes(
-    CreateRecoverRoutesEnum.createPassword
-  );
-  const returnFromDownload = createRecoverWalletRoutes.includes(
-    CreateRecoverRoutesEnum.createDownload
-  );
-
+export const CreateRecoverPassword = ({
+  mnemonic,
+  onNext,
+  setCreatedAddress,
+  setKeystoreString
+}: CreateRecoverPasswordPropsType) => {
   const infoSection = (
-    <p className='modal-layout-subtitle' data-testid='modalSubtitle'>
-      The wallet made a secret key for you and stored it in a file. <br />{' '}
-      Protect your Keystore File with a password.
+    <p
+      className='text-sm text-gray-400 mb-10'
+      data-testid={DataTestIdsEnum.modalSubtitle}
+    >
+      The wallet made a secret key for you and stored it in a file. Protect your
+      Keystore File with a password.
     </p>
   );
 
-  if (routeNotInArray || returnFromDownload) {
-    return <Navigate to={routeNames.home} />;
-  }
+  const handleSubmit = ({ password }: PasswordFormPasswordFieldType) => {
+    const { publicKey, privateKey } = getKeysFromMnemonic({
+      mnemonic,
+      password
+    });
+
+    setCreatedAddress(publicKey);
+    setKeystoreString(JSON.stringify(privateKey));
+    onNext();
+  };
 
   return (
-    <CreateRecoverPasswordForm
+    <Formik
       initialValues={initialValues}
-      onSubmit={saveToContextAndNavigate}
-      inputRef={inputRef}
-      infoSection={infoSection}
-    />
+      onSubmit={handleSubmit}
+      validationSchema={passwordFormSchema()}
+    >
+      {(formikProps) => (
+        <CreateRecoverPasswordFormFields
+          formikProps={formikProps}
+          infoSection={infoSection}
+        />
+      )}
+    </Formik>
   );
 };

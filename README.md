@@ -35,7 +35,7 @@ yarn  install
 
 
 Go to `src/config` folder and edit the `config.sovereign.ts` file.
-Create a new `index.ts` file with the contents of `config.sovereign.ts`.
+Create a new `index.tsx` file with the contents of `config.sovereign.ts`.
 
 #### Step 3. Running in development mode
 

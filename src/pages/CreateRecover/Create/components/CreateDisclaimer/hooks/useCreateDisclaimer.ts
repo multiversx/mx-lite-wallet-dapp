@@ -1,35 +1,39 @@
 import { ChangeEvent, MutableRefObject, useRef, useState } from 'react';
-import { useCreateRecoverDispatch } from 'pages/CreateRecover/contexts/createRecover';
 import { generateMnemonic } from '../generateMnemonic';
 
-export interface CreateDisclaimerType {
-  handleNetworkCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
+export interface CreateDisclaimerReturnType {
   disclaimerContinueHandler: () => void;
+  handleCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleNetworkCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isValid: boolean;
-  touched: boolean;
-  safetyRef: MutableRefObject<null>;
-  networkRef: MutableRefObject<null>;
-  touchedNetwork: boolean;
   isValidNetwork: boolean;
-  accessWalletSection?: JSX.Element;
+  networkRef: MutableRefObject<null>;
+  safetyRef: MutableRefObject<null>;
 }
 
-export const useCreateDisclaimer = () => {
-  const [isValid, setIsValid] = useState(true);
+export interface CreateDisclaimerPropsType {
+  onNext: () => void;
+  setMnemonic: (mnemonic: string) => void;
+}
+
+export const useCreateDisclaimer = ({
+  onNext,
+  setMnemonic
+}: CreateDisclaimerPropsType) => {
+  const [isValid, setIsValid] = useState(false);
   const [touched, setTouched] = useState(false);
   const [isValidNetwork, setIsValidNetwork] = useState(true);
   const [touchedNetwork, setTouchedNetwork] = useState(false);
 
   const safetyRef = useRef(null);
   const networkRef = useRef(null);
-  const createDispatch = useCreateRecoverDispatch();
 
   const disclaimerContinueHandler = () => {
     if (touched && isValid && touchedNetwork && isValidNetwork) {
       const mnemonic = generateMnemonic();
       const mnemonicString = mnemonic.join(' ');
-      createDispatch({ type: 'setMnemonic', mnemonic: mnemonicString });
+      setMnemonic(mnemonicString);
+      onNext();
     } else {
       const isChecked =
         safetyRef.current !== null && (safetyRef.current as any).checked;
@@ -45,8 +49,8 @@ export const useCreateDisclaimer = () => {
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked;
-
     setTouched(true);
+
     if (checked) {
       setIsValid(true);
     } else {

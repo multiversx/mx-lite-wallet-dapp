@@ -1,24 +1,25 @@
 import { ChangeEvent, useState } from 'react';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
-import { Navigate } from 'react-router-dom';
-import { CopyButton } from 'components';
-import { useCreateRecoverContext } from 'pages/CreateRecover/contexts/createRecover';
-import { usePushAndNavigate } from 'hooks';
+import { Button, CopyButton } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
-import { CreateRecoverRoutesEnum } from '../../../routes';
 
-export const CreateMnemonics = () => {
-  const { mnemonic, createRecoverWalletRoutes } = useCreateRecoverContext();
+interface CreateMnemonicsPropsType {
+  onNext: () => void;
+  mnemonic: string;
+}
+
+export const CreateMnemonics = ({
+  mnemonic,
+  onNext
+}: CreateMnemonicsPropsType) => {
   const mnemonicArray = mnemonic.split(' ');
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
   const [touched, setTouched] = useState(false);
-  const pushAndNavigate = usePushAndNavigate();
 
   const goToCheckMnemonic = () => {
     if (touched && isValid) {
-      return pushAndNavigate(CreateRecoverRoutesEnum.createCheckMnemonic);
+      return onNext();
     }
 
     setTouched(true);
@@ -43,20 +44,11 @@ export const CreateMnemonics = () => {
     }
   };
 
-  if (
-    !createRecoverWalletRoutes.includes(CreateRecoverRoutesEnum.createMnemonic)
-  ) {
-    return <Navigate to={CreateRecoverRoutesEnum.info} />;
-  }
-
   return (
-    <div className='create-wrapper mnemonics-wrapper'>
-      <div className='create-top'>
-        <div className='create-disclaimers'>
-          <p
-            className='create-disclaimer'
-            data-testid={DataTestIdsEnum.mnemonicsDisclaimer}
-          >
+    <div className='flex flex-col items-center gap-4 mt-10'>
+      <div className='flex flex-col items-center gap-4 mb-10'>
+        <div>
+          <p data-testid={DataTestIdsEnum.mnemonicsDisclaimer}>
             <FontAwesomeIcon icon={faInfoCircle} className='primary' /> Write
             down these words in this exact order. You can use them to access
             your wallet, make sure you protect them.
@@ -64,56 +56,46 @@ export const CreateMnemonics = () => {
         </div>
 
         <div
-          className='create-mnemonics'
+          className='flex flex-row flex-wrap items-center justify-center p-4 gap-2 bg-gray-100 border border-gray-200'
           data-testid={DataTestIdsEnum.mnemonicWords}
         >
           {mnemonicArray.map((word, i) => (
             <div
               data-testid={DataTestIdsEnum.mnemonicWord}
               key={word + i}
-              className='mnemonic-word'
+              className='flex flex-row items-center justify-center p-2 gap-1 bg-gray-500 border border-gray-200 text-white rounded text-sm'
             >
-              <span className='mnemonic-word-id'>{i + 1}</span>
-              <span
-                className='mnemonic-word-value'
-                data-testid={`mnemonicWord${i}`}
-              >
-                {word}
-              </span>
+              <span>{i + 1}</span>
+              <span data-testid={`mnemonicWord${i}`}>{word}</span>
             </div>
           ))}
 
-          <CopyButton text={textToCopy} className='mnemonic-copy' />
+          <CopyButton text={textToCopy} />
         </div>
 
-        <div className='modal-layout-fields'>
-          <div className='modal-layout-checkbox-field'>
-            <input
-              type='checkbox'
-              id='check'
-              data-testid={DataTestIdsEnum.check}
-              onChange={handleCheckboxChange}
-              className={classNames('modal-layout-checkbox-input', {
-                invalid: touched && !isValid
-              })}
-            />
+        <div>
+          <input
+            type='checkbox'
+            id='check'
+            data-testid={DataTestIdsEnum.check}
+            onChange={handleCheckboxChange}
+            className='mr-2'
+          />
 
-            <label htmlFor='check' data-testid={DataTestIdsEnum.mnemonicCheck}>
-              I confirm I have written down and safely stored my secret phrase.
-            </label>
-          </div>
+          <label htmlFor='check' data-testid={DataTestIdsEnum.mnemonicCheck}>
+            I confirm I have written down and safely stored my secret phrase.
+          </label>
         </div>
       </div>
 
-      <button
-        className='btn btn-primary modal-layout-button'
+      <Button
         id='goToCheckMnemonic'
         data-testid={DataTestIdsEnum.goToCheckMnemonic}
         disabled={!isValid}
         onClick={goToCheckMnemonic}
       >
         Create Wallet
-      </button>
+      </Button>
     </div>
   );
 };

@@ -1,29 +1,22 @@
-import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useCreateRecoverDispatch } from 'pages/CreateRecover/contexts/createRecover';
-import { IS_TEST } from 'localConstants';
-import { routeNames } from 'routes';
+import { ReactNode, useEffect } from 'react';
+import { DataTestIdsEnum, IS_TEST } from 'localConstants';
 
-import { CreateRecoverDownloadScreen } from './components/CreateRecoverDownloadScreen';
-import { useCreateRecoverDownload } from './hooks';
+import { CreateRecoverDownloadScreen } from './components';
 import { downloadFile } from '../../helpers';
-import { CreateRecoverRoutesEnum } from '../../routes';
 
 export interface CreateRecoverDownloadType {
-  createRecoverWalletRoutes: Array<CreateRecoverRoutesEnum>;
-  keystoreString: string;
-  createdAddress: string;
-  infoSection: JSX.Element;
-  hasDownload?: boolean;
   accessWalletBtnLabel?: string;
+  createdAddress: string;
+  hasDownload?: boolean;
+  infoSection?: ReactNode;
+  keystoreString: string;
 }
-export const CreateRecoverDownload = () => {
-  const { createRecoverWalletRoutes, keystoreString, createdAddress } =
-    useCreateRecoverDownload();
 
-  const createDispatch = useCreateRecoverDispatch();
-
-  const triggerDownloadJson = () => {
+export const CreateRecoverDownload = ({
+  keystoreString,
+  createdAddress
+}: CreateRecoverDownloadType) => {
+  useEffect(() => {
     if (!IS_TEST) {
       downloadFile({
         data: keystoreString,
@@ -31,32 +24,22 @@ export const CreateRecoverDownload = () => {
         fileType: 'json'
       });
     }
-
-    return () => {
-      createDispatch({ type: 'resetWizard' });
-    };
-  };
-
-  useEffect(triggerDownloadJson, []);
-
-  if (
-    !createRecoverWalletRoutes.includes(CreateRecoverRoutesEnum.createDownload)
-  ) {
-    return <Navigate to={routeNames.home} />;
-  }
+  }, []);
 
   const infoSection = (
-    <>
+    <p
+      className='text-gray-400 mb-10'
+      data-testid={DataTestIdsEnum.modalSubtitle}
+    >
       Great work. You downloaded the Keystore file. <br /> Save it, you’ll need
       it to access your wallet.
-    </>
+    </p>
   );
 
   return (
     <CreateRecoverDownloadScreen
       keystoreString={keystoreString}
       createdAddress={createdAddress}
-      createRecoverWalletRoutes={createRecoverWalletRoutes}
       infoSection={infoSection}
     />
   );

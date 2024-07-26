@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import { RecoverMnemonicsScreen } from './components';
 import { useRecoverMnemonics } from './hooks';
 import { UnlockRoutesEnum } from '../../../routes';
+import { MxLink } from 'components';
 
 export const RecoverMnemonics = () => {
   const {
@@ -18,13 +18,7 @@ export const RecoverMnemonics = () => {
   } = useRecoverMnemonics();
 
   const goToUnlockSection = (
-    <Link
-      id='backButton'
-      to={UnlockRoutesEnum.keystore}
-      className='modal-layout-text'
-    >
-      Back to unlock
-    </Link>
+    <MxLink to={UnlockRoutesEnum.keystore}>Back to unlock</MxLink>
   );
 
   return (

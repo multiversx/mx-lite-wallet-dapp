@@ -32,7 +32,7 @@
   max-width: 600px !important;
 }
 
-.dapp-core-component__dappModalStyles__dappModalBody, .dapp-core-component__dappModalStyles__dappModalContent, .dapp-core-component__dappModalStyles__dappModal {
+.dapp-core-component__dappModalStyles__dappModalBody, .dapp-core-component__dappModalStyles__dappModalContent {
   border-radius: 12px !important;
 }
 
@@ -104,4 +104,20 @@
 
 .dapp-core-component__balanceStyles__balanceSymbol {
   color: #0ac2ae !important;
+}
+
+.password-visibility-toggle {
+  color: var(--body-color);
+  cursor: pointer;
+  margin: 36px 12px 0 0;
+  padding: 1px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: var(--transition);
+  width: 24px;
+
+  &:hover {
+    opacity: 0.75;
+  }
 }

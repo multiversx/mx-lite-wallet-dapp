@@ -11,7 +11,7 @@ export const RecoverLayoutWrapper = ({ children }: PropsWithChildren) => {
 
   return (
     <ModalContainer
-      className='login-modal rounded shadow-lg p-6'
+      className='login-modal rounded p-6'
       visible
       data-testid={DataTestIdsEnum.recoverKeystoreModal}
     >

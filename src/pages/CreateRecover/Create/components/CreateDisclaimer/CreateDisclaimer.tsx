@@ -1,21 +1,7 @@
-import { useEffect } from 'react';
-
-import { Link, Navigate } from 'react-router-dom';
-import {
-  useCreateRecoverContext,
-  useCreateRecoverDispatch
-} from 'pages/CreateRecover/contexts/createRecover';
-
-import { usePushAndNavigate } from 'hooks';
-import { routeNames } from 'routes';
 import { CreateDisclaimerScreen } from './components';
-import { useCreateDisclaimer } from './hooks';
-import { CreateRecoverRoutesEnum } from '../../../routes';
+import { CreateDisclaimerPropsType, useCreateDisclaimer } from './hooks';
 
-export const CreateDisclaimer = () => {
-  const { createRecoverWalletRoutes, mnemonic } = useCreateRecoverContext();
-  const createDispatch = useCreateRecoverDispatch();
-  const pushAndNavigate = usePushAndNavigate();
+export const CreateDisclaimer = (props: CreateDisclaimerPropsType) => {
   const {
     handleNetworkCheckboxChange,
     handleCheckboxChange,
@@ -26,43 +12,19 @@ export const CreateDisclaimer = () => {
     networkRef,
     touchedNetwork,
     isValidNetwork
-  } = useCreateDisclaimer();
-  const isReturnFromWizard = createRecoverWalletRoutes.length > 0;
-
-  useEffect(() => {
-    if (mnemonic) {
-      pushAndNavigate(CreateRecoverRoutesEnum.createMnemonic);
-    }
-  }, [mnemonic]);
-
-  const resetOnInit = () => {
-    createDispatch({ type: 'resetWizard' });
-  };
-
-  useEffect(resetOnInit, []);
-
-  if (isReturnFromWizard) {
-    return <Navigate to={routeNames.home} />;
-  }
-
-  const accessWalletSection = (
-    <div className='modal-layout-text'>
-      Already have a wallet? <Link to={routeNames.unlock}>Access it</Link>
-    </div>
-  );
+  } = useCreateDisclaimer(props);
 
   return (
     <CreateDisclaimerScreen
-      handleNetworkCheckboxChange={handleNetworkCheckboxChange}
-      handleCheckboxChange={handleCheckboxChange}
       disclaimerContinueHandler={disclaimerContinueHandler}
+      handleCheckboxChange={handleCheckboxChange}
+      handleNetworkCheckboxChange={handleNetworkCheckboxChange}
       isValid={isValid}
-      touched={touched}
-      safetyRef={safetyRef}
-      networkRef={networkRef}
-      touchedNetwork={touchedNetwork}
       isValidNetwork={isValidNetwork}
-      accessWalletSection={accessWalletSection}
+      networkRef={networkRef}
+      safetyRef={safetyRef}
+      touched={touched}
+      touchedNetwork={touchedNetwork}
     />
   );
 };

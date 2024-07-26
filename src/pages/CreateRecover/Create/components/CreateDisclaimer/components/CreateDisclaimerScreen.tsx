@@ -1,28 +1,26 @@
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { getEgldLabel } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { isChromeIOS } from '../../../../helpers';
-import { CreateDisclaimerType } from '../hooks';
+import { CreateDisclaimerReturnType } from '../hooks';
+import { Button, MxLink } from 'components';
+import { routeNames } from 'routes';
 
 export const CreateDisclaimerScreen = ({
   handleNetworkCheckboxChange,
   handleCheckboxChange,
   disclaimerContinueHandler,
   isValid,
-  touched,
   safetyRef,
   networkRef,
-  touchedNetwork,
-  isValidNetwork,
-  accessWalletSection
-}: CreateDisclaimerType) => {
+  isValidNetwork
+}: CreateDisclaimerReturnType) => {
   const egldLabel = getEgldLabel();
 
   return (
-    <div className='create-wrapper'>
-      <div className='create-top'>
+    <div className='flex flex-col items-center gap-4 mt-10'>
+      <div className='mb-10'>
         {isChromeIOS() && (
           <div className='p-2 border rounded border-warning bg-warning-light mb-spacer mx-sm-5'>
             <p className='body-color m-0'>
@@ -41,24 +39,22 @@ export const CreateDisclaimerScreen = ({
           </div>
         )}
 
-        <div className='create-disclaimers'>
-          <p className='create-disclaimer'>
+        <div>
+          <p>
             <FontAwesomeIcon icon={faInfoCircle} className='primary' />{' '}
             Blockchains do not have a “Reset Password” feature. All you get is a
             Secret Phrase - make sure to keep it safe.
           </p>
 
-          <div className='modal-layout-fields'>
-            <div className='modal-layout-checkbox-field'>
+          <div className='mt-2 p-2'>
+            <div>
               <input
                 type='checkbox'
                 id='check'
                 data-testid={DataTestIdsEnum.check}
                 ref={safetyRef}
                 onChange={handleCheckboxChange}
-                className={classNames('modal-layout-checkbox-input', {
-                  invalid: touched && !isValid
-                })}
+                className='mr-2'
               />
 
               <label
@@ -70,16 +66,14 @@ export const CreateDisclaimerScreen = ({
               </label>
             </div>
 
-            <div className='modal-layout-checkbox-field'>
+            <div>
               <input
                 type='checkbox'
                 id='check-testnet'
                 data-testid={DataTestIdsEnum.checkNetwork}
                 ref={networkRef}
                 onChange={handleNetworkCheckboxChange}
-                className={classNames('modal-layout-checkbox-input', {
-                  invalid: touchedNetwork && !isValidNetwork
-                })}
+                className='mr-2'
               />
 
               <label htmlFor='check-testnet'>
@@ -92,18 +86,25 @@ export const CreateDisclaimerScreen = ({
         </div>
       </div>
 
-      <button
-        type='submit'
-        disabled={!isValid || !isValidNetwork}
+      <Button
         data-testid='submitButton'
+        disabled={!isValid || !isValidNetwork}
         id='createWalletBtn'
-        className='btn btn-primary modal-layout-button'
         onClick={disclaimerContinueHandler}
+        type='submit'
       >
         Continue
-      </button>
+      </Button>
 
-      {accessWalletSection}
+      <div className='flex flex-col items-center justify-center mt-1 gap-1'>
+        <p>Already have a wallet?</p>
+        <MxLink
+          className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+          to={routeNames.unlock}
+        >
+          Access it
+        </MxLink>
+      </div>
     </div>
   );
 };
