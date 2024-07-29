@@ -1,34 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { API_URL } from 'config';
 import { ACCOUNTS_ENDPOINT } from 'localConstants';
-
-const getData = async <T extends AxiosResponse>(response: T) => {
-  const needsParsing = response.config.responseType === 'arraybuffer';
-
-  if (!needsParsing) {
-    return response.data;
-  }
-
-  const decoder = new TextDecoder('utf-8');
-  const text = decoder.decode(new Uint8Array(response.data));
-
-  try {
-    const data = JSON.parse(text);
-    return data;
-  } catch (e) {
-    // Handle JSON parse error if needed
-    return Promise.reject(
-      new Error('Failed to parse JSON from arraybuffer response.')
-    );
-  }
-};
-
-const jsonToArrayBuffer = (json: Record<string, unknown>) => {
-  const jsonString = JSON.stringify(json);
-  const encoder = new TextEncoder();
-  const arrayBuffer = encoder.encode(jsonString);
-  return arrayBuffer;
-};
+import { arraybufferToJSON } from './helpers/arraybufferToJSON';
+import { jsonToArrayBuffer } from './helpers/jsonToArrayBuffer';
 
 const gatewayUrl = 'https://devnet-gateway.multiversx.com';
 
@@ -72,7 +46,7 @@ axios.interceptors.response.use(
     }
 
     if (url?.includes('address')) {
-      const account = await getData(response);
+      const account = await arraybufferToJSON(response);
 
       return {
         ...response,
