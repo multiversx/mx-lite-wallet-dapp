@@ -1,34 +1,32 @@
 import axios from 'axios';
-import { API_URL } from 'config';
-import { ACCOUNTS_ENDPOINT } from 'localConstants';
-import { arraybufferToJSON } from './helpers/arraybufferToJSON';
-import { jsonToArrayBuffer } from './helpers/jsonToArrayBuffer';
-
-const gatewayUrl = 'https://devnet-gateway.multiversx.com';
-
-const endpointMap = {
-  [ACCOUNTS_ENDPOINT]: 'address'
-};
+import { API_URL, GATEWAY_URL } from 'config';
+import { getGatewayResponse } from './helpers/getGatewayResponse';
+import { getGatewayUrlForCurrentRequest } from './helpers/getGatewayUrlForCurrentRequest';
 
 axios.interceptors.request.use(
   function (config) {
     const { url } = config;
 
-    if (!url?.includes(API_URL)) {
+    if (!url || (API_URL && !GATEWAY_URL)) {
+      console.log(
+        'API_URL is defined but GATEWAY_URL is not defined. Please set GATEWAY_URL in config/index',
+        !url || (API_URL && !GATEWAY_URL)
+      );
+
       return config;
     }
 
-    if (url.includes(ACCOUNTS_ENDPOINT)) {
-      return {
-        ...config,
-        url: url.replace(
-          `${API_URL}/accounts`,
-          'https://devnet-gateway.multiversx.com/address'
-        )
-      };
-    }
+    const newUrl = getGatewayUrlForCurrentRequest(url);
 
-    return config;
+    console.log({
+      newUrl
+    });
+
+    // GATEWAY_URL is defined
+    return {
+      ...config,
+      url: newUrl
+    };
   },
   function (error) {
     return Promise.reject(error);
@@ -41,20 +39,20 @@ axios.interceptors.response.use(
       config: { url }
     } = response;
 
-    if (url?.includes(API_URL)) {
+    const isGatewayRequest = url?.includes(GATEWAY_URL);
+
+    console.log('\x1b[42m%s\x1b[0m', 'response', {
+      isGatewayRequest,
+      url
+    });
+
+    if (!isGatewayRequest || !url) {
       return response;
     }
 
-    if (url?.includes('address')) {
-      const account = await arraybufferToJSON(response);
+    const gatewayResponse = await getGatewayResponse(url, response);
 
-      return {
-        ...response,
-        data: jsonToArrayBuffer(account.data.account)
-      };
-    }
-
-    return response;
+    return gatewayResponse;
   },
   function (error) {
     return Promise.reject(error);
