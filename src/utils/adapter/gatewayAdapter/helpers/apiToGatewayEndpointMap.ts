@@ -1,9 +1,11 @@
-import { ACCOUNTS_ENDPOINT } from 'localConstants';
+import { ACCOUNTS_ENDPOINT, NETWORK_CONFIG_ENDPOINT } from 'localConstants';
 
-export enum GatewayEndpointsEnum {
-  address = 'address'
-}
+export const gatewayEndpoints = {
+  address: 'address',
+  [NETWORK_CONFIG_ENDPOINT]: NETWORK_CONFIG_ENDPOINT
+};
 
 export const endpointMap = {
-  [ACCOUNTS_ENDPOINT]: GatewayEndpointsEnum.address
+  [ACCOUNTS_ENDPOINT]: gatewayEndpoints.address,
+  [NETWORK_CONFIG_ENDPOINT]: gatewayEndpoints[NETWORK_CONFIG_ENDPOINT]
 };

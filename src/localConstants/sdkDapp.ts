@@ -9,6 +9,7 @@ export {
 export {
   ACCOUNTS_ENDPOINT,
   TRANSACTIONS_ENDPOINT,
+  NETWORK_CONFIG_ENDPOINT,
   TOKENS_ENDPOINT,
   NFTS_ENDPOINT
 } from '@multiversx/sdk-dapp/apiCalls/endpoints';
