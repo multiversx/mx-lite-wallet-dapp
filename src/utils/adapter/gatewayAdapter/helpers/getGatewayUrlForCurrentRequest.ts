@@ -7,7 +7,7 @@ export const getGatewayUrlForCurrentRequest = (sourcelUrl: string) => {
     Object.keys(endpointMap).some((key) => {
       return sourcelUrl.includes(`/${key}`);
     });
-  // const isOtherUrl = sourcelUrl.startsWith('http');
+  // const isOtherUrl = sourcelUrl.startsWith('http'); TODO: restore this line when the API_URL will be missing
 
   if (!needsGateway) {
     return sourcelUrl;

@@ -8,19 +8,10 @@ axios.interceptors.request.use(
     const { url } = config;
 
     if (!url || (API_URL && !GATEWAY_URL)) {
-      console.log(
-        'API_URL is defined but GATEWAY_URL is not defined. Please set GATEWAY_URL in config/index',
-        !url || (API_URL && !GATEWAY_URL)
-      );
-
       return config;
     }
 
     const newUrl = getGatewayUrlForCurrentRequest(url);
-
-    console.log({
-      newUrl
-    });
 
     // GATEWAY_URL is defined
     return {
@@ -40,11 +31,6 @@ axios.interceptors.response.use(
     } = response;
 
     const isGatewayRequest = url?.includes(GATEWAY_URL);
-
-    console.log('\x1b[42m%s\x1b[0m', 'response', {
-      isGatewayRequest,
-      url
-    });
 
     if (!isGatewayRequest || !url) {
       return response;
