@@ -10,7 +10,6 @@ export const getGatewayConfigForCurrentRequest = (
 
   const needsGateway =
     config.baseURL?.startsWith(API_URL) || config.url?.startsWith(API_URL);
-  // const isOtherUrl = sourcelUrl.startsWith('http'); TODO: restore this line when the API_URL will be missing
 
   const isGatewayRequest =
     needsGateway &&
@@ -20,18 +19,20 @@ export const getGatewayConfigForCurrentRequest = (
     return config;
   }
 
-  // API_URL is an empty string so the gateway is prepended to the URL
   config.baseURL = GATEWAY_URL;
   const configUrl = String(config.url);
 
   let url = configUrl.startsWith(API_URL)
-    ? configUrl.replace(API_URL, '').toString()
-    : configUrl.toString();
+    ? configUrl.replace(API_URL, '')
+    : configUrl;
 
   Object.entries(endpointMap).forEach(([key, value]) => {
-    const needsReplacement = Boolean(
-      matchPath(apiRoutes[key as keyof typeof apiRoutes], url)
+    const matchesPath = matchPath(
+      apiRoutes[key as keyof typeof apiRoutes],
+      url
     );
+
+    const needsReplacement = Boolean(matchesPath);
 
     if (!needsReplacement) {
       return;
@@ -48,7 +49,6 @@ export const getGatewayConfigForCurrentRequest = (
       source.cancel(
         `Request canceled: ${key} cannot be fetched from the gateway`
       );
-      console.log('cancelling', key);
     }
   });
 
