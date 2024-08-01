@@ -13,7 +13,6 @@ axios.interceptors.request.use(
 
     const newUrl = getGatewayUrlForCurrentRequest(url);
 
-    // GATEWAY_URL is defined
     return {
       ...config,
       url: newUrl
