@@ -26,6 +26,14 @@ export const getGatewayConfigForCurrentRequest = (
     ? configUrl.replace(API_URL, '')
     : configUrl;
 
+  if (
+    newConfig.method?.toLowerCase() === 'post' &&
+    newConfig.url?.endsWith('transactions')
+  ) {
+    newConfig.url = '/transaction/send';
+    return newConfig;
+  }
+
   Object.entries(endpointMap).forEach(([key, value]) => {
     const matchesPath = matchPath(
       apiRoutes[key as keyof typeof apiRoutes],
@@ -38,7 +46,12 @@ export const getGatewayConfigForCurrentRequest = (
       return;
     }
 
-    url = url.replace(`/${key}`, `/${value}`);
+    if (key.includes('transactions') && url.includes('transactions')) {
+      const hash = config.params?.hashes;
+      url = `/transaction/${hash}`;
+    } else {
+      url = url.replace(`/${key}`, `/${value}`);
+    }
 
     newConfig.url = url;
 
