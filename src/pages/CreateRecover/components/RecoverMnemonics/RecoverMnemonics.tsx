@@ -74,9 +74,8 @@ export const RecoverMnemonics = ({
             </label>
 
             <div
-              data-testid={DataTestIdsEnum.recoverMnemonicsInput}
               className={classNames(
-                'flex flex-row flex-wrap items-center justify-start p-5 gap-2 bg-gray-100 border border-gray-200 relative h-full',
+                'bg-gray-100 border border-gray-200 p-4 relative h-full',
                 { 'border-red-600': error, 'p-8': words.length === 0 }
               )}
             >
@@ -126,7 +125,7 @@ export const RecoverMnemonics = ({
             </label>
             <Select
               className='text-sm text-gray-700 placeholder-gray-400'
-              data-testid={DataTestIdsEnum.mnemonicInput}
+              inputId={DataTestIdsEnum.mnemonicInput}
               name={DataTestIdsEnum.mnemonicInput}
               onChange={handleAddTag as any}
               options={mnemonicWordsOptions}

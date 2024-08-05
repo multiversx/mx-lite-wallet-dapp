@@ -80,7 +80,12 @@ export const CreateRecover = () => {
       <div className='flex flex-col items-center justify-center p-6'>
         <div className='flex flex-col items-center justify-center gap-4 max-w-full w-1/2 mb-4'>
           <ProgressBar progress={progressBarPercentageFill} />
-          <h1 className='text-2xl whitespace-nowrap mt-2'>{currentTitle}</h1>
+          <h1
+            className='text-2xl whitespace-nowrap mt-2'
+            data-testid={DataTestIdsEnum.modalTitle}
+          >
+            {currentTitle}
+          </h1>
         </div>
 
         {stepComponents[currentStep]}

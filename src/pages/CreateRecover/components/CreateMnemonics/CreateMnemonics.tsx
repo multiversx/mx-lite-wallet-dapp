@@ -56,7 +56,7 @@ export const CreateMnemonics = ({
         </div>
 
         <div
-          className='flex flex-row flex-wrap items-center justify-center p-4 gap-2 bg-gray-100 border border-gray-200'
+          className='flex flex-row flex-wrap items-center justify-start p-4 gap-2 bg-gray-100 border border-gray-200 relative'
           data-testid={DataTestIdsEnum.mnemonicWords}
         >
           {mnemonicArray.map((word, i) => (
@@ -70,7 +70,10 @@ export const CreateMnemonics = ({
             </div>
           ))}
 
-          <CopyButton text={textToCopy} />
+          <CopyButton
+            className='text-gray-400 absolute right-0 bottom-0 m-2'
+            text={textToCopy}
+          />
         </div>
 
         <div>

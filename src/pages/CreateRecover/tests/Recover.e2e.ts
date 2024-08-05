@@ -44,10 +44,13 @@ describe('Recover page tests', () => {
       request.continue();
     });
 
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
+    await page.goto(WALLET_SOURCE_ORIGIN, {
       waitUntil: 'domcontentloaded'
     });
 
+    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.connectBtn));
+    await page.click(getByDataTestId(DataTestIdsEnum.connectBtn));
+    expect(page.url()).toEqual(`${WALLET_SOURCE_ORIGIN}/unlock`);
     await page.waitForSelector(
       getByDataTestId(DataTestIdsEnum.recoverWalletBtn)
     );
@@ -55,12 +58,44 @@ describe('Recover page tests', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.recoverWalletBtn));
     expect(page.url()).toEqual(`${WALLET_SOURCE_ORIGIN}/recover`);
 
+    // Paste from clipboard required permission
+    // const mnemonics = mnemonicWords
+    //   .map((word, index) => `${index + 1} ${word}`)
+    //   .join(' ');
+
+    // await page.evaluate((textToCopy) => {
+    //   navigator.clipboard.writeText(textToCopy);
+    // }, mnemonics);
+    //
+    // await page.click(getByDataTestId(DataTestIdsEnum.pasteMenemonicBtn));
+    // await page.keyboard.press('Enter');
+
     for (const word of mnemonicWords) {
-      await page.type(getByDataTestId(DataTestIdsEnum.mnemonicInput), word, {
+      await page.type(`#${DataTestIdsEnum.mnemonicInput}`, word, {
         delay: 10
       });
 
-      // https://pptr.dev/api/puppeteer.keyinput
+      if (word === 'rain') {
+        // There are multiple words that contain "rain"
+        for (let i = 1; i <= 2; i++) {
+          await page.keyboard.press('ArrowDown');
+        }
+      }
+
+      if (word === 'try') {
+        // There are multiple words that contain "try"
+        for (let i = 1; i <= 3; i++) {
+          await page.keyboard.press('ArrowDown');
+        }
+      }
+
+      if (word === 'use') {
+        // There are multiple words that contain "use"
+        for (let i = 1; i <= 11; i++) {
+          await page.keyboard.press('ArrowDown');
+        }
+      }
+
       await page.keyboard.press('Enter');
     }
 
@@ -80,7 +115,7 @@ describe('Recover page tests', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.modalTitle,
-      text: 'Keystore created!'
+      text: 'Wallet created!'
     });
   });
 });

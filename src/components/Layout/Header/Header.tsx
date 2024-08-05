@@ -11,7 +11,9 @@ export const Header = () => {
   const isUnlockRoute = Boolean(useMatch(RouteNamesEnum.unlock));
 
   const ConnectButton = isUnlockRoute ? null : (
-    <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>
+    <MxLink data-testid={DataTestIdsEnum.connectBtn} to={RouteNamesEnum.unlock}>
+      Connect
+    </MxLink>
   );
 
   return (

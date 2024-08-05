@@ -77,7 +77,7 @@ export const CreateQuiz = ({
                   const inputKey = ordinal as keyof InitialValuesType;
 
                   return (
-                    <div key={ordinal} data-testid={ordinal} className='w-full'>
+                    <div key={ordinal} className='w-full'>
                       <label
                         htmlFor={ordinal}
                         className='block text-sm font-bold mb-2'
@@ -93,6 +93,7 @@ export const CreateQuiz = ({
 
                       <Select
                         className='text-sm text-gray-700 placeholder-gray-400'
+                        inputId={ordinal}
                         options={mnemonicWordsOptions as any[]}
                         name={ordinal}
                         onChange={(option) => setFieldValue(ordinal, option)}

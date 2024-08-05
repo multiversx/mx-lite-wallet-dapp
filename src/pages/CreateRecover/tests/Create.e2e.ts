@@ -13,6 +13,9 @@ describe('Create test', () => {
       waitUntil: 'domcontentloaded'
     });
 
+    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.connectBtn));
+    await page.click(getByDataTestId(DataTestIdsEnum.connectBtn));
+    expect(page.url()).toEqual(`${WALLET_SOURCE_ORIGIN}/unlock`);
     await page.waitForSelector(
       getByDataTestId(DataTestIdsEnum.createWalletBtn)
     );

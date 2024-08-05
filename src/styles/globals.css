@@ -121,3 +121,11 @@
     opacity: 0.75;
   }
 }
+
+.DraggableTags {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+}

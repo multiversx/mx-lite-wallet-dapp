@@ -16,14 +16,14 @@ const createRecoverDetails: Record<
       'Create wallet',
       'Surprise quiz',
       'Awesome, now create a password',
-      'Wallet created'
+      'Wallet created!'
     ]
   },
   [CreateRecoverProviderTypeEnum.recover]: {
     titles: [
       'Recover Keystore file',
       'Awesome, now create a password',
-      'Wallet created'
+      'Wallet created!'
     ]
   }
 };
