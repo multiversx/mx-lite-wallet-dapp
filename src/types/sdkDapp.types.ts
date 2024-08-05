@@ -5,6 +5,7 @@ export {
 } from '@multiversx/sdk-dapp/types/enums.types';
 export type { AccountType } from '@multiversx/sdk-dapp/types';
 export type { RouteType } from '@multiversx/sdk-dapp/types/index';
+export { matchPath } from '@multiversx/sdk-dapp/wrappers/AuthenticatedRoutesWrapper/helpers/matchPath';
 export type { ServerTransactionType } from '@multiversx/sdk-dapp/types/serverTransactions.types';
 export type { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 export type {

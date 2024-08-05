@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added gateway adapter](https://github.com/multiversx/mx-wallet-dapp/pull/35)
+
+
 ## [[1.0.1](https://github.com/multiversx/mx-lite-wallet-dapp/pull/34)] - 2024-07-18
 
 - [Removed cross shard rounds from polling interval calculations](https://github.com/multiversx/mx-wallet-dapp/pull/34)
