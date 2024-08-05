@@ -38,6 +38,13 @@ export const CreateRecover = () => {
   };
 
   const stepComponents = [
+    ...(isCreateRoute
+      ? [
+          <CreateDisclaimer onNext={onNext} setMnemonic={setMnemonic} />,
+          <CreateMnemonics onNext={onNext} mnemonic={mnemonic} />,
+          <CreateQuiz mnemonic={mnemonic} onBack={onBack} onNext={onNext} />
+        ]
+      : [<RecoverMnemonics onNext={onNext} setMnemonic={setMnemonic} />]),
     <CreateRecoverPassword
       mnemonic={mnemonic}
       onNext={onNext}
@@ -47,14 +54,7 @@ export const CreateRecover = () => {
     <CreateRecoverDownload
       createdAddress={createdAddress}
       keystoreString={keystoreString}
-    />,
-    ...(isCreateRoute
-      ? [
-          <CreateDisclaimer onNext={onNext} setMnemonic={setMnemonic} />,
-          <CreateMnemonics onNext={onNext} mnemonic={mnemonic} />,
-          <CreateQuiz mnemonic={mnemonic} onBack={onBack} onNext={onNext} />
-        ]
-      : [<RecoverMnemonics onNext={onNext} setMnemonic={setMnemonic} />])
+    />
   ];
 
   return (
