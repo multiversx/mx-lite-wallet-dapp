@@ -1,4 +1,4 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__/data/constants';
+import { WALLET_SOURCE_ORIGIN, emptyWalletPassword } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -57,12 +57,12 @@ describe('Create test', () => {
 
     await changeInputText({
       dataTestId: DataTestIdsEnum.password,
-      text: 'juxbit-7dusku-miskIs'
+      text: emptyWalletPassword
     });
 
     await changeInputText({
       dataTestId: DataTestIdsEnum.passwordRepeat,
-      text: 'juxbit-7dusku-miskIs'
+      text: emptyWalletPassword
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.submitButton));

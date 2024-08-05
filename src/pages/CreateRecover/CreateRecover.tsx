@@ -12,7 +12,7 @@ import {
   CreateQuiz,
   RecoverMnemonics
 } from './components';
-import { useCreateRecoverState } from './hooks/useCreateRecoverState';
+import { useCreateRecoverState } from './hooks';
 
 export const CreateRecover = () => {
   const {
