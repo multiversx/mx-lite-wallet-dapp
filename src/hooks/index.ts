@@ -3,7 +3,6 @@ export * from './tokens';
 export * from './useBooleanStateToggle';
 export * from './useIsWebProvider';
 export * from './useLogout';
-export * from './usePushAndNavigate';
 export * from './useRedirectPathname';
 export * from './useReplyToDapp';
 export * from './useReplyWithCancelled';

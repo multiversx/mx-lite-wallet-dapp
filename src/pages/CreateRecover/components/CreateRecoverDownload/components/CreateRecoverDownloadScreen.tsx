@@ -1,9 +1,9 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { MxLink, PageState } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
+import { routeNames } from 'routes';
 import { CreateRecoverDownloadType } from '../CreateRecoverDownload';
 import { ReDownloadButton } from '../ReDownloadButton';
-import { routeNames } from 'routes';
 
 export const CreateRecoverDownloadScreen = ({
   keystoreString,

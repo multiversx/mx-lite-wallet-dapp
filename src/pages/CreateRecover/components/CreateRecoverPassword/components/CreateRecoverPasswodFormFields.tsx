@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { Button, PasswordVisibilityToggle } from 'components';
+import { useBooleanStateToggle } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
 
 import {
@@ -6,8 +8,6 @@ import {
   CreateRecoverPasswordFormFieldType
 } from './createRecoverPasswordFormFields.types';
 import { CreateRecoverFieldNamesEnum } from '../types';
-import { useBooleanStateToggle } from 'hooks';
-import { Button, PasswordVisibilityToggle } from 'components';
 
 export const CreateRecoverPasswordFormFields = ({
   formikProps,

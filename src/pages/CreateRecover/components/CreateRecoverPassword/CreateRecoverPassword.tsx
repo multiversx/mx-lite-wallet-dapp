@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import { passwordFormSchema } from 'helpers';
-import { CreateRecoverPasswordFormFields } from './components';
 import { DataTestIdsEnum } from 'localConstants';
+import { CreateRecoverPasswordFormFields } from './components';
 import {
   CreateRecoverFieldNamesEnum,
   CreateRecoverPasswordPropsType,

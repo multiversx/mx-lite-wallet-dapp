@@ -1,6 +1,6 @@
 export const readFromClipboard = async () => {
   try {
-    await navigator.clipboard.readText();
+    return navigator.clipboard.readText();
   } catch (error) {
     console.error(error);
   }

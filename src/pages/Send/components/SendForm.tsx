@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { useSendForm } from '../hooks';
 import { FormFieldsEnum, SendTypeEnum } from '../types';
-import classNames from 'classnames';
 
 export const SendForm = () => {
   const {

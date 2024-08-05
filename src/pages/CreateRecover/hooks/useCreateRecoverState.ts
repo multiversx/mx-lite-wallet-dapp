@@ -1,5 +1,6 @@
 import { MouseEvent, useState } from 'react';
-import { CreateRecoverProviderTypeEnum } from '../contexts/createRecover/reducer';
+import { matchPath } from 'react-router-dom';
+import { CreateRecoverProviderTypeEnum } from '../types';
 
 interface CreateRecoverState {
   titles: string[];
@@ -20,9 +21,7 @@ const createRecoverDetails: Record<
   },
   [CreateRecoverProviderTypeEnum.recover]: {
     titles: [
-      'Create wallet',
-      'Create wallet',
-      'Surprise quiz',
+      'Recover Keystore file',
       'Awesome, now create a password',
       'Wallet created'
     ]
@@ -33,11 +32,17 @@ export const useCreateRecoverState = () => {
   const [mnemonic, setMnemonic] = useState('');
   const [createdAddress, setCreatedAddress] = useState('');
   const [keystoreString, setKeystoreString] = useState('');
-  const [providerType, setProviderType] = useState(
-    CreateRecoverProviderTypeEnum.create
-  );
 
   const [currentStep, setCurrentStep] = useState(0);
+  const isCreateRoute = matchPath(
+    CreateRecoverProviderTypeEnum.create,
+    window.location.pathname
+  );
+
+  const providerType = isCreateRoute
+    ? CreateRecoverProviderTypeEnum.create
+    : CreateRecoverProviderTypeEnum.recover;
+
   const steps = createRecoverDetails[providerType].titles.length - 1;
   const showBackButton = false;
 
@@ -63,6 +68,7 @@ export const useCreateRecoverState = () => {
     createdAddress,
     currentStep,
     currentTitle: createRecoverDetails[providerType].titles[currentStep],
+    isCreateRoute,
     keystoreString,
     mnemonic,
     providerType,
@@ -73,7 +79,6 @@ export const useCreateRecoverState = () => {
     setMnemonic,
     setCreatedAddress,
     setKeystoreString,
-    setProviderType,
     setCurrentStep
   };
 };
