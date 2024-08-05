@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import { DraggableArea } from 'react-draggable-tags';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
+import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { RecoverMnemonicsPropsType, useRecoverMnemonics } from './hooks';
-import { DataTestIdsEnum } from 'localConstants';
 import { isChromeIOS, mnemonicWords as allMnemonicWords } from '../../helpers';
 import { SelectOptionType } from '../../types';
 
