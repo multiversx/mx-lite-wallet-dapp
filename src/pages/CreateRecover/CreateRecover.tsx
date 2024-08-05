@@ -47,20 +47,15 @@ export const CreateRecover = () => {
     <CreateRecoverDownload
       createdAddress={createdAddress}
       keystoreString={keystoreString}
-    />
+    />,
+    ...(isCreateRoute
+      ? [
+          <CreateDisclaimer onNext={onNext} setMnemonic={setMnemonic} />,
+          <CreateMnemonics onNext={onNext} mnemonic={mnemonic} />,
+          <CreateQuiz mnemonic={mnemonic} onBack={onBack} onNext={onNext} />
+        ]
+      : [<RecoverMnemonics onNext={onNext} setMnemonic={setMnemonic} />])
   ];
-
-  if (isCreateRoute) {
-    stepComponents.unshift(
-      <CreateDisclaimer onNext={onNext} setMnemonic={setMnemonic} />,
-      <CreateMnemonics onNext={onNext} mnemonic={mnemonic} />,
-      <CreateQuiz mnemonic={mnemonic} onBack={onBack} onNext={onNext} />
-    );
-  } else {
-    stepComponents.unshift(
-      <RecoverMnemonics onNext={onNext} setMnemonic={setMnemonic} />
-    );
-  }
 
   return (
     <ModalContainer

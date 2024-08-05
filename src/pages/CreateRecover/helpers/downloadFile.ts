@@ -8,31 +8,33 @@ interface DownloadFileType {
 }
 
 export const downloadFile = ({ data, name, fileType }: DownloadFileType) => {
-  if (data && name) {
-    const type =
-      fileType === 'csv'
-        ? 'data:text/csv;charset=utf-8'
-        : 'application/json; charset=utf-8';
+  if (!data || !name) {
+    return;
+  }
 
-    const blob = new Blob([data], { type });
+  const type =
+    fileType === 'csv'
+      ? 'data:text/csv;charset=utf-8'
+      : 'application/json; charset=utf-8';
 
-    if (!isChromeIOS()) {
-      FileSaver.saveAs(blob, name + '.' + fileType);
-    } else {
-      const reader = new FileReader();
-      reader.onload = () => {
-        window.location.href = reader.result as any;
-      };
+  const blob = new Blob([data], { type });
 
-      reader.readAsDataURL(blob);
+  if (!isChromeIOS()) {
+    FileSaver.saveAs(blob, name + '.' + fileType);
+  } else {
+    const reader = new FileReader();
+    reader.onload = () => {
+      window.location.href = reader.result as any;
+    };
 
-      const fileURL = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = fileURL;
-      a.target = '_blank';
-      a.download = name + '.' + fileType;
-      document.body.appendChild(a);
-      a.click();
-    }
+    reader.readAsDataURL(blob);
+
+    const fileURL = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = fileURL;
+    a.target = '_blank';
+    a.download = name + '.' + fileType;
+    document.body.appendChild(a);
+    a.click();
   }
 };

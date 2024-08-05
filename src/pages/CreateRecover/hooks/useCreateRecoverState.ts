@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from 'react';
-import { matchPath } from 'react-router-dom';
+import { matchPath, useLocation } from 'react-router-dom';
 import { CreateRecoverProviderTypeEnum } from '../types';
 
 interface CreateRecoverState {
@@ -29,14 +29,14 @@ const createRecoverDetails: Record<
 };
 
 export const useCreateRecoverState = () => {
+  const { pathname } = useLocation();
   const [mnemonic, setMnemonic] = useState('');
   const [createdAddress, setCreatedAddress] = useState('');
   const [keystoreString, setKeystoreString] = useState('');
-
   const [currentStep, setCurrentStep] = useState(0);
   const isCreateRoute = matchPath(
     CreateRecoverProviderTypeEnum.create,
-    window.location.pathname
+    pathname
   );
 
   const providerType = isCreateRoute
