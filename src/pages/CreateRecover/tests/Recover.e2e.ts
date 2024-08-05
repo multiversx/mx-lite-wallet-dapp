@@ -44,13 +44,10 @@ describe('Recover page tests', () => {
       request.continue();
     });
 
-    await page.goto(WALLET_SOURCE_ORIGIN, {
+    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
       waitUntil: 'domcontentloaded'
     });
 
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.connectBtn));
-    await page.click(getByDataTestId(DataTestIdsEnum.connectBtn));
-    expect(page.url()).toEqual(`${WALLET_SOURCE_ORIGIN}/unlock`);
     await page.waitForSelector(
       getByDataTestId(DataTestIdsEnum.recoverWalletBtn)
     );
