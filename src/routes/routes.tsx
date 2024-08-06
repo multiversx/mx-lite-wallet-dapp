@@ -10,93 +10,100 @@ import {
   LogoutHook,
   SignHook,
   SignMessage,
-  SignMessageHook
+  SignMessageHook,
+  Send,
+  Sign
 } from 'pages';
-import { Send } from 'pages/Send/Send';
-import { Sign } from 'pages/Sign/Sign';
 import { RouteType } from 'types/sdkDapp.types';
+import {
+  CreateRecoverRoutes,
+  CreateRecoverRoutesEnum
+} from '../pages/CreateRecover/routes';
 
-interface RouteWithTitleType extends RouteType {
+export interface RouteWithTitleType extends RouteType {
   title: string;
 }
 
-const routesObject: Record<RouteNamesEnum | HooksPageEnum, RouteWithTitleType> =
-  {
-    [RouteNamesEnum.home]: {
-      path: RouteNamesEnum.home,
-      title: 'Home',
-      component: Home
-    },
-    [RouteNamesEnum.unlock]: {
-      path: RouteNamesEnum.unlock,
-      title: 'Unlock',
-      component: Unlock
-    },
-    [RouteNamesEnum.logout]: {
-      path: RouteNamesEnum.logout,
-      title: 'Logout',
-      component: Logout
-    },
-    [RouteNamesEnum.dashboard]: {
-      path: RouteNamesEnum.dashboard,
-      authenticatedRoute: true,
-      title: 'Dashboard',
-      component: Dashboard
-    },
-    [RouteNamesEnum.disclaimer]: {
-      path: RouteNamesEnum.disclaimer,
-      title: 'Disclaimer',
-      component: Disclaimer
-    },
-    [RouteNamesEnum.send]: {
-      path: RouteNamesEnum.send,
-      authenticatedRoute: true,
-      title: 'Send',
-      component: () => (
-        <PrivateKeyCheckWrapper>
-          <Send />
-        </PrivateKeyCheckWrapper>
-      )
-    },
-    [RouteNamesEnum.sign]: {
-      path: RouteNamesEnum.sign,
-      title: 'Sign',
-      component: () => (
-        <PrivateKeyCheckWrapper>
-          <Sign />
-        </PrivateKeyCheckWrapper>
-      )
-    },
-    [RouteNamesEnum.signMessage]: {
-      path: RouteNamesEnum.signMessage,
-      title: 'Sign Message',
-      component: () => (
-        <PrivateKeyCheckWrapper>
-          <SignMessage />
-        </PrivateKeyCheckWrapper>
-      )
-    },
-    [HooksPageEnum.login]: {
-      path: HooksPageEnum.login,
-      title: 'Login',
-      component: LoginHook
-    },
-    [HooksPageEnum.sign]: {
-      path: HooksPageEnum.sign,
-      title: 'Sign',
-      component: SignHook
-    },
-    [HooksPageEnum.signMessage]: {
-      path: HooksPageEnum.signMessage,
-      title: 'Sign Message',
-      component: SignMessageHook
-    },
-    [HooksPageEnum.logout]: {
-      path: HooksPageEnum.logout,
-      title: 'Logout',
-      component: LogoutHook
-    }
-  };
+const routesObject: Record<
+  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
+  RouteWithTitleType
+> = {
+  [RouteNamesEnum.home]: {
+    path: RouteNamesEnum.home,
+    title: 'Home',
+    component: Home
+  },
+  [RouteNamesEnum.unlock]: {
+    path: RouteNamesEnum.unlock,
+    title: 'Unlock',
+    component: Unlock
+  },
+  [RouteNamesEnum.logout]: {
+    path: RouteNamesEnum.logout,
+    title: 'Logout',
+    component: Logout
+  },
+  [RouteNamesEnum.dashboard]: {
+    path: RouteNamesEnum.dashboard,
+    authenticatedRoute: true,
+    title: 'Dashboard',
+    component: Dashboard
+  },
+  [RouteNamesEnum.disclaimer]: {
+    path: RouteNamesEnum.disclaimer,
+    title: 'Disclaimer',
+    component: Disclaimer
+  },
+  [RouteNamesEnum.send]: {
+    path: RouteNamesEnum.send,
+    authenticatedRoute: true,
+    title: 'Send',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <Send />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.sign]: {
+    path: RouteNamesEnum.sign,
+    title: 'Sign',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <Sign />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.signMessage]: {
+    path: RouteNamesEnum.signMessage,
+    title: 'Sign Message',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <SignMessage />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [HooksPageEnum.login]: {
+    path: HooksPageEnum.login,
+    title: 'Login',
+    component: LoginHook
+  },
+  [HooksPageEnum.sign]: {
+    path: HooksPageEnum.sign,
+    title: 'Sign',
+    component: SignHook
+  },
+  [HooksPageEnum.signMessage]: {
+    path: HooksPageEnum.signMessage,
+    title: 'Sign Message',
+    component: SignMessageHook
+  },
+  [HooksPageEnum.logout]: {
+    path: HooksPageEnum.logout,
+    title: 'Logout',
+    component: LogoutHook
+  },
+  ...CreateRecoverRoutes
+};
 
 export const routes: RouteWithTitleType[] = Object.values(routesObject);
 

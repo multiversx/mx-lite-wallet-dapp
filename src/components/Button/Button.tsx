@@ -21,11 +21,11 @@ export const Button = ({
 }: ButtonType) => {
   return (
     <button
-      id={id}
+      className={className}
       data-testid={otherProps['data-testid']}
       disabled={disabled}
+      id={id}
       onClick={onClick}
-      className={className}
       type={type}
     >
       {children}

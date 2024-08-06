@@ -1,3 +1,4 @@
+import { MxLink } from 'components';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
@@ -16,6 +17,7 @@ import {
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';
+import { CreateRecoverRoutesEnum } from '../CreateRecover/routes';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -67,6 +69,25 @@ export const Unlock = () => {
 
             <Pem />
             <Keystore />
+          </div>
+          <div className='flex flex-col items-center justify-center mt-1 gap-1'>
+            <p className='text-center text-gray-400'>Don't have a wallet?</p>
+            <div className='flex flex-col md:flex-row md:gap-4 items-center justify-center'>
+              <MxLink
+                className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+                data-testid={DataTestIdsEnum.createWalletBtn}
+                to={CreateRecoverRoutesEnum.create}
+              >
+                Create
+              </MxLink>
+              <MxLink
+                className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+                data-testid={DataTestIdsEnum.recoverWalletBtn}
+                to={CreateRecoverRoutesEnum.recover}
+              >
+                Recover
+              </MxLink>
+            </div>
           </div>
         </div>
       </div>

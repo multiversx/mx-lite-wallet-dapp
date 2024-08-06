@@ -1,5 +1,6 @@
 export * from './interface';
 export * from './tokens';
+export * from './useBooleanStateToggle';
 export * from './useIsWebProvider';
 export * from './useLogout';
 export * from './useRedirectPathname';

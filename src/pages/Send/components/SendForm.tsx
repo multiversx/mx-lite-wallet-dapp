@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
@@ -29,7 +30,14 @@ export const SendForm = () => {
             Receiver:
           </label>
           <input
-            className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+            className={classNames(
+              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              {
+                'border-red-600':
+                  formik.touched[FormFieldsEnum.receiver] &&
+                  formik.errors[FormFieldsEnum.receiver]
+              }
+            )}
             data-testid={DataTestIdsEnum.receiverInput}
             id={FormFieldsEnum.receiver}
             name={FormFieldsEnum.receiver}
@@ -41,7 +49,7 @@ export const SendForm = () => {
           {formik.touched[FormFieldsEnum.receiver] &&
             formik.errors[FormFieldsEnum.receiver] && (
               <div
-                className='text-red-600 text-sm'
+                className='text-red-600 text-sm mt-1'
                 data-testid={DataTestIdsEnum.receiverError}
               >
                 {formik.errors[FormFieldsEnum.receiver]}
@@ -98,7 +106,14 @@ export const SendForm = () => {
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col w-full'>
               <input
-                className='p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+                className={classNames(
+                  'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+                  {
+                    'border-red-600':
+                      formik.touched[FormFieldsEnum.amount] &&
+                      formik.errors[FormFieldsEnum.amount]
+                  }
+                )}
                 disabled={isNFT && !canEditNftAmount}
                 data-testid={DataTestIdsEnum.amountInput}
                 id={FormFieldsEnum.amount}
@@ -109,15 +124,16 @@ export const SendForm = () => {
                 type='number'
                 value={formik.values[FormFieldsEnum.amount]}
               />
-              {formik.values[FormFieldsEnum.token] && (
-                <div
-                  className='text-sm text-gray-400 mt-1'
-                  data-testid={DataTestIdsEnum.availableAmount}
-                >
-                  Available: {availableAmount}{' '}
-                  {formik.values[FormFieldsEnum.token].label}
-                </div>
-              )}
+              {formik.values[FormFieldsEnum.token] &&
+                !formik.errors[FormFieldsEnum.amount] && (
+                  <div
+                    className='text-sm text-gray-400 mt-1'
+                    data-testid={DataTestIdsEnum.availableAmount}
+                  >
+                    Available: {availableAmount}{' '}
+                    {formik.values[FormFieldsEnum.token].label}
+                  </div>
+                )}
               {formik.touched[FormFieldsEnum.amount] &&
                 formik.errors[FormFieldsEnum.amount] && (
                   <div
@@ -162,7 +178,14 @@ export const SendForm = () => {
             Gas Limit:
           </label>
           <input
-            className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+            className={classNames(
+              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              {
+                'border-red-600':
+                  formik.touched[FormFieldsEnum.gasLimit] &&
+                  formik.errors[FormFieldsEnum.gasLimit]
+              }
+            )}
             data-testid={DataTestIdsEnum.gasLimitInput}
             disabled={!isEgldToken}
             id={FormFieldsEnum.gasLimit}
@@ -205,7 +228,7 @@ export const SendForm = () => {
       </div>
       <div className='mt-4 flex flex-col align-middle'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >

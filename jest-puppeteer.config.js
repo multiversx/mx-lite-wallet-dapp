@@ -43,9 +43,25 @@ const getChromeExecutablePath = () => {
 
 const isHeadless = process.env.HEADLESS !== 'false';
 
+const args = [
+  '--start-maximized', // Required to start in full screen
+  '--disable-web-security', // Required for iframe to work
+  '--ignore-certificate-errors' // Required for HTTPS to work
+];
+
+if (isHeadless) {
+  args.unshift(
+    '--disable-gpu',
+    '--disable-dev-shm-usage',
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    `--headless=new`
+  );
+}
+
 const config = {
   preset: 'jest-puppeteer',
-  testMatch: ['**/src/**/?(*.)+(e2e).ts?(x)'],
+  testMatch: ['**/src/**/*.e2e.ts'],
   setupFilesAfterEnv: ['./src/setupPuppeteerTests.ts'],
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/src'],
@@ -53,21 +69,19 @@ const config = {
   workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
   maxWorkers: '50%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
   launch: {
-    headless: isHeadless,
+    headless: false,
     product: 'chrome',
     defaultViewport: { width: 1600, height: 800 },
-    args: [
-      '--start-maximized', // Required to start in full screen
-      '--disable-web-security', // Required for iframe to work
-      '--ignore-certificate-errors' // Required for HTTPS to work
-    ],
+    args,
     executablePath: getChromeExecutablePath(), // optional locally, required on Git Action
     devtools: !isHeadless
   },
   server: {
     command: 'vite preview'
   },
-  browserContext: 'incognito'
+  exitOnPageError: false,
+  browserContext: isHeadless ? 'incognito' : 'default',
+  browserPerWorker: true
 };
 
 if (!isHeadless) {
