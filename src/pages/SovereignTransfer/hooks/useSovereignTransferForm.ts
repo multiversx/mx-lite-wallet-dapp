@@ -4,13 +4,8 @@ import { array, number, object, string } from 'yup';
 import { sovereignContractAddress } from 'config';
 import { getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
-import {
-  addressIsValid,
-  getEgldLabel,
-  useGetAccountInfo,
-  useGetNetworkConfig
-} from 'lib';
-import { SendTypeEnum, TokenType, PartialNftType } from 'types';
+import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { SendTypeEnum } from 'types';
 import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 
@@ -20,15 +15,13 @@ export const useSovereignTransferForm = () => {
     network: { chainId }
   } = useGetNetworkConfig();
   const { sendTransactions } = useSendTransactions();
-
-  const egldLabel = getEgldLabel();
   const {
     allTokens,
     getTokenOptionsByType,
     getTokens,
     isLoading,
     tokenOptions
-  } = useTokenOptions(SendTypeEnum.esdt);
+  } = useTokenOptions({ sendType: SendTypeEnum.esdt, skipAddEgld: true });
 
   const defaultTokenOption = tokenOptions?.[0];
 
@@ -51,11 +44,6 @@ export const useSovereignTransferForm = () => {
           'addressIsValid',
           'Address is invalid',
           (value) => !value || addressIsValid(value)
-        )
-        .test(
-          'differentSender',
-          'Receiver should be different than current account',
-          (value) => !value || value !== address
         )
         .required('Receiver is required'),
       [SovereignTransferFormFieldsEnum.contract]: string()
@@ -127,9 +115,6 @@ export const useSovereignTransferForm = () => {
   const getSelectedToken = (selectedToken: string) =>
     allTokens?.find((token) => token.identifier === selectedToken);
 
-  const isEgldToken = (selectedToken: TokenType | PartialNftType) =>
-    selectedToken?.identifier === egldLabel;
-
   const getIsNFT = (type: SendTypeEnum) => type === SendTypeEnum.nft;
 
   const getTokenAvailableAmount = ({
@@ -172,7 +157,6 @@ export const useSovereignTransferForm = () => {
     getTokenOptionsByType,
     handleAddToken,
     handleRemoveToken,
-    isEgldToken,
     isLoading
   };
 };

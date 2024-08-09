@@ -40,7 +40,7 @@ export const useSendForm = () => {
 
   const egldLabel = getEgldLabel();
   const isNFT = sendType === SendTypeEnum.nft;
-  const { tokenOptions, isLoading, tokens } = useTokenOptions(sendType);
+  const { tokenOptions, isLoading, tokens } = useTokenOptions({ sendType });
   const defaultTokenOption = tokenIdParam
     ? tokenOptions?.find((option) => option.value === tokenIdParam)
     : tokenOptions?.[0];

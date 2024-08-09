@@ -24,7 +24,7 @@ describe('Send ESDT from dashboard tests', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
-      text: 'Available: 431.8354 ASH'
+      text: 'Available: 431.835489492912187639 ASH'
     });
 
     await expectInputToHaveValue({

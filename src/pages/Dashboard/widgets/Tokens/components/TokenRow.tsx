@@ -35,7 +35,12 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
       <div className='flex items-center space-x-4'>
         {token.balance && (
           <div className='text-right'>
-            <FormatAmount value={token.balance} showLabel={false} />
+            <FormatAmount
+              value={token.balance}
+              decimals={token.decimals}
+              showLabel={false}
+              showLastNonZeroDecimal
+            />
           </div>
         )}
         <button
