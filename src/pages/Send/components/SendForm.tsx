@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { Button, MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
-import { SendTypeEnum } from '../../../types';
+import { SendTypeEnum } from 'types';
 import { useSendForm } from '../hooks';
 import { FormFieldsEnum } from '../types';
 
