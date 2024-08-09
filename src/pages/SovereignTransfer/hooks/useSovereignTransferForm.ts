@@ -52,11 +52,6 @@ export const useSovereignTransferForm = () => {
           'Address is invalid',
           (value) => !value || addressIsValid(value)
         )
-        .test(
-          'differentSender',
-          'Receiver should be different than current account',
-          (value) => !value || value !== address
-        )
         .required('Receiver is required'),
       [SovereignTransferFormFieldsEnum.contract]: string()
         .test(
