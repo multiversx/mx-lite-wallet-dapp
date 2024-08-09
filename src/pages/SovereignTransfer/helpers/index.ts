@@ -1,1 +1,1 @@
-export * from './getSovereignTransferTxData';
+export * from './getSovereignTransferTransaction';

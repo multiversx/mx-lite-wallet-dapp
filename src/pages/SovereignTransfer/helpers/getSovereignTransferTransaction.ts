@@ -4,15 +4,12 @@ import {
   Token
 } from '@multiversx/sdk-core';
 import { Address, AddressValue, TokenTransfer } from '@multiversx/sdk-core/out';
-import {
-  addressToHex,
-  numberToPaddedHex
-} from '@multiversx/sdk-core/out/utils.codec';
+import { numberToPaddedHex } from '@multiversx/sdk-core/out/utils.codec';
 import BigNumber from 'bignumber.js';
 import { WEGLDID } from 'config';
 import { getEgldLabel, parseAmount } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { TransactionTypesEnum, PartialNftType, TokenType } from 'types';
+import { PartialNftType, TokenType } from 'types';
 import { SovereignTransferFormType } from '../types';
 
 export const stringToHex = (stringTopEncode?: string) =>
@@ -68,50 +65,4 @@ export const getSovereignTransferTransaction = ({
       });
     })
   });
-};
-
-export const getSovereignTransferTxData = ({
-  values,
-  tokens
-}: {
-  values: SovereignTransferFormType;
-  tokens: (PartialNftType | TokenType)[];
-}) => {
-  const egldLabel = getEgldLabel();
-  const encodedContractAddress = addressToHex(new Address(values.contract));
-  const encodedTokensLength = numberToHex(values.tokens.length);
-  const encodedTokens = values.tokens
-    .map((token) => {
-      const realToken = tokens.find((t) => t.identifier === token.token?.value);
-
-      if (!realToken) {
-        return '';
-      }
-
-      const tokenNonce = (realToken as PartialNftType).nonce;
-      const identifierItems = realToken.identifier.split('-');
-      identifierItems.pop();
-      const identifier = tokenNonce
-        ? identifierItems.join('-')
-        : realToken.identifier;
-      const encodedTokenId = stringToHex(
-        identifier === egldLabel ? WEGLDID : identifier
-      );
-
-      const encodedNonce = tokenNonce ? numberToHex(tokenNonce) : '';
-
-      const encodedAmount = numberToHex(
-        encodedNonce
-          ? token.amount
-          : parseAmount(token.amount, realToken.decimals)
-      );
-
-      return `${encodedTokenId}@${encodedNonce}@${encodedAmount}`;
-    })
-    .join('@');
-
-  const encodedFunctionName = stringToHex('deposit');
-  const encodedReceiverAddress = addressToHex(new Address(values.receiver));
-
-  return `${TransactionTypesEnum.MultiESDTNFTTransfer}@${encodedContractAddress}@${encodedTokensLength}@${encodedTokens}@${encodedFunctionName}@${encodedReceiverAddress}`;
 };
