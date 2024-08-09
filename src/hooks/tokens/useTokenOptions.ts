@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useGetTokensWithEgld } from 'hooks/index';
+import { useGetTokensWithEgld } from 'hooks';
 import { useGetAccountInfo } from 'lib';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { SendTypeEnum, TokenOptionType } from 'types';
