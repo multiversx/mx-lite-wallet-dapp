@@ -96,7 +96,6 @@ export const SovereignTransferForm = () => {
         </div>
         {formik.values[SovereignTransferFormFieldsEnum.tokens].map(
           (token, index) => {
-            console.log(token);
             const typeFieldName = `${SovereignTransferFormFieldsEnum.tokens}[${index}].${SovereignTransferFormFieldsEnum.type}`;
             const amountFieldName = `${SovereignTransferFormFieldsEnum.tokens}[${index}].${SovereignTransferFormFieldsEnum.amount}`;
             const tokenFieldName = `${SovereignTransferFormFieldsEnum.tokens}[${index}].${SovereignTransferFormFieldsEnum.token}`;
@@ -203,7 +202,7 @@ export const SovereignTransferForm = () => {
                         type='number'
                         value={token[SovereignTransferFormFieldsEnum.amount]}
                       />
-                      {!tokenError?.amount && (
+                      {(!tokenError?.amount || !tokenTouched?.amount) && (
                         <div
                           className='text-sm text-gray-400 mt-1'
                           data-testid={DataTestIdsEnum.availableAmount}

@@ -6,3 +6,4 @@ export const sampleAuthenticatedDomains = [API_URL];
 export const environment = 'sovereign';
 export const sovereignContractAddress =
   'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa';
+export const WEGLDID = 'WEGLD-bd4d79';
