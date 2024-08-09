@@ -1,5 +1,3 @@
-import { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { array, number, object, string } from 'yup';
@@ -9,17 +7,15 @@ import { useSendTransactions, useTokenOptions } from 'hooks';
 import {
   addressIsValid,
   getEgldLabel,
-  prepareTransaction,
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib';
-import { GAS_PRICE, SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { SendTypeEnum } from 'types';
-import { getSovereignTransferTxData } from '../helpers';
+import { SendTypeEnum, TokenType, PartialNftType } from 'types';
+import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 
 export const useSovereignTransferForm = () => {
-  const { address, account } = useGetAccountInfo();
+  const { address } = useGetAccountInfo();
   const {
     network: { chainId }
   } = useGetNetworkConfig();
@@ -115,21 +111,11 @@ export const useSovereignTransferForm = () => {
       )
     }),
     onSubmit: async (values) => {
-      const data = getSovereignTransferTxData({
-        values,
-        tokens: allTokens
-      });
-
-      const transaction = prepareTransaction({
-        amount: '0',
-        balance: account.balance,
+      const transaction = getSovereignTransferTransaction({
+        address,
         chainId,
-        data,
-        gasLimit: String(SOVEREIGN_TRANSFER_GAS_LIMIT),
-        gasPrice: String(GAS_PRICE),
-        nonce: account.nonce,
-        receiver: address,
-        sender: address
+        tokens: allTokens,
+        values
       });
 
       await sendTransactions([transaction]);

@@ -1,5 +1,4 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSearchParams } from 'react-router-dom';
@@ -23,7 +22,7 @@ import {
   GAS_PRICE,
   SearchParamsEnum
 } from 'localConstants';
-import { SendTypeEnum, TokenOptionType } from 'types';
+import { SendTypeEnum, TokenOptionType, PartialNftType } from 'types';
 import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {

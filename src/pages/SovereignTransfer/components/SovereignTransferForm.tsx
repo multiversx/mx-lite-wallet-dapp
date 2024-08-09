@@ -113,9 +113,7 @@ export const SovereignTransferForm = () => {
               token: token[SovereignTransferFormFieldsEnum.token]?.value
             });
 
-            const canEditNftAmount = getCanEditNftAmount(
-              token[SovereignTransferFormFieldsEnum.amount]
-            );
+            const canEditNftAmount = getCanEditNftAmount(availableAmount);
 
             const tokenOptions = getTokenOptionsByType(
               token[SovereignTransferFormFieldsEnum.type]
@@ -128,7 +126,15 @@ export const SovereignTransferForm = () => {
                 formik.setFieldValue(typeFieldName, selectedType);
                 const options = getTokenOptionsByType(selectedType);
                 formik.setFieldValue(tokenFieldName, options[0]);
-                formik.setFieldValue(amountFieldName, 0);
+                const amount = getTokenAvailableAmount({
+                  sendType: selectedType,
+                  token: options[0].value
+                });
+
+                formik.setFieldValue(
+                  amountFieldName,
+                  amount === '1' && getIsNFT(selectedType) ? '1' : 0
+                );
 
                 return formik.handleChange(event);
               };

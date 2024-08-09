@@ -20,6 +20,7 @@ export { loginWithExternalProvider } from '@multiversx/sdk-dapp/utils/account/lo
 export { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp/utils/transactions/getInterpretedTransaction';
 export { formatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
+export { parseAmount } from '@multiversx/sdk-dapp/utils/operations/parseAmount';
 export { getIsProviderEqualTo } from '@multiversx/sdk-dapp/utils/account/getIsProviderEqualTo';
 export { removeTransactionsToSign } from '@multiversx/sdk-dapp/services/transactions/clearTransactions';
 export { extractSessionId } from '@multiversx/sdk-dapp/hooks/transactions/helpers/extractSessionId';
@@ -35,6 +36,7 @@ export { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks/account/useGetIsLog
 export { useGetIsWalletConnectV2Initialized } from '@multiversx/sdk-dapp/hooks/account/useGetIsWalletConnectV2Initialized';
 export { useGetLastPendingTransactionHash } from '@multiversx/sdk-dapp/hooks/transactions/useGetLastPendingTransactionHash';
 export { useGetLastSignedMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetLastSignedMessageSession';
+export { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
 export { useGetLoginInfo } from '@multiversx/sdk-dapp/hooks/account/useGetLoginInfo';
 export { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 export { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
