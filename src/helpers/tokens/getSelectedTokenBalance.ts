@@ -36,6 +36,6 @@ export const getSelectedTokenBalance = ({
     input: currentToken.balance ?? '0',
     decimals: currentToken.decimals ?? DECIMALS,
     digits: DIGITS,
-    showLastNonZeroDecimal: false
+    showLastNonZeroDecimal: true
   });
 };

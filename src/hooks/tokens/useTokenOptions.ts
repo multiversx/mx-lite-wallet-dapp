@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useGetTokensWithEgld } from 'hooks';
-import { useGetAccountInfo } from 'lib';
+import { getEgldLabel, useGetAccountInfo } from 'lib';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { SendTypeEnum, TokenOptionType } from 'types';
 
@@ -15,6 +15,7 @@ export const useTokenOptions = ({
   const { tokens, isLoading: isLoadingTokens } = useGetTokensWithEgld();
   const [fetchNFTs, { data: nfts, isLoading: isLoadingNfts }] =
     useLazyGetNftsQuery();
+  const egldLabel = getEgldLabel();
 
   const getTokenOptionsByType = (type: SendTypeEnum): TokenOptionType[] => {
     if (type === SendTypeEnum.nft) {
@@ -26,7 +27,7 @@ export const useTokenOptions = ({
       );
     }
 
-    if (skipAddEgld) {
+    if (skipAddEgld && tokens[0]?.identifier === egldLabel) {
       tokens.shift();
     }
 
@@ -50,7 +51,7 @@ export const useTokenOptions = ({
 
   const allTokens = [...tokens, ...(nfts || [])];
 
-  if (skipAddEgld) {
+  if (skipAddEgld && allTokens[0]?.identifier === egldLabel) {
     allTokens.shift();
   }
 

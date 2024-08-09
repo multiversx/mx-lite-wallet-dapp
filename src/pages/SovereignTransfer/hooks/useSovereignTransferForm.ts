@@ -4,13 +4,8 @@ import { array, number, object, string } from 'yup';
 import { sovereignContractAddress } from 'config';
 import { getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
-import {
-  addressIsValid,
-  getEgldLabel,
-  useGetAccountInfo,
-  useGetNetworkConfig
-} from 'lib';
-import { SendTypeEnum, TokenType, PartialNftType } from 'types';
+import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { SendTypeEnum } from 'types';
 import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 
@@ -20,8 +15,6 @@ export const useSovereignTransferForm = () => {
     network: { chainId }
   } = useGetNetworkConfig();
   const { sendTransactions } = useSendTransactions();
-
-  const egldLabel = getEgldLabel();
   const {
     allTokens,
     getTokenOptionsByType,
@@ -122,9 +115,6 @@ export const useSovereignTransferForm = () => {
   const getSelectedToken = (selectedToken: string) =>
     allTokens?.find((token) => token.identifier === selectedToken);
 
-  const isEgldToken = (selectedToken: TokenType | PartialNftType) =>
-    selectedToken?.identifier === egldLabel;
-
   const getIsNFT = (type: SendTypeEnum) => type === SendTypeEnum.nft;
 
   const getTokenAvailableAmount = ({
@@ -167,7 +157,6 @@ export const useSovereignTransferForm = () => {
     getTokenOptionsByType,
     handleAddToken,
     handleRemoveToken,
-    isEgldToken,
     isLoading
   };
 };
