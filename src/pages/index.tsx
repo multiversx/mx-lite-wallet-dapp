@@ -1,4 +1,5 @@
 export * from './Dashboard';
+export * from './SovereignTransfer';
 export * from './Disclaimer';
 export * from './Home';
 export * from './Hook';

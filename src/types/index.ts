@@ -1,5 +1,6 @@
 export * from './api';
 export * from './profile.types';
+export * from './send.types';
 export * from './sdkCore.types';
 export * from './sdkDapp.types';
 export * from './sdkDappForm.types';

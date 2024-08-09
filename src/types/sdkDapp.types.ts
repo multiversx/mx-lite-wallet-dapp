@@ -1,7 +1,8 @@
 export {
   SignedMessageStatusesEnum,
   LoginMethodsEnum,
-  EnvironmentsEnum
+  EnvironmentsEnum,
+  TransactionTypesEnum
 } from '@multiversx/sdk-dapp/types/enums.types';
 export type { AccountType } from '@multiversx/sdk-dapp/types';
 export type { RouteType } from '@multiversx/sdk-dapp/types/index';

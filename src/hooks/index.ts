@@ -7,5 +7,6 @@ export * from './useRedirectPathname';
 export * from './useReplyToDapp';
 export * from './useReplyWithCancelled';
 export * from './useScrollToElement';
+export * from './useSendTransactions';
 export * from './useSignTxSchema';
 export * from './withPageTitle';

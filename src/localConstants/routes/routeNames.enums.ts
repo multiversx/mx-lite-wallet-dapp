@@ -13,7 +13,8 @@ export enum RouteNamesEnum {
   send = '/send',
   logout = '/logout',
   sign = '/sign',
-  signMessage = '/sign-message'
+  signMessage = '/sign-message',
+  sovereignTransfer = '/sovereign-transfer'
 }
 
 export enum HooksPageEnum {
