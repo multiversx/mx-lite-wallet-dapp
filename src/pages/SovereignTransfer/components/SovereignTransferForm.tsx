@@ -209,7 +209,7 @@ export const SovereignTransferForm = () => {
                           data-testid={DataTestIdsEnum.availableAmount}
                         >
                           Available: {availableAmount}{' '}
-                          {token[SovereignTransferFormFieldsEnum.token].label}
+                          {token[SovereignTransferFormFieldsEnum.token]?.label}
                         </div>
                       )}
                       {tokenTouched?.amount && tokenError?.amount && (

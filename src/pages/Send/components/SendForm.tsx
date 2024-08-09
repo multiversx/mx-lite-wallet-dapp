@@ -132,7 +132,7 @@ export const SendForm = () => {
                     data-testid={DataTestIdsEnum.availableAmount}
                   >
                     Available: {availableAmount}{' '}
-                    {formik.values[FormFieldsEnum.token].label}
+                    {formik.values[FormFieldsEnum.token]?.label}
                   </div>
                 )}
               {formik.touched[FormFieldsEnum.amount] &&
