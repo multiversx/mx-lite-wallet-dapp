@@ -39,6 +39,7 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
               value={token.balance}
               decimals={token.decimals}
               showLabel={false}
+              showLastNonZeroDecimal
             />
           </div>
         )}
