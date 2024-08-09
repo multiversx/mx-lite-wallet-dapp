@@ -3,8 +3,9 @@ import Select from 'react-select';
 import { Button, MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
+import { SendTypeEnum } from 'types';
 import { useSendForm } from '../hooks';
-import { FormFieldsEnum, SendTypeEnum } from '../types';
+import { FormFieldsEnum } from '../types';
 
 export const SendForm = () => {
   const {
@@ -131,7 +132,7 @@ export const SendForm = () => {
                     data-testid={DataTestIdsEnum.availableAmount}
                   >
                     Available: {availableAmount}{' '}
-                    {formik.values[FormFieldsEnum.token].label}
+                    {formik.values[FormFieldsEnum.token]?.label}
                   </div>
                 )}
               {formik.touched[FormFieldsEnum.amount] &&

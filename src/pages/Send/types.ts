@@ -1,12 +1,4 @@
-export interface TokenOptionType {
-  label: string;
-  value: string;
-}
-
-export enum SendTypeEnum {
-  esdt = 'ESDT',
-  nft = 'NFT'
-}
+import { TokenOptionType } from 'types';
 
 export enum FormFieldsEnum {
   amount = 'amount',

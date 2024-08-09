@@ -1,9 +1,10 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
-import { PartialNftType } from '@multiversx/sdk-dapp-form';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSearchParams } from 'react-router-dom';
 import { number, object, string } from 'yup';
+import { getSelectedTokenBalance } from 'helpers';
+import { useSendTransactions, useTokenOptions } from 'hooks';
 import {
   prepareTransaction,
   getEgldLabel,
@@ -21,10 +22,8 @@ import {
   GAS_PRICE,
   SearchParamsEnum
 } from 'localConstants';
-import { useSendTransactions } from './useSendTransactions';
-import { useTokenOptions } from './useTokenOptions';
-import { getSelectedTokenBalance } from '../helpers';
-import { FormFieldsEnum, SendTypeEnum, TokenOptionType } from '../types';
+import { SendTypeEnum, TokenOptionType, PartialNftType } from 'types';
+import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {
   const { address, account } = useGetAccountInfo();
@@ -82,8 +81,8 @@ export const useSendForm = () => {
 
           const selectedTokenBalance = getSelectedTokenBalance({
             isNFT,
-            tokens,
-            tokenOption: selectedTokenOption
+            selectedToken: selectedTokenOption?.value,
+            tokens
           });
 
           return new BigNumber(selectedTokenBalance).isGreaterThanOrEqualTo(
@@ -124,8 +123,8 @@ export const useSendForm = () => {
   const isEgldToken = selectedToken?.identifier === egldLabel;
   const availableAmount = getSelectedTokenBalance({
     isNFT,
-    tokens,
-    tokenOption: formik.values[FormFieldsEnum.token]
+    selectedToken: formik.values[FormFieldsEnum.token]?.value,
+    tokens
   });
 
   const canEditNftAmount = new BigNumber(availableAmount).isGreaterThan(1);
@@ -134,8 +133,8 @@ export const useSendForm = () => {
     const balance = defaultTokenOption
       ? getSelectedTokenBalance({
           isNFT,
-          tokens,
-          tokenOption: defaultTokenOption
+          selectedToken: defaultTokenOption.value,
+          tokens
         })
       : '';
 

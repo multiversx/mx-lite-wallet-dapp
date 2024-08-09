@@ -70,10 +70,17 @@ export const Account = () => {
             </MxLink>
             <MxLink
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-              data-testid={DataTestIdsEnum.sendBtn}
+              data-testid={DataTestIdsEnum.signMessageBtn}
               to={routeNames.signMessage}
             >
               Sign Message
+            </MxLink>
+            <MxLink
+              className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+              data-testid={DataTestIdsEnum.sovereignTransferBtn}
+              to={routeNames.sovereignTransfer}
+            >
+              Sovereign Transfer
             </MxLink>
           </div>
         </div>

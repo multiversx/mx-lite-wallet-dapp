@@ -1,23 +1,22 @@
 import { formatAmount, getEgldLabel } from 'lib';
 import { DECIMALS, DIGITS } from 'localConstants';
 import { PartialNftType, TokenType } from 'types';
-import { TokenOptionType } from '../types';
 
 export const getSelectedTokenBalance = ({
   isNFT,
-  tokens,
-  tokenOption
+  selectedToken,
+  tokens
 }: {
   isNFT: boolean;
+  selectedToken?: string;
   tokens?: PartialNftType[] | TokenType[];
-  tokenOption?: TokenOptionType;
 }) => {
   if (!tokens || tokens.length === 0) {
     return '0';
   }
 
   const currentToken = tokens.find(
-    (token) => token.identifier === tokenOption?.value
+    (token) => token.identifier === selectedToken
   );
 
   if (!currentToken) {

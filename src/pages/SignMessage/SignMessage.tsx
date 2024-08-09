@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { faBroom, faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
 import { useReplyWithCancelled } from 'hooks';
-import { parseQueryParams, useSignMessage } from 'lib';
+import {
+  parseQueryParams,
+  useSignMessage,
+  useGetSignMessageSession
+} from 'lib';
 import { CANCELLED, DataTestIdsEnum, HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';

@@ -9,7 +9,7 @@ import { NftEnumType, PartialNftType } from 'types';
 export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
   const navigate = useNavigate();
   const nftType =
-    CollectionTypeByNftEnum[nft.type as NftEnumType].toUpperCase();
+    CollectionTypeByNftEnum[nft.type as NftEnumType]?.toUpperCase();
 
   const handleSend = (event: MouseEvent) => {
     event.preventDefault();

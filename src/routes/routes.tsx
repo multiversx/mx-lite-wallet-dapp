@@ -12,7 +12,8 @@ import {
   SignMessage,
   SignMessageHook,
   Send,
-  Sign
+  Sign,
+  SovereignTransfer
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
 import {
@@ -79,6 +80,15 @@ const routesObject: Record<
     component: () => (
       <PrivateKeyCheckWrapper>
         <SignMessage />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.sovereignTransfer]: {
+    path: RouteNamesEnum.sovereignTransfer,
+    title: 'Sovereign Transfer',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <SovereignTransfer />
       </PrivateKeyCheckWrapper>
     )
   },
