@@ -1,17 +1,17 @@
 import axios from 'axios';
-import { API_URL, GATEWAY_URL } from 'config';
+import { getCurrentNetwork } from 'helpers';
 import { getGatewayConfigForCurrentRequest } from './helpers/getGatewayConfigForCurrentRequest';
 import { getGatewayResponse } from './helpers/getGatewayResponse';
 
 axios.interceptors.request.use(
   function (config) {
-    if (!config.url || (API_URL && !GATEWAY_URL)) {
+    const { apiAddress, gatewayUrl } = getCurrentNetwork();
+
+    if (!config.url || (apiAddress && !gatewayUrl)) {
       return config;
     }
 
-    const newConfig = getGatewayConfigForCurrentRequest(config);
-
-    return newConfig;
+    return getGatewayConfigForCurrentRequest(config);
   },
   function (error) {
     return Promise.reject(error);
@@ -20,18 +20,17 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   async function (response) {
+    const { gatewayUrl } = getCurrentNetwork();
     const { config } = response;
 
-    const isGatewayRequest = config.baseURL === GATEWAY_URL;
+    const isGatewayRequest = config.baseURL === gatewayUrl;
     const url = config.url || '';
 
     if (!isGatewayRequest || !url) {
       return response;
     }
 
-    const gatewayResponse = await getGatewayResponse(url, response);
-
-    return gatewayResponse;
+    return await getGatewayResponse(url, response);
   },
   function (error) {
     return Promise.reject(error);

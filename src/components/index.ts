@@ -10,5 +10,7 @@ export * from './PasswordVisibilityToggle';
 export * from './PrivateKeyCheckWrapper';
 export * from './ProgressBar';
 export * from './TransactionsTracker';
+export * from './Dropdown';
+export * from './NetworkSwitcher';
 export * from './Utilities';
 export * from './sdkDapp.components';

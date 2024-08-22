@@ -6,10 +6,10 @@ import {
 import { Address, AddressValue, TokenTransfer } from '@multiversx/sdk-core/out';
 import { numberToPaddedHex } from '@multiversx/sdk-core/out/utils.codec';
 import BigNumber from 'bignumber.js';
-import { WEGLDID } from 'config';
 import { getEgldLabel, parseAmount } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { PartialNftType, TokenType } from 'types';
+import { getCurrentNetwork } from '../../../helpers';
 import { SovereignTransferFormType } from '../types';
 
 export const stringToHex = (stringTopEncode?: string) =>
@@ -30,6 +30,7 @@ export const getSovereignTransferTransaction = ({
   tokens: (PartialNftType | TokenType)[];
 }) => {
   const egldLabel = getEgldLabel();
+  const { WEGLDid } = getCurrentNetwork();
   const factoryConfig = new TransactionsFactoryConfig({ chainID: chainId });
   const factory = new SmartContractTransactionsFactory({
     config: factoryConfig
@@ -56,7 +57,7 @@ export const getSovereignTransferTransaction = ({
       return new TokenTransfer({
         token: new Token({
           identifier:
-            realToken.identifier === egldLabel ? WEGLDID : realToken.identifier,
+            realToken.identifier === egldLabel ? WEGLDid : realToken.identifier,
           nonce: nonce ? BigInt(nonce) : undefined
         }),
         amount: BigInt(

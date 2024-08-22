@@ -27,6 +27,7 @@ export const Button = ({
       id={id}
       onClick={onClick}
       type={type}
+      {...otherProps}
     >
       {children}
     </button>

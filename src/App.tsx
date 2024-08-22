@@ -1,4 +1,4 @@
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -9,27 +9,24 @@ import {
   Utilities
 } from 'components';
 
-import {
-  apiTimeout,
-  walletConnectV2ProjectId,
-  environment,
-  sampleAuthenticatedDomains,
-  API_URL
-} from 'config';
+import { apiTimeout, walletConnectV2ProjectId } from 'config';
 import { provider } from 'helpers/app';
 import { PageNotFound, Unlock } from 'pages';
 import { routeNames, routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
+import { networkSelector } from './redux/selectors';
 import { persistor, store } from './redux/store';
 
 const AppContent = () => {
+  const { activeNetwork } = useSelector(networkSelector);
+
   return (
     <DappProvider
-      environment={environment}
+      environment={activeNetwork.id}
       externalProvider={provider}
       customNetworkConfig={{
         name: 'customConfig',
-        apiAddress: API_URL,
+        apiAddress: activeNetwork.apiAddress,
         apiTimeout,
         walletConnectV2ProjectId
       }}
@@ -72,10 +69,12 @@ const AppContent = () => {
 };
 
 export const MainApp = () => {
+  const { activeNetwork } = useSelector(networkSelector);
+
   return (
     <AxiosInterceptorContext.Provider>
       <AxiosInterceptorContext.Interceptor
-        authenticatedDomains={sampleAuthenticatedDomains}
+        authenticatedDomains={activeNetwork.sampleAuthenticatedDomains}
       >
         <BatchTransactionsContextProvider>
           <AppContent />
