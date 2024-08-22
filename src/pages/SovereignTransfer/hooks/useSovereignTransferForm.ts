@@ -1,11 +1,10 @@
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
-import { useSelector } from 'react-redux';
 import { array, number, object, string } from 'yup';
+import { sovereignContractAddress } from 'config';
 import { getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
-import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';
 import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
@@ -15,11 +14,6 @@ export const useSovereignTransferForm = () => {
   const {
     network: { chainId }
   } = useGetNetworkConfig();
-
-  const {
-    activeNetwork: { sovereignContractAddress }
-  } = useSelector(networkSelector);
-
   const { sendTransactions } = useSendTransactions();
   const {
     allTokens,
