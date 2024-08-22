@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
-import { API_URL, GATEWAY_URL } from 'config';
+import { getCurrentNetwork } from 'helpers';
 import { matchPath } from 'types/sdkDapp.types';
 import { apiRoutes, endpointMap } from './apiToGatewayEndpointMap';
 
@@ -7,9 +7,11 @@ export const getGatewayConfigForCurrentRequest = (
   config: InternalAxiosRequestConfig<any>
 ): InternalAxiosRequestConfig<any> => {
   const newConfig = config;
+  const { apiAddress, gatewayUrl } = getCurrentNetwork();
 
   const needsGateway =
-    config.baseURL?.startsWith(API_URL) || config.url?.startsWith(API_URL);
+    config.baseURL?.startsWith(apiAddress) ||
+    config.url?.startsWith(apiAddress);
 
   const isGatewayRequest =
     needsGateway &&
@@ -19,11 +21,11 @@ export const getGatewayConfigForCurrentRequest = (
     return config;
   }
 
-  config.baseURL = GATEWAY_URL;
+  config.baseURL = gatewayUrl;
   const configUrl = String(config.url);
 
-  let url = configUrl.startsWith(API_URL)
-    ? configUrl.replace(API_URL, '')
+  let url = configUrl.startsWith(apiAddress)
+    ? configUrl.replace(apiAddress, '')
     : configUrl;
 
   if (
