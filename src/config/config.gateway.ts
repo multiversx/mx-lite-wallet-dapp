@@ -10,6 +10,7 @@ export const networks: NetworkType[] = [
     name: 'Devnet',
     apiAddress: 'https://devnet-api.multiversx.com',
     gatewayUrl: '',
+    extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://devnet-api.multiversx.com'],
     sovereignContractAddress: '',
     WEGLDid: ''
@@ -20,6 +21,7 @@ export const networks: NetworkType[] = [
     name: 'Gateway',
     apiAddress: '',
     gatewayUrl: 'https://devnet-gateway.multiversx.com',
+    extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: [''],
     sovereignContractAddress: '',
     WEGLDid: ''
@@ -30,6 +32,7 @@ export const networks: NetworkType[] = [
     name: 'Mainnet',
     apiAddress: 'https://api.multiversx.com',
     gatewayUrl: '',
+    extrasApi: 'https://extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://api.multiversx.com'],
     sovereignContractAddress: '',
     WEGLDid: ''
@@ -40,6 +43,7 @@ export const networks: NetworkType[] = [
     name: 'Sovereign',
     apiAddress: 'https://api-sovereign-test.elrond.ro',
     gatewayUrl: '',
+    extrasApi: 'https://extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
     sovereignContractAddress:
       'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa',
@@ -51,6 +55,7 @@ export const networks: NetworkType[] = [
     name: 'Testnet',
     apiAddress: 'https://testnet-api.multiversx.com',
     gatewayUrl: '',
+    extrasApi: 'https://testnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://testnet-api.multiversx.com'],
     sovereignContractAddress: '',
     WEGLDid: ''

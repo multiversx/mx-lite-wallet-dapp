@@ -5,6 +5,7 @@ export interface NetworkType {
   WEGLDid: string;
   apiAddress: string;
   default: boolean;
+  extrasApi: string;
   faucet?: boolean;
   gatewayUrl: string;
   id: string;
@@ -21,6 +22,7 @@ interface NetworkSliceType {
 export const emptyNetwork: NetworkType = {
   apiAddress: '',
   default: false,
+  extrasApi: '',
   gatewayUrl: '',
   id: 'not-configured',
   name: 'NOT CONFIGURED',
