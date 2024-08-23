@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button, Loader } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
 import { getEgldLabel } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 const isDisabled = process.env.NODE_ENV === 'production';

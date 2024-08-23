@@ -1,16 +1,16 @@
 import { useRef, useState } from 'react';
 
+import { Loader } from 'components';
+import { getEgldLabel } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 
-import { FaucetError } from './components/FaucetError';
-import { FaucetScreen } from './components/FaucetScreen';
-import { FaucetSuccess } from './components/FaucetSuccess';
 import {
   useGetFaucetSettingsQuery,
   useRequestFundsMutation
 } from 'redux/endpoints';
-import { getEgldLabel } from 'lib';
-import { Loader } from 'components';
+import { FaucetError } from './components/FaucetError';
+import { FaucetScreen } from './components/FaucetScreen';
+import { FaucetSuccess } from './components/FaucetSuccess';
 
 export const Faucet = () => {
   const ref = useRef(null);

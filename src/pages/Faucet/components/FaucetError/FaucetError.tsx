@@ -1,6 +1,6 @@
-import { DataTestIdsEnum } from 'localConstants';
-import { PageState } from 'components';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { PageState } from 'components';
+import { DataTestIdsEnum } from 'localConstants';
 
 export const FaucetError = ({ message }: { message: string }) => (
   <div className='faucet-content'>

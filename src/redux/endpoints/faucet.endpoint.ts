@@ -1,10 +1,10 @@
+import { PartialTokenType } from '@multiversx/sdk-dapp-form';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { faucetSettingEndpoint, faucetEndpoint } from 'config';
+import { getAxiosConfig, getExtrasApi } from 'helpers';
+import { formatAmount, getEgldLabel, stringIsInteger } from 'lib';
 import { DECIMALS, DIGITS, TOKENS_ENDPOINT, ZERO } from 'localConstants';
 import { RootApi } from 'redux/rootApi';
-import { formatAmount, getEgldLabel, stringIsInteger } from 'lib';
-import { getAxiosConfig, getExtrasApi } from 'helpers';
-import { faucetSettingEndpoint, faucetEndpoint } from 'config';
-import { PartialTokenType } from '@multiversx/sdk-dapp-form';
 
 interface FaucetSettingsType {
   address: string;

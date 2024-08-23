@@ -1,6 +1,6 @@
-import { DataTestIdsEnum } from 'localConstants';
-import { PageState } from 'components';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { PageState } from 'components';
+import { DataTestIdsEnum } from 'localConstants';
 
 export const FaucetSuccess = ({ settings }: { settings: string }) => {
   return (
