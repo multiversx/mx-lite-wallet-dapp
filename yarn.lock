@@ -8931,7 +8931,7 @@ react-collapsed@3.6.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-draggable-tags@^1.0.6:
+react-draggable-tags@1.0.6:
   version "1.0.6"
   resolved "https://registry.npmjs.org/react-draggable-tags/-/react-draggable-tags-1.0.6.tgz"
   integrity sha512-8Sl6UnLRCotqkaPih5D9L2DoKX858fV/zIf/ZkvcCht3Y58hkOLWO5V1M4XgdcZ0NMKh2ttcI55MCZqKO17DCg==
