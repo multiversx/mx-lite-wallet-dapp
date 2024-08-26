@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Button, Loader } from 'components';
+import { Button } from 'components';
 import { getEgldLabel } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 
@@ -33,20 +33,22 @@ export const FaucetScreen = ({
   };
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col items-center pb-5'>
       <h1
-        className='text-2xl whitespace-nowrap mt-2'
+        className='text-2xl whitespace-nowrap mt-5'
         data-testid={DataTestIdsEnum.modalTitle}
       >
         {egldLabel} Faucet
       </h1>
+      <p
+        className='text-sm text-gray-400 mb-10'
+        data-testid={DataTestIdsEnum.modalSubtitle}
+      >
+        You can request {settings} every 24 hours
+      </p>
 
-      <div>You can request {settings} every 24 hours</div>
-
-      <div data-testid={DataTestIdsEnum.captcha}>
+      <div className='mb-10' data-testid={DataTestIdsEnum.captcha}>
         <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} />
-
-        <Loader />
       </div>
 
       <Button

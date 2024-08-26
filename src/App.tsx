@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import {
+  AxiosInterceptor,
   AxiosInterceptorContext,
   DappProvider,
   Layout,
@@ -48,22 +49,20 @@ const AppContent = () => {
         }
       }}
     >
-      <AxiosInterceptorContext.Listener>
-        <Layout>
-          <Routes>
-            <Route path={routeNames.unlock} element={<Unlock />} />
-            {routes.map((route) => (
-              <Route
-                path={route.path}
-                key={`route-key-'${route.path}`}
-                element={<route.component />}
-              />
-            ))}
-            <Route path='*' element={<PageNotFound />} />
-          </Routes>
-          <Utilities />
-        </Layout>
-      </AxiosInterceptorContext.Listener>
+      <Layout>
+        <Routes>
+          <Route path={routeNames.unlock} element={<Unlock />} />
+          {routes.map((route) => (
+            <Route
+              path={route.path}
+              key={`route-key-'${route.path}`}
+              element={<route.component />}
+            />
+          ))}
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+        <Utilities />
+      </Layout>
     </DappProvider>
   );
 };
@@ -76,9 +75,11 @@ export const MainApp = () => {
       <AxiosInterceptorContext.Interceptor
         authenticatedDomains={activeNetwork.sampleAuthenticatedDomains}
       >
-        <BatchTransactionsContextProvider>
-          <AppContent />
-        </BatchTransactionsContextProvider>
+        <AxiosInterceptor>
+          <BatchTransactionsContextProvider>
+            <AppContent />
+          </BatchTransactionsContextProvider>
+        </AxiosInterceptor>
       </AxiosInterceptorContext.Interceptor>
     </AxiosInterceptorContext.Provider>
   );

@@ -3,6 +3,7 @@ import { networks } from 'config';
 
 export interface NetworkType {
   WEGLDid: string;
+  accessToken?: boolean;
   apiAddress: string;
   default: boolean;
   extrasApi: string;
@@ -12,6 +13,7 @@ export interface NetworkType {
   name: string;
   sampleAuthenticatedDomains: string[];
   sovereignContractAddress: string;
+  walletAddress: string;
 }
 
 interface NetworkSliceType {
@@ -28,6 +30,7 @@ export const emptyNetwork: NetworkType = {
   name: 'NOT CONFIGURED',
   sampleAuthenticatedDomains: [],
   sovereignContractAddress: '',
+  walletAddress: '',
   WEGLDid: ''
 };
 

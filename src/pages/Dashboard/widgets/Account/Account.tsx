@@ -3,6 +3,7 @@ import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
+import { Faucet } from 'pages/Faucet';
 import {
   explorerAddressSelector,
   useSdkDappSelector
@@ -53,7 +54,7 @@ export const Account = () => {
               </div>
             </div>
           </div>
-          <div className='flex flex-row gap-4'>
+          <div className='flex flex-row flex-wrap gap-4'>
             <a
               href={`${explorerAddress}/accounts/${address}`}
               target='_blank'
@@ -82,6 +83,7 @@ export const Account = () => {
             >
               Sovereign Transfer
             </MxLink>
+            <Faucet />
           </div>
         </div>
         <div className='mb-2 hidden justify-center sm:block'>

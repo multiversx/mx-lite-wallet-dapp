@@ -1,0 +1,28 @@
+import { useSelector } from 'react-redux';
+import { storage } from 'lib';
+import { IS_DEVELOPMENT, IS_TEST, ACCESS_TOKEN_KEY } from 'localConstants';
+import { networkSelector } from 'redux/selectors';
+
+interface ConfigType {
+  origin?: string;
+  extraRequestHeaders?: {
+    Authorization: string;
+  };
+}
+
+export const useGetNativeAuthConfig = () => {
+  const token = storage.local.getItem(ACCESS_TOKEN_KEY);
+  const { activeNetwork } = useSelector(networkSelector);
+  const extraRequestHeaders = { Authorization: `Bearer ${token}` };
+
+  const walletConfig: ConfigType =
+    IS_DEVELOPMENT || IS_TEST
+      ? { extraRequestHeaders, origin: activeNetwork.walletAddress }
+      : { extraRequestHeaders };
+
+  if (!token) {
+    delete walletConfig.extraRequestHeaders;
+  }
+
+  return walletConfig;
+};

@@ -13,6 +13,7 @@ export const networks: NetworkType[] = [
     extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://devnet-api.multiversx.com'],
     sovereignContractAddress: '',
+    walletAddress: 'https://devnet-wallet.multiversx.com',
     WEGLDid: ''
   },
   {
@@ -24,17 +25,20 @@ export const networks: NetworkType[] = [
     extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: [''],
     sovereignContractAddress: '',
+    walletAddress: 'https://devnet-wallet.multiversx.com',
     WEGLDid: ''
   },
   {
     default: true,
     id: EnvironmentsEnum.mainnet,
     name: 'Mainnet',
+    accessToken: true,
     apiAddress: 'https://api.multiversx.com',
     gatewayUrl: '',
     extrasApi: 'https://extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://api.multiversx.com'],
     sovereignContractAddress: '',
+    walletAddress: 'https://wallet.multiversx.com',
     WEGLDid: ''
   },
   {
@@ -47,6 +51,7 @@ export const networks: NetworkType[] = [
     sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
     sovereignContractAddress:
       'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa',
+    walletAddress: 'https://wallet.voyager1.dev',
     WEGLDid: 'WEGLD-bd4d79'
   },
   {
@@ -58,6 +63,7 @@ export const networks: NetworkType[] = [
     extrasApi: 'https://testnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://testnet-api.multiversx.com'],
     sovereignContractAddress: '',
+    walletAddress: 'https://testnet-wallet.multiversx.com',
     WEGLDid: ''
   }
 ];

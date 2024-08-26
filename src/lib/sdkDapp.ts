@@ -63,3 +63,6 @@ export {
   setTransactionsToSignedState
 } from '@multiversx/sdk-dapp/services/transactions/updateSignedTransactions';
 export { sendBatchTransactions } from '@multiversx/sdk-dapp/services/transactions/sendBatchTransactions';
+export { useAxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext';
+export { storage } from '@multiversx/sdk-dapp/utils/storage';
+export { addNewCustomToast } from '@multiversx/sdk-dapp/utils/toasts';
