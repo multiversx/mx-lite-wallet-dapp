@@ -32,7 +32,7 @@ export const PemModal = ({ handleClose, show }: UseModalReturnType) => {
   const { type: hook, loginToken: hookInitToken } = useSelector(hookSelector);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [fileName, setFileName] = useState<string>('');
+  const [fileName, setFileName] = useState('');
 
   const handleModalClose = () => {
     handleClose();

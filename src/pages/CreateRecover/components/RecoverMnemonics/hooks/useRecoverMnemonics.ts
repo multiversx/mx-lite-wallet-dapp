@@ -15,7 +15,7 @@ export const useRecoverMnemonics = ({
   setMnemonic
 }: RecoverMnemonicsPropsType) => {
   const [words, setWords] = useState<WordType[]>([]);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState('');
   const [inputValue, setInputValue] = useState<SelectOptionType>({
     label: '',
     value: ''

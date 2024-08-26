@@ -20,8 +20,8 @@ export const useSetNativeAuthInterceptors = () => {
    * `axios` wait until token arrives
    */
   const getToken = async (): Promise<string> => {
-    const pollForToken = () => {
-      return new Promise(function (resolve, reject) {
+    const pollForToken = () =>
+      new Promise(function (resolve, reject) {
         if (nativeAuthToken) {
           resolve(nativeAuthToken);
         }
@@ -30,9 +30,12 @@ export const useSetNativeAuthInterceptors = () => {
           ? resolve('Auth token not found')
           : reject('Auth token not found');
       });
-    };
 
-    return retry(pollForToken, 3, 'Auth token not found');
+    return retry({
+      fn: pollForToken,
+      retries: 3,
+      error: 'Auth token not found'
+    });
   };
 
   const setNativeAuthTokenInterceptors = (

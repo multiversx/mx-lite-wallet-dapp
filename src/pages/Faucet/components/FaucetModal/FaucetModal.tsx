@@ -21,7 +21,7 @@ export const FaucetModal = () => {
   const { data: settings, error: settingsError } = useGetFaucetSettingsQuery();
   const egldLabel = getEgldLabel();
 
-  const onRequestClick = async (captcha: string) => {
+  const handleRequestClick = async (captcha: string) => {
     const response = await getFunds(captcha);
 
     if ('error' in response) {
@@ -63,7 +63,7 @@ export const FaucetModal = () => {
   return (
     <div ref={ref} className='flex flex-col flex-grow'>
       {showFaucetScreen ? (
-        <FaucetScreen settings={settings} onRequestClick={onRequestClick} />
+        <FaucetScreen settings={settings} onRequestClick={handleRequestClick} />
       ) : (
         <FaucetSuccess settings={settings} />
       )}

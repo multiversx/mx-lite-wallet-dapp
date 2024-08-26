@@ -16,7 +16,7 @@ export const FaucetScreen = ({
   settings,
   onRequestClick
 }: FaucetScreenPropsType) => {
-  const [captcha, setCaptcha] = useState<string>('');
+  const [captcha, setCaptcha] = useState('');
   const [requestDisabled, setRequestDisabled] = useState(isDisabled);
   const egldLabel = getEgldLabel();
 

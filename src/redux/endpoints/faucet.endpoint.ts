@@ -70,15 +70,13 @@ const faucetEndpoints = RootApi.injectEndpoints({
       }
     }),
     requestFunds: builder.mutation<void, string>({
-      query: (captcha: string) => {
-        return {
-          baseURL: getExtrasApi(),
-          url: faucetEndpoint,
-          method: 'POST',
-          data: { captcha },
-          validateStatus: (status) => status >= 200 && status < 300
-        };
-      }
+      query: (captcha: string) => ({
+        baseURL: getExtrasApi(),
+        url: faucetEndpoint,
+        method: 'POST',
+        data: { captcha },
+        validateStatus: (status) => status >= 200 && status < 300
+      })
     })
   })
 });

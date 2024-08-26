@@ -7,9 +7,7 @@ export const useSetResponseInterceptors = () => {
 
   const setResponseInterceptors = () => {
     const newResponseId = axios.interceptors.response.use(
-      (response) => {
-        return response;
-      },
+      (response) => response,
       (error) => {
         let url = error.config.url;
         if (error.config.params) {
