@@ -16,7 +16,7 @@ export const FaucetModal = () => {
   const ref = useRef(null);
   const [getFunds, { isSuccess }] = useRequestFundsMutation();
   const [fundsReceived, setFundsReceived] = useState(false);
-  const [requestFailed, setRequestFailed] = useState(false);
+  const [requestFailed, setRequestFailed] = useState('');
 
   const { data: settings, error: settingsError } = useGetFaucetSettingsQuery();
   const egldLabel = getEgldLabel();
@@ -25,7 +25,10 @@ export const FaucetModal = () => {
     const response = await getFunds(captcha);
 
     if ('error' in response) {
-      setRequestFailed(true);
+      setRequestFailed(
+        (response.error as any).data.message ||
+          'The faucet is available once every 24 hours.'
+      );
     }
 
     if (ref.current !== null) {
@@ -52,9 +55,7 @@ export const FaucetModal = () => {
   }
 
   if (requestFailed) {
-    return (
-      <FaucetError message='The faucet is available once every 24 hours.' />
-    );
+    return <FaucetError message={requestFailed} />;
   }
 
   const showFaucetScreen = !fundsReceived && !isSuccess;
