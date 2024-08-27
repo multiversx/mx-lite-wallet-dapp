@@ -36,8 +36,9 @@ export const getRegisterTokenTransaction = ({
   const isNft = Boolean(nft.nonce);
   const collectionId = isNft ? nft.collection : '';
   const tokenType = TokenTypeMap[nft.type] || 0;
-  const tokenName = token.name;
-  const tokenTicker = token.ticker;
+  const collectionName = collectionId.split('-')[0];
+  const tokenName = collectionName || token.name;
+  const tokenTicker = collectionName || token.ticker;
   const tokenDecimals = token.decimals || 0;
 
   const args = [
