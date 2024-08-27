@@ -30,3 +30,4 @@ export type {
 export type { TransactionsDataTokensType } from '@multiversx/sdk-dapp/types/transactions.types';
 export type { SignedTransactionsType } from '@multiversx/sdk-dapp/types/transactions.types';
 export type { SendBatchTransactionsPropsType } from '@multiversx/sdk-dapp/types/transactions.types';
+export type { CustomToastType } from '@multiversx/sdk-dapp/types/toasts.types';

@@ -20,6 +20,7 @@ import {
   CreateRecoverRoutes,
   CreateRecoverRoutesEnum
 } from '../pages/CreateRecover/routes';
+import { IssueToken } from '../pages/IssueToken/IssueToken';
 
 export interface RouteWithTitleType extends RouteType {
   title: string;
@@ -89,6 +90,15 @@ const routesObject: Record<
     component: () => (
       <PrivateKeyCheckWrapper>
         <SovereignTransfer />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.issueToken]: {
+    path: RouteNamesEnum.issueToken,
+    title: 'Issue Token',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <IssueToken />
       </PrivateKeyCheckWrapper>
     )
   },

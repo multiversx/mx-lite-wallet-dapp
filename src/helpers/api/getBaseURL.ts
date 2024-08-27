@@ -1,11 +1,7 @@
-import { networkSelector } from 'redux/selectors';
-import { RootState, store } from 'redux/store';
+import { getCurrentNetwork } from './getCurrentNetwork';
 
 export function getBaseURL() {
-  const state: RootState = store.getState();
-  const {
-    activeNetwork: { apiAddress }
-  } = networkSelector(state);
+  const { apiAddress } = getCurrentNetwork();
 
   return apiAddress;
 }

@@ -1,5 +1,9 @@
 import { useSelector } from 'react-redux';
-import { TransactionsToastList, NotificationModal } from 'components';
+import {
+  TransactionsToastList,
+  NotificationModal,
+  AxiosInterceptorContext
+} from 'components';
 import { CUSTOM_TOAST_DEFAULT_DURATION } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { PostMessageListener, SendModals, SignModals } from './components';
@@ -19,6 +23,7 @@ export const Utilities = () => {
       <NotificationModal />
       <SignTransactionsModals />
       <PostMessageListener />
+      <AxiosInterceptorContext.Listener />
     </>
   );
 };

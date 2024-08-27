@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added faucet and issue token](https://github.com/multiversx/mx-wallet-dapp/pull/41)
 - [Fixed package.json scripts](https://github.com/multiversx/mx-wallet-dapp/pull/39)
 - [Added gateway adapter](https://github.com/multiversx/mx-wallet-dapp/pull/35)
 

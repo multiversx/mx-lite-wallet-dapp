@@ -5,12 +5,14 @@ export interface NetworkType {
   WEGLDid: string;
   apiAddress: string;
   default: boolean;
+  extrasApi: string;
   faucet?: boolean;
   gatewayUrl: string;
   id: string;
   name: string;
   sampleAuthenticatedDomains: string[];
   sovereignContractAddress: string;
+  walletAddress: string;
 }
 
 interface NetworkSliceType {
@@ -21,11 +23,13 @@ interface NetworkSliceType {
 export const emptyNetwork: NetworkType = {
   apiAddress: '',
   default: false,
+  extrasApi: '',
   gatewayUrl: '',
   id: 'not-configured',
   name: 'NOT CONFIGURED',
   sampleAuthenticatedDomains: [],
   sovereignContractAddress: '',
+  walletAddress: '',
   WEGLDid: ''
 };
 
