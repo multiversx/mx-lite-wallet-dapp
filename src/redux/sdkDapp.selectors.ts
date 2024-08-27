@@ -8,3 +8,4 @@ export {
   egldLabelSelector,
   networkSelector
 } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
+export { accountSelector } from '@multiversx/sdk-dapp/reduxStore/selectors';

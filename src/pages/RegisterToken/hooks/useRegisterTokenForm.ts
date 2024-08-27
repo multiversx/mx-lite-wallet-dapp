@@ -8,6 +8,7 @@ import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/
 import { capitalize } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import { useGetAccountInfo, addressIsValid } from 'lib';
+import { sdkDappStore } from 'redux/sdkDapp.store';
 import {
   DEVNET_CHAIN_ID,
   TESTNET_CHAIN_ID,
@@ -19,6 +20,7 @@ import { EnvironmentsEnum, SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
+import { accountSelector } from 'redux/sdkDapp.selectors';
 
 const defaultChain = {
   label: capitalize(EnvironmentsEnum.devnet),
@@ -95,6 +97,8 @@ export const useRegisterTokenForm = () => {
 
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
       await sleep(1000);
+      const { nonce } = accountSelector(sdkDappStore.getState());
+      transaction.setNonce(nonce);
       await sendTransactions([transaction]);
       navigate(routeNames.dashboard);
     }
