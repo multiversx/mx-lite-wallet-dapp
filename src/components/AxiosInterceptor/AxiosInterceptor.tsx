@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useGetAccount } from 'lib';
 import {
   handleError,
@@ -11,7 +11,6 @@ export const AxiosInterceptor = ({ children }: React.PropsWithChildren) => {
     useSetNativeAuthInterceptors();
   const { address } = useGetAccount();
   const isLoggedIn = Boolean(address);
-  const [interceptorsReady, setInterceptorsReady] = useState(false);
   const { setResponseInterceptors, axiosErrorUrl } =
     useSetResponseInterceptors();
 
@@ -19,17 +18,12 @@ export const AxiosInterceptor = ({ children }: React.PropsWithChildren) => {
     handleError(axiosErrorUrl);
   }, [axiosErrorUrl]);
 
-  const setReady = () => {
-    setResponseInterceptors();
-    setInterceptorsReady(true);
-  };
-
   useEffect(() => {
     if (nativeAuthToken) {
       setNativeAuthTokenInterceptors(nativeAuthToken);
-      setReady();
+      setResponseInterceptors();
     }
   }, [nativeAuthToken, isLoggedIn]);
 
-  return interceptorsReady ? <>{children}</> : null;
+  return <>{children}</>;
 };
