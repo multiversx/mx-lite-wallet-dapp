@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { storage } from 'lib';
 import { IS_DEVELOPMENT, IS_TEST, TOKEN_KEY } from 'localConstants';
 import { networkSelector } from 'redux/selectors';
 
@@ -11,7 +10,7 @@ interface ConfigType {
 }
 
 export const useGetNativeAuthConfig = () => {
-  const token = storage.local.getItem(TOKEN_KEY);
+  const token = localStorage.getItem(TOKEN_KEY);
   const { activeNetwork } = useSelector(networkSelector);
   const extraRequestHeaders = { Authorization: `Bearer ${token}` };
 
