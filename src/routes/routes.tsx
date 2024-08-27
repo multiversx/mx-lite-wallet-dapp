@@ -13,7 +13,8 @@ import {
   SignMessageHook,
   Send,
   Sign,
-  SovereignTransfer
+  SovereignTransfer,
+  RegisterToken
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
 import {
@@ -99,6 +100,15 @@ const routesObject: Record<
     component: () => (
       <PrivateKeyCheckWrapper>
         <IssueToken />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.registerToken]: {
+    path: RouteNamesEnum.registerToken,
+    title: 'Register Token',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <RegisterToken />
       </PrivateKeyCheckWrapper>
     )
   },

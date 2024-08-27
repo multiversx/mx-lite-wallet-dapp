@@ -61,6 +61,6 @@ export const useTokenOptions = ({
     getTokens,
     isLoading: isLoadingTokens || isLoadingNfts,
     tokenOptions,
-    tokens: getTokens(sendType)
+    tokens: getTokens(sendType) || []
   };
 };

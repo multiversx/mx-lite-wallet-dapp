@@ -15,7 +15,8 @@ export enum RouteNamesEnum {
   sign = '/sign',
   signMessage = '/sign-message',
   sovereignTransfer = '/sovereign-transfer',
-  issueToken = '/issue-token'
+  issueToken = '/issue-token',
+  registerToken = '/register-token'
 }
 
 export enum HooksPageEnum {
