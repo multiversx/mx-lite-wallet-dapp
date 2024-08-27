@@ -8,19 +8,19 @@ import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/
 import { capitalize } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import { useGetAccountInfo, addressIsValid } from 'lib';
-import { sdkDappStore } from 'redux/sdkDapp.store';
 import {
   DEVNET_CHAIN_ID,
   TESTNET_CHAIN_ID,
   MAINNET_CHAIN_ID
 } from 'localConstants';
+import { accountSelector } from 'redux/sdkDapp.selectors';
+import { sdkDappStore } from 'redux/sdkDapp.store';
 import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { EnvironmentsEnum, SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
-import { accountSelector } from 'redux/sdkDapp.selectors';
 
 const defaultChain = {
   label: capitalize(EnvironmentsEnum.devnet),
