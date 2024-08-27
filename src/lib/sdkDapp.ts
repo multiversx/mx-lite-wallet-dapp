@@ -66,3 +66,7 @@ export { sendBatchTransactions } from '@multiversx/sdk-dapp/services/transaction
 export { useAxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext';
 export { storage } from '@multiversx/sdk-dapp/utils/storage';
 export { addNewCustomToast } from '@multiversx/sdk-dapp/utils/toasts';
+export {
+  maxDecimals,
+  stringIsFloat
+} from '@multiversx/sdk-dapp/utils/validation';

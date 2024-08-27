@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { networks } from 'config';
 import { networkSelector } from 'redux/selectors';
-import { Dropdown, DropdownOption } from '../Dropdown';
 import { useRefreshNativeAuthTokenForNetwork } from './hooks';
+import { Dropdown, DropdownOption } from '../Dropdown';
 
 export const NetworkSwitcher = () => {
   const { activeNetwork } = useSelector(networkSelector);

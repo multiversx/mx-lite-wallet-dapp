@@ -3,7 +3,6 @@ import { networks } from 'config';
 
 export interface NetworkType {
   WEGLDid: string;
-  accessToken?: boolean;
   apiAddress: string;
   default: boolean;
   extrasApi: string;

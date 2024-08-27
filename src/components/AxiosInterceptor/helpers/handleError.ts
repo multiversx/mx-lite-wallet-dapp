@@ -57,30 +57,7 @@ export const handleError = (axiosErrorUrl: string) => {
 
   const hasWalletVersion = walletVersion != null;
 
-  if (!hasWalletVersion) {
-    if (IS_DEVELOPMENT) {
-      createNotification();
-    }
-    return;
-  }
-
-  try {
-    const erdAddressRegex = new RegExp(/erd1\w+/, 'g');
-    const hashRegex = new RegExp(/([a-z0-9]){64}/, 'g');
-
-    let request = axiosErrorUrl.replace(erdAddressRegex, 'erd1...');
-    request = request.replace(hashRegex, 'hash...');
-
-    if ((window as any).ga) {
-      (window as any).ga(
-        'send',
-        'event',
-        'failed-request',
-        request,
-        walletVersion
-      );
-    }
-
+  if (!hasWalletVersion && IS_DEVELOPMENT) {
     createNotification();
-  } catch {}
+  }
 };

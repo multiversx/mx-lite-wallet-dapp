@@ -32,7 +32,6 @@ export const networks: NetworkType[] = [
     default: true,
     id: EnvironmentsEnum.mainnet,
     name: 'Mainnet',
-    accessToken: true,
     apiAddress: 'https://api.multiversx.com',
     gatewayUrl: '',
     extrasApi: 'https://extras-api.multiversx.com',

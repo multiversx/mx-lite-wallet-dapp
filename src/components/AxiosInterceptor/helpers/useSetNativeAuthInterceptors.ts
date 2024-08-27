@@ -61,10 +61,6 @@ export const useSetNativeAuthInterceptors = () => {
           }
         }
 
-        if (config.method === 'post') {
-          config.headers.set('X-Timestamp', Date.now().toString());
-        }
-
         if (!bearerToken) {
           return config;
         }

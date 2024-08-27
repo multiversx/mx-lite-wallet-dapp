@@ -1,19 +1,15 @@
 import { SignableMessage } from '@multiversx/sdk-core/out';
 import { useDispatch } from 'react-redux';
-import {
-  useAuthToken,
-  useSetNativeAuthInterceptors
-} from 'components/AxiosInterceptor/helpers';
+import { useSetNativeAuthInterceptors } from 'components/AxiosInterceptor/helpers';
 import { networks } from 'config';
+import { useLoginService } from 'lib';
 import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
 import { changeNetwork } from 'redux/slices';
-import { useLoginService } from 'lib';
 
 export const useRefreshNativeAuthTokenForNetwork = () => {
   const nativeAuthConfig = useGetNativeAuthConfig();
   const loginService = useLoginService(nativeAuthConfig);
   const dispatch = useDispatch();
-  const { fetchToken, setToken } = useAuthToken();
   const { setNativeAuthTokenInterceptors } = useSetNativeAuthInterceptors();
 
   return async ({
@@ -34,11 +30,6 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     }
 
     try {
-      if (foundNetwork.accessToken) {
-        const token = await fetchToken(foundNetwork.extrasApi);
-        setNativeAuthTokenInterceptors(token);
-      }
-
       const nativeAuthToken = await loginService.refreshNativeAuthTokenLogin({
         signMessageCallback,
         nativeAuthClientConfig: {
@@ -48,10 +39,7 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
         }
       });
 
-      if (!foundNetwork.accessToken) {
-        setToken(undefined);
-        setNativeAuthTokenInterceptors(nativeAuthToken);
-      }
+      setNativeAuthTokenInterceptors(nativeAuthToken);
     } catch (error) {
       console.error('Could not refresh nativeAuth token', error);
     }
