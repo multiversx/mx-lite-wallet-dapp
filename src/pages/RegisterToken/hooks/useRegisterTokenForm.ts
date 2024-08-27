@@ -39,7 +39,7 @@ export const useRegisterTokenForm = () => {
   const {
     activeNetwork: { sovereignContractAddress }
   } = useSelector(networkSelector);
-  const { sendTransactions } = useSendTransactions();
+  const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
   const { tokenOptions, isLoading, tokens } = useTokenOptions({
@@ -98,7 +98,7 @@ export const useRegisterTokenForm = () => {
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
       await sleep(1000);
       const { nonce } = accountSelector(sdkDappStore.getState());
-      transaction.setNonce(nonce);
+      transaction.setNonce(nonce + 1);
       await sendTransactions([transaction]);
       navigate(routeNames.dashboard);
     }
