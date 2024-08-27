@@ -1,9 +1,15 @@
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
+import { capitalize } from 'helpers';
+import {
+  DataTestIdsEnum,
+  DEVNET_CHAIN_ID,
+  MAINNET_CHAIN_ID,
+  TESTNET_CHAIN_ID
+} from 'localConstants';
 import { routeNames } from 'routes';
-import { SendTypeEnum } from 'types';
+import { EnvironmentsEnum, SendTypeEnum } from 'types';
 import { useRegisterTokenForm } from '../hooks';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
@@ -13,16 +19,16 @@ export const RegisterTokenForm = () => {
 
   const chainOptions = [
     {
-      label: 'Devnet',
-      value: 'D'
+      label: capitalize(EnvironmentsEnum.devnet),
+      value: DEVNET_CHAIN_ID
     },
     {
-      label: 'Testnet',
-      value: 'T'
+      label: capitalize(EnvironmentsEnum.testnet),
+      value: TESTNET_CHAIN_ID
     },
     {
-      label: 'Mainnet',
-      value: '1'
+      label: capitalize(EnvironmentsEnum.mainnet),
+      value: MAINNET_CHAIN_ID
     }
   ];
 

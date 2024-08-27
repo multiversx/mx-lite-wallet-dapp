@@ -2,6 +2,7 @@ import { ChangeEventHandler, useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { capitalize } from 'helpers';
@@ -13,7 +14,9 @@ import {
   MAINNET_CHAIN_ID
 } from 'localConstants';
 import { networkSelector } from 'redux/selectors';
+import { routeNames } from 'routes';
 import { EnvironmentsEnum, SendTypeEnum } from 'types';
+import { sleep } from 'utils/testUtils/puppeteer';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
@@ -29,6 +32,7 @@ const NetworkChainIdMap: Record<string, EnvironmentsEnum> = {
 };
 
 export const useRegisterTokenForm = () => {
+  const navigate = useNavigate();
   const { account } = useGetAccountInfo();
   const {
     activeNetwork: { sovereignContractAddress }
@@ -37,9 +41,9 @@ export const useRegisterTokenForm = () => {
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
   const { tokenOptions, isLoading, tokens } = useTokenOptions({
-    sendType,
-    skipAddEgld: true
+    sendType
   });
+
   const refreshNativeAuthTokenForNetwork =
     useRefreshNativeAuthTokenForNetwork();
 
@@ -90,9 +94,9 @@ export const useRegisterTokenForm = () => {
       });
 
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
+      await sleep(1000);
       await sendTransactions([transaction]);
-
-      formik.resetForm();
+      navigate(routeNames.dashboard);
     }
   });
 
