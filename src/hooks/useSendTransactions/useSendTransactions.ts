@@ -21,7 +21,12 @@ import {
   TransactionsDisplayInfoType
 } from 'types';
 
-export function useSendTransactions(redirectRoute?: string) {
+interface SendTransactionsParamsType {
+  redirectRoute?: string;
+  skipAddNonce?: boolean;
+}
+
+export function useSendTransactions(params?: SendTransactionsParamsType) {
   const {
     account: { nonce }
   } = useGetAccountInfo();
@@ -48,7 +53,9 @@ export function useSendTransactions(redirectRoute?: string) {
 
     // TODO: Undo when xPortal with usernames is launched
     const mappedTransactions = transactions.map((tx, index) => {
-      tx.setNonce(nonce + index);
+      if (!params?.skipAddNonce) {
+        tx.setNonce(nonce + index);
+      }
 
       const plainTransactionObject = tx.toPlainObject();
 
@@ -129,7 +136,7 @@ export function useSendTransactions(redirectRoute?: string) {
   }, [fail, timedOut]);
 
   useEffect(() => {
-    if (!sessionId || !pendingTransactions || !redirectRoute) {
+    if (!sessionId || !pendingTransactions || !params?.redirectRoute) {
       return;
     }
 
@@ -141,7 +148,7 @@ export function useSendTransactions(redirectRoute?: string) {
       return;
     }
 
-    return navigate(redirectRoute);
+    return navigate(params?.redirectRoute);
   }, [pendingTransactions, sessionId]);
 
   return {

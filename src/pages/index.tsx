@@ -6,6 +6,7 @@ export * from './Hook';
 export * from './IssueToken';
 export * from './Logout';
 export * from './PageNotFound';
+export * from './RegisterToken';
 export * from './Send';
 export * from './Sign';
 export * from './SignMessage';

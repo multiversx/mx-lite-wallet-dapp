@@ -54,6 +54,7 @@ export enum DataTestIdsEnum {
   receiverError = 'receiverError',
   receiverInput = 'receiverInput',
   recoverWalletBtn = 'recoverWalletBtn',
+  registerTokenBtn = 'registerTokenBtn',
   removeTokenBtn = 'removeTokenBtn',
   requestTokensButton = 'requestTokensButton',
   sendBtn = 'sendBtn',

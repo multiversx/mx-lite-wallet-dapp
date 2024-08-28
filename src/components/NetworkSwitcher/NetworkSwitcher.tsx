@@ -8,6 +8,7 @@ export const NetworkSwitcher = () => {
   const { activeNetwork } = useSelector(networkSelector);
   const refreshNativeAuthTokenForNetwork =
     useRefreshNativeAuthTokenForNetwork();
+
   const networkOptions = networks.map((network) => ({
     label: network.name,
     value: network.id

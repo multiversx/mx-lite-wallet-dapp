@@ -17,9 +17,20 @@ export const Tokens = () => {
 
   if (!isLoading && tokens?.length === 0) {
     return (
-      <OutputContainer>
-        <p className='text-gray-400'>No tokens found</p>
-      </OutputContainer>
+      <div className='flex flex-col'>
+        <OutputContainer>
+          <p className='text-gray-400'>No tokens found</p>
+        </OutputContainer>
+        <div className='mt-5'>
+          <MxLink
+            className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+            data-testid={DataTestIdsEnum.issueTokenBtn}
+            to={routeNames.issueToken}
+          >
+            Issue Token
+          </MxLink>
+        </div>
+      </div>
     );
   }
 

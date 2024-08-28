@@ -1,4 +1,5 @@
 import QRCode from 'react-qr-code';
+import { useSelector } from 'react-redux';
 import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
@@ -8,12 +9,15 @@ import {
   explorerAddressSelector,
   useSdkDappSelector
 } from 'redux/sdkDapp.store';
+import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
+  const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
   const explorerAddress = useSdkDappSelector(explorerAddressSelector);
+  const isSovereign = activeNetwork.id === 'sovereign';
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
@@ -83,6 +87,15 @@ export const Account = () => {
             >
               Sovereign Transfer
             </MxLink>
+            {isSovereign && (
+              <MxLink
+                className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+                data-testid={DataTestIdsEnum.registerTokenBtn}
+                to={routeNames.registerToken}
+              >
+                Register Token
+              </MxLink>
+            )}
             <Faucet />
           </div>
         </div>
