@@ -1,18 +1,23 @@
 import QRCode from 'react-qr-code';
+import { useSelector } from 'react-redux';
 import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
+import { Faucet } from 'pages/Faucet';
 import {
   explorerAddressSelector,
   useSdkDappSelector
 } from 'redux/sdkDapp.store';
+import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
+  const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
   const explorerAddress = useSdkDappSelector(explorerAddressSelector);
+  const isSovereign = activeNetwork.id === 'sovereign';
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
@@ -53,7 +58,7 @@ export const Account = () => {
               </div>
             </div>
           </div>
-          <div className='flex flex-row gap-4'>
+          <div className='flex flex-row flex-wrap gap-4'>
             <a
               href={`${explorerAddress}/accounts/${address}`}
               target='_blank'
@@ -82,6 +87,16 @@ export const Account = () => {
             >
               Sovereign Transfer
             </MxLink>
+            {isSovereign && (
+              <MxLink
+                className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+                data-testid={DataTestIdsEnum.registerTokenBtn}
+                to={routeNames.registerToken}
+              >
+                Register Token
+              </MxLink>
+            )}
+            <Faucet />
           </div>
         </div>
         <div className='mb-2 hidden justify-center sm:block'>

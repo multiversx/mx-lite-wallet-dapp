@@ -15,6 +15,7 @@ import {
   setExternalNativeAuthToken,
   setTokenLogin
 } from 'redux/slices';
+import { useGetNativeAuthConfig } from './useGetNativeAuthConfig';
 import { signMessage } from '../helpers';
 
 interface UseOnLoginType {
@@ -36,7 +37,8 @@ export const useOnFileLogin = () => {
   const dispatch = useDispatch();
   const { loginToken, hasNativeAuthToken } = useSelector(hookSelector);
   const { address: loggedInAddress } = useGetAccountInfo();
-  const loginService = useLoginService();
+  const nativeAuthConfig = useGetNativeAuthConfig();
+  const loginService = useLoginService(nativeAuthConfig);
   const navigate = useNavigate();
   const { getRedirectPathname } = useRedirectPathname();
 

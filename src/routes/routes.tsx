@@ -13,13 +13,15 @@ import {
   SignMessageHook,
   Send,
   Sign,
-  SovereignTransfer
+  SovereignTransfer,
+  RegisterToken
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
 import {
   CreateRecoverRoutes,
   CreateRecoverRoutesEnum
 } from '../pages/CreateRecover/routes';
+import { IssueToken } from '../pages/IssueToken/IssueToken';
 
 export interface RouteWithTitleType extends RouteType {
   title: string;
@@ -89,6 +91,24 @@ const routesObject: Record<
     component: () => (
       <PrivateKeyCheckWrapper>
         <SovereignTransfer />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.issueToken]: {
+    path: RouteNamesEnum.issueToken,
+    title: 'Issue Token',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <IssueToken />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.registerToken]: {
+    path: RouteNamesEnum.registerToken,
+    title: 'Register Token',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <RegisterToken />
       </PrivateKeyCheckWrapper>
     )
   },

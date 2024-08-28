@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/42)] - 2024-08-27
+
+- [Added register sovereign token](https://github.com/multiversx/mx-wallet-dapp/pull/43)
+- [Added faucet and issue token](https://github.com/multiversx/mx-wallet-dapp/pull/41)
 - [Fixed package.json scripts](https://github.com/multiversx/mx-wallet-dapp/pull/39)
 - [Added gateway adapter](https://github.com/multiversx/mx-wallet-dapp/pull/35)
 

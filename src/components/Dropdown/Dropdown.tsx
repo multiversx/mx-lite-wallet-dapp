@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '../Button';
@@ -20,7 +20,11 @@ export const Dropdown = ({
   options
 }: DropdownPropsType) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(initialOption.label);
+  const [selectedOption, setSelectedOption] = useState<string>();
+
+  useEffect(() => {
+    setSelectedOption(initialOption.label);
+  }, [initialOption]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

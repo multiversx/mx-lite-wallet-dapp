@@ -1,3 +1,4 @@
+export * from './AxiosInterceptor';
 export * from './Button';
 export * from './Card';
 export * from './Copy';

@@ -14,7 +14,9 @@ export enum RouteNamesEnum {
   logout = '/logout',
   sign = '/sign',
   signMessage = '/sign-message',
-  sovereignTransfer = '/sovereign-transfer'
+  sovereignTransfer = '/sovereign-transfer',
+  issueToken = '/issue-token',
+  registerToken = '/register-token'
 }
 
 export enum HooksPageEnum {

@@ -16,3 +16,8 @@ export {
 } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 export { CANCELLED } from '@multiversx/sdk-dapp/constants/errorsMessages';
 export { TransactionBatchStatusesEnum } from '@multiversx/sdk-dapp/types/enums.types';
+export {
+  DEVNET_CHAIN_ID,
+  TESTNET_CHAIN_ID,
+  MAINNET_CHAIN_ID
+} from '@multiversx/sdk-dapp/constants';

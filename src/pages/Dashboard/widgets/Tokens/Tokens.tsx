@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
-import { OutputContainer } from 'components';
+import { MxLink, OutputContainer } from 'components';
 import { useGetAccountInfo } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
+import { routeNames } from 'routes';
 import { TokenType } from 'types';
 import { TokenRow } from './components';
 
@@ -15,9 +17,20 @@ export const Tokens = () => {
 
   if (!isLoading && tokens?.length === 0) {
     return (
-      <OutputContainer>
-        <p className='text-gray-400'>No tokens found</p>
-      </OutputContainer>
+      <div className='flex flex-col'>
+        <OutputContainer>
+          <p className='text-gray-400'>No tokens found</p>
+        </OutputContainer>
+        <div className='mt-5'>
+          <MxLink
+            className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+            data-testid={DataTestIdsEnum.issueTokenBtn}
+            to={routeNames.issueToken}
+          >
+            Issue Token
+          </MxLink>
+        </div>
+      </div>
     );
   }
 
@@ -28,6 +41,15 @@ export const Tokens = () => {
           <TokenRow key={token.identifier} token={token} />
         ))}
       </OutputContainer>
+      <div className='mt-5'>
+        <MxLink
+          className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+          data-testid={DataTestIdsEnum.issueTokenBtn}
+          to={routeNames.issueToken}
+        >
+          Issue Token
+        </MxLink>
+      </div>
     </div>
   );
 };
