@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import { Button, MxLink } from 'components';
 import { CollectionTypeByNftEnum, DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
+import { NftEnumType } from 'types';
 import { useIssueCollectionForm } from '../hooks';
 import { IssueCollectionFieldsEnum } from '../types';
-import { NftEnumType } from 'types';
 
 export const IssueCollectionForm = () => {
   const formik = useIssueCollectionForm();
@@ -31,10 +31,15 @@ export const IssueCollectionForm = () => {
           <div className='flex flex-row gap-4'>
             <div>
               <input
+                checked={
+                  formik.values[IssueCollectionFieldsEnum.tokenType] === nft
+                }
                 className='mr-2'
-                data-testid={DataTestIdsEnum.sftTypeInput}
+                data-testid={DataTestIdsEnum.nftTypeInput}
+                defaultChecked
                 id={nft}
                 name={IssueCollectionFieldsEnum.tokenType}
+                onChange={formik.handleChange}
                 type='radio'
                 value={nft}
               />
@@ -44,10 +49,14 @@ export const IssueCollectionForm = () => {
             </div>
             <div>
               <input
+                checked={
+                  formik.values[IssueCollectionFieldsEnum.tokenType] === sft
+                }
                 className='mr-2'
-                data-testid={DataTestIdsEnum.nftTypeInput}
+                data-testid={DataTestIdsEnum.sftTypeInput}
                 id={sft}
                 name={IssueCollectionFieldsEnum.tokenType}
+                onChange={formik.handleChange}
                 type='radio'
                 value={sft}
               />

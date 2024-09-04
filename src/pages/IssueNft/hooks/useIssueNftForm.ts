@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Address,
   TokenManagementTransactionsFactory,
@@ -8,8 +9,9 @@ import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
 import { useGetAccount, useGetNetworkConfig } from 'lib';
-import { IssueNftFieldsEnum } from '../types';
 import { useGetCollectionsQuery } from 'redux/endpoints';
+import { CollectionType } from 'types';
+import { IssueNftFieldsEnum } from '../types';
 
 export const useIssueNftForm = () => {
   const { address } = useGetAccount();
@@ -18,6 +20,8 @@ export const useIssueNftForm = () => {
   const {
     network: { chainId }
   } = useGetNetworkConfig();
+  const [selectedCollection, setSelectedCollection] =
+    useState<CollectionType>();
 
   const collections =
     data?.map((collection) => ({
@@ -34,7 +38,7 @@ export const useIssueNftForm = () => {
       [IssueNftFieldsEnum.name]: '',
       [IssueNftFieldsEnum.quantity]: 1,
       [IssueNftFieldsEnum.royalties]: 1,
-      [IssueNftFieldsEnum.collection]: '',
+      [IssueNftFieldsEnum.collection]: { label: '', value: '' },
       [IssueNftFieldsEnum.imageUrl]: ''
     },
     validationSchema: object().shape({
@@ -49,7 +53,11 @@ export const useIssueNftForm = () => {
       quantity: number()
         .required('Required')
         .min(1, 'Should be greater than or equal to 1'),
-      collection: string().required('Required'),
+      royalties: number()
+        .required('Required')
+        .min(1, 'Should be greater than or equal to 1')
+        .max(100, 'Should be less than or equal to 100'),
+      collection: object().nullable().required('Collection is required'),
       imageUrl: string().required('Required')
     }),
     onSubmit: async (values) => {
@@ -57,8 +65,8 @@ export const useIssueNftForm = () => {
         const transaction = factory.createTransactionForCreatingNFT({
           sender: new Address(address),
           name: values.name,
-          tokenIdentifier: values.collection,
-          royalties: values.quantity,
+          tokenIdentifier: values.collection.value,
+          royalties: values.royalties,
           initialQuantity: BigInt(values.quantity),
           hash: '',
           attributes: new Uint8Array(),
@@ -74,5 +82,13 @@ export const useIssueNftForm = () => {
     }
   });
 
-  return { formik, isLoading, collections };
+  useEffect(() => {
+    const collection = data?.find(
+      (col) => col.ticker === formik.values[IssueNftFieldsEnum.collection].value
+    );
+
+    setSelectedCollection(collection);
+  }, [formik.values[IssueNftFieldsEnum.collection]]);
+
+  return { formik, isLoading, collections, selectedCollection };
 };

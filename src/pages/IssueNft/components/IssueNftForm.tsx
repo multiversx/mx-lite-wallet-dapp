@@ -1,13 +1,15 @@
+import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 import classNames from 'classnames';
+import Select from 'react-select';
 import { Button, MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { useIssueNftForm } from '../hooks';
 import { IssueNftFieldsEnum } from '../types';
-import Select from 'react-select';
 
 export const IssueNftForm = () => {
-  const { formik, isLoading, collections } = useIssueNftForm();
+  const { formik, isLoading, collections, selectedCollection } =
+    useIssueNftForm();
 
   return (
     <form
@@ -16,10 +18,10 @@ export const IssueNftForm = () => {
       className='d-flex flex-column'
     >
       <div className='flex flex-col gap-4 h-full'>
-        <div className='flex flex-row align-middle'>
-          <div className='flex flex-col'>
+        <div className='flex flex-row align-middle w-full'>
+          <div className='flex flex-col w-full'>
             <Select
-              className='text-sm text-gray-700 placeholder-gray-400'
+              className='text-sm text-gray-700 placeholder-gray-400 w-full'
               isLoading={isLoading}
               options={collections as any}
               name={IssueNftFieldsEnum.collection}
@@ -37,11 +39,13 @@ export const IssueNftForm = () => {
                   className='text-red-600 text-sm mt-1'
                   data-testid={DataTestIdsEnum.collectionError}
                 >
-                  {formik.errors[IssueNftFieldsEnum.collection]}
+                  {formik.errors[IssueNftFieldsEnum.collection] as any}
                 </div>
               )}
           </div>
-          <MxLink to={routeNames.issueCollection}>Issue collection</MxLink>
+          <div className='w-1/3'>
+            <MxLink to={routeNames.issueCollection}>Issue collection</MxLink>
+          </div>
         </div>
         <div className='flex flex-col'>
           <label
@@ -77,41 +81,43 @@ export const IssueNftForm = () => {
               </div>
             )}
         </div>
-        <div className='flex flex-col'>
-          <label
-            htmlFor={IssueNftFieldsEnum.quantity}
-            className='block text-sm font-bold mb-2'
-          >
-            Quantity:
-          </label>
-          <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600':
-                  formik.touched[IssueNftFieldsEnum.quantity] &&
-                  formik.errors[IssueNftFieldsEnum.quantity]
-              }
-            )}
-            data-testid={DataTestIdsEnum.quantityInput}
-            id={IssueNftFieldsEnum.quantity}
-            name={IssueNftFieldsEnum.quantity}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            placeholder='Enter quantity'
-            type='number'
-            value={formik.values[IssueNftFieldsEnum.quantity]}
-          />
-          {formik.touched[IssueNftFieldsEnum.quantity] &&
-            formik.errors[IssueNftFieldsEnum.quantity] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.quantityError}
-              >
-                {formik.errors[IssueNftFieldsEnum.quantity]}
-              </div>
-            )}
-        </div>
+        {selectedCollection?.type === NftEnumType.SemiFungibleESDT && (
+          <div className='flex flex-col'>
+            <label
+              htmlFor={IssueNftFieldsEnum.quantity}
+              className='block text-sm font-bold mb-2'
+            >
+              Quantity:
+            </label>
+            <input
+              className={classNames(
+                'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+                {
+                  'border-red-600':
+                    formik.touched[IssueNftFieldsEnum.quantity] &&
+                    formik.errors[IssueNftFieldsEnum.quantity]
+                }
+              )}
+              data-testid={DataTestIdsEnum.quantityInput}
+              id={IssueNftFieldsEnum.quantity}
+              name={IssueNftFieldsEnum.quantity}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              placeholder='Enter quantity'
+              type='number'
+              value={formik.values[IssueNftFieldsEnum.quantity]}
+            />
+            {formik.touched[IssueNftFieldsEnum.quantity] &&
+              formik.errors[IssueNftFieldsEnum.quantity] && (
+                <div
+                  className='text-red-600 text-sm mt-1'
+                  data-testid={DataTestIdsEnum.quantityError}
+                >
+                  {formik.errors[IssueNftFieldsEnum.quantity]}
+                </div>
+              )}
+          </div>
+        )}
         <div className='flex flex-col'>
           <label
             htmlFor={IssueNftFieldsEnum.royalties}

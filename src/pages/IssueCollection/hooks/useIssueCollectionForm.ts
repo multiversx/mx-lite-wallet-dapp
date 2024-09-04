@@ -10,8 +10,8 @@ import { useSendTransactions } from 'hooks';
 import { useGetAccount, useGetNetworkConfig } from 'lib';
 
 import { CollectionTypeByNftEnum } from 'localConstants';
-import { IssueCollectionFieldsEnum } from '../types';
 import { NftEnumType } from 'types';
+import { IssueCollectionFieldsEnum } from '../types';
 
 export const useIssueCollectionForm = () => {
   const { address } = useGetAccount();
@@ -52,6 +52,7 @@ export const useIssueCollectionForm = () => {
     }),
     onSubmit: async (values) => {
       try {
+        console.log(values);
         const transaction =
           factory.createTransactionForRegisteringAndSettingRoles({
             sender: new Address(address),
