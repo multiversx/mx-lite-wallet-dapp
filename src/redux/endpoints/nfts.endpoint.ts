@@ -1,3 +1,4 @@
+import { CollectionType } from '@multiversx/sdk-dapp/types/tokens.types';
 import { getBaseURL } from 'helpers';
 import {
   ACCOUNTS_ENDPOINT,
@@ -9,7 +10,6 @@ import {
 } from 'localConstants';
 import { GetNftsType, PartialNftType } from 'types';
 import { RootApi } from '../rootApi';
-import { CollectionType } from '@multiversx/sdk-dapp/types/tokens.types';
 
 const nftsEndpoints = RootApi.injectEndpoints({
   overrideExisting: true,

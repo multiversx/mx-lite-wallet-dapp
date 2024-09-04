@@ -22,8 +22,8 @@ import {
   CreateRecoverRoutes,
   CreateRecoverRoutesEnum
 } from '../pages/CreateRecover/routes';
-import { IssueToken } from '../pages/IssueToken/IssueToken';
 import { IssueCollection } from '../pages/IssueCollection/IssueCollection';
+import { IssueToken } from '../pages/IssueToken/IssueToken';
 
 export interface RouteWithTitleType extends RouteType {
   title: string;
