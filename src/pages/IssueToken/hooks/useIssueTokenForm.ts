@@ -4,6 +4,7 @@ import {
   TransactionsFactoryConfig
 } from '@multiversx/sdk-core/out';
 
+import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
@@ -16,7 +17,6 @@ import {
 
 import { DECIMALS } from 'localConstants';
 import { IssueTokenFieldsEnum } from '../types';
-import BigNumber from 'bignumber.js';
 
 export const useIssueTokenForm = () => {
   const { address } = useGetAccount();
