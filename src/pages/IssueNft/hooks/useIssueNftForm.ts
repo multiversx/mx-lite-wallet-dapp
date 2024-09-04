@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import {
-  Address,
-  TokenManagementTransactionsFactory,
-  TransactionsFactoryConfig
-} from '@multiversx/sdk-core/out';
-
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
-import { useGetAccount, useGetNetworkConfig } from 'lib';
+import {
+  useGetAccount,
+  useGetNetworkConfig,
+  Address,
+  TokenManagementTransactionsFactory,
+  TransactionsFactoryConfig
+} from 'lib';
 import { useGetCollectionsQuery } from 'redux/endpoints';
 import { CollectionType } from 'types';
 import { IssueNftFieldsEnum } from '../types';

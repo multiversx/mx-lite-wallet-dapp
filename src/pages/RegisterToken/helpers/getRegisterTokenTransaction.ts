@@ -1,9 +1,7 @@
-import { numberToPaddedHex } from '@multiversx/sdk-core/out/utils.codec';
-import { EsdtEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 import BigNumber from 'bignumber.js';
-import { prepareTransaction } from 'lib';
+import { prepareTransaction, numberToPaddedHex } from 'lib';
 import { GAS_PRICE, SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { NftEnumType, PartialNftType, TokenType } from 'types';
+import { NftEnumType, PartialNftType, TokenType, EsdtEnumType } from 'types';
 import { RegisterTokenFormType } from '../types';
 
 export const stringToHex = (stringTopEncode?: string) =>

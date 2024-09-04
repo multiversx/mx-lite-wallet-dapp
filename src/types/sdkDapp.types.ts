@@ -23,6 +23,7 @@ export type { TokenType } from '@multiversx/sdk-dapp/types/tokens.types';
 export type { MultiSignTransactionType } from '@multiversx/sdk-dapp/types/transactions.types';
 export type { CollectionType } from '@multiversx/sdk-dapp/types/tokens.types';
 export { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
+export { EsdtEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 export type {
   OperaWalletLoginButtonPropsType,
   LedgerLoginButtonPropsType,

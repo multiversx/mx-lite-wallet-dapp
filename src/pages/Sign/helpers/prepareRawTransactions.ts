@@ -1,5 +1,4 @@
-import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
-import { stringIsInteger } from 'lib';
+import { stringIsInteger, IPlainTransactionObject } from 'lib';
 
 export interface CreateNewTransactionsFromRawParamsType {
   address: string;

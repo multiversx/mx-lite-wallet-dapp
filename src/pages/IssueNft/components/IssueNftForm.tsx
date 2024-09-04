@@ -1,9 +1,9 @@
-import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
+import { NftEnumType } from 'types';
 import { useIssueNftForm } from '../hooks';
 import { IssueNftFieldsEnum } from '../types';
 

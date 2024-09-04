@@ -1,13 +1,13 @@
-import {
-  Address,
-  TokenManagementTransactionsFactory,
-  TransactionsFactoryConfig
-} from '@multiversx/sdk-core/out';
-
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
-import { useGetAccount, useGetNetworkConfig } from 'lib';
+import {
+  useGetAccount,
+  useGetNetworkConfig,
+  Address,
+  TokenManagementTransactionsFactory,
+  TransactionsFactoryConfig
+} from 'lib';
 
 import { CollectionTypeByNftEnum } from 'localConstants';
 import { NftEnumType } from 'types';

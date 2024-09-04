@@ -1,9 +1,3 @@
-import {
-  Address,
-  TokenManagementTransactionsFactory,
-  TransactionsFactoryConfig
-} from '@multiversx/sdk-core/out';
-
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
@@ -11,7 +5,10 @@ import {
   useGetAccount,
   useGetNetworkConfig,
   maxDecimals,
-  stringIsFloat
+  stringIsFloat,
+  Address,
+  TokenManagementTransactionsFactory,
+  TransactionsFactoryConfig
 } from 'lib';
 
 import { DECIMALS } from 'localConstants';
