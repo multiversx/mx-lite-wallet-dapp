@@ -16,6 +16,7 @@ import {
 
 import { DECIMALS } from 'localConstants';
 import { IssueTokenFieldsEnum } from '../types';
+import BigNumber from 'bignumber.js';
 
 export const useIssueTokenForm = () => {
   const { address } = useGetAccount();
@@ -74,7 +75,11 @@ export const useIssueTokenForm = () => {
           sender: new Address(address),
           tokenName: values.tokenName,
           tokenTicker: values.tokenTicker.toUpperCase(),
-          initialSupply: BigInt(values.mintedValue),
+          initialSupply: BigInt(
+            new BigNumber(values.mintedValue)
+              .pow(10, values.numDecimals)
+              .toNumber()
+          ),
           numDecimals: BigInt(values.numDecimals),
           canFreeze: true,
           canWipe: true,
