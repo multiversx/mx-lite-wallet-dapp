@@ -14,7 +14,8 @@ import {
   Send,
   Sign,
   SovereignTransfer,
-  RegisterToken
+  RegisterToken,
+  IssueNft
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
 import {
@@ -110,6 +111,15 @@ const routesObject: Record<
     component: () => (
       <PrivateKeyCheckWrapper>
         <IssueCollection />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.issueNft]: {
+    path: RouteNamesEnum.issueNft,
+    title: 'Issue NFT',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <IssueNft />
       </PrivateKeyCheckWrapper>
     )
   },

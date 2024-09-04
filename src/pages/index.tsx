@@ -4,6 +4,7 @@ export * from './Disclaimer';
 export * from './Home';
 export * from './Hook';
 export * from './IssueCollection';
+export * from './IssueNft';
 export * from './IssueToken';
 export * from './Logout';
 export * from './PageNotFound';

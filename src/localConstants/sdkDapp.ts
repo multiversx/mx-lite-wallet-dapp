@@ -12,7 +12,9 @@ export {
   TRANSACTIONS_ENDPOINT,
   NETWORK_CONFIG_ENDPOINT,
   TOKENS_ENDPOINT,
-  NFTS_ENDPOINT
+  NFTS_ENDPOINT,
+  ROLES_ENDPOINT,
+  COLLECTIONS_ENDPOINT
 } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 export { CANCELLED } from '@multiversx/sdk-dapp/constants/errorsMessages';
 export { TransactionBatchStatusesEnum } from '@multiversx/sdk-dapp/types/enums.types';

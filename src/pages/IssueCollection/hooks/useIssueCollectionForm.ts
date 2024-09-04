@@ -35,14 +35,14 @@ export const useIssueCollectionForm = () => {
     validationSchema: object().shape({
       tokenName: string()
         .required('Required')
-        .matches(/^[a-zA-Z0-9]*$/, 'Alphanumeric characters only')
+        .matches(/^[a-zA-Z]*$/, 'Only letters are allowed')
         .test(
           'validLength',
           'Must be between 3 - 50 characters long',
           (value) => Boolean(value && value.length >= 3 && value.length <= 50)
         ),
       tokenTicker: string()
-        .matches(/^[A-Z0-9]*$/, 'Alphanumeric uppercase characters only')
+        .matches(/^[A-Z0-9]*$/, 'Only uppercase letters are allowed')
         .required('Required')
         .test(
           'validLength',

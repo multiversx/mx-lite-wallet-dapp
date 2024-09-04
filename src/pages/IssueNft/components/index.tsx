@@ -1,1 +1,1 @@
-export * from './IssueCollectionForm';
+export * from './IssueNftForm';

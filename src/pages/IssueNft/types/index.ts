@@ -1,1 +1,1 @@
-export * from './issueCollectionFieldsEnum';
+export * from './issueNftFieldsEnum';

@@ -62,7 +62,7 @@ export const IssueCollectionForm = () => {
             htmlFor={IssueCollectionFieldsEnum.tokenName}
             className='block text-sm font-bold mb-2'
           >
-            Token name:
+            Collection name:
           </label>
           <input
             className={classNames(
@@ -96,7 +96,7 @@ export const IssueCollectionForm = () => {
             htmlFor={IssueCollectionFieldsEnum.tokenTicker}
             className='block text-sm font-bold mb-2'
           >
-            Token ticker:
+            Collection ticker:
           </label>
           <input
             className={classNames(

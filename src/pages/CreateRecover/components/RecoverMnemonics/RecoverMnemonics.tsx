@@ -99,7 +99,7 @@ export const RecoverMnemonics = ({
 
               <button
                 onClick={handlePasteWords}
-                data-testid={DataTestIdsEnum.pasteMenemonicBtn}
+                data-testid={DataTestIdsEnum.pasteMnemonicBtn}
                 className={classNames(
                   'text-gray-400 absolute right-0 bottom-0 m-2',
                   {
