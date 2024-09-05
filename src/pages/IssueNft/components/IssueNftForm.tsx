@@ -42,7 +42,11 @@ export const IssueNftForm = () => {
                 className='text-red-600 text-sm mt-1'
                 data-testid={DataTestIdsEnum.collectionError}
               >
-                {formik.errors[IssueNftFieldsEnum.collection] as any}
+                {
+                  formik.errors[
+                    IssueNftFieldsEnum.collection
+                  ] as unknown as string
+                }
               </div>
             )}
           </div>
