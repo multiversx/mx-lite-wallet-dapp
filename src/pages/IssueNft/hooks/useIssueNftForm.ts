@@ -60,23 +60,18 @@ export const useIssueNftForm = () => {
       collection: object().nullable().required('Collection is required')
     }),
     onSubmit: async (values) => {
-      try {
-        const transaction = factory.createTransactionForCreatingNFT({
-          sender: new Address(address),
-          name: values.name,
-          tokenIdentifier: values.collection.value,
-          royalties: values.royalties,
-          initialQuantity: BigInt(values.quantity),
-          hash: '',
-          attributes: new Uint8Array(),
-          uris: [values.imageUrl]
-        });
+      const transaction = factory.createTransactionForCreatingNFT({
+        sender: new Address(address),
+        name: values.name,
+        tokenIdentifier: values.collection.value,
+        royalties: values.royalties,
+        initialQuantity: BigInt(values.quantity),
+        hash: '',
+        attributes: new Uint8Array(),
+        uris: [values.imageUrl]
+      });
 
-        await sendTransactions([transaction]);
-      } catch (err) {
-        //setErrors({ amount: err.message });
-      }
-
+      await sendTransactions([transaction]);
       formik.resetForm();
     }
   });
