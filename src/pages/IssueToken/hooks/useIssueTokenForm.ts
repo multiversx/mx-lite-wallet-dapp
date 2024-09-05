@@ -4,6 +4,7 @@ import {
   TransactionsFactoryConfig
 } from '@multiversx/sdk-core/out';
 
+import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
@@ -74,7 +75,11 @@ export const useIssueTokenForm = () => {
           sender: new Address(address),
           tokenName: values.tokenName,
           tokenTicker: values.tokenTicker.toUpperCase(),
-          initialSupply: BigInt(values.mintedValue),
+          initialSupply: BigInt(
+            new BigNumber(values.mintedValue)
+              .pow(10, values.numDecimals)
+              .toNumber()
+          ),
           numDecimals: BigInt(values.numDecimals),
           canFreeze: true,
           canWipe: true,
