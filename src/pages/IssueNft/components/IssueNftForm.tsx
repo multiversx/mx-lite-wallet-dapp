@@ -24,7 +24,7 @@ export const IssueNftForm = () => {
             <Select
               className='text-sm text-gray-700 placeholder-gray-400 w-full'
               isLoading={isLoading}
-              options={collections as any}
+              options={collections}
               name={IssueNftFieldsEnum.collection}
               onChange={(option) =>
                 formik.setFieldValue(IssueNftFieldsEnum.collection, option)
@@ -42,11 +42,7 @@ export const IssueNftForm = () => {
                 className='text-red-600 text-sm mt-1'
                 data-testid={DataTestIdsEnum.collectionError}
               >
-                {
-                  formik.errors[
-                    IssueNftFieldsEnum.collection
-                  ] as unknown as string
-                }
+                {String(formik.errors[IssueNftFieldsEnum.collection])}
               </div>
             )}
           </div>

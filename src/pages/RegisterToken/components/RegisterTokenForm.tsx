@@ -122,7 +122,7 @@ export const RegisterTokenForm = () => {
           <div className='flex flex-col'>
             <Select
               className='text-sm text-gray-700 placeholder-gray-400'
-              options={chainOptions as any}
+              options={chainOptions}
               name={RegisterTokenFormFieldsEnum.chainId}
               onChange={(option) =>
                 formik.setFieldValue(
