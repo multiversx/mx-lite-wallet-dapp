@@ -23,8 +23,8 @@ import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
 const defaultChain = {
-  label: capitalize(EnvironmentsEnum.devnet),
-  value: DEVNET_CHAIN_ID
+  label: capitalize(EnvironmentsEnum.testnet),
+  value: TESTNET_CHAIN_ID
 };
 
 const NetworkChainIdMap: Record<string, EnvironmentsEnum> = {
@@ -43,7 +43,8 @@ export const useRegisterTokenForm = () => {
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
   const { tokenOptions, isLoading, tokens } = useTokenOptions({
-    sendType
+    sendType,
+    skipAddEgld: true
   });
 
   const refreshNativeAuthTokenForNetwork =
@@ -98,7 +99,7 @@ export const useRegisterTokenForm = () => {
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
       await sleep(1000);
       const { nonce } = accountSelector(sdkDappStore.getState());
-      transaction.setNonce(nonce + 1);
+      transaction.setNonce(nonce);
       await sendTransactions([transaction]);
       navigate(routeNames.dashboard);
     }
