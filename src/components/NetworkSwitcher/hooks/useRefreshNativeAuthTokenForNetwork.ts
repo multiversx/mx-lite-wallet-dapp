@@ -1,8 +1,7 @@
-import { SignableMessage } from '@multiversx/sdk-core/out';
 import { useDispatch } from 'react-redux';
 import { useSetNativeAuthInterceptors } from 'components/AxiosInterceptor/helpers';
 import { networks } from 'config';
-import { useLoginService } from 'lib';
+import { useLoginService, SignableMessage } from 'lib';
 import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
 import { changeNetwork } from 'redux/slices';
 

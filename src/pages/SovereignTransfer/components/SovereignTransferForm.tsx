@@ -2,6 +2,7 @@ import { ChangeEventHandler } from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
+import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
@@ -37,9 +38,10 @@ export const SovereignTransferForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[SovereignTransferFormFieldsEnum.contract] &&
-                  formik.errors[SovereignTransferFormFieldsEnum.contract]
+                'border-red-600': getFormHasError({
+                  form: formik,
+                  fieldName: SovereignTransferFormFieldsEnum.contract
+                })
               }
             )}
             data-testid={DataTestIdsEnum.contractInput}
@@ -50,15 +52,17 @@ export const SovereignTransferForm = () => {
             placeholder='Enter contract'
             value={formik.values[SovereignTransferFormFieldsEnum.contract]}
           />
-          {formik.touched[SovereignTransferFormFieldsEnum.contract] &&
-            formik.errors[SovereignTransferFormFieldsEnum.contract] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.contractError}
-              >
-                {formik.errors[SovereignTransferFormFieldsEnum.contract]}
-              </div>
-            )}
+          {getFormHasError({
+            form: formik,
+            fieldName: SovereignTransferFormFieldsEnum.contract
+          }) && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.contractError}
+            >
+              {formik.errors[SovereignTransferFormFieldsEnum.contract]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
@@ -71,9 +75,10 @@ export const SovereignTransferForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[SovereignTransferFormFieldsEnum.receiver] &&
-                  formik.errors[SovereignTransferFormFieldsEnum.receiver]
+                'border-red-600': getFormHasError({
+                  form: formik,
+                  fieldName: SovereignTransferFormFieldsEnum.receiver
+                })
               }
             )}
             data-testid={DataTestIdsEnum.receiverInput}
@@ -84,15 +89,17 @@ export const SovereignTransferForm = () => {
             placeholder='Enter receiver'
             value={formik.values[SovereignTransferFormFieldsEnum.receiver]}
           />
-          {formik.touched[SovereignTransferFormFieldsEnum.receiver] &&
-            formik.errors[SovereignTransferFormFieldsEnum.receiver] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.receiverError}
-              >
-                {formik.errors[SovereignTransferFormFieldsEnum.receiver]}
-              </div>
-            )}
+          {getFormHasError({
+            form: formik,
+            fieldName: SovereignTransferFormFieldsEnum.contract
+          }) && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.receiverError}
+            >
+              {formik.errors[SovereignTransferFormFieldsEnum.receiver]}
+            </div>
+          )}
         </div>
         {formik.values[SovereignTransferFormFieldsEnum.tokens].map(
           (token, index) => {
@@ -138,6 +145,8 @@ export const SovereignTransferForm = () => {
 
                 return formik.handleChange(event);
               };
+
+            const hasAmountError = tokenTouched?.amount && tokenError?.amount;
 
             return (
               <div className='flex flex-col' key={index}>
@@ -194,8 +203,7 @@ export const SovereignTransferForm = () => {
                         className={classNames(
                           'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
                           {
-                            'border-red-600':
-                              tokenTouched?.amount && tokenError?.amount
+                            'border-red-600': hasAmountError
                           }
                         )}
                         disabled={isNFT && !canEditNftAmount}
@@ -208,7 +216,7 @@ export const SovereignTransferForm = () => {
                         type='number'
                         value={token[SovereignTransferFormFieldsEnum.amount]}
                       />
-                      {(!tokenError?.amount || !tokenTouched?.amount) && (
+                      {!hasAmountError && (
                         <div
                           className='text-sm text-gray-400 mt-1'
                           data-testid={DataTestIdsEnum.availableAmount}
@@ -217,7 +225,7 @@ export const SovereignTransferForm = () => {
                           {token[SovereignTransferFormFieldsEnum.token]?.label}
                         </div>
                       )}
-                      {tokenTouched?.amount && tokenError?.amount && (
+                      {hasAmountError && (
                         <div
                           className='text-red-600 text-sm mt-1'
                           data-testid={DataTestIdsEnum.amountError}

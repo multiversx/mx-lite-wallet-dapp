@@ -14,13 +14,15 @@ import {
   Send,
   Sign,
   SovereignTransfer,
-  RegisterToken
+  RegisterToken,
+  IssueNft
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
 import {
   CreateRecoverRoutes,
   CreateRecoverRoutesEnum
 } from '../pages/CreateRecover/routes';
+import { IssueCollection } from '../pages/IssueCollection/IssueCollection';
 import { IssueToken } from '../pages/IssueToken/IssueToken';
 
 export interface RouteWithTitleType extends RouteType {
@@ -100,6 +102,24 @@ const routesObject: Record<
     component: () => (
       <PrivateKeyCheckWrapper>
         <IssueToken />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.issueCollection]: {
+    path: RouteNamesEnum.issueCollection,
+    title: 'Issue Collection',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <IssueCollection />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.issueNft]: {
+    path: RouteNamesEnum.issueNft,
+    title: 'Issue NFT',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <IssueNft />
       </PrivateKeyCheckWrapper>
     )
   },

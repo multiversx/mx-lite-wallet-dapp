@@ -3,10 +3,15 @@ import {
   TransactionsFactoryConfig,
   Token
 } from '@multiversx/sdk-core';
-import { Address, AddressValue, TokenTransfer } from '@multiversx/sdk-core/out';
-import { numberToPaddedHex } from '@multiversx/sdk-core/out/utils.codec';
 import BigNumber from 'bignumber.js';
-import { getEgldLabel, parseAmount } from 'lib';
+import {
+  getEgldLabel,
+  parseAmount,
+  Address,
+  AddressValue,
+  TokenTransfer,
+  numberToPaddedHex
+} from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { PartialNftType, TokenType } from 'types';
 import { getCurrentNetwork } from '../../../helpers';

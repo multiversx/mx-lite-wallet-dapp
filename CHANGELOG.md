@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added ability to issue NFTs and collections](https://github.com/multiversx/mx-wallet-dapp/pull/45)
 - [Fixed network switch and issue token](https://github.com/multiversx/mx-lite-wallet-dapp/pull/44)
 
 ## [[1.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/42)] - 2024-08-27
