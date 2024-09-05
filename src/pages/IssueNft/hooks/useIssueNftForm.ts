@@ -57,8 +57,7 @@ export const useIssueNftForm = () => {
         .required('Required')
         .min(1, 'Should be greater than or equal to 1')
         .max(100, 'Should be less than or equal to 100'),
-      collection: object().nullable().required('Collection is required'),
-      imageUrl: string().required('Required')
+      collection: object().nullable().required('Collection is required')
     }),
     onSubmit: async (values) => {
       try {

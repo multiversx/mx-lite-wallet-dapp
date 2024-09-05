@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Button, PasswordVisibilityToggle } from 'components';
+import { getFormHasError } from 'helpers';
 import { useBooleanStateToggle } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
 
@@ -14,9 +15,6 @@ export const CreateRecoverPasswordFormFields = ({
   infoSection
 }: CreateRecoverPasswordFormFieldsPropsType) => {
   const { isSet, toggleState } = useBooleanStateToggle(false);
-
-  const showError = (fieldName: CreateRecoverFieldNamesEnum) =>
-    Boolean(formikProps.errors[fieldName] && formikProps.touched[fieldName]);
 
   const fields: CreateRecoverPasswordFormFieldType[] = [
     {
@@ -53,7 +51,10 @@ export const CreateRecoverPasswordFormFields = ({
               className={classNames(
                 'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded relative',
                 {
-                  'border-red-600': showError(field.name)
+                  'border-red-600': getFormHasError({
+                    form: formikProps,
+                    fieldName: field.name
+                  })
                 }
               )}
               data-testid={DataTestIdsEnum[field.name]}
@@ -68,7 +69,10 @@ export const CreateRecoverPasswordFormFields = ({
                 onVisibilityChange={toggleState}
               />
             )}
-            {showError(field.name) && (
+            {getFormHasError({
+              form: formikProps,
+              fieldName: field.name
+            }) && (
               <div
                 data-testid={DataTestIdsEnum.passwordError}
                 className='text-red-600 text-sm mt-1'
@@ -77,7 +81,10 @@ export const CreateRecoverPasswordFormFields = ({
               </div>
             )}
 
-            {!showError(field.name) && (
+            {!getFormHasError({
+              form: formikProps,
+              fieldName: field.name
+            }) && (
               <span className='text-sm text-gray-400 mt-1'>
                 At least 8 characters, an uppercase letter, a symbol & a number.
               </span>

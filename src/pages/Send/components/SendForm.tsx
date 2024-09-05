@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
+import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
@@ -34,9 +35,10 @@ export const SendForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[FormFieldsEnum.receiver] &&
-                  formik.errors[FormFieldsEnum.receiver]
+                'border-red-600': getFormHasError({
+                  form: formik,
+                  fieldName: FormFieldsEnum.receiver
+                })
               }
             )}
             data-testid={DataTestIdsEnum.receiverInput}
@@ -47,15 +49,17 @@ export const SendForm = () => {
             placeholder='Enter receiver'
             value={formik.values[FormFieldsEnum.receiver]}
           />
-          {formik.touched[FormFieldsEnum.receiver] &&
-            formik.errors[FormFieldsEnum.receiver] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.receiverError}
-              >
-                {formik.errors[FormFieldsEnum.receiver]}
-              </div>
-            )}
+          {getFormHasError({
+            form: formik,
+            fieldName: FormFieldsEnum.receiver
+          }) && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.receiverError}
+            >
+              {formik.errors[FormFieldsEnum.receiver]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
@@ -110,9 +114,10 @@ export const SendForm = () => {
                 className={classNames(
                   'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
                   {
-                    'border-red-600':
-                      formik.touched[FormFieldsEnum.amount] &&
-                      formik.errors[FormFieldsEnum.amount]
+                    'border-red-600': getFormHasError({
+                      form: formik,
+                      fieldName: FormFieldsEnum.amount
+                    })
                   }
                 )}
                 disabled={isNFT && !canEditNftAmount}
@@ -135,15 +140,17 @@ export const SendForm = () => {
                     {formik.values[FormFieldsEnum.token]?.label}
                   </div>
                 )}
-              {formik.touched[FormFieldsEnum.amount] &&
-                formik.errors[FormFieldsEnum.amount] && (
-                  <div
-                    className='text-red-600 text-sm mt-1'
-                    data-testid={DataTestIdsEnum.amountError}
-                  >
-                    {formik.errors[FormFieldsEnum.amount]}
-                  </div>
-                )}
+              {getFormHasError({
+                form: formik,
+                fieldName: FormFieldsEnum.amount
+              }) && (
+                <div
+                  className='text-red-600 text-sm mt-1'
+                  data-testid={DataTestIdsEnum.amountError}
+                >
+                  {formik.errors[FormFieldsEnum.amount]}
+                </div>
+              )}
             </div>
             <div className='flex flex-col w-1/2'>
               <Select
@@ -159,15 +166,17 @@ export const SendForm = () => {
                 }
                 value={formik.values[FormFieldsEnum.token]}
               />
-              {formik.touched[FormFieldsEnum.token] &&
-                formik.errors[FormFieldsEnum.token] && (
-                  <div
-                    className='text-red-600 text-sm mt-1'
-                    data-testid={DataTestIdsEnum.tokenError}
-                  >
-                    {formik.errors[FormFieldsEnum.token]}
-                  </div>
-                )}
+              {getFormHasError({
+                form: formik,
+                fieldName: FormFieldsEnum.token
+              }) && (
+                <div
+                  className='text-red-600 text-sm mt-1'
+                  data-testid={DataTestIdsEnum.tokenError}
+                >
+                  {formik.errors[FormFieldsEnum.token]}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -182,9 +191,10 @@ export const SendForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[FormFieldsEnum.gasLimit] &&
-                  formik.errors[FormFieldsEnum.gasLimit]
+                'border-red-600': getFormHasError({
+                  form: formik,
+                  fieldName: FormFieldsEnum.gasLimit
+                })
               }
             )}
             data-testid={DataTestIdsEnum.gasLimitInput}
@@ -197,15 +207,17 @@ export const SendForm = () => {
             type='number'
             value={formik.values[FormFieldsEnum.gasLimit]}
           />
-          {formik.touched[FormFieldsEnum.gasLimit] &&
-            formik.errors[FormFieldsEnum.gasLimit] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.gasLimitError}
-              >
-                {formik.errors[FormFieldsEnum.gasLimit]}
-              </div>
-            )}
+          {getFormHasError({
+            form: formik,
+            fieldName: FormFieldsEnum.gasLimit
+          }) && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.gasLimitError}
+            >
+              {formik.errors[FormFieldsEnum.gasLimit]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label

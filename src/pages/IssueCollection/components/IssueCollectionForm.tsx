@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Button, MxLink } from 'components';
+import { getFormHasError } from 'helpers';
 import { CollectionTypeByNftEnum, DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { NftEnumType } from 'types';
@@ -77,9 +78,10 @@ export const IssueCollectionForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[IssueCollectionFieldsEnum.tokenName] &&
-                  formik.errors[IssueCollectionFieldsEnum.tokenName]
+                'border-red-600': getFormHasError({
+                  form: formik,
+                  fieldName: IssueCollectionFieldsEnum.tokenName
+                })
               }
             )}
             data-testid={DataTestIdsEnum.tokenNameInput}
@@ -90,15 +92,17 @@ export const IssueCollectionForm = () => {
             placeholder='Enter token name'
             value={formik.values[IssueCollectionFieldsEnum.tokenName]}
           />
-          {formik.touched[IssueCollectionFieldsEnum.tokenName] &&
-            formik.errors[IssueCollectionFieldsEnum.tokenName] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.tokenNameError}
-              >
-                {formik.errors[IssueCollectionFieldsEnum.tokenName]}
-              </div>
-            )}
+          {getFormHasError({
+            form: formik,
+            fieldName: IssueCollectionFieldsEnum.tokenName
+          }) && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.tokenNameError}
+            >
+              {formik.errors[IssueCollectionFieldsEnum.tokenName]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
@@ -111,9 +115,10 @@ export const IssueCollectionForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[IssueCollectionFieldsEnum.tokenTicker] &&
-                  formik.errors[IssueCollectionFieldsEnum.tokenTicker]
+                'border-red-600': getFormHasError({
+                  form: formik,
+                  fieldName: IssueCollectionFieldsEnum.tokenTicker
+                })
               }
             )}
             data-testid={DataTestIdsEnum.tokenTickerInput}
@@ -124,15 +129,17 @@ export const IssueCollectionForm = () => {
             placeholder='Enter token ticker'
             value={formik.values[IssueCollectionFieldsEnum.tokenTicker]}
           />
-          {formik.touched[IssueCollectionFieldsEnum.tokenTicker] &&
-            formik.errors[IssueCollectionFieldsEnum.tokenTicker] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.tokenTickerError}
-              >
-                {formik.errors[IssueCollectionFieldsEnum.tokenTicker]}
-              </div>
-            )}
+          {getFormHasError({
+            form: formik,
+            fieldName: IssueCollectionFieldsEnum.tokenTicker
+          }) && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.tokenTickerError}
+            >
+              {formik.errors[IssueCollectionFieldsEnum.tokenTicker]}
+            </div>
+          )}
         </div>
       </div>
       <div className='mt-4 flex flex-col align-middle'>
