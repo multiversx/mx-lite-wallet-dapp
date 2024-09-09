@@ -1,4 +1,3 @@
-import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
@@ -73,9 +72,7 @@ export const useIssueTokenForm = () => {
         tokenName: values.tokenName,
         tokenTicker: values.tokenTicker.toUpperCase(),
         initialSupply: BigInt(
-          new BigNumber(
-            parseAmount(values.mintedValue, values.numDecimals)
-          ).toNumber()
+          parseAmount(values.mintedValue, values.numDecimals)
         ),
         numDecimals: BigInt(values.numDecimals),
         canFreeze: true,
