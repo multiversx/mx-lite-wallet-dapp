@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { capitalize } from 'helpers';
-import { useSendTransactions, useTokenOptions } from 'hooks';
-import { useGetAccountInfo, addressIsValid } from 'lib';
+import { useSendTransactions } from 'hooks';
+import { addressIsValid, useGetAccountInfo } from 'lib';
 import {
   DEVNET_CHAIN_ID,
-  TESTNET_CHAIN_ID,
-  MAINNET_CHAIN_ID
+  MAINNET_CHAIN_ID,
+  TESTNET_CHAIN_ID
 } from 'localConstants';
 import { accountSelector } from 'redux/sdkDapp.selectors';
 import { sdkDappStore } from 'redux/sdkDapp.store';
@@ -21,6 +21,7 @@ import { EnvironmentsEnum, SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
+import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 
 const defaultChain = {
   label: capitalize(EnvironmentsEnum.testnet),
@@ -42,10 +43,7 @@ export const useRegisterTokenForm = () => {
   const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
-  const { tokenOptions, isLoading, tokens } = useTokenOptions({
-    sendType,
-    skipAddEgld: true
-  });
+  const { tokenOptions, isLoading, tokens } = useRegisterTokenOptions(sendType);
 
   const refreshNativeAuthTokenForNetwork =
     useRefreshNativeAuthTokenForNetwork();
@@ -84,7 +82,11 @@ export const useRegisterTokenForm = () => {
       [RegisterTokenFormFieldsEnum.type]: string().required('Type is required')
     }),
     onSubmit: async (values) => {
-      const token = tokens.find((t) => t.identifier === values.token.value);
+      const token = tokens.find((t) =>
+        'identifier' in t
+          ? t.identifier === values.token.value
+          : t.ticker === values.token.value
+      );
 
       if (!token) {
         return;

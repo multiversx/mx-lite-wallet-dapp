@@ -24,9 +24,9 @@ export const NFTs = () => {
           <MxLink
             className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             data-testid={DataTestIdsEnum.issueNftBtn}
-            to={routeNames.issueNft}
+            to={routeNames.createNft}
           >
-            Issue NFT
+            Create NFT
           </MxLink>
         </div>
       </div>
@@ -41,13 +41,20 @@ export const NFTs = () => {
       >
         {data?.map((nft) => <NFTRow key={nft.identifier} nft={nft} />)}
       </OutputContainer>
-      <div className='mt-5'>
+      <div className='mt-5 flex flex-row gap-4'>
         <MxLink
           className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
           data-testid={DataTestIdsEnum.issueNftBtn}
-          to={routeNames.issueNft}
+          to={routeNames.createNft}
         >
-          Issue NFT
+          Create NFT
+        </MxLink>
+        <MxLink
+          className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+          data-testid={DataTestIdsEnum.issueCollectionBtn}
+          to={routeNames.createCollection}
+        >
+          Create Collection
         </MxLink>
       </div>
     </div>

@@ -34,7 +34,7 @@ export const networks: NetworkType[] = [
     name: 'Sovereign',
     apiAddress: 'https://api-sovereign-test.elrond.ro',
     gatewayUrl: '',
-    extrasApi: 'https://extras-api.multiversx.com',
+    extrasApi: 'https://extras-api-sovereign-test.elrond.ro',
     sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
     sovereignContractAddress:
       'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa',

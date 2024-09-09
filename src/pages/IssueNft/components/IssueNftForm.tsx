@@ -46,8 +46,8 @@ export const IssueNftForm = () => {
               </div>
             )}
           </div>
-          <div className='w-1/3'>
-            <MxLink to={routeNames.issueCollection}>Issue collection</MxLink>
+          <div className='w-1/6 flex justify-end'>
+            <MxLink to={routeNames.createCollection}>Create</MxLink>
           </div>
         </div>
         <div className='flex flex-col'>
@@ -209,7 +209,7 @@ export const IssueNftForm = () => {
           data-testid={DataTestIdsEnum.issueCollectionBtn}
           type='submit'
         >
-          Issue
+          Send
         </Button>
         <MxLink
           className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'

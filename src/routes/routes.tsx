@@ -105,18 +105,18 @@ const routesObject: Record<
       </PrivateKeyCheckWrapper>
     )
   },
-  [RouteNamesEnum.issueCollection]: {
-    path: RouteNamesEnum.issueCollection,
-    title: 'Issue Collection',
+  [RouteNamesEnum.createCollection]: {
+    path: RouteNamesEnum.createCollection,
+    title: 'Create Collection',
     component: () => (
       <PrivateKeyCheckWrapper>
         <IssueCollection />
       </PrivateKeyCheckWrapper>
     )
   },
-  [RouteNamesEnum.issueNft]: {
-    path: RouteNamesEnum.issueNft,
-    title: 'Issue NFT',
+  [RouteNamesEnum.createNft]: {
+    path: RouteNamesEnum.createNft,
+    title: 'Create NFT',
     component: () => (
       <PrivateKeyCheckWrapper>
         <IssueNft />

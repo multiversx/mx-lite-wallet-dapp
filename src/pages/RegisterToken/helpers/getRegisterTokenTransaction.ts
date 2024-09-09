@@ -1,7 +1,13 @@
 import BigNumber from 'bignumber.js';
 import { prepareTransaction, numberToPaddedHex } from 'lib';
 import { GAS_PRICE, SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { NftEnumType, PartialNftType, TokenType, EsdtEnumType } from 'types';
+import {
+  NftEnumType,
+  PartialNftType,
+  TokenType,
+  EsdtEnumType,
+  CollectionType
+} from 'types';
 import { RegisterTokenFormType } from '../types';
 
 export const stringToHex = (stringTopEncode?: string) =>
@@ -28,11 +34,15 @@ export const getRegisterTokenTransaction = ({
   balance: string;
   nonce: number;
   values: RegisterTokenFormType;
-  token: PartialNftType | TokenType;
+  token: PartialNftType | TokenType | CollectionType;
 }) => {
   const nft = token as PartialNftType;
   const isNft = Boolean(nft.nonce);
-  const tokenIdentifier = isNft ? nft.collection : token.identifier;
+  const tokenIdentifier = isNft
+    ? nft.collection
+    : 'identifier' in token
+    ? token.identifier
+    : token.ticker;
   const tokenType = TokenTypeMap[nft.type] || 0;
   const tokenName = token.name;
   const tokenTicker = token.ticker?.split('-')[0];

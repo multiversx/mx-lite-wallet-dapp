@@ -12,6 +12,7 @@ import {
 import { useGetCollectionsQuery } from 'redux/endpoints';
 import { CollectionType } from 'types';
 import { IssueNftFieldsEnum } from '../types';
+import BigNumber from 'bignumber.js';
 
 export const useIssueNftForm = () => {
   const { address } = useGetAccount();
@@ -56,7 +57,7 @@ export const useIssueNftForm = () => {
       royalties: number()
         .required('Required')
         .min(1, 'Should be greater than or equal to 1')
-        .max(100, 'Should be less than or equal to 100'),
+        .max(10000, 'Should be less than or equal to 10000'),
       collection: object().nullable().required('Collection is required')
     }),
     onSubmit: async (values) => {
@@ -64,7 +65,7 @@ export const useIssueNftForm = () => {
         sender: new Address(address),
         name: values.name,
         tokenIdentifier: values.collection.value,
-        royalties: values.royalties,
+        royalties: new BigNumber(values.royalties).multipliedBy(100).toNumber(),
         initialQuantity: BigInt(values.quantity),
         hash: '',
         attributes: new Uint8Array(),
