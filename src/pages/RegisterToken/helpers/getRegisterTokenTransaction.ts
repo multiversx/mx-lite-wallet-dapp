@@ -38,18 +38,15 @@ export const getRegisterTokenTransaction = ({
 }) => {
   const nft = token as PartialNftType;
   const isNft = Boolean(nft.nonce);
-  const tokenIdentifier = isNft
-    ? nft.collection
-    : 'identifier' in token
-    ? token.identifier
-    : token.ticker;
+  const tokenIdentifier =
+    'identifier' in token ? token.identifier : token.ticker;
   const tokenType = TokenTypeMap[nft.type] || 0;
   const tokenName = token.name;
   const tokenTicker = token.ticker?.split('-')[0];
   const tokenDecimals = token.decimals || 0;
 
   const args = [
-    stringToHex(tokenIdentifier),
+    stringToHex(isNft ? nft.collection : tokenIdentifier),
     numberToHex(tokenType),
     stringToHex(tokenName),
     stringToHex(tokenTicker),
