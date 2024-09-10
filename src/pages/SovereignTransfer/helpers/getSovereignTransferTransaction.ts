@@ -48,7 +48,9 @@ export const getSovereignTransferTransaction = ({
     gasLimit: BigInt(SOVEREIGN_TRANSFER_GAS_LIMIT),
     arguments: [new AddressValue(Address.fromBech32(values.receiver))],
     tokenTransfers: values.tokens.map((token) => {
-      const realToken = tokens.find((t) => t.identifier === token.token?.value);
+      const realToken = tokens.find(
+        ({ identifier }) => identifier === token.token?.value
+      );
 
       if (!realToken) {
         return new TokenTransfer({

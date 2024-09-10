@@ -16,7 +16,7 @@ export const getSelectedTokenBalance = ({
   }
 
   const currentToken = tokens.find(
-    (token) => token.identifier === selectedToken
+    ({ identifier }) => identifier === selectedToken
   );
 
   if (!currentToken) {
