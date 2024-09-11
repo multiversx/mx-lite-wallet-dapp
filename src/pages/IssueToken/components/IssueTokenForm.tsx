@@ -174,7 +174,7 @@ export const IssueTokenForm = () => {
           data-testid={DataTestIdsEnum.issueTokenBtn}
           type='submit'
         >
-          Send
+          Issue
         </Button>
         <MxLink
           className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'

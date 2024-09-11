@@ -45,7 +45,6 @@ export const useIssueNftForm = () => {
     validationSchema: object().shape({
       name: string()
         .required('Required')
-        .matches(/^[a-zA-Z0-9]*$/, 'Alphanumeric characters only')
         .test(
           'validLength',
           'Must be between 3 - 50 characters long',
