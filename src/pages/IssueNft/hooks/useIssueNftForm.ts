@@ -64,11 +64,9 @@ export const useIssueNftForm = () => {
         sender: new Address(address),
         name: values.name,
         tokenIdentifier: values.collection.value,
-        royalties: Number(
-          new BigNumber(values.royalties)
-            .multipliedBy(100)
-            .toFixed(2, BigNumber.ROUND_DOWN)
-        ),
+        royalties: new BigNumber(values.royalties.toFixed(2))
+          .multipliedBy(100)
+          .toNumber(),
         initialQuantity: BigInt(values.quantity),
         hash: '',
         attributes: new Uint8Array(),
