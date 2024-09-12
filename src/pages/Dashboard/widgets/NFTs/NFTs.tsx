@@ -8,13 +8,13 @@ import { NFTRow } from './components';
 
 export const NFTs = () => {
   const { websocketEvent, address } = useGetAccountInfo();
-  const [fetchNFTs, { data, isLoading }] = useLazyGetNftsQuery();
+  const [fetchNFTs, { data: nftsData, isLoading }] = useLazyGetNftsQuery();
 
   useEffect(() => {
     fetchNFTs({ address });
   }, [address, websocketEvent]);
 
-  if (!isLoading && data?.length === 0) {
+  if (!isLoading && nftsData?.length === 0) {
     return (
       <div className='flex flex-col'>
         <OutputContainer>
@@ -39,7 +39,7 @@ export const NFTs = () => {
         isLoading={isLoading}
         className='p-0 max-h-screen flex flex-wrap justify-center gap-3 py-3'
       >
-        {data?.map((nft) => <NFTRow key={nft.identifier} nft={nft} />)}
+        {nftsData?.map((nft) => <NFTRow key={nft.identifier} nft={nft} />)}
       </OutputContainer>
       <div className='mt-5 flex flex-row gap-4'>
         <MxLink
