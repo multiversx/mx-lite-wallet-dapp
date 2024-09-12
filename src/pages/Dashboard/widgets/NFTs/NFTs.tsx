@@ -52,9 +52,9 @@ export const NFTs = () => {
         <MxLink
           className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
           data-testid={DataTestIdsEnum.issueCollectionBtn}
-          to={routeNames.createCollection}
+          to={routeNames.issueCollection}
         >
-          Create Collection
+          Issue Collection
         </MxLink>
       </div>
     </div>

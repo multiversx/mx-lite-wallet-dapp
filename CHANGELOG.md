@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Updated Issue NFT and collection buttons and routes](https://github.com/multiversx/mx-wallet-dapp/pull/47)
 - [Fixed form buttons and validation](https://github.com/multiversx/mx-wallet-dapp/pull/47)
 - [Fixed issue token and issue NFT](https://github.com/multiversx/mx-wallet-dapp/pull/46)
 - [Added ability to issue NFTs and collections](https://github.com/multiversx/mx-wallet-dapp/pull/45)
