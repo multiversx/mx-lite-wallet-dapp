@@ -20,8 +20,15 @@ export const IssueNftForm = () => {
     >
       <div className='flex flex-col gap-4 h-full'>
         <div className='flex flex-col'>
+          <label
+            htmlFor={IssueNftFieldsEnum.collection}
+            className='block text-sm font-bold mb-2'
+          >
+            Collection:
+          </label>
           <Select
             className='text-sm text-gray-700 placeholder-gray-400 w-full'
+            id={IssueNftFieldsEnum.collection}
             isLoading={isLoading}
             options={collections}
             name={IssueNftFieldsEnum.collection}
