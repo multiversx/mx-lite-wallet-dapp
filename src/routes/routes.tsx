@@ -105,8 +105,8 @@ const routesObject: Record<
       </PrivateKeyCheckWrapper>
     )
   },
-  [RouteNamesEnum.createCollection]: {
-    path: RouteNamesEnum.createCollection,
+  [RouteNamesEnum.issueCollection]: {
+    path: RouteNamesEnum.issueCollection,
     title: 'Issue Collection',
     component: () => (
       <PrivateKeyCheckWrapper>

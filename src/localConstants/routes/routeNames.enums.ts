@@ -16,7 +16,7 @@ export enum RouteNamesEnum {
   signMessage = '/sign-message',
   sovereignTransfer = '/sovereign-transfer',
   issueToken = '/issue-token',
-  createCollection = '/create-collection',
+  issueCollection = '/issue-collection',
   createNft = '/create-nft',
   registerToken = '/register-token'
 }

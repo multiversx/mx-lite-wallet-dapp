@@ -55,7 +55,7 @@ export const useIssueNftForm = () => {
         .min(1, 'Should be greater than or equal to 1'),
       royalties: number()
         .required('Required')
-        .min(1, 'Should be greater than or equal to 1')
+        .min(0, 'Should be greater than or equal to 0')
         .max(100, 'Should be less than or equal to 100'),
       collection: object().nullable().required('Collection is required')
     }),
@@ -64,7 +64,9 @@ export const useIssueNftForm = () => {
         sender: new Address(address),
         name: values.name,
         tokenIdentifier: values.collection.value,
-        royalties: new BigNumber(values.royalties).multipliedBy(100).toNumber(),
+        royalties: new BigNumber(values.royalties.toFixed(2))
+          .multipliedBy(100)
+          .toNumber(),
         initialQuantity: BigInt(values.quantity),
         hash: '',
         attributes: new Uint8Array(),

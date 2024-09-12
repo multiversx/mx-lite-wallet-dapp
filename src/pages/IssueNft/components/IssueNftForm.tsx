@@ -19,36 +19,38 @@ export const IssueNftForm = () => {
       className='d-flex flex-column'
     >
       <div className='flex flex-col gap-4 h-full'>
-        <div className='flex flex-row align-middle w-full'>
-          <div className='flex flex-col w-full'>
-            <Select
-              className='text-sm text-gray-700 placeholder-gray-400 w-full'
-              isLoading={isLoading}
-              options={collections}
-              name={IssueNftFieldsEnum.collection}
-              onChange={(option) =>
-                formik.setFieldValue(IssueNftFieldsEnum.collection, option)
-              }
-              onBlur={() =>
-                formik.setFieldTouched(IssueNftFieldsEnum.collection, true)
-              }
-              value={formik.values[IssueNftFieldsEnum.collection]}
-            />
-            {getFormHasError({
-              form: formik,
-              fieldName: IssueNftFieldsEnum.collection
-            }) && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.collectionError}
-              >
-                {String(formik.errors[IssueNftFieldsEnum.collection])}
-              </div>
-            )}
-          </div>
-          <div className='w-1/6 flex justify-end'>
-            <MxLink to={routeNames.createCollection}>Create</MxLink>
-          </div>
+        <div className='flex flex-col'>
+          <label
+            htmlFor={IssueNftFieldsEnum.collection}
+            className='block text-sm font-bold mb-2'
+          >
+            Collection:
+          </label>
+          <Select
+            className='text-sm text-gray-700 placeholder-gray-400 w-full'
+            id={IssueNftFieldsEnum.collection}
+            isLoading={isLoading}
+            options={collections}
+            name={IssueNftFieldsEnum.collection}
+            onChange={(option) =>
+              formik.setFieldValue(IssueNftFieldsEnum.collection, option)
+            }
+            onBlur={() =>
+              formik.setFieldTouched(IssueNftFieldsEnum.collection, true)
+            }
+            value={formik.values[IssueNftFieldsEnum.collection]}
+          />
+          {getFormHasError({
+            form: formik,
+            fieldName: IssueNftFieldsEnum.collection
+          }) && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.collectionError}
+            >
+              {String(formik.errors[IssueNftFieldsEnum.collection])}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
