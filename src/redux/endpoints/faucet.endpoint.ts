@@ -9,14 +9,20 @@ import { RootApi } from 'redux/rootApi';
 interface FaucetSettingsType {
   address: string;
   amount: string;
+  recaptchaBypass?: boolean;
   token?: string;
   tokenAmount?: string;
+}
+
+export interface FaucetSettingsReturnType {
+  recaptchaBypass?: boolean;
+  token: string;
 }
 
 const faucetEndpoints = RootApi.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    getFaucetSettings: builder.query<string, void>({
+    getFaucetSettings: builder.query<FaucetSettingsReturnType, void>({
       async queryFn(_, _queryApi, _extraOptions, fetchWithBQ) {
         const egldLabel = getEgldLabel();
 
@@ -29,7 +35,7 @@ const faucetEndpoints = RootApi.injectEndpoints({
           return { error: settingsData.error as FetchBaseQueryError };
         }
 
-        const { token, tokenAmount, amount } =
+        const { token, tokenAmount, amount, recaptchaBypass } =
           settingsData.data as FaucetSettingsType;
 
         const egldAmount = formatAmount({
@@ -43,7 +49,7 @@ const faucetEndpoints = RootApi.injectEndpoints({
         const faucetTokenList = `${egldAmount} ${egldLabel}`;
 
         if (!token || !tokenAmount) {
-          return { data: faucetTokenList };
+          return { data: { token: faucetTokenList, recaptchaBypass } };
         }
 
         const tokenData = await fetchWithBQ({
@@ -65,7 +71,10 @@ const faucetEndpoints = RootApi.injectEndpoints({
         });
 
         return {
-          data: `${faucetTokenList} & ${denominatedTokenAmount} ${token}`
+          data: {
+            token: `${faucetTokenList} & ${denominatedTokenAmount} ${token}`,
+            recaptchaBypass
+          }
         };
       }
     }),

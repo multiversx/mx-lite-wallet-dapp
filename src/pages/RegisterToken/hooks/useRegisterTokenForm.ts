@@ -19,9 +19,9 @@ import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { EnvironmentsEnum, SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
+import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
-import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 
 const defaultChain = {
   label: capitalize(EnvironmentsEnum.testnet),

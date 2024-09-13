@@ -20,13 +20,20 @@ export const NFTs = () => {
         <OutputContainer>
           <p className='text-gray-400'>No NFTs found</p>
         </OutputContainer>
-        <div className='mt-5'>
+        <div className='mt-5 flex flex-row gap-4'>
           <MxLink
             className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             data-testid={DataTestIdsEnum.issueNftBtn}
             to={routeNames.createNft}
           >
             Create NFT
+          </MxLink>
+          <MxLink
+            className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+            data-testid={DataTestIdsEnum.issueCollectionBtn}
+            to={routeNames.issueCollection}
+          >
+            Issue Collection
           </MxLink>
         </div>
       </div>

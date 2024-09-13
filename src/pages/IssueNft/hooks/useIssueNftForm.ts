@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
@@ -12,7 +13,6 @@ import {
 import { useGetCollectionsQuery } from 'redux/endpoints';
 import { CollectionType } from 'types';
 import { IssueNftFieldsEnum } from '../types';
-import BigNumber from 'bignumber.js';
 
 export const useIssueNftForm = () => {
   const { address } = useGetAccount();
