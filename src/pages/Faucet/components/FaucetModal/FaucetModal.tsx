@@ -40,7 +40,7 @@ export const FaucetModal = () => {
     return <FaucetError message='Faucet not available. Try again later.' />;
   }
 
-  if (!settings) {
+  if (!settings?.token) {
     return (
       <div className='flex flex-col'>
         <h1
@@ -65,7 +65,7 @@ export const FaucetModal = () => {
       {showFaucetScreen ? (
         <FaucetScreen settings={settings} onRequestClick={handleRequestClick} />
       ) : (
-        <FaucetSuccess settings={settings} />
+        <FaucetSuccess token={settings.token} />
       )}
     </div>
   );
