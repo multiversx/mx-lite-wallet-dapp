@@ -6,7 +6,7 @@ import { getLogoutHookData, replyToDapp } from 'lib';
 import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { CrossWindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'types';
 import { HookValidationOutcome } from '../HookValidationOutcome';
 import { HookStateEnum } from '../types';
 
@@ -42,7 +42,7 @@ export const LogoutHook = () => {
     replyToDapp({
       callbackUrl: data.callbackUrl,
       postMessageData: {
-        type: CrossWindowProviderResponseEnums.disconnectResponse,
+        type: WindowProviderResponseEnums.disconnectResponse,
         payload: {
           data: undefined
         }

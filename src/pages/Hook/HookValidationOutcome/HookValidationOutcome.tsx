@@ -10,7 +10,7 @@ import {
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { CrossWindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'types';
 import { LoginMethodsEnum } from 'types';
 import { HookStateEnum } from '../types';
 
@@ -75,7 +75,7 @@ export const HookValidationOutcome = ({
         if (hook === HooksEnum.login && callbackUrl) {
           // The user is logged in and must return to the dapp if the callbackURL is provided
           replyToDapp({
-            type: CrossWindowProviderResponseEnums.loginResponse,
+            type: WindowProviderResponseEnums.loginResponse,
             payload: {
               data: {
                 address
