@@ -44,5 +44,9 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     }
 
     dispatch(changeNetwork(foundNetwork));
+
+    setTimeout(() => {
+      window.location.reload();
+    });
   };
 };

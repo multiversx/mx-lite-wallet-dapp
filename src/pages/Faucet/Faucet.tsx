@@ -3,8 +3,15 @@ import { DataTestIdsEnum } from 'localConstants';
 import { FaucetModal } from './components/FaucetModal';
 import { useModal } from '../../hooks';
 
+const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
+
 export const Faucet = () => {
   const { show, handleShow, handleClose } = useModal();
+
+  if (!sitekey) {
+    // Faucet does not work without google recaptcha key
+    return null;
+  }
 
   return (
     <>

@@ -6,7 +6,7 @@ import { useReplyToDapp } from 'hooks';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
 import {
-  CrossWindowProviderResponseEnums,
+  WindowProviderResponseEnums,
   ReplyWithPostMessageType,
   SignMessageStatusEnum
 } from 'types';
@@ -32,7 +32,7 @@ export const useSignMessageCompleted = () => {
         };
 
         const replyData: ReplyWithPostMessageType = {
-          type: CrossWindowProviderResponseEnums.signMessageResponse,
+          type: WindowProviderResponseEnums.signMessageResponse,
           payload: {
             data
           }

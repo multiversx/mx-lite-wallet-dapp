@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Removed faucet when there is no recaptcha key](https://github.com/multiversx/mx-wallet-dapp/pull/51)
 - [Added reCaptcha bypass](https://github.com/multiversx/mx-wallet-dapp/pull/49)
 - [Updated Issue NFT and collection buttons and routes](https://github.com/multiversx/mx-wallet-dapp/pull/48)
 - [Fixed form buttons and validation](https://github.com/multiversx/mx-wallet-dapp/pull/47)
