@@ -5,18 +5,24 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgrPlugin from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+const port = Number(process.env.PORT) || 3002;
+const proxyHost = `https://localhost:${port}`;
+
 export default defineConfig({
   server: {
-    port: Number(process.env.PORT) || 3000,
+    port,
     strictPort: true,
-    host: true,
     https: true,
-    watch: {
-      usePolling: false,
-      useFsEvents: false
+    host: true,
+    proxy: {
+      proxyHost
     },
     hmr: {
       overlay: false
+    },
+    watch: {
+      usePolling: false,
+      useFsEvents: false
     }
   },
   plugins: [
