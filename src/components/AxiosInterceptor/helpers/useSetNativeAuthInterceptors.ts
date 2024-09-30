@@ -49,7 +49,7 @@ export const useSetNativeAuthInterceptors = () => {
 
         let bearerToken = newToken;
         const hasAllowedURLs =
-          config.baseURL?.includes('extras-api.multiversx.com') ||
+          config.baseURL?.includes('extras-lite-api.multiversx.com') ||
           config.baseURL?.includes('api.xportal.com') ||
           config.baseURL?.includes('tools.multiversx.com');
 
