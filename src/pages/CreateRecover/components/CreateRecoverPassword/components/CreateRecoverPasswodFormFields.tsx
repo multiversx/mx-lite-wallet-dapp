@@ -39,10 +39,8 @@ export const CreateRecoverPasswordFormFields = ({
 
       <div className='flex flex-col items-center justify-center gap-4 w-full mb-10'>
         {fields.map((field, index) => {
-          const hasError = getFormHasError({
-            form: formikProps,
-            fieldName: field.name
-          });
+          const checkFormHasError = getFormHasError(formikProps);
+          const hasError = checkFormHasError(field.name);
 
           return (
             <div key={field.name} className='w-full flex flex-col relative'>

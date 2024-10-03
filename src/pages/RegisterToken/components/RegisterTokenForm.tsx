@@ -32,10 +32,10 @@ export const RegisterTokenForm = () => {
     }
   ];
 
-  const hasContractError = getFormHasError({
-    form: formik,
-    fieldName: RegisterTokenFormFieldsEnum.contract
-  });
+  const checkFormHasError = getFormHasError(formik);
+  const hasContractError = checkFormHasError(
+    RegisterTokenFormFieldsEnum.contract
+  );
 
   return (
     <form onSubmit={formik.handleSubmit}>

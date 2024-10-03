@@ -24,10 +24,10 @@ export const SovereignTransferForm = () => {
     isLoading
   } = useSovereignTransferForm();
 
-  const contractHasError = getFormHasError({
-    form: formik,
-    fieldName: SovereignTransferFormFieldsEnum.contract
-  });
+  const checkFormHasError = getFormHasError(formik);
+  const contractHasError = checkFormHasError(
+    SovereignTransferFormFieldsEnum.contract
+  );
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -74,10 +74,9 @@ export const SovereignTransferForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: SovereignTransferFormFieldsEnum.receiver
-                })
+                'border-red-600': checkFormHasError(
+                  SovereignTransferFormFieldsEnum.receiver
+                )
               }
             )}
             data-testid={DataTestIdsEnum.receiverInput}

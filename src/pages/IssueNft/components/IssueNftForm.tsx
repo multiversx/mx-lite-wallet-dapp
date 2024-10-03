@@ -12,30 +12,12 @@ export const IssueNftForm = () => {
   const { formik, isLoading, collections, selectedCollection } =
     useIssueNftForm();
 
-  const nameHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueNftFieldsEnum.name
-  });
-
-  const quantityHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueNftFieldsEnum.quantity
-  });
-
-  const royaltiesHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueNftFieldsEnum.royalties
-  });
-
-  const imageUrlHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueNftFieldsEnum.imageUrl
-  });
-
-  const collectionHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueNftFieldsEnum.collection
-  });
+  const checkFormHasError = getFormHasError(formik);
+  const nameHasError = checkFormHasError(IssueNftFieldsEnum.name);
+  const quantityHasError = checkFormHasError(IssueNftFieldsEnum.quantity);
+  const royaltiesHasError = checkFormHasError(IssueNftFieldsEnum.royalties);
+  const imageUrlHasError = checkFormHasError(IssueNftFieldsEnum.imageUrl);
+  const collectionHasError = checkFormHasError(IssueNftFieldsEnum.collection);
 
   return (
     <form

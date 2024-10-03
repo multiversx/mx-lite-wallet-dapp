@@ -15,15 +15,14 @@ export const IssueCollectionForm = () => {
   const sft =
     CollectionTypeByNftEnum[NftEnumType.SemiFungibleESDT].toUpperCase();
 
-  const tokenNameHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueCollectionFieldsEnum.tokenName
-  });
+  const checkFormHasError = getFormHasError(formik);
+  const tokenNameHasError = checkFormHasError(
+    IssueCollectionFieldsEnum.tokenName
+  );
 
-  const tokenTickerHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueCollectionFieldsEnum.tokenTicker
-  });
+  const tokenTickerHasError = checkFormHasError(
+    IssueCollectionFieldsEnum.tokenTicker
+  );
 
   return (
     <form

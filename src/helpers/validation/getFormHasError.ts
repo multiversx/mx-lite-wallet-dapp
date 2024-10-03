@@ -3,10 +3,6 @@ interface FormHasErrorType {
   errors: Record<string, any>;
 }
 
-export const getFormHasError = ({
-  form,
-  fieldName
-}: {
-  form: FormHasErrorType;
-  fieldName: string;
-}) => form.touched[fieldName] && form.errors[fieldName];
+export const getFormHasError =
+  (form: FormHasErrorType) => (fieldName: string) =>
+    form.touched[fieldName] && form.errors[fieldName];

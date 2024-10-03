@@ -10,25 +10,19 @@ import { IssueTokenFieldsEnum } from '../types';
 export const IssueTokenForm = () => {
   const formik = useIssueTokenForm();
 
-  const tokenNameHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueTokenFieldsEnum.tokenName
-  });
+  const checkFormHasError = getFormHasError(formik);
+  const tokenNameHasError = checkFormHasError(IssueTokenFieldsEnum.tokenName);
+  const tokenTickerHasError = checkFormHasError(
+    IssueTokenFieldsEnum.tokenTicker
+  );
 
-  const tokenTickerHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueTokenFieldsEnum.tokenTicker
-  });
+  const mintedValueHasError = checkFormHasError(
+    IssueTokenFieldsEnum.mintedValue
+  );
 
-  const mintedValueHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueTokenFieldsEnum.mintedValue
-  });
-
-  const numDecimalsHasError = getFormHasError({
-    form: formik,
-    fieldName: IssueTokenFieldsEnum.numDecimals
-  });
+  const numDecimalsHasError = checkFormHasError(
+    IssueTokenFieldsEnum.numDecimals
+  );
 
   return (
     <form

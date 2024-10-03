@@ -21,25 +21,11 @@ export const SendForm = () => {
     tokenOptions
   } = useSendForm();
 
-  const receiverHasError = getFormHasError({
-    form: formik,
-    fieldName: FormFieldsEnum.receiver
-  });
-
-  const amountHasError = getFormHasError({
-    form: formik,
-    fieldName: FormFieldsEnum.amount
-  });
-
-  const tokenHasError = getFormHasError({
-    form: formik,
-    fieldName: FormFieldsEnum.token
-  });
-
-  const gasLimitHasError = getFormHasError({
-    form: formik,
-    fieldName: FormFieldsEnum.gasLimit
-  });
+  const checkFormHasError = getFormHasError(formik);
+  const receiverHasError = checkFormHasError(FormFieldsEnum.receiver);
+  const amountHasError = checkFormHasError(FormFieldsEnum.amount);
+  const tokenHasError = checkFormHasError(FormFieldsEnum.token);
+  const gasLimitHasError = checkFormHasError(FormFieldsEnum.gasLimit);
 
   return (
     <form onSubmit={formik.handleSubmit}>
