@@ -14,10 +14,12 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
   return async ({
     networkId,
     origin,
+    preventPageReload,
     signMessageCallback
   }: {
     networkId: string;
     origin: string;
+    preventPageReload?: boolean;
     signMessageCallback: (
       messageToSign: SignableMessage
     ) => Promise<SignableMessage>;
@@ -45,8 +47,10 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
 
     dispatch(changeNetwork(foundNetwork));
 
-    setTimeout(() => {
-      window.location.reload();
-    });
+    if (!preventPageReload) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 10);
+    }
   };
 };
