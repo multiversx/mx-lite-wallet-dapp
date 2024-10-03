@@ -52,7 +52,8 @@ export const useRegisterTokenForm = () => {
     await refreshNativeAuthTokenForNetwork({
       networkId,
       origin: window.location.origin,
-      signMessageCallback: (messageToSign) => Promise.resolve(messageToSign)
+      signMessageCallback: (messageToSign) => Promise.resolve(messageToSign),
+      preventPageReload: true
     });
   };
 
