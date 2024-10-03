@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[1.0.3](https://github.com/multiversx/mx-lite-wallet-dapp/pull/54)] - 2024-10-03
+## [[1.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/54)] - 2024-10-03
 
 - [Fixed page reload on network refresh](https://github.com/multiversx/mx-lite-wallet-dapp/pull/53)
 - [Updated extras API and NFTs endpoints](https://github.com/multiversx/mx-wallet-dapp/pull/52)
@@ -18,9 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Fixed issue token and issue NFT](https://github.com/multiversx/mx-wallet-dapp/pull/46)
 - [Added ability to issue NFTs and collections](https://github.com/multiversx/mx-wallet-dapp/pull/45)
 - [Fixed network switch and issue token](https://github.com/multiversx/mx-lite-wallet-dapp/pull/44)
-
-## [[1.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/42)] - 2024-08-27
-
 - [Added register sovereign token](https://github.com/multiversx/mx-wallet-dapp/pull/43)
 - [Added faucet and issue token](https://github.com/multiversx/mx-wallet-dapp/pull/41)
 - [Fixed package.json scripts](https://github.com/multiversx/mx-wallet-dapp/pull/39)
