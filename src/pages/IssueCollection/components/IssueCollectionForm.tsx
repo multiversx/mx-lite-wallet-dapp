@@ -15,6 +15,16 @@ export const IssueCollectionForm = () => {
   const sft =
     CollectionTypeByNftEnum[NftEnumType.SemiFungibleESDT].toUpperCase();
 
+  const tokenNameHasError = getFormHasError({
+    form: formik,
+    fieldName: IssueCollectionFieldsEnum.tokenName
+  });
+
+  const tokenTickerHasError = getFormHasError({
+    form: formik,
+    fieldName: IssueCollectionFieldsEnum.tokenTicker
+  });
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -78,10 +88,7 @@ export const IssueCollectionForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: IssueCollectionFieldsEnum.tokenName
-                })
+                'border-red-600': tokenNameHasError
               }
             )}
             data-testid={DataTestIdsEnum.tokenNameInput}
@@ -92,10 +99,7 @@ export const IssueCollectionForm = () => {
             placeholder='Enter token name'
             value={formik.values[IssueCollectionFieldsEnum.tokenName]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: IssueCollectionFieldsEnum.tokenName
-          }) && (
+          {tokenNameHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.tokenNameError}
@@ -115,10 +119,7 @@ export const IssueCollectionForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: IssueCollectionFieldsEnum.tokenTicker
-                })
+                'border-red-600': tokenTickerHasError
               }
             )}
             data-testid={DataTestIdsEnum.tokenTickerInput}
@@ -129,10 +130,7 @@ export const IssueCollectionForm = () => {
             placeholder='Enter token ticker'
             value={formik.values[IssueCollectionFieldsEnum.tokenTicker]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: IssueCollectionFieldsEnum.tokenTicker
-          }) && (
+          {tokenTickerHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.tokenTickerError}

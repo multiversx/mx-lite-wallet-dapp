@@ -21,6 +21,26 @@ export const SendForm = () => {
     tokenOptions
   } = useSendForm();
 
+  const receiverHasError = getFormHasError({
+    form: formik,
+    fieldName: FormFieldsEnum.receiver
+  });
+
+  const amountHasError = getFormHasError({
+    form: formik,
+    fieldName: FormFieldsEnum.amount
+  });
+
+  const tokenHasError = getFormHasError({
+    form: formik,
+    fieldName: FormFieldsEnum.token
+  });
+
+  const gasLimitHasError = getFormHasError({
+    form: formik,
+    fieldName: FormFieldsEnum.gasLimit
+  });
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className='flex flex-col gap-4 h-full'>
@@ -35,10 +55,7 @@ export const SendForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: FormFieldsEnum.receiver
-                })
+                'border-red-600': receiverHasError
               }
             )}
             data-testid={DataTestIdsEnum.receiverInput}
@@ -49,10 +66,7 @@ export const SendForm = () => {
             placeholder='Enter receiver'
             value={formik.values[FormFieldsEnum.receiver]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: FormFieldsEnum.receiver
-          }) && (
+          {receiverHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.receiverError}
@@ -114,10 +128,7 @@ export const SendForm = () => {
                 className={classNames(
                   'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
                   {
-                    'border-red-600': getFormHasError({
-                      form: formik,
-                      fieldName: FormFieldsEnum.amount
-                    })
+                    'border-red-600': amountHasError
                   }
                 )}
                 disabled={isNFT && !canEditNftAmount}
@@ -140,10 +151,7 @@ export const SendForm = () => {
                     {formik.values[FormFieldsEnum.token]?.label}
                   </div>
                 )}
-              {getFormHasError({
-                form: formik,
-                fieldName: FormFieldsEnum.amount
-              }) && (
+              {amountHasError && (
                 <div
                   className='text-red-600 text-sm mt-1'
                   data-testid={DataTestIdsEnum.amountError}
@@ -166,10 +174,7 @@ export const SendForm = () => {
                 }
                 value={formik.values[FormFieldsEnum.token]}
               />
-              {getFormHasError({
-                form: formik,
-                fieldName: FormFieldsEnum.token
-              }) && (
+              {tokenHasError && (
                 <div
                   className='text-red-600 text-sm mt-1'
                   data-testid={DataTestIdsEnum.tokenError}
@@ -191,10 +196,7 @@ export const SendForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: FormFieldsEnum.gasLimit
-                })
+                'border-red-600': gasLimitHasError
               }
             )}
             data-testid={DataTestIdsEnum.gasLimitInput}
@@ -207,10 +209,7 @@ export const SendForm = () => {
             type='number'
             value={formik.values[FormFieldsEnum.gasLimit]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: FormFieldsEnum.gasLimit
-          }) && (
+          {gasLimitHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.gasLimitError}

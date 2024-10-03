@@ -32,6 +32,11 @@ export const RegisterTokenForm = () => {
     }
   ];
 
+  const hasContractError = getFormHasError({
+    form: formik,
+    fieldName: RegisterTokenFormFieldsEnum.contract
+  });
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className='flex flex-col gap-4 h-full'>
@@ -46,10 +51,7 @@ export const RegisterTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: RegisterTokenFormFieldsEnum.contract
-                })
+                'border-red-600': hasContractError
               }
             )}
             data-testid={DataTestIdsEnum.contractInput}
@@ -60,10 +62,7 @@ export const RegisterTokenForm = () => {
             placeholder='Enter contract'
             value={formik.values[RegisterTokenFormFieldsEnum.contract]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: RegisterTokenFormFieldsEnum.contract
-          }) && (
+          {hasContractError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.contractError}

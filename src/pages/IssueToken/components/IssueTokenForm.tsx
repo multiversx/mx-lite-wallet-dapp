@@ -10,6 +10,26 @@ import { IssueTokenFieldsEnum } from '../types';
 export const IssueTokenForm = () => {
   const formik = useIssueTokenForm();
 
+  const tokenNameHasError = getFormHasError({
+    form: formik,
+    fieldName: IssueTokenFieldsEnum.tokenName
+  });
+
+  const tokenTickerHasError = getFormHasError({
+    form: formik,
+    fieldName: IssueTokenFieldsEnum.tokenTicker
+  });
+
+  const mintedValueHasError = getFormHasError({
+    form: formik,
+    fieldName: IssueTokenFieldsEnum.mintedValue
+  });
+
+  const numDecimalsHasError = getFormHasError({
+    form: formik,
+    fieldName: IssueTokenFieldsEnum.numDecimals
+  });
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -28,10 +48,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: IssueTokenFieldsEnum.tokenName
-                })
+                'border-red-600': tokenNameHasError
               }
             )}
             data-testid={DataTestIdsEnum.tokenNameInput}
@@ -42,10 +59,7 @@ export const IssueTokenForm = () => {
             placeholder='Enter token name'
             value={formik.values[IssueTokenFieldsEnum.tokenName]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: IssueTokenFieldsEnum.tokenName
-          }) && (
+          {tokenNameHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.tokenNameError}
@@ -65,10 +79,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: IssueTokenFieldsEnum.tokenTicker
-                })
+                'border-red-600': tokenTickerHasError
               }
             )}
             data-testid={DataTestIdsEnum.tokenTickerInput}
@@ -79,10 +90,7 @@ export const IssueTokenForm = () => {
             placeholder='Enter token ticker'
             value={formik.values[IssueTokenFieldsEnum.tokenTicker]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: IssueTokenFieldsEnum.tokenTicker
-          }) && (
+          {tokenTickerHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.tokenTickerError}
@@ -102,10 +110,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: IssueTokenFieldsEnum.mintedValue
-                })
+                'border-red-600': mintedValueHasError
               }
             )}
             data-testid={DataTestIdsEnum.mintedValueInput}
@@ -117,10 +122,7 @@ export const IssueTokenForm = () => {
             type='number'
             value={formik.values[IssueTokenFieldsEnum.mintedValue]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: IssueTokenFieldsEnum.mintedValue
-          }) && (
+          {mintedValueHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.mintedValueError}
@@ -140,10 +142,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600': getFormHasError({
-                  form: formik,
-                  fieldName: IssueTokenFieldsEnum.numDecimals
-                })
+                'border-red-600': numDecimalsHasError
               }
             )}
             data-testid={DataTestIdsEnum.numDecimalsInput}
@@ -155,10 +154,7 @@ export const IssueTokenForm = () => {
             type='number'
             value={formik.values[IssueTokenFieldsEnum.numDecimals]}
           />
-          {getFormHasError({
-            form: formik,
-            fieldName: IssueTokenFieldsEnum.numDecimals
-          }) && (
+          {numDecimalsHasError && (
             <div
               className='text-red-600 text-sm mt-1'
               data-testid={DataTestIdsEnum.numDecimalsError}
