@@ -50,7 +50,7 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     if (!preventPageReload) {
       setTimeout(() => {
         window.location.reload();
-      }, 10);
+      });
     }
   };
 };
