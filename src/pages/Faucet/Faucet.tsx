@@ -13,7 +13,7 @@ export const Faucet = () => {
   const isSovereign = activeNetwork.id === 'sovereign';
 
   if (!sitekey && !isSovereign) {
-    // Faucet does not work without google recaptcha key
+    // Faucet does not work without google recaptcha key, unless recaptchaBypass is specified (sovereign)
     return null;
   }
 
