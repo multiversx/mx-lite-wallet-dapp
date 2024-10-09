@@ -2,13 +2,17 @@ import { Button, ModalContainer, PrivateKeyCheckWrapper } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetModal } from './components/FaucetModal';
 import { useModal } from '../../hooks';
+import { useSelector } from 'react-redux';
+import { networkSelector } from 'redux/selectors';
 
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 
 export const Faucet = () => {
   const { show, handleShow, handleClose } = useModal();
+  const { activeNetwork } = useSelector(networkSelector);
+  const isSovereign = activeNetwork.id === 'sovereign';
 
-  if (!sitekey) {
+  if (!sitekey && !isSovereign) {
     // Faucet does not work without google recaptcha key
     return null;
   }

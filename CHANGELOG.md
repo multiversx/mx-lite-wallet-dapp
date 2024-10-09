@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed faucet is missing on sovereign when recpatcha key is missing](https://github.com/multiversx/mx-lite-wallet-dapp/pull/55)
+
 ## [[1.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/54)] - 2024-10-03
 
 - [Fixed page reload on network refresh](https://github.com/multiversx/mx-lite-wallet-dapp/pull/53)
