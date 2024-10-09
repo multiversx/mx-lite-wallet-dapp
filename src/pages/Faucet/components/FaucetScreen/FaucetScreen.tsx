@@ -48,7 +48,7 @@ export const FaucetScreen = ({
         You can request {settings.token} every 24 hours
       </p>
 
-      {!settings.recaptchaBypass && (
+      {!settings.recaptchaBypass && sitekey && (
         <div className='mb-10' data-testid={DataTestIdsEnum.captcha}>
           <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} />
         </div>
