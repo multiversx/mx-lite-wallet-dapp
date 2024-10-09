@@ -3,10 +3,15 @@ import {
   TransactionsFactoryConfig,
   Token
 } from '@multiversx/sdk-core';
-import { Address, AddressValue, TokenTransfer } from '@multiversx/sdk-core/out';
-import { numberToPaddedHex } from '@multiversx/sdk-core/out/utils.codec';
 import BigNumber from 'bignumber.js';
-import { getEgldLabel, parseAmount } from 'lib';
+import {
+  getEgldLabel,
+  parseAmount,
+  Address,
+  AddressValue,
+  TokenTransfer,
+  numberToPaddedHex
+} from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { PartialNftType, TokenType } from 'types';
 import { getCurrentNetwork } from '../../../helpers';
@@ -43,7 +48,9 @@ export const getSovereignTransferTransaction = ({
     gasLimit: BigInt(SOVEREIGN_TRANSFER_GAS_LIMIT),
     arguments: [new AddressValue(Address.fromBech32(values.receiver))],
     tokenTransfers: values.tokens.map((token) => {
-      const realToken = tokens.find((t) => t.identifier === token.token?.value);
+      const realToken = tokens.find(
+        ({ identifier }) => identifier === token.token?.value
+      );
 
       if (!realToken) {
         return new TokenTransfer({

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useReplyToDapp } from 'hooks';
 import { useGetAccount, useGetLoginInfo, decodeNativeAuthToken } from 'lib';
 import { accountSelector, hookSelector } from 'redux/selectors';
-import { CrossWindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'types';
 
 export const useOnLoginHookRedirect = () => {
   const { callbackUrl } = useSelector(hookSelector);
@@ -27,7 +27,7 @@ export const useOnLoginHookRedirect = () => {
     }
 
     return replyToDapp({
-      type: CrossWindowProviderResponseEnums.loginResponse,
+      type: WindowProviderResponseEnums.loginResponse,
       payload: {
         data: {
           address: urlParams.address,

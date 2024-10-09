@@ -5,7 +5,7 @@ import { HooksEnum } from 'localConstants';
 import { logoutAction } from 'redux/commonActions';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { CrossWindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'types';
 import { useReplyToDapp } from '../useReplyToDapp';
 
 const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
@@ -42,7 +42,7 @@ export const useLogout = () => {
     }
 
     replyToDapp({
-      type: CrossWindowProviderResponseEnums.disconnectResponse,
+      type: WindowProviderResponseEnums.disconnectResponse,
       payload: {
         data: true
       }

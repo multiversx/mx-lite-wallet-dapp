@@ -1,8 +1,7 @@
-import { SignableMessage } from '@multiversx/sdk-core/out';
 import { useDispatch } from 'react-redux';
 import { useSetNativeAuthInterceptors } from 'components/AxiosInterceptor/helpers';
 import { networks } from 'config';
-import { useLoginService } from 'lib';
+import { useLoginService, SignableMessage } from 'lib';
 import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
 import { changeNetwork } from 'redux/slices';
 
@@ -15,10 +14,12 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
   return async ({
     networkId,
     origin,
+    preventPageReload,
     signMessageCallback
   }: {
     networkId: string;
     origin: string;
+    preventPageReload?: boolean;
     signMessageCallback: (
       messageToSign: SignableMessage
     ) => Promise<SignableMessage>;
@@ -45,5 +46,11 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     }
 
     dispatch(changeNetwork(foundNetwork));
+
+    if (!preventPageReload) {
+      setTimeout(() => {
+        window.location.reload();
+      });
+    }
   };
 };

@@ -1,9 +1,9 @@
+import omit from 'lodash/omit';
 import {
   IPlainTransactionObject,
   TransactionOptions,
   TransactionVersion
-} from '@multiversx/sdk-core/out';
-import omit from 'lodash/omit';
+} from 'lib';
 import { GAS_LIMIT, GAS_PRICE, ZERO } from 'localConstants';
 import { TransactionSignatureDataType } from 'types';
 

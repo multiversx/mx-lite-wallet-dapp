@@ -18,8 +18,8 @@ import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
 import {
-  CrossWindowProviderRequestEnums,
-  CrossWindowProviderResponseEnums,
+  WindowProviderRequestEnums,
+  WindowProviderResponseEnums,
   RequestMessageType
 } from 'types';
 import {
@@ -59,7 +59,7 @@ export const PostMessageListener = () => {
     const { type, payload } = event.data;
 
     const isHandshakeEstablished =
-      type === CrossWindowProviderRequestEnums.finalizeHandshakeRequest ||
+      type === WindowProviderRequestEnums.finalizeHandshakeRequest ||
       // handshake must be established for all other requests
       handshakeEstablished;
 
@@ -69,7 +69,7 @@ export const PostMessageListener = () => {
     }
 
     switch (type) {
-      case CrossWindowProviderRequestEnums.loginRequest: {
+      case WindowProviderRequestEnums.loginRequest: {
         if (isRelogin) {
           logout();
         }
@@ -100,7 +100,7 @@ export const PostMessageListener = () => {
         break;
       }
 
-      case CrossWindowProviderRequestEnums.signTransactionsRequest: {
+      case WindowProviderRequestEnums.signTransactionsRequest: {
         const transactions = payload.map((plainTransactionObject) =>
           Transaction.fromPlainObject(plainTransactionObject)
         );
@@ -131,7 +131,7 @@ export const PostMessageListener = () => {
         break;
       }
 
-      case CrossWindowProviderRequestEnums.signMessageRequest: {
+      case WindowProviderRequestEnums.signMessageRequest: {
         const payloadString = buildWalletQueryString({
           params: { ...payload, callbackUrl }
         });
@@ -156,12 +156,12 @@ export const PostMessageListener = () => {
         break;
       }
 
-      case CrossWindowProviderRequestEnums.finalizeHandshakeRequest: {
+      case WindowProviderRequestEnums.finalizeHandshakeRequest: {
         handshakeEstablished = true;
         break;
       }
 
-      case CrossWindowProviderRequestEnums.logoutRequest: {
+      case WindowProviderRequestEnums.logoutRequest: {
         navigate(routeNames.logout);
         break;
       }
@@ -183,7 +183,7 @@ export const PostMessageListener = () => {
   const closeHandshake = () => {
     replyWithCancelled({ shouldResetHook: false });
     replyToDapp({
-      type: CrossWindowProviderResponseEnums.handshakeResponse,
+      type: WindowProviderResponseEnums.handshakeResponse,
       payload: {
         data: false
       }
@@ -206,7 +206,7 @@ export const PostMessageListener = () => {
     window.addEventListener('beforeunload', closeHandshake);
 
     replyToDapp({
-      type: CrossWindowProviderResponseEnums.handshakeResponse,
+      type: WindowProviderResponseEnums.handshakeResponse,
       payload: {
         data: true
       }

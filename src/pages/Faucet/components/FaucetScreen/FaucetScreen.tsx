@@ -3,12 +3,13 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from 'components';
 import { getEgldLabel } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
+import { FaucetSettingsReturnType } from 'redux/endpoints';
 
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 const isDisabled = process.env.NODE_ENV === 'production';
 
 export interface FaucetScreenPropsType {
-  settings: string;
+  settings: FaucetSettingsReturnType;
   onRequestClick: (captcha: string) => void;
 }
 
@@ -44,12 +45,14 @@ export const FaucetScreen = ({
         className='text-sm text-gray-400 mb-10'
         data-testid={DataTestIdsEnum.modalSubtitle}
       >
-        You can request {settings} every 24 hours
+        You can request {settings.token} every 24 hours
       </p>
 
-      <div className='mb-10' data-testid={DataTestIdsEnum.captcha}>
-        <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} />
-      </div>
+      {!settings.recaptchaBypass && sitekey && (
+        <div className='mb-10' data-testid={DataTestIdsEnum.captcha}>
+          <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} />
+        </div>
+      )}
 
       <Button
         data-testid={DataTestIdsEnum.requestTokensButton}

@@ -2,7 +2,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DataTestIdsEnum } from 'localConstants';
 
-export const FaucetSuccess = ({ settings }: { settings: string }) => (
+export const FaucetSuccess = ({ token }: { token: string }) => (
   <div className='flex flex-col items-center pb-5'>
     <h1
       className='text-2xl whitespace-nowrap mt-5'
@@ -19,7 +19,7 @@ export const FaucetSuccess = ({ settings }: { settings: string }) => (
       className='text-sm text-green-500 mb-5'
       data-testid={DataTestIdsEnum.modalSubtitle}
     >
-      {settings} have been sent to your address.
+      {token} have been sent to your address.
     </p>
   </div>
 );

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { capitalize } from 'helpers';
+import { capitalize, getFormHasError } from 'helpers';
 import {
   DataTestIdsEnum,
   DEVNET_CHAIN_ID,
@@ -32,6 +32,11 @@ export const RegisterTokenForm = () => {
     }
   ];
 
+  const checkFormHasError = getFormHasError(formik);
+  const hasContractError = checkFormHasError(
+    RegisterTokenFormFieldsEnum.contract
+  );
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className='flex flex-col gap-4 h-full'>
@@ -46,9 +51,7 @@ export const RegisterTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[RegisterTokenFormFieldsEnum.contract] &&
-                  formik.errors[RegisterTokenFormFieldsEnum.contract]
+                'border-red-600': hasContractError
               }
             )}
             data-testid={DataTestIdsEnum.contractInput}
@@ -59,15 +62,14 @@ export const RegisterTokenForm = () => {
             placeholder='Enter contract'
             value={formik.values[RegisterTokenFormFieldsEnum.contract]}
           />
-          {formik.touched[RegisterTokenFormFieldsEnum.contract] &&
-            formik.errors[RegisterTokenFormFieldsEnum.contract] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.contractError}
-              >
-                {formik.errors[RegisterTokenFormFieldsEnum.contract]}
-              </div>
-            )}
+          {hasContractError && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.contractError}
+            >
+              {formik.errors[RegisterTokenFormFieldsEnum.contract]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
@@ -119,7 +121,7 @@ export const RegisterTokenForm = () => {
           <div className='flex flex-col'>
             <Select
               className='text-sm text-gray-700 placeholder-gray-400'
-              options={chainOptions as any}
+              options={chainOptions}
               name={RegisterTokenFormFieldsEnum.chainId}
               onChange={(option) =>
                 formik.setFieldValue(

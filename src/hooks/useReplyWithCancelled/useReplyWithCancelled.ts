@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useGetAccount } from 'lib';
 import { resetHook } from 'redux/slices';
-import { CrossWindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'types';
 import { useAbortAndRemoveAllTxs } from '../useAbortAndRemoveAllTx';
 import { useReplyToDapp } from '../useReplyToDapp';
 
@@ -32,7 +32,7 @@ export const useReplyWithCancelled = (debugProps?: { caller: string }) => {
     }
 
     replyToDapp({
-      type: CrossWindowProviderResponseEnums.cancelResponse,
+      type: WindowProviderResponseEnums.cancelResponse,
       payload: {
         data: {
           address

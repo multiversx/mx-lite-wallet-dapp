@@ -1,9 +1,13 @@
-import { numberToPaddedHex } from '@multiversx/sdk-core/out/utils.codec';
-import { EsdtEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
 import BigNumber from 'bignumber.js';
-import { prepareTransaction } from 'lib';
+import { prepareTransaction, numberToPaddedHex } from 'lib';
 import { GAS_PRICE, SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { NftEnumType, PartialNftType, TokenType } from 'types';
+import {
+  NftEnumType,
+  PartialNftType,
+  TokenType,
+  EsdtEnumType,
+  CollectionType
+} from 'types';
 import { RegisterTokenFormType } from '../types';
 
 export const stringToHex = (stringTopEncode?: string) =>
@@ -30,18 +34,19 @@ export const getRegisterTokenTransaction = ({
   balance: string;
   nonce: number;
   values: RegisterTokenFormType;
-  token: PartialNftType | TokenType;
+  token: PartialNftType | TokenType | CollectionType;
 }) => {
   const nft = token as PartialNftType;
   const isNft = Boolean(nft.nonce);
-  const tokenIdentifier = isNft ? nft.collection : token.identifier;
+  const tokenIdentifier =
+    'identifier' in token ? token.identifier : token.ticker;
   const tokenType = TokenTypeMap[nft.type] || 0;
   const tokenName = token.name;
   const tokenTicker = token.ticker?.split('-')[0];
   const tokenDecimals = token.decimals || 0;
 
   const args = [
-    stringToHex(tokenIdentifier),
+    stringToHex(isNft ? nft.collection : tokenIdentifier),
     numberToHex(tokenType),
     stringToHex(tokenName),
     stringToHex(tokenTicker),

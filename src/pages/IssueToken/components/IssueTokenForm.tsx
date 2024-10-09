@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Button, MxLink } from 'components';
+import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 
 import { routeNames } from 'routes';
@@ -8,6 +9,20 @@ import { IssueTokenFieldsEnum } from '../types';
 
 export const IssueTokenForm = () => {
   const formik = useIssueTokenForm();
+
+  const checkFormHasError = getFormHasError(formik);
+  const tokenNameHasError = checkFormHasError(IssueTokenFieldsEnum.tokenName);
+  const tokenTickerHasError = checkFormHasError(
+    IssueTokenFieldsEnum.tokenTicker
+  );
+
+  const mintedValueHasError = checkFormHasError(
+    IssueTokenFieldsEnum.mintedValue
+  );
+
+  const numDecimalsHasError = checkFormHasError(
+    IssueTokenFieldsEnum.numDecimals
+  );
 
   return (
     <form
@@ -27,9 +42,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[IssueTokenFieldsEnum.tokenName] &&
-                  formik.errors[IssueTokenFieldsEnum.tokenName]
+                'border-red-600': tokenNameHasError
               }
             )}
             data-testid={DataTestIdsEnum.tokenNameInput}
@@ -40,15 +53,14 @@ export const IssueTokenForm = () => {
             placeholder='Enter token name'
             value={formik.values[IssueTokenFieldsEnum.tokenName]}
           />
-          {formik.touched[IssueTokenFieldsEnum.tokenName] &&
-            formik.errors[IssueTokenFieldsEnum.tokenName] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.tokenNameError}
-              >
-                {formik.errors[IssueTokenFieldsEnum.tokenName]}
-              </div>
-            )}
+          {tokenNameHasError && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.tokenNameError}
+            >
+              {formik.errors[IssueTokenFieldsEnum.tokenName]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
@@ -61,9 +73,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[IssueTokenFieldsEnum.tokenTicker] &&
-                  formik.errors[IssueTokenFieldsEnum.tokenTicker]
+                'border-red-600': tokenTickerHasError
               }
             )}
             data-testid={DataTestIdsEnum.tokenTickerInput}
@@ -74,15 +84,14 @@ export const IssueTokenForm = () => {
             placeholder='Enter token ticker'
             value={formik.values[IssueTokenFieldsEnum.tokenTicker]}
           />
-          {formik.touched[IssueTokenFieldsEnum.tokenTicker] &&
-            formik.errors[IssueTokenFieldsEnum.tokenTicker] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.tokenTickerError}
-              >
-                {formik.errors[IssueTokenFieldsEnum.tokenTicker]}
-              </div>
-            )}
+          {tokenTickerHasError && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.tokenTickerError}
+            >
+              {formik.errors[IssueTokenFieldsEnum.tokenTicker]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
@@ -95,9 +104,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[IssueTokenFieldsEnum.mintedValue] &&
-                  formik.errors[IssueTokenFieldsEnum.mintedValue]
+                'border-red-600': mintedValueHasError
               }
             )}
             data-testid={DataTestIdsEnum.mintedValueInput}
@@ -109,15 +116,14 @@ export const IssueTokenForm = () => {
             type='number'
             value={formik.values[IssueTokenFieldsEnum.mintedValue]}
           />
-          {formik.touched[IssueTokenFieldsEnum.mintedValue] &&
-            formik.errors[IssueTokenFieldsEnum.mintedValue] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.mintedValueError}
-              >
-                {formik.errors[IssueTokenFieldsEnum.mintedValue]}
-              </div>
-            )}
+          {mintedValueHasError && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.mintedValueError}
+            >
+              {formik.errors[IssueTokenFieldsEnum.mintedValue]}
+            </div>
+          )}
         </div>
         <div className='flex flex-col'>
           <label
@@ -130,9 +136,7 @@ export const IssueTokenForm = () => {
             className={classNames(
               'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
               {
-                'border-red-600':
-                  formik.touched[IssueTokenFieldsEnum.numDecimals] &&
-                  formik.errors[IssueTokenFieldsEnum.numDecimals]
+                'border-red-600': numDecimalsHasError
               }
             )}
             data-testid={DataTestIdsEnum.numDecimalsInput}
@@ -144,15 +148,14 @@ export const IssueTokenForm = () => {
             type='number'
             value={formik.values[IssueTokenFieldsEnum.numDecimals]}
           />
-          {formik.touched[IssueTokenFieldsEnum.numDecimals] &&
-            formik.errors[IssueTokenFieldsEnum.numDecimals] && (
-              <div
-                className='text-red-600 text-sm mt-1'
-                data-testid={DataTestIdsEnum.numDecimalsError}
-              >
-                {formik.errors[IssueTokenFieldsEnum.numDecimals]}
-              </div>
-            )}
+          {numDecimalsHasError && (
+            <div
+              className='text-red-600 text-sm mt-1'
+              data-testid={DataTestIdsEnum.numDecimalsError}
+            >
+              {formik.errors[IssueTokenFieldsEnum.numDecimals]}
+            </div>
+          )}
         </div>
       </div>
       <div className='mt-4 flex flex-col align-middle'>
@@ -161,7 +164,7 @@ export const IssueTokenForm = () => {
           data-testid={DataTestIdsEnum.issueTokenBtn}
           type='submit'
         >
-          Send
+          Issue
         </Button>
         <MxLink
           className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'

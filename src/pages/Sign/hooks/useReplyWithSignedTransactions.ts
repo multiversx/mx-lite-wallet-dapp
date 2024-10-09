@@ -1,8 +1,7 @@
-import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
 import { useSelector } from 'react-redux';
-import { replyToDapp } from 'lib';
+import { replyToDapp, IPlainTransactionObject } from 'lib';
 import { hookSelector } from 'redux/selectors';
-import { CrossWindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'types';
 
 interface ReplyWithSignedTransactionsType {
   callbackUrl?: string;
@@ -18,7 +17,7 @@ export const useReplyWithSignedTransactions = (
     replyToDapp({
       callbackUrl,
       postMessageData: {
-        type: CrossWindowProviderResponseEnums.signTransactionsResponse,
+        type: WindowProviderResponseEnums.signTransactionsResponse,
         payload: {
           data: transactions
         }

@@ -3,9 +3,11 @@ import {
   ACCOUNTS_ENDPOINT,
   API_CACHE_DURATION_SECONDS,
   MAX_API_SIZE,
-  NFTS_ENDPOINT
+  NFTS_ENDPOINT,
+  ROLES_ENDPOINT,
+  COLLECTIONS_ENDPOINT
 } from 'localConstants';
-import { GetNftsType, PartialNftType } from 'types';
+import { GetNftsType, PartialNftType, CollectionType } from 'types';
 import { RootApi } from '../rootApi';
 
 const nftsEndpoints = RootApi.injectEndpoints({
@@ -17,10 +19,24 @@ const nftsEndpoints = RootApi.injectEndpoints({
         baseURL: getBaseURL(),
         url: `/${ACCOUNTS_ENDPOINT}/${props.address}/${NFTS_ENDPOINT}`,
         method: 'GET',
-        params: { size: MAX_API_SIZE, ...props }
+        params: { excludeMetaESDT: true, size: MAX_API_SIZE, ...props }
+      })
+    }),
+    getCollections: builder.query<CollectionType[], string>({
+      keepUnusedDataFor: API_CACHE_DURATION_SECONDS,
+      query: (address) => ({
+        baseURL: getBaseURL(),
+        url: `/${ACCOUNTS_ENDPOINT}/${address}/${ROLES_ENDPOINT}/${COLLECTIONS_ENDPOINT}`,
+        method: 'GET',
+        params: { creator: address }
       })
     })
   })
 });
 
-export const { useGetNftsQuery, useLazyGetNftsQuery } = nftsEndpoints;
+export const {
+  useGetNftsQuery,
+  useGetCollectionsQuery,
+  useLazyGetNftsQuery,
+  useLazyGetCollectionsQuery
+} = nftsEndpoints;

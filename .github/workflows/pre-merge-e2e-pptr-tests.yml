@@ -47,15 +47,7 @@ jobs:
           retry_on: error
           max_attempts: 5
           command: yarn install
-      - name: Get build cache
-        uses: actions/cache@v3.2.2
-        id: build
-        with:
-          path: |
-            **/build
-          key: ${{ runner.os }}-build-${{ github.sha }}
       - name: Build devnet MSW
-        if: steps.build.outputs.cache-hit != 'true'
         run: yarn build:devnet-msw
       - name: Run Puppeteer tests
         run: yarn test:pptr-headless

@@ -1,6 +1,6 @@
 export {
-  CrossWindowProviderRequestEnums,
-  CrossWindowProviderResponseEnums,
+  WindowProviderRequestEnums,
+  WindowProviderResponseEnums,
   SignMessageStatusEnum
 } from '@multiversx/sdk-dapp-utils/out/enums';
 export type {

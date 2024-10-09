@@ -17,18 +17,6 @@ export const networks: NetworkType[] = [
     WEGLDid: ''
   },
   {
-    default: false,
-    id: EnvironmentsEnum.devnet,
-    name: 'Gateway',
-    apiAddress: '',
-    gatewayUrl: 'https://devnet-gateway.multiversx.com',
-    extrasApi: 'https://devnet-extras-api.multiversx.com',
-    sampleAuthenticatedDomains: [''],
-    sovereignContractAddress: '',
-    walletAddress: 'https://devnet-wallet.multiversx.com',
-    WEGLDid: ''
-  },
-  {
     default: true,
     id: EnvironmentsEnum.mainnet,
     name: 'Mainnet',
@@ -46,10 +34,9 @@ export const networks: NetworkType[] = [
     name: 'Sovereign',
     apiAddress: 'https://api-sovereign-test.elrond.ro',
     gatewayUrl: '',
-    extrasApi: 'https://extras-api.multiversx.com',
+    extrasApi: 'https://extras-api-sovereign-test.elrond.ro',
     sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
-    sovereignContractAddress:
-      'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa',
+    sovereignContractAddress: '',
     walletAddress: 'https://wallet.voyager1.dev',
     WEGLDid: 'WEGLD-bd4d79'
   },
