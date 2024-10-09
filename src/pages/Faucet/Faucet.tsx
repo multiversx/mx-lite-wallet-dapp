@@ -1,9 +1,9 @@
+import { useSelector } from 'react-redux';
 import { Button, ModalContainer, PrivateKeyCheckWrapper } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
+import { networkSelector } from 'redux/selectors';
 import { FaucetModal } from './components/FaucetModal';
 import { useModal } from '../../hooks';
-import { useSelector } from 'react-redux';
-import { networkSelector } from 'redux/selectors';
 
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 
