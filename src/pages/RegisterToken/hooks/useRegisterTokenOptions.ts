@@ -13,22 +13,26 @@ export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
   ] = useLazyGetCollectionsQuery();
 
   const getTokenOptionsByType = (type: SendTypeEnum): TokenOptionType[] => {
+    let options: TokenOptionType[] = [];
+
     if (type === SendTypeEnum.nft) {
-      return (
+      options =
         collections?.map((token) => ({
           value: token.ticker,
           label: token.name
-        })) ?? []
-      );
+        })) ?? [];
+    } else {
+      // Remove EGLD
+      tokens.shift();
+
+      options = tokens.map((token) => ({
+        value: token.identifier,
+        label: token.name
+      }));
     }
 
-    // Remove EGLD
-    tokens.shift();
-
-    return tokens.map((token) => ({
-      value: token.identifier,
-      label: token.name
-    }));
+    // Show only tokens/collections with a prefix (e.g. sov-FNG-123456)
+    return options.filter((token) => token.value.split('-').length > 2);
   };
 
   const getTokens = (type: SendTypeEnum) =>
