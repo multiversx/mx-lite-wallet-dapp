@@ -1,9 +1,8 @@
 import { useEffect, useMemo } from 'react';
 import { useGetTokensWithEgld } from 'hooks';
-import { useGetAccountInfo } from 'lib';
+import { useGetAccountInfo, getEgldLabel } from 'lib';
 import { useLazyGetCollectionsQuery } from 'redux/endpoints';
 import { SendTypeEnum, TokenOptionType } from 'types';
-import { getEgldLabel } from '../../../lib';
 
 export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
   const { address, websocketEvent } = useGetAccountInfo();
