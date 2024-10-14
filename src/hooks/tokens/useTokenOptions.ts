@@ -27,14 +27,12 @@ export const useTokenOptions = ({
       );
     }
 
-    if (skipAddEgld && tokens[0]?.identifier === egldLabel) {
-      tokens.shift();
-    }
-
-    return tokens.map((token) => ({
-      value: token.identifier,
-      label: token.name
-    }));
+    return tokens
+      .filter((token) => !skipAddEgld || token.identifier !== egldLabel)
+      .map((token) => ({
+        value: token.identifier,
+        label: token.name
+      }));
   };
 
   const getTokens = (type: SendTypeEnum) =>
@@ -49,11 +47,9 @@ export const useTokenOptions = ({
     [nfts, tokens, sendType]
   );
 
-  const allTokens = [...tokens, ...(nfts || [])];
-
-  if (skipAddEgld && allTokens[0]?.identifier === egldLabel) {
-    allTokens.shift();
-  }
+  const allTokens = [...tokens, ...(nfts || [])].filter(
+    (token) => !skipAddEgld || token.identifier !== egldLabel
+  );
 
   return {
     allTokens,

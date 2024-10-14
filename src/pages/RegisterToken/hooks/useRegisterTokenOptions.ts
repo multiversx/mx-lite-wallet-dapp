@@ -3,6 +3,7 @@ import { useGetTokensWithEgld } from 'hooks';
 import { useGetAccountInfo } from 'lib';
 import { useLazyGetCollectionsQuery } from 'redux/endpoints';
 import { SendTypeEnum, TokenOptionType } from 'types';
+import { getEgldLabel } from '../../../lib';
 
 export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
   const { address, websocketEvent } = useGetAccountInfo();
@@ -11,6 +12,7 @@ export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
     fetchCollections,
     { data: collections, isLoading: isLoadingCollections }
   ] = useLazyGetCollectionsQuery();
+  const egldLabel = getEgldLabel();
 
   const getTokenOptionsByType = (type: SendTypeEnum): TokenOptionType[] => {
     let options: TokenOptionType[] = [];
@@ -22,13 +24,12 @@ export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
           label: token.name
         })) ?? [];
     } else {
-      // Remove EGLD
-      tokens.shift();
-
-      options = tokens.map((token) => ({
-        value: token.identifier,
-        label: token.name
-      }));
+      options = tokens
+        .filter((token) => token.identifier !== egldLabel)
+        .map((token) => ({
+          value: token.identifier,
+          label: token.name
+        }));
     }
 
     // Show only tokens/collections with a prefix (e.g. sov-FNG-123456)
@@ -47,10 +48,9 @@ export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
     [collections, tokens, sendType]
   );
 
-  const allTokens = [...tokens, ...(collections || [])];
-
-  // Remove EGLD
-  allTokens.shift();
+  const allTokens = [...tokens, ...(collections || [])].filter(
+    (token) => !('identifier' in token) || token.identifier !== egldLabel
+  );
 
   return {
     allTokens,
