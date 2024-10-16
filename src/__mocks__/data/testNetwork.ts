@@ -1,3 +1,4 @@
 export const testNetwork = {
-  apiAddress: 'https://devnet-api.multiversx.com'
+  apiAddress: 'https://api-sovereign-test.elrond.ro',
+  extrasApiAddress: 'https://extras-api-sovereign-test.elrond.ro'
 };
