@@ -22,7 +22,7 @@ describe('Validate and send EGLD tests', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
-      text: 'Available: 4.559443050404540691 xEGLD'
+      text: 'Available: 4.559443050404540691 WEGLD'
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));

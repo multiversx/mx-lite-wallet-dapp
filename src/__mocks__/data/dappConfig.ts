@@ -13,5 +13,5 @@ export const dappConfig = {
   apiAddress: 'https://api-sovereign-test.elrond.ro',
   explorerAddress:
     'https://api-sovereign-test.internal-explorer.multiversx.com',
-  chainId: 'local-testnet'
+  chainId: 'D'
 };
