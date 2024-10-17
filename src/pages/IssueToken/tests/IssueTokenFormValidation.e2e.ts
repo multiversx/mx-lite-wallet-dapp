@@ -23,6 +23,11 @@ describe('Issue Token form validation test', () => {
       text: 'Required'
     });
 
+    await expectElementToContainText({
+      dataTestId: DataTestIdsEnum.tokenTickerError,
+      text: 'Required'
+    });
+
     await changeInputText({
       dataTestId: DataTestIdsEnum.tokenNameInput,
       shouldOverride: true,
@@ -187,5 +192,21 @@ describe('Issue Token form validation test', () => {
       dataTestId: DataTestIdsEnum.numDecimalsError,
       text: 'Must be between 0 - 18'
     });
+
+    const tokenNameError = await page.$(
+      getByDataTestId(DataTestIdsEnum.tokenNameError)
+    );
+
+    const tokenTickerError = await page.$(
+      getByDataTestId(DataTestIdsEnum.tokenTickerError)
+    );
+
+    const mintedValueError = await page.$(
+      getByDataTestId(DataTestIdsEnum.mintedValueError)
+    );
+
+    expect(tokenNameError).toEqual(null);
+    expect(tokenTickerError).toEqual(null);
+    expect(mintedValueError).toEqual(null);
   });
 });
