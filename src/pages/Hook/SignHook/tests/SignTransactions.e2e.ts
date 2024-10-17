@@ -31,7 +31,7 @@ describe('Sign hook test', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.confirmFee,
-      text: '0.000569455 xEGLD'
+      text: '0.000569455 WEGLD'
     });
 
     await expectElementToContainText({
@@ -53,7 +53,7 @@ describe('Sign hook test', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.confirmFee,
-      text: '0.000569455 xEGLD'
+      text: '0.000569455 WEGLD'
     });
 
     await expectElementToContainText({
@@ -75,7 +75,7 @@ describe('Sign hook test', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.confirmFee,
-      text: '0.000569455 xEGLD'
+      text: '0.000569455 WEGLD'
     });
 
     await expectElementToContainText({

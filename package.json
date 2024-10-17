@@ -18,7 +18,7 @@
     "build": "tsc && npm run set-storage-persist && vite build",
     "build:devnet": "npm run copy:devnet-config && npm run build",
     "build:sovereign": "npm run copy:sovereign-config && npm run build",
-    "build:devnet-msw": "npm run copy:devnet-config & VITE_APP_MSW=true npm run build",
+    "build:sovereign-msw": "npm run copy:sovereign-config & VITE_APP_MSW=true npm run build",
     "build:testnet": "npm run copy:testnet-config & npm run build",
     "build:mainnet": "npm run copy:mainnet-config & npm run build",
     "postbuild": "node src/scripts/createVersionFile/index",
@@ -26,7 +26,7 @@
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "copy:sovereign-config": "cp ./src/config/config.sovereign.ts ./src/config/index.ts",
-    "test:pptr-headless": "npx @puppeteer/browsers install chrome-headless-shell@125.0.6420.0 && jest --config=jest-puppeteer.config.js",
+    "test:pptr-headless": "HEADLESS=true jest --config=jest-puppeteer.config.js",
     "test:pptr": "JEST_PPTR_RETRY_TIMES=0 HEADLESS=false jest --config=jest-puppeteer.config.js",
     "test": "jest",
     "preview": "vite preview"

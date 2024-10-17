@@ -45,9 +45,18 @@ jobs:
         with:
           timeout_minutes: 120
           retry_on: error
-          max_attempts: 5
+          max_attempts: 3
           command: yarn install
-      - name: Build devnet MSW
-        run: yarn build:devnet-msw
-      - name: Run Puppeteer tests
+      - name: Setup chrome
+        uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+        with:
+          chrome-version: 128
+      - name: Set Chrome Path
+        run: echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+      - name: Build sovereign msw
+        run: yarn build:sovereign-msw
+      - name: Run Puppeteer test
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
         run: yarn test:pptr-headless

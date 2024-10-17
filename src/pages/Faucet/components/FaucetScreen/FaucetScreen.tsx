@@ -54,9 +54,9 @@ export const FaucetScreen = ({
       )}
 
       <Button
-        data-testid={DataTestIdsEnum.requestTokensButton}
+        data-testid={DataTestIdsEnum.requestFundsButton}
         disabled={requestDisabled}
-        id={DataTestIdsEnum.requestTokensButton}
+        id={DataTestIdsEnum.requestFundsButton}
         onClick={handleRequestTokens}
       >
         Request Tokens
