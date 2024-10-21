@@ -40,7 +40,7 @@ export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
 
   useEffect(() => {
     fetchCollections(address);
-  }, [address, websocketEvent]);
+  }, [address, sendType, websocketEvent]);
 
   const tokenOptions = useMemo(
     () => getTokenOptionsByType(sendType),

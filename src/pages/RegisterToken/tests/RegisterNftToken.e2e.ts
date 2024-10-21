@@ -14,8 +14,8 @@ import {
   loginWithKeystore
 } from 'utils/testUtils/puppeteer';
 
-describe('Register ESDT Token test', () => {
-  it('should register an ESDT token from sovereign to testnet successfully', async () => {
+describe('Register NFT Token test', () => {
+  it('should register an NFT token from sovereign to testnet successfully', async () => {
     await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
       waitUntil: 'domcontentloaded'
     });
@@ -26,6 +26,12 @@ describe('Register ESDT Token test', () => {
 
     await expectToBeChecked({
       dataTestId: DataTestIdsEnum.sendEsdtTypeInput,
+      isChecked: true
+    });
+
+    await page.click(getByDataTestId(DataTestIdsEnum.sendNFtTypeInput));
+    await expectToBeChecked({
+      dataTestId: DataTestIdsEnum.sendNFtTypeInput,
       isChecked: true
     });
 
@@ -40,7 +46,7 @@ describe('Register ESDT Token test', () => {
       value: 'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa'
     });
 
-    await page.type('#react-select-3-input', 'MEX');
+    await page.type('#react-select-3-input', 'SFT');
     await page.keyboard.press('Enter');
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
     await expectElementToContainText({
