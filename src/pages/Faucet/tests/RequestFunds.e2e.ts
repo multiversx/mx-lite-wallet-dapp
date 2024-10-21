@@ -1,11 +1,11 @@
 import { DEFAULT_DELAY_MS, WALLET_SOURCE_ORIGIN } from '__mocks__/data';
+import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   expectElementToContainText,
   getByDataTestId,
   loginWithPem,
   sleep
 } from 'utils/testUtils/puppeteer';
-import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 describe('Request funds tests', () => {
   it('should receive 40 WEGLD successfully', async () => {

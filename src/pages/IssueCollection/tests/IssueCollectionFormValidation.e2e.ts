@@ -1,3 +1,4 @@
+import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -6,7 +7,6 @@ import {
   getByDataTestId,
   loginWithKeystore
 } from 'utils/testUtils/puppeteer';
-import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 
 describe('Issue Collection form validation test', () => {
   it('should show errors and not create collection when data is invalid', async () => {
