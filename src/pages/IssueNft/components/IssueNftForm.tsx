@@ -188,7 +188,7 @@ export const IssueNftForm = () => {
       <div className='mt-4 flex flex-col align-middle'>
         <Button
           className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
-          data-testid={DataTestIdsEnum.issueCollectionBtn}
+          data-testid={DataTestIdsEnum.issueNftBtn}
           type='submit'
         >
           Create

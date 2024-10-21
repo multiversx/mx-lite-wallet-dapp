@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added issue NFT tests](https://github.com/multiversx/mx-lite-wallet-dapp/pull/60)
 - [Added issue collection tests](https://github.com/multiversx/mx-lite-wallet-dapp/pull/59)
 - [Added faucet and issue token tests](https://github.com/multiversx/mx-lite-wallet-dapp/pull/58)
 - [Allow only tokens and collections with prefix to be registered](https://github.com/multiversx/mx-lite-wallet-dapp/pull/56)
