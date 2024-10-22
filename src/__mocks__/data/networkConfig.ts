@@ -2,7 +2,7 @@ export const networkConfig = {
   data: {
     config: {
       erd_adaptivity: 'false',
-      erd_chain_id: 'D',
+      erd_chain_id: 'S',
       erd_denomination: 18,
       erd_gas_per_data_byte: 1500,
       erd_gas_price_modifier: '0.01',
