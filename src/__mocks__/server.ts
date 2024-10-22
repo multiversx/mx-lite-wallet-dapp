@@ -13,7 +13,8 @@ import {
   networkConfig,
   pemAccountGuarded,
   faucetSettings,
-  keystoreWalletCollections
+  keystoreWalletCollections,
+  pendingTransactionKeystoreWallet
 } from './data';
 import { mockResponse } from './serverUtils';
 
@@ -38,6 +39,10 @@ export const handlers = [
   http.get(
     `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}/roles/collections`,
     mockResponse(keystoreWalletCollections)
+  ),
+  http.post(
+    `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}/transactions`,
+    mockResponse(pendingTransactionKeystoreWallet)
   ),
   http.get(
     `${testNetwork.apiAddress}/accounts/${pemAccount.address}`,
