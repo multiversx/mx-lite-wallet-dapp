@@ -1,0 +1,71 @@
+export const keystoreWalletCollections = [
+  {
+    collection: 'SFT-384108',
+    type: 'SemiFungibleESDT',
+    subType: 'SemiFungibleESDT',
+    name: 'SFT',
+    ticker: 'sov-SFT-384108',
+    owner: 'erd1jrd4sm6mg5ggq0yl87jfs22hlnjn8aalx7fqx57q34jght264c2q335qcc',
+    timestamp: 1729528742,
+    canFreeze: false,
+    canWipe: false,
+    canPause: false,
+    canTransferNftCreateRole: false,
+    canChangeOwner: false,
+    canUpgrade: true,
+    canAddSpecialRoles: true,
+    role: {
+      canCreate: true,
+      canBurn: true,
+      canAddQuantity: true,
+      canUpdateAttributes: false,
+      canAddUri: false,
+      roles: ['ESDTRoleNFTCreate', 'ESDTRoleNFTBurn', 'ESDTRoleNFTAddQuantity']
+    },
+    canTransfer: true,
+    canCreate: true,
+    canBurn: true,
+    canAddQuantity: true,
+    canUpdateAttributes: false,
+    canAddUri: false
+  },
+  {
+    collection: 'NFT-e9be01',
+    type: 'NonFungibleESDT',
+    subType: 'NonFungibleESDTv2',
+    name: 'NFT',
+    ticker: 'sov-NFT-e9be01',
+    owner: 'erd1jrd4sm6mg5ggq0yl87jfs22hlnjn8aalx7fqx57q34jght264c2q335qcc',
+    timestamp: 1729528730,
+    canFreeze: false,
+    canWipe: false,
+    canPause: false,
+    canTransferNftCreateRole: false,
+    canChangeOwner: false,
+    canUpgrade: true,
+    canAddSpecialRoles: true,
+    role: {
+      canCreate: true,
+      canBurn: true,
+      canAddQuantity: false,
+      canUpdateAttributes: true,
+      canAddUri: true,
+      roles: [
+        'ESDTRoleSetNewURI',
+        'ESDTRoleNFTUpdate',
+        'ESDTRoleNFTBurn',
+        'ESDTRoleModifyCreator',
+        'ESDTRoleModifyRoyalties',
+        'ESDTRoleNFTRecreate',
+        'ESDTRoleNFTCreate',
+        'ESDTRoleNFTUpdateAttributes',
+        'ESDTRoleNFTAddURI'
+      ]
+    },
+    canTransfer: true,
+    canCreate: true,
+    canBurn: true,
+    canUpdateAttributes: true,
+    canAddUri: true
+  }
+];

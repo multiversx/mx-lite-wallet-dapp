@@ -12,7 +12,8 @@ import {
   dappConfig,
   networkConfig,
   pemAccountGuarded,
-  faucetSettings
+  faucetSettings,
+  keystoreWalletCollections
 } from './data';
 import { mockResponse } from './serverUtils';
 
@@ -33,6 +34,10 @@ export const handlers = [
   http.get(
     `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}/nfts`,
     mockResponse(keystoreWalletNfts)
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}/roles/collections`,
+    mockResponse(keystoreWalletCollections)
   ),
   http.get(
     `${testNetwork.apiAddress}/accounts/${pemAccount.address}`,
