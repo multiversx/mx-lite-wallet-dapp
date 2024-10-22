@@ -86,7 +86,7 @@ describe('Sign hook test', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.signBtn));
 
     expect(page.url()).toMatch(
-      `https://devnet.xexchange.com/?nonce[0]=786&value[0]=0&receiver[0]=${keystoreAccount.address}&sender[0]=${keystoreAccount.address}&gasPrice[0]=1000000000&gasLimit[0]=7000000&data[0]=MultiESDTNFTTransfer@000000000000000005006704c51b25a956ddbc643189ba7945b413890d4f0fd6@02@444d452d626465326238@01@01@444d452d626465326238@01@01@6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09&chainID[0]=D&version[0]=1&signature[0]=40d593538628a874ae0ec101e33aeb68e42b88f2fbcd0f436ed9721f390b4d163ba93ad362aba86d4eab98874e61e325838457bf4769bf45c5476256e777c30c&walletProviderStatus=transactionsSigned`
+      `https://devnet.xexchange.com/?nonce[0]=786&value[0]=0&receiver[0]=${keystoreAccount.address}&sender[0]=${keystoreAccount.address}&gasPrice[0]=1000000000&gasLimit[0]=7000000&data[0]=MultiESDTNFTTransfer@000000000000000005006704c51b25a956ddbc643189ba7945b413890d4f0fd6@02@444d452d626465326238@01@01@444d452d626465326238@01@01@6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09&chainID[0]=S&version[0]=1&signature[0]=d55db9d86615793cc9b8eda80beff789ef1212f1869d4d7ae104b3688cc488559fb9071d357a9772b451b19d25bf8facbcc83a65df895490aeb8e115a37b5700&walletProviderStatus=transactionsSigned`
     );
   });
 });
