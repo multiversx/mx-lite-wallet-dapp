@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useSetNativeAuthInterceptors } from 'components/AxiosInterceptor/helpers';
 import { networks } from 'config';
-import { useLoginService, SignableMessage } from 'lib';
+import { useLoginService, Message } from 'lib';
 import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
 import { changeNetwork } from 'redux/slices';
 
@@ -20,9 +20,7 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     networkId: string;
     origin: string;
     preventPageReload?: boolean;
-    signMessageCallback: (
-      messageToSign: SignableMessage
-    ) => Promise<SignableMessage>;
+    signMessageCallback: (messageToSign: Message) => Promise<Message>;
   }) => {
     const foundNetwork = networks.find(({ id }) => id === networkId);
 

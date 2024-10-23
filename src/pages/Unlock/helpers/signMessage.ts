@@ -1,4 +1,10 @@
-import { Address, SignableMessage, UserSecretKey, UserSigner } from 'lib';
+import {
+  Address,
+  Message,
+  UserSecretKey,
+  UserSigner,
+  MessageComputer
+} from 'lib';
 
 interface SignMessageParams {
   message: string;
@@ -10,16 +16,23 @@ export const signMessage = async ({
   message,
   address,
   privateKey
-}: SignMessageParams): Promise<SignableMessage> => {
+}: SignMessageParams): Promise<Message> => {
   const signer = new UserSigner(UserSecretKey.fromString(privateKey));
 
-  const messageToSign = new SignableMessage({
+  const msg = new Message({
     ...(address ? { address: new Address(address) } : {}),
-    message: Buffer.from(message)
+    data: new Uint8Array(Buffer.from(message))
   });
-  const serializedMessage = messageToSign.serializeForSigning();
-  const signature = await signer.sign(serializedMessage);
-  messageToSign.applySignature(signature);
 
-  return messageToSign;
+  const messageComputer = new MessageComputer();
+
+  const messageToSign = new Uint8Array(
+    messageComputer.computeBytesForSigning(msg)
+  );
+
+  const signature = await signer.sign(Buffer.from(messageToSign));
+
+  msg.signature = new Uint8Array(signature);
+
+  return msg;
 };
