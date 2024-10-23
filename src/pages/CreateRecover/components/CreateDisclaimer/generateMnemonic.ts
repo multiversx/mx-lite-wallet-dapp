@@ -1,4 +1,4 @@
-import { Mnemonic } from '@multiversx/sdk-wallet/out';
+import { Mnemonic } from 'lib';
 
 export function generateMnemonic() {
   const mnemonic = Mnemonic.generate().getWords();

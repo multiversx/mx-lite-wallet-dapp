@@ -1,4 +1,4 @@
-import { UserSecretKey } from 'lib/sdkWallet';
+import { UserSecretKey } from 'lib';
 
 type ParsedPemReturnType = {
   address: string;

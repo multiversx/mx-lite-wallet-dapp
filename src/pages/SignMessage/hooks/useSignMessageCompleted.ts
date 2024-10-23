@@ -7,8 +7,8 @@ import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
 import {
   WindowProviderResponseEnums,
-  ReplyWithPostMessageType,
-  SignMessageStatusEnum
+  SignMessageStatusEnum,
+  ExtendedReplyWithPostMessageType
 } from 'types';
 
 interface GetReplyDataPropsType {
@@ -31,7 +31,7 @@ export const useSignMessageCompleted = () => {
           status: SignMessageStatusEnum[signedMessageInfo.status]
         };
 
-        const replyData: ReplyWithPostMessageType = {
+        const replyData: ExtendedReplyWithPostMessageType = {
           type: WindowProviderResponseEnums.signMessageResponse,
           payload: {
             data
