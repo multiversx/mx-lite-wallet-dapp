@@ -2079,10 +2079,10 @@
     lodash "^4.17.21"
     zustand "^4.4.7"
 
-"@multiversx/sdk-dapp-form@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-form/-/sdk-dapp-form-1.0.1.tgz#c957e236fd03f05afbe20539ec4105db12ee6ef9"
-  integrity sha512-mOexdVSVi6mfVhMDjIv+vf286l7KCuFWlnKjA5iyojaZgvWdG22MegKF6HdW+0N4uV3OIkr/sxW5blzdXJG+hw==
+"@multiversx/sdk-dapp-form@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-form/-/sdk-dapp-form-1.0.2.tgz#cddfc95446c6df63f43c08d4745a77fb5972b00c"
+  integrity sha512-2EwfrQciIhDoJk7PY9ET03ZI0o/GYSV70KBXo6yvMBNbQ0SxF6+iQEPpdOV12L/dK8nNWlncRfZogElzJBGP0Q==
   dependencies:
     anchorme "2.1.2"
     bech32 "2.0.0"
@@ -2187,10 +2187,10 @@
     buffer "6.0.3"
     platform "1.3.6"
 
-"@multiversx/sdk-js-web-wallet-io@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-js-web-wallet-io/-/sdk-js-web-wallet-io-1.1.0.tgz#8e024d3bd1a4782cec89bda55e59287421d39b41"
-  integrity sha512-6PUfAXcYbxHQj31VpgTyDOJLvftA5RuhXnyNdmEWfydfKBI+vxzbNLrHhZ10q4AWBLeIeF9g3h3F6OQzdZGQAg==
+"@multiversx/sdk-js-web-wallet-io@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-js-web-wallet-io/-/sdk-js-web-wallet-io-1.1.1.tgz#747de3a06624f09ec7adc47ebd89648d81ea69b5"
+  integrity sha512-oIMu6LxwF3XhQbkFcWIvQeLxKuuEymocP+zG/UQsqHzRtDo1goNXnkvVSwDjzMGD3B87QK6X6O9rnsmwO5GY8w==
   dependencies:
     "@multiversx/sdk-web-wallet-provider" "3.1.0"
     lodash "4.17.21"
@@ -2219,16 +2219,6 @@
   integrity sha512-q1/cDRKz7QQsr8lQskUsfGkqJbIut772/MBX52Td4OTGg/G1HAm2xsELe+06y7L537A2rqz5/W9KkJ5yWt968g==
   dependencies:
     axios "^1.7.4"
-
-"@multiversx/sdk-network-providers@2.8.0":
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-network-providers/-/sdk-network-providers-2.8.0.tgz#549d19090c536c77f03951367d4da2a72b8486bc"
-  integrity sha512-p28NVS+uKpfPH4O0yR2LJtCNBHi1o95a3L51pCco1F4UN5seYEXYqOgP0GBxPd0WtajMXR1r5dnCrX9CFHDGcA==
-  dependencies:
-    bech32 "1.1.4"
-    bignumber.js "9.0.1"
-    buffer "6.0.3"
-    json-bigint "1.0.0"
 
 "@multiversx/sdk-opera-provider@1.0.0-alpha.1":
   version "1.0.0-alpha.1"
@@ -2772,13 +2762,13 @@
     magic-string "^0.30.3"
 
 "@rollup/pluginutils@^5.0.1", "@rollup/pluginutils@^5.0.4":
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.1.2.tgz#d3bc9f0fea4fd4086aaac6aa102f3fa587ce8bd9"
-  integrity sha512-/FIdS3PyZ39bjZlwqFnWqCOVnW7o963LtKMwQOD0NhQqw22gSr2YY1afu3FxRip4ZCZNsD5jq6Aaz6QV3D/Njw==
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.1.3.tgz#3001bf1a03f3ad24457591f2c259c8e514e0dbdf"
+  integrity sha512-Pnsb6f32CD2W3uCaLZIzDmeFyQ2b8UWMFI7xtwUezpcGBDVDW6y9XgAWIlARiGAo6eNF5FK5aQTr0LFyNyqq5A==
   dependencies:
     "@types/estree" "^1.0.0"
     estree-walker "^2.0.2"
-    picomatch "^2.3.1"
+    picomatch "^4.0.2"
 
 "@scure/base@^1.1.3", "@scure/base@~1.1.6":
   version "1.1.9"
@@ -5486,9 +5476,9 @@ ed2curve@0.3.0:
     tweetnacl "1.x.x"
 
 electron-to-chromium@^1.5.41:
-  version "1.5.43"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.43.tgz#d9e69fc709ddebd521416de9d17cdef81d2d4718"
-  integrity sha512-NxnmFBHDl5Sachd2P46O7UJiMaMHMLSofoIWVJq3mj8NJgG0umiSeljAVP9lGzjI0UDLJJ5jjoGjcrB8RSbjLQ==
+  version "1.5.45"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.45.tgz#fa592ce6a88b44d23acbc7453a2feab98996e6c9"
+  integrity sha512-vOzZS6uZwhhbkZbcRyiy99Wg+pYFV5hk+5YaECvx0+Z31NR3Tt5zS6dze2OepT6PCTzVzT0dIJItti+uAW5zmw==
 
 elliptic@^6.5.3, elliptic@^6.5.5, elliptic@^6.5.7:
   version "6.5.7"
@@ -8815,6 +8805,11 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3, picomatch@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
+
+picomatch@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-4.0.2.tgz#77c742931e8f3b8820946c76cd0c1f13730d1dab"
+  integrity sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==
 
 pify@^2.3.0:
   version "2.3.0"

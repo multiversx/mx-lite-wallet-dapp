@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Remove @multiversx/sdk-network-providers](https://github.com/multiversx/mx-lite-wallet-dapp/pull/63)
 - [Updated SDK packages](https://github.com/multiversx/mx-lite-wallet-dapp/pull/62)
 - [Added sovereign transfer test and fix](https://github.com/multiversx/mx-lite-wallet-dapp/pull/61)
 - [Added issue NFT tests](https://github.com/multiversx/mx-lite-wallet-dapp/pull/60)
