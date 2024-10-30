@@ -26,6 +26,7 @@
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "copy:sovereign-config": "cp ./src/config/config.sovereign.ts ./src/config/index.ts",
+    "copy:placeholder-config": "cp ./src/config/config.placeholder.ts ./src/config/index.ts",
     "test:pptr-headless": "npx @puppeteer/browsers install chrome-headless-shell@125.0.6420.0 && jest --config=jest-puppeteer.config.js",
     "test:pptr": "JEST_PPTR_RETRY_TIMES=0 HEADLESS=false jest --config=jest-puppeteer.config.js",
     "test": "jest"
