@@ -21,6 +21,7 @@
     "build:devnet-msw": "npm run copy:devnet-config & VITE_APP_MSW=true npm run build",
     "build:testnet": "npm run copy:testnet-config & npm run build",
     "build:mainnet": "npm run copy:mainnet-config & npm run build",
+    "build:placeholder": "npm run copy:placeholder-config & npm run build",
     "postbuild": "node src/scripts/createVersionFile/index",
     "copy:devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
