@@ -1,3 +1,6 @@
+import { replyToDapp as originalReplyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';
+import { ExtendedReplyWithPostMessageType, ReplyWithRedirectType } from 'types';
+
 export { getEgldLabel } from '@multiversx/sdk-dapp/utils/network/getEgldLabel';
 export { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
 export { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
@@ -70,3 +73,13 @@ export {
   maxDecimals,
   stringIsFloat
 } from '@multiversx/sdk-dapp/utils/validation';
+
+export const replyToDapp: (
+  props: {
+    callbackUrl: string;
+    webwiewApp?: HTMLIFrameElement | null;
+    postMessageData?: ExtendedReplyWithPostMessageType;
+    transactionData?: ReplyWithRedirectType['transactionData'];
+  },
+  extensionReplyToDapp?: (props: ExtendedReplyWithPostMessageType) => void
+) => void = originalReplyToDapp as any; // use as any to allow extending input params

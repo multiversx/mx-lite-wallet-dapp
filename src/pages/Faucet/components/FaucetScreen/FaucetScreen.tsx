@@ -6,7 +6,6 @@ import { DataTestIdsEnum } from 'localConstants';
 import { FaucetSettingsReturnType } from 'redux/endpoints';
 
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
-const isDisabled = process.env.NODE_ENV === 'production';
 
 export interface FaucetScreenPropsType {
   settings: FaucetSettingsReturnType;
@@ -18,7 +17,7 @@ export const FaucetScreen = ({
   onRequestClick
 }: FaucetScreenPropsType) => {
   const [captcha, setCaptcha] = useState('');
-  const [requestDisabled, setRequestDisabled] = useState(isDisabled);
+  const [requestDisabled, setRequestDisabled] = useState(false);
   const egldLabel = getEgldLabel();
 
   const onRecaptchaChange = (value: string | null) => {
@@ -55,9 +54,9 @@ export const FaucetScreen = ({
       )}
 
       <Button
-        data-testid={DataTestIdsEnum.requestTokensButton}
+        data-testid={DataTestIdsEnum.requestFundsButton}
         disabled={requestDisabled}
-        id={DataTestIdsEnum.requestTokensButton}
+        id={DataTestIdsEnum.requestFundsButton}
         onClick={handleRequestTokens}
       >
         Request Tokens

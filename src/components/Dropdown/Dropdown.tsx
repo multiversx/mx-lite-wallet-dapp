@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DataTestIdsEnum } from 'localConstants';
 import { Button } from '../Button';
 
 export interface DropdownOption {
@@ -42,6 +43,7 @@ export const Dropdown = ({
         aria-expanded='true'
         aria-haspopup='true'
         className='flex flex-row flex-nowrap items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500'
+        data-testid={DataTestIdsEnum.activeNetwork}
         onClick={toggleDropdown}
       >
         {selectedOption}

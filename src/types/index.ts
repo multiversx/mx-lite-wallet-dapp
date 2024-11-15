@@ -4,6 +4,6 @@ export * from './send.types';
 export * from './sdkCore.types';
 export * from './sdkDapp.types';
 export * from './sdkDappForm.types';
-export * from './sdkDappUtils.types';
+export * from './sdkDappWebWalletCrossWindowProvider.types';
 export * from './transaction.types';
 export * from './widget.types';

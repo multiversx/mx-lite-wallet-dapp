@@ -97,7 +97,7 @@ export const SovereignTransferForm = () => {
           )}
         </div>
         {formik.values[SovereignTransferFormFieldsEnum.tokens].map(
-          (token, index) => {
+          (token, index, array) => {
             const typeFieldName = `${SovereignTransferFormFieldsEnum.tokens}[${index}].${SovereignTransferFormFieldsEnum.type}`;
             const amountFieldName = `${SovereignTransferFormFieldsEnum.tokens}[${index}].${SovereignTransferFormFieldsEnum.amount}`;
             const tokenFieldName = `${SovereignTransferFormFieldsEnum.tokens}[${index}].${SovereignTransferFormFieldsEnum.token}`;
@@ -127,16 +127,20 @@ export const SovereignTransferForm = () => {
               (selectedType: SendTypeEnum) => (event) => {
                 formik.setFieldValue(typeFieldName, selectedType);
                 const options = getTokenOptionsByType(selectedType);
-                formik.setFieldValue(tokenFieldName, options[0]);
-                const amount = getTokenAvailableAmount({
-                  sendType: selectedType,
-                  token: options[0].value
-                });
 
-                formik.setFieldValue(
-                  amountFieldName,
-                  amount === '1' && getIsNFT(selectedType) ? '1' : 0
-                );
+                if (options.length > 0) {
+                  formik.setFieldValue(tokenFieldName, options[0]);
+
+                  const amount = getTokenAvailableAmount({
+                    sendType: token[SovereignTransferFormFieldsEnum.type],
+                    token: token[SovereignTransferFormFieldsEnum.token]?.value
+                  });
+
+                  formik.setFieldValue(
+                    amountFieldName,
+                    amount === '1' && getIsNFT(selectedType) ? '1' : 0
+                  );
+                }
 
                 return formik.handleChange(event);
               };
@@ -157,8 +161,8 @@ export const SovereignTransferForm = () => {
                       <input
                         checked={!isNFT}
                         className='mr-2'
-                        data-testid={DataTestIdsEnum.sendEsdtTypeInput}
-                        id={SendTypeEnum.esdt}
+                        data-testid={`${DataTestIdsEnum.sendEsdtTypeInput}${index}`}
+                        id={`${SendTypeEnum.esdt}${index}`}
                         name={typeFieldName}
                         onChange={handleOnSendTypeChange(SendTypeEnum.esdt)}
                         type='radio'
@@ -172,8 +176,8 @@ export const SovereignTransferForm = () => {
                       <input
                         checked={isNFT}
                         className='mr-2'
-                        data-testid={DataTestIdsEnum.sendNFtTypeInput}
-                        id={SendTypeEnum.nft}
+                        data-testid={`${DataTestIdsEnum.sendNFtTypeInput}${index}`}
+                        id={`${SendTypeEnum.nft}${index}`}
                         name={typeFieldName}
                         onChange={handleOnSendTypeChange(SendTypeEnum.nft)}
                         type='radio'
@@ -202,7 +206,7 @@ export const SovereignTransferForm = () => {
                           }
                         )}
                         disabled={isNFT && !canEditNftAmount}
-                        data-testid={DataTestIdsEnum.amountInput}
+                        data-testid={`${DataTestIdsEnum.amountInput}${index}`}
                         id={amountFieldName}
                         name={amountFieldName}
                         onBlur={formik.handleBlur}
@@ -214,7 +218,7 @@ export const SovereignTransferForm = () => {
                       {!hasAmountError && (
                         <div
                           className='text-sm text-gray-400 mt-1'
-                          data-testid={DataTestIdsEnum.availableAmount}
+                          data-testid={`${DataTestIdsEnum.availableAmount}${index}`}
                         >
                           Available: {availableAmount}{' '}
                           {token[SovereignTransferFormFieldsEnum.token]?.label}
@@ -223,7 +227,7 @@ export const SovereignTransferForm = () => {
                       {hasAmountError && (
                         <div
                           className='text-red-600 text-sm mt-1'
-                          data-testid={DataTestIdsEnum.amountError}
+                          data-testid={`${DataTestIdsEnum.amountError}${index}`}
                         >
                           {tokenError?.amount}
                         </div>
@@ -247,7 +251,7 @@ export const SovereignTransferForm = () => {
                         tokenError?.[SovereignTransferFormFieldsEnum.token] && (
                           <div
                             className='text-red-600 text-sm mt-1'
-                            data-testid={DataTestIdsEnum.tokenError}
+                            data-testid={`${DataTestIdsEnum.tokenError}${index}`}
                           >
                             {
                               tokenError[
@@ -260,17 +264,19 @@ export const SovereignTransferForm = () => {
                   </div>
                 </div>
                 <div className='flex flex-row gap-2'>
-                  <Button
-                    className='mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white'
-                    data-testid={DataTestIdsEnum.addTokenBtn}
-                    onClick={handleAddToken}
-                  >
-                    Add token
-                  </Button>
+                  {index === array.length - 1 && (
+                    <Button
+                      className='mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white'
+                      data-testid={DataTestIdsEnum.addTokenBtn}
+                      onClick={handleAddToken}
+                    >
+                      Add token
+                    </Button>
+                  )}
                   {index > 0 && (
                     <Button
                       className='mt-4 rounded-lg bg-red-600 px-4 py-2 text-white'
-                      data-testid={DataTestIdsEnum.removeTokenBtn}
+                      data-testid={`${DataTestIdsEnum.removeTokenBtn}${index}`}
                       onClick={handleRemoveToken(index)}
                     >
                       Remove token

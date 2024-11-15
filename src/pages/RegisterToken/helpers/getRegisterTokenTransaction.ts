@@ -42,7 +42,7 @@ export const getRegisterTokenTransaction = ({
     'identifier' in token ? token.identifier : token.ticker;
   const tokenType = TokenTypeMap[nft.type] || 0;
   const tokenName = token.name;
-  const tokenTicker = token.ticker?.split('-')[0];
+  const tokenTicker = token.ticker?.split('-')[1];
   const tokenDecimals = token.decimals || 0;
 
   const args = [

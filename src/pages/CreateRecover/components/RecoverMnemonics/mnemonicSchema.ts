@@ -1,4 +1,4 @@
-import { Mnemonic } from '@multiversx/sdk-wallet/out';
+import { Mnemonic } from 'lib';
 import { string } from 'yup';
 
 export const mnemonicSchema = () =>

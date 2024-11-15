@@ -10,7 +10,11 @@ import {
   pemWalletTokens,
   pemWalletNfts,
   dappConfig,
-  networkConfig
+  networkConfig,
+  pemAccountGuarded,
+  faucetSettings,
+  keystoreWalletCollections,
+  pendingTransactionKeystoreWallet
 } from './data';
 import { mockResponse } from './serverUtils';
 
@@ -33,6 +37,14 @@ export const handlers = [
     mockResponse(keystoreWalletNfts)
   ),
   http.get(
+    `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}/roles/collections`,
+    mockResponse(keystoreWalletCollections)
+  ),
+  http.post(
+    `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}/transactions`,
+    mockResponse(pendingTransactionKeystoreWallet)
+  ),
+  http.get(
     `${testNetwork.apiAddress}/accounts/${pemAccount.address}`,
     mockResponse(pemAccount)
   ),
@@ -43,6 +55,28 @@ export const handlers = [
   http.get(
     `${testNetwork.apiAddress}/accounts/${pemAccount.address}/nfts`,
     mockResponse(pemWalletNfts)
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/accounts/${pemAccountGuarded.address}`,
+    mockResponse(pemAccount)
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/accounts/${pemAccountGuarded.address}/tokens`,
+    mockResponse(pemWalletTokens)
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/accounts/${pemAccountGuarded.address}/nfts`,
+    mockResponse(pemWalletNfts)
+  ),
+  http.get(
+    `${testNetwork.extrasApiAddress}/faucet/settings`,
+    mockResponse(faucetSettings)
+  ),
+  http.post(
+    `${testNetwork.extrasApiAddress}/faucet`,
+    mockResponse({
+      status: 'success'
+    })
   )
 ];
 

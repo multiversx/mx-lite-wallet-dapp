@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.0.3](https://github.com/multiversx/mx-lite-wallet-dapp/pull/65)] - 2024-11-15
+
+- [Updated packages](https://github.com/multiversx/mx-lite-wallet-dapp/pull/64)
+- [Remove @multiversx/sdk-network-providers](https://github.com/multiversx/mx-lite-wallet-dapp/pull/63)
+- [Updated SDK packages](https://github.com/multiversx/mx-lite-wallet-dapp/pull/62)
+- [Added sovereign transfer test and fix](https://github.com/multiversx/mx-lite-wallet-dapp/pull/61)
+- [Added issue NFT tests](https://github.com/multiversx/mx-lite-wallet-dapp/pull/60)
+- [Added issue collection tests](https://github.com/multiversx/mx-lite-wallet-dapp/pull/59)
+- [Added faucet and issue token tests](https://github.com/multiversx/mx-lite-wallet-dapp/pull/58)
+- [Allow only tokens and collections with prefix to be registered](https://github.com/multiversx/mx-lite-wallet-dapp/pull/56)
+
 ## [[1.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/54)] - 2024-10-03
 
 - [Fixed faucet is missing on sovereign when recpatcha key is missing](https://github.com/multiversx/mx-lite-wallet-dapp/pull/55)

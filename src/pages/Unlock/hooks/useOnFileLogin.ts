@@ -55,13 +55,18 @@ export const useOnFileLogin = () => {
     let signature = '';
 
     if (usedToken) {
-      signature = (
-        await generateTokenSignature({
-          address,
-          loginToken: usedToken,
-          privateKey
-        })
-      ).signature.toString('hex');
+      const msg = await generateTokenSignature({
+        address,
+        loginToken: usedToken,
+        privateKey
+      });
+
+      if (!msg.signature) {
+        console.error('Token not signed');
+        return;
+      }
+
+      signature = Buffer.from(msg.signature).toString('hex');
     }
 
     if (loginToken && hasNativeAuthToken) {
