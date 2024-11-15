@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  lite-wallet:
+    ports: 
+      - 127.0.0.1:80:80
+    container_name: lite-wallet
+    build:
+      context: .  
+      dockerfile: Dockerfile 
+    environment:
+      START_NETWORK_ID_STOP: custom
+      START_NETWORK_NAME_STOP: custom
+      START_API_ADDRESS_STOP: https://testnet-api.multiversx.com
+      START_GATEWAY_URL_STOP: https://testnet-gateway.multiversx.com
+      START_WALLET_ADDRESS_STOP: https://testnet-wallet.multiversx.com
+      START_WEGLD_ID_STOP: xEGLD
