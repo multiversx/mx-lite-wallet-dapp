@@ -1,33 +1,27 @@
 #!/bin/sh
 
-if [ -n "START_NETWORK_ID_STOP" ]; then
-  echo "Network ID defined: ${START_NETWORK_ID_STOP}, replacing in config"
-  find /usr/share/nginx/html/ -type f -exec sed -i 's|START_NETWORK_ID_STOP|'${START_NETWORK_ID_STOP}'|g' {} +
-fi
+# List of environment variables and their default values
+env_vars_with_defaults="START_NETWORK_ID_STOP=sovereign START_NETWORK_NAME_STOP=Sovereign START_API_ADDRESS_STOP=https://api-sovereign-test.elrond.ro START_GATEWAY_URL_STOP= START_EXTRAS_API_URL_STOP=https://extras-api-sovereign-test.elrond.ro START_SAMPLE_AUTHENTICATED_DOMAINS_STOP=https://api-sovereign-test.elrond.ro START_SOVEREIGN_CONTRACT_ADDR_STOP=erd1qqqqqqqqqqqqqpgqkh3lkj9dznw7awmulw2xcfzkael83jaflrhswsar06 START_WALLET_ADDRESS_STOP=https://wallet-sovereign-test.elrond.ro START_WEGLD_ID_STOP=WEGLD-bd4d79 START2_NETWORK_ID_STOP2=Testnet START2_NETWORK_NAME_STOP2=Testnet START2_API_ADDRESS_STOP2=https://testnet-api.multiversx.com START2_GATEWAY_URL_STOP2= START2_EXTRAS_API_URL_STOP2=https://testnet-extras-api.multiversx.com START2_SAMPLE_AUTHENTICATED_DOMAINS_STOP2=https://testnet-api.multiversx.com START2_SOVEREIGN_CONTRACT_ADDR_STOP2=erd1qqqqqqqqqqqqqpgqkhqeu7e2t62pwuadcshlrmxcharcstkhlrhs8cg509 START2_WALLET_ADDRESS_STOP2=https://testnet-wallet.multiversx.com START2_WEGLD_ID_STOP2="
 
-if [ -n "START_NETWORK_NAME_STOP" ]; then
-  echo "Network name defined: ${START_NETWORK_NAME_STOP}, replacing in config"
-  find /usr/share/nginx/html/ -type f -exec sed -i 's|START_NETWORK_NAME_STOP|'${START_NETWORK_NAME_STOP}'|g' {} +
-fi
+replace_placeholder() {
+  local var_name=$1
+  local var_value=$2
 
-if [ -n "START_API_ADDRESS_STOP" ]; then
-  echo "Api address defined: ${START_API_ADDRESS_STOP}, replacing in config"
-  find /usr/share/nginx/html/ -type f -exec sed -i 's|START_API_ADDRESS_STOP|'${START_API_ADDRESS_STOP}'|g' {} +
-fi
+  echo "Var ${var_name} defined, replacing ${var_value} in config"
+  find /usr/share/nginx/html/ -type f -exec sed -i 's|'${var_name}'|'${var_value}'|g' {} +
+}
 
-if [ -n "START_GATEWAY_URL_STOP" ]; then
-  echo "Gateway URL defined: ${START_GATEWAY_URL_STOP}, replacing in config"
-  find /usr/share/nginx/html/ -type f -exec sed -i 's|START_GATEWAY_URL_STOP|'${START_GATEWAY_URL_STOP}'|g' {} +
-fi
+# Loop through each environment variable
+for entry in $env_vars_with_defaults; do
+  # Split the entry into name and value
+  var_name=$(echo $entry | cut -d= -f1)
+  default_value=$(echo $entry | cut -d= -f2)
 
-if [ -n "START_WALLET_ADDRESS_STOP" ]; then
-  echo "Wallet address defined: ${START_WALLET_ADDRESS_STOP}, replacing in config"
-  find /usr/share/nginx/html/ -type f -exec sed -i 's|START_WALLET_ADDRESS_STOP|'${START_WALLET_ADDRESS_STOP}'|g' {} +
-fi
+  # Use the environment variable value if defined; otherwise, use the default
+  eval "value=\${$var_name:-$default_value}"
 
-if [ -n "START_WEGLD_ID_STOP" ]; then
-  echo "WEGLD id defined: ${START_WEGLD_ID_STOP}, replacing in config"
-  find /usr/share/nginx/html/ -type f -exec sed -i 's|START_WEGLD_ID_STOP|'${START_WEGLD_ID_STOP}'|g' {} +
-fi
+  # Execute the function with the variable name and value
+  replace_placeholder "$var_name" "$value"
+done
 
 exec nginx -g 'daemon off;'
