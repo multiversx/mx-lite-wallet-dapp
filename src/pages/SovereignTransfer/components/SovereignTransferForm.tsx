@@ -136,10 +136,7 @@ export const SovereignTransferForm = () => {
                     token: token[SovereignTransferFormFieldsEnum.token]?.value
                   });
 
-                  formik.setFieldValue(
-                    amountFieldName,
-                    amount === '1' && getIsNFT(selectedType) ? '1' : 0
-                  );
+                  formik.setFieldValue(amountFieldName, '1');
                 }
 
                 return formik.handleChange(event);
