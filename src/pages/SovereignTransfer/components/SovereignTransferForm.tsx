@@ -15,6 +15,7 @@ import {
 export const SovereignTransferForm = () => {
   const {
     formik,
+    getCanEditNftAmount,
     getIsNFT,
     getTokenAvailableAmount,
     getTokenOptionsByType,
@@ -113,6 +114,8 @@ export const SovereignTransferForm = () => {
               sendType: token[SovereignTransferFormFieldsEnum.type],
               token: token[SovereignTransferFormFieldsEnum.token]?.value
             });
+
+            const canEditNftAmount = getCanEditNftAmount(availableAmount);
 
             const tokenOptions = getTokenOptionsByType(
               token[SovereignTransferFormFieldsEnum.type]
@@ -216,6 +219,7 @@ export const SovereignTransferForm = () => {
                             'border-red-600': hasAmountError
                           }
                         )}
+                        disabled={isNFT && !canEditNftAmount}
                         data-testid={`${DataTestIdsEnum.amountInput}${index}`}
                         id={amountFieldName}
                         name={amountFieldName}
