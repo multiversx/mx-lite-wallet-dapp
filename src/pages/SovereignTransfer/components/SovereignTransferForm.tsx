@@ -144,7 +144,7 @@ export const SovereignTransferForm = () => {
 
                 formik.setFieldValue(
                   amountFieldName,
-                  amount === '1' && getIsNFT(selectedType) ? '1' : 0
+                  amount === '0' || !getIsNFT(selectedType) ? 0 : 1
                 );
               }
             };
