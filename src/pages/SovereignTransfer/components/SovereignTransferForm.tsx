@@ -121,26 +121,40 @@ export const SovereignTransferForm = () => {
               token[SovereignTransferFormFieldsEnum.type]
             );
 
+            const setDefaultAmount = ({
+              selectedType,
+              skipTokenReset
+            }: {
+              selectedType: SendTypeEnum;
+              skipTokenReset?: boolean;
+            }) => {
+              const options = getTokenOptionsByType(selectedType);
+
+              if (options.length > 0) {
+                const defaultOption = options[0];
+
+                if (!skipTokenReset) {
+                  formik.setFieldValue(tokenFieldName, defaultOption);
+                }
+
+                const amount = getTokenAvailableAmount({
+                  sendType: selectedType,
+                  token: defaultOption.value
+                });
+
+                formik.setFieldValue(
+                  amountFieldName,
+                  amount === '0' || !getIsNFT(selectedType) ? 0 : 1
+                );
+              }
+            };
+
             const handleOnSendTypeChange: (
               sendType: SendTypeEnum
             ) => ChangeEventHandler<HTMLInputElement> =
               (selectedType: SendTypeEnum) => (event) => {
                 formik.setFieldValue(typeFieldName, selectedType);
-                const options = getTokenOptionsByType(selectedType);
-
-                if (options.length > 0) {
-                  formik.setFieldValue(tokenFieldName, options[0]);
-
-                  const amount = getTokenAvailableAmount({
-                    sendType: token[SovereignTransferFormFieldsEnum.type],
-                    token: token[SovereignTransferFormFieldsEnum.token]?.value
-                  });
-
-                  formik.setFieldValue(
-                    amountFieldName,
-                    amount === '1' && getIsNFT(selectedType) ? '1' : 0
-                  );
-                }
+                setDefaultAmount({ selectedType });
 
                 return formik.handleChange(event);
               };
@@ -209,6 +223,7 @@ export const SovereignTransferForm = () => {
                         data-testid={`${DataTestIdsEnum.amountInput}${index}`}
                         id={amountFieldName}
                         name={amountFieldName}
+                        min={0}
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         placeholder='Enter amount'
@@ -239,9 +254,15 @@ export const SovereignTransferForm = () => {
                         isLoading={isLoading}
                         options={tokenOptions}
                         name={tokenFieldName}
-                        onChange={(option) =>
-                          formik.setFieldValue(tokenFieldName, option)
-                        }
+                        onChange={(option) => {
+                          formik.setFieldValue(tokenFieldName, option);
+                          setDefaultAmount({
+                            selectedType: token[
+                              SovereignTransferFormFieldsEnum.type
+                            ] as SendTypeEnum,
+                            skipTokenReset: true
+                          });
+                        }}
                         onBlur={() =>
                           formik.setFieldTouched(tokenFieldName, true)
                         }
