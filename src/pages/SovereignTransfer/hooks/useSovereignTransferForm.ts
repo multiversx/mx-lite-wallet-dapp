@@ -151,12 +151,8 @@ export const useSovereignTransferForm = () => {
     formik.setFieldValue(SovereignTransferFormFieldsEnum.tokens, formTokens);
   };
 
-  const getCanEditNftAmount = (availableAmount: number | string) =>
-    new BigNumber(availableAmount).isGreaterThan(1);
-
   return {
     formik,
-    getCanEditNftAmount,
     getIsNFT,
     getSelectedToken,
     getTokenAvailableAmount,
