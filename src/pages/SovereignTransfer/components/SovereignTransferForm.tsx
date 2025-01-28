@@ -128,9 +128,14 @@ export const SovereignTransferForm = () => {
                 if (options.length > 0) {
                   formik.setFieldValue(tokenFieldName, options[0]);
 
+                  const amount = getTokenAvailableAmount({
+                    sendType: token[SovereignTransferFormFieldsEnum.type],
+                    token: token[SovereignTransferFormFieldsEnum.token]?.value
+                  });
+
                   formik.setFieldValue(
                     amountFieldName,
-                    getIsNFT(selectedType) ? '1' : 0
+                    amount === '1' && getIsNFT(selectedType) ? '1' : 0
                   );
                 }
 
