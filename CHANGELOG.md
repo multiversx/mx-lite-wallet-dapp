@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed sovereign contract address in register token](https://github.com/multiversx/mx-lite-wallet-dapp/pull/72)
+
 ## [[1.0.4](https://github.com/multiversx/mx-lite-wallet-dapp/pull/71)] - 2025-01-30
 
 - [Fixed sovereign transfer of NFT amount is disabled and 0](https://github.com/multiversx/mx-lite-wallet-dapp/pull/66)
