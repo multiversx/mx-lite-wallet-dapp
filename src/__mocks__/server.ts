@@ -16,6 +16,7 @@ import {
   keystoreWalletCollections,
   pendingTransactionKeystoreWallet
 } from './data';
+import { issueContract } from './data/issueContract';
 import { mockResponse } from './serverUtils';
 
 export const handlers = [
@@ -67,6 +68,10 @@ export const handlers = [
   http.get(
     `${testNetwork.apiAddress}/accounts/${pemAccountGuarded.address}/nfts`,
     mockResponse(pemWalletNfts)
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/accounts/${issueContract.address}`,
+    mockResponse(issueContract)
   ),
   http.get(
     `${testNetwork.extrasApiAddress}/faucet/settings`,

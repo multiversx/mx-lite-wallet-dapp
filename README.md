@@ -1,4 +1,3 @@
-
 # MultiversX Lite Wallet DApp
 
 [![Project Status: Not Production Ready](https://img.shields.io/badge/status-not--production--ready-red)](https://github.com/your-repo)
@@ -6,7 +5,6 @@
 🚧 **Notice: This project is not production-ready.** 🚧
 
 > This repository is currently under development and not recommended for production use. Expect frequent changes and potential instability. Contributions and feedback are welcome, but please use this code at your own risk in a non-production environment.
-
 
 The **MultiversX Lite Wallet DApp**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and transaction signing.
@@ -33,7 +31,6 @@ yarn  install
 
 #### Step 2. Create the main config file
 
-
 Go to `src/config` folder and edit the `config.sovereign.ts` file.
 Create a new `index.ts` file with the contents of `config.sovereign.ts`.
 
@@ -42,12 +39,12 @@ Create a new `index.ts` file with the contents of `config.sovereign.ts`.
 In the project folder run:
 
 ```bash
-yarn  start:sovereign
-yarn  start:devnet
-yarn  start:testnet
-yarn  start:mainnet
+yarn  start-sovereign
+yarn  start-devnet
+yarn  start-testnet
+yarn  start-mainnet
 ```
-  
+
 This will start the React app in development mode, using the configs found in the `vite.config.ts` file.
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -63,10 +60,10 @@ A build of the app is necessary to deploy for testing purposes or production use
 To build the project run:
 
 ```bash
-yarn  build:sovereign
-yarn  build:devnet
-yarn  build:testnet
-yarn  build:mainnet
+yarn  build-sovereign
+yarn  build-devnet
+yarn  build-testnet
+yarn  build-mainnet
 ```
 
 > **NOTE**
@@ -76,9 +73,10 @@ yarn  build:mainnet
 
 #### Basic user journey
 
-The wallet is a dApp that allows the user to view his account balance and assets, send transactions, and sign transaction requests coming from another dApp. 
-To achieve these goals, it has public pages and private pages. 
-1. The user journey starts while not logged in, and accessing the home page (`/`). 
+The wallet is a dApp that allows the user to view his account balance and assets, send transactions, and sign transaction requests coming from another dApp.
+To achieve these goals, it has public pages and private pages.
+
+1. The user journey starts while not logged in, and accessing the home page (`/`).
 2. The user clicks Connect and accesses the `/unlock` page
 3. He chooses one of the login options and once done, gets redirected to the `/dashboard`, where he can check his balance and assets
 4. From here, he can press the Send button to go to the `/send` page and make a transaction
@@ -96,7 +94,7 @@ flowchart TB;
 	subgraph private
 	/dashboard -- 4. press Send --> /send
 	end
-    
+
     id0{Start} -- 1. --> /
 
 	public --> id1([access page and is logged in]) -- is redirected --> /dashboard
@@ -106,8 +104,8 @@ flowchart TB;
 ```
 
 #### File login transaction signing
-There is a difference in the user journey when the user chooses to login with a file-based provider (pem or keystore). Since the private key is stored in local memory, the user must provide the same file on every page refresh. If the user provides a different file, the login will not succeed. If the user will cancel the re-login pricess he will be logged out and redirected to the `/unlock` page.
 
+There is a difference in the user journey when the user chooses to login with a file-based provider (pem or keystore). Since the private key is stored in local memory, the user must provide the same file on every page refresh. If the user provides a different file, the login will not succeed. If the user will cancel the re-login pricess he will be logged out and redirected to the `/unlock` page.
 
 ```mermaid
 
@@ -123,17 +121,22 @@ flowchart TB;
 	/logout -- 4. is redirected --> /unlock
 
 ```
+
 #### Hook flow
+
 The web-wallet allows the user to connect a dApp and sign transactions. The dApp can make several requests to the wallet, called hooks:
+
 - login
 - logout
 - signTransaction
 
 These requests can be in two ways:
+
 1. The dApp makes a URL redirect to the wallet in the same tab. In this case the web-wallet will redirect back to the dApp after the action is completed.
 2. The dApp opens the web wallet in a new tab as a child tab. In this case the web-wallet will send a post message to the parent tab with the result of the action.
 
 The same principles apply to all hooks:
+
 - The dApp sends a request to the wallet
 - The wallet validates the request
 - If the request is invalid, nothing happens
@@ -150,8 +153,6 @@ flowchart TB;
 ```
 
 With the PostMessageListener, the HookOutcomeComponent is skipped and the user is redirected to appropriate page.
-
-
 
 ### Installation and running
 
