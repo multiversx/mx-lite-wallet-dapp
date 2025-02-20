@@ -8,7 +8,7 @@ COPY . .
 
 # Install dependencies
 RUN yarn install
-RUN yarn build:placeholder
+RUN yarn build-placeholder
 
 # Production image
 FROM nginx:alpine

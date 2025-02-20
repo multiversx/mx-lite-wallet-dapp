@@ -14,8 +14,14 @@ import { useRegisterTokenForm } from '../hooks';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
 export const RegisterTokenForm = () => {
-  const { formik, handleOnSendTypeChange, isLoading, isNFT, tokenOptions } =
-    useRegisterTokenForm();
+  const {
+    formik,
+    handleOnSendTypeChange,
+    handleChainChange,
+    isLoading,
+    isNFT,
+    tokenOptions
+  } = useRegisterTokenForm();
 
   const chainOptions = [
     {
@@ -123,12 +129,7 @@ export const RegisterTokenForm = () => {
               className='text-sm text-gray-700 placeholder-gray-400'
               options={chainOptions}
               name={RegisterTokenFormFieldsEnum.chainId}
-              onChange={(option) =>
-                formik.setFieldValue(
-                  RegisterTokenFormFieldsEnum.chainId,
-                  option
-                )
-              }
+              onChange={handleChainChange}
               onBlur={() =>
                 formik.setFieldTouched(
                   RegisterTokenFormFieldsEnum.chainId,
