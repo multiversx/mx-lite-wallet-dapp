@@ -38,8 +38,7 @@ export const networks: NetworkType[] = [
     sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
     sovereignContractAddress: '',
     walletAddress: 'https://wallet.voyager1.dev',
-    WEGLDid: 'WEGLD-bd4d79',
-    hrp: 'vibe'
+    WEGLDid: 'WEGLD-bd4d79'
   },
   {
     default: false,
