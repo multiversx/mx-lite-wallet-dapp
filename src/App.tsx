@@ -18,8 +18,10 @@ import { BatchTransactionsContextProvider } from 'wrappers';
 import { useSetupHrp } from './hooks';
 import { networkSelector } from './redux/selectors';
 import { persistor, store } from './redux/store';
+
 const AppContent = () => {
-  useSetupHrp(activeNetwork.hrp);
+  const { activeNetwork } = useSelector(networkSelector);
+  useSetupHrp();
 
   return (
     <DappProvider
