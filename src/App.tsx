@@ -15,11 +15,11 @@ import { provider } from 'helpers/app';
 import { PageNotFound, Unlock } from 'pages';
 import { routeNames, routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
+import { useSetupHrp } from './hooks';
 import { networkSelector } from './redux/selectors';
 import { persistor, store } from './redux/store';
-
 const AppContent = () => {
-  const { activeNetwork } = useSelector(networkSelector);
+  useSetupHrp(activeNetwork.hrp);
 
   return (
     <DappProvider

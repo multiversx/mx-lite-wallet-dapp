@@ -13,6 +13,7 @@ export interface NetworkType {
   sampleAuthenticatedDomains: string[];
   sovereignContractAddress: string;
   walletAddress: string;
+  hrp?: string;
 }
 
 interface NetworkSliceType {
