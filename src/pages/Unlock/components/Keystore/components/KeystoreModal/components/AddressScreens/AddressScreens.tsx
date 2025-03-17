@@ -58,12 +58,20 @@ export const AddressScreens = ({
     handleSelectAddress(address);
   };
 
+  const onGoToSpecificPage = (pageIndex: number) => {
+    const newStartIndex = pageIndex * defaultAddressesPerPage;
+    setAccounts([]);
+    onSelectAddress(null);
+    handleSelectAddress({ address: '', index: newStartIndex });
+  };
+
   return (
     <AddressTable
       accounts={accounts}
       loading={false}
       onGoToNextPage={onGoToNextPage}
       onGoToPrevPage={onGoToPrevPage}
+      onGoToSpecificPage={onGoToSpecificPage}
       onSelectAddress={onSelectAddress}
       startIndex={startIndex}
       selectedAddress={selectedAddress?.address}
