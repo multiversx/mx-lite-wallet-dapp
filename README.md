@@ -8,7 +8,6 @@
 
 The **MultiversX Lite Wallet DApp**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and transaction signing.
-See [Lite Wallet dApp](https://lite-wallet-dapp.multiversx.com/) for live demo.
 
 ## Requirements
 
@@ -88,18 +87,18 @@ flowchart TB;
 	subgraph public
 	/unlock
 	/
-	/ -- 2. Connect --> /unlock
+	/ -- [2 Connect] --> /unlock
 	end
 
 	subgraph private
-	/dashboard -- 4. press Send --> /send
+	/dashboard -- [4 press Send] --> /send
 	end
 
-    id0{Start} -- 1. --> /
+    id0{Start} -- [1] --> /
 
-	public --> id1([access page and is logged in]) -- is redirected --> /dashboard
-	/unlock -- 3. Perform login --> /dashboard
-	private -->  id2{End} -- 5. press Close --> /logout -- is redirected--> /unlock
+	public --> id1([access page and is logged in]) -- [is redirected] --> /dashboard
+	/unlock -- [3 Perform login] --> /dashboard
+	private -->  id2{End} -- [5 press Close] --> /logout -- [is redirected] --> /unlock
 
 ```
 
@@ -110,15 +109,15 @@ There is a difference in the user journey when the user chooses to login with a 
 ```mermaid
 
 flowchart TB;
-    id5{Start} -- user is logged in --> /dashboard
-    /dashboard -- 1. press send --> /send
-    /dashboard --> id4((Refresh page)) -- 1 .press send --> id0{`PrivateKeyCheckWrapper`}
-	id0{`PrivateKeyCheckWrapper`} -- 2. --> id1([other login]) --> /send
-	id0{`PrivateKeyCheckWrapper`} -- 2. --> id2([pem or keystore login]) --> id3{`PemModal`}
-	id3{`Pem` or `KeystoreModal`} -- 3. provide same file --> /send
-	id3{`Pem` or `KeystoreModal`} -- provide different file - retry --> id3{`Pem` or `KeystoreModal`}
-	id3{`Pem` or `KeystoreModal`} -- 3. cancel login --> /logout
-	/logout -- 4. is redirected --> /unlock
+    id5{Start} -- [user is logged in] --> /dashboard
+    /dashboard -- [1 press send] --> /send
+    /dashboard --> id4((Refresh page)) -- [1 press send] --> id0{PrivateKeyCheckWrapper}
+	id0{PrivateKeyCheckWrapper} -- [2] --> id1([other login]) --> /send
+	id0{PrivateKeyCheckWrapper} -- [2] --> id2([pem or keystore login]) --> id3{`PemModal`}
+	id3{Pem or KeystoreModal} -- [3 provide same file] --> /send
+	id3{Pem or KeystoreModal} -- [provide different file & <br/> retry] --> id3{Pem or KeystoreModal}
+	id3{Pem or KeystoreModal} -- [3 cancel login] --> /logout
+	/logout -- [4 is redirected] --> /unlock
 
 ```
 
@@ -148,8 +147,8 @@ Below is an example of the login hook flow:
 
 ```mermaid
 flowchart TB;
-    id1{Start} -- 1. dApp redirects to wallet --> /hook/login?data&callbackUrl -- 2. hook component gets mounted --> id2{data validation} -- 3. data is saved in redux store --> HookOutcome -- 4. redirect --> /unlock -- 5. response --> https://callbackUrl?result
-	id2{data validation} -- 3. data is invalid --> noRedirect
+    id1{Start} -- [1 dApp redirects to wallet] --> /hook/login?data&callbackUrl -- [2 hook component <br/> gets mounted] --> id2{data validation} -- [3 data is saved in <br/> redux store] --> HookOutcome -- [4 redirect] --> /unlock -- [5 response] --> https//callbackUrl?result
+	id2{data validation} -- [3 data is invalid] --> noRedirect
 ```
 
 With the PostMessageListener, the HookOutcomeComponent is skipped and the user is redirected to appropriate page.
