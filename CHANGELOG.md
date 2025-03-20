@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed README](https://github.com/multiversx/mx-lite-wallet-dapp/pull/78)
+
 ## [[1.0.5](https://github.com/multiversx/mx-lite-wallet-dapp/pull/74)] - 2025-02-20
 
 - [Fixed sovereign contract address in register token](https://github.com/multiversx/mx-lite-wallet-dapp/pull/73)
