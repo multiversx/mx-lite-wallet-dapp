@@ -5,7 +5,7 @@ import { SingleValue } from 'react-select';
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { networks } from 'config';
-import { capitalize } from 'helpers';
+import { capitalize, addressIsErd } from 'helpers';
 import { useSendTransactions } from 'hooks';
 import { addressIsValid, useGetAccountInfo } from 'lib';
 import {
@@ -71,7 +71,7 @@ export const useRegisterTokenForm = () => {
         .test(
           'addressIsValid',
           'Address is invalid',
-          (value) => !value || addressIsValid(value)
+          (value) => !value || addressIsValid(value) || addressIsErd(value)
         )
         .required('Contract is required'),
       [RegisterTokenFormFieldsEnum.token]: object()

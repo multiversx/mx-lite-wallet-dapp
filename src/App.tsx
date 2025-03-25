@@ -18,6 +18,7 @@ import { PageNotFound, Unlock } from 'pages';
 import { setIsWebview } from 'redux/slices';
 import { routeNames, routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
+import { useSetupHrp } from './hooks';
 import { networkSelector } from './redux/selectors';
 import { persistor, store } from './redux/store';
 
@@ -25,6 +26,7 @@ const isWebview = Boolean(getWebviewToken());
 
 const AppContent = () => {
   const { activeNetwork } = useSelector(networkSelector);
+  useSetupHrp();
 
   const dispatch = useDispatch();
 
