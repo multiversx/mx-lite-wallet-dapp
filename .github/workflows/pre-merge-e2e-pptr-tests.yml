@@ -30,7 +30,7 @@ jobs:
       - name: Setup yarn
         run: npm install -g yarn
       - name: Get node_modules cache
-        uses: actions/cache@v4.0.0
+        uses: actions/cache@v4
         id: node_modules
         with:
           path: |
