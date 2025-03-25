@@ -59,10 +59,9 @@ export const AddressScreens = ({
   };
 
   const onGoToSpecificPage = (pageIndex: number) => {
-    const newStartIndex = pageIndex * defaultAddressesPerPage;
     setAccounts([]);
     onSelectAddress(null);
-    handleSelectAddress({ address: '', index: newStartIndex });
+    handleSelectAddress({ address: '', index: pageIndex });
   };
 
   return (
