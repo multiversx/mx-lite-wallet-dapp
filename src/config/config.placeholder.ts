@@ -26,5 +26,5 @@ export const networks: NetworkType[] = [
     sovereignContractAddress: 'START2_SOVEREIGN_CONTRACT_ADDR_STOP2',
     walletAddress: 'START2_WALLET_ADDRESS_STOP2',
     WEGLDid: 'START2_WEGLD_ID_STOP2'
-  }  
+  }
 ];

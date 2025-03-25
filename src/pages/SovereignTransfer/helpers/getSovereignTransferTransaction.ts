@@ -43,10 +43,10 @@ export const getSovereignTransferTransaction = ({
 
   return factory.createTransactionForExecute({
     sender: new Address(address),
-    contract: Address.fromBech32(values.contract),
+    contract: Address.newFromBech32(values.contract),
     function: 'deposit',
     gasLimit: BigInt(SOVEREIGN_TRANSFER_GAS_LIMIT),
-    arguments: [new AddressValue(Address.fromBech32(values.receiver))],
+    arguments: [new AddressValue(Address.newFromBech32(values.receiver))],
     tokenTransfers: values.tokens.map((token) => {
       const realToken = tokens.find(
         ({ identifier }) => identifier === token.token?.value
