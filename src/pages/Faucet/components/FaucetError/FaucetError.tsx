@@ -6,7 +6,7 @@ export const FaucetError = ({ message }: { message: string }) => (
   <div className='flex flex-col items-center pb-5'>
     <h1
       className='text-2xl whitespace-nowrap mt-5'
-      data-testid={DataTestIdsEnum.modalTitle}
+      data-testid={DataTestIdsEnum.faucetTitle}
     >
       Failed
     </h1>
@@ -17,7 +17,7 @@ export const FaucetError = ({ message }: { message: string }) => (
     />
     <p
       className='text-sm text-red-500 mb-5'
-      data-testid={DataTestIdsEnum.modalSubtitle}
+      data-testid={DataTestIdsEnum.faucetErrorMessage}
     >
       {message}
     </p>

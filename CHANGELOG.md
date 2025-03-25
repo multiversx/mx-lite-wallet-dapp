@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added ability to open faucet and login via webview](https://github.com/multiversx/mx-lite-wallet-dapp/pull/79)
 - [Fixed README](https://github.com/multiversx/mx-lite-wallet-dapp/pull/78)
 - [Added ability to setup custom HRP](https://github.com/multiversx/mx-lite-wallet-dapp/pull/75)
 

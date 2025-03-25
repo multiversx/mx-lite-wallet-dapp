@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getIsInWebview } from 'helpers/app';
 import {
   useLogout,
   useReplyToDapp,
@@ -11,6 +12,8 @@ import {
   getLoginHookData,
   getSignHookData,
   getSignMessageHookData,
+  removeAllTransactionsToSign,
+  removeAllSignedTransactions,
   Transaction,
   useGetLoginInfo
 } from 'lib';
@@ -28,7 +31,6 @@ import {
   getEventOrigin,
   getIsReload
 } from './helpers';
-
 let isListenerAdded = false;
 let isHandShakeSent = false;
 let handshakeEstablished = false;
@@ -47,12 +49,13 @@ export const PostMessageListener = () => {
   const getData = getSignHookData(schema);
   const nativeAuthToken = tokenLogin?.nativeAuthToken;
   const isRelogin = isLoggedIn && !nativeAuthToken;
+  const isInWebview = getIsInWebview();
 
   const messageListener = async (event: MessageEvent<RequestMessageType>) => {
     const callbackUrl = getEventOrigin(event);
     const isFromSelf = callbackUrl === window.location.origin;
 
-    if (isFromSelf) {
+    if (isFromSelf && !isInWebview) {
       return;
     }
 
@@ -63,7 +66,7 @@ export const PostMessageListener = () => {
       // handshake must be established for all other requests
       handshakeEstablished;
 
-    if (!isHandshakeEstablished) {
+    if (!isHandshakeEstablished && !isInWebview) {
       console.error('Handshake could not be established.');
       return;
     }
@@ -163,6 +166,26 @@ export const PostMessageListener = () => {
 
       case WindowProviderRequestEnums.logoutRequest: {
         navigate(routeNames.logout);
+        break;
+      }
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // Use case
+      // A dApp (ex: xAlias) implements hub and becomes a parent of an iframe
+      // Web-wallet is loaded in the iframe as a child
+      // Web-wallet needs to listen to post message response from parent dApp when eg. signing a message
+      case WindowProviderResponseEnums.cancelResponse:
+      case WindowProviderRequestEnums.cancelAction: {
+        if (isInWebview) {
+          removeAllTransactionsToSign();
+          removeAllSignedTransactions();
+
+          return;
+        }
+
+        replyWithCancelled({ shouldResetHook: false });
+
         break;
       }
 

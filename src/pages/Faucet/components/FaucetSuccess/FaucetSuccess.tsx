@@ -6,7 +6,7 @@ export const FaucetSuccess = ({ token }: { token: string }) => (
   <div className='flex flex-col items-center pb-5'>
     <h1
       className='text-2xl whitespace-nowrap mt-5'
-      data-testid={DataTestIdsEnum.modalTitle}
+      data-testid={DataTestIdsEnum.faucetTitle}
     >
       Success
     </h1>
@@ -17,7 +17,7 @@ export const FaucetSuccess = ({ token }: { token: string }) => (
     />
     <p
       className='text-sm text-green-500 mb-5'
-      data-testid={DataTestIdsEnum.modalSubtitle}
+      data-testid={DataTestIdsEnum.faucetSuccessMessage}
     >
       {token} have been sent to your address.
     </p>
