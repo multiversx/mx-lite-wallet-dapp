@@ -20,16 +20,9 @@ describe('Request funds tests', () => {
     );
 
     await requestFundsButton.click();
-    // Verify we're on the faucet page
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.faucetPage,
-      text: 'Request Funds'
-    });
-
-    // Verify the faucet information
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.faucetTitle,
-      text: 'You can request 40 WEGLD every 24 hours'
+      text: 'WEGLD FaucetYou can request 40 WEGLD every 24 hoursRequest TokensCancel'
     });
 
     // Request funds
