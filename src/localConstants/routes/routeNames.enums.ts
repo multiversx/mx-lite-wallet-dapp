@@ -18,7 +18,8 @@ export enum RouteNamesEnum {
   issueToken = '/issue-token',
   issueCollection = '/issue-collection',
   createNft = '/create-nft',
-  registerToken = '/register-token'
+  registerToken = '/register-token',
+  faucet = '/faucet'
 }
 
 export enum HooksPageEnum {

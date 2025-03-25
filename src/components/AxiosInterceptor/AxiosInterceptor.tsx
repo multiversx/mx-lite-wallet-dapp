@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useGetAccount } from 'lib';
+import { networkSelector } from 'redux/selectors';
 import {
   handleError,
   useSetNativeAuthInterceptors,
@@ -7,6 +9,7 @@ import {
 } from './helpers';
 
 export const AxiosInterceptor = ({ children }: React.PropsWithChildren) => {
+  const { accessToken: hasAccessToken } = useSelector(networkSelector);
   const { setNativeAuthTokenInterceptors, nativeAuthToken } =
     useSetNativeAuthInterceptors();
   const { address } = useGetAccount();

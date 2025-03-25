@@ -6,7 +6,12 @@ import {
 } from 'components';
 import { CUSTOM_TOAST_DEFAULT_DURATION } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
-import { PostMessageListener, SendModals, SignModals } from './components';
+import {
+  PostMessageListener,
+  SendModals,
+  SignModals,
+  RedirectWebviewLogin
+} from './components';
 
 export const Utilities = () => {
   const { type: hook } = useSelector(hookSelector);
@@ -24,6 +29,7 @@ export const Utilities = () => {
       <SignTransactionsModals />
       <PostMessageListener />
       <AxiosInterceptorContext.Listener />
+      <RedirectWebviewLogin />
     </>
   );
 };

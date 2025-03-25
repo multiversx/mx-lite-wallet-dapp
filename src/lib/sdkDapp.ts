@@ -1,3 +1,4 @@
+import { nativeAuth } from '@multiversx/sdk-dapp/services/nativeAuth/nativeAuth';
 import { replyToDapp as originalReplyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';
 import { ExtendedReplyWithPostMessageType, ReplyWithRedirectType } from 'types';
 
@@ -16,7 +17,9 @@ export { useLoginService } from '@multiversx/sdk-dapp/hooks/login/useLoginServic
 export { decodeNativeAuthToken } from '@multiversx/sdk-dapp/services/nativeAuth/helpers/decodeNativeAuthToken';
 export { getIsNativeAuthSingingForbidden } from '@multiversx/sdk-dapp/services/nativeAuth/helpers/getIsNativeAuthSingingForbidden';
 export { decodeLoginToken } from '@multiversx/sdk-dapp/services/nativeAuth/helpers/decodeLoginToken';
-import { nativeAuth } from '@multiversx/sdk-dapp/services/nativeAuth/nativeAuth';
+export { getWebviewToken } from '@multiversx/sdk-dapp/utils/account/getWebviewToken';
+export { getAccountProviderType } from '@multiversx/sdk-dapp/utils/account/getAccountProviderType';
+
 const { getToken } = nativeAuth();
 export { getToken };
 export { loginWithExternalProvider } from '@multiversx/sdk-dapp/utils/account/loginWithExternalProvider';
