@@ -4,7 +4,7 @@ import { Copy, MxLink } from 'components';
 import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-import { Faucet } from 'pages/Faucet';
+import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import {
   explorerAddressSelector,
   useSdkDappSelector
@@ -66,7 +66,7 @@ export const Account = () => {
             >
               Open in Explorer
             </a>
-            {isSovereign && <Faucet />}
+            {isSovereign && <FaucetButton />}
             <MxLink
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.sendBtn}

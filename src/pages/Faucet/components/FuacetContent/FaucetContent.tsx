@@ -1,9 +1,7 @@
 import { useRef, useState } from 'react';
-
 import { Loader } from 'components';
 import { getEgldLabel } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-
 import {
   useGetFaucetSettingsQuery,
   useRequestFundsMutation
@@ -12,7 +10,7 @@ import { FaucetError } from '../FaucetError';
 import { FaucetScreen } from '../FaucetScreen';
 import { FaucetSuccess } from '../FaucetSuccess';
 
-export const FaucetModal = () => {
+export const FaucetContent = () => {
   const ref = useRef(null);
   const [getFunds, { isSuccess }] = useRequestFundsMutation();
   const [fundsReceived, setFundsReceived] = useState(false);
@@ -45,7 +43,7 @@ export const FaucetModal = () => {
       <div className='flex flex-col'>
         <h1
           className='text-2xl whitespace-nowrap mt-2'
-          data-testid={DataTestIdsEnum.modalTitle}
+          data-testid={DataTestIdsEnum.faucetTitle}
         >
           {egldLabel} Faucet
         </h1>

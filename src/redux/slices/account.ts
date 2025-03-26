@@ -19,6 +19,7 @@ interface AccountSliceType {
    */
   externalNativeAuthToken?: string;
   addressIndex: number | null;
+  accessTokenRedirectRoute?: string;
   isWebview?: boolean;
 }
 
@@ -79,6 +80,18 @@ export const accountSlice = createSlice({
       action: PayloadAction<AccountSliceType['address']>
     ) => {
       state.address = action.payload;
+    },
+    setAccessTokenRedirectRoute: (
+      state: AccountSliceType,
+      action: PayloadAction<string>
+    ) => {
+      state.accessTokenRedirectRoute = action.payload;
+    },
+    clearAccessTokenRedirectRoute: (state: AccountSliceType) => {
+      state.accessTokenRedirectRoute = '';
+    },
+    setIsWebview: (state: AccountSliceType, action: PayloadAction<boolean>) => {
+      state.isWebview = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -97,7 +110,10 @@ export const {
   setToken,
   setExternalNativeAuthToken,
   setAddressIndex,
-  setAccountAddress
+  setAccountAddress,
+  setAccessTokenRedirectRoute,
+  clearAccessTokenRedirectRoute,
+  setIsWebview
 } = accountSlice.actions;
 
 export const accountReducer = accountSlice.reducer;

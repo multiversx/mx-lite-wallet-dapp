@@ -1,40 +1,42 @@
 import { useSelector } from 'react-redux';
-import { Button, ModalContainer, PrivateKeyCheckWrapper } from 'components';
+import { useNavigate } from 'react-router-dom';
+import { Button, PrivateKeyCheckWrapper } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { networkSelector } from 'redux/selectors';
-import { FaucetModal } from './components/FaucetModal';
-import { useModal } from '../../hooks';
-
+import { routeNames } from 'routes';
+import { FaucetContent } from './components/FuacetContent/FaucetContent';
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 
 export const Faucet = () => {
-  const { show, handleShow, handleClose } = useModal();
   const { activeNetwork } = useSelector(networkSelector);
   const isSovereign = activeNetwork.id === 'sovereign';
+  const navigate = useNavigate();
 
   if (!sitekey && !isSovereign) {
     // Faucet does not work without google recaptcha key, unless recaptchaBypass is specified (sovereign)
     return null;
   }
 
+  const handleFaucetCloseFlow = () => {
+    navigate(routeNames.dashboard);
+  };
+
   return (
-    <>
-      <Button
-        className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-        data-testid={DataTestIdsEnum.faucetBtn}
-        onClick={handleShow}
+    <PrivateKeyCheckWrapper>
+      <div
+        className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'
+        data-testid={DataTestIdsEnum.faucetPage}
       >
-        Request funds
-      </Button>
-      <PrivateKeyCheckWrapper>
-        <ModalContainer
-          className='login-modal p-6'
-          onClose={handleClose}
-          visible={show}
+        <FaucetContent />
+        <Button
+          data-testid={DataTestIdsEnum.cancelFaucetBtn}
+          className='mx-auto text-blue-600 text-sm'
+          id='closeButton'
+          onClick={handleFaucetCloseFlow}
         >
-          <FaucetModal />
-        </ModalContainer>
-      </PrivateKeyCheckWrapper>
-    </>
+          Cancel
+        </Button>
+      </div>
+    </PrivateKeyCheckWrapper>
   );
 };

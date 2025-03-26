@@ -15,7 +15,8 @@ import {
   Sign,
   SovereignTransfer,
   RegisterToken,
-  IssueNft
+  IssueNft,
+  Faucet
 } from 'pages';
 import { RouteType } from 'types/sdkDapp.types';
 import {
@@ -129,6 +130,15 @@ const routesObject: Record<
     component: () => (
       <PrivateKeyCheckWrapper>
         <RegisterToken />
+      </PrivateKeyCheckWrapper>
+    )
+  },
+  [RouteNamesEnum.faucet]: {
+    path: RouteNamesEnum.faucet,
+    title: '',
+    component: () => (
+      <PrivateKeyCheckWrapper>
+        <Faucet />
       </PrivateKeyCheckWrapper>
     )
   },
