@@ -88,5 +88,9 @@ export enum DataTestIdsEnum {
   transactionToastTitle = 'transactionToastTitle',
   unlockPage = 'unlockPage',
   userAddress = 'userAddress',
-  walletFile = 'walletFile'
+  walletFile = 'walletFile',
+  inputFile = 'input[type=file]',
+  sovereign = 'sovereign',
+  testnet = 'testnet',
+  amountInput0 = 'amountInput0'
 }

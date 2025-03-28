@@ -1,0 +1,77 @@
+name: Playwright Tests
+on:
+  pull_request:
+    branches: [ main, development ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.push.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-and-test:
+    runs-on: runner-dapp
+    name: Deploy and Run Regression E2E Tests
+    timeout-minutes: 90
+    steps:
+      # Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      # Setup Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Clean up previous builds and dependencies
+      - name: Setup yarn
+        run: npm install -g yarn
+      - name: Clean up
+        run: |
+          rm -rf node_modules
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: yarn install
+
+      # Build for Devnet
+      - name: Build for Devnet
+        run: yarn build-devnet
+
+      # Install Playwright Browsers
+      - name: Install Playwright Browsers
+        run: |
+         n=0
+         until [ "$n" -ge 10 ]
+         do
+          if [ "$n" -eq 2 ]; then
+            echo "Attempt $n failed. Killing existing apt/dpkg processes before retrying..."
+            sudo killall apt-get || true
+            sudo killall dpkg || true
+            sudo rm -rf /var/lib/dpkg/lock
+            sudo rm -rf /var/lib/dpkg/lock-frontend
+            sudo rm -rf /var/lib/apt/lists/lock
+            sudo dpkg --configure -a
+            echo "Cleaned up system locks. Retrying installation..."
+          fi
+
+          yarn playwright install --with-deps && break
+          n=$((n+1))
+          echo "Attempt $n failed. Retrying in 10 seconds..."
+          sleep 10
+         done
+
+         if [ "$n" -eq 10 ]; then
+          echo "Failed to install Playwright browsers after 10 attempts."
+          exit 1
+         fi
+      
+      - name: Run Playwright Tests
+        run: NODE_ENV=test yarn playwright test --workers=10
+
+      # Upload Playwright test report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 5
