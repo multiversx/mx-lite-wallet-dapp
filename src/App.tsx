@@ -1,4 +1,5 @@
-import { Provider, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -12,19 +13,33 @@ import {
 
 import { apiTimeout, walletConnectV2ProjectId } from 'config';
 import { provider } from 'helpers/app';
+import { getWebviewToken } from 'lib';
 import { PageNotFound, Unlock } from 'pages';
+import { setIsWebview } from 'redux/slices';
 import { routeNames, routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
+import { useSetupHrp } from './hooks';
 import { networkSelector } from './redux/selectors';
 import { persistor, store } from './redux/store';
 
+const isWebview = Boolean(getWebviewToken());
+
 const AppContent = () => {
   const { activeNetwork } = useSelector(networkSelector);
+  useSetupHrp();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isWebview) {
+      dispatch(setIsWebview(true));
+    }
+  }, [isWebview]);
 
   return (
     <DappProvider
       environment={activeNetwork.id}
-      externalProvider={provider}
+      externalProvider={isWebview ? undefined : provider}
       customNetworkConfig={{
         name: 'customConfig',
         apiAddress: activeNetwork.apiAddress,
@@ -32,7 +47,8 @@ const AppContent = () => {
         walletConnectV2ProjectId
       }}
       dappConfig={{
-        logoutRoute: routeNames.unlock
+        logoutRoute: routeNames.unlock,
+        shouldUseWebViewProvider: isWebview
       }}
       customComponents={{
         transactionTracker: {

@@ -1,7 +1,10 @@
 import { useSelector } from 'react-redux';
 import { useGetAccount } from 'lib';
 import { HooksEnum } from 'localConstants';
-import { hookSelector } from 'redux/selectors';
+import {
+  accessTokenRedirectRouteSelector,
+  hookSelector
+} from 'redux/selectors';
 import { routeNames } from 'routes';
 
 export interface UseRedirectPathnameProps {
@@ -11,10 +14,12 @@ export interface UseRedirectPathnameProps {
 
 export const useRedirectPathname = () => {
   const { type: hook } = useSelector(hookSelector);
-
+  const accessTokenRedirectRoute = useSelector(
+    accessTokenRedirectRouteSelector
+  );
   const { address } = useGetAccount();
   const isLoggedIn = Boolean(address);
-  const defaultRedirect = routeNames.dashboard;
+  const defaultRedirect = accessTokenRedirectRoute || routeNames.dashboard;
 
   const getRedirectPathname = () => {
     switch (hook) {
