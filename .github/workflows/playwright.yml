@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   deploy-and-test:
-    runs-on: runner-dapp
+    runs-on: ubuntu-latest
     name: Deploy and Run Regression E2E Tests
     timeout-minutes: 90
     steps:
