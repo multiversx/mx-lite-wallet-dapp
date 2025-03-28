@@ -12,7 +12,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run vite preview',
     timeout: 120 * 1000,
-    reuseExistingServer: !process.env.CI
+    reuseExistingServer: true
   },
   use: {
     baseURL: 'https://localhost:3000',
