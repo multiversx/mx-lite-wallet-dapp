@@ -10,7 +10,7 @@ export default defineConfig({
   reporter: 'html',
   timeout: 75000,
   webServer: {
-    command: 'npm run start-devnet',
+    command: 'npm run vite preview',
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI
   },
