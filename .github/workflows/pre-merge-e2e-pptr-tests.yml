@@ -1,64 +1,64 @@
-# name: 'Puppeteer E2E Tests'
-# on:
-#   pull_request:
-#     branches: [main, development]
-#     paths:
-#       - 'src/**'
-#       - '**.js'
-#       - '**.ts'
-#       - '**.json'
-#   repository_dispatch:
-#     types: run-pptr-e2e-tests
-#   workflow_dispatch:
+name: 'Puppeteer E2E Tests'
+on:
+  pull_request:
+    branches: [main, development]
+    paths:
+      - 'src/**'
+      - '**.js'
+      - '**.ts'
+      - '**.json'
+  repository_dispatch:
+    types: run-pptr-e2e-tests
+  workflow_dispatch:
 
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-#   cancel-in-progress: true
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
-# jobs:
-#   run-unit-tests:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           ref: ${{ github.ref }}
-#           if: ${{ !github.event.pull_request.draft }}
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 18
-#       - name: Setup yarn
-#         run: npm install -g yarn
-#       - name: Get node_modules cache
-#         uses: actions/cache@v4
-#         id: node_modules
-#         with:
-#           path: |
-#             **/node_modules
-#           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-#       - name: Remove node_modules
-#         if: steps.node_modules.outputs.cache-hit != 'true'
-#         run: rm -rf node_modules
-#       - name: Install Dependencies
-#         uses: nick-fields/retry@v3
-#         if: steps.node_modules.outputs.cache-hit != 'true'
-#         with:
-#           timeout_minutes: 120
-#           retry_on: error
-#           max_attempts: 3
-#           command: yarn install
-#       - name: Setup chrome
-#         uses: browser-actions/setup-chrome@v1
-#         id: setup-chrome
-#         with:
-#           chrome-version: 128
-#       - name: Set Chrome Path
-#         run: echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
-#       - name: Build sovereign msw
-#         run: yarn build-sovereign-msw
-#       - name: Run Jest tests
-#         run: yarn test
-#       - name: Run Puppeteer test
-#         env:
-#           CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
-#         run: yarn test-pptr-headless
+jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          if: ${{ !github.event.pull_request.draft }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Setup yarn
+        run: npm install -g yarn
+      - name: Get node_modules cache
+        uses: actions/cache@v4
+        id: node_modules
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Remove node_modules
+        if: steps.node_modules.outputs.cache-hit != 'true'
+        run: rm -rf node_modules
+      - name: Install Dependencies
+        uses: nick-fields/retry@v3
+        if: steps.node_modules.outputs.cache-hit != 'true'
+        with:
+          timeout_minutes: 120
+          retry_on: error
+          max_attempts: 3
+          command: yarn install
+      - name: Setup chrome
+        uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+        with:
+          chrome-version: 128
+      - name: Set Chrome Path
+        run: echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> $GITHUB_ENV
+      - name: Build sovereign msw
+        run: yarn build-sovereign-msw
+      - name: Run Jest tests
+        run: yarn test
+      - name: Run Puppeteer test
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: yarn test-pptr-headless
