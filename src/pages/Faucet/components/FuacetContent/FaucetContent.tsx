@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from 'components';
-import { getEgldLabel, refreshAccount } from 'lib';
+import { getEgldLabel, refreshAccount, useGetAccountInfo } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import {
   useGetFaucetSettingsQuery,
@@ -15,7 +15,7 @@ export const FaucetContent = () => {
   const [getFunds, { isSuccess }] = useRequestFundsMutation();
   const [fundsReceived, setFundsReceived] = useState(false);
   const [requestFailed, setRequestFailed] = useState('');
-
+  const { websocketEvent } = useGetAccountInfo();
   const { data: settings, error: settingsError } = useGetFaucetSettingsQuery();
   const egldLabel = getEgldLabel();
 
@@ -23,7 +23,7 @@ export const FaucetContent = () => {
     if (isSuccess && fundsReceived) {
       refreshAccount();
     }
-  }, [isSuccess, fundsReceived]);
+  }, [isSuccess, fundsReceived, websocketEvent]);
 
   const handleRequestClick = async (captcha: string) => {
     const response = await getFunds(captcha);
