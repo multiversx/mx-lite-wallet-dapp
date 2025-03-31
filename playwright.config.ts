@@ -11,11 +11,11 @@ export default defineConfig({
   timeout: 75000,
   webServer: {
     command: 'npm run  preview',
-    timeout: 120 * 1000,
+    timeout: 200 * 1000,
     reuseExistingServer: true
   },
   use: {
-    baseURL: 'https://localhost:3000',
+    baseURL: 'http://localhost:3000',
     ignoreHTTPSErrors: true,
     trace: 'on-first-retry'
   },
