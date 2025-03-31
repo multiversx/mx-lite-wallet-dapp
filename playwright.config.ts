@@ -15,15 +15,16 @@ export default defineConfig({
     reuseExistingServer: true
   },
   use: {
-    baseURL: 'https://localhost:3000/',
+    baseURL: 'https://localhost:3000',
     ignoreHTTPSErrors: true,
-    trace: 'on-first-retry'
+    timeout: 120 * 1000,
+    reuseExistingServer: true
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chrome',
+      name: 'chromium',
       use: { ...devices['Desktop Chrome'] }
     }
   ]
