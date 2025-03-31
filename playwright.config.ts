@@ -12,10 +12,11 @@ export default defineConfig({
   webServer: {
     command: 'npm run start-devnet && echo "✅ SERVER STARTED"',
     timeout: 200 * 1000,
-    reuseExistingServer: true
+    reuseExistingServer: true,
+    url: 'http://localhost:3000'
   },
   use: {
-    baseURL: 'https://localhost:3000',
+    baseURL: 'http://localhost:3000',
     ignoreHTTPSErrors: true,
     trace: 'on-first-retry'
   },
