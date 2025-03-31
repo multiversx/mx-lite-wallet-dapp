@@ -15,7 +15,7 @@ export default defineConfig({
     reuseExistingServer: true
   },
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://localhost:3000/',
     ignoreHTTPSErrors: true,
     trace: 'on-first-retry'
   },
