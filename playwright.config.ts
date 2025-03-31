@@ -10,7 +10,7 @@ export default defineConfig({
   reporter: 'html',
   timeout: 75000,
   webServer: {
-    command: 'npm run  preview',
+    command: 'npm run start-devnet',
     timeout: 200 * 1000,
     reuseExistingServer: true
   },
