@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { prepareTransaction, numberToPaddedHex } from 'lib';
+import { numberToPaddedHex, prepareTransaction } from 'lib';
 import { GAS_PRICE, SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import {
   NftEnumType,

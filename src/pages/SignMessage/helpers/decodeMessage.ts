@@ -1,6 +1,6 @@
 import { Address, Message, MessageComputer, verifyMessage } from 'lib';
 
-export const decodeMessage = ({
+export const decodeMessage = async ({
   address,
   message,
   signature
@@ -8,7 +8,7 @@ export const decodeMessage = ({
   address: string;
   message: string;
   signature: string;
-}): { encodedMessage: string; decodedMessage: string } => {
+}): Promise<{ encodedMessage: string; decodedMessage: string }> => {
   const messageToSign = new Message({
     ...(address ? { address: new Address(address) } : {}),
     data: new Uint8Array(Buffer.from(message))
@@ -24,7 +24,7 @@ export const decodeMessage = ({
     signature: `0x${signature}`
   });
 
-  const newMessage = verifyMessage(stringifiedMessage);
+  const newMessage = await verifyMessage(stringifiedMessage);
 
   return {
     encodedMessage: encodedMessage,

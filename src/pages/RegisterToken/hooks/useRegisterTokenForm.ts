@@ -102,7 +102,7 @@ export const useRegisterTokenForm = () => {
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
       await sleep(1000);
       const { nonce } = accountSelector(sdkDappStore.getState());
-      transaction.setNonce(nonce);
+      transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
       navigate(routeNames.dashboard);
     }

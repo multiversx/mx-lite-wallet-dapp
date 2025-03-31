@@ -41,8 +41,7 @@ export const getSovereignTransferTransaction = ({
     config: factoryConfig
   });
 
-  return factory.createTransactionForExecute({
-    sender: new Address(address),
+  return factory.createTransactionForExecute(new Address(address), {
     contract: Address.newFromBech32(values.contract),
     function: 'deposit',
     gasLimit: BigInt(SOVEREIGN_TRANSFER_GAS_LIMIT),
