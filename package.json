@@ -29,7 +29,7 @@
     "copy-placeholder-config": "cp ./src/config/config.placeholder.ts ./src/config/index.ts",
     "test-pptr-headless": "HEADLESS=true jest --config=jest-puppeteer.config.js",
     "test-pptr": "JEST_PPTR_RETRY_TIMES=0 HEADLESS=false jest --config=jest-puppeteer.config.js",
-    "run-playwright" : "yarn playwright test --workers=10",
+    "run-playwright": "yarn playwright test --workers=10",
     "test": "jest",
     "preview": "vite preview"
   },

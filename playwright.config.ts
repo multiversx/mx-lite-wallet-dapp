@@ -17,8 +17,7 @@ export default defineConfig({
   use: {
     baseURL: 'https://localhost:3000',
     ignoreHTTPSErrors: true,
-    timeout: 120 * 1000,
-    reuseExistingServer: true
+    trace: 'on-first-retry'
   },
 
   /* Configure projects for major browsers */
