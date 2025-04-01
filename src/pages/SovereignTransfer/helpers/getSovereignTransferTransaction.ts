@@ -3,25 +3,17 @@ import {
   TransactionsFactoryConfig,
   Token
 } from '@multiversx/sdk-core';
-import BigNumber from 'bignumber.js';
 import {
   getEgldLabel,
   parseAmount,
   Address,
   AddressValue,
-  TokenTransfer,
-  numberToPaddedHex
+  TokenTransfer
 } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { PartialNftType, TokenType } from 'types';
 import { getCurrentNetwork } from '../../../helpers';
 import { SovereignTransferFormType } from '../types';
-
-export const stringToHex = (stringTopEncode?: string) =>
-  stringTopEncode ? Buffer.from(stringTopEncode).toString('hex') : '';
-
-export const numberToHex = (numberToEncode: number | string) =>
-  numberToPaddedHex(new BigNumber(numberToEncode).toNumber());
 
 export const getSovereignTransferTransaction = ({
   address,
