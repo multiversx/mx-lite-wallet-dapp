@@ -1,4 +1,3 @@
-import { sleep } from '@multiversx/sdk-dapp-core';
 import {
   DEFAULT_PAGE_LOAD_DELAY_MS,
   WALLET_SOURCE_ORIGIN
@@ -11,7 +10,8 @@ import {
   expectInputToHaveValue,
   expectToBeChecked,
   getByDataTestId,
-  loginWithKeystore
+  loginWithKeystore,
+  sleep
 } from 'utils/testUtils/puppeteer';
 
 describe('Register ESDT Token test', () => {

@@ -27,7 +27,10 @@ export const useSovereignTransferForm = () => {
     getTokens,
     isLoading,
     tokenOptions
-  } = useTokenOptions({ sendType: SendTypeEnum.esdt, skipAddEgld: true });
+  } = useTokenOptions({
+    sendType: SendTypeEnum.esdt,
+    skipAddEgld: true
+  });
 
   const defaultTokenOption = tokenOptions?.[0];
 

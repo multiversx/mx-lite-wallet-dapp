@@ -1,6 +1,7 @@
-import { Address, Message, MessageComputer, verifyMessage } from 'lib';
+import { Address, Message, MessageComputer } from 'lib/sdkCore';
+import { verifyMessage } from 'lib/sdkDapp';
 
-export const decodeMessage = ({
+export const decodeMessage = async ({
   address,
   message,
   signature
@@ -8,7 +9,7 @@ export const decodeMessage = ({
   address: string;
   message: string;
   signature: string;
-}): { encodedMessage: string; decodedMessage: string } => {
+}): Promise<{ encodedMessage: string; decodedMessage: string }> => {
   const messageToSign = new Message({
     ...(address ? { address: new Address(address) } : {}),
     data: new Uint8Array(Buffer.from(message))
@@ -18,13 +19,18 @@ export const decodeMessage = ({
   const packedMessage = messageComputer.packMessage(messageToSign);
   const encodedMessage = `0x${packedMessage.message}`;
 
+  // Remove 0x prefix from signature if present
+  const normalizedSignature = signature.startsWith('0x')
+    ? signature.slice(2)
+    : signature;
+
   const stringifiedMessage = JSON.stringify({
     ...packedMessage,
     message: encodedMessage,
-    signature: `0x${signature}`
+    signature: `0x${normalizedSignature}`
   });
 
-  const newMessage = verifyMessage(stringifiedMessage);
+  const newMessage = await verifyMessage(stringifiedMessage);
 
   return {
     encodedMessage: encodedMessage,

@@ -67,21 +67,23 @@ export const useIssueTokenForm = () => {
         )
     }),
     onSubmit: async (values) => {
-      const transaction = factory.createTransactionForIssuingFungible({
-        sender: new Address(address),
-        tokenName: values.tokenName,
-        tokenTicker: values.tokenTicker.toUpperCase(),
-        initialSupply: BigInt(
-          parseAmount(values.mintedValue, values.numDecimals)
-        ),
-        numDecimals: BigInt(values.numDecimals),
-        canFreeze: true,
-        canWipe: true,
-        canPause: true,
-        canChangeOwner: true,
-        canUpgrade: true,
-        canAddSpecialRoles: true
-      });
+      const transaction = factory.createTransactionForIssuingFungible(
+        new Address(address),
+        {
+          tokenName: values.tokenName,
+          tokenTicker: values.tokenTicker.toUpperCase(),
+          initialSupply: BigInt(
+            parseAmount(values.mintedValue, values.numDecimals)
+          ),
+          numDecimals: BigInt(values.numDecimals),
+          canFreeze: true,
+          canWipe: true,
+          canPause: true,
+          canChangeOwner: true,
+          canUpgrade: true,
+          canAddSpecialRoles: true
+        }
+      );
 
       await sendTransactions([transaction]);
       formik.resetForm();

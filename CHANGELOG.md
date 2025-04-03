@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[2.0.0](https://github.com/multiversx/mx-lite-wallet-dapp/pull/82)] - 2025-03-31
+
+- [Upgrade to sdk-core v14 and sdk-dapp v4](https://github.com/multiversx/mx-lite-wallet-dapp/pull/81)
+
 ## [[1.0.6](https://github.com/multiversx/mx-lite-wallet-dapp/pull/80)] - 2025-03-25
 
 - [Added ability to open faucet and login via webview](https://github.com/multiversx/mx-lite-wallet-dapp/pull/79)

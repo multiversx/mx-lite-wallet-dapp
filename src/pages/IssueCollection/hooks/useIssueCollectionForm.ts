@@ -52,13 +52,15 @@ export const useIssueCollectionForm = () => {
     }),
     onSubmit: async (values) => {
       const transaction =
-        factory.createTransactionForRegisteringAndSettingRoles({
-          sender: new Address(address),
-          tokenName: values.tokenName,
-          tokenTicker: values.tokenTicker.toUpperCase(),
-          tokenType: values.tokenType as any,
-          numDecimals: BigInt(0)
-        });
+        factory.createTransactionForRegisteringAndSettingRoles(
+          new Address(address),
+          {
+            tokenName: values.tokenName,
+            tokenTicker: values.tokenTicker.toUpperCase(),
+            tokenType: values.tokenType as any,
+            numDecimals: BigInt(0)
+          }
+        );
 
       await sendTransactions([transaction]);
       formik.resetForm();

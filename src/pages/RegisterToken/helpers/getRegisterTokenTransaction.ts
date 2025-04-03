@@ -1,5 +1,6 @@
-import BigNumber from 'bignumber.js';
-import { prepareTransaction, numberToPaddedHex } from 'lib';
+import { numberToHex } from 'helpers/operations/toHex';
+import { stringToHex } from 'helpers/operations/toHex';
+import { prepareTransaction } from 'lib';
 import { GAS_PRICE, SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import {
   NftEnumType,
@@ -9,12 +10,6 @@ import {
   CollectionType
 } from 'types';
 import { RegisterTokenFormType } from '../types';
-
-export const stringToHex = (stringTopEncode?: string) =>
-  stringTopEncode ? Buffer.from(stringTopEncode).toString('hex') : '';
-
-export const numberToHex = (numberToEncode: number | string) =>
-  numberToPaddedHex(new BigNumber(numberToEncode).toNumber());
 
 const TokenTypeMap: Record<string, number> = {
   [EsdtEnumType.FungibleESDT]: 0,
