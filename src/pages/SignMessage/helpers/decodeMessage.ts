@@ -19,10 +19,15 @@ export const decodeMessage = async ({
   const packedMessage = messageComputer.packMessage(messageToSign);
   const encodedMessage = `0x${packedMessage.message}`;
 
+  // Remove 0x prefix from signature if present
+  const normalizedSignature = signature.startsWith('0x')
+    ? signature.slice(2)
+    : signature;
+
   const stringifiedMessage = JSON.stringify({
     ...packedMessage,
     message: encodedMessage,
-    signature: `0x${signature}`
+    signature: `0x${normalizedSignature}`
   });
 
   const newMessage = await verifyMessage(stringifiedMessage);
