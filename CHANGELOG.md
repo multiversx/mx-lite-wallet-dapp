@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added WEGLD to sovereign transfer](https://github.com/multiversx/mx-lite-wallet-dapp/pull/83)
+
 ## [[2.0.0](https://github.com/multiversx/mx-lite-wallet-dapp/pull/82)] - 2025-03-31
 
 - [Upgrade to sdk-core v14 and sdk-dapp v4](https://github.com/multiversx/mx-lite-wallet-dapp/pull/81)
