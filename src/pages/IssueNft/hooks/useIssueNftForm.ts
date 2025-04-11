@@ -60,7 +60,6 @@ export const useIssueNftForm = () => {
       collection: object().nullable().required('Collection is required')
     }),
     onSubmit: async (values) => {
-      debugger;
       const transaction = factory.createTransactionForCreatingNFT(
         new Address(address),
         {
