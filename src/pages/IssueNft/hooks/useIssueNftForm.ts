@@ -27,7 +27,7 @@ export const useIssueNftForm = () => {
   const collections =
     data?.map((collection) => ({
       label: collection.name,
-      value: collection.ticker
+      value: collection.collection
     })) || [];
 
   const factory = new TokenManagementTransactionsFactory({
@@ -64,7 +64,7 @@ export const useIssueNftForm = () => {
         new Address(address),
         {
           name: values.name,
-          tokenIdentifier: values.collection.label,
+          tokenIdentifier: values.collection.value,
           royalties: new BigNumber(values.royalties.toFixed(2))
             .multipliedBy(100)
             .toNumber(),
