@@ -82,7 +82,8 @@ export const useIssueNftForm = () => {
 
   useEffect(() => {
     const collection = data?.find(
-      (col) => col.ticker === formik.values[IssueNftFieldsEnum.collection].value
+      (col) =>
+        col.collection === formik.values[IssueNftFieldsEnum.collection].value
     );
 
     setSelectedCollection(collection);
