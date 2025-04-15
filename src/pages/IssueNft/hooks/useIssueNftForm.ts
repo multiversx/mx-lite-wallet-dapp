@@ -27,7 +27,7 @@ export const useIssueNftForm = () => {
   const collections =
     data?.map((collection) => ({
       label: collection.name,
-      value: collection.ticker
+      value: collection.collection
     })) || [];
 
   const factory = new TokenManagementTransactionsFactory({
@@ -82,7 +82,8 @@ export const useIssueNftForm = () => {
 
   useEffect(() => {
     const collection = data?.find(
-      (col) => col.ticker === formik.values[IssueNftFieldsEnum.collection].value
+      (col) =>
+        col.collection === formik.values[IssueNftFieldsEnum.collection].value
     );
 
     setSelectedCollection(collection);
