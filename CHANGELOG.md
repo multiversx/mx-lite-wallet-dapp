@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed issue NFT has invalid collection name](https://github.com/multiversx/mx-lite-wallet-dapp/pull/84)
+- [Added WEGLD to sovereign transfer](https://github.com/multiversx/mx-lite-wallet-dapp/pull/83)
+
+## [[2.0.0](https://github.com/multiversx/mx-lite-wallet-dapp/pull/82)] - 2025-03-31
+
+- [Upgrade to sdk-core v14 and sdk-dapp v4](https://github.com/multiversx/mx-lite-wallet-dapp/pull/81)
+
 ## [[1.0.6](https://github.com/multiversx/mx-lite-wallet-dapp/pull/80)] - 2025-03-25
 
 - [Added ability to open faucet and login via webview](https://github.com/multiversx/mx-lite-wallet-dapp/pull/79)

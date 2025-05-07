@@ -40,11 +40,6 @@ describe('Sovereign transfer test', () => {
       text: 'Amount is required'
     });
 
-    await expectElementToContainText({
-      dataTestId: `${DataTestIdsEnum.tokenError}0`,
-      text: 'Token is required'
-    });
-
     await expectToBeChecked({
       dataTestId: `${DataTestIdsEnum.sendEsdtTypeInput}0`,
       isChecked: true

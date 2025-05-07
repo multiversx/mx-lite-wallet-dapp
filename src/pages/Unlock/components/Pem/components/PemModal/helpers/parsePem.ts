@@ -9,7 +9,7 @@ const parsePemData = (pemFileText: string): ParsedPemReturnType => {
   try {
     const secretKey = UserSecretKey.fromPem(pemFileText);
     const address = secretKey.generatePublicKey().toAddress();
-    const accountAddress = address.bech32();
+    const accountAddress = address.toBech32();
 
     return {
       address: accountAddress,

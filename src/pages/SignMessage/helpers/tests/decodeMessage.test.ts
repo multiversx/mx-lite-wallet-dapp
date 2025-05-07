@@ -9,7 +9,7 @@ const signedMessage = '0x68656c6c6f20776f726c64';
 
 describe('decodeMessage', () => {
   it('should decode message', async () => {
-    const { decodedMessage, encodedMessage } = decodeMessage({
+    const { decodedMessage, encodedMessage } = await decodeMessage({
       address,
       signature,
       message: rawMessage

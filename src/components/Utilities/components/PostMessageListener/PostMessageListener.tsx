@@ -208,7 +208,7 @@ export const PostMessageListener = () => {
     replyToDapp({
       type: WindowProviderResponseEnums.handshakeResponse,
       payload: {
-        data: false
+        data: ''
       }
     });
   };
@@ -231,7 +231,7 @@ export const PostMessageListener = () => {
     replyToDapp({
       type: WindowProviderResponseEnums.handshakeResponse,
       payload: {
-        data: true
+        data: 'true'
       }
     });
 
