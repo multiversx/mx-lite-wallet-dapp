@@ -9,18 +9,17 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   timeout: 75000,
+
   webServer: {
     command: 'npm run start-devnet',
-    // url: 'http://localhost:3000',
-    timeout: 120 * 1000,
+    url: 'http://localhost:3000',
+    timeout: 300 * 1000,
     reuseExistingServer: !process.env.CI
   },
   use: {
     baseURL: 'http://localhost:3000',
     ignoreHTTPSErrors: true,
-    trace: 'on-first-retry',
-    navigationTimeout: 30000, // Timeout for each navigation in milliseconds
-    actionTimeout: 10000
+    trace: 'on-first-retry'
   },
 
   /* Configure projects for major browsers */
