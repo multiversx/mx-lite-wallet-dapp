@@ -74,7 +74,8 @@ export { storage } from '@multiversx/sdk-dapp/utils/storage';
 export { addNewCustomToast } from '@multiversx/sdk-dapp/utils/toasts';
 export {
   maxDecimals,
-  stringIsFloat
+  stringIsFloat,
+  stringIsInteger
 } from '@multiversx/sdk-dapp/utils/validation';
 
 export const replyToDapp: (

@@ -54,7 +54,7 @@ export function useSendTransactions(params?: SendTransactionsParamsType) {
     // TODO: Undo when xPortal with usernames is launched
     const mappedTransactions = transactions.map((tx, index) => {
       if (!params?.skipAddNonce) {
-        tx.setNonce(nonce + index);
+        tx.nonce = BigInt(nonce + index);
       }
 
       const plainTransactionObject = tx.toPlainObject();
@@ -64,7 +64,7 @@ export function useSendTransactions(params?: SendTransactionsParamsType) {
         delete plainTransactionObject.senderUsername;
       }
 
-      return Transaction.fromPlainObject(plainTransactionObject);
+      return Transaction.newFromPlainObject(plainTransactionObject);
     });
 
     const props: SendTransactionsPropsType = {

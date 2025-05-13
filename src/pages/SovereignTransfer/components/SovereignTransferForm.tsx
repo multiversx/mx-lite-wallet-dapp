@@ -223,7 +223,6 @@ export const SovereignTransferForm = () => {
                         data-testid={`${DataTestIdsEnum.amountInput}${index}`}
                         id={amountFieldName}
                         name={amountFieldName}
-                        min={0}
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         placeholder='Enter amount'
