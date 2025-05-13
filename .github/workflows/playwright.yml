@@ -21,7 +21,7 @@ jobs:
       run: |
         sudo lsof -i :3000 || echo "Port 3000 is free"  
     - name: Run Playwright tests
-      run: yarn playwright test --workers=20
+      run: yarn playwright test --workers=1
     - name: Check if port 3000 is in use
       run: |
         sudo lsof -i :3000 || echo "Port 3000 is free"     
