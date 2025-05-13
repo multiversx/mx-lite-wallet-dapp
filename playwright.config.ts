@@ -11,9 +11,9 @@ export default defineConfig({
   timeout: 75000,
 
   webServer: {
-    command: 'npm run start-devnet',
+    command: 'npm run preview',
     url: 'http://localhost:3000',
-    timeout: 300 * 1000,
+    timeout: 100 * 1000,
     reuseExistingServer: !process.env.CI
   },
   use: {
