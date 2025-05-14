@@ -45,20 +45,11 @@ export const handlePopup = async (page: Page, triggerPopupAction) => {
 
 export const sovereignTransfer = async ({
   page,
-  contractInput = GlobalDataEnum.contractInput,
-  receiver = AccountStatesEnum.unGuardAccount8,
-  amount = '1',
-  tokenValue = 'AGE'
+  contractInput = GlobalDataEnum.contractDevnet,
+  receiver = AccountStatesEnum.unGuardAccount8
 }) => {
   await page.getByTestId(DataTestIdsEnum.contractInput).fill(contractInput);
   await page.getByTestId(DataTestIdsEnum.receiverInput).fill(receiver);
-  await page
-    .locator('div')
-    .filter({ hasText: /^Select\.\.\.$/ })
-    .nth(3)
-    .click();
-  await page.getByRole('option', { name: tokenValue }).click();
-  await page.getByTestId(DataTestIdsEnum.amountInput0).fill(amount);
   await page.getByTestId(DataTestIdsEnum.sendBtn).click();
 };
 

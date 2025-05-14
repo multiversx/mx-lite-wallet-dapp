@@ -97,5 +97,7 @@ export enum DataTestIdsEnum {
   inputFile = 'input[type=file]',
   sovereign = 'sovereign',
   testnet = 'testnet',
-  amountInput0 = 'amountInput0'
+  amountInput0 = 'amountInput0',
+  sendNFtTypeInput0 = 'sendNFtTypeInput0',
+  transactionDetailsToastBody = 'transactionDetailsToastBody'
 }

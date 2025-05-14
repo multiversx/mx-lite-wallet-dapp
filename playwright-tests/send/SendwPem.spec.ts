@@ -11,7 +11,7 @@ test('Positive w pem', async ({ page }) => {
   await sendAction(page, sendData);
   await handlePopup(page, () =>
     page
-      .getByTestId('transactionDetailsToastBody')
+      .getByTestId(DataTestIdsEnum.transactionDetailsToastBody)
       .getByRole('link')
       .nth(1)
       .click()

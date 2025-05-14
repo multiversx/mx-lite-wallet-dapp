@@ -16,7 +16,7 @@ test('Create Token', async ({ page }) => {
   await page.waitForTimeout(5000);
   await handlePopup(page, () =>
     page
-      .getByTestId('transactionDetailsToastBody')
+      .getByTestId(DataTestIdsEnum.transactionDetailsToastBody)
       .getByRole('link')
       .nth(1)
       .click()

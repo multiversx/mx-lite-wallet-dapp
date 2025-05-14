@@ -107,6 +107,7 @@ export enum GlobalDataEnum {
   encodedMsg = '0x54657374206d7367',
   decodedMsg = ' Test msg',
   contractInput = 'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa',
+  contractDevnet = 'erd1qqqqqqqqqqqqqpgqhwsytpz5q57my2ns4t2pml3r22xt9p8fcxuqnjl23z',
   nftImg = 'https://images.app.goo.gl/uCTQH1oUsqmJRd6N9'
 }
 

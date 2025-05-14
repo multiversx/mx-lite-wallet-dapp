@@ -6,8 +6,6 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    env:
-      DEBUG: pw:webserver
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -19,14 +17,8 @@ jobs:
       run: yarn build-devnet  
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
-    - name: Check if port 3000 is in use
-      run: |
-        sudo lsof -i :3000 || echo "Port 3000 is free"  
     - name: Run Playwright tests
-      run: yarn playwright test --workers=1
-    - name: Check if port 3000 is in use
-      run: |
-        sudo lsof -i :3000 || echo "Port 3000 is free"     
+      run: yarn playwright test --workers=20  
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

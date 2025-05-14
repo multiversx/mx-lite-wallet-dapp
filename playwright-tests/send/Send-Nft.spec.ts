@@ -13,7 +13,7 @@ test('Positive Send Nft', async ({ page }) => {
   await sendAction(page, sendNftData);
   await handlePopup(page, () =>
     page
-      .getByTestId('transactionDetailsToastBody')
+      .getByTestId(DataTestIdsEnum.transactionDetailsToastBody)
       .getByRole('link')
       .nth(1)
       .click()
