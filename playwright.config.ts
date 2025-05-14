@@ -12,12 +12,12 @@ export default defineConfig({
 
   webServer: {
     command: 'npm run preview',
-    url: 'http://localhost:3000',
+    // url: 'http://localhost:3000',
     // timeout: 100 * 1000,
     reuseExistingServer: !process.env.CI
   },
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3002',
     ignoreHTTPSErrors: true,
     trace: 'on-first-retry'
   },
