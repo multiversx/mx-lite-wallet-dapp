@@ -40,11 +40,6 @@ export enum AccountStatesEnum {
   guardedAccount = 'erd1knjjk9nvl6tey3k0w0wfq964zpfu3gdm84ex6nqmz7plvq69je5sgkalrf'
 }
 
-export enum OtpSecretsEnum {
-  readyToGuardSecret = 'EJCFISATP26DDXT3SSQG37MQXSSAURUT',
-  guardedAccountSecret = '7Y2XCMJ2LP5MHE3NAMBIOPDMYJ5UBACB'
-}
-
 export enum RoutesEnum {
   send = '/send',
   guardian = '/guardian',
