@@ -1,9 +1,7 @@
 import { expect, Page } from '@playwright/test';
-import { getTokensAndBalanceQueryResponse } from './mockData/getTokensAndBalanceQueryResponse.ts';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum';
 import {
   AccountStatesEnum,
-  ApiPathEnum,
   GlobalDataEnum,
   LoginFilesEnum
 } from '../utils/enums.ts';
@@ -51,16 +49,4 @@ export const sovereignTransfer = async ({
   await page.getByTestId(DataTestIdsEnum.contractInput).fill(contractInput);
   await page.getByTestId(DataTestIdsEnum.receiverInput).fill(receiver);
   await page.getByTestId(DataTestIdsEnum.sendBtn).click();
-};
-
-export const mockGraphQlResponse = async (page: Page) => {
-  await page.route(ApiPathEnum.devnetGraphXexchange, (route) => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({
-        data: getTokensAndBalanceQueryResponse
-      })
-    });
-  });
 };
