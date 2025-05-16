@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[2.0.1](https://github.com/multiversx/mx-lite-wallet-dapp/pull/85)] - 2025-05-07
+## [[2.0.1](https://github.com/multiversx/mx-lite-wallet-dapp/pull/90)] - 2025-05-15
 
+- [Update pacakges to latest versions](https://github.com/multiversx/mx-lite-wallet-dapp/pull/89)
 - [Fixed issue NFT has invalid collection name](https://github.com/multiversx/mx-lite-wallet-dapp/pull/84)
 - [Added WEGLD to sovereign transfer](https://github.com/multiversx/mx-lite-wallet-dapp/pull/83)
 
