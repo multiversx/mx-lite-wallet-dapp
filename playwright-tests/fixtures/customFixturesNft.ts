@@ -1,11 +1,11 @@
 // This fixture creates an NFT before running the Sovereign Transfer test.
 
-import { test as base, expect } from '@playwright/test';
+import { test as base, expect, Page } from '@playwright/test';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum';
 import { createNft } from '../createNft/actions';
-import { login } from '../utils/actions';
+import { login } from '../utils/login';
 
-export const test = base.extend<{ authenticatedPage: any }>({
+export const test = base.extend<{ authenticatedPage: Page }>({
   authenticatedPage: async ({ page }, use) => {
     await page.goto('/unlock');
     await login({ page });

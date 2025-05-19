@@ -6,7 +6,6 @@ export const sendData = {
 };
 export const sendNftData = {
   adress: AccountStatesEnum.guardedAccount
-  // amount: ''
 };
 
 export const sendUsernameData = {

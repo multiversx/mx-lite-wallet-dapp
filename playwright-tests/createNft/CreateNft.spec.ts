@@ -1,8 +1,9 @@
 import { test } from '@playwright/test';
 import { createNft } from './actions.ts';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum.ts';
-import { login, handlePopup } from '../utils/actions.ts';
 import { LoginFilesEnum } from '../utils/enums.ts';
+import { handlePopup } from '../utils/handlePopup.ts';
+import { login } from '../utils/login.ts';
 
 test('Create NFT', async ({ page }) => {
   await page.goto('/unlock');

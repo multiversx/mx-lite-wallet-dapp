@@ -2,8 +2,9 @@ import { test, expect } from '@playwright/test';
 import { sendAction } from './actions.ts';
 import { sendData } from './data.ts';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum.ts';
-import { login, handlePopup } from '../utils/actions.ts';
 import { LoginFilesEnum, RoutesEnum } from '../utils/enums.ts';
+import { handlePopup } from '../utils/handlePopup.ts';
+import { login } from '../utils/login.ts';
 
 test('Positive Send Estd', async ({ page }) => {
   await page.goto('/unlock');

@@ -1,7 +1,7 @@
-// import { test, expect } from '@playwright/test';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum.ts';
 import { test } from '../fixtures/customFixturesNft.ts';
-import { handlePopup, sovereignTransfer } from '../utils/actions.ts';
+import { handlePopup } from '../utils/handlePopup.ts';
+import { sovereignTransfer } from '../utils/sovereignTransfer.ts';
 
 test('Positive sovereign transfer', async ({ authenticatedPage }) => {
   await authenticatedPage

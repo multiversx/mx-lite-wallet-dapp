@@ -2,7 +2,8 @@ import { test } from '@playwright/test';
 import { sendAction } from './actions.ts';
 import { sendData } from './data.ts';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum.ts';
-import { login, handlePopup } from '../utils/actions.ts';
+import { handlePopup } from '../utils/handlePopup.ts';
+import { login } from '../utils/login.ts';
 
 test('Positive w pem', async ({ page }) => {
   await page.goto('/unlock');

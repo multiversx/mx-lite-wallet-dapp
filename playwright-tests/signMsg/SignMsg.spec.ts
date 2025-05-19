@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum.ts';
-import { login } from '../utils/actions.ts';
 import { RoutesEnum, GlobalDataEnum, LoginFilesEnum } from '../utils/enums.ts';
+import { login } from '../utils/login.ts';
 
 test('Sign msg test', async ({ page }) => {
   await page.goto('/unlock');
