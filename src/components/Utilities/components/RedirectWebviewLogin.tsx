@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { decodeNativeAuthToken, useGetIsLoggedIn } from 'lib';
+import { decodeNativeAuthToken, useGetIsLoggedIn } from 'lib/sdkDapp';
 import { ACCESS_TOKEN_KEY } from 'localConstants/misc';
 import { accessTokenRedirectRouteSelector } from 'redux/selectors';
 import { setAccessTokenRedirectRoute } from 'redux/slices';

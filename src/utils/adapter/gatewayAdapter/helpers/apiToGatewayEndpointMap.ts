@@ -5,7 +5,7 @@ import {
   NETWORK_CONFIG_ENDPOINT,
   NFTS_ENDPOINT,
   TOKENS_ENDPOINT
-} from 'localConstants/sdkDapp';
+} from 'lib/sdkDapp/sdkDapp.constants';
 
 export const gatewayEndpoints = {
   [ADDRESS_ENDPOINT]: ADDRESS_ENDPOINT,

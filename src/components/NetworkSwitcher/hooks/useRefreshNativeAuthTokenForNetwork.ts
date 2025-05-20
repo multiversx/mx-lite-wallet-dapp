@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useSetNativeAuthInterceptors } from 'components/AxiosInterceptor/helpers';
 import { networks } from 'config';
-import { useLoginService, Message } from 'lib';
+import { Message } from 'lib/sdkCore';
+import { refreshNativeAuthTokenLogin } from 'lib/sdkDapp';
 import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
 import { changeNetwork } from 'redux/slices';
 
 export const useRefreshNativeAuthTokenForNetwork = () => {
   const nativeAuthConfig = useGetNativeAuthConfig();
-  const loginService = useLoginService(nativeAuthConfig);
   const dispatch = useDispatch();
   const { setNativeAuthTokenInterceptors } = useSetNativeAuthInterceptors();
 
@@ -29,9 +29,10 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     }
 
     try {
-      const nativeAuthToken = await loginService.refreshNativeAuthTokenLogin({
+      const nativeAuthToken = await refreshNativeAuthTokenLogin({
         signMessageCallback,
         nativeAuthClientConfig: {
+          ...nativeAuthConfig,
           origin,
           apiAddress: foundNetwork?.apiAddress,
           expirySeconds: 86400

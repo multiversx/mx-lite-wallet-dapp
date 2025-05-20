@@ -1,5 +1,5 @@
+import { EnvironmentsEnum } from 'lib/sdkDapp';
 import { NetworkType } from 'redux/slices';
-import { EnvironmentsEnum } from 'types';
 
 export * from './sharedConfig';
 

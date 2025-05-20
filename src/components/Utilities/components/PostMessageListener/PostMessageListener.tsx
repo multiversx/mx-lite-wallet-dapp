@@ -8,23 +8,22 @@ import {
   useReplyWithCancelled,
   useSignTxSchema
 } from 'hooks';
-import {
-  getLoginHookData,
-  getSignHookData,
-  getSignMessageHookData,
-  removeAllTransactionsToSign,
-  removeAllSignedTransactions,
-  Transaction,
-  useGetLoginInfo
-} from 'lib';
-import { HooksEnum } from 'localConstants';
-import { setHook } from 'redux/slices';
-import { routeNames } from 'routes';
+import { Transaction } from 'lib/sdkCore';
+import { useGetLoginInfo } from 'lib/sdkDapp';
 import {
   WindowProviderRequestEnums,
   WindowProviderResponseEnums,
   RequestMessageType
-} from 'types';
+} from 'lib/sdkDappWebWalletCrossWindowProvider';
+
+import {
+  getLoginHookData,
+  getSignMessageHookData,
+  getSignHookData
+} from 'lib/sdkJsWebWalletIo';
+import { HooksEnum } from 'localConstants';
+import { setHook } from 'redux/slices';
+import { routeNames } from 'routes';
 import {
   buildTransactionsQueryString,
   buildWalletQueryString,
@@ -105,7 +104,7 @@ export const PostMessageListener = () => {
 
       case WindowProviderRequestEnums.signTransactionsRequest: {
         const transactions = payload.map((plainTransactionObject) =>
-          Transaction.fromPlainObject(plainTransactionObject)
+          Transaction.newFromPlainObject(plainTransactionObject)
         );
 
         const payloadQueryString = buildTransactionsQueryString({
@@ -178,9 +177,6 @@ export const PostMessageListener = () => {
       case WindowProviderResponseEnums.cancelResponse:
       case WindowProviderRequestEnums.cancelAction: {
         if (isInWebview) {
-          removeAllTransactionsToSign();
-          removeAllSignedTransactions();
-
           return;
         }
 

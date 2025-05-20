@@ -1,4 +1,4 @@
-import { NftEnumType } from 'types/sdkDapp.types';
+import { NftEnumType } from 'lib/sdkDapp/sdkDapp.types';
 
 export const CollectionTypeByNftEnum = {
   [NftEnumType.SemiFungibleESDT]: 'sft',

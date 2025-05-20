@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { Formik, FormikHelpers } from 'formik';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, ModalContainer, PageState } from 'components';
+import { Button } from 'components';
 import { UseModalReturnType, useCloseModalOnEsc } from 'hooks';
 import { WALLET_FILE, WALLET_FILE_NAME, DataTestIdsEnum } from 'localConstants';
 import { useInitToken } from 'pages/Unlock/hooks';
@@ -23,6 +23,7 @@ import {
   parseKeystoreJSON
 } from './helpers';
 import { KeystoreValuesType, useOnKeystoreSubmit } from './hooks';
+import { MvxModalContainer as ModalContainer, MvxPageState as PageState } from '@multiversx/sdk-dapp-core-ui/react';
 
 interface AccessWalletType {
   kdContent: { [key: string]: any };

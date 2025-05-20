@@ -1,5 +1,6 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { MxLink, PageState } from 'components';
+import { MxLink } from 'components';
+import { MvxPageState as PageState } from '@multiversx/sdk-dapp-core-ui/react';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { CreateRecoverDownloadType } from '../CreateRecoverDownload';

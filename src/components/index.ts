@@ -1,7 +1,7 @@
 export * from './AxiosInterceptor';
 export * from './Button';
 export * from './Card';
-export * from './Copy';
+export * from './CopyButton';
 export * from './Label';
 export * from './Layout';
 export * from './MissingNativeAuthError';
@@ -10,8 +10,6 @@ export * from './OutputContainer';
 export * from './PasswordVisibilityToggle';
 export * from './PrivateKeyCheckWrapper';
 export * from './ProgressBar';
-export * from './TransactionsTracker';
 export * from './Dropdown';
 export * from './NetworkSwitcher';
 export * from './Utilities';
-export * from './sdkDapp.components';

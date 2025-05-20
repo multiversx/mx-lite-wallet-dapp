@@ -1,6 +1,6 @@
 import { useMatch } from 'react-router-dom';
 import { MxLink } from 'components/MxLink';
-import { useGetIsLoggedIn } from 'lib';
+import { useGetIsLoggedIn } from 'lib/sdkDapp';
 import { DataTestIdsEnum, RouteNamesEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';

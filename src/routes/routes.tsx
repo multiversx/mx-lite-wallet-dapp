@@ -18,7 +18,6 @@ import {
   IssueNft,
   Faucet
 } from 'pages';
-import { RouteType } from 'types/sdkDapp.types';
 import {
   CreateRecoverRoutes,
   CreateRecoverRoutesEnum
@@ -26,13 +25,16 @@ import {
 import { IssueCollection } from '../pages/IssueCollection/IssueCollection';
 import { IssueToken } from '../pages/IssueToken/IssueToken';
 
-export interface RouteWithTitleType extends RouteType {
+export interface RouteType {
+  authenticatedRoute?: boolean;
+  path: RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum;
   title: string;
+  component: React.ComponentType;
 }
 
 const routesObject: Record<
   RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
-  RouteWithTitleType
+  RouteType
 > = {
   [RouteNamesEnum.home]: {
     path: RouteNamesEnum.home,
@@ -165,7 +167,7 @@ const routesObject: Record<
   ...CreateRecoverRoutes
 };
 
-export const routes: RouteWithTitleType[] = Object.values(routesObject);
+export const routes: RouteType[] = Object.values(routesObject);
 
 export const routeNames = Object.keys(RouteNamesEnum).reduce(
   (acc, key) => {

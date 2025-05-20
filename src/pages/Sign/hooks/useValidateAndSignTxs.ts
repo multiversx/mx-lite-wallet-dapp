@@ -5,7 +5,13 @@ import { useReplyWithCancelled } from 'hooks';
 import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
 import { useGetAccountInfo, useGetSignedTransactions } from 'lib';
 
-import { TransactionBatchStatusesEnum } from 'localConstants';
+// TODO: Define TransactionBatchStatusesEnum locally or import from sdk-dapp-core if available.
+enum TransactionBatchStatusesEnum {
+  cancelled = 'cancelled',
+  fail = 'fail',
+  invalid = 'invalid',
+}
+
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';

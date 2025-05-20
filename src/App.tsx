@@ -6,13 +6,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 import {
   AxiosInterceptor,
   AxiosInterceptorContext,
-  DappProvider,
   Layout,
   Utilities
 } from 'components';
 
-import { apiTimeout, walletConnectV2ProjectId } from 'config';
-import { provider } from 'helpers/app';
 import { getWebviewToken } from 'lib';
 import { PageNotFound, Unlock } from 'pages';
 import { setIsWebview } from 'redux/slices';
@@ -25,7 +22,6 @@ import { persistor, store } from './redux/store';
 const isWebview = Boolean(getWebviewToken());
 
 const AppContent = () => {
-  const { activeNetwork } = useSelector(networkSelector);
   useSetupHrp();
 
   const dispatch = useDispatch();
@@ -37,49 +33,20 @@ const AppContent = () => {
   }, [isWebview]);
 
   return (
-    <DappProvider
-      environment={activeNetwork.id}
-      externalProvider={isWebview ? undefined : provider}
-      customNetworkConfig={{
-        name: 'customConfig',
-        apiAddress: activeNetwork.apiAddress,
-        apiTimeout,
-        walletConnectV2ProjectId
-      }}
-      dappConfig={{
-        logoutRoute: routeNames.unlock,
-        shouldUseWebViewProvider: isWebview
-      }}
-      customComponents={{
-        transactionTracker: {
-          // uncomment this to use the custom transaction tracker
-          // component: TransactionsTracker,
-          props: {
-            onSuccess: (sessionId: string) => {
-              console.log(`Session ${sessionId} successfully completed`);
-            },
-            onFail: (sessionId: string, errorMessage: string) => {
-              console.log(`Session ${sessionId} failed. ${errorMessage ?? ''}`);
-            }
-          }
-        }
-      }}
-    >
-      <Layout>
-        <Routes>
-          <Route path={routeNames.unlock} element={<Unlock />} />
-          {routes.map((route) => (
-            <Route
-              path={route.path}
-              key={`route-key-'${route.path}`}
-              element={<route.component />}
-            />
-          ))}
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-        <Utilities />
-      </Layout>
-    </DappProvider>
+    <Layout>
+      <Routes>
+        <Route path={routeNames.unlock} element={<Unlock />} />
+        {routes.map((route) => (
+          <Route
+            path={route.path}
+            key={`route-key-'${route.path}`}
+            element={<route.component />}
+          />
+        ))}
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
+      <Utilities />
+    </Layout>
   );
 };
 

@@ -1,14 +1,14 @@
+import { MvxFormatAmount as FormatAmount } from 'components/sdkDapp.components';
+import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';
-import { Copy, MxLink } from 'components';
-import { FormatAmount } from 'components/sdkDapp.components';
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
-import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import {
   explorerAddressSelector,
   useSdkDappSelector
 } from 'redux/sdkDapp.store';
+import { MxLink } from 'components';
+import { DataTestIdsEnum } from 'localConstants';
+import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
@@ -33,7 +33,7 @@ export const Account = () => {
               data-testid={DataTestIdsEnum.userAddress}
             >
               {address}
-              <Copy value={address} />
+              <CopyButton text={address} />
             </div>
           </div>
           <div className='my-1 flex justify-center sm:hidden'>

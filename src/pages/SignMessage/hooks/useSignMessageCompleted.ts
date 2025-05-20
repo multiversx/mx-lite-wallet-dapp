@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { SignedSessionType } from '@multiversx/sdk-dapp/reduxStore/slices';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyToDapp } from 'hooks';
@@ -13,7 +12,7 @@ import {
 
 interface GetReplyDataPropsType {
   isSuccess: boolean;
-  signedMessageInfo: SignedSessionType;
+  signedMessageInfo: { signature?: string; status: string };
 }
 
 export const useSignMessageCompleted = () => {

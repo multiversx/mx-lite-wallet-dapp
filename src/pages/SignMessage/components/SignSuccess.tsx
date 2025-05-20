@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CopyButton } from 'components';
+import { CopyButton } from 'components/sdkDapp.components';
 import { Label } from 'components/Label';
 import { useGetAccountInfo, useGetLastSignedMessageSession } from 'lib';
 import { decodeMessage } from '../helpers';

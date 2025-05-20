@@ -6,7 +6,7 @@ import { Formik, FormikHelpers } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { mixed, object } from 'yup';
-import { Button, ModalContainer, PageState } from 'components';
+import { Button } from 'components';
 import { UseModalReturnType, useCloseModalOnEsc } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
 import { useInitToken, useOnFileLogin } from 'pages/Unlock/hooks';
@@ -14,6 +14,7 @@ import { accountSelector, hookSelector } from 'redux/selectors';
 import { setPemLogin } from 'redux/slices';
 import { routeNames } from 'routes';
 import { parsePem } from './helpers';
+import { MvxModalContainer as ModalContainer, MvxPageState as PageState } from '@multiversx/sdk-dapp-core-ui/react';
 
 const PEM_FIELD = 'pem';
 

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { NETWORK_CONFIG_ENDPOINT } from 'localConstants';
-import { matchPath } from 'types/sdkDapp.types';
+import { matchPath } from 'react-router-dom';
+import { NETWORK_CONFIG_ENDPOINT } from 'lib/sdkDapp/sdkDapp.constants';
 import { gatewayEndpoints } from './apiToGatewayEndpointMap';
 import { arraybufferToJSON } from './arraybufferToJSON';
 import { jsonToArrayBuffer } from './jsonToArrayBuffer';

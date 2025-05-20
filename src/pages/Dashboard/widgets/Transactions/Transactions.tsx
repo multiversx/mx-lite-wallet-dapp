@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
-import { TransactionRow } from 'components/sdkDapp.components';
+// TODO: Replace TransactionRow with sdk-dapp-core-ui equivalent if available.
+// import { TransactionRow } from 'components/sdkDapp.components';
 import {
   getInterpretedTransaction,
   useGetNetworkConfig,

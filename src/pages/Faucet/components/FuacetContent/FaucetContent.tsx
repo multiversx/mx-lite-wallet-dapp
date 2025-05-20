@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Loader } from 'components';
+// TODO: Replace Loader with sdk-dapp-core-ui equivalent if available.
+// import { Loader } from 'components';
 import { getEgldLabel, refreshAccount, useGetAccountInfo } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import {

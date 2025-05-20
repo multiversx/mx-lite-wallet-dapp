@@ -1,11 +1,11 @@
 import { MxLink } from 'components';
 import {
-  ExtensionLoginButton,
-  LedgerLoginButton,
-  OperaWalletLoginButton,
-  WalletConnectLoginButton,
-  XaliasLoginButton
-} from 'components/sdkDapp.components';
+  MvxWalletConnectLoginButton as WalletConnectLoginButton,
+  MvxLedgerLoginButton as LedgerLoginButton,
+  MvxExtensionLoginButton as ExtensionLoginButton,
+  MvxOperaWalletLoginButton as OperaWalletLoginButton,
+  MvxXaliasLoginButton as XaliasLoginButton
+} from '@multiversx/sdk-dapp-core-ui/react';
 import { nativeAuth } from 'config';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
