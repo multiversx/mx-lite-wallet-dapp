@@ -10,8 +10,6 @@ const hasFaucet = import.meta.env.VITE_APP_MSW === 'true' || Boolean(sitekey);
 export const Faucet = () => {
   const navigate = useNavigate();
 
-  console.log('hasFaucet', { hasFaucet });
-
   if (!hasFaucet) {
     // Faucet does not work without google recaptcha key, unless recaptchaBypass is specified (sovereign)
     return null;
