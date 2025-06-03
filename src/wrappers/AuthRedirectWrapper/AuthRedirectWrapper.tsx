@@ -31,5 +31,8 @@ export const AuthRedirectWrapper = ({
     return <Navigate to={`${routeNames.unlock}${search}`} />;
   }
 
+  // add puppeteer debugger
+  debugger;
+
   return <>{children}</>;
 };
