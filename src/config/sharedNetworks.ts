@@ -42,7 +42,7 @@ export const sharedNetorks: NetworkType[] = [
     apiAddress: 'https://localhost:3002',
     gatewayUrl: '',
     extrasApi: 'https://localhost:3001',
-    sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
+    sampleAuthenticatedDomains: ['https://localhost:3002'],
     sovereignContractAddress: '',
     walletAddress: 'https://localhost:3000',
     WEGLDid: 'WEGLD-bd4d79',
