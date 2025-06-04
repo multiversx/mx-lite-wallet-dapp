@@ -15,7 +15,7 @@ export const networks: NetworkType[] = [
     extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: [''],
     sovereignContractAddress: '',
-    walletAddress: 'https://devnet-wallet.multiversx.com',
+    walletAddress: 'https://localhost:3000',
     WEGLDid: ''
   }
 ];
