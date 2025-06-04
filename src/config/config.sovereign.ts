@@ -12,9 +12,9 @@ if (!sovereignNetwork) {
 }
 
 export const networks: NetworkType[] = [
+  ...sharedNetorks.filter((network) => network.id !== 'sovereign'),
   {
     ...sovereignNetwork,
     default: true
-  },
-  ...sharedNetorks
+  }
 ];
