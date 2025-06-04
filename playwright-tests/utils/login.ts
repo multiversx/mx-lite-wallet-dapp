@@ -3,24 +3,23 @@ import { confirmPem } from './confirmPem';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum';
 import { LoginFilesEnum } from '../utils/enums.ts';
 
-interface Login {
+type LoginType = {
   page: Page;
   file?: string;
   user?: string;
-}
+};
 
 export const login = async ({
   page,
   file = LoginFilesEnum.pem,
   user = ''
-}: Login) => {
+}: LoginType) => {
   // Wait for and click the access wallet button
 
   if (file !== LoginFilesEnum.pem) {
     await page.getByTestId(DataTestIdsEnum.keystoreBtn).click();
     await page.setInputFiles(DataTestIdsEnum.inputFile, file);
     await page.getByTestId(DataTestIdsEnum.accessPass).fill('Develop13#');
-    console.log(user);
     await page.getByTestId(DataTestIdsEnum.submitButton).click();
     user ? await page.getByTestId(`check_${user}`).click() : '';
     await page.waitForTimeout(1000);
