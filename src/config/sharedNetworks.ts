@@ -11,8 +11,7 @@ export const sharedNetorks: NetworkType[] = [
     extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://devnet-api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://localhost:3000',
-    WEGLDid: ''
+    walletAddress: 'https://devnet-wallet.multiversx.com'
   },
   {
     default: false,
@@ -23,8 +22,7 @@ export const sharedNetorks: NetworkType[] = [
     extrasApi: 'https://extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://localhost:3000',
-    WEGLDid: ''
+    walletAddress: 'https://wallet.multiversx.com'
   },
   {
     default: false,
@@ -35,8 +33,7 @@ export const sharedNetorks: NetworkType[] = [
     extrasApi: 'https://testnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://testnet-api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://localhost:3000',
-    WEGLDid: ''
+    walletAddress: 'https://testnet-wallet.multiversx.com'
   },
   {
     default: false,
