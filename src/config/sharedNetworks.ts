@@ -49,6 +49,7 @@ export const sharedNetorks: NetworkType[] = [
     sovereignContractAddress: '',
     walletAddress: 'https://localhost:3000',
     WEGLDid: 'WEGLD-bd4d79',
+    hrp: 'erd',
     faucet: true,
     hasRegisterToken: true,
     hasSovereignTransfer: true
