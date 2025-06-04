@@ -21,7 +21,11 @@ export const login = async ({
     await page.setInputFiles(DataTestIdsEnum.inputFile, file);
     await page.getByTestId(DataTestIdsEnum.accessPass).fill('Develop13#');
     await page.getByTestId(DataTestIdsEnum.submitButton).click();
-    user ? await page.getByTestId(`check_${user}`).click() : '';
+
+    if (user) {
+      await page.getByTestId(`check_${user}`).click();
+    }
+
     await page.waitForTimeout(1000);
     await page.getByTestId(DataTestIdsEnum.confirmBtn).click();
     await page.waitForTimeout(2000);
