@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[2.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/92)] - 2025-06-04
+
+- [Added ability to hide features pages based on config](https://github.com/multiversx/mx-lite-wallet-dapp/pull/95)
+- [Added ability to hide token transfer on sovereign](https://github.com/multiversx/mx-lite-wallet-dapp/pull/91)
+
 ## [[2.0.1](https://github.com/multiversx/mx-lite-wallet-dapp/pull/90)] - 2025-05-15
 
 - [Update pacakges to latest versions](https://github.com/multiversx/mx-lite-wallet-dapp/pull/89)

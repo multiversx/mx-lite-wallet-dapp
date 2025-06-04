@@ -27,7 +27,7 @@ export const getSovereignTransferTransaction = ({
   tokens: (PartialNftType | TokenType)[];
 }) => {
   const egldLabel = getEgldLabel();
-  const { WEGLDid } = getCurrentNetwork();
+  const { WEGLDid = '' } = getCurrentNetwork();
   const factoryConfig = new TransactionsFactoryConfig({ chainID: chainId });
   const factory = new SmartContractTransactionsFactory({
     config: factoryConfig
