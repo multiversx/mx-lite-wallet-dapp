@@ -11,7 +11,8 @@ export const sharedNetorks: NetworkType[] = [
     extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://devnet-api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://devnet-wallet.multiversx.com'
+    walletAddress: 'https://devnet-wallet.multiversx.com',
+    WEGLDid: ''
   },
   {
     default: false,
@@ -22,7 +23,8 @@ export const sharedNetorks: NetworkType[] = [
     extrasApi: 'https://extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://wallet.multiversx.com'
+    walletAddress: 'https://wallet.multiversx.com',
+    WEGLDid: ''
   },
   {
     default: false,
@@ -33,20 +35,20 @@ export const sharedNetorks: NetworkType[] = [
     extrasApi: 'https://testnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://testnet-api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://testnet-wallet.multiversx.com'
+    walletAddress: 'https://testnet-wallet.multiversx.com',
+    WEGLDid: ''
   },
   {
     default: false,
     id: 'sovereign',
     name: 'Sovereign',
-    apiAddress: 'https://localhost:3002',
+    apiAddress: 'https://api-sovereign-test.elrond.ro',
     gatewayUrl: '',
-    extrasApi: 'https://localhost:3001',
+    extrasApi: 'https://extras-api-sovereign-test.elrond.ro',
     sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
     sovereignContractAddress: '',
-    walletAddress: 'https://localhost:3000',
+    walletAddress: 'https://wallet.voyager1.dev',
     WEGLDid: 'WEGLD-bd4d79',
-    hrp: 'erd',
     faucet: true,
     hasRegisterToken: true,
     hasSovereignTransfer: true
