@@ -13,9 +13,9 @@ if (!testnetNetwork) {
 }
 
 export const networks: NetworkType[] = [
+  ...sharedNetorks.filter((network) => network.id !== EnvironmentsEnum.testnet),
   {
     ...testnetNetwork,
     default: true
-  },
-  ...sharedNetorks
+  }
 ];
