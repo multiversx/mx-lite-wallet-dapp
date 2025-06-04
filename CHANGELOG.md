@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added ability to hide token transfer on sovereign](https://github.com/multiversx/mx-lite-wallet-dapp/pull/91)
+
 ## [[2.0.1](https://github.com/multiversx/mx-lite-wallet-dapp/pull/90)] - 2025-05-15
 
 - [Update pacakges to latest versions](https://github.com/multiversx/mx-lite-wallet-dapp/pull/89)
