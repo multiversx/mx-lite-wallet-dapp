@@ -7,6 +7,8 @@ export interface NetworkType {
   default: boolean;
   extrasApi: string;
   faucet?: boolean;
+  hasRegisterToken?: boolean;
+  hasSovereignTransfer?: boolean;
   gatewayUrl: string;
   id: string;
   name: string;
