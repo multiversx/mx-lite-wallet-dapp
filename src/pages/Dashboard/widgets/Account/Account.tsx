@@ -1,4 +1,4 @@
-import { MvxFormatAmount as FormatAmount } from 'components/sdkDapp.components';
+import { FormatAmount } from 'lib/sdkDapp';
 import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { MvxLoader as Loader } from '@multiversx/sdk-dapp-core-ui/react';
+import { MvxLoader as Loader } from 'lib/sdkDappCoreUI';
 import { useReplyToDapp, useRedirectPathname } from 'hooks';
 import {
   useGetAccount,

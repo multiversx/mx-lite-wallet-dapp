@@ -1,11 +1,9 @@
-import { faWarning } from '@fortawesome/free-solid-svg-icons';
-import { addNewCustomToast } from 'lib';
+import { createCustomToast } from '@multiversx/sdk-dapp/out/store/actions/toasts/toastsActions';
 import {
   CUSTOM_TOAST_DEFAULT_DURATION,
   IS_DEVELOPMENT,
   IS_TEST
 } from 'localConstants';
-import { CustomToastType } from 'types';
 import { hash } from '../../../../version.json';
 
 const IGNORED_LIST = [
@@ -25,18 +23,13 @@ const createNotification = () => {
 
   isToastVisible = true;
 
-  const newToast: CustomToastType = {
+  createCustomToast({
     toastId: 'axiosError' + Date.now(),
-    type: 'custom',
+    icon: 'warning',
+    iconClassName: 'bg-warning',
     message: 'Your funds are safe.',
-    duration: CUSTOM_TOAST_DEFAULT_DURATION,
-    title: 'Failed to display some information.',
-    status: 'Please try again later.',
-    icon: faWarning,
-    iconClassName: 'bg-warning'
-  };
-
-  addNewCustomToast(newToast);
+    title: 'Failed to display some information.'
+  });
 
   setTimeout(() => {
     isToastVisible = false;
