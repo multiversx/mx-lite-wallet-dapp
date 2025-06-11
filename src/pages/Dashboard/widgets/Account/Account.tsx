@@ -1,4 +1,4 @@
-import { FormatAmount } from 'lib/sdkDapp';
+import { FormatAmount } from 'lib';
 import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';

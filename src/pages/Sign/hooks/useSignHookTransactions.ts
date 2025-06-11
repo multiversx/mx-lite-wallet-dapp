@@ -8,7 +8,7 @@ import {
   extractSessionId,
   sendBatchTransactionsSdkDapp,
   sendTransactions
-} from 'lib/sdkDapp';
+} from 'lib';
 
 import { MultiSignTransactionType, TransactionsDataTokensType } from 'types';
 import { SendBatchTransactionsPropsType } from 'types';

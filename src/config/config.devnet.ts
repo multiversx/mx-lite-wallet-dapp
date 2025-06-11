@@ -1,4 +1,4 @@
-import { EnvironmentsEnum } from 'lib/sdkDapp';
+import { EnvironmentsEnum } from 'lib';
 import { NetworkType } from 'redux/slices';
 import { EnvironmentsEnum } from 'types';
 import { sharedNetorks } from './sharedNetworks';

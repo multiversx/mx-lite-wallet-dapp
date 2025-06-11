@@ -1,13 +1,16 @@
-import { getAccountProviderType } from 'lib';
+import { getAccountProvider, ProviderTypeEnum } from 'lib';
 import { accountSelector } from 'redux/selectors';
 import { RootState, store } from 'redux/store';
-import { LoginMethodsEnum } from 'types';
 
 export const getIsInWebview = () => {
   try {
     const state: RootState = store.getState();
-    const providerType = getAccountProviderType();
-    const isExternalProvider = providerType === LoginMethodsEnum.extra;
+    const provider = getAccountProvider();
+    const providerType = provider.getType();
+    const isExternalProvider = !Object.values(ProviderTypeEnum).includes(
+      providerType as ProviderTypeEnum
+    );
+
     const { isWebview } = accountSelector(state);
 
     return isExternalProvider && isWebview;

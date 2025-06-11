@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { faArrowUp, faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import { FormatAmount } from 'lib/sdkDapp';
+import { FormatAmount } from 'lib';
 import { SearchParamsEnum } from 'localConstants';
 import { sendRouteBuilder } from 'routes';
 import { TokenType } from 'types';

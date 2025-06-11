@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getSignMessageHookData } from 'lib/sdkJsWebWalletIo';
+import { getSignMessageHookData } from 'lib';
 import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { HookValidationOutcome } from '../HookValidationOutcome';

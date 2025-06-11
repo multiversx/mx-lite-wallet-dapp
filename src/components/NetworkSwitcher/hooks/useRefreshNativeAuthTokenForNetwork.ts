@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useSetNativeAuthInterceptors } from 'components/AxiosInterceptor/helpers';
 import { networks } from 'config';
-import { Message } from 'lib/sdkCore';
-import { refreshNativeAuthTokenLogin } from 'lib/sdkDapp';
+import { Message } from 'lib';
+import { refreshNativeAuthTokenLogin } from 'lib';
 import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
 import { changeNetwork } from 'redux/slices';
 

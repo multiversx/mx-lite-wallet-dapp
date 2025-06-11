@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useGetAccount } from 'lib/sdkDapp';
+import { useGetAccount } from 'lib';
 import {
   handleError,
   useSetNativeAuthInterceptors,

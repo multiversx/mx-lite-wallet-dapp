@@ -1,13 +1,14 @@
 import {
+  Message,
   Transaction,
   UserSecretKey,
   UserSigner,
   getAddress,
-  MessageComputer
+  MessageComputer,
+  IProvider
 } from 'lib';
 import { setKeystoreLogin } from 'redux/slices/account';
 import { store as reduxStore } from 'redux/store';
-import { IDappProvider } from 'types';
 let privateKey: string | null = null;
 
 export const setProviderPrivateKey = (key: typeof privateKey) =>
@@ -17,7 +18,7 @@ const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
 };
 
-export const provider: IDappProvider = {
+export const provider: IProvider = {
   init: async () => {
     const address = getAddress();
     return Boolean(address);
@@ -47,7 +48,6 @@ export const provider: IDappProvider = {
   getAddress: notInitializedError('getAddress'),
   isInitialized: () => Boolean(privateKey),
   isConnected: () => false,
-  sendTransaction: notInitializedError('sendTransaction'),
   signTransaction: async (transaction: Transaction) => {
     if (!privateKey) {
       const throwError = notInitializedError('signTransaction');
@@ -61,7 +61,7 @@ export const provider: IDappProvider = {
     return transaction;
   },
 
-  signMessage: async (message) => {
+  signMessage: async (message: Message) => {
     if (!privateKey) {
       const throwError = notInitializedError('signMessage');
       return throwError();

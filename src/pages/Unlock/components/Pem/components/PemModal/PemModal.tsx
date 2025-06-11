@@ -14,7 +14,7 @@ import { accountSelector, hookSelector } from 'redux/selectors';
 import { setPemLogin } from 'redux/slices';
 import { routeNames } from 'routes';
 import { parsePem } from './helpers';
-import { MvxModalContainer as ModalContainer, MvxPageState as PageState } from 'lib/sdkDappCoreUI';
+import { MvxModalContainer as ModalContainer, MvxPageState as PageState } from 'lib';
 
 const PEM_FIELD = 'pem';
 

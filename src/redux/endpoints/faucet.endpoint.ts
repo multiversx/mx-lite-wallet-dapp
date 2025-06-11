@@ -3,8 +3,16 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import { getAxiosConfig, getExtrasApi } from 'helpers';
-import { formatAmount, getEgldLabel, stringIsInteger } from 'lib';
-import { DECIMALS, DIGITS, TOKENS_ENDPOINT, ZERO } from 'localConstants';
+import { TOKENS_ENDPOINT } from 'lib';
+import { getEgldLabel } from 'lib';
+import {
+  formatAmount,
+  stringIsInteger,
+  DECIMALS,
+  DIGITS,
+  ZERO
+} from 'lib';
+
 import { RootApi } from 'redux/rootApi';
 
 interface FaucetSettingsType {

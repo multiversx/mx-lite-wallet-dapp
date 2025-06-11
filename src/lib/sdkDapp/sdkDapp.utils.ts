@@ -1,2 +1,9 @@
 export { refreshNativeAuthTokenLogin } from '@multiversx/sdk-dapp/out/core/providers/DappProvider/helpers/login/helpers/refreshNativeAuthTokenLogin';
 export { decodeNativeAuthToken } from '@multiversx/sdk-dapp/out/services/nativeAuth/helpers/decodeNativeAuthToken';
+export { decodeLoginToken } from '@multiversx/sdk-dapp/out/services/nativeAuth/helpers/decodeLoginToken';
+export { getEgldLabel } from '@multiversx/sdk-dapp/out/methods/network/getEgldLabel';
+export { initApp } from '@multiversx/sdk-dapp/out/methods/initApp/initApp';
+export { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/accountProvider';
+export { UnlockPanelManager } from '@multiversx/sdk-dapp/out/managers/UnlockPanelManager';
+export { NotificationsFeedManager } from '@multiversx/sdk-dapp/out/managers/NotificationsFeedManager';
+export { getAddress } from '@multiversx/sdk-dapp/out/methods/account/getAddress';

@@ -13,7 +13,7 @@ import {
   Transaction
 } from 'lib';
 
-import { TransactionBatchStatusesEnum } from 'lib/sdkDapp/sdkDapp.constants';
+import { TransactionBatchStatusesEnum } from 'lib';
 import {
   LoginMethodsEnum,
   SendBatchTransactionsPropsType,

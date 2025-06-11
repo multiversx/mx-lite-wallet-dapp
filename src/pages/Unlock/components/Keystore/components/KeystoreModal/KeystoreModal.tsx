@@ -23,7 +23,7 @@ import {
   parseKeystoreJSON
 } from './helpers';
 import { KeystoreValuesType, useOnKeystoreSubmit } from './hooks';
-import { MvxModalContainer as ModalContainer, MvxPageState as PageState } from 'lib/sdkDappCoreUI';
+import { MvxModalContainer as ModalContainer, MvxPageState as PageState } from 'lib';
 
 interface AccessWalletType {
   kdContent: { [key: string]: any };

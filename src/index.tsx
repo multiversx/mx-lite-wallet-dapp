@@ -1,9 +1,8 @@
 import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
+import { EnvironmentsEnum, initApp } from 'lib';
 import { App } from './App';
 import 'utils/adapter/gatewayAdapter';
-import { initApp } from 'lib/sdkDapp';
-import { EnvironmentsEnum } from 'lib/sdkDapp/sdkDapp.types';
 
 const config = {
   storage: { getStorageCallback: () => sessionStorage },

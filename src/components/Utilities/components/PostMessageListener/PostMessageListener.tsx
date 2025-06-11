@@ -8,19 +8,19 @@ import {
   useReplyWithCancelled,
   useSignTxSchema
 } from 'hooks';
-import { Transaction } from 'lib/sdkCore';
-import { useGetLoginInfo } from 'lib/sdkDapp';
+import { Transaction } from 'lib';
+import { useGetLoginInfo } from 'lib';
 import {
   WindowProviderRequestEnums,
   WindowProviderResponseEnums,
   RequestMessageType
-} from 'lib/sdkDappWebWalletCrossWindowProvider';
+} from 'lib';
 
 import {
   getLoginHookData,
   getSignMessageHookData,
   getSignHookData
-} from 'lib/sdkJsWebWalletIo';
+} from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
