@@ -17,7 +17,7 @@ export const Account = () => {
   const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
   const explorerAddress = useSdkDappSelector(explorerAddressSelector);
-  const isSovereign = activeNetwork.id === 'sovereign';
+  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
@@ -66,7 +66,7 @@ export const Account = () => {
             >
               Open in Explorer
             </a>
-            {isSovereign && <FaucetButton />}
+            <FaucetButton />
             <MxLink
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.sendBtn}
@@ -81,14 +81,16 @@ export const Account = () => {
             >
               Sign Message
             </MxLink>
-            <MxLink
-              className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-              data-testid={DataTestIdsEnum.sovereignTransferBtn}
-              to={routeNames.sovereignTransfer}
-            >
-              Sovereign Transfer
-            </MxLink>
-            {isSovereign && (
+            {hasSovereignTransfer && (
+              <MxLink
+                className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+                data-testid={DataTestIdsEnum.sovereignTransferBtn}
+                to={routeNames.sovereignTransfer}
+              >
+                Sovereign Transfer
+              </MxLink>
+            )}
+            {hasRegisterToken && (
               <MxLink
                 className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
                 data-testid={DataTestIdsEnum.registerTokenBtn}

@@ -1,20 +1,21 @@
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Button, PrivateKeyCheckWrapper } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
-import { networkSelector } from 'redux/selectors';
+import { RootState } from 'redux/store';
 import { routeNames } from 'routes';
 import { FaucetContent } from './components/FuacetContent/FaucetContent';
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 
-export const Faucet = () => {
-  const { activeNetwork } = useSelector(networkSelector);
-  const isSovereign = activeNetwork.id === 'sovereign';
-  const navigate = useNavigate();
+const hasFaucet = import.meta.env.VITE_APP_MSW === 'true' || Boolean(sitekey);
 
-  if (!sitekey && !isSovereign) {
+export const Faucet = () => {
+  const navigate = useNavigate();
+  const { activeNetwork } = useSelector((state: RootState) => state.network);
+
+  if (!hasFaucet || !activeNetwork.faucet) {
     // Faucet does not work without google recaptcha key, unless recaptchaBypass is specified (sovereign)
-    return null;
+    return <Navigate to={routeNames.dashboard} />;
   }
 
   const handleFaucetCloseFlow = () => {

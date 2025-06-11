@@ -1,9 +1,25 @@
+import { useState, useEffect } from 'react';
 import HeartIcon from 'assets/img/heart.svg?react';
 
 import { version } from '../../../../package.json';
-import { hash as walletVersion } from '../../../../version.json';
 
 export const Footer = () => {
+  const [walletVersion, setWalletVersion] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadVersion = async () => {
+      try {
+        const versionModule = await import('../../../../version.json');
+        setWalletVersion(versionModule.hash);
+      } catch (error) {
+        console.error('Failed to load version information', error);
+        setWalletVersion(null);
+      }
+    };
+
+    loadVersion();
+  }, []);
+
   return (
     <footer className='mx-auto w-full max-w-prose pb-6 pl-6 pr-6 text-center text-gray-400'>
       <div className='flex flex-col items-center text sm text-gray-400'>
