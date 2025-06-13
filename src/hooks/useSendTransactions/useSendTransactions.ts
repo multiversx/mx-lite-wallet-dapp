@@ -1,25 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  extractSessionId,
-  removeTransactionsToSign,
-  sendBatchTransactionsSdkDapp,
-  sendTransactions as sendTransactionsSdkDapp,
-  useGetAccountInfo,
-  useGetAccountProvider,
-  useGetActiveTransactionsStatus,
-  useGetPendingTransactions,
-  Transaction
-} from 'lib';
-
-import { TransactionBatchStatusesEnum } from 'lib';
-import {
-  LoginMethodsEnum,
-  SendBatchTransactionsPropsType,
-  SendTransactionsPropsType,
-  TransactionsDisplayInfoType
-} from 'types';
+import { ProviderTypeEnum, Transaction, useGetAccount } from 'lib';
 
 interface SendTransactionsParamsType {
   redirectRoute?: string;
@@ -29,7 +11,7 @@ interface SendTransactionsParamsType {
 export function useSendTransactions(params?: SendTransactionsParamsType) {
   const {
     account: { nonce }
-  } = useGetAccountInfo();
+  } = useGetAccount();
   const navigate = useNavigate();
   const { pendingTransactions } = useGetPendingTransactions();
   const { fail, timedOut } = useGetActiveTransactionsStatus();
@@ -41,7 +23,7 @@ export function useSendTransactions(params?: SendTransactionsParamsType) {
   const [sessionId, setSessionId] = useState<string | null>(null);
 
   const shouldRemoveUsernames =
-    providerType === LoginMethodsEnum.walletconnectv2;
+    providerType === ProviderTypeEnum.walletconnectv2;
 
   const sendTransactions = async (
     transactions: Transaction[],

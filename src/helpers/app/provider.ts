@@ -8,6 +8,7 @@ import {
   IProvider,
   TransactionComputer
 } from 'lib';
+import { IDappProvider } from 'lib';
 import { setKeystoreLogin } from 'redux/slices/account';
 import { store as reduxStore } from 'redux/store';
 

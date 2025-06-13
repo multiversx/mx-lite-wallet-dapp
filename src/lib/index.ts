@@ -5,3 +5,4 @@ export * from './sdkDappForm';
 export * from './sdkDappUtils';
 export * from './sdkDappWebWalletCrossWindowProvider';
 export * from './sdkJsWebWalletIo';
+export * from './sdkDappWebWalletCrossWindowProvider';

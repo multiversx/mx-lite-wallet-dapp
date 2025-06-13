@@ -3,19 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyWithCancelled } from 'hooks';
 import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
-import { useGetAccountInfo, useGetSignedTransactions } from 'lib';
-
-// TODO: Define TransactionBatchStatusesEnum locally or import from sdk-dapp-core if available.
-enum TransactionBatchStatusesEnum {
-  cancelled = 'cancelled',
-  fail = 'fail',
-  invalid = 'invalid'
-}
+import {
+  useGetAccountInfo,
+  useGetSignedTransactions,
+  SignedTransactionType,
+  TransactionBatchStatusesEnum
+} from 'lib';
 
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { SignedTransactionType, TransactionSignatureDataType } from 'types';
+import { TransactionSignatureDataType } from 'types';
 import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
 import {
   ValidateAndSignTxsReturnType,

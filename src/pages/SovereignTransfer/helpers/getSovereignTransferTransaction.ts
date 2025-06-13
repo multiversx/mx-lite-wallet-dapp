@@ -1,5 +1,5 @@
+import { TokenType } from 'lib';
 import {
-  SmartContractTransactionsFactory,
   TransactionsFactoryConfig,
   Token
 } from '@multiversx/sdk-core';

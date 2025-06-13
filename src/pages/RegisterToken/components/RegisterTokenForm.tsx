@@ -3,13 +3,14 @@ import Select from 'react-select';
 import { Button, MxLink } from 'components';
 import { capitalize, getFormHasError } from 'helpers';
 import {
-  DataTestIdsEnum,
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,
-  TESTNET_CHAIN_ID
-} from 'localConstants';
+  TESTNET_CHAIN_ID,
+  EnvironmentsEnum
+} from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
-import { EnvironmentsEnum, SendTypeEnum } from 'types';
+import { SendTypeEnum } from 'types';
 import { useRegisterTokenForm } from '../hooks';
 import { RegisterTokenFormFieldsEnum } from '../types';
 

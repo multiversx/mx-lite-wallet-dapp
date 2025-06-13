@@ -1,4 +1,4 @@
-import { Address } from '@multiversx/sdk-core';
+import { Address } from 'lib';
 
 export const addressIsErd = (address: string) => {
   try {

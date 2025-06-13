@@ -9,14 +9,13 @@ import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/
 import { networks } from 'config';
 import { capitalize, addressIsErd } from 'helpers';
 import { useSendTransactions } from 'hooks';
-import { addressIsValid, useGetAccountInfo } from 'lib';
 import {
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,
   TESTNET_CHAIN_ID
 } from 'localConstants';
 import { routeNames } from 'routes';
-import { EnvironmentsEnum, SendTypeEnum } from 'types';
+import { SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';

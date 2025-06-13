@@ -1,4 +1,4 @@
-import { createCustomToast } from '@multiversx/sdk-dapp/out/store/actions/toasts/toastsActions';
+import { createCustomToast } from 'lib';
 import {
   CUSTOM_TOAST_DEFAULT_DURATION,
   IS_DEVELOPMENT,

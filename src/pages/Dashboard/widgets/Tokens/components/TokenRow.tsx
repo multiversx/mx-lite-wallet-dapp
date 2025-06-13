@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { FormatAmount } from 'lib';
 import { SearchParamsEnum } from 'localConstants';
 import { sendRouteBuilder } from 'routes';
-import { TokenType } from 'types';
 
 export const TokenRow = ({ token }: { token: TokenType }) => {
   const navigate = useNavigate();

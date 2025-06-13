@@ -38,7 +38,7 @@ export const getGatewayConfigForCurrentRequest = (
 
   Object.entries(endpointMap).forEach(([key, value]) => {
     const matchesPath = matchPath(
-      apiRoutes[key as keyof typeof apiRoutes],
+      apiRoutes[key as keyof typeof apiRoutes] as unknown as string,
       url
     );
 

@@ -8,15 +8,16 @@ import {
   useReplyWithCancelled,
   useSignTxSchema
 } from 'hooks';
-import { Transaction } from 'lib';
-import { useGetLoginInfo } from 'lib';
 import {
   WindowProviderRequestEnums,
   WindowProviderResponseEnums,
-  RequestMessageType
+  RequestMessageType,
+  getLoginHookData,
+  getSignHookData,
+  getSignMessageHookData,
+  Transaction,
+  useGetLoginInfo,
 } from 'lib';
-
-import { getLoginHookData, getSignMessageHookData, getSignHookData } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Refactor @multiversx imports and moved to lib](https://github.com/multiversx/mx-lite-wallet-dapp/pull/97)
+- [Added `hasSovereignTransfer` in `sharedNetworks`](https://github.com/multiversx/mx-lite-wallet-dapp/pull/96)
+
 ## [[2.0.2](https://github.com/multiversx/mx-lite-wallet-dapp/pull/92)] - 2025-06-04
 
 - [Added ability to hide features pages based on config](https://github.com/multiversx/mx-lite-wallet-dapp/pull/95)

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { Button, MxLink } from 'components';
 import { getFormHasError } from 'helpers';
+import { NftEnumType } from 'lib';
 import { CollectionTypeByNftEnum, DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
-import { NftEnumType } from 'types';
 import { useIssueCollectionForm } from '../hooks';
 import { IssueCollectionFieldsEnum } from '../types';
 

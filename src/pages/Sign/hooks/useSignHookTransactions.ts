@@ -2,9 +2,7 @@ import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import {
   IPlainTransactionObject,
   parseSignUrl,
-  validateSignTransactions
-} from 'lib';
-import {
+  validateSignTransactions,
   extractSessionId,
   sendBatchTransactionsSdkDapp,
   sendTransactions

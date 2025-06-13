@@ -5,10 +5,11 @@ import { OutputContainer } from 'components/OutputContainer';
 import {
   getInterpretedTransaction,
   useGetNetworkConfig,
-  useGetAccountInfo
+  useGetAccountInfo,
+  TransactionRow
 } from 'lib';
+import { ServerTransactionType } from 'lib';
 import { useLazyGetTransactionsQuery } from 'redux/endpoints';
-import { ServerTransactionType } from 'types';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 

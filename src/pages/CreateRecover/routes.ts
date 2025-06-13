@@ -1,3 +1,4 @@
+import { RouteType } from 'lib';
 import { CreateRecover } from './CreateRecover';
 import { RouteType } from '../../routes/routes';
 

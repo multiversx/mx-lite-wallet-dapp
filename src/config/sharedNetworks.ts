@@ -11,7 +11,8 @@ export const sharedNetworks: NetworkType[] = [
     extrasApi: 'https://devnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://devnet-api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://devnet-wallet.multiversx.com'
+    walletAddress: 'https://devnet-wallet.multiversx.com',
+    hasSovereignTransfer: true
   },
   {
     default: false,
@@ -22,7 +23,8 @@ export const sharedNetworks: NetworkType[] = [
     extrasApi: 'https://extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://wallet.multiversx.com'
+    walletAddress: 'https://wallet.multiversx.com',
+    hasSovereignTransfer: true
   },
   {
     default: false,
@@ -33,7 +35,8 @@ export const sharedNetworks: NetworkType[] = [
     extrasApi: 'https://testnet-extras-api.multiversx.com',
     sampleAuthenticatedDomains: ['https://testnet-api.multiversx.com'],
     sovereignContractAddress: '',
-    walletAddress: 'https://testnet-wallet.multiversx.com'
+    walletAddress: 'https://testnet-wallet.multiversx.com',
+    hasSovereignTransfer: true
   },
   {
     default: false,
