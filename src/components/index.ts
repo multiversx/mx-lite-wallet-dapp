@@ -14,4 +14,4 @@ export * from './TransactionsTracker';
 export * from './Dropdown';
 export * from './NetworkSwitcher';
 export * from './Utilities';
-export * from './sdkDapp.components';
+export * from '../lib/sdkDapp/sdkDapp.components';

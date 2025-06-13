@@ -13,9 +13,9 @@ import {
   useGetSignTransactionsError
 } from 'lib';
 
+import { signTransactionsCancelMessageSelector } from 'lib/sdkDapp/sdkDapp.selectors';
+import { sdkDappStore } from 'lib/sdkDapp/sdkDapp.store';
 import { MAX_ALLOWED_TRANSACTIONS_TO_SIGN } from 'localConstants';
-import { signTransactionsCancelMessageSelector } from 'redux/sdkDapp.selectors';
-import { sdkDappStore } from 'redux/sdkDapp.store';
 import {
   LoginMethodsEnum,
   MultiSignTransactionType,

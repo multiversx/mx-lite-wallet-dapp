@@ -1,4 +1,5 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
+import { SearchParamsEnum } from '@multiversx/sdk-dapp/constants';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSearchParams } from 'react-router-dom';
@@ -16,12 +17,7 @@ import {
   addressIsValid,
   calculateGasLimit
 } from 'lib';
-import {
-  DECIMALS,
-  GAS_LIMIT,
-  GAS_PRICE,
-  SearchParamsEnum
-} from 'localConstants';
+import { DECIMALS, GAS_LIMIT, GAS_PRICE } from 'lib';
 import { SendTypeEnum, TokenOptionType, PartialNftType } from 'types';
 import { FormFieldsEnum } from '../types';
 

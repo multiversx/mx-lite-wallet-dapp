@@ -1,5 +1,5 @@
 import { formatAmount, getEgldLabel } from 'lib';
-import { DECIMALS, DIGITS } from 'localConstants';
+import { DECIMALS, DIGITS } from 'lib';
 import { PartialNftType, TokenType } from 'types';
 
 export const getSelectedTokenBalance = ({

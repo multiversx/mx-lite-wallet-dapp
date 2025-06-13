@@ -1,12 +1,12 @@
 import { MxLink } from 'components';
+import { nativeAuth } from 'config';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
   XaliasLoginButton
-} from 'components/sdkDapp.components';
-import { nativeAuth } from 'config';
+} from 'lib/sdkDapp/sdkDapp.components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import {

@@ -1,18 +1,16 @@
+import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
+import { TokenType } from 'types';
+import { getCurrentNetwork } from '../../../helpers';
 import {
-  SmartContractTransactionsFactory,
   TransactionsFactoryConfig,
-  Token
-} from '@multiversx/sdk-core';
-import {
-  getEgldLabel,
-  parseAmount,
+  TokenTransfer,
   Address,
   AddressValue,
-  TokenTransfer
-} from 'lib';
-import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { PartialNftType, TokenType } from 'types';
-import { getCurrentNetwork } from '../../../helpers';
+  SmartContractTransactionsFactory,
+  Token
+} from '../../../lib';
+import { getEgldLabel, parseAmount } from '../../../lib';
+import { PartialNftType } from '../../../lib';
 import { SovereignTransferFormType } from '../types';
 
 export const getSovereignTransferTransaction = ({

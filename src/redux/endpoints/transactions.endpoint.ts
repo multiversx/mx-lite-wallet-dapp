@@ -4,7 +4,7 @@ import {
   API_CACHE_DURATION_SECONDS,
   MAX_API_SIZE,
   TRANSACTIONS_ENDPOINT
-} from 'localConstants';
+} from 'lib';
 import { RootApi } from 'redux/rootApi';
 import { ServerTransactionType } from 'types';
 

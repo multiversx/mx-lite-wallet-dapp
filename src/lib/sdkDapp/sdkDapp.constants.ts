@@ -4,7 +4,8 @@ export {
   GAS_LIMIT,
   EXTRA_GAS_LIMIT_GUARDED_TX,
   VERSION,
-  DIGITS
+  DIGITS,
+  DataTestIdsEnum
 } from '@multiversx/sdk-dapp/constants';
 export {
   ACCOUNTS_ENDPOINT,

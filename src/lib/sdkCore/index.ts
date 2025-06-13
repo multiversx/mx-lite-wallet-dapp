@@ -12,7 +12,10 @@ export {
   TransactionOptions,
   TransactionVersion,
   TokenManagementTransactionsFactory,
-  TransactionsFactoryConfig
+  TransactionsFactoryConfig,
+  SmartContractTransactionsFactory,
+  Token,
+  LibraryConfig
 } from '@multiversx/sdk-core';
 
 export type { IPlainTransactionObject } from '@multiversx/sdk-core/out';

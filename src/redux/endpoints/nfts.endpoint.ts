@@ -6,7 +6,7 @@ import {
   NFTS_ENDPOINT,
   ROLES_ENDPOINT,
   COLLECTIONS_ENDPOINT
-} from 'localConstants';
+} from 'lib';
 import { GetNftsType, PartialNftType, CollectionType } from 'types';
 import { RootApi } from '../rootApi';
 

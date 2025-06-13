@@ -4,7 +4,7 @@ import {
   API_CACHE_DURATION_SECONDS,
   MAX_API_SIZE,
   TOKENS_ENDPOINT
-} from 'localConstants';
+} from 'lib';
 import { TokenType } from 'types';
 import { RootApi } from '../rootApi';
 

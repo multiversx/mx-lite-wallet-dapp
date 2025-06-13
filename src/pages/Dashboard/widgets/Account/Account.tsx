@@ -1,14 +1,14 @@
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';
 import { Copy, MxLink } from 'components';
-import { FormatAmount } from 'components/sdkDapp.components';
 import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
-import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
+import { FormatAmount } from 'lib/sdkDapp/sdkDapp.components';
 import {
   explorerAddressSelector,
   useSdkDappSelector
-} from 'redux/sdkDapp.store';
+} from 'lib/sdkDapp/sdkDapp.store';
+import { DataTestIdsEnum } from 'localConstants';
+import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 

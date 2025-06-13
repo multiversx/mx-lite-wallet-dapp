@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { TransactionBatchStatusesEnum } from 'localConstants/sdkDapp';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -13,7 +14,6 @@ import {
   Transaction
 } from 'lib';
 
-import { TransactionBatchStatusesEnum } from 'localConstants/sdkDapp';
 import {
   LoginMethodsEnum,
   SendBatchTransactionsPropsType,

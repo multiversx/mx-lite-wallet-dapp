@@ -1,7 +1,7 @@
 import { EnvironmentsEnum } from 'types';
 import { NetworkType } from '../redux/slices';
 
-export const sharedNetorks: NetworkType[] = [
+export const sharedNetworks: NetworkType[] = [
   {
     default: false,
     id: EnvironmentsEnum.devnet,
