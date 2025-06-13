@@ -12,3 +12,4 @@ export {
 } from '@multiversx/sdk-dapp/reduxStore/slices/accountInfoSlice';
 export { initializeNetworkConfig } from '@multiversx/sdk-dapp/reduxStore/slices';
 export { apiAddressSelector } from '@multiversx/sdk-dapp/reduxStore/selectors/networkConfigSelectors';
+export type { SignedSessionType } from '@multiversx/sdk-dapp/reduxStore/slices';

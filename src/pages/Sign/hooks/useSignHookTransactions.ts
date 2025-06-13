@@ -5,11 +5,12 @@ import {
   validateSignTransactions,
   extractSessionId,
   sendBatchTransactionsSdkDapp,
-  sendTransactions
+  sendTransactions,
+  MultiSignTransactionType,
+  TransactionsDataTokensType,
+  SendBatchTransactionsPropsType
 } from 'lib';
 
-import { MultiSignTransactionType, TransactionsDataTokensType } from 'types';
-import { SendBatchTransactionsPropsType } from 'types';
 import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFromRaw';
 
 interface ValidatedTxsStateType {

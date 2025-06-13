@@ -4,7 +4,7 @@ import { useGetAccountInfo } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { routeNames } from 'routes';
-import { TokenType } from 'types';
+import { TokenType } from 'lib';
 import { TokenRow } from './components';
 
 export const Tokens = () => {

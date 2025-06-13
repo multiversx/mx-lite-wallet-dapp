@@ -9,7 +9,7 @@ import { TransactionBatchStatusesEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { SignedTransactionType, TransactionSignatureDataType } from 'types';
+import { SignedTransactionType, TransactionSignatureDataType } from 'lib';
 import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
 import {
   ValidateAndSignTxsReturnType,

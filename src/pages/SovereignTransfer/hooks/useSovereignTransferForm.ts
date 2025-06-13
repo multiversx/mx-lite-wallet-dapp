@@ -6,7 +6,7 @@ import { addressIsErd, getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { networkSelector } from 'redux/selectors';
-import { SendTypeEnum } from 'types';
+import { SendTypeEnum } from 'lib';
 import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 

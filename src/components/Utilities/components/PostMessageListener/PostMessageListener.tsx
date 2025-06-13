@@ -17,14 +17,14 @@ import {
   Transaction,
   useGetLoginInfo
 } from 'lib';
-import { HooksEnum } from 'localConstants';
-import { setHook } from 'redux/slices';
-import { routeNames } from 'routes';
 import {
   WindowProviderRequestEnums,
   WindowProviderResponseEnums,
   RequestMessageType
-} from 'types';
+} from 'lib';
+import { HooksEnum } from 'localConstants';
+import { setHook } from 'redux/slices';
+import { routeNames } from 'routes';
 import {
   buildTransactionsQueryString,
   buildWalletQueryString,

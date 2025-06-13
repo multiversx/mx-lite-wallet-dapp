@@ -13,7 +13,7 @@ import {
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { LoginMethodsEnum } from 'types';
+import { LoginMethodsEnum } from 'lib';
 import { useValidateAndSignTxs } from './hooks';
 
 /*

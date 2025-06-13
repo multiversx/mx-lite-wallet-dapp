@@ -19,7 +19,7 @@ import {
   SendBatchTransactionsPropsType,
   SendTransactionsPropsType,
   TransactionsDisplayInfoType
-} from 'types';
+} from 'lib';
 
 interface SendTransactionsParamsType {
   redirectRoute?: string;

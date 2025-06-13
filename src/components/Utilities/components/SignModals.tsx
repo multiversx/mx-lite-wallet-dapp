@@ -1,18 +1,18 @@
 import { useEffect, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useReplyWithCancelled } from 'hooks';
 import {
   SignTransactionsModals,
   SignWithDeviceModal,
   SignWithExtensionModal,
   SignWithLedgerModal
-} from 'components';
-import { useReplyWithCancelled } from 'hooks';
+} from 'lib';
 import { useGetActiveTransactionsStatus } from 'lib';
+import { SignModalPropsType } from 'lib';
 import { HooksEnum } from 'localConstants/routes/routeNames.enums';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
-import { SignModalPropsType } from 'types';
 
 const DappUI = {
   SignWithDeviceModal,

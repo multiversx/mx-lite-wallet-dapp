@@ -15,7 +15,7 @@ import {
 import { CANCELLED, DataTestIdsEnum, HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { SignedMessageStatusesEnum } from 'types';
+import { SignedMessageStatusesEnum } from 'lib';
 import { SignFailure, SignSuccess } from './components';
 import { useSignMessageCompleted } from './hooks';
 

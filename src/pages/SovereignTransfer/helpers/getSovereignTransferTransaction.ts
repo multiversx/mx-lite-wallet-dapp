@@ -1,5 +1,5 @@
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { TokenType } from 'types';
+import { TokenType } from 'lib';
 import { getCurrentNetwork } from '../../../helpers';
 import {
   TransactionsFactoryConfig,

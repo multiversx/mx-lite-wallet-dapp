@@ -6,7 +6,7 @@ import { getLogoutHookData, replyToDapp } from 'lib';
 import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { WindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'lib';
 import { HookValidationOutcome } from '../HookValidationOutcome';
 import { HookStateEnum } from '../types';
 

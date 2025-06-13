@@ -7,7 +7,7 @@ import {
   TransactionOptions,
   TransactionVersion
 } from 'lib';
-import { TransactionSignatureDataType } from 'types';
+import { TransactionSignatureDataType } from 'lib';
 
 export interface MapSignedTransactionsParamsType {
   txs: IPlainTransactionObject[];

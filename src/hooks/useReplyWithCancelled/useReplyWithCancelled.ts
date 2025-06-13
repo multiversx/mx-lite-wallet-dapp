@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useGetAccount } from 'lib';
 import { resetHook } from 'redux/slices';
-import { WindowProviderResponseEnums } from 'types';
+import { WindowProviderResponseEnums } from 'lib';
 import { useAbortAndRemoveAllTxs } from '../useAbortAndRemoveAllTx';
 import { useReplyToDapp } from '../useReplyToDapp';
 

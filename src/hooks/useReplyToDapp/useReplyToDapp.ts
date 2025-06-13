@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { replyToDapp } from 'lib';
 import { hookSelector } from 'redux/selectors/hook';
-import { ExtendedReplyWithPostMessageType } from 'types';
+import { ExtendedReplyWithPostMessageType } from 'lib';
 
 export const useReplyToDapp = () => {
   const { callbackUrl } = useSelector(hookSelector);

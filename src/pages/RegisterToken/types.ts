@@ -1,4 +1,4 @@
-import { TokenOptionType } from 'types';
+import { TokenOptionType } from 'lib';
 
 export enum RegisterTokenFormFieldsEnum {
   contract = 'contract',

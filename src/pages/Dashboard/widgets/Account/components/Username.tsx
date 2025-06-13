@@ -1,6 +1,6 @@
 import { Label } from 'components/Label';
 import { trimUsernameDomain } from 'lib';
-import { AccountType, ProfileType } from 'types';
+import { AccountType, ProfileType } from 'lib';
 
 export const Username = (props: {
   account: AccountType | ProfileType | null;

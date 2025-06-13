@@ -10,7 +10,7 @@ import {
 } from 'lib';
 
 import { CollectionTypeByNftEnum } from 'localConstants';
-import { NftEnumType } from 'types';
+import { NftEnumType } from 'lib';
 import { IssueCollectionFieldsEnum } from '../types';
 
 export const useIssueCollectionForm = () => {

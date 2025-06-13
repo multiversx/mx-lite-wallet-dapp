@@ -4,7 +4,7 @@ import { Button, MxLink } from 'components';
 import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
-import { NftEnumType } from 'types';
+import { NftEnumType } from 'lib';
 import { useIssueNftForm } from '../hooks';
 import { IssueNftFieldsEnum } from '../types';
 

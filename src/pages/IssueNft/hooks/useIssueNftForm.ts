@@ -11,7 +11,7 @@ import {
   TransactionsFactoryConfig
 } from 'lib';
 import { useGetCollectionsQuery } from 'redux/endpoints';
-import { CollectionType } from 'types';
+import { CollectionType } from 'lib';
 import { IssueNftFieldsEnum } from '../types';
 
 export const useIssueNftForm = () => {

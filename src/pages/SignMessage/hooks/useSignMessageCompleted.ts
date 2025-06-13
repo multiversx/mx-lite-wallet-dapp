@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyToDapp } from 'hooks';
 import { SignedSessionType } from 'lib';
-import { resetHook } from 'redux/slices';
-import { routeNames } from 'routes';
 import {
   WindowProviderResponseEnums,
   SignMessageStatusEnum,
   ExtendedReplyWithPostMessageType
-} from 'types';
+} from 'lib';
+import { resetHook } from 'redux/slices';
+import { routeNames } from 'routes';
 
 interface GetReplyDataPropsType {
   isSuccess: boolean;

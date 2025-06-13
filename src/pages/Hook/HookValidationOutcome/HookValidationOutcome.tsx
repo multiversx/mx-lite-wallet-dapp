@@ -10,8 +10,8 @@ import {
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { WindowProviderResponseEnums } from 'types';
-import { LoginMethodsEnum } from 'types';
+import { WindowProviderResponseEnums } from 'lib';
+import { LoginMethodsEnum } from 'lib';
 import { HookStateEnum } from '../types';
 
 interface HookValidationOutcomePropsType {

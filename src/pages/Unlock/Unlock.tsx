@@ -13,7 +13,7 @@ import {
   LedgerLoginButtonPropsType,
   OperaWalletLoginButtonPropsType,
   WalletConnectLoginButtonPropsType
-} from 'types';
+} from 'lib';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';

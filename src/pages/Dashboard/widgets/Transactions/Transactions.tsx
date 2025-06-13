@@ -7,7 +7,7 @@ import {
   TransactionRow
 } from 'lib';
 import { useLazyGetTransactionsQuery } from 'redux/endpoints';
-import { ServerTransactionType } from 'types';
+import { ServerTransactionType } from 'lib';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
