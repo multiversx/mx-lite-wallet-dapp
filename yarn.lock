@@ -2075,10 +2075,10 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.0.tgz#15cae568ae5d25ea2ac12c3793d52d18db5ac1fe"
   integrity sha512-NcaQUgXrjDqjKJgbUj1eM11ID7sDJRVFamjEA/VO4qquP8jBOrSeW0ltvppHElZGC/A14tNDERPbZQkrLIa2KQ==
 
-"@multiversx/sdk-dapp@5.0.0-alpha.6":
-  version "5.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.6.tgz#6b3896871645d8f7ee1139811abd8e61e216261c"
-  integrity sha512-+Gz7GPBdaG40LRel2vcnnnb+Amt/1L32jsdTQosNIkuVyzc3voY67QzLxCbuWuxuZ/kM8VVN+EQ1btlPQd5Tsg==
+"@multiversx/sdk-dapp@5.0.0-alpha.7":
+  version "5.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.7.tgz#8577248981b1ba6be60ab68d1eca1e17b5543bf6"
+  integrity sha512-4tE8ejoNd+hTAiw9W4pC4LMA4u0sDK3f/FL8dI7VZ5/fiKVLIVySzjRdZlBYn8/qyu/oAO5lKyBHfJSw2PZ1kA==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "14.0.2"
@@ -2090,7 +2090,7 @@
     "@multiversx/sdk-wallet" "4.6.0"
     "@multiversx/sdk-wallet-connect-provider" "6.0.1"
     "@multiversx/sdk-web-wallet-cross-window-provider" "3.1.0"
-    "@multiversx/sdk-web-wallet-iframe-provider" "3.0.0"
+    "@multiversx/sdk-web-wallet-iframe-provider" "3.0.1"
     "@multiversx/sdk-web-wallet-provider" "5.0.0"
     "@multiversx/sdk-webview-provider" "3.0.1"
     immer "10.1.1"
@@ -2190,10 +2190,10 @@
   dependencies:
     qs "6.11.2"
 
-"@multiversx/sdk-web-wallet-iframe-provider@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-iframe-provider/-/sdk-web-wallet-iframe-provider-3.0.0.tgz#65068b2fa9fc0084a2c4fb90d8e686df14258e5e"
-  integrity sha512-qEPARy3iMsmnOiRKBsAN2PCXP1l1kHpNn+8MvVFmdHC6jt5mdyKJw5Dj7CgReoLeuHwUtGDp5OGjUUGk6Cf9gg==
+"@multiversx/sdk-web-wallet-iframe-provider@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-iframe-provider/-/sdk-web-wallet-iframe-provider-3.0.1.tgz#e3b9d1584f6a7b02ee1d27ff0c56bc0524c3a911"
+  integrity sha512-fXqkWPhuEiyg57JzZjgkktzRfL/pQ/7fM4wuIN8dIYUngfwEwa0uqpJy5DU90Pcqm0S2gf8whPmAeSZ7K8H5aQ==
   dependencies:
     "@types/jest" "^29.5.11"
     "@types/qs" "6.9.10"

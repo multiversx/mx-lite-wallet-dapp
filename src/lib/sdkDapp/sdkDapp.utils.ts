@@ -7,5 +7,6 @@ export { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/a
 export { UnlockPanelManager } from '@multiversx/sdk-dapp/out/managers/UnlockPanelManager';
 export { NotificationsFeedManager } from '@multiversx/sdk-dapp/out/managers/NotificationsFeedManager';
 export { getAddress } from '@multiversx/sdk-dapp/out/methods/account/getAddress';
-export { nativeAuth } from '@multiversx/sdk-dapp/out/services/nativeAuth';
+export { nativeAuth } from '@multiversx/sdk-dapp/out/services/nativeAuth/nativeAuth';
 export { signTransactions } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/signTransactions';
+export { login } from '@multiversx/sdk-dapp/out/providers/DappProvider/helpers/login/login';

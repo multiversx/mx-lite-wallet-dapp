@@ -45,6 +45,7 @@
     "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "0.2.0",
     "@multiversx/sdk-core": "14.0.2",
+    "@multiversx/sdk-dapp": "5.0.0-alpha.7",
     "@multiversx/sdk-dapp-core-ui": "0.0.0-alpha.15",
     "@multiversx/sdk-dapp-form": "2.0.3",
     "@multiversx/sdk-dapp-utils": "2.0.0",
@@ -67,8 +68,7 @@
     "react-router-dom": "6.16.0",
     "react-select": "5.8.0",
     "redux-persist": "6.0.0",
-    "yup": "1.4.0",
-    "@multiversx/sdk-dapp": "5.0.0-alpha.6"
+    "yup": "1.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.21.8",
