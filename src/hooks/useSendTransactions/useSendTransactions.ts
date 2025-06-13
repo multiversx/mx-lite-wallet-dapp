@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { TransactionBatchStatusesEnum } from 'localConstants/sdkDapp';
 import { useNavigate } from 'react-router-dom';
+import { TransactionBatchStatusesEnum } from 'lib';
 
 import {
   extractSessionId,

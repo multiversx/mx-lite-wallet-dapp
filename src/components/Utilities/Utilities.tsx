@@ -3,7 +3,7 @@ import {
   TransactionsToastList,
   NotificationModal,
   AxiosInterceptorContext
-} from 'components';
+} from 'lib';
 import { CUSTOM_TOAST_DEFAULT_DURATION } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import {

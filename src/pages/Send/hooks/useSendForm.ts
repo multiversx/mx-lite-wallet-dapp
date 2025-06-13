@@ -21,7 +21,7 @@ import {
   GAS_PRICE
 } from 'lib';
 import { SearchParamsEnum } from 'localConstants';
-import { SendTypeEnum, TokenOptionType } from 'lib';
+import { SendTypeEnum, TokenOptionType } from 'types';
 import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {

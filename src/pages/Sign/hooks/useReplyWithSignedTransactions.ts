@@ -1,7 +1,10 @@
 import { useSelector } from 'react-redux';
-import { replyToDapp, IPlainTransactionObject } from 'lib';
+import {
+  replyToDapp,
+  IPlainTransactionObject,
+  WindowProviderResponseEnums
+} from 'lib';
 import { hookSelector } from 'redux/selectors';
-import { WindowProviderResponseEnums } from 'lib';
 
 interface ReplyWithSignedTransactionsType {
   callbackUrl?: string;

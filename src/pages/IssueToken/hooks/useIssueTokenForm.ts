@@ -9,10 +9,10 @@ import {
   Address,
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig,
-  parseAmount
+  parseAmount,
+  DECIMALS
 } from 'lib';
 
-import { DECIMALS } from 'localConstants';
 import { IssueTokenFieldsEnum } from '../types';
 
 export const useIssueTokenForm = () => {

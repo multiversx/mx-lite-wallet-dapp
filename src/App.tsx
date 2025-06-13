@@ -2,15 +2,10 @@ import { useEffect } from 'react';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import {
-  AxiosInterceptor,
-  AxiosInterceptorContext,
-  DappProvider,
-  Layout,
-  Utilities
-} from 'components';
+import { AxiosInterceptor, Layout, Utilities } from 'components';
 import { apiTimeout, walletConnectV2ProjectId } from 'config';
 import { provider } from 'helpers/app';
+import { AxiosInterceptorContext, DappProvider } from 'lib';
 import { getWebviewToken } from 'lib';
 import { PageNotFound, Unlock } from 'pages';
 import { setIsWebview } from 'redux/slices';

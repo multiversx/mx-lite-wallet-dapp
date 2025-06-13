@@ -1,5 +1,4 @@
-import { getAccountProviderType } from 'lib';
-import { LoginMethodsEnum } from 'lib';
+import { getAccountProviderType, LoginMethodsEnum } from 'lib';
 import { accountSelector } from 'redux/selectors';
 import { RootState, store } from 'redux/store';
 

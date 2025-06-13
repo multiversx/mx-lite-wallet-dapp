@@ -28,7 +28,10 @@ export const useSignMessageCompleted = () => {
           ...(isSuccess
             ? { signature: signedMessageInfo.signature ?? '' }
             : {}),
-          status: SignMessageStatusEnum[signedMessageInfo.status]
+          status:
+            SignMessageStatusEnum[
+              signedMessageInfo.status as keyof typeof SignMessageStatusEnum
+            ]
         };
 
         const replyData: ExtendedReplyWithPostMessageType = {

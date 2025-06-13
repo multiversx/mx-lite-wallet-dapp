@@ -16,8 +16,9 @@ import {
   accountSelector,
   sdkDappStore
 } from 'lib';
+import { EnvironmentsEnum } from 'lib';
 import { routeNames } from 'routes';
-import { EnvironmentsEnum, SendTypeEnum } from 'lib';
+import { SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';

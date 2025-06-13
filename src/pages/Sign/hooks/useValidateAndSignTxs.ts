@@ -5,11 +5,12 @@ import { useReplyWithCancelled } from 'hooks';
 import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
 import { useGetAccountInfo, useGetSignedTransactions } from 'lib';
 
-import { TransactionBatchStatusesEnum } from 'localConstants';
+import { SignedTransactionType } from 'lib';
+import { TransactionBatchStatusesEnum } from 'lib';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { SignedTransactionType, TransactionSignatureDataType } from 'lib';
+import { TransactionSignatureDataType } from 'types';
 import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
 import {
   ValidateAndSignTxsReturnType,

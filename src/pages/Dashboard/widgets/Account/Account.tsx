@@ -18,6 +18,7 @@ export const Account = () => {
   const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
   const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
+  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>

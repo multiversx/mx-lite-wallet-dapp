@@ -8,14 +8,15 @@ import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
 import { useReplyWithCancelled } from 'hooks';
 import {
+  CANCELLED,
   parseQueryParams,
   useSignMessage,
   useGetSignMessageSession
 } from 'lib';
-import { CANCELLED, DataTestIdsEnum, HooksEnum } from 'localConstants';
+import { SignedMessageStatusesEnum } from 'lib';
+import { DataTestIdsEnum, HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { SignedMessageStatusesEnum } from 'lib';
 import { SignFailure, SignSuccess } from './components';
 import { useSignMessageCompleted } from './hooks';
 

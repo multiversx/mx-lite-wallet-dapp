@@ -4,7 +4,7 @@ import { Button, MxLink } from 'components';
 import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
-import { SendTypeEnum } from 'lib';
+import { SendTypeEnum } from 'types';
 import { useSendForm } from '../hooks';
 import { FormFieldsEnum } from '../types';
 

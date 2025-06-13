@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { CopyButton } from 'components';
 import { Label } from 'components/Label';
+import { CopyButton } from 'lib';
 import { useGetAccountInfo, useGetLastSignedMessageSession } from 'lib';
 import { decodeMessage } from '../helpers';
 

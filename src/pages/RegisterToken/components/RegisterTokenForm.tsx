@@ -10,7 +10,7 @@ import {
 } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
-import { SendTypeEnum } from 'lib';
+import { SendTypeEnum } from 'types';
 import { useRegisterTokenForm } from '../hooks';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
