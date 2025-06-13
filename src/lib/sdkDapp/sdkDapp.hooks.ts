@@ -1,4 +1,3 @@
-// Hooks exports
 export { useLoginService } from '@multiversx/sdk-dapp/hooks/login/useLoginService';
 export { useAddressScreens } from '@multiversx/sdk-dapp/hooks/login/useAddressScreens';
 export { useBatchTransactionsTracker } from '@multiversx/sdk-dapp/hooks/transactions/batch/tracker/useBatchTransactionsTracker';

@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Label } from 'components/Label';
-import { CopyButton } from 'lib';
-import { useGetAccountInfo, useGetLastSignedMessageSession } from 'lib';
+import {
+  CopyButton,
+  useGetAccountInfo,
+  useGetLastSignedMessageSession
+} from 'lib';
 import { decodeMessage } from '../helpers';
 
 export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {

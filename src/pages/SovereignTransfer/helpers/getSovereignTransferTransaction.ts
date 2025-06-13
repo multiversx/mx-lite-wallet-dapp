@@ -1,6 +1,4 @@
-import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { TokenType } from 'lib';
-import { getCurrentNetwork } from '../../../helpers';
 import {
   TransactionsFactoryConfig,
   TokenTransfer,
@@ -8,9 +6,10 @@ import {
   AddressValue,
   SmartContractTransactionsFactory,
   Token
-} from '../../../lib';
-import { getEgldLabel, parseAmount } from '../../../lib';
-import { PartialNftType } from '../../../lib';
+} from 'lib';
+import { getEgldLabel, parseAmount, PartialNftType } from 'lib';
+import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
+import { getCurrentNetwork } from '../../../helpers';
 import { SovereignTransferFormType } from '../types';
 
 export const getSovereignTransferTransaction = ({

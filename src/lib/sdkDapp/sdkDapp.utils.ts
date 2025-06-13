@@ -4,8 +4,6 @@ import {
   ExtendedReplyWithPostMessageType,
   ReplyWithRedirectType
 } from '../sdkDappWebWalletCrossWindowProvider';
-
-// Utility exports
 export { getEgldLabel } from '@multiversx/sdk-dapp/utils/network/getEgldLabel';
 export { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
 export { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';

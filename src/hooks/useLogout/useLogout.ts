@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from 'lib';
+import { logout, WindowProviderResponseEnums } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { logoutAction } from 'redux/commonActions';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { WindowProviderResponseEnums } from 'lib';
 import { useReplyToDapp } from '../useReplyToDapp';
 
 const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
