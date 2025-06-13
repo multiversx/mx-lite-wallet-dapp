@@ -16,7 +16,7 @@ export const SignMessage = () => {
     'pending'
   );
 
-  const [signatrue, setSignatrue] = useState('');
+  const [signature, setSignature] = useState('');
   const { address } = useGetAccount();
   const provider = getAccountProvider();
 
@@ -24,7 +24,7 @@ export const SignMessage = () => {
     try {
       const messageToSign = new Message({
         address: new Address(address),
-        data: new Uint8Array(Buffer.from(message))
+        data: new TextEncoder().encode(message)
       });
 
       const signedMessageResult = await provider.signMessage(messageToSign);
@@ -35,7 +35,7 @@ export const SignMessage = () => {
       }
 
       setState('success');
-      setSignatrue(Buffer.from(signedMessageResult?.signature).toString('hex'));
+      setSignature(Buffer.from(signedMessageResult?.signature).toString('hex'));
       setSignedMessage(signedMessageResult);
       setMessage('');
     } catch (error) {
@@ -47,7 +47,7 @@ export const SignMessage = () => {
   const handleClear = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setSignatrue('');
+    setSignature('');
     setState('pending');
   };
 
@@ -94,7 +94,7 @@ export const SignMessage = () => {
         {state === 'success' && signedMessage != null && (
           <SignSuccess
             message={signedMessage}
-            signature={signatrue}
+            signature={signature}
             address={address}
           />
         )}

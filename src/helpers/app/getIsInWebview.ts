@@ -6,7 +6,12 @@ export const getIsInWebview = () => {
   try {
     const state: RootState = store.getState();
     const provider = getAccountProvider();
-    const providerType = provider.getType();
+    const providerType = provider?.getType?.();
+
+    if (!providerType) {
+      return false;
+    }
+
     const isExternalProvider = !Object.values(ProviderTypeEnum).includes(
       providerType as ProviderTypeEnum
     );

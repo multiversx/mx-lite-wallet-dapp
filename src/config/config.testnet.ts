@@ -1,10 +1,10 @@
 import { NetworkType } from 'redux/slices';
 import { EnvironmentsEnum } from 'types';
-import { sharedNetorks } from './sharedNetworks';
+import { sharedNetworks } from './sharedNetworks';
 
 export * from './sharedConfig';
 
-const testnetNetwork = sharedNetorks.find(
+const testnetNetwork = sharedNetworks.find(
   (network) => network.id === EnvironmentsEnum.testnet
 );
 
@@ -13,7 +13,9 @@ if (!testnetNetwork) {
 }
 
 export const networks: NetworkType[] = [
-  ...sharedNetorks.filter((network) => network.id !== EnvironmentsEnum.testnet),
+  ...sharedNetworks.filter(
+    (network) => network.id !== EnvironmentsEnum.testnet
+  ),
   {
     ...testnetNetwork,
     default: true

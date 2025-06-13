@@ -133,8 +133,11 @@ const accessWallet = ({
         kdContent,
         accessPassVal
       );
-      const secretKeyBuffer = Buffer.from(decryptedSecretKey.hex(), 'hex');
-      const secretKeyUint8Array = new Uint8Array(secretKeyBuffer);
+
+      const secretKeyUint8Array = new Uint8Array(
+        Buffer.from(decryptedSecretKey.hex(), 'hex')
+      );
+
       const secretKey = new UserSecretKey(secretKeyUint8Array);
       const address = secretKey.generatePublicKey().toAddress();
       privateKey = secretKey.hex();

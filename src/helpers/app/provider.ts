@@ -58,7 +58,7 @@ class CustomProvider implements IProvider {
   }
 
   isConnected(): boolean {
-    return false;
+    return Boolean(this.privateKey);
   }
 
   getType(): string {

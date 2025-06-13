@@ -27,7 +27,7 @@ export const generateTokenSignature = ({
 }: UseOnLoginType) => {
   const message = new Message({
     address: new Address(address),
-    data: new Uint8Array(Buffer.from(`${address}${loginToken}`))
+    data: new TextEncoder().encode(`${address}${loginToken}`)
   });
 
   return signMessage({ message, privateKey });
@@ -64,7 +64,9 @@ export const useOnFileLogin = () => {
         return;
       }
 
-      signature = Buffer.from(msg.signature).toString('hex');
+      signature = Array.from(msg.signature)
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
     }
 
     if (loginToken && hasNativeAuthToken) {
@@ -80,7 +82,6 @@ export const useOnFileLogin = () => {
       dispatch(setTokenLogin({ loginToken: token, signature }));
     }
 
-    loginWithExternalProvider(address);
     dispatch(setAccountAddress(address));
 
     if (noRedirect) {

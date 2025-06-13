@@ -24,7 +24,7 @@ export const getSovereignTransferTransaction = ({
   tokens: (PartialNftType | TokenType)[];
 }) => {
   const egldLabel = getEgldLabel();
-  const { WEGLDid = '' } = getCurrentNetwork();
+  const { WEGLDid } = getCurrentNetwork();
   const factoryConfig = new TransactionsFactoryConfig({ chainID: chainId });
   const factory = new SmartContractTransactionsFactory({
     config: factoryConfig
@@ -52,7 +52,9 @@ export const getSovereignTransferTransaction = ({
       return new TokenTransfer({
         token: new Token({
           identifier:
-            realToken.identifier === egldLabel ? WEGLDid : realToken.identifier,
+            realToken.identifier === egldLabel && WEGLDid
+              ? WEGLDid
+              : realToken.identifier,
           nonce: nonce ? BigInt(nonce) : undefined
         }),
         amount: BigInt(

@@ -1,9 +1,9 @@
 import { NetworkType } from 'redux/slices';
-import { sharedNetorks } from './sharedNetworks';
+import { sharedNetworks } from './sharedNetworks';
 
 export * from './sharedConfig';
 
-const sovereignNetwork = sharedNetorks.find(
+const sovereignNetwork = sharedNetworks.find(
   (network) => network.id === 'sovereign'
 );
 
@@ -12,7 +12,7 @@ if (!sovereignNetwork) {
 }
 
 export const networks: NetworkType[] = [
-  ...sharedNetorks.filter((network) => network.id !== 'sovereign'),
+  ...sharedNetworks.filter((network) => network.id !== 'sovereign'),
   {
     ...sovereignNetwork,
     default: true

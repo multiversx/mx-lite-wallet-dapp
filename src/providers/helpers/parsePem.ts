@@ -33,7 +33,7 @@ export const parsePem = (file: File | null): Promise<ParsedPemReturnType> => {
       resolve(parsedContent);
     };
     reader.onerror = () => {
-      reject(null);
+      resolve(null);
     };
     reader.readAsText(file);
   });

@@ -129,7 +129,7 @@ export class PemProvider implements IProvider {
       const message = `${address}${token}{}`;
       const msg = new Message({
         address: new Address(address),
-        data: new Uint8Array(Buffer.from(message))
+        data: new TextEncoder().encode(message)
       });
       const signedMessage = await this.signMessage(msg);
 
@@ -141,7 +141,9 @@ export class PemProvider implements IProvider {
         return;
       }
 
-      const signature = Buffer.from(signedMessage.signature).toString('hex');
+      const signature = Array.from(signedMessage.signature)
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
 
       this.setAccount({
         address,

@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { UserSecretKey, UserWallet } from 'lib';
 
 export interface AccessWalletType {
@@ -30,7 +31,7 @@ export const accessWallet = ({
         accessPassVal
       );
       // will be improved once issue is fixed https://github.com/multiversx/mx-sdk-js-wallet/issues/31
-      const secretKeyUint8Array = new Uint8Array(
+      const secretKeyUint8Array = Uint8Array.from(
         Buffer.from(decryptedSecretKey.hex(), 'hex')
       );
       // cast was needed because of the issue above and Jest Uint8Array issue
@@ -38,7 +39,7 @@ export const accessWallet = ({
       const secretKey = new UserSecretKey(secretKeyUint8Array as Buffer);
       const address = secretKey.generatePublicKey().toAddress();
       privateKey = secretKey.hex();
-      accountAddress = address.bech32();
+      accountAddress = address.toBech32();
     }
 
     return {

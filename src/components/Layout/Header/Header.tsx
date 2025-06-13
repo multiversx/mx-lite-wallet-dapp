@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button, MxLink } from 'components';
@@ -14,10 +15,15 @@ export const Header = () => {
   const provider = getAccountProvider();
   const { activeNetwork } = useSelector(networkSelector);
 
-  const handleLogout = async () => {
-    await provider.logout();
-    navigate(RouteNamesEnum.home);
-  };
+  const handleLogout = useCallback(async () => {
+    try {
+      await provider?.logout?.();
+    } catch (e) {
+      console.error('Logout failed', e);
+    } finally {
+      navigate(RouteNamesEnum.home);
+    }
+  }, [provider, navigate]);
 
   return (
     <header className='flex flex-row align-center justify-between pl-6 pr-6 pt-6'>
@@ -32,7 +38,7 @@ export const Header = () => {
         <div className='flex justify-end container mx-auto items-center gap-2'>
           <div className='flex gap-1 items-center'>
             <div className='w-2 h-2 rounded-full bg-green-500' />
-            <p className='text-gray-600'>{activeNetwork.name}</p>
+            <p className='text-gray-600'>{activeNetwork?.name ?? '—'}</p>
           </div>
 
           {isLoggedIn && (
