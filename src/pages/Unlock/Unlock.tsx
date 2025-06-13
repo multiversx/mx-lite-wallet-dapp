@@ -5,15 +5,13 @@ import {
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
-  XaliasLoginButton
-} from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
-import {
+  XaliasLoginButton,
   LedgerLoginButtonPropsType,
   OperaWalletLoginButtonPropsType,
   WalletConnectLoginButtonPropsType
 } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
+import { routeNames } from 'routes';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';

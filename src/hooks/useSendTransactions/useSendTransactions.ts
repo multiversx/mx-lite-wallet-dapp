@@ -11,10 +11,7 @@ import {
   useGetAccountProvider,
   useGetActiveTransactionsStatus,
   useGetPendingTransactions,
-  Transaction
-} from 'lib';
-
-import {
+  Transaction,
   LoginMethodsEnum,
   SendBatchTransactionsPropsType,
   SendTransactionsPropsType,

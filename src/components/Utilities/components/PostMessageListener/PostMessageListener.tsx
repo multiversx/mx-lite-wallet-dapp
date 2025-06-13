@@ -15,9 +15,7 @@ import {
   removeAllTransactionsToSign,
   removeAllSignedTransactions,
   Transaction,
-  useGetLoginInfo
-} from 'lib';
-import {
+  useGetLoginInfo,
   WindowProviderRequestEnums,
   WindowProviderResponseEnums,
   RequestMessageType
