@@ -1,7 +1,6 @@
 import { numberToHex } from 'helpers/operations/toHex';
 import { stringToHex } from 'helpers/operations/toHex';
-import { GAS_PRICE } from 'lib';
-import { prepareTransaction } from 'lib';
+import { GAS_PRICE, prepareTransaction } from 'lib';
 import {
   NftEnumType,
   PartialNftType,

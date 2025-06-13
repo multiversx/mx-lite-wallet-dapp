@@ -1,5 +1,4 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
-import { SearchParamsEnum } from '@multiversx/sdk-dapp/constants';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSearchParams } from 'react-router-dom';
@@ -15,10 +14,14 @@ import {
   computeTokenDataField,
   calculateNftGasLimit,
   addressIsValid,
-  calculateGasLimit
+  calculateGasLimit,
+  PartialNftType,
+  DECIMALS,
+  GAS_LIMIT,
+  GAS_PRICE
 } from 'lib';
-import { DECIMALS, GAS_LIMIT, GAS_PRICE } from 'lib';
-import { SendTypeEnum, TokenOptionType, PartialNftType } from 'types';
+import { SearchParamsEnum } from 'localConstants';
+import { SendTypeEnum, TokenOptionType } from 'types';
 import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {
@@ -171,7 +174,7 @@ export const useSendForm = () => {
     const formTokenValue = formik.values[FormFieldsEnum.token]?.value;
     const selectedTokenValue = defaultTokenOption?.value;
 
-    if (!formTokenValue && formTokenValue !== selectedTokenValue) {
+    if (!formTokenValue || formTokenValue !== selectedTokenValue) {
       formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
       resetFormAndGetBalance();
       setSearchParams();
