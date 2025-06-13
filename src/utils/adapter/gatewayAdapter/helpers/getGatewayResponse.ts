@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { NETWORK_CONFIG_ENDPOINT } from 'localConstants';
-import { matchPath } from 'types/sdkDapp.types';
+import { matchPath, NETWORK_CONFIG_ENDPOINT } from 'lib';
 import { gatewayEndpoints } from './apiToGatewayEndpointMap';
 import { arraybufferToJSON } from './arraybufferToJSON';
 import { jsonToArrayBuffer } from './jsonToArrayBuffer';

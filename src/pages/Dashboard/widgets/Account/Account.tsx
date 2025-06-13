@@ -1,14 +1,15 @@
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';
 import { Copy, MxLink } from 'components';
-import { FormatAmount } from 'components/sdkDapp.components';
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
-import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import {
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  FormatAmount,
   explorerAddressSelector,
   useSdkDappSelector
-} from 'redux/sdkDapp.store';
+} from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
+import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
@@ -16,8 +17,8 @@ export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
-  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
   const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
+  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>

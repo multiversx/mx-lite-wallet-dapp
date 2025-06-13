@@ -1,11 +1,10 @@
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
-import { addNewCustomToast } from 'lib';
+import { addNewCustomToast, CustomToastType } from 'lib';
 import {
   CUSTOM_TOAST_DEFAULT_DURATION,
   IS_DEVELOPMENT,
   IS_TEST
 } from 'localConstants';
-import { CustomToastType } from 'types';
 import { hash } from '../../../../version.json';
 
 const IGNORED_LIST = [

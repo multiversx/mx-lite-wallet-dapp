@@ -21,7 +21,6 @@ export { AuthenticatedRoutesWrapper } from '@multiversx/sdk-dapp/wrappers/Authen
 export { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext/AxiosInterceptorContext';
 export { DappProvider } from '@multiversx/sdk-dapp/wrappers/DappProvider/DappProvider';
 export { TransactionRow } from '@multiversx/sdk-dapp/UI/TransactionsTable/components/TransactionRow';
-export { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 export { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 export { AddressTable } from '@multiversx/sdk-dapp/UI/ledger/LedgerLoginContainer/AddressTable';
 export { Trim } from '@multiversx/sdk-dapp/UI/Trim/Trim';

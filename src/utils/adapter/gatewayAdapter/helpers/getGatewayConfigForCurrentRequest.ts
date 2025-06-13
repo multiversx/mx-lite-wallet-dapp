@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { getCurrentNetwork } from 'helpers';
-import { matchPath } from 'types/sdkDapp.types';
+import { matchPath } from 'lib';
 import { apiRoutes, endpointMap } from './apiToGatewayEndpointMap';
 
 export const getGatewayConfigForCurrentRequest = (
@@ -38,7 +38,7 @@ export const getGatewayConfigForCurrentRequest = (
 
   Object.entries(endpointMap).forEach(([key, value]) => {
     const matchesPath = matchPath(
-      apiRoutes[key as keyof typeof apiRoutes],
+      apiRoutes[key as keyof typeof apiRoutes] as unknown as string,
       url
     );
 

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import uniq from 'lodash/uniq';
 
-import { SignTransactionsModals } from 'components';
+import { SignTransactionsModals } from 'lib';
 
 import {
   useGetAccountProvider,
@@ -10,17 +10,15 @@ import {
   useSignTransactionsWithLedger,
   useGetLastPendingTransactionHash,
   useSignTransactionsCommonData,
-  useGetSignTransactionsError
+  useGetSignTransactionsError,
+  LoginMethodsEnum,
+  MultiSignTransactionType,
+  SignModalPropsType,
+  signTransactionsCancelMessageSelector,
+  sdkDappStore
 } from 'lib';
 
 import { MAX_ALLOWED_TRANSACTIONS_TO_SIGN } from 'localConstants';
-import { signTransactionsCancelMessageSelector } from 'redux/sdkDapp.selectors';
-import { sdkDappStore } from 'redux/sdkDapp.store';
-import {
-  LoginMethodsEnum,
-  MultiSignTransactionType,
-  SignModalPropsType
-} from 'types';
 
 const isUnderMaxAllowedTransactions = (
   allTransactions: MultiSignTransactionType[]

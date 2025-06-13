@@ -15,16 +15,14 @@ import {
   removeAllTransactionsToSign,
   removeAllSignedTransactions,
   Transaction,
-  useGetLoginInfo
+  useGetLoginInfo,
+  WindowProviderRequestEnums,
+  WindowProviderResponseEnums,
+  RequestMessageType
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import {
-  WindowProviderRequestEnums,
-  WindowProviderResponseEnums,
-  RequestMessageType
-} from 'types';
 import {
   buildTransactionsQueryString,
   buildWalletQueryString,

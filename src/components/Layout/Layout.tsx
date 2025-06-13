@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AuthenticatedRoutesWrapper } from 'components';
+import { AuthenticatedRoutesWrapper } from 'lib';
 import { routeNames, routes } from 'routes/routes';
 import { Footer } from './Footer';
 import { Header } from './Header';

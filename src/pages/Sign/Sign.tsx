@@ -10,10 +10,10 @@ import {
   useGetLoginInfo,
   checkIsValidSender
 } from 'lib';
+import { LoginMethodsEnum } from 'lib';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { LoginMethodsEnum } from 'types';
 import { useValidateAndSignTxs } from './hooks';
 
 /*

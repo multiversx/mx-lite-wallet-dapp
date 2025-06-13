@@ -1,9 +1,16 @@
-import { PartialTokenType } from '@multiversx/sdk-dapp-form';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import { getAxiosConfig, getExtrasApi } from 'helpers';
-import { formatAmount, getEgldLabel, stringIsInteger } from 'lib';
-import { DECIMALS, DIGITS, TOKENS_ENDPOINT, ZERO } from 'localConstants';
+import {
+  TOKENS_ENDPOINT,
+  DECIMALS,
+  DIGITS,
+  ZERO,
+  formatAmount,
+  getEgldLabel,
+  stringIsInteger,
+  PartialTokenType
+} from 'lib';
 import { RootApi } from 'redux/rootApi';
 
 interface FaucetSettingsType {

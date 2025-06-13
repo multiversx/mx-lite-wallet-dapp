@@ -5,9 +5,9 @@ import {
   getAddress,
   MessageComputer
 } from 'lib';
+import { IDappProvider } from 'lib';
 import { setKeystoreLogin } from 'redux/slices/account';
 import { store as reduxStore } from 'redux/store';
-import { IDappProvider } from 'types';
 let privateKey: string | null = null;
 
 export const setProviderPrivateKey = (key: typeof privateKey) =>

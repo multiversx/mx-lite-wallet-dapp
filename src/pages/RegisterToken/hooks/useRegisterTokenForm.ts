@@ -7,16 +7,18 @@ import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/
 import { networks } from 'config';
 import { capitalize, addressIsErd } from 'helpers';
 import { useSendTransactions } from 'hooks';
-import { addressIsValid, useGetAccountInfo } from 'lib';
 import {
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,
-  TESTNET_CHAIN_ID
-} from 'localConstants';
-import { accountSelector } from 'redux/sdkDapp.selectors';
-import { sdkDappStore } from 'redux/sdkDapp.store';
+  TESTNET_CHAIN_ID,
+  addressIsValid,
+  useGetAccountInfo,
+  accountSelector,
+  sdkDappStore
+} from 'lib';
+import { EnvironmentsEnum } from 'lib';
 import { routeNames } from 'routes';
-import { EnvironmentsEnum, SendTypeEnum } from 'types';
+import { SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';

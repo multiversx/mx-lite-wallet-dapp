@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { Loader } from 'components';
 import { useReplyToDapp, useRedirectPathname } from 'hooks';
+import { Loader } from 'lib';
 import {
   useGetAccount,
   useGetIsWalletConnectV2Initialized,
-  useGetLoginInfo
+  useGetLoginInfo,
+  WindowProviderResponseEnums,
+  LoginMethodsEnum
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
-import { WindowProviderResponseEnums } from 'types';
-import { LoginMethodsEnum } from 'types';
 import { HookStateEnum } from '../types';
 
 interface HookValidationOutcomePropsType {

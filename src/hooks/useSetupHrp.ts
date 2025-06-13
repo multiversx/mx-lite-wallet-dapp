@@ -1,5 +1,5 @@
-import { LibraryConfig } from '@multiversx/sdk-core/out';
 import { useSelector } from 'react-redux';
+import { LibraryConfig } from 'lib';
 import { networkSelector } from 'redux/selectors';
 
 export const useSetupHrp = () => {

@@ -1,5 +1,5 @@
-import { Mnemonic } from 'lib';
 import { string } from 'yup';
+import { Mnemonic } from 'lib';
 
 export const mnemonicSchema = () =>
   string()

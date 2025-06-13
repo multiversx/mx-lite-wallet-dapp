@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TransactionBatchStatusesEnum } from 'lib';
 
 import {
   extractSessionId,
@@ -10,16 +11,12 @@ import {
   useGetAccountProvider,
   useGetActiveTransactionsStatus,
   useGetPendingTransactions,
-  Transaction
-} from 'lib';
-
-import { TransactionBatchStatusesEnum } from 'localConstants/sdkDapp';
-import {
+  Transaction,
   LoginMethodsEnum,
   SendBatchTransactionsPropsType,
   SendTransactionsPropsType,
   TransactionsDisplayInfoType
-} from 'types';
+} from 'lib';
 
 interface SendTransactionsParamsType {
   redirectRoute?: string;

@@ -14,15 +14,14 @@ import {
   computeTokenDataField,
   calculateNftGasLimit,
   addressIsValid,
-  calculateGasLimit
-} from 'lib';
-import {
+  calculateGasLimit,
+  PartialNftType,
   DECIMALS,
   GAS_LIMIT,
-  GAS_PRICE,
-  SearchParamsEnum
-} from 'localConstants';
-import { SendTypeEnum, TokenOptionType, PartialNftType } from 'types';
+  GAS_PRICE
+} from 'lib';
+import { SearchParamsEnum } from 'localConstants';
+import { SendTypeEnum, TokenOptionType } from 'types';
 import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {

@@ -1,19 +1,17 @@
 import { MxLink } from 'components';
+import { nativeAuth } from 'config';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
-  XaliasLoginButton
-} from 'components/sdkDapp.components';
-import { nativeAuth } from 'config';
-import { DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
-import {
+  XaliasLoginButton,
   LedgerLoginButtonPropsType,
   OperaWalletLoginButtonPropsType,
   WalletConnectLoginButtonPropsType
-} from 'types';
+} from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
+import { routeNames } from 'routes';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Keystore, Pem } from './components';
 import { useUnlockRedirect } from './hooks';

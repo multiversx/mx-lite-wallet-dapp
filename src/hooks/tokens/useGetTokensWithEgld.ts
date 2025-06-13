@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import uniqBy from 'lodash/unionBy';
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { useGetAccountInfo, useGetNetworkConfig, TokenType } from 'lib';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
-import { TokenType } from 'types';
 
 const defaultValues = {
   owner: '',

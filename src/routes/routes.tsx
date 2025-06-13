@@ -1,4 +1,5 @@
 import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
+import { RouteType } from 'lib';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
@@ -18,7 +19,6 @@ import {
   IssueNft,
   Faucet
 } from 'pages';
-import { RouteType } from 'types/sdkDapp.types';
 import {
   CreateRecoverRoutes,
   CreateRecoverRoutesEnum

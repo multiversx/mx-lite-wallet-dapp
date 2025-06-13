@@ -1,10 +1,12 @@
 import omit from 'lodash/omit';
 import {
+  GAS_LIMIT,
+  GAS_PRICE,
+  ZERO,
   IPlainTransactionObject,
   TransactionOptions,
   TransactionVersion
 } from 'lib';
-import { GAS_LIMIT, GAS_PRICE, ZERO } from 'localConstants';
 import { TransactionSignatureDataType } from 'types';
 
 export interface MapSignedTransactionsParamsType {

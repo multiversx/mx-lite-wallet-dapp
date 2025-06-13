@@ -1,8 +1,12 @@
 import { useSelector } from 'react-redux';
 import { useReplyToDapp } from 'hooks';
-import { useGetAccount, useGetLoginInfo, decodeNativeAuthToken } from 'lib';
+import {
+  useGetAccount,
+  useGetLoginInfo,
+  decodeNativeAuthToken,
+  WindowProviderResponseEnums
+} from 'lib';
 import { accountSelector, hookSelector } from 'redux/selectors';
-import { WindowProviderResponseEnums } from 'types';
 
 export const useOnLoginHookRedirect = () => {
   const { callbackUrl } = useSelector(hookSelector);

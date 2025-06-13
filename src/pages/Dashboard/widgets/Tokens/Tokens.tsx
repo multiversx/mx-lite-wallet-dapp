@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { MxLink, OutputContainer } from 'components';
-import { useGetAccountInfo } from 'lib';
+import { useGetAccountInfo, TokenType } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { routeNames } from 'routes';
-import { TokenType } from 'types';
 import { TokenRow } from './components';
 
 export const Tokens = () => {
