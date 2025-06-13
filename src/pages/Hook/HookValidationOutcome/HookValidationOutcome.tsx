@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { MvxLoader as Loader } from 'lib';
 import { useReplyToDapp, useRedirectPathname } from 'hooks';
+import { MvxLoader as Loader } from 'lib';
 import {
   useGetAccount,
   useGetIsWalletConnectV2Initialized,

@@ -1,5 +1,3 @@
-import { FormatAmount } from 'lib';
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';
 import {
@@ -7,6 +5,8 @@ import {
   useSdkDappSelector
 } from 'redux/sdkDapp.store';
 import { MxLink } from 'components';
+import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { FormatAmount } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';

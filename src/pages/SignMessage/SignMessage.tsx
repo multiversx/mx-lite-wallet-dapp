@@ -1,10 +1,10 @@
+import { MouseEvent, useState } from 'react';
 import {
   faArrowsRotate,
   faBroom,
   faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MouseEvent, useState } from 'react';
 import { Button, OutputContainer } from 'components';
 import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
 import { SignFailure, SignSuccess } from './components';

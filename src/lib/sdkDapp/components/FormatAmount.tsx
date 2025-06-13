@@ -5,7 +5,9 @@ import { DECIMALS, DIGITS } from '../../sdkDappUtils/sdkDappUtils';
 import { FormatAmountController } from '../sdkDapp.helpers';
 import { useGetNetworkConfig } from '../sdkDapp.hooks';
 
-interface FormatAmountPropsType extends Partial<MvxFormatAmountPropsType>, WithClassnameType {
+interface FormatAmountPropsType
+  extends Partial<MvxFormatAmountPropsType>,
+    WithClassnameType {
   egldLabel?: string;
   value: string;
 }
@@ -35,4 +37,4 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
       valueInteger={valueInteger}
     />
   );
-}; 
+};

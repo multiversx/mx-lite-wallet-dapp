@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { useRedirectPathname } from 'hooks';
-import { useGetAccount, useLoginService } from 'lib';
+import { Message, Address, useGetAccount } from 'lib';
+import { nativeAuth } from 'lib';
 import { hookSelector } from 'redux/selectors';
 
 import {
@@ -10,7 +11,7 @@ import {
   setExternalNativeAuthToken,
   setTokenLogin
 } from 'redux/slices';
-import { useGetNativeAuthConfig } from './useGetNativeAuthConfig';
+
 import { signMessage } from '../helpers';
 
 interface UseOnLoginType {
@@ -24,7 +25,11 @@ export const generateTokenSignature = ({
   loginToken,
   privateKey
 }: UseOnLoginType) => {
-  const message = `${address}${loginToken}{}`;
+  const message = new Message({
+    address: new Address(address),
+    data: new Uint8Array(Buffer.from(`${address}${loginToken}`))
+  });
+
   return signMessage({ message, privateKey });
 };
 
@@ -32,8 +37,6 @@ export const useOnFileLogin = () => {
   const dispatch = useDispatch();
   const { loginToken, hasNativeAuthToken } = useSelector(hookSelector);
   const { address: loggedInAddress } = useGetAccount();
-  const nativeAuthConfig = useGetNativeAuthConfig();
-  const loginService = useLoginService(nativeAuthConfig);
   const navigate = useNavigate();
   const { getRedirectPathname } = useRedirectPathname();
 
@@ -65,7 +68,8 @@ export const useOnFileLogin = () => {
     }
 
     if (loginToken && hasNativeAuthToken) {
-      const externalNativeAuthToken = getToken({
+      const nativeAuthService = nativeAuth();
+      const externalNativeAuthToken = nativeAuthService.getToken({
         address,
         token: loginToken,
         signature
@@ -74,14 +78,6 @@ export const useOnFileLogin = () => {
       dispatch(setExternalNativeAuthToken(externalNativeAuthToken));
     } else if (token) {
       dispatch(setTokenLogin({ loginToken: token, signature }));
-
-      if (signature) {
-        loginService.setLoginToken(token);
-        loginService.setTokenLoginInfo({
-          signature,
-          address
-        });
-      }
     }
 
     loginWithExternalProvider(address);

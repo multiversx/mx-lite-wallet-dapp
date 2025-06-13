@@ -10,8 +10,9 @@ import classNames from 'classnames';
 import { Formik, FormikHelpers } from 'formik';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button } from 'components';
+import { Button, PageState } from 'components';
 import { UseModalReturnType, useCloseModalOnEsc } from 'hooks';
+import { MvxGenericModal as ModalContainer } from 'lib';
 import { WALLET_FILE, WALLET_FILE_NAME, DataTestIdsEnum } from 'localConstants';
 import { useInitToken } from 'pages/Unlock/hooks';
 import { accountSelector, hookSelector } from 'redux/selectors';
@@ -23,7 +24,6 @@ import {
   parseKeystoreJSON
 } from './helpers';
 import { KeystoreValuesType, useOnKeystoreSubmit } from './hooks';
-import { MvxModalContainer as ModalContainer, MvxPageState as PageState } from 'lib';
 
 interface AccessWalletType {
   kdContent: { [key: string]: any };
@@ -195,7 +195,7 @@ export const KeystoreModal = ({ handleClose, show }: UseModalReturnType) => {
                   ) : (
                     <div
                       className={classNames(
-                        'w-full my-6 flex flex-col border-dashed border-2 rounded-md p-6 flex items-center justify-center mb-4 h-[200px]',
+                        'w-full my-6 flex flex-col border-dashed border-2 rounded-md p-6 items-center justify-center mb-4 h-[200px] cursor-pointer',
                         dropzoneClassNames
                       )}
                     >

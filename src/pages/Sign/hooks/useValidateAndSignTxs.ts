@@ -9,7 +9,7 @@ import { useGetAccountInfo, useGetSignedTransactions } from 'lib';
 enum TransactionBatchStatusesEnum {
   cancelled = 'cancelled',
   fail = 'fail',
-  invalid = 'invalid',
+  invalid = 'invalid'
 }
 
 import { hookSelector } from 'redux/selectors';

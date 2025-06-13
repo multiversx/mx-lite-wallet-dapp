@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { useGetNetworkConfig } from '../sdkDapp.hooks';
-import { MvxExplorerLink } from '../../sdkDappCoreUI/sdkDappCoreUI.components';
 import { WithClassnameType } from 'types';
+import { MvxExplorerLink } from '../../sdkDappCoreUI/sdkDappCoreUI.components';
+import { useGetNetworkConfig } from '../sdkDapp.hooks';
 
 export const ExplorerLink = ({
   children,
@@ -22,6 +22,8 @@ export const ExplorerLink = ({
   );
 };
 
-export interface ExplorerLinkPropsType extends WithClassnameType, PropsWithChildren {
+export interface ExplorerLinkPropsType
+  extends WithClassnameType,
+    PropsWithChildren {
   page: string;
-} 
+}

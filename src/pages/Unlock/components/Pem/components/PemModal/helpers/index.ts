@@ -1,1 +1,1 @@
-export * from './parsePem';
+export * from '../../../../../../../providers/helpers/parsePem';

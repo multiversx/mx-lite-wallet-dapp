@@ -1,7 +1,6 @@
 import { MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { AuthRedirectWrapper } from 'wrappers';
-import { Keystore, Pem } from './components';
 import { CreateRecoverRoutesEnum } from '../CreateRecover/routes';
 
 export const Unlock = () => {
@@ -12,16 +11,6 @@ export const Unlock = () => {
           className='flex flex-col p-6 items-center justify-center gap-4 rounded-xl bg-[#f6f8fa]'
           data-testid={DataTestIdsEnum.unlockPage}
         >
-          <div className='flex flex-col items-center gap-1'>
-            <h2 className='text-2xl'>Login</h2>
-
-            <p className='text-center text-gray-400'>Choose a login method</p>
-          </div>
-
-          <div className='flex flex-col md:flex-row'>
-            <Pem />
-            <Keystore />
-          </div>
           <div className='flex flex-col items-center justify-center mt-1 gap-1'>
             <p className='text-center text-gray-400'>Don't have a wallet?</p>
             <div className='flex flex-col md:flex-row md:gap-4 items-center justify-center'>

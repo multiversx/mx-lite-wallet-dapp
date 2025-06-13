@@ -1,7 +1,8 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import { ModalContainer, ProgressBar } from 'components';
+import { ProgressBar } from 'components';
+import { MvxGenericModal as ModalContainer } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import {

@@ -16,11 +16,7 @@ import {
   RequestMessageType
 } from 'lib';
 
-import {
-  getLoginHookData,
-  getSignMessageHookData,
-  getSignHookData
-} from 'lib';
+import { getLoginHookData, getSignMessageHookData, getSignHookData } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';

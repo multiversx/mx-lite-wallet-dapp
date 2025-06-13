@@ -17,4 +17,4 @@ export const CopyButton = ({
       successIcon={successIcon}
     />
   );
-}; 
+};

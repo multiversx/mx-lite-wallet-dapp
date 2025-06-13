@@ -2,5 +2,6 @@ export {
   MvxCopyButton,
   MvxExplorerLink,
   MvxFormatAmount,
-  MvxTransactionsTable
+  MvxTransactionsTable,
+  MvxGenericModal
 } from '@multiversx/sdk-dapp-core-ui/dist/react/components';

@@ -6,5 +6,8 @@ export {
   TokenTransfer,
   UserSecretKey,
   UserSigner,
-  MessageComputer
+  MessageComputer,
+  TransactionComputer,
+  UserWallet,
+  Mnemonic
 } from '@multiversx/sdk-core';

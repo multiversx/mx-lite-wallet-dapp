@@ -2,6 +2,8 @@ import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
+import { accountSelector } from 'redux/sdkDapp.selectors';
+import { sdkDappStore } from 'redux/sdkDapp.store';
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { networks } from 'config';
@@ -13,8 +15,6 @@ import {
   MAINNET_CHAIN_ID,
   TESTNET_CHAIN_ID
 } from 'localConstants';
-import { accountSelector } from 'redux/sdkDapp.selectors';
-import { sdkDappStore } from 'redux/sdkDapp.store';
 import { routeNames } from 'routes';
 import { EnvironmentsEnum, SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
