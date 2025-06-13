@@ -174,7 +174,7 @@ export const useSendForm = () => {
     const formTokenValue = formik.values[FormFieldsEnum.token]?.value;
     const selectedTokenValue = defaultTokenOption?.value;
 
-    if (!formTokenValue || formTokenValue !== selectedTokenValue) {
+    if (!formTokenValue && formTokenValue !== selectedTokenValue) {
       formik.setFieldValue(FormFieldsEnum.token, defaultTokenOption);
       resetFormAndGetBalance();
       setSearchParams();
