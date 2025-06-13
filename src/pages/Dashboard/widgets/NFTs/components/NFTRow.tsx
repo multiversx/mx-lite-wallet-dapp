@@ -2,9 +2,9 @@ import { MouseEvent } from 'react';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
+import { NftEnumType, PartialNftType } from 'lib';
 import { CollectionTypeByNftEnum, SearchParamsEnum } from 'localConstants';
 import { sendRouteBuilder } from 'routes';
-import { NftEnumType, PartialNftType } from 'lib';
 
 export const NFTRow = ({ nft }: { nft: PartialNftType }) => {
   const navigate = useNavigate();

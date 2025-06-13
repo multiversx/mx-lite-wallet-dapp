@@ -10,8 +10,8 @@ import {
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig
 } from 'lib';
-import { useGetCollectionsQuery } from 'redux/endpoints';
 import { CollectionType } from 'lib';
+import { useGetCollectionsQuery } from 'redux/endpoints';
 import { IssueNftFieldsEnum } from '../types';
 
 export const useIssueNftForm = () => {

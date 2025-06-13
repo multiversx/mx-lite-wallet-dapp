@@ -17,7 +17,7 @@ export const getGatewayResponse = async (
     };
   }
 
-  if (gatewayUrl.includes(`/${(gatewayEndpoints as any).address}`)) {
+  if (gatewayUrl.includes(`/${gatewayEndpoints.address}`)) {
     const account = await arraybufferToJSON(response);
 
     return {

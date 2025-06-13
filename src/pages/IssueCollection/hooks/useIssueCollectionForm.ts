@@ -9,8 +9,8 @@ import {
   TransactionsFactoryConfig
 } from 'lib';
 
-import { CollectionTypeByNftEnum } from 'localConstants';
 import { NftEnumType } from 'lib';
+import { CollectionTypeByNftEnum } from 'localConstants';
 import { IssueCollectionFieldsEnum } from '../types';
 
 export const useIssueCollectionForm = () => {

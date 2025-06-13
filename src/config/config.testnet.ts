@@ -1,5 +1,5 @@
-import { NetworkType } from 'redux/slices';
 import { EnvironmentsEnum } from 'lib';
+import { NetworkType } from 'redux/slices';
 import { sharedNetworks } from './sharedNetworks';
 
 export * from './sharedConfig';
