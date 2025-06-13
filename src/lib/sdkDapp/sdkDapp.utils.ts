@@ -1,6 +1,9 @@
 import { nativeAuth } from '@multiversx/sdk-dapp/services/nativeAuth/nativeAuth';
 import { replyToDapp as originalReplyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';
-import { ExtendedReplyWithPostMessageType, ReplyWithRedirectType } from 'types';
+import {
+  ExtendedReplyWithPostMessageType,
+  ReplyWithRedirectType
+} from '../sdkDappWebWalletCrossWindowProvider';
 
 // Utility exports
 export { getEgldLabel } from '@multiversx/sdk-dapp/utils/network/getEgldLabel';
@@ -53,7 +56,7 @@ export { getToken };
 export const replyToDapp: (
   props: {
     callbackUrl: string;
-    webwiewApp?: HTMLIFrameElement | null;
+    webviewApp?: HTMLIFrameElement | null;
     postMessageData?: ExtendedReplyWithPostMessageType;
     transactionData?: ReplyWithRedirectType['transactionData'];
   },

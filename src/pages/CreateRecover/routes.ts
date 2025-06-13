@@ -1,5 +1,5 @@
+import { RouteType } from 'lib';
 import { CreateRecover } from './CreateRecover';
-import { RouteType } from '../../lib/sdkDapp/sdkDapp.types';
 
 export enum CreateRecoverRoutesEnum {
   create = '/create',

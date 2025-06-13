@@ -10,17 +10,15 @@ import {
   useSignTransactionsWithLedger,
   useGetLastPendingTransactionHash,
   useSignTransactionsCommonData,
-  useGetSignTransactionsError
-} from 'lib';
-
-import { signTransactionsCancelMessageSelector } from 'lib/sdkDapp/sdkDapp.selectors';
-import { sdkDappStore } from 'lib/sdkDapp/sdkDapp.store';
-import { MAX_ALLOWED_TRANSACTIONS_TO_SIGN } from 'localConstants';
-import {
+  useGetSignTransactionsError,
   LoginMethodsEnum,
   MultiSignTransactionType,
-  SignModalPropsType
-} from 'types';
+  SignModalPropsType,
+  signTransactionsCancelMessageSelector,
+  sdkDappStore
+} from 'lib';
+
+import { MAX_ALLOWED_TRANSACTIONS_TO_SIGN } from 'localConstants';
 
 const isUnderMaxAllowedTransactions = (
   allTransactions: MultiSignTransactionType[]

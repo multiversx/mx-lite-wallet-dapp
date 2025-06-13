@@ -3,9 +3,9 @@ import { OutputContainer } from 'components/OutputContainer';
 import {
   getInterpretedTransaction,
   useGetNetworkConfig,
-  useGetAccountInfo
+  useGetAccountInfo,
+  TransactionRow
 } from 'lib';
-import { TransactionRow } from 'lib/sdkDapp/sdkDapp.components';
 import { useLazyGetTransactionsQuery } from 'redux/endpoints';
 import { ServerTransactionType } from 'types';
 

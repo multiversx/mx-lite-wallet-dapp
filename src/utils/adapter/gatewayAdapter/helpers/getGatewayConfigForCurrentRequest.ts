@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { getCurrentNetwork } from 'helpers';
-import { matchPath } from 'lib/sdkDapp/sdkDapp.types';
+import { matchPath } from 'lib';
 import { apiRoutes, endpointMap } from './apiToGatewayEndpointMap';
 
 export const getGatewayConfigForCurrentRequest = (

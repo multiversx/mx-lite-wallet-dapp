@@ -2,13 +2,11 @@ import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import {
   IPlainTransactionObject,
   parseSignUrl,
-  validateSignTransactions
-} from 'lib';
-import {
+  validateSignTransactions,
   extractSessionId,
   sendBatchTransactionsSdkDapp,
   sendTransactions
-} from 'lib/sdkDapp';
+} from 'lib';
 
 import { MultiSignTransactionType, TransactionsDataTokensType } from 'types';
 import { SendBatchTransactionsPropsType } from 'types';

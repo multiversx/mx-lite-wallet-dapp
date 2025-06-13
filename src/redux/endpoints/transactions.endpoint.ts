@@ -1,12 +1,11 @@
 import { getBaseURL } from 'helpers';
 import {
   ACCOUNTS_ENDPOINT,
-  API_CACHE_DURATION_SECONDS,
-  MAX_API_SIZE,
-  TRANSACTIONS_ENDPOINT
+  TRANSACTIONS_ENDPOINT,
+  ServerTransactionType
 } from 'lib';
+import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
 import { RootApi } from 'redux/rootApi';
-import { ServerTransactionType } from 'types';
 
 const transactionsEndpoints = RootApi.injectEndpoints({
   overrideExisting: true,

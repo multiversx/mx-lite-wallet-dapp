@@ -1,4 +1,4 @@
-import { EnvironmentsEnum } from 'types';
+import { EnvironmentsEnum } from 'lib';
 import { NetworkType } from '../redux/slices';
 
 export const sharedNetworks: NetworkType[] = [

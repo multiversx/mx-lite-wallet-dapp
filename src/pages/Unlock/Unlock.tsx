@@ -6,7 +6,7 @@ import {
   OperaWalletLoginButton,
   WalletConnectLoginButton,
   XaliasLoginButton
-} from 'lib/sdkDapp/sdkDapp.components';
+} from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import {

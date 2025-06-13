@@ -2,14 +2,14 @@ import { numberToHex } from 'helpers/operations/toHex';
 import { stringToHex } from 'helpers/operations/toHex';
 import { GAS_PRICE } from 'lib';
 import { prepareTransaction } from 'lib';
-import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import {
   NftEnumType,
   PartialNftType,
   TokenType,
   EsdtEnumType,
   CollectionType
-} from 'types';
+} from 'lib';
+import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { RegisterTokenFormType } from '../types';
 
 const TokenTypeMap: Record<string, number> = {

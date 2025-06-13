@@ -1,12 +1,13 @@
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';
 import { Copy, MxLink } from 'components';
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
-import { FormatAmount } from 'lib/sdkDapp/sdkDapp.components';
 import {
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  FormatAmount,
   explorerAddressSelector,
   useSdkDappSelector
-} from 'lib/sdkDapp/sdkDapp.store';
+} from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';
@@ -16,7 +17,6 @@ export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
-  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
   const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
 
   return (

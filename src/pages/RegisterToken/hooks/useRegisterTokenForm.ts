@@ -7,10 +7,15 @@ import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/
 import { networks } from 'config';
 import { capitalize, addressIsErd } from 'helpers';
 import { useSendTransactions } from 'hooks';
-import { DEVNET_CHAIN_ID, MAINNET_CHAIN_ID, TESTNET_CHAIN_ID } from 'lib';
-import { addressIsValid, useGetAccountInfo } from 'lib';
-import { accountSelector } from 'lib/sdkDapp/sdkDapp.selectors';
-import { sdkDappStore } from 'lib/sdkDapp/sdkDapp.store';
+import {
+  DEVNET_CHAIN_ID,
+  MAINNET_CHAIN_ID,
+  TESTNET_CHAIN_ID,
+  addressIsValid,
+  useGetAccountInfo,
+  accountSelector,
+  sdkDappStore
+} from 'lib';
 import { routeNames } from 'routes';
 import { EnvironmentsEnum, SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';

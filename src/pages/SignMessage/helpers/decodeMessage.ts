@@ -1,5 +1,4 @@
-import { Address, Message, MessageComputer } from 'lib/sdkCore';
-import { verifyMessage } from 'lib/sdkDapp';
+import { Address, Message, MessageComputer, verifyMessage } from 'lib';
 
 export const decodeMessage = async ({
   address,
