@@ -2,5 +2,6 @@ export {
   networkSelector,
   accountSelector,
   websocketEventSelector,
-  addressSelector
+  addressSelector,
+  loginInfoSelector
 } from '@multiversx/sdk-dapp/out/store/selectors';

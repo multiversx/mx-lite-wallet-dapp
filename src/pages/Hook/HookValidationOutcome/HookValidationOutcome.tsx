@@ -1,13 +1,14 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
+import { Loader } from 'components';
 import { useReplyToDapp, useRedirectPathname } from 'hooks';
-import { MvxLoader as Loader } from 'lib';
 import {
   useGetAccount,
-  useGetIsWalletConnectV2Initialized,
-  useGetLoginInfo,
   WindowProviderResponseEnums,
-  LoginMethodsEnum
+  getAccountProvider,
+  ProviderTypeEnum,
+  loginInfoSelector,
+  getState
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
@@ -26,8 +27,9 @@ export const HookValidationOutcome = ({
   validUrl
 }: HookValidationOutcomePropsType) => {
   const { search } = useLocation();
-  const { loginMethod } = useGetLoginInfo();
-  const isWalletConnectV2Initializing = useGetIsWalletConnectV2Initialized();
+  const provider = getAccountProvider();
+  const providerType = provider.getType();
+  const { walletConnectV2Initializing } = loginInfoSelector(getState());
   const { type: registeredHook } = useSelector(hookSelector);
   const { pathname: redirectPathname } = useRedirectPathname();
   const { address } = useGetAccount();
@@ -37,7 +39,7 @@ export const HookValidationOutcome = ({
   const isInvalid = validUrl === HookStateEnum.invalid;
   const isPending = validUrl === HookStateEnum.pending;
 
-  if (isWalletConnectV2Initializing) {
+  if (walletConnectV2Initializing) {
     return <Loader />;
   }
 
@@ -65,8 +67,8 @@ export const HookValidationOutcome = ({
       registeredHook
     )
   ) {
-    switch (loginMethod) {
-      case LoginMethodsEnum.none: {
+    switch (providerType) {
+      case ProviderTypeEnum.none: {
         // The user must login before we can sign
         return <Navigate to={routeNames.unlock} replace />;
       }
