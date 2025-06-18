@@ -63,7 +63,9 @@ export class PemProvider implements IProvider {
   }
 
   getType() {
-    return 'pemProvider';
+    // TODO: Add 'custom' to the ProviderTypeEnum
+    return 'custom' as any;
+    // return ProviderTypeEnum.custom;
   }
 
   async signTransaction(transaction: Transaction) {

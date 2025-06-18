@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { MxLink, OutputContainer } from 'components';
-import { useGetAccountInfo, TokenType } from 'lib';
+import { useGetAccount, TokenType } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { routeNames } from 'routes';
 import { TokenRow } from './components';
 
 export const Tokens = () => {
-  const { websocketEvent, address } = useGetAccountInfo();
+  const { websocketEvent, address } = useGetAccount();
   const [fetchTokens, { data: tokens, isLoading }] = useLazyGetTokensQuery();
 
   useEffect(() => {

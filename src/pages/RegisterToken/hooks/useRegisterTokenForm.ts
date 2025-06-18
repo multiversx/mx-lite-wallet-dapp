@@ -34,7 +34,7 @@ const NetworkChainIdMap: Record<string, EnvironmentsEnum> = {
 
 export const useRegisterTokenForm = () => {
   const navigate = useNavigate();
-  const { account } = useGetAccountInfo();
+  const { account } = useGetAccount();
 
   const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);

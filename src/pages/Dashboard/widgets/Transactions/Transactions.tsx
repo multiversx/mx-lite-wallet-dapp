@@ -5,7 +5,7 @@ import { OutputContainer } from 'components/OutputContainer';
 import {
   getInterpretedTransaction,
   useGetNetworkConfig,
-  useGetAccountInfo,
+  useGetAccount,
   TransactionRow
 } from 'lib';
 import { ServerTransactionType } from 'lib';
@@ -14,7 +14,7 @@ import { useLazyGetTransactionsQuery } from 'redux/endpoints';
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
 export const Transactions = () => {
-  const { websocketEvent, address } = useGetAccountInfo();
+  const { websocketEvent, address } = useGetAccount();
   const {
     network: { explorerAddress }
   } = useGetNetworkConfig();

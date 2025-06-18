@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { MxLink, OutputContainer } from 'components';
-import { useGetAccountInfo } from 'lib';
+import { useGetAccount } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { routeNames } from 'routes';
 import { NFTRow } from './components';
 
 export const NFTs = () => {
-  const { websocketEvent, address } = useGetAccountInfo();
+  const { websocketEvent, address } = useGetAccount();
   const [fetchNFTs, { data: nftsData, isLoading }] = useLazyGetNftsQuery();
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
-import { RouteType } from 'lib';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,

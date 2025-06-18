@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useGetTokensWithEgld } from 'hooks';
-import { getEgldLabel, useGetAccountInfo } from 'lib';
+import { getEgldLabel, useGetAccount } from 'lib';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { SendTypeEnum, TokenOptionType } from 'types';
 
@@ -11,7 +11,7 @@ export const useTokenOptions = ({
   sendType: SendTypeEnum;
   skipAddEgld?: boolean;
 }) => {
-  const { address, websocketEvent } = useGetAccountInfo();
+  const { address, websocketEvent } = useGetAccount();
   const { tokens, isLoading: isLoadingTokens } = useGetTokensWithEgld();
   const [fetchNFTs, { data: nfts, isLoading: isLoadingNfts }] =
     useLazyGetNftsQuery();

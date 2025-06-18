@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import { array, number, object, string } from 'yup';
 import { addressIsErd, getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
-import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { addressIsValid, useGetAccount, useGetNetworkConfig } from 'lib';
 import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';
 import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 
 export const useSovereignTransferForm = () => {
-  const { address } = useGetAccountInfo();
+  const { address } = useGetAccount();
   const {
     network: { chainId }
   } = useGetNetworkConfig();

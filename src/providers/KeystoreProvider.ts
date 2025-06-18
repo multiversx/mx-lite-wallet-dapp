@@ -63,7 +63,9 @@ export class KeystoreProvider implements IProvider {
   }
 
   getType() {
-    return 'keystoreProvider';
+    // TODO: Add 'custom' to the ProviderTypeEnum
+    return 'custom' as any;
+    // return ProviderTypeEnum.custom;
   }
 
   async signTransaction(transaction: Transaction) {

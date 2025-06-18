@@ -1,4 +1,4 @@
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { useGetAccount, useGetNetworkConfig } from 'lib';
 import {
   IPlainTransactionObject,
   parseSignUrl,
@@ -42,7 +42,7 @@ export const useSignHookTransactions = () => {
 
   const {
     account: { address, balance }
-  } = useGetAccountInfo();
+  } = useGetAccount();
 
   const apiConfig = {
     baseURL: apiAddress,

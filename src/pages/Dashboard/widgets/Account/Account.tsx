@@ -1,7 +1,7 @@
 import QRCode from 'react-qr-code';
 import { useSelector } from 'react-redux';
 import {
-  useGetAccountInfo,
+  useGetAccount,
   useGetNetworkConfig,
   FormatAmount,
   explorerAddressSelector,
