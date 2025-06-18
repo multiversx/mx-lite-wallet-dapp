@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ProviderTypeEnum, Transaction, useGetAccount } from 'lib';
+import { ProviderTypeEnum, Transaction, useGetAccountInfo } from 'lib';
 
 interface SendTransactionsParamsType {
   redirectRoute?: string;
@@ -11,7 +11,7 @@ interface SendTransactionsParamsType {
 export function useSendTransactions(params?: SendTransactionsParamsType) {
   const {
     account: { nonce }
-  } = useGetAccount();
+  } = useGetAccountInfo();
   const navigate = useNavigate();
   const { pendingTransactions } = useGetPendingTransactions();
   const { fail, timedOut } = useGetActiveTransactionsStatus();

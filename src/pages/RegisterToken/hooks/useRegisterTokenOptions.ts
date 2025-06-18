@@ -1,11 +1,11 @@
 import { useEffect, useMemo } from 'react';
 import { useGetTokensWithEgld } from 'hooks';
-import { useGetAccount, getEgldLabel } from 'lib';
+import { useGetAccountInfo, getEgldLabel } from 'lib';
 import { useLazyGetCollectionsQuery } from 'redux/endpoints';
 import { SendTypeEnum, TokenOptionType } from 'types';
 
 export const useRegisterTokenOptions = (sendType: SendTypeEnum) => {
-  const { address, websocketEvent } = useGetAccount();
+  const { address, websocketEvent } = useGetAccountInfo();
   const { tokens, isLoading: isLoadingTokens } = useGetTokensWithEgld();
   const [
     fetchCollections,

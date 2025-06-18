@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useReplyWithCancelled } from 'hooks';
 import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
 import {
-  useGetAccount,
-  useGetSignedTransactions,
+  useGetAccountInfo,
   SignedTransactionType,
   TransactionBatchStatusesEnum
 } from 'lib';
@@ -36,11 +35,7 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
   const dispatch = useDispatch();
   const removeAllTransactions = useAbortAndRemoveAllTxs();
 
-  const { signedTransactions } = useGetSignedTransactions();
-  const {
-    account: { address },
-    ledgerAccount
-  } = useGetAccount();
+  const { address, ledgerAccount } = useGetAccountInfo();
   const [state, setState] = useState<ValidateAndSignTxsReturnType>({
     multiSignTxs: [],
     txErrors: {},

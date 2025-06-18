@@ -7,11 +7,7 @@ import {
   TransactionOptions,
   TransactionVersion
 } from 'lib';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 import { TransactionSignatureDataType } from 'types';
-
-// TODO: Define ZERO locally or import from sdk-dapp-core if available.
-const ZERO = '0';
 
 export interface MapSignedTransactionsParamsType {
   txs: IPlainTransactionObject[];

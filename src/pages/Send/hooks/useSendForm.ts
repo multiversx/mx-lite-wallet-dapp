@@ -8,7 +8,7 @@ import { useSendTransactions, useTokenOptions } from 'hooks';
 import {
   prepareTransaction,
   getEgldLabel,
-  useGetAccount,
+  useGetAccountInfo,
   useGetNetworkConfig,
   computeNftDataField,
   computeTokenDataField,
@@ -25,7 +25,7 @@ import { SendTypeEnum, TokenOptionType } from 'types';
 import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {
-  const { address, account } = useGetAccount();
+  const { address, account } = useGetAccountInfo();
   const {
     network: { chainId }
   } = useGetNetworkConfig();

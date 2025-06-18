@@ -1,5 +1,5 @@
 export type { AccountType } from '@multiversx/sdk-dapp/out/types/account.types';
-export { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
+export * from '@multiversx/sdk-dapp/out/types/enums.types';
 export type { FormatAmountControllerPropsType } from '@multiversx/sdk-dapp/out/controllers/FormatAmountController/types';
 export type {
   InterpretedTransactionType,

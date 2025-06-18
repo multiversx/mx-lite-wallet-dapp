@@ -1,11 +1,11 @@
-import { useGetAccount, useGetNetworkConfig } from 'lib';
+import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import {
   IPlainTransactionObject,
   parseSignUrl,
   validateSignTransactions,
   extractSessionId,
   sendBatchTransactionsSdkDapp,
-  sendTransactions
+  signTransactions
 } from 'lib';
 
 import { MultiSignTransactionType, TransactionsDataTokensType } from 'types';
@@ -42,7 +42,7 @@ export const useSignHookTransactions = () => {
 
   const {
     account: { address, balance }
-  } = useGetAccount();
+  } = useGetAccountInfo();
 
   const apiConfig = {
     baseURL: apiAddress,

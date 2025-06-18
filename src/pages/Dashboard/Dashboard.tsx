@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useScrollToElement } from 'hooks';
-import { refreshAccount, useGetAccount } from 'lib';
+import { refreshAccount, useGetAccountInfo } from 'lib';
 import { WidgetType } from 'types/widget.types';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Widget } from './components';
@@ -32,7 +32,7 @@ const WIDGETS: WidgetType[] = [
 
 export const Dashboard = () => {
   useScrollToElement();
-  const { websocketEvent } = useGetAccount();
+  const { websocketEvent } = useGetAccountInfo();
 
   useEffect(() => {
     refreshAccount();

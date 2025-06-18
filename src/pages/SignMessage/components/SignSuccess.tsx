@@ -4,7 +4,7 @@ import { Message } from 'lib';
 import { decodeMessage } from '../helpers';
 
 interface VerifyMessagePropsType {
-  message: Message | null;
+  message: Message;
   signature: string;
   address: string;
 }

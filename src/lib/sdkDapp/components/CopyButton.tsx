@@ -1,5 +1,5 @@
-import { MvxCopyButton } from '../../sdkDappCoreUI/sdkDappCoreUI.components';
-import { MvxCopyButtonPropsType } from '../../sdkDappCoreUI/sdkDappCoreUI.types';
+import { MvxCopyButton } from '@multiversx/sdk-dapp-core-ui/react';
+import type { MvxCopyButton as MvxCopyButtonPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/mvx-copy-button';
 
 export const CopyButton = ({
   className,

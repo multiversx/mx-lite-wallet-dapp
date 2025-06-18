@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
+import { MvxExplorerLink } from '@multiversx/sdk-dapp-core-ui/react';
+import { getState, networkSelector } from 'lib';
 import { WithClassnameType } from 'types';
-import { MvxExplorerLink } from '../../sdkDappCoreUI/sdkDappCoreUI.components';
-import { useGetNetworkConfig } from '../sdkDapp.hooks';
 
 export const ExplorerLink = ({
   children,
@@ -9,7 +9,7 @@ export const ExplorerLink = ({
   className,
   'data-testid': dataTestId
 }: ExplorerLinkPropsType) => {
-  const { network } = useGetNetworkConfig();
+  const network = networkSelector(getState());
 
   return (
     <MvxExplorerLink

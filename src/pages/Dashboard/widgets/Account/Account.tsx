@@ -1,26 +1,24 @@
 import QRCode from 'react-qr-code';
-import { useSelector } from 'react-redux';
-import {
-  useGetAccount,
-  useGetNetworkConfig,
-  FormatAmount,
-  explorerAddressSelector,
-  useSdkDappSelector
-} from 'redux/sdkDapp.store';
+
 import { MxLink } from 'components';
-import { useGetAccount, useGetNetworkConfig } from 'lib';
-import { FormatAmount } from 'lib';
+import {
+  getState,
+  useGetAccountInfo,
+  networkSelector,
+  FormatAmount,
+  CopyButton
+} from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
-import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
 export const Account = () => {
-  const { network } = useGetNetworkConfig();
-  const { activeNetwork } = useSelector(networkSelector);
-  const { address, account } = useGetAccount();
-  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
-  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
+  const activeNetwork = networkSelector(getState());
+  const { address, account } = useGetAccountInfo();
+
+  // TODO: fix this
+  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork as any;
+  const explorerAddress = activeNetwork.explorerAddress;
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
@@ -54,7 +52,7 @@ export const Account = () => {
                 <span className='text-xl'>
                   <FormatAmount
                     value={account.balance}
-                    egldLabel={network.egldLabel}
+                    egldLabel={activeNetwork.egldLabel}
                     data-testid='balance'
                   />
                 </span>

@@ -1,9 +1,9 @@
+import { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers';
+import { MvxFormatAmount } from '@multiversx/sdk-dapp-core-ui/react';
+import type { MvxFormatAmount as MvxFormatAmountPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/mvx-format-amount';
+import { getState, networkSelector } from 'lib';
 import { WithClassnameType } from 'types';
-import { MvxFormatAmount } from '../../sdkDappCoreUI/sdkDappCoreUI.components';
-import { MvxFormatAmountPropsType } from '../../sdkDappCoreUI/sdkDappCoreUI.types';
 import { DECIMALS, DIGITS } from '../../sdkDappUtils/sdkDappUtils';
-import { FormatAmountController } from '../sdkDapp.helpers';
-import { useGetNetworkConfig } from '../sdkDapp.hooks';
 
 interface FormatAmountPropsType
   extends Partial<MvxFormatAmountPropsType>,
@@ -13,15 +13,13 @@ interface FormatAmountPropsType
 }
 
 export const FormatAmount = (props: FormatAmountPropsType) => {
-  const {
-    network: { egldLabel }
-  } = useGetNetworkConfig();
+  const network = networkSelector(getState());
 
   const { isValid, valueDecimal, valueInteger, label } =
     FormatAmountController.getData({
       digits: DIGITS,
       decimals: DECIMALS,
-      egldLabel,
+      egldLabel: network.egldLabel,
       ...props,
       input: props.value
     });
@@ -32,7 +30,6 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
       dataTestId={props['data-testid']}
       isValid={isValid}
       label={label}
-      showLabel={props.showLabel}
       valueDecimal={valueDecimal}
       valueInteger={valueInteger}
     />

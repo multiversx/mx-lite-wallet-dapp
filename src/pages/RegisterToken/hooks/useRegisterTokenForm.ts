@@ -2,8 +2,7 @@ import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
-import { accountSelector } from 'redux/sdkDapp.selectors';
-import { sdkDappStore } from 'redux/sdkDapp.store';
+
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { networks } from 'config';
@@ -12,8 +11,13 @@ import { useSendTransactions } from 'hooks';
 import {
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,
-  TESTNET_CHAIN_ID
-} from 'localConstants';
+  TESTNET_CHAIN_ID,
+  EnvironmentsEnum,
+  addressIsValid,
+  useGetAccountInfo,
+  accountSelector
+} from 'lib';
+import { getState } from 'lib';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';
@@ -34,7 +38,7 @@ const NetworkChainIdMap: Record<string, EnvironmentsEnum> = {
 
 export const useRegisterTokenForm = () => {
   const navigate = useNavigate();
-  const { account } = useGetAccount();
+  const { account } = useGetAccountInfo();
 
   const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
@@ -100,7 +104,7 @@ export const useRegisterTokenForm = () => {
 
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
       await sleep(1000);
-      const { nonce } = accountSelector(sdkDappStore.getState());
+      const { nonce } = accountSelector(getState());
       transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
       navigate(routeNames.dashboard);

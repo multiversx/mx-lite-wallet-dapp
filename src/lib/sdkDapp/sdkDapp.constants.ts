@@ -15,3 +15,9 @@ export {
   GAS_PRICE,
   VERSION
 } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
+
+export {
+  DEVNET_CHAIN_ID,
+  MAINNET_CHAIN_ID,
+  TESTNET_CHAIN_ID
+} from '@multiversx/sdk-dapp/out/constants/network.constants';

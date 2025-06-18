@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { faArrowUp, faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import { FormatAmount } from 'lib';
+import { FormatAmount, TokenType } from 'lib';
 import { SearchParamsEnum } from 'localConstants';
 import { sendRouteBuilder } from 'routes';
 
@@ -34,12 +34,7 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
       <div className='flex items-center space-x-4'>
         {token.balance && (
           <div className='text-right'>
-            <FormatAmount
-              value={token.balance}
-              decimals={token.decimals}
-              showLabel={false}
-              showLastNonZeroDecimal
-            />
+            <FormatAmount value={token.balance} showLabel={false} />
           </div>
         )}
         <button

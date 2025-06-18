@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-// TODO: Replace Loader with sdk-dapp-core-ui equivalent if available.
-// import { Loader } from 'components';
-import { getEgldLabel, refreshAccount, useGetAccount } from 'lib';
+import { Loader } from 'components';
+import { getEgldLabel, refreshAccount, useGetAccountInfo } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import {
   useGetFaucetSettingsQuery,
@@ -16,7 +15,7 @@ export const FaucetContent = () => {
   const [getFunds, { isSuccess }] = useRequestFundsMutation();
   const [fundsReceived, setFundsReceived] = useState(false);
   const [requestFailed, setRequestFailed] = useState('');
-  const { websocketEvent } = useGetAccount();
+  const { websocketEvent } = useGetAccountInfo();
   const { data: settings, error: settingsError } = useGetFaucetSettingsQuery();
   const egldLabel = getEgldLabel();
 
