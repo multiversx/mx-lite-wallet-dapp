@@ -125,12 +125,10 @@ export const Sign = () => {
     );
   }
 
-  const noSpinner = [
-    ProviderTypeEnum.extension,
-    ProviderTypeEnum.walletConnect
-  ].includes(providerType as ProviderTypeEnum);
-
-  if (noSpinner) {
+  if (
+    providerType === ProviderTypeEnum.extension ||
+    providerType === ProviderTypeEnum.walletConnect
+  ) {
     return null;
   }
 
