@@ -1,7 +1,12 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ProviderTypeEnum, Transaction, useGetAccountInfo } from 'lib';
+import {
+  getAccountProvider,
+  ProviderTypeEnum,
+  Transaction,
+  useGetAccountInfo
+} from 'lib';
 
 interface SendTransactionsParamsType {
   redirectRoute?: string;
@@ -15,7 +20,8 @@ export function useSendTransactions(params?: SendTransactionsParamsType) {
   const navigate = useNavigate();
   const { pendingTransactions } = useGetPendingTransactions();
   const { fail, timedOut } = useGetActiveTransactionsStatus();
-  const { providerType } = useGetAccountProvider();
+  const provider = getAccountProvider();
+  const providerType = provider.getType();
   const [localState, setLocalState] = useState<{
     setIsFormSubmitted?: React.Dispatch<React.SetStateAction<boolean>>;
   }>({});
