@@ -2019,21 +2019,6 @@
     axios "^1.7.4"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-core-ui@0.0.0-alpha.15":
-  version "0.0.0-alpha.15"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-core-ui/-/sdk-dapp-core-ui-0.0.0-alpha.15.tgz#dc9c48b63ba0c44834f03f9b30c2e02246ad4826"
-  integrity sha512-rxC99uZrDA8C1sSXvBk3l7sbbownBTg6XxTflZoZR7eh7yRBG8s9z8PvWNGw9e7Y3Y/tGA/u6KqJUWOqsZ1Iuw==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" ">= 6.7.2"
-    "@fortawesome/free-solid-svg-icons" ">= 6.7.2"
-    "@multiversx/sdk-dapp-utils" ">= 1.0.4"
-    "@stencil/react-output-target" "0.8.2"
-    classnames ">= 2.5.1"
-    lodash.inrange "^3.3.0"
-    lodash.range "^3.2.0"
-    qrcode ">= 1.5.4"
-    sass-embedded "^1.85.1"
-
 "@multiversx/sdk-dapp-form@2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-form/-/sdk-dapp-form-2.0.3.tgz#c323d93c221f42b766360288e99c0c3213f4a44d"
@@ -2055,7 +2040,7 @@
     classnames "2.3.2"
     react-select "5.4.0"
 
-"@multiversx/sdk-dapp-ui@>=0.0.6":
+"@multiversx/sdk-dapp-ui@0.0.6", "@multiversx/sdk-dapp-ui@>=0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.6.tgz#f4b0d66c456b42fca14927abe37e7e7637a8b0ff"
   integrity sha512-iJg9OYlcx0TTifzn5XuVMSfgq/Exk4OQRpLrEDtdUkMDRM00TlvxWRg7tKVkWtsBUk7koWA1WVo6g7HCf2Sm5g==

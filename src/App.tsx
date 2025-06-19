@@ -5,7 +5,6 @@ import { AxiosInterceptor, Layout, Utilities } from 'components';
 
 import { PageNotFound, Unlock } from 'pages';
 import { routeNames, routes } from 'routes';
-import { BatchTransactionsContextProvider } from 'wrappers';
 import { useSetupHrp } from './hooks';
 import { persistor, store } from './redux/store';
 
@@ -33,9 +32,7 @@ const AppContent = () => {
 export const MainApp = () => {
   return (
     <AxiosInterceptor>
-      <BatchTransactionsContextProvider>
-        <AppContent />
-      </BatchTransactionsContextProvider>
+      <AppContent />
     </AxiosInterceptor>
   );
 };
