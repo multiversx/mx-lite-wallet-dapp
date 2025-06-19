@@ -1,24 +1,23 @@
 import QRCode from 'react-qr-code';
-import { useSelector } from 'react-redux';
-import { Copy, MxLink } from 'components';
+
+import { MxLink } from 'components';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
   FormatAmount,
-  explorerAddressSelector,
-  useSdkDappSelector
+  CopyButton
 } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
-import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
 export const Account = () => {
-  const { network } = useGetNetworkConfig();
-  const { activeNetwork } = useSelector(networkSelector);
+  const { network: activeNetwork } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
-  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
+
+  // TODO: fix this
+  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork as any;
+  const explorerAddress = activeNetwork.explorerAddress;
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
@@ -34,7 +33,7 @@ export const Account = () => {
               data-testid={DataTestIdsEnum.userAddress}
             >
               {address}
-              <Copy value={address} />
+              <CopyButton text={address} />
             </div>
           </div>
           <div className='my-1 flex justify-center sm:hidden'>
@@ -52,7 +51,7 @@ export const Account = () => {
                 <span className='text-xl'>
                   <FormatAmount
                     value={account.balance}
-                    egldLabel={network.egldLabel}
+                    egldLabel={activeNetwork.egldLabel}
                     data-testid='balance'
                   />
                 </span>

@@ -1,5 +1,3 @@
-import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
-import { RouteType } from 'lib';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
@@ -26,13 +24,16 @@ import {
 import { IssueCollection } from '../pages/IssueCollection/IssueCollection';
 import { IssueToken } from '../pages/IssueToken/IssueToken';
 
-export interface RouteWithTitleType extends RouteType {
+export interface RouteType {
+  authenticatedRoute?: boolean;
+  path: RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum;
   title: string;
+  component: React.ComponentType;
 }
 
 const routesObject: Record<
   RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
-  RouteWithTitleType
+  RouteType
 > = {
   [RouteNamesEnum.home]: {
     path: RouteNamesEnum.home,
@@ -64,83 +65,47 @@ const routesObject: Record<
     path: RouteNamesEnum.send,
     authenticatedRoute: true,
     title: 'Send',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Send />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <Send />
   },
   [RouteNamesEnum.sign]: {
     path: RouteNamesEnum.sign,
     title: 'Sign',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Sign />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <Sign />
   },
   [RouteNamesEnum.signMessage]: {
     path: RouteNamesEnum.signMessage,
     title: 'Sign Message',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <SignMessage />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <SignMessage />
   },
   [RouteNamesEnum.sovereignTransfer]: {
     path: RouteNamesEnum.sovereignTransfer,
     title: 'Sovereign Transfer',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <SovereignTransfer />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <SovereignTransfer />
   },
   [RouteNamesEnum.issueToken]: {
     path: RouteNamesEnum.issueToken,
     title: 'Issue Token',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <IssueToken />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <IssueToken />
   },
   [RouteNamesEnum.issueCollection]: {
     path: RouteNamesEnum.issueCollection,
     title: 'Issue Collection',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <IssueCollection />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <IssueCollection />
   },
   [RouteNamesEnum.createNft]: {
     path: RouteNamesEnum.createNft,
     title: 'Create NFT',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <IssueNft />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <IssueNft />
   },
   [RouteNamesEnum.registerToken]: {
     path: RouteNamesEnum.registerToken,
     title: 'Register Token',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <RegisterToken />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <RegisterToken />
   },
   [RouteNamesEnum.faucet]: {
     path: RouteNamesEnum.faucet,
     title: '',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Faucet />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <Faucet />
   },
   [HooksPageEnum.login]: {
     path: HooksPageEnum.login,
@@ -165,7 +130,7 @@ const routesObject: Record<
   ...CreateRecoverRoutes
 };
 
-export const routes: RouteWithTitleType[] = Object.values(routesObject);
+export const routes: RouteType[] = Object.values(routesObject);
 
 export const routeNames = Object.keys(RouteNamesEnum).reduce(
   (acc, key) => {

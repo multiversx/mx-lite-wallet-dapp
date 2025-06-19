@@ -1,5 +1,5 @@
 import type { PropsWithChildren, MouseEvent } from 'react';
-import { WithClassnameType } from 'lib';
+import { WithClassnameType } from 'types';
 
 interface ButtonType extends WithClassnameType, PropsWithChildren {
   onClick?: (e: MouseEvent) => void;

@@ -1,42 +1,23 @@
-import { useState, useEffect } from 'react';
-import { Label } from 'components/Label';
-import {
-  CopyButton,
-  useGetAccountInfo,
-  useGetLastSignedMessageSession
-} from 'lib';
+import { Label } from 'components';
+import { CopyButton } from 'lib';
+import { Message } from 'lib';
 import { decodeMessage } from '../helpers';
 
-export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {
-  const { address } = useGetAccountInfo();
-  const signedMessageInfo = useGetLastSignedMessageSession();
+interface VerifyMessagePropsType {
+  message: Message;
+  signature: string;
+  address: string;
+}
 
-  const [encodedMessage, setEncodedMessage] = useState('');
-  const [decodedMessage, setDecodedMessage] = useState('');
-
-  const fetchDecodedMessage = async () => {
-    if (!signedMessageInfo?.signature) {
-      return;
-    }
-
-    const { signature } = signedMessageInfo;
-    const result = await decodeMessage({
-      address,
-      message: messageToSign,
-      signature
-    });
-
-    setEncodedMessage(result.encodedMessage);
-    setDecodedMessage(result.decodedMessage);
-  };
-
-  useEffect(() => {
-    fetchDecodedMessage();
-  }, [signedMessageInfo]);
-
-  if (!signedMessageInfo?.signature) {
+export const SignSuccess = (props: VerifyMessagePropsType) => {
+  if (props.message == null) {
     return null;
   }
+
+  const { encodedMessage, decodedMessage } = decodeMessage({
+    message: props.message,
+    signature: props.signature
+  });
 
   return (
     <div className='flex flex-col gap-6'>
@@ -48,9 +29,9 @@ export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {
             readOnly
             className='w-full resize-none outline-none bg-transparent'
             rows={2}
-            defaultValue={signedMessageInfo.signature}
+            defaultValue={props.signature}
           />
-          <CopyButton text={signedMessageInfo.signature} />
+          <CopyButton text={props.signature} />
         </div>
 
         <div className='flex flex-row w-full gap-2'>

@@ -36,7 +36,7 @@ export const FaucetScreen = ({
     <div className='flex flex-col items-center pb-5'>
       <h1
         className='text-2xl whitespace-nowrap mt-5'
-        data-testid={DataTestIdsEnum.modalTitle}
+        data-testid={DataTestIdsEnum.panelTitle}
       >
         {egldLabel} Faucet
       </h1>

@@ -1,6 +1,8 @@
 import { getBaseURL } from 'helpers';
-import { ACCOUNTS_ENDPOINT, TOKENS_ENDPOINT, TokenType } from 'lib';
+import { ACCOUNTS_ENDPOINT, TOKENS_ENDPOINT } from 'lib';
+import { TokenType } from 'lib';
 import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
+
 import { RootApi } from '../rootApi';
 
 const tokensEndpoints = RootApi.injectEndpoints({
