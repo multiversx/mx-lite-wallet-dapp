@@ -1,7 +1,6 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
-import { getSelectedTokenBalance } from 'helpers';
 import { useSearchParams } from 'react-router-dom';
 import { number, object, string } from 'yup';
 import { useSendTransactions, useTokenOptions } from 'hooks';
@@ -22,6 +21,7 @@ import {
 } from 'lib';
 import { SearchParamsEnum } from 'localConstants';
 import { SendTypeEnum, TokenOptionType } from 'types';
+import { getSelectedTokenBalance } from 'utils';
 import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {

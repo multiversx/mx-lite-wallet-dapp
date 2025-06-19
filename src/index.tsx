@@ -1,7 +1,7 @@
 import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
-import 'helpers/adapter/gatewayAdapter';
+import 'utils/adapter/gatewayAdapter';
 
 async function start() {
   if (import.meta.env.VITE_APP_MSW === 'true') {

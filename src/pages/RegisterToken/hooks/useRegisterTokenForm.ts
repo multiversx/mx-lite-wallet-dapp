@@ -1,6 +1,5 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { capitalize, addressIsErd } from 'helpers';
 import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
 import { object, string } from 'yup';
@@ -19,6 +18,7 @@ import {
 import { EnvironmentsEnum } from 'lib';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
+import { capitalize, addressIsErd } from 'utils';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';

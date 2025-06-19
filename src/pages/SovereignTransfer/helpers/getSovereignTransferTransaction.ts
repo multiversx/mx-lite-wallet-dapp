@@ -5,11 +5,13 @@ import {
   Address,
   AddressValue,
   SmartContractTransactionsFactory,
-  Token
+  Token,
+  getEgldLabel,
+  parseAmount,
+  PartialNftType
 } from 'lib';
-import { getEgldLabel, parseAmount, PartialNftType } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { getCurrentNetwork } from '../../../helpers';
+import { getCurrentNetwork } from 'utils';
 import { SovereignTransferFormType } from '../types';
 
 export const getSovereignTransferTransaction = ({
