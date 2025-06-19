@@ -16,7 +16,7 @@ import {
   getSignHookData,
   getSignMessageHookData,
   Transaction,
-  useGetLoginInfo,
+  useGetLoginInfo
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';

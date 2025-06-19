@@ -15,9 +15,9 @@ import {
   EnvironmentsEnum,
   addressIsValid,
   useGetAccountInfo,
-  accountSelector
+  accountSelector,
+  getState
 } from 'lib';
-import { getState } from 'lib';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { sleep } from 'utils/testUtils/puppeteer';

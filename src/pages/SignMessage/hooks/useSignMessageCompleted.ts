@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyToDapp } from 'hooks';
-import { SignedSessionType } from 'lib';
 import {
   WindowProviderResponseEnums,
   SignMessageStatusEnum,

@@ -25,7 +25,7 @@ export const parsePem = (file: File | null): Promise<ParsedPemReturnType> => {
     return Promise.resolve(null);
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = () => {
       const fileContent = reader.result;

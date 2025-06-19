@@ -1,4 +1,3 @@
-import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
@@ -66,83 +65,47 @@ const routesObject: Record<
     path: RouteNamesEnum.send,
     authenticatedRoute: true,
     title: 'Send',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Send />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <Send />
   },
   [RouteNamesEnum.sign]: {
     path: RouteNamesEnum.sign,
     title: 'Sign',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Sign />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <Sign />
   },
   [RouteNamesEnum.signMessage]: {
     path: RouteNamesEnum.signMessage,
     title: 'Sign Message',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <SignMessage />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <SignMessage />
   },
   [RouteNamesEnum.sovereignTransfer]: {
     path: RouteNamesEnum.sovereignTransfer,
     title: 'Sovereign Transfer',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <SovereignTransfer />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <SovereignTransfer />
   },
   [RouteNamesEnum.issueToken]: {
     path: RouteNamesEnum.issueToken,
     title: 'Issue Token',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <IssueToken />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <IssueToken />
   },
   [RouteNamesEnum.issueCollection]: {
     path: RouteNamesEnum.issueCollection,
     title: 'Issue Collection',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <IssueCollection />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <IssueCollection />
   },
   [RouteNamesEnum.createNft]: {
     path: RouteNamesEnum.createNft,
     title: 'Create NFT',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <IssueNft />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <IssueNft />
   },
   [RouteNamesEnum.registerToken]: {
     path: RouteNamesEnum.registerToken,
     title: 'Register Token',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <RegisterToken />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <RegisterToken />
   },
   [RouteNamesEnum.faucet]: {
     path: RouteNamesEnum.faucet,
     title: '',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Faucet />
-      </PrivateKeyCheckWrapper>
-    )
+    component: () => <Faucet />
   },
   [HooksPageEnum.login]: {
     path: HooksPageEnum.login,

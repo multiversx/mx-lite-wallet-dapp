@@ -37,7 +37,7 @@ export const useSetNativeAuthInterceptors = () => {
   };
 
   const setNativeAuthTokenInterceptors = (
-    newToken?: string,
+    newToken: string | null,
     onRequest?: () => void
   ) => {
     axios.interceptors.request.eject(requestInterceptorId);

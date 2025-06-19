@@ -7,8 +7,7 @@ import {
   WindowProviderResponseEnums,
   getAccountProvider,
   ProviderTypeEnum,
-  loginInfoSelector,
-  getState
+  loginInfoSelector
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
@@ -29,7 +28,7 @@ export const HookValidationOutcome = ({
   const { search } = useLocation();
   const provider = getAccountProvider();
   const providerType = provider.getType();
-  const { walletConnectV2Initializing } = loginInfoSelector(getState());
+  const { isWalletConnectV2Initialized } = useSelector(loginInfoSelector);
   const { type: registeredHook } = useSelector(hookSelector);
   const { pathname: redirectPathname } = useRedirectPathname();
   const { address } = useGetAccount();
@@ -39,7 +38,7 @@ export const HookValidationOutcome = ({
   const isInvalid = validUrl === HookStateEnum.invalid;
   const isPending = validUrl === HookStateEnum.pending;
 
-  if (walletConnectV2Initializing) {
+  if (isWalletConnectV2Initialized) {
     return <Loader />;
   }
 

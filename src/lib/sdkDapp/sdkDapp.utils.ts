@@ -14,8 +14,10 @@ export { nativeAuth } from '@multiversx/sdk-dapp/out/services/nativeAuth/nativeA
 export { signTransactions } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/signTransactions';
 export { login } from '@multiversx/sdk-dapp/out/providers/DappProvider/helpers/login/login';
 export { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
+export { maxDecimals } from '@multiversx/sdk-dapp/out/utils/validation/maxDecimals';
 export { getAccountFromApi } from '@multiversx/sdk-dapp/out/apiCalls/account/getAccountFromApi';
 export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp/out/utils/transactions/getActiveTransactionsStatus';
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp/out/utils/transactions/getInterpretedTransaction';
 export { getTransactions } from '@multiversx/sdk-dapp/out/apiCalls/transactions/getTransactions';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
+export { checkIsValidSender } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/getCommonData/helpers/checkIsValidSender';

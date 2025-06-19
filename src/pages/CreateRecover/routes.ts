@@ -1,5 +1,5 @@
-import { RouteType } from '../../routes/routes';
 import { CreateRecover } from './CreateRecover';
+import { RouteType } from '../../routes/routes';
 
 export enum CreateRecoverRoutesEnum {
   create = '/create',

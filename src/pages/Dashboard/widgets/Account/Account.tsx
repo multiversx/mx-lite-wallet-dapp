@@ -2,9 +2,8 @@ import QRCode from 'react-qr-code';
 
 import { MxLink } from 'components';
 import {
-  getState,
   useGetAccountInfo,
-  networkSelector,
+  useGetNetworkConfig,
   FormatAmount,
   CopyButton
 } from 'lib';
@@ -13,7 +12,7 @@ import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton'
 import { routeNames } from 'routes';
 
 export const Account = () => {
-  const activeNetwork = networkSelector(getState());
+  const { network: activeNetwork } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
   // TODO: fix this

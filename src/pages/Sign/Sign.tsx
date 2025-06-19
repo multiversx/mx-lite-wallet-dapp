@@ -3,14 +3,14 @@ import uniq from 'lodash/uniq';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyWithCancelled } from 'hooks';
-import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
 import {
   useGetAccountInfo,
   ProviderTypeEnum,
   getAccountFromApi,
-  networkSelector,
-  getState,
-  getAccountProvider
+  getAccountProvider,
+  checkIsValidSender,
+  useGetNetworkConfig,
+  clearCompletedTransactions
 } from 'lib';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
@@ -30,8 +30,7 @@ export const Sign = () => {
   });
 
   const { address } = useGetAccountInfo();
-  const network = networkSelector(getState());
-  const removeAllTransactions = useAbortAndRemoveAllTxs();
+  const { network } = useGetNetworkConfig();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -79,7 +78,7 @@ export const Sign = () => {
     }
 
     if (invalidHook || senderAddresses.length > 1 || !isValidSender) {
-      removeAllTransactions();
+      clearCompletedTransactions();
       dispatch(resetHook());
       navigate(redirectPathname);
     }

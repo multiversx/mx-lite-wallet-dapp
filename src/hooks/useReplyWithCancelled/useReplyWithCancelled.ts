@@ -1,7 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { useGetAccount, WindowProviderResponseEnums } from 'lib';
+import {
+  clearCompletedTransactions,
+  useGetAccount,
+  WindowProviderResponseEnums
+} from 'lib';
 import { resetHook } from 'redux/slices';
-import { useAbortAndRemoveAllTxs } from '../useAbortAndRemoveAllTx';
 import { useReplyToDapp } from '../useReplyToDapp';
 
 const DEBUG = false;
@@ -16,7 +19,6 @@ export const useReplyWithCancelled = (debugProps?: { caller: string }) => {
   const { address } = useGetAccount();
   const dispatch = useDispatch();
   const replyToDapp = useReplyToDapp();
-  const removeAllTransactions = useAbortAndRemoveAllTxs();
 
   return (props: ReplyWithCancelledPropsType = { shouldResetHook: true }) => {
     if (DEBUG) {
@@ -27,7 +29,7 @@ export const useReplyWithCancelled = (debugProps?: { caller: string }) => {
 
     if (props.shouldResetHook) {
       dispatch(resetHook({ wasCancelled: true }));
-      removeAllTransactions();
+      clearCompletedTransactions();
     }
 
     replyToDapp({

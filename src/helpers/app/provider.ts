@@ -1,4 +1,8 @@
 import {
+  ProviderType,
+  ProviderTypeEnum
+} from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+import {
   Message,
   Transaction,
   UserSecretKey,
@@ -8,7 +12,6 @@ import {
   IProvider,
   TransactionComputer
 } from 'lib';
-import { IDappProvider } from 'lib';
 import { setKeystoreLogin } from 'redux/slices/account';
 import { store as reduxStore } from 'redux/store';
 
@@ -62,8 +65,9 @@ class CustomProvider implements IProvider {
     return Boolean(this.privateKey);
   }
 
-  getType(): string {
-    return 'customProvider';
+  getType(): ProviderType {
+    // TODO: Add custom provider type
+    return (ProviderTypeEnum as any).custom;
   }
 
   async signTransaction(transaction: Transaction): Promise<Transaction> {

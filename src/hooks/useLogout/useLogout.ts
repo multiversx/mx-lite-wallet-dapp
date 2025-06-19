@@ -7,7 +7,6 @@ import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { useReplyToDapp } from '../useReplyToDapp';
 
-const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
 const options = {
   /*
    * @param {boolean} [shouldBroadcastLogoutAcrossTabs=true]
@@ -53,5 +52,8 @@ export const useLogout = () => {
 
   options.shouldBroadcastLogoutAcrossTabs = hook !== HooksEnum.logout;
 
-  return () => provider.logout(options);
+  return async () => {
+    await provider.logout(options);
+    onRedirect();
+  };
 };

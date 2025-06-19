@@ -1,12 +1,6 @@
 import { useEffect } from 'react';
 import uniqBy from 'lodash/unionBy';
-import {
-  useGetAccountInfo,
-  TokenType,
-  networkSelector,
-  getState,
-  websocketEventSelector
-} from 'lib';
+import { useGetAccountInfo, TokenType, useGetNetworkConfig } from 'lib';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 
 const defaultValues = {
@@ -28,9 +22,8 @@ const defaultValues = {
 };
 
 export const useGetTokensWithEgld = () => {
-  const { address, account } = useGetAccountInfo();
-  const network = networkSelector(getState());
-  const websocketEvent = websocketEventSelector(getState());
+  const { address, account, websocketEvent } = useGetAccountInfo();
+  const { network } = useGetNetworkConfig();
   const [fetchTokens, { data: tokens, isLoading }] = useLazyGetTokensQuery();
 
   const egldToken: TokenType = {
