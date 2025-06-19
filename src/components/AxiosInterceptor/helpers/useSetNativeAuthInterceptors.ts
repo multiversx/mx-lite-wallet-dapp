@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 import { retry } from 'helpers';
+import { useSelector } from 'react-redux';
 import { useAxiosInterceptorContext } from 'lib';
 import { IS_TEST } from 'localConstants';
 import { accountSelector } from 'redux/selectors';

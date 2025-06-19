@@ -1,7 +1,7 @@
 import classNames from 'classnames';
+import { capitalize, getFormHasError } from 'helpers';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { capitalize, getFormHasError } from 'helpers';
 import {
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,

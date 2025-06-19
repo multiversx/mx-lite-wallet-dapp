@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { Button, MxLink } from 'components';
 import { getFormHasError } from 'helpers';
+import { Button, MxLink } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 
 import { routeNames } from 'routes';

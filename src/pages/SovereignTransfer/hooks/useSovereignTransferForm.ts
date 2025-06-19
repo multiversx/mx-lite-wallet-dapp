@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
+import { addressIsErd, getSelectedTokenBalance } from 'helpers';
 import { useSelector } from 'react-redux';
 import { array, number, object, string } from 'yup';
-import { addressIsErd, getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { networkSelector } from 'redux/selectors';

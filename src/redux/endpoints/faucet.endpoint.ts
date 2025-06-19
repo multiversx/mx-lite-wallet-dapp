@@ -1,6 +1,6 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
-import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import { getAxiosConfig, getExtrasApi } from 'helpers';
+import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import {
   TOKENS_ENDPOINT,
   DECIMALS,

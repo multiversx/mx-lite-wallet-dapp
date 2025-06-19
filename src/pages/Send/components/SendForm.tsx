@@ -1,7 +1,7 @@
 import classNames from 'classnames';
+import { getFormHasError } from 'helpers';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';

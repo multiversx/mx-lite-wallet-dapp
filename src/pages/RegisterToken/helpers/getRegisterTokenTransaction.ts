@@ -1,5 +1,3 @@
-import { numberToHex } from 'utils/operations/toHex';
-import { stringToHex } from 'utils/operations/toHex';
 import { GAS_PRICE, prepareTransaction } from 'lib';
 import {
   NftEnumType,
@@ -9,6 +7,8 @@ import {
   CollectionType
 } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
+import { stringToHex } from 'utils/operations/toHex';
+import { numberToHex } from 'utils/operations/toHex';
 import { RegisterTokenFormType } from '../types';
 
 const TokenTypeMap: Record<string, number> = {

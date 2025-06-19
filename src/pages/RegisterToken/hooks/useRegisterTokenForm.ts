@@ -1,11 +1,11 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
+import { capitalize, addressIsErd } from 'helpers';
 import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { networks } from 'config';
-import { capitalize, addressIsErd } from 'helpers';
 import { useSendTransactions } from 'hooks';
 import {
   DEVNET_CHAIN_ID,
