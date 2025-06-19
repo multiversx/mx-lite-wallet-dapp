@@ -1,9 +1,6 @@
 import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import {
-  getByDataTestId,
-  loginWithKeystore
-} from 'helpers/testUtils/puppeteer';
+import { getByDataTestId, loginWithKeystore } from 'utils/testUtils/puppeteer';
 
 describe('Invalid sign message tests', () => {
   it('should navigate to /dashboard route without signing when message is missing', async () => {

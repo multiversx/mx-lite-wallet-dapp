@@ -4,7 +4,7 @@ import {
   changeInputText,
   expectElementToContainText,
   getByDataTestId
-} from 'helpers/testUtils/puppeteer';
+} from 'utils/testUtils/puppeteer';
 
 const mnemonicWords: string[] = [
   'decade',

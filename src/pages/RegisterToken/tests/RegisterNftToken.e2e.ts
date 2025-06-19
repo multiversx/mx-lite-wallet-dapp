@@ -12,7 +12,7 @@ import {
   getByDataTestId,
   loginWithKeystore,
   sleep
-} from 'helpers/testUtils/puppeteer';
+} from 'utils/testUtils/puppeteer';
 
 describe('Register NFT Token test', () => {
   it('should register an NFT token from sovereign to testnet successfully', async () => {

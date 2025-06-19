@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getIsInWebview } from 'helpers/app';
+import { getIsInWebview } from 'utils/app';
 import {
   useLogout,
   useReplyToDapp,

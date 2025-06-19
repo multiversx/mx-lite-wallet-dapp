@@ -9,7 +9,7 @@ import {
   expectToBeChecked,
   getByDataTestId,
   loginWithKeystore
-} from 'helpers/testUtils/puppeteer';
+} from 'utils/testUtils/puppeteer';
 
 describe('Sovereign transfer test', () => {
   it('should transfer ESDT and NFT tokens on sovereign successfully', async () => {

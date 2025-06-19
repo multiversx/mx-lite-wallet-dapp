@@ -1,9 +1,6 @@
 import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import {
-  getByDataTestId,
-  loginWithKeystore
-} from 'helpers/testUtils/puppeteer';
+import { getByDataTestId, loginWithKeystore } from 'utils/testUtils/puppeteer';
 
 describe('Cancel sign message tests', () => {
   it('should cancel sign message and redirect to callbackUrl with status cancelled', async () => {

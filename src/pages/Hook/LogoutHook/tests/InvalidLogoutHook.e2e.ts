@@ -1,6 +1,6 @@
 import { WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import { expectElementToContainText } from 'helpers/testUtils/puppeteer';
+import { expectElementToContainText } from 'utils/testUtils/puppeteer';
 
 describe('Invalid logout hook tests', () => {
   it('should logout and navigate to unlock page when callbackUrl is missing', async () => {

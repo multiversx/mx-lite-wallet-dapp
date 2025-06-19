@@ -1,6 +1,6 @@
 import { PropsWithChildren, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { provider } from 'helpers/app';
+import { provider } from 'utils/app';
 import { KeystoreModal } from 'pages/Unlock/components/Keystore/components/KeystoreModal';
 import { PemModal } from 'pages/Unlock/components/Pem/components/PemModal';
 import { accountSelector, hookSelector } from 'redux/selectors';

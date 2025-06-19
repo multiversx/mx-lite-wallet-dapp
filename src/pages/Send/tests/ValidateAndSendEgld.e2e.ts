@@ -7,7 +7,7 @@ import {
   expectToBeChecked,
   getByDataTestId,
   loginWithPem
-} from 'helpers/testUtils/puppeteer';
+} from 'utils/testUtils/puppeteer';
 
 describe('Validate and send EGLD tests', () => {
   it('should validate form and send EGLD successfully', async () => {

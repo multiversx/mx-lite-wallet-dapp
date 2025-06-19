@@ -1,5 +1,5 @@
-import { numberToHex } from 'helpers/operations/toHex';
-import { stringToHex } from 'helpers/operations/toHex';
+import { numberToHex } from 'utils/operations/toHex';
+import { stringToHex } from 'utils/operations/toHex';
 import { GAS_PRICE, prepareTransaction } from 'lib';
 import {
   NftEnumType,

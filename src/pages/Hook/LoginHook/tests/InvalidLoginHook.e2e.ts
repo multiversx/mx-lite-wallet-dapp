@@ -1,5 +1,5 @@
 import { WALLET_SOURCE_ORIGIN } from '__mocks__';
-import { loginWithKeystore } from 'helpers/testUtils/puppeteer';
+import { loginWithKeystore } from 'utils/testUtils/puppeteer';
 
 describe('Invalid login hook tests', () => {
   it('should navigate to /dashboard route when callbackUrl is missing', async () => {

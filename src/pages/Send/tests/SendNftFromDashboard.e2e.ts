@@ -8,7 +8,7 @@ import {
   expectToBeChecked,
   getByDataTestId,
   loginWithKeystore
-} from 'helpers/testUtils/puppeteer';
+} from 'utils/testUtils/puppeteer';
 
 describe('Send NFT tests', () => {
   it('should send NFT successfully', async () => {

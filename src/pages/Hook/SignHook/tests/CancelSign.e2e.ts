@@ -4,7 +4,7 @@ import {
   expectElementToContainText,
   getByDataTestId,
   loginWithKeystore
-} from 'helpers/testUtils/puppeteer';
+} from 'utils/testUtils/puppeteer';
 
 describe('Cancel sign transaction test', () => {
   it('should cancel sign MultiESDTNFTTransfer transactions successfully', async () => {
