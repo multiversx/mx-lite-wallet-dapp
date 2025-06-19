@@ -3,7 +3,7 @@ import {
   keystoreAccount,
   DEFAULT_PAGE_LOAD_DELAY_MS
 } from '__mocks__';
-import { loginWithKeystore, sleep } from 'utils/testUtils/puppeteer';
+import { loginWithKeystore, sleep } from 'helpers/testUtils/puppeteer';
 
 describe('Login hook with token test', () => {
   it('should login with token and redirect to the callbackUrl', async () => {

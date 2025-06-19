@@ -3,7 +3,7 @@ import {
   keystoreAccount,
   WALLET_SOURCE_ORIGIN
 } from '__mocks__';
-import { loginWithKeystore, sleep } from 'utils/testUtils/puppeteer';
+import { loginWithKeystore, sleep } from 'helpers/testUtils/puppeteer';
 
 describe('Login hook without token test', () => {
   it('should login without token and redirect to the callbackUrl', async () => {

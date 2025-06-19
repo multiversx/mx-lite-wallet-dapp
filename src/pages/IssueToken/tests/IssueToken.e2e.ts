@@ -7,7 +7,7 @@ import {
   expectInputToHaveValue,
   getByDataTestId,
   loginWithKeystore
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Issue Token test', () => {
   it('should create a new token with all settings checked successfully', async () => {

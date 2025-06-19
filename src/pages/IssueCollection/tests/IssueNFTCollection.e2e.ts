@@ -5,7 +5,7 @@ import {
   expectElementToContainText,
   getByDataTestId,
   loginWithKeystore
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Issue NFT Collection test', () => {
   it('should create a new NFT collection successfully', async () => {

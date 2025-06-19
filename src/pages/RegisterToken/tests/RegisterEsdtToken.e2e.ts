@@ -12,7 +12,7 @@ import {
   getByDataTestId,
   loginWithKeystore,
   sleep
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Register ESDT Token test', () => {
   it('should register an ESDT token from sovereign to testnet successfully', async () => {

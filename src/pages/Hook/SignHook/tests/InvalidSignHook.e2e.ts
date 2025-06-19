@@ -1,6 +1,6 @@
 import { WALLET_SOURCE_ORIGIN, keystoreAccount, pemAccount } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import { expectElementToContainText } from 'utils/testUtils/puppeteer';
+import { expectElementToContainText } from 'helpers/testUtils/puppeteer';
 import { pingSC } from './data/pingSC';
 
 describe('Invalid sign hook tests', () => {

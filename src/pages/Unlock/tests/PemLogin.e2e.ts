@@ -1,5 +1,5 @@
 import { WALLET_SOURCE_ORIGIN } from '__mocks__/data/constants';
-import { loginWithPem } from 'utils/testUtils/puppeteer';
+import { loginWithPem } from 'helpers/testUtils/puppeteer';
 
 describe('Pem login test', () => {
   it('should login with pem file successfully', async () => {

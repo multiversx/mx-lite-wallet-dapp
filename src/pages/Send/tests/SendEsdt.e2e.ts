@@ -12,7 +12,7 @@ import {
   getByDataTestId,
   loginWithPem,
   sleep
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Send ESDT tests', () => {
   it('should send ESDT successfully', async () => {

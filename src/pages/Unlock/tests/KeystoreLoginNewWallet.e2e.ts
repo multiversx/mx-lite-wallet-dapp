@@ -10,7 +10,7 @@ import {
   expectToBeChecked,
   getByDataTestId,
   uploadFile
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('New wallet login with keystore test', () => {
   it('should select address and login new wallet with keystore file', async () => {

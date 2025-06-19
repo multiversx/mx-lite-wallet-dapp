@@ -7,7 +7,7 @@ import {
   expectInputToHaveValue,
   getByDataTestId,
   loginWithPem
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Send ESDT from dashboard tests', () => {
   it('should autocomplete the send form and send ESDT successfully', async () => {

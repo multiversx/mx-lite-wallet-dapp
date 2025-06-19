@@ -6,7 +6,7 @@ import {
   expectInputToHaveValue,
   getByDataTestId,
   loginWithKeystore
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Issue Collection form validation test', () => {
   it('should show errors and not create collection when data is invalid', async () => {

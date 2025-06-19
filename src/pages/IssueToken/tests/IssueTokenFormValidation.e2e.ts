@@ -6,7 +6,7 @@ import {
   expectInputToHaveValue,
   getByDataTestId,
   loginWithKeystore
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Issue Token form validation test', () => {
   it('should show errors and not create token when data is invalid', async () => {

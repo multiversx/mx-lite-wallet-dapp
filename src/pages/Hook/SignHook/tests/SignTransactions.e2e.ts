@@ -4,7 +4,7 @@ import {
   expectElementToContainText,
   getByDataTestId,
   loginWithKeystore
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Sign hook test', () => {
   it('should sign MultiESDTNFTTransfer transactions successfully', async () => {

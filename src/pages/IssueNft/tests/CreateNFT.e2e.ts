@@ -6,7 +6,7 @@ import {
   expectInputToHaveValue,
   getByDataTestId,
   loginWithKeystore
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Issue NFT test', () => {
   it('should create a new NFT successfully', async () => {

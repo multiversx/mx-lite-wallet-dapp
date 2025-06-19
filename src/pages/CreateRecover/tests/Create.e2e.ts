@@ -5,7 +5,7 @@ import {
   getByDataTestId,
   getElementTextContent,
   expectElementToContainText
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Create test', () => {
   it('should create a new wallet successfully', async () => {

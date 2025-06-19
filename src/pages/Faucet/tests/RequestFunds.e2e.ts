@@ -6,7 +6,7 @@ import {
   getByDataTestId,
   loginWithPem,
   sleep
-} from 'utils/testUtils/puppeteer';
+} from 'helpers/testUtils/puppeteer';
 
 describe('Request funds tests', () => {
   it('should receive 40 WEGLD successfully', async () => {
