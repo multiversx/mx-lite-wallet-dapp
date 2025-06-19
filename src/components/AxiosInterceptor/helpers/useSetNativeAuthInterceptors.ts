@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { retry } from 'helpers';
 import { useAxiosInterceptorContext } from 'lib';
 import { IS_TEST } from 'localConstants';
 import { accountSelector } from 'redux/selectors';
+import { retry } from 'utils';
 
 let nativeAuthToken: string | undefined;
 let requestInterceptorId = -1;

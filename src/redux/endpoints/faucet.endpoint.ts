@@ -1,6 +1,5 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
-import { getAxiosConfig, getExtrasApi } from 'helpers';
 import {
   TOKENS_ENDPOINT,
   DECIMALS,
@@ -12,6 +11,7 @@ import {
   PartialTokenType
 } from 'lib';
 import { RootApi } from 'redux/rootApi';
+import { getAxiosConfig, getExtrasApi } from 'utils';
 
 interface FaucetSettingsType {
   address: string;

@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { getFormHasError } from 'helpers';
 import { NftEnumType } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
+import { getFormHasError } from 'utils';
 import { useIssueNftForm } from '../hooks';
 import { IssueNftFieldsEnum } from '../types';
 
