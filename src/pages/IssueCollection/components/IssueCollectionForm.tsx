@@ -46,7 +46,6 @@ export const IssueCollectionForm = () => {
                 }
                 className='mr-2'
                 data-testid={DataTestIdsEnum.nftTypeInput}
-                defaultChecked
                 id={nft}
                 name={IssueCollectionFieldsEnum.tokenType}
                 onChange={formik.handleChange}
