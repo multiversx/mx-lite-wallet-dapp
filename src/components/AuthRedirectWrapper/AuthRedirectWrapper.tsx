@@ -14,12 +14,6 @@ export const AuthRedirectWrapper = ({ children }: PropsWithChildren) => {
   const requireAuth = Boolean(currentRoute?.authenticatedRoute);
 
   useEffect(() => {
-    if (isLoggedIn && !requireAuth) {
-      navigate(RouteNamesEnum.dashboard);
-
-      return;
-    }
-
     if (!isLoggedIn && requireAuth) {
       navigate(RouteNamesEnum.unlock);
     }
