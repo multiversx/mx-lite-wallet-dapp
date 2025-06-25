@@ -2,11 +2,11 @@ import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { array, number, object, string } from 'yup';
-import { addressIsErd, getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import { addressIsValid, useGetAccount, useGetNetworkConfig } from 'lib';
 import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';
+import { addressIsErd, getSelectedTokenBalance } from 'utils';
 import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 

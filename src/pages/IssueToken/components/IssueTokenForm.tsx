@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { Button, MxLink } from 'components';
-import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 
 import { routeNames } from 'routes';
+import { getFormHasError } from 'utils';
 import { useIssueTokenForm } from '../hooks';
 import { IssueTokenFieldsEnum } from '../types';
 

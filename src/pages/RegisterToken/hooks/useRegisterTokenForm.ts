@@ -6,7 +6,6 @@ import { SingleValue } from 'react-select';
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { networks } from 'config';
-import { capitalize, addressIsErd } from 'helpers';
 import { useSendTransactions } from 'hooks';
 import {
   DEVNET_CHAIN_ID,
@@ -20,6 +19,7 @@ import {
 } from 'lib';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
+import { capitalize, addressIsErd } from 'utils';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';

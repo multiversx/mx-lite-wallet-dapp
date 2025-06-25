@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { capitalize, getFormHasError } from 'helpers';
 import {
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,
@@ -11,6 +10,7 @@ import {
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
+import { capitalize, getFormHasError } from 'utils';
 import { useRegisterTokenForm } from '../hooks';
 import { RegisterTokenFormFieldsEnum } from '../types';
 

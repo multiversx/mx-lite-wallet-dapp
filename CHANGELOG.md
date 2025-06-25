@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Refactor @multiversx imports from helpers and moved to utils](https://github.com/multiversx/mx-lite-wallet-dapp/pull/99)
+- [Migrate to sdk-dapp V5](https://github.com/multiversx/mx-lite-wallet-dapp/pull/98)
 - [Refactor @multiversx imports and moved to lib](https://github.com/multiversx/mx-lite-wallet-dapp/pull/97)
 - [Added `hasSovereignTransfer` in `sharedNetworks`](https://github.com/multiversx/mx-lite-wallet-dapp/pull/96)
 

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { Button, PasswordVisibilityToggle } from 'components';
-import { getFormHasError } from 'helpers';
 import { useBooleanStateToggle } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
+import { getFormHasError } from 'utils';
 
 import {
   CreateRecoverPasswordFormFieldsPropsType,

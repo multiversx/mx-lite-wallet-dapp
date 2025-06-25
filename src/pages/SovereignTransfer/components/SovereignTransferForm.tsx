@@ -2,10 +2,10 @@ import { ChangeEventHandler } from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Button, MxLink } from 'components';
-import { getFormHasError } from 'helpers';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
+import { getFormHasError } from 'utils';
 import { useSovereignTransferForm } from '../hooks';
 import {
   SovereignTransferFormFieldsEnum,

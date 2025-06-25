@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { setProviderPrivateKey } from 'helpers/app/provider';
 import { TokenLoginType } from 'lib';
 import { logoutAction } from 'redux/commonActions';
+import { setProviderPrivateKey } from 'utils/app/provider';
 
 export enum FileLoginEnum {
   pem = 'pem',
