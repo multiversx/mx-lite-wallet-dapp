@@ -1,38 +1,23 @@
-import { Address, Message, MessageComputer, verifyMessage } from 'lib';
+import { Message } from 'lib';
 
-export const decodeMessage = async ({
-  address,
+export const decodeMessage = ({
   message,
   signature
 }: {
-  address: string;
-  message: string;
+  message: Message;
   signature: string;
-}): Promise<{ encodedMessage: string; decodedMessage: string }> => {
-  const messageToSign = new Message({
-    ...(address ? { address: new Address(address) } : {}),
-    data: new Uint8Array(Buffer.from(message))
-  });
+}): { encodedMessage: string; decodedMessage: string } => {
+  const messageObj = JSON.parse(JSON.stringify(message.data));
+  messageObj.signature = `0x${signature}`;
 
-  const messageComputer = new MessageComputer();
-  const packedMessage = messageComputer.packMessage(messageToSign);
-  const encodedMessage = `0x${packedMessage.message}`;
-
-  // Remove 0x prefix from signature if present
-  const normalizedSignature = signature.startsWith('0x')
-    ? signature.slice(2)
-    : signature;
-
-  const stringifiedMessage = JSON.stringify({
-    ...packedMessage,
-    message: encodedMessage,
-    signature: `0x${normalizedSignature}`
-  });
-
-  const newMessage = await verifyMessage(stringifiedMessage);
+  const encodedMessage =
+    '0x' +
+    Array.from(message.data, (byte) => byte.toString(16).padStart(2, '0')).join(
+      ''
+    );
 
   return {
     encodedMessage: encodedMessage,
-    decodedMessage: newMessage.message ?? ''
+    decodedMessage: Buffer.from(message?.data).toString()
   };
 };

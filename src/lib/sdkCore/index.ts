@@ -10,6 +10,7 @@ export {
   Transaction,
   MessageComputer,
   TransactionOptions,
+  TransactionComputer,
   TransactionVersion,
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig,

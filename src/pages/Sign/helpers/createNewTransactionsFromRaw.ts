@@ -1,4 +1,4 @@
-import { Transaction, newTransaction } from 'lib';
+import { Transaction } from 'lib';
 import {
   CreateNewTransactionsFromRawParamsType,
   prepareRawTransactions
@@ -15,5 +15,7 @@ export const createNewTransactionsFromRaw = ({
     transactions
   });
 
-  return preparedRawTransactions.map((tx) => newTransaction(tx));
+  return preparedRawTransactions.map((tx) =>
+    Transaction.newFromPlainObject(tx)
+  );
 };

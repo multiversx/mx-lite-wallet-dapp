@@ -1,24 +1,20 @@
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 import {
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  TransactionManager,
   IPlainTransactionObject,
   parseSignUrl,
-  validateSignTransactions,
-  extractSessionId,
-  sendBatchTransactionsSdkDapp,
-  sendTransactions,
-  MultiSignTransactionType,
-  TransactionsDataTokensType,
-  SendBatchTransactionsPropsType
+  validateSignTransactions
 } from 'lib';
-
 import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFromRaw';
 
 interface ValidatedTxsStateType {
   executeAfterSign?: string;
-  multiSignTxs: MultiSignTransactionType[];
+  multiSignTxs: any[]; // TODO: Define proper type
   rawTxs: IPlainTransactionObject[];
   txErrors: { [key: string]: string };
-  txsDataTokens: TransactionsDataTokensType;
+  txsDataTokens: { [key: string]: any }; // TODO: Define proper type
   multiSigContract?: string | null;
 }
 
@@ -81,7 +77,7 @@ export const useSignHookTransactions = () => {
       transactions: rawTxs
     });
 
-    const transactionsDisplayInfo = {
+    const transactionsDisplayInfo: TransactionsDisplayInfoType = {
       successMessage: 'Transactions successfully sent',
       errorMessage: 'An error has occurred',
       submittedMessage: 'Success',
@@ -97,39 +93,32 @@ export const useSignHookTransactions = () => {
       txsDataTokens: txData.txsDataTokens
     };
 
+    const txManager = TransactionManager.getInstance();
+
     if (executeAfterSign === 'true') {
-      const props: SendBatchTransactionsPropsType = {
-        transactions: [rawTxs],
-        signWithoutSending: false,
-        transactionsDisplayInfo: transactionsDisplayInfo ?? {
-          successMessage: 'Transactions successful',
-          errorMessage: 'An error has occurred',
-          submittedMessage: 'Success',
-          processingMessage: 'Processing transactions',
-          transactionDuration: 10000
-        },
-        redirectAfterSign: false
-      };
+      // Send as batch transactions
+      const sentTransactions = await txManager.send([mappedTransactions]);
+      const sessionId = await txManager.track(sentTransactions, {
+        transactionsDisplayInfo,
+        disableToasts: false
+      });
 
-      const { batchId } = await sendBatchTransactionsSdkDapp(props);
-      const batchSessionId = extractSessionId(batchId);
-
-      if (!batchSessionId) {
+      if (!sessionId) {
         console.error('Batch transactions session id is invalid');
         return emptyState;
       }
 
       return {
         ...partialState,
-        sessionId: batchSessionId.toString()
+        sessionId
       };
     }
 
-    const { sessionId } = await sendTransactions({
-      transactions: mappedTransactions,
-      signWithoutSending: executeAfterSign !== 'true',
+    // Send as individual transactions
+    const sentTransactions = await txManager.send(mappedTransactions);
+    const sessionId = await txManager.track(sentTransactions, {
       transactionsDisplayInfo,
-      redirectAfterSign: false
+      disableToasts: false
     });
 
     return {

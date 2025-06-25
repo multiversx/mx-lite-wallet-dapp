@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { array, number, object, string } from 'yup';
 import { useSendTransactions, useTokenOptions } from 'hooks';
-import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { addressIsValid, useGetAccount, useGetNetworkConfig } from 'lib';
 import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';
 import { addressIsErd, getSelectedTokenBalance } from 'utils';
@@ -11,7 +11,7 @@ import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 
 export const useSovereignTransferForm = () => {
-  const { address } = useGetAccountInfo();
+  const { address } = useGetAccount();
   const {
     network: { chainId }
   } = useGetNetworkConfig();
