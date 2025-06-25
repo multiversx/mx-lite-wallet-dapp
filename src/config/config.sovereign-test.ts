@@ -23,6 +23,9 @@ export const networks: NetworkType[] = [
     extrasApi: 'https://extras-api-sovereign-test.elrond.ro',
     sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
     sovereignContractAddress: '',
-    walletAddress: 'https://wallet.voyager1.dev'
+    walletAddress: 'https://wallet.voyager1.dev',
+    faucet: true,
+    hasRegisterToken: true,
+    hasSovereignTransfer: true
   }
 ];

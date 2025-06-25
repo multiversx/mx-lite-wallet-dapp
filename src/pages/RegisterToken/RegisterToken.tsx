@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { FeaturePageLayout } from 'components/Layout';
-import { RootState } from 'redux/store';
+import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { RegisterTokenForm } from './components';
 
 export const RegisterToken = () => {
-  const { activeNetwork } = useSelector((state: RootState) => state.network);
+  const { activeNetwork } = useSelector(networkSelector);
 
   if (!activeNetwork.hasRegisterToken) {
     return <Navigate to={routeNames.dashboard} />;

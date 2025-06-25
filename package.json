@@ -11,6 +11,7 @@
     "start-no-tsc": "npm run set-storage-persist && vite dev",
     "start-devnet": "npm run copy-devnet-config && npm run start",
     "start-sovereign": "npm run copy-sovereign-config && npm run start",
+    "start-sovereign-test": "npm run copy-sovereign-test-config && npm run start",
     "start-testnet": "npm run copy-testnet-config && npm run start",
     "start-mainnet": "npm run copy-mainnet-config && npm run start",
     "build": "tsc && vite build",
