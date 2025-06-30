@@ -1,10 +1,11 @@
 import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
-import { EnvironmentsEnum, initApp } from 'lib';
+import { initApp } from 'lib';
 import { App } from './App';
 import 'utils/adapter/gatewayAdapter';
 import { KeystoreProvider } from './providers/KeystoreProvider';
 import { PemProvider } from './providers/PemProvider';
+import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
 
 interface ICustomProvider {
   name: string;
@@ -31,13 +32,14 @@ const providers: ICustomProvider[] = [
 (window as any).multiversx = {};
 (window as any).multiversx.providers = providers;
 
+const activeNetwork = getCurrentNetwork();
 const config = {
   storage: { getStorageCallback: () => sessionStorage },
   dAppConfig: {
     nativeAuth: true,
-    environment: EnvironmentsEnum.devnet,
     network: {
-      walletAddress: window.location.origin
+      ...activeNetwork,
+      walletAddress: activeNetwork.walletAddress || window.location.origin
     },
     successfulToastLifetime: 5000
   }

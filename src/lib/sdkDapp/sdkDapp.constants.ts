@@ -13,7 +13,8 @@ export {
   EXTRA_GAS_LIMIT_GUARDED_TX,
   GAS_LIMIT,
   GAS_PRICE,
-  VERSION
+  VERSION,
+  GAS_PER_DATA_BYTE
 } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 
 export {

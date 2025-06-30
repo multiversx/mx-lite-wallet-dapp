@@ -1,10 +1,8 @@
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, MxLink } from 'components';
+import { Button, MxLink, NetworkSwitcher } from 'components';
 import { getAccountProvider, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-import { networkSelector } from 'redux/selectors';
 import { ConnectButton } from './components';
 import { NotificationsButton } from './components/NotificationsButton';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
@@ -13,7 +11,6 @@ export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const navigate = useNavigate();
   const provider = getAccountProvider();
-  const { activeNetwork } = useSelector(networkSelector);
 
   const handleLogout = useCallback(async () => {
     try {
@@ -36,10 +33,7 @@ export const Header = () => {
 
       <nav className='h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
         <div className='flex justify-end container mx-auto items-center gap-2'>
-          <div className='flex gap-1 items-center'>
-            <div className='w-2 h-2 rounded-full bg-green-500' />
-            <p className='text-gray-600'>{activeNetwork?.name ?? '—'}</p>
-          </div>
+          <NetworkSwitcher />
 
           {isLoggedIn && (
             <>
