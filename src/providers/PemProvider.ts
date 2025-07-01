@@ -1,3 +1,4 @@
+import { ProviderType } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 import {
   Address,
   IDAppProviderAccount,
@@ -62,10 +63,8 @@ export class PemProvider implements IProvider {
     return true;
   }
 
-  getType() {
-    // TODO: Add 'custom' to the ProviderTypeEnum
-    return 'custom' as any;
-    // return ProviderTypeEnum.custom;
+  getType(): ProviderType {
+    return 'pemProvider' as unknown as ProviderType;
   }
 
   async signTransaction(transaction: Transaction) {

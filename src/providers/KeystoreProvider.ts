@@ -2,6 +2,7 @@ import {
   Address,
   IDAppProviderAccount,
   IProvider,
+  ProviderType,
   Message,
   MessageComputer,
   signTransactions,
@@ -10,7 +11,7 @@ import {
   UserSecretKey,
   UserSigner
 } from 'lib';
-import { KeystoreLoginModal } from './KeystoreLoginModal';
+import { KeystoreLoginPanel } from './KeystoreLoginPanel';
 
 const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
@@ -19,7 +20,7 @@ const notInitializedError = (caller: string) => () => {
 let privateKey = '';
 
 export class KeystoreProvider implements IProvider {
-  private modal = KeystoreLoginModal.getInstance();
+  private panel = KeystoreLoginPanel.getInstance();
   private _anchor?: HTMLElement;
   private _account: IDAppProviderAccount = {
     address: ''
@@ -62,10 +63,8 @@ export class KeystoreProvider implements IProvider {
     return true;
   }
 
-  getType() {
-    // TODO: Add 'custom' to the ProviderTypeEnum
-    return 'custom' as any;
-    // return ProviderTypeEnum.custom;
+  getType(): ProviderType {
+    return 'keystoreProvider' as unknown as ProviderType;
   }
 
   async signTransaction(transaction: Transaction) {
@@ -105,7 +104,7 @@ export class KeystoreProvider implements IProvider {
   }> {
     return new Promise(async (resolve, reject) => {
       const { address, privateKey: userPrivateKey } =
-        await this.modal.showModal({
+        await this.panel.showPanel({
           needsAddress: true,
           anchor: this._anchor
         });
@@ -131,7 +130,7 @@ export class KeystoreProvider implements IProvider {
       const message = `${address}${token}{}`;
       const msg = new Message({
         address: new Address(address),
-        data: new TextEncoder().encode(message)
+        data: new Uint8Array(Buffer.from(message))
       });
       const signedMessage = await this.signMessage(msg);
 
@@ -143,9 +142,7 @@ export class KeystoreProvider implements IProvider {
         return;
       }
 
-      const signature = Array.from(signedMessage.signature)
-        .map((b) => b.toString(16).padStart(2, '0'))
-        .join('');
+      const signature = Buffer.from(signedMessage.signature).toString('hex');
 
       this.setAccount({
         address,
@@ -185,7 +182,7 @@ export class KeystoreProvider implements IProvider {
 
   private async _getPrivateKey(action: string) {
     if (!privateKey) {
-      const { privateKey: userPrivateKey } = await this.modal.showModal();
+      const { privateKey: userPrivateKey } = await this.panel.showPanel();
 
       if (!userPrivateKey) {
         await this.logout();

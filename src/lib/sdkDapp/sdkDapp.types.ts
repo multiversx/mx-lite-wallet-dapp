@@ -8,6 +8,9 @@ export type {
 export type { SignedTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 export * from '@multiversx/sdk-dapp/out/types/tokens.types';
 export type { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
-export { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+export {
+  ProviderTypeEnum,
+  type ProviderType
+} from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 export type { IProvider } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 export type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';

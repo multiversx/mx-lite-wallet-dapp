@@ -6,6 +6,7 @@ import 'utils/adapter/gatewayAdapter';
 import { KeystoreProvider } from './providers/KeystoreProvider';
 import { PemProvider } from './providers/PemProvider';
 import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
+import { defineCustomElements } from '@multiversx/sdk-dapp-ui/dist/loader';
 
 interface ICustomProvider {
   name: string;
@@ -55,11 +56,11 @@ async function start() {
     });
   }
 
-  await initApp(config);
-
-  const container = document.getElementById('root');
-  const root = createRoot(container as HTMLElement);
-  root.render((<App />) as any);
+  initApp(config).then(() => {
+    const container = document.getElementById('root');
+    const root = createRoot(container as HTMLElement);
+    root.render((<App />) as any);
+  });
 }
 
 start();
