@@ -6,7 +6,6 @@ import 'utils/adapter/gatewayAdapter';
 import { KeystoreProvider } from './providers/KeystoreProvider';
 import { PemProvider } from './providers/PemProvider';
 import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
-import { defineCustomElements } from '@multiversx/sdk-dapp-ui/dist/loader';
 
 interface ICustomProvider {
   name: string;
