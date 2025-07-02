@@ -4,6 +4,7 @@ export * from './Button';
 export * from './Card';
 export * from './Dropdown';
 export * from './KeystorePanel';
+export * from './PemPanel';
 export * from './Label';
 export * from './Layout';
 export * from './Loader';

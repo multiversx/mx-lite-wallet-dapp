@@ -1,7 +1,7 @@
-import React from 'react';
 import { createPortal } from 'react-dom';
 import { createRoot } from 'react-dom/client';
-import { SidePanel, KeystorePanel } from 'components';
+import { SidePanel } from 'components';
+import { PemPanel } from 'components/PemPanel';
 
 const panelStyles = {
   overlay: {
@@ -36,7 +36,7 @@ const PanelWrapper = ({
     return createPortal(
       <div style={panelStyles.overlay}>
         <div style={panelStyles.panel}>
-          <KeystorePanel onSubmit={onSubmit} onClose={onClose} />
+          <PemPanel onSubmit={onSubmit} onClose={onClose} />
         </div>
       </div>,
       anchor
@@ -46,21 +46,21 @@ const PanelWrapper = ({
   return (
     <SidePanel
       isOpen={isOpen}
-      panelTitle='Keystore Login'
+      panelTitle='PEM Login'
       showHeader={true}
       onClose={onClose}
     >
       <div style={panelStyles.overlay}>
         <div style={panelStyles.panel}>
-          <KeystorePanel onSubmit={onSubmit} onClose={onClose} />
+          <PemPanel onSubmit={onSubmit} onClose={onClose} />
         </div>
       </div>
     </SidePanel>
   );
 };
 
-export class KeystoreLoginPanel {
-  private static instance: KeystoreLoginPanel;
+export class PemLoginPanel {
+  private static instance: PemLoginPanel;
   private _panelRoot: HTMLDivElement;
   private _currentPanel: any = null;
 
@@ -70,11 +70,11 @@ export class KeystoreLoginPanel {
     this._initializePanel();
   }
 
-  public static getInstance(): KeystoreLoginPanel {
-    if (!KeystoreLoginPanel.instance) {
-      KeystoreLoginPanel.instance = new KeystoreLoginPanel();
+  public static getInstance(): PemLoginPanel {
+    if (!PemLoginPanel.instance) {
+      PemLoginPanel.instance = new PemLoginPanel();
     }
-    return KeystoreLoginPanel.instance;
+    return PemLoginPanel.instance;
   }
 
   private _initializePanel() {

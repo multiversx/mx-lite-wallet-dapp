@@ -11,7 +11,7 @@ import {
   UserSecretKey,
   UserSigner
 } from 'lib';
-import { PemLoginModal } from './PemLoginModal';
+import { PemLoginPanel } from './PemLoginPanel';
 
 const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
@@ -20,7 +20,7 @@ const notInitializedError = (caller: string) => () => {
 let privateKey = '';
 
 export class PemProvider implements IProvider {
-  private modal = PemLoginModal.getInstance();
+  private panel = PemLoginPanel.getInstance();
   private _anchor?: HTMLElement;
   private _account: IDAppProviderAccount = {
     address: ''
@@ -104,7 +104,7 @@ export class PemProvider implements IProvider {
   }> {
     return new Promise(async (resolve, reject) => {
       const { address, privateKey: userPrivateKey } =
-        await this.modal.showModal({
+        await this.panel.showPanel({
           needsAddress: true,
           anchor: this._anchor
         });
@@ -184,7 +184,7 @@ export class PemProvider implements IProvider {
 
   private async _getPrivateKey(action: string) {
     if (!privateKey) {
-      const { privateKey: userPrivateKey } = await this.modal.showModal();
+      const { privateKey: userPrivateKey } = await this.panel.showPanel();
 
       if (!userPrivateKey) {
         await this.logout();
