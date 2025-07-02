@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { Button } from 'components';
+import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { parsePem } from '../../providers/helpers/parsePem';
 
 const styles = {
@@ -97,13 +98,14 @@ export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
       <form onSubmit={handleSubmit} style={styles.form}>
         <div>
           <label>PEM File</label>
-          <div style={styles.fileUpload}>
+          <div style={styles.fileUpload} data-testid={DataTestIdsEnum.pemBtn}>
             <input
               type='file'
               accept='.pem'
               onChange={handleFileChange}
               style={{ display: 'none' }}
               id='pem-file-input-panel'
+              data-testid={DataTestIdsEnum.walletFile}
             />
             <label htmlFor='pem-file-input-panel' style={{ cursor: 'pointer' }}>
               {fileName ? (
@@ -121,10 +123,18 @@ export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
         </div>
         {error && <div style={{ color: 'red', fontSize: '14px' }}>{error}</div>}
         <div style={styles.buttonGroup}>
-          <Button onClick={handleClose} {...{ style: styles.button }}>
+          <Button
+            onClick={handleClose}
+            {...{ style: styles.button }}
+            data-testid={DataTestIdsEnum.cancelBtn}
+          >
             Cancel
           </Button>
-          <Button type='submit' {...{ style: styles.button }}>
+          <Button
+            type='submit'
+            {...{ style: styles.button }}
+            data-testid={DataTestIdsEnum.submitButton}
+          >
             Login
           </Button>
         </div>

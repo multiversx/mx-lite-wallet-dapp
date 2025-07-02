@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Button } from 'components';
 import { UserSecretKey, UserWallet } from 'lib';
+import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 const styles = {
   form: {
@@ -183,13 +184,17 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
       <form onSubmit={handleSubmit} style={styles.form}>
         <div>
           <label>Keystore File</label>
-          <div style={styles.fileUpload}>
+          <div
+            style={styles.fileUpload}
+            data-testid={DataTestIdsEnum.keystoreBtn}
+          >
             <input
               type='file'
               accept='.json'
               onChange={handleFileChange}
               style={{ display: 'none' }}
               id='keystore-file-input'
+              data-testid={DataTestIdsEnum.walletFile}
             />
             <label htmlFor='keystore-file-input' style={{ cursor: 'pointer' }}>
               {fileName ? (
@@ -215,15 +220,24 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Enter keystore password'
               required
+              data-testid={DataTestIdsEnum.accessPass}
             />
           </label>
         </div>
         {error && <div style={{ color: 'red', fontSize: '14px' }}>{error}</div>}
         <div style={styles.buttonGroup}>
-          <Button onClick={handleClose} {...{ style: styles.button }}>
+          <Button
+            onClick={handleClose}
+            {...{ style: styles.button }}
+            data-testid={DataTestIdsEnum.cancelBtn}
+          >
             Cancel
           </Button>
-          <Button type='submit' {...{ style: styles.button }}>
+          <Button
+            type='submit'
+            {...{ style: styles.button }}
+            data-testid={DataTestIdsEnum.submitButton}
+          >
             Login
           </Button>
         </div>

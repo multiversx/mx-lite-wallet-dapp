@@ -6,7 +6,7 @@ const getAddressAndPrivateKeyForIndex = (mnemonic: Mnemonic, index: number) => {
   const deriveKey = mnemonic.deriveKey(index);
   const secretKeyHex = deriveKey.hex();
   const secretKey = UserSecretKey.fromString(secretKeyHex);
-  const address = secretKey.generatePublicKey().toAddress().bech32();
+  const address = secretKey.generatePublicKey().toAddress().toBech32();
   const privateKey = secretKey.hex();
   return {
     address,

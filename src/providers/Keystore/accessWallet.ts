@@ -23,7 +23,7 @@ export const accessWallet = ({
       const deriveKey = mnemonicObj.deriveKey(index);
       const secretKeyHex = deriveKey.hex();
       const secretKey = UserSecretKey.fromString(secretKeyHex);
-      accountAddress = secretKey.generatePublicKey().toAddress().bech32();
+      accountAddress = secretKey.generatePublicKey().toAddress().toBech32();
       privateKey = secretKey.hex();
     } else {
       const decryptedSecretKey = UserWallet.decryptSecretKey(

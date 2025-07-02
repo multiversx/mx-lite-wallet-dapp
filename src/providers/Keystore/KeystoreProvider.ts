@@ -186,8 +186,7 @@ export class KeystoreProvider implements IProvider {
 
       if (!userPrivateKey) {
         await this.logout();
-        const throwError = notInitializedError(action);
-        return throwError();
+        return notInitializedError(action)();
       }
 
       privateKey = userPrivateKey;

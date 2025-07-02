@@ -12,6 +12,7 @@ interface ICustomProvider {
   type: string;
   iconUrl: string;
   constructor: (options?: any) => Promise<any>;
+  dataTestId?: string;
 }
 
 const providers: ICustomProvider[] = [
