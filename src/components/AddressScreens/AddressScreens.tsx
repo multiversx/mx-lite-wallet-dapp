@@ -1,5 +1,10 @@
+import { useEffect, useState, useCallback } from 'react';
 import { MvxAddressSelect } from '@multiversx/sdk-dapp-ui/react';
 import { type MvxAddressSelect as MvxAddressSelectPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-address-select';
+import { useDispatch } from 'react-redux';
+import type { AccessWalletType } from '../../providers/Keystore/accessWallet';
+import { getKeystoreAddresses } from '../../providers/Keystore/getKeystoreAddresses';
+import { setAddressIndex } from '../../redux/slices/account';
 
 export interface IAccount {
   address: string;
@@ -14,29 +19,100 @@ export interface IAccountScreenData {
   isLoading: boolean;
 }
 
-export interface AddressScreensPropsType extends MvxAddressSelectPropsType {}
+export interface AddressScreensPropsType
+  extends Partial<MvxAddressSelectPropsType> {
+  kdContent: AccessWalletType['kdContent'];
+  accessPassVal: string;
+  addressesPerPage?: number;
+  onConfirmSelectedAddress?: (account: IAccount) => void;
+}
+
+const DEFAULT_ADDRESSES_PER_PAGE = 5;
 
 export const AddressScreens = ({
-  accountScreenData,
-  selectedIndex,
+  kdContent,
+  accessPassVal,
+  addressesPerPage = DEFAULT_ADDRESSES_PER_PAGE,
+  onConfirmSelectedAddress,
   className
 }: AddressScreensPropsType) => {
-  const handleAccessWallet = () => {
-    console.log('handleAccessWallet');
-  };
+  const dispatch = useDispatch();
+  const [accounts, setAccounts] = useState<IAccount[]>([]);
+  const [startIndex, setStartIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSelectAccount = (event: CustomEvent) => {
-    console.log('handleSelectAccount', event);
-  };
+  // Derive addresses for the current page
+  const loadAccounts = useCallback(() => {
+    setIsLoading(true);
 
-  const handlePageChange = (event: CustomEvent) => {
-    console.log('handlePageChange', event);
+    try {
+      const derived = getKeystoreAddresses({
+        kdContent,
+        accessPassVal,
+        index: startIndex,
+        count: addressesPerPage
+      });
+
+      setAccounts(
+        derived.map((item, idx) => ({
+          address: item.address,
+          balance: '', // balance can be fetched separately if needed
+          index: startIndex * addressesPerPage + idx
+        }))
+      );
+    } catch (e) {
+      setAccounts([]);
+    }
+    setIsLoading(false);
+  }, [kdContent, accessPassVal, startIndex, addressesPerPage]);
+
+  useEffect(() => {
+    loadAccounts();
+    setSelectedIndex(null);
+  }, [loadAccounts]);
+
+  // Handler: Confirm selected address (access wallet)
+  const handleAccessWallet = useCallback(() => {
+    if (selectedIndex == null || !accounts[selectedIndex]) return;
+    if (onConfirmSelectedAddress) {
+      onConfirmSelectedAddress(accounts[selectedIndex]);
+    }
+    // You can add more logic here if needed
+  }, [selectedIndex, accounts, onConfirmSelectedAddress]);
+
+  // Handler: Select account
+  const handleSelectAccount = useCallback(
+    (event: CustomEvent) => {
+      const idx = event.detail?.index;
+      if (typeof idx === 'number') {
+        setSelectedIndex(idx);
+        dispatch(setAddressIndex({ addressIndex: idx }));
+      }
+    },
+    [dispatch]
+  );
+
+  // Handler: Page change
+  const handlePageChange = useCallback((event: CustomEvent) => {
+    const pageIdx = event.detail?.pageIndex;
+    if (typeof pageIdx === 'number') {
+      setStartIndex(pageIdx);
+      setSelectedIndex(null);
+    }
+  }, []);
+
+  const accountScreenData: IAccountScreenData = {
+    accounts,
+    startIndex,
+    addressesPerPage,
+    isLoading
   };
 
   return (
     <MvxAddressSelect
       className={className}
-      selectedIndex={selectedIndex}
+      selectedIndex={selectedIndex ?? undefined}
       accountScreenData={accountScreenData}
       onAccessWallet={handleAccessWallet}
       onSelectAccount={handleSelectAccount}

@@ -1,11 +1,11 @@
 import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
 import { initApp } from 'lib';
+import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
 import { App } from './App';
 import 'utils/adapter/gatewayAdapter';
-import { KeystoreProvider } from './providers/KeystoreProvider';
-import { PemProvider } from './providers/PemProvider';
-import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
+import { KeystoreProvider } from './providers/Keystore/KeystoreProvider';
+import { PemProvider } from './providers/Pem/PemProvider';
 
 interface ICustomProvider {
   name: string;

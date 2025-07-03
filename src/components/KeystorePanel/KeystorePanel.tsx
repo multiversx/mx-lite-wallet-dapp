@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Button, AddressScreens } from 'components';
-import { UserSecretKey, UserWallet } from 'lib';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
+import { accessWallet } from '../../providers/Keystore/accessWallet';
+import { parseKeystoreJSON } from '../../providers/Keystore/parseKeystoreJSON';
 
 const styles = {
   form: {
@@ -46,116 +47,10 @@ const styles = {
   }
 };
 
-const parseKeystore = (file: File): Promise<Record<string, any> | null> => {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      try {
-        const result = event.target?.result as string;
-        if (!result) {
-          return resolve(null);
-        }
-
-        const data = JSON.parse(result);
-        resolve(data);
-      } catch (error) {
-        resolve(null);
-      }
-    };
-
-    reader.onerror = () => resolve(null);
-    reader.readAsText(file);
-  });
-};
-
 interface KeystorePanelProps {
   onSubmit: (values: { privateKey: string; address: string }) => void;
   onClose: () => void;
 }
-
-interface WalletData {
-  privateKey: string;
-  address: string;
-}
-
-interface AddressAccount {
-  address: string;
-  index: number;
-}
-
-const accessWallet = ({
-  kdContent,
-  accessPassVal,
-  index = 0
-}: {
-  kdContent: Record<string, any>;
-  accessPassVal: string;
-  index?: number;
-}): { privateKey: string; address: string } | null => {
-  try {
-    let privateKey = '';
-    let accountAddress = '';
-
-    if (kdContent.kind === 'mnemonic') {
-      const mnemonicObj = UserWallet.decryptMnemonic(kdContent, accessPassVal);
-      const deriveKey = mnemonicObj.deriveKey(index);
-      const secretKeyHex = deriveKey.hex();
-      const secretKey = UserSecretKey.fromString(secretKeyHex);
-      accountAddress = secretKey.generatePublicKey().toAddress().toBech32();
-      privateKey = secretKey.hex();
-    } else {
-      const decryptedSecretKey = UserWallet.decryptSecretKey(
-        kdContent,
-        accessPassVal
-      );
-
-      const secretKeyUint8Array = new Uint8Array(
-        Buffer.from(decryptedSecretKey.hex(), 'hex')
-      );
-
-      const secretKey = new UserSecretKey(secretKeyUint8Array);
-      const address = secretKey.generatePublicKey().toAddress();
-      privateKey = secretKey.hex();
-      accountAddress = address.toBech32();
-    }
-
-    return {
-      privateKey,
-      address: accountAddress
-    };
-  } catch (e) {
-    return null;
-  }
-};
-
-const getKeystoreAddresses = ({
-  kdContent,
-  accessPassVal,
-  index = 0,
-  count = 10
-}: {
-  kdContent: Record<string, any>;
-  accessPassVal: string;
-  index?: number;
-  count?: number;
-}): WalletData[] => {
-  const addresses: WalletData[] = [];
-
-  for (let i = index; i < index + count; i++) {
-    const walletData = accessWallet({
-      kdContent,
-      accessPassVal,
-      index: i
-    });
-
-    if (walletData) {
-      addresses.push(walletData);
-    }
-  }
-
-  return addresses;
-};
 
 export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
@@ -166,24 +61,14 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
   const [keystoreData, setKeystoreData] = useState<Record<string, any> | null>(
     null
   );
-  const [accounts, setAccounts] = useState<string[]>([]);
-  const [startIndex, setStartIndex] = useState(0);
-  const [selectedAddress, setSelectedAddress] = useState<AddressAccount | null>(
-    null
-  );
-
-  const defaultAddressesPerPage = 10;
 
   const handleClose = useCallback(() => {
-    // Reset form state when closing
     setSelectedFile(null);
     setFileName('');
     setPassword('');
     setError('');
     setShowAddressSelection(false);
     setKeystoreData(null);
-    setAccounts([]);
-    setSelectedAddress(null);
     onClose();
   }, [onClose]);
 
@@ -199,8 +84,6 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
   const handleBackToKeystore = useCallback(() => {
     setShowAddressSelection(false);
     setKeystoreData(null);
-    setAccounts([]);
-    setSelectedAddress(null);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -216,7 +99,7 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
       return;
     }
 
-    const keystoreDataParsed = await parseKeystore(selectedFile);
+    const keystoreDataParsed = await parseKeystoreJSON(selectedFile);
     if (!keystoreDataParsed) {
       setError('Invalid keystore file format');
       return;
@@ -225,7 +108,8 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
     // Test the password with the first account
     const walletData = accessWallet({
       kdContent: keystoreDataParsed,
-      accessPassVal: password
+      accessPassVal: password,
+      index: 0
     });
 
     if (!walletData) {
@@ -235,16 +119,7 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
 
     // Check if it's a mnemonic (multiple addresses) or single key
     if (keystoreDataParsed.kind === 'mnemonic') {
-      // Show address selection for mnemonic
       setKeystoreData(keystoreDataParsed);
-      const addresses = getKeystoreAddresses({
-        kdContent: keystoreDataParsed,
-        accessPassVal: password,
-        index: startIndex,
-        count: defaultAddressesPerPage
-      }).map(({ address }) => address);
-
-      setAccounts(addresses);
       setShowAddressSelection(true);
     } else {
       // Single key, proceed directly
@@ -255,84 +130,27 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
     }
   };
 
-  const handleSelectAddress = useCallback((address: AddressAccount | null) => {
-    setSelectedAddress(address);
-  }, []);
-
-  const handleGoToNextPage = useCallback(() => {
-    setSelectedAddress(null);
-    const newStartIndex = startIndex + defaultAddressesPerPage;
-    setStartIndex(newStartIndex);
-
-    if (keystoreData) {
-      const addresses = getKeystoreAddresses({
+  // Handler for when an address is confirmed in AddressScreens
+  const handleConfirmSelectedAddress = useCallback(
+    (account: { index: number }) => {
+      if (!account || !keystoreData) return;
+      // Derive privateKey for the selected index
+      const walletData = accessWallet({
         kdContent: keystoreData,
         accessPassVal: password,
-        index: newStartIndex,
-        count: defaultAddressesPerPage
-      }).map(({ address }) => address);
-
-      setAccounts(addresses);
-    }
-  }, [startIndex, keystoreData, password]);
-
-  const handleGoToPrevPage = useCallback(() => {
-    setSelectedAddress(null);
-    const newStartIndex = Math.max(0, startIndex - defaultAddressesPerPage);
-    setStartIndex(newStartIndex);
-
-    if (keystoreData) {
-      const addresses = getKeystoreAddresses({
-        kdContent: keystoreData,
-        accessPassVal: password,
-        index: newStartIndex,
-        count: defaultAddressesPerPage
-      }).map(({ address }) => address);
-
-      setAccounts(addresses);
-    }
-  }, [startIndex, keystoreData, password]);
-
-  const handleGoToSpecificPage = useCallback(
-    (page: number) => {
-      setSelectedAddress(null);
-      const newStartIndex = page * defaultAddressesPerPage;
-      setStartIndex(newStartIndex);
-
-      if (keystoreData) {
-        const addresses = getKeystoreAddresses({
-          kdContent: keystoreData,
-          accessPassVal: password,
-          index: newStartIndex,
-          count: defaultAddressesPerPage
-        }).map(({ address }) => address);
-
-        setAccounts(addresses);
+        index: account.index
+      });
+      if (walletData) {
+        onSubmit({
+          privateKey: walletData.privateKey,
+          address: walletData.address
+        });
       }
     },
-    [keystoreData, password]
+    [keystoreData, password, onSubmit]
   );
 
-  const handleConfirmSelectedAddress = useCallback(() => {
-    if (!selectedAddress || !keystoreData) {
-      return;
-    }
-
-    const walletData = accessWallet({
-      kdContent: keystoreData,
-      accessPassVal: password,
-      index: selectedAddress.index
-    });
-
-    if (walletData) {
-      onSubmit({
-        privateKey: walletData.privateKey,
-        address: walletData.address
-      });
-    }
-  }, [selectedAddress, keystoreData, password, onSubmit]);
-
-  if (showAddressSelection) {
+  if (showAddressSelection && keystoreData) {
     return (
       <div data-testid={DataTestIdsEnum.addressSelectionPanel}>
         <div
@@ -345,33 +163,17 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
           <Button
             onClick={handleBackToKeystore}
             data-testid={DataTestIdsEnum.backToKeystoreBtn}
-            style={{ marginRight: '10px' }}
+            className='mr-2'
           >
             ← Back
           </Button>
           <h2>Select Address</h2>
         </div>
         <AddressScreens
-          accounts={accounts}
-          loading={false}
-          onGoToNextPage={handleGoToNextPage}
-          onGoToPrevPage={handleGoToPrevPage}
-          onSelectAddress={handleSelectAddress}
-          onGoToSpecificPage={handleGoToSpecificPage}
-          startIndex={startIndex}
-          selectedAddress={selectedAddress?.address}
-          className='p-0'
+          kdContent={keystoreData}
+          accessPassVal={password}
           onConfirmSelectedAddress={handleConfirmSelectedAddress}
-          addressTableClassNames={{
-            ledgerModalTitleClassName: 'ledger-modal-title',
-            ledgerModalSubtitleClassName: 'ledger-modal-subtitle',
-            ledgerModalTableHeadClassName: 'ledger-modal-table-head',
-            ledgerModalTableItemClassName: 'ledger-modal-table-item',
-            ledgerModalButtonClassName:
-              'button primary large ledger-modal-button',
-            ledgerModalTableSelectedItemClassName:
-              'ledger-modal-table-selected-item'
-          }}
+          className='p-0'
         />
       </div>
     );
