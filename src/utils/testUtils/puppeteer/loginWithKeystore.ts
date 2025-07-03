@@ -19,8 +19,26 @@ export const loginWithKeystore = async (props?: {
   const filePath =
     props?.filePath ?? 'src/__mocks__/data/testKeystoreWallet/account.json';
 
-  await parent.waitForSelector(getByDataTestId(DataTestIdsEnum.keystoreBtn));
-  await parent.click(getByDataTestId(DataTestIdsEnum.keystoreBtn));
+  // Click the Connect button to open the unlock panel
+  const connectBtn = await parent.waitForSelector(
+    getByDataTestId(DataTestIdsEnum.connectBtn)
+  );
+
+  await connectBtn.click();
+
+  // Click the keystoreProvider button in the unlock panel
+  const keystoreProviderBtn = await parent.waitForSelector(
+    getByDataTestId(DataTestIdsEnum.keystoreProvider)
+  );
+
+  await keystoreProviderBtn.click();
+
+  // Wait for the keystore login panel to appear
+  await parent.waitForSelector(
+    getByDataTestId(DataTestIdsEnum.keystoreLoginPanel)
+  );
+
+  // Upload the keystore file
   await uploadFile({
     dataTestId: DataTestIdsEnum.walletFile,
     filePath,

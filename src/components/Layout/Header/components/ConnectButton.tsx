@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components';
 import { UnlockPanelManager } from 'lib';
-import { RouteNamesEnum } from 'localConstants';
+import { DataTestIdsEnum, RouteNamesEnum } from 'localConstants';
 
 export const ConnectButton = () => {
   const navigate = useNavigate();
@@ -19,5 +19,12 @@ export const ConnectButton = () => {
     unlockPanelManager.openUnlockPanel();
   };
 
-  return <Button onClick={handleOpenUnlockPanel}>Connect</Button>;
+  return (
+    <Button
+      dataTestId={DataTestIdsEnum.connectBtn}
+      onClick={handleOpenUnlockPanel}
+    >
+      Connect
+    </Button>
+  );
 };

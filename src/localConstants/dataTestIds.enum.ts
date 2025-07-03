@@ -99,5 +99,13 @@ export enum DataTestIdsEnum {
   testnet = 'testnet',
   amountInput0 = 'amountInput0',
   sendNFtTypeInput0 = 'sendNFtTypeInput0',
-  transactionDetailsToastBody = 'transactionDetailsToastBody'
+  transactionDetailsToastBody = 'transactionDetailsToastBody',
+  pemProvider = 'pemProvider',
+  keystoreProvider = 'keystoreProvider',
+  pemLoginPanel = 'pemLoginPanel',
+  keystoreLoginPanel = 'keystoreLoginPanel',
+  addressSelectionPanel = 'addressSelectionPanel',
+  addressTableItem = 'addressTableItem',
+  selectAddressBtn = 'selectAddressBtn',
+  backToKeystoreBtn = 'backToKeystoreBtn'
 }

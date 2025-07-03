@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import { parsePem } from '../../providers/helpers/parsePem';
+import { parsePem } from 'providers/Pem/parsePem';
 
 const styles = {
   form: {
@@ -93,7 +93,7 @@ export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
   };
 
   return (
-    <div>
+    <div data-testid={DataTestIdsEnum.pemLoginPanel}>
       <h2>Login with PEM File</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div>
