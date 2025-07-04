@@ -1,62 +1,23 @@
-import { nativeAuth } from '@multiversx/sdk-dapp/services/nativeAuth/nativeAuth';
-import { replyToDapp as originalReplyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';
-import {
-  ExtendedReplyWithPostMessageType,
-  ReplyWithRedirectType
-} from '../sdkDappWebWalletCrossWindowProvider';
-export { getEgldLabel } from '@multiversx/sdk-dapp/utils/network/getEgldLabel';
-export { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
-export { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
-export { sendBatchTransactions as sendBatchTransactionsSdkDapp } from '@multiversx/sdk-dapp/services/transactions/sendBatchTransactions';
-export { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
-export { logout } from '@multiversx/sdk-dapp/utils/logout';
-export { signTransactions } from '@multiversx/sdk-dapp/services/transactions/signTransactions';
-export { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers';
-export { getAccount } from '@multiversx/sdk-dapp/utils/account/getAccount';
-export { getAddress } from '@multiversx/sdk-dapp/utils/account/getAddress';
-export { newTransaction } from '@multiversx/sdk-dapp/models';
-export { decodeNativeAuthToken } from '@multiversx/sdk-dapp/services/nativeAuth/helpers/decodeNativeAuthToken';
-export { getIsNativeAuthSingingForbidden } from '@multiversx/sdk-dapp/services/nativeAuth/helpers/getIsNativeAuthSingingForbidden';
-export { decodeLoginToken } from '@multiversx/sdk-dapp/services/nativeAuth/helpers/decodeLoginToken';
-export { getWebviewToken } from '@multiversx/sdk-dapp/utils/account/getWebviewToken';
-export { getAccountProviderType } from '@multiversx/sdk-dapp/utils/account/getAccountProviderType';
-export { loginWithExternalProvider } from '@multiversx/sdk-dapp/utils/account/loginWithExternalProvider';
-export { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
-export { getInterpretedTransaction } from '@multiversx/sdk-dapp/utils/transactions/getInterpretedTransaction';
-export { formatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
-export { parseAmount } from '@multiversx/sdk-dapp/utils/operations/parseAmount';
-export { getIsProviderEqualTo } from '@multiversx/sdk-dapp/utils/account/getIsProviderEqualTo';
-export { removeTransactionsToSign } from '@multiversx/sdk-dapp/services/transactions/clearTransactions';
-export { extractSessionId } from '@multiversx/sdk-dapp/hooks/transactions/helpers/extractSessionId';
-export { checkIsValidSender } from '@multiversx/sdk-dapp/hooks/transactions/helpers/checkIsValidSender';
-export { verifyMessage } from '@multiversx/sdk-dapp/hooks/signMessage/verifyMessage';
-export { storage } from '@multiversx/sdk-dapp/utils/storage';
-export { addNewCustomToast } from '@multiversx/sdk-dapp/utils/toasts';
-export {
-  maxDecimals,
-  stringIsFloat,
-  stringIsInteger
-} from '@multiversx/sdk-dapp/utils/validation';
-export {
-  deleteTransactionToast,
-  removeAllSignedTransactions,
-  removeAllTransactionsToSign
-} from '@multiversx/sdk-dapp/services/transactions/clearTransactions';
-export {
-  setTransactionsDisplayInfoState,
-  setTransactionsToSignedState
-} from '@multiversx/sdk-dapp/services/transactions/updateSignedTransactions';
-export { sendBatchTransactions } from '@multiversx/sdk-dapp/services/transactions/sendBatchTransactions';
-
-const { getToken } = nativeAuth();
-export { getToken };
-
-export const replyToDapp: (
-  props: {
-    callbackUrl: string;
-    webviewApp?: HTMLIFrameElement | null;
-    postMessageData?: ExtendedReplyWithPostMessageType;
-    transactionData?: ReplyWithRedirectType['transactionData'];
-  },
-  extensionReplyToDapp?: (props: ExtendedReplyWithPostMessageType) => void
-) => void = originalReplyToDapp as any;
+export { refreshNativeAuthTokenLogin } from '@multiversx/sdk-dapp/out/utils/account/refreshNativeAuthTokenLogin';
+export { decodeNativeAuthToken } from '@multiversx/sdk-dapp/out/services/nativeAuth/helpers/decodeNativeAuthToken';
+export { decodeLoginToken } from '@multiversx/sdk-dapp/out/services/nativeAuth/helpers/decodeLoginToken';
+export { getEgldLabel } from '@multiversx/sdk-dapp/out/methods/network/getEgldLabel';
+export { initApp } from '@multiversx/sdk-dapp/out/methods/initApp/initApp';
+export { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/accountProvider';
+export { UnlockPanelManager } from '@multiversx/sdk-dapp/out/managers/UnlockPanelManager';
+export { NotificationsFeedManager } from '@multiversx/sdk-dapp/out/managers/NotificationsFeedManager';
+export { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers/FormatAmountController';
+export { TransactionManager } from '@multiversx/sdk-dapp/out/managers/TransactionManager';
+export { getAddress } from '@multiversx/sdk-dapp/out/methods/account/getAddress';
+export { refreshAccount } from '@multiversx/sdk-dapp/out/utils/account/refreshAccount';
+export { nativeAuth } from '@multiversx/sdk-dapp/out/services/nativeAuth/nativeAuth';
+export { signTransactions } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/signTransactions';
+export { login } from '@multiversx/sdk-dapp/out/providers/DappProvider/helpers/login/login';
+export { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
+export { maxDecimals } from '@multiversx/sdk-dapp/out/utils/validation/maxDecimals';
+export { getAccountFromApi } from '@multiversx/sdk-dapp/out/apiCalls/account/getAccountFromApi';
+export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp/out/utils/transactions/getActiveTransactionsStatus';
+export { getInterpretedTransaction } from '@multiversx/sdk-dapp/out/utils/transactions/getInterpretedTransaction';
+export { getTransactions } from '@multiversx/sdk-dapp/out/apiCalls/transactions/getTransactions';
+export { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
+export { checkIsValidSender } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/getCommonData/helpers/checkIsValidSender';

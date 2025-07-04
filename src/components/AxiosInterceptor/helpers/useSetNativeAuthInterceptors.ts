@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { useAxiosInterceptorContext } from 'lib';
+import { useGetLoginInfo } from 'lib';
 import { IS_TEST } from 'localConstants';
 import { accountSelector } from 'redux/selectors';
 import { retry } from 'utils';
@@ -9,9 +9,7 @@ let nativeAuthToken: string | undefined;
 let requestInterceptorId = -1;
 
 export const useSetNativeAuthInterceptors = () => {
-  const {
-    loginInfo: { tokenLogin }
-  } = useAxiosInterceptorContext();
+  const { tokenLogin } = useGetLoginInfo();
   const { externalNativeAuthToken } = useSelector(accountSelector);
   nativeAuthToken = externalNativeAuthToken || tokenLogin?.nativeAuthToken;
 
@@ -39,7 +37,7 @@ export const useSetNativeAuthInterceptors = () => {
   };
 
   const setNativeAuthTokenInterceptors = (
-    newToken?: string,
+    newToken: string | null,
     onRequest?: () => void
   ) => {
     axios.interceptors.request.eject(requestInterceptorId);

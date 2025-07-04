@@ -1,12 +1,12 @@
 import QRCode from 'react-qr-code';
+
 import { useSelector } from 'react-redux';
-import { Copy, MxLink } from 'components';
+import { MxLink } from 'components';
 import {
   useGetAccountInfo,
-  useGetNetworkConfig,
   FormatAmount,
-  explorerAddressSelector,
-  useSdkDappSelector
+  CopyButton,
+  useGetNetworkConfig
 } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
@@ -15,10 +15,10 @@ import { routeNames } from 'routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
-  const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
-  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
-  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
+  const { activeNetwork } = useSelector(networkSelector);
+  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork as any;
+  const explorerAddress = network.explorerAddress;
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
@@ -34,7 +34,7 @@ export const Account = () => {
               data-testid={DataTestIdsEnum.userAddress}
             >
               {address}
-              <Copy value={address} />
+              <CopyButton text={address} />
             </div>
           </div>
           <div className='my-1 flex justify-center sm:hidden'>

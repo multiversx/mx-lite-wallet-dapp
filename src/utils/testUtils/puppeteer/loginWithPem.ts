@@ -6,8 +6,25 @@ import { uploadFile } from './uploadFile';
 
 export const loginWithPem = async () => {
   const filePath = 'src/__mocks__/data/testPemWallet/account.pem';
-  await page.waitForSelector(getByDataTestId(DataTestIdsEnum.pemBtn));
-  await page.click(getByDataTestId(DataTestIdsEnum.pemBtn));
+
+  // Click the Connect button to open the unlock panel
+  const connectBtn = await page.waitForSelector(
+    getByDataTestId(DataTestIdsEnum.connectBtn)
+  );
+
+  await connectBtn.click();
+
+  // Click the pemProvider button in the unlock panel
+  const pemProviderBtn = await page.waitForSelector(
+    getByDataTestId(DataTestIdsEnum.pemProvider)
+  );
+
+  await pemProviderBtn.click();
+
+  // Wait for the PEM login panel to appear
+  await page.waitForSelector(getByDataTestId(DataTestIdsEnum.pemLoginPanel));
+
+  // Upload the PEM file
   await uploadFile({ dataTestId: DataTestIdsEnum.walletFile, filePath });
   await page.click(getByDataTestId(DataTestIdsEnum.submitButton));
 

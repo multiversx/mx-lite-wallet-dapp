@@ -7,7 +7,7 @@ export const useReplyToDapp = () => {
 
   return (props: ExtendedReplyWithPostMessageType) =>
     replyToDapp({
-      callbackUrl,
-      postMessageData: props
+      ...props,
+      callbackUrl
     });
 };
