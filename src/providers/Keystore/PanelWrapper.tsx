@@ -7,14 +7,17 @@ const panelStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
   panel: {
-    backgroundColor: 'white',
     padding: '20px',
-    borderRadius: '8px',
+    height: '100%',
+    color: 'white',
     width: '100%',
-    maxWidth: '500px'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 };
 

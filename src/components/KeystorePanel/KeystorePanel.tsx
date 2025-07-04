@@ -13,7 +13,6 @@ const styles = {
   input: {
     padding: '8px',
     marginTop: '5px',
-    backgroundColor: '#FFF',
     width: '100%',
     borderRadius: '4px',
     border: '1px solid #ccc'
@@ -42,8 +41,7 @@ const styles = {
     borderRadius: '8px',
     padding: '20px',
     textAlign: 'center' as const,
-    cursor: 'pointer',
-    backgroundColor: '#f9f9f9'
+    cursor: 'pointer'
   }
 };
 
@@ -80,11 +78,6 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
       setError('');
     }
   };
-
-  const handleBackToKeystore = useCallback(() => {
-    setShowAddressSelection(false);
-    setKeystoreData(null);
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -153,22 +146,6 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
   if (showAddressSelection && keystoreData) {
     return (
       <div data-testid={DataTestIdsEnum.addressSelectionPanel}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '20px'
-          }}
-        >
-          <Button
-            onClick={handleBackToKeystore}
-            data-testid={DataTestIdsEnum.backToKeystoreBtn}
-            className='mr-2'
-          >
-            ← Back
-          </Button>
-          <h2>Select Address</h2>
-        </div>
         <AddressScreens
           kdContent={keystoreData}
           accessPassVal={password}
@@ -181,7 +158,6 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
 
   return (
     <div data-testid={DataTestIdsEnum.keystoreLoginPanel}>
-      <h2>Login with Keystore File</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div>
           <label>Keystore File</label>

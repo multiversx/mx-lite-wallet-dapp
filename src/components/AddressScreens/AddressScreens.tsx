@@ -1,10 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { MvxAddressSelect } from '@multiversx/sdk-dapp-ui/react';
 import { type MvxAddressSelect as MvxAddressSelectPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-address-select';
-import { useDispatch } from 'react-redux';
 import type { AccessWalletType } from '../../providers/Keystore/accessWallet';
 import { getKeystoreAddresses } from '../../providers/Keystore/getKeystoreAddresses';
-import { setAddressIndex } from '../../redux/slices/account';
 
 export interface IAccount {
   address: string;
@@ -25,6 +23,7 @@ export interface AddressScreensPropsType
   accessPassVal: string;
   addressesPerPage?: number;
   onConfirmSelectedAddress?: (account: IAccount) => void;
+  onPageChange?: (pageIndex: number) => void;
 }
 
 const DEFAULT_ADDRESSES_PER_PAGE = 5;
@@ -33,10 +32,10 @@ export const AddressScreens = ({
   kdContent,
   accessPassVal,
   addressesPerPage = DEFAULT_ADDRESSES_PER_PAGE,
+  onPageChange,
   onConfirmSelectedAddress,
   className
 }: AddressScreensPropsType) => {
-  const dispatch = useDispatch();
   const [accounts, setAccounts] = useState<IAccount[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -70,7 +69,7 @@ export const AddressScreens = ({
   useEffect(() => {
     loadAccounts();
     setSelectedIndex(null);
-  }, [loadAccounts]);
+  }, [loadAccounts, startIndex]);
 
   // Handler: Confirm selected address (access wallet)
   const handleAccessWallet = useCallback(() => {
@@ -82,16 +81,12 @@ export const AddressScreens = ({
   }, [selectedIndex, accounts, onConfirmSelectedAddress]);
 
   // Handler: Select account
-  const handleSelectAccount = useCallback(
-    (event: CustomEvent) => {
-      const idx = event.detail?.index;
-      if (typeof idx === 'number') {
-        setSelectedIndex(idx);
-        dispatch(setAddressIndex({ addressIndex: idx }));
-      }
-    },
-    [dispatch]
-  );
+  const handleSelectAccount = useCallback((event: CustomEvent) => {
+    const idx = event.detail?.index;
+    if (typeof idx === 'number') {
+      setSelectedIndex(idx);
+    }
+  }, []);
 
   // Handler: Page change
   const handlePageChange = useCallback((event: CustomEvent) => {
@@ -99,6 +94,7 @@ export const AddressScreens = ({
     if (typeof pageIdx === 'number') {
       setStartIndex(pageIdx);
       setSelectedIndex(null);
+      onPageChange?.(pageIdx);
     }
   }, []);
 
