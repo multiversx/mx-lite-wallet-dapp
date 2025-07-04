@@ -1,6 +1,6 @@
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { SidePanel } from 'components';
-import React from 'react';
 
 export interface PanelWrapperProps {
   isOpen: boolean;
