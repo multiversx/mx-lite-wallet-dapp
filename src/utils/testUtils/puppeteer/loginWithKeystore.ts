@@ -52,17 +52,24 @@ export const loginWithKeystore = async (props?: {
   });
 
   await parent.click(getByDataTestId(DataTestIdsEnum.submitButton));
-  const dataTestId = `check_${address}`;
-  await parent.waitForSelector(getByDataTestId(dataTestId));
-  await parent.click(getByDataTestId(dataTestId));
+  const dataTestId = `addressTableItem_${address}`;
+  const addressTableItem = await parent.waitForSelector(
+    getByDataTestId(dataTestId)
+  );
+
+  await addressTableItem.click();
 
   await expectToBeChecked({
-    dataTestId,
+    dataTestId: dataTestId,
     isChecked: true,
     parent
   });
 
-  await parent.click(getByDataTestId(DataTestIdsEnum.confirmBtn));
+  const confirmBtn = await parent.waitForSelector(
+    getByDataTestId(DataTestIdsEnum.confirmBtn)
+  );
+
+  await confirmBtn.click();
 
   if (props?.skipLoggedInCheck) {
     return;

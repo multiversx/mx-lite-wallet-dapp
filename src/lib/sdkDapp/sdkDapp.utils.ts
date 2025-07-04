@@ -1,4 +1,4 @@
-export { refreshNativeAuthTokenLogin } from '@multiversx/sdk-dapp/out/core/providers/DappProvider/helpers/login/helpers/refreshNativeAuthTokenLogin';
+export { refreshNativeAuthTokenLogin } from '@multiversx/sdk-dapp/out/utils/account/refreshNativeAuthTokenLogin';
 export { decodeNativeAuthToken } from '@multiversx/sdk-dapp/out/services/nativeAuth/helpers/decodeNativeAuthToken';
 export { decodeLoginToken } from '@multiversx/sdk-dapp/out/services/nativeAuth/helpers/decodeLoginToken';
 export { getEgldLabel } from '@multiversx/sdk-dapp/out/methods/network/getEgldLabel';

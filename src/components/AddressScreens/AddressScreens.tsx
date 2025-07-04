@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import { MvxAddressSelect } from '@multiversx/sdk-dapp-ui/react';
-import { type MvxAddressSelect as MvxAddressSelectPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-address-select';
+import { MvxAddressTable } from '@multiversx/sdk-dapp-ui/react';
+import { type MvxAddressTable as MvxAddressTablePropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-address-table';
 import type { AccessWalletType } from '../../providers/Keystore/accessWallet';
 import { getKeystoreAddresses } from '../../providers/Keystore/getKeystoreAddresses';
 
@@ -18,11 +18,11 @@ export interface IAccountScreenData {
 }
 
 export interface AddressScreensPropsType
-  extends Partial<MvxAddressSelectPropsType> {
+  extends Partial<MvxAddressTablePropsType> {
   kdContent: AccessWalletType['kdContent'];
   accessPassVal: string;
   addressesPerPage?: number;
-  onConfirmSelectedAddress?: (account: IAccount) => void;
+  onConfirmSelectedAddress: (account: IAccount) => void;
   onPageChange?: (pageIndex: number) => void;
 }
 
@@ -41,7 +41,6 @@ export const AddressScreens = ({
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Derive addresses for the current page
   const loadAccounts = useCallback(() => {
     setIsLoading(true);
 
@@ -56,7 +55,7 @@ export const AddressScreens = ({
       setAccounts(
         derived.map((item, idx) => ({
           address: item.address,
-          balance: '', // balance can be fetched separately if needed
+          balance: '',
           index: startIndex * addressesPerPage + idx
         }))
       );
@@ -71,26 +70,27 @@ export const AddressScreens = ({
     setSelectedIndex(null);
   }, [loadAccounts, startIndex]);
 
-  // Handler: Confirm selected address (access wallet)
   const handleAccessWallet = useCallback(() => {
+    console.log('handleAccessWallet', selectedIndex);
+    console.log('accounts', accounts);
     if (selectedIndex == null || !accounts[selectedIndex]) return;
-    if (onConfirmSelectedAddress) {
-      onConfirmSelectedAddress(accounts[selectedIndex]);
-    }
-    // You can add more logic here if needed
+
+    console.log('handleAccessWallet', accounts[selectedIndex]);
+
+    onConfirmSelectedAddress(accounts[selectedIndex]);
   }, [selectedIndex, accounts, onConfirmSelectedAddress]);
 
-  // Handler: Select account
   const handleSelectAccount = useCallback((event: CustomEvent) => {
-    const idx = event.detail?.index;
+    const idx = event.detail;
+
     if (typeof idx === 'number') {
       setSelectedIndex(idx);
     }
   }, []);
 
-  // Handler: Page change
   const handlePageChange = useCallback((event: CustomEvent) => {
-    const pageIdx = event.detail?.pageIndex;
+    const pageIdx = event.detail;
+
     if (typeof pageIdx === 'number') {
       setStartIndex(pageIdx);
       setSelectedIndex(null);
@@ -106,7 +106,7 @@ export const AddressScreens = ({
   };
 
   return (
-    <MvxAddressSelect
+    <MvxAddressTable
       className={className}
       selectedIndex={selectedIndex ?? undefined}
       accountScreenData={accountScreenData}

@@ -7,6 +7,7 @@ import { parseKeystoreJSON } from '../../providers/Keystore/parseKeystoreJSON';
 const styles = {
   container: {
     width: '100%',
+    height: '100%',
     maxWidth: '400px',
     margin: '0 auto',
     padding: '24px 0',
@@ -126,7 +127,6 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
       return;
     }
 
-    // Test the password with the first account
     const walletData = accessWallet({
       kdContent: keystoreDataParsed,
       accessPassVal: password,
@@ -138,12 +138,10 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
       return;
     }
 
-    // Check if it's a mnemonic (multiple addresses) or single key
     if (keystoreDataParsed.kind === 'mnemonic') {
       setKeystoreData(keystoreDataParsed);
       setShowAddressSelection(true);
     } else {
-      // Single key, proceed directly
       onSubmit({
         privateKey: walletData.privateKey,
         address: walletData.address
@@ -151,11 +149,9 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
     }
   };
 
-  // Handler for when an address is confirmed in AddressScreens
   const handleConfirmSelectedAddress = useCallback(
     (account: { index: number }) => {
       if (!account || !keystoreData) return;
-      // Derive privateKey for the selected index
       const walletData = accessWallet({
         kdContent: keystoreData,
         accessPassVal: password,
