@@ -77,9 +77,14 @@ const styles = {
 interface KeystorePanelProps {
   onSubmit: (values: { privateKey: string; address: string }) => void;
   onClose: () => void;
+  needsAddress?: boolean;
 }
 
-export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
+export const KeystorePanel = ({
+  onSubmit,
+  onClose,
+  needsAddress
+}: KeystorePanelProps) => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const [fileName, setFileName] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
@@ -167,7 +172,7 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
     [keystoreData, password, onSubmit]
   );
 
-  if (showAddressSelection && keystoreData) {
+  if (needsAddress && showAddressSelection && keystoreData) {
     return (
       <div
         style={styles.container}

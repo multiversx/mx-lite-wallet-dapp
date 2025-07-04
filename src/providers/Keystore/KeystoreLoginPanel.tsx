@@ -39,7 +39,10 @@ export class KeystoreLoginPanel {
     this._renderPanel();
   }
 
-  private _renderPanel() {
+  private _renderPanel(options?: {
+    needsAddress: boolean;
+    anchor?: HTMLElement;
+  }) {
     if (!this._currentPanel) {
       return;
     }
@@ -68,6 +71,7 @@ export class KeystoreLoginPanel {
         anchor={this._currentPanel.anchor}
         panelTitle='Keystore Login'
         PanelComponent={KeystorePanel}
+        needsAddress={options?.needsAddress}
       />
     );
   }
@@ -87,7 +91,7 @@ export class KeystoreLoginPanel {
       this._currentPanel.resolve = resolve;
       this._currentPanel.isOpen = true;
       this._currentPanel.anchor = options?.anchor;
-      this._renderPanel();
+      this._renderPanel(options);
     });
   }
 }

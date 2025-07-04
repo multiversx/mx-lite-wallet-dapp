@@ -12,6 +12,7 @@ export interface PanelWrapperProps {
     onSubmit: (values: { privateKey: string; address: string }) => void;
     onClose: () => void;
   }>;
+  needsAddress?: boolean;
 }
 
 export const PanelWrapper = ({
@@ -20,7 +21,8 @@ export const PanelWrapper = ({
   onClose,
   anchor,
   panelTitle,
-  PanelComponent
+  PanelComponent,
+  needsAddress
 }: PanelWrapperProps) => {
   const panelContent = (
     <div
@@ -34,7 +36,11 @@ export const PanelWrapper = ({
         alignItems: 'stretch'
       }}
     >
-      <PanelComponent onSubmit={onSubmit} onClose={onClose} />
+      <PanelComponent
+        onSubmit={onSubmit}
+        onClose={onClose}
+        needsAddress={needsAddress}
+      />
     </div>
   );
 
