@@ -5,43 +5,71 @@ import { accessWallet } from '../../providers/Keystore/accessWallet';
 import { parseKeystoreJSON } from '../../providers/Keystore/parseKeystoreJSON';
 
 const styles = {
+  container: {
+    width: '100%',
+    maxWidth: '400px',
+    margin: '0 auto',
+    padding: '24px 0',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'stretch'
+  },
   form: {
     display: 'flex',
     flexDirection: 'column' as const,
-    gap: '15px'
+    gap: '20px',
+    width: '100%'
   },
   input: {
-    padding: '8px',
-    marginTop: '5px',
+    padding: '10px',
+    marginTop: '6px',
     width: '100%',
-    borderRadius: '4px',
-    border: '1px solid #ccc'
+    borderRadius: '6px',
+    border: '1px solid #333',
+    background: '#18181b',
+    color: '#fff',
+    fontSize: '16px'
   },
   buttonGroup: {
     display: 'flex',
-    gap: '10px',
+    gap: '12px',
     justifyContent: 'flex-end',
-    marginTop: '15px'
+    marginTop: '10px'
   },
   button: {
-    backgroundColor: '#2563eb',
-    color: 'white',
-    padding: '8px 16px',
+    backgroundColor: '#232326',
+    color: '#fff',
+    padding: '10px 24px',
     borderRadius: '8px',
-    border: 'none',
+    border: '1px solid #333',
     cursor: 'pointer',
-    fontSize: '14px',
-    fontWeight: '500',
-    ':hover': {
-      backgroundColor: '#1d4ed8'
-    }
+    fontSize: '16px',
+    fontWeight: 500,
+    transition: 'background 0.2s, border 0.2s'
   },
   fileUpload: {
-    border: '2px dashed #ccc',
+    border: '2px dashed #333',
     borderRadius: '8px',
-    padding: '20px',
+    padding: '18px',
     textAlign: 'center' as const,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    background: '#232326',
+    color: '#fff',
+    fontSize: '16px',
+    marginTop: '6px'
+  },
+  label: {
+    fontWeight: 500,
+    fontSize: '15px',
+    color: '#fff',
+    marginBottom: '4px',
+    display: 'block'
+  },
+  error: {
+    color: 'red',
+    fontSize: '14px',
+    marginTop: '-10px',
+    marginBottom: '10px'
   }
 };
 
@@ -145,7 +173,10 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
 
   if (showAddressSelection && keystoreData) {
     return (
-      <div data-testid={DataTestIdsEnum.addressSelectionPanel}>
+      <div
+        style={styles.container}
+        data-testid={DataTestIdsEnum.addressSelectionPanel}
+      >
         <AddressScreens
           kdContent={keystoreData}
           accessPassVal={password}
@@ -157,10 +188,13 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
   }
 
   return (
-    <div data-testid={DataTestIdsEnum.keystoreLoginPanel}>
+    <div
+      style={styles.container}
+      data-testid={DataTestIdsEnum.keystoreLoginPanel}
+    >
       <form onSubmit={handleSubmit} style={styles.form}>
         <div>
-          <label>Keystore File</label>
+          <label style={styles.label}>Keystore File</label>
           <div
             style={styles.fileUpload}
             data-testid={DataTestIdsEnum.keystoreBtn}
@@ -173,11 +207,14 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
               id='keystore-file-input'
               data-testid={DataTestIdsEnum.walletFile}
             />
-            <label htmlFor='keystore-file-input' style={{ cursor: 'pointer' }}>
+            <label
+              htmlFor='keystore-file-input'
+              style={{ cursor: 'pointer', width: '100%', display: 'block' }}
+            >
               {fileName ? (
                 <div>
                   <div>✓ Keystore file loaded</div>
-                  <div style={{ fontSize: '14px', color: '#666' }}>
+                  <div style={{ fontSize: '14px', color: '#aaa' }}>
                     {fileName}
                   </div>
                 </div>
@@ -188,7 +225,7 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
           </div>
         </div>
         <div>
-          <label>
+          <label style={styles.label}>
             Password
             <input
               style={styles.input}
@@ -201,18 +238,19 @@ export const KeystorePanel = ({ onSubmit, onClose }: KeystorePanelProps) => {
             />
           </label>
         </div>
-        {error && <div style={{ color: 'red', fontSize: '14px' }}>{error}</div>}
+        {error && <div style={styles.error}>{error}</div>}
         <div style={styles.buttonGroup}>
           <Button
             onClick={handleClose}
-            {...{ style: styles.button }}
+            style={styles.button}
             data-testid={DataTestIdsEnum.cancelBtn}
+            type='button'
           >
             Cancel
           </Button>
           <Button
             type='submit'
-            {...{ style: styles.button }}
+            style={styles.button}
             data-testid={DataTestIdsEnum.submitButton}
           >
             Login

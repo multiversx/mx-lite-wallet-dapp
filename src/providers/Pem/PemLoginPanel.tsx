@@ -1,5 +1,6 @@
 import { createRoot, Root } from 'react-dom/client';
-import PanelWrapper from './PanelWrapper';
+import PanelWrapper from 'components/PanelWrapper/PanelWrapper';
+import { PemPanel } from 'components/PemPanel';
 
 interface PemLoginPanelState {
   root: Root;
@@ -65,6 +66,8 @@ export class PemLoginPanel {
           this._renderPanel();
         }}
         anchor={this._currentPanel.anchor}
+        panelTitle='PEM Login'
+        PanelComponent={PemPanel}
       />
     );
   }

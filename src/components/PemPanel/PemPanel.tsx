@@ -4,45 +4,71 @@ import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { parsePem } from 'providers/Pem/parsePem';
 
 const styles = {
+  container: {
+    width: '100%',
+    maxWidth: '400px',
+    margin: '0 auto',
+    padding: '24px 0',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'stretch'
+  },
   form: {
     display: 'flex',
     flexDirection: 'column' as const,
-    gap: '15px'
+    gap: '20px',
+    width: '100%'
   },
   input: {
-    padding: '8px',
-    marginTop: '5px',
-    backgroundColor: '#FFF',
+    padding: '10px',
+    marginTop: '6px',
     width: '100%',
-    borderRadius: '4px',
-    border: '1px solid #ccc'
+    borderRadius: '6px',
+    border: '1px solid #333',
+    background: '#18181b',
+    color: '#fff',
+    fontSize: '16px'
   },
   buttonGroup: {
     display: 'flex',
-    gap: '10px',
+    gap: '12px',
     justifyContent: 'flex-end',
-    marginTop: '15px'
+    marginTop: '10px'
   },
   button: {
-    backgroundColor: '#2563eb',
-    color: 'white',
-    padding: '8px 16px',
+    backgroundColor: '#232326',
+    color: '#fff',
+    padding: '10px 24px',
     borderRadius: '8px',
-    border: 'none',
+    border: '1px solid #333',
     cursor: 'pointer',
-    fontSize: '14px',
-    fontWeight: '500',
-    ':hover': {
-      backgroundColor: '#1d4ed8'
-    }
+    fontSize: '16px',
+    fontWeight: 500,
+    transition: 'background 0.2s, border 0.2s'
   },
   fileUpload: {
-    border: '2px dashed #ccc',
+    border: '2px dashed #333',
     borderRadius: '8px',
-    padding: '20px',
+    padding: '18px',
     textAlign: 'center' as const,
     cursor: 'pointer',
-    backgroundColor: '#f9f9f9'
+    background: '#232326',
+    color: '#fff',
+    fontSize: '16px',
+    marginTop: '6px'
+  },
+  label: {
+    fontWeight: 500,
+    fontSize: '15px',
+    color: '#fff',
+    marginBottom: '4px',
+    display: 'block'
+  },
+  error: {
+    color: 'red',
+    fontSize: '14px',
+    marginTop: '-10px',
+    marginBottom: '10px'
   }
 };
 
@@ -93,11 +119,10 @@ export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
   };
 
   return (
-    <div data-testid={DataTestIdsEnum.pemLoginPanel}>
-      <h2>Login with PEM File</h2>
+    <div style={styles.container} data-testid={DataTestIdsEnum.pemLoginPanel}>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div>
-          <label>PEM File</label>
+          <label style={styles.label}>PEM File</label>
           <div style={styles.fileUpload} data-testid={DataTestIdsEnum.pemBtn}>
             <input
               type='file'
@@ -107,11 +132,14 @@ export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
               id='pem-file-input-panel'
               data-testid={DataTestIdsEnum.walletFile}
             />
-            <label htmlFor='pem-file-input-panel' style={{ cursor: 'pointer' }}>
+            <label
+              htmlFor='pem-file-input-panel'
+              style={{ cursor: 'pointer', width: '100%', display: 'block' }}
+            >
               {fileName ? (
                 <div>
                   <div>✓ PEM file loaded</div>
-                  <div style={{ fontSize: '14px', color: '#666' }}>
+                  <div style={{ fontSize: '14px', color: '#aaa' }}>
                     {fileName}
                   </div>
                 </div>
@@ -121,18 +149,19 @@ export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
             </label>
           </div>
         </div>
-        {error && <div style={{ color: 'red', fontSize: '14px' }}>{error}</div>}
+        {error && <div style={styles.error}>{error}</div>}
         <div style={styles.buttonGroup}>
           <Button
             onClick={handleClose}
-            {...{ style: styles.button }}
+            style={styles.button}
             data-testid={DataTestIdsEnum.cancelBtn}
+            type='button'
           >
             Cancel
           </Button>
           <Button
             type='submit'
-            {...{ style: styles.button }}
+            style={styles.button}
             data-testid={DataTestIdsEnum.submitButton}
           >
             Login

@@ -1,5 +1,6 @@
 import { createRoot, Root } from 'react-dom/client';
-import PanelWrapper from './PanelWrapper';
+import { KeystorePanel } from 'components/KeystorePanel';
+import PanelWrapper from 'components/PanelWrapper/PanelWrapper';
 
 interface KeystoreLoginPanelState {
   root: Root;
@@ -65,6 +66,8 @@ export class KeystoreLoginPanel {
           this._renderPanel();
         }}
         anchor={this._currentPanel.anchor}
+        panelTitle='Keystore Login'
+        PanelComponent={KeystorePanel}
       />
     );
   }
