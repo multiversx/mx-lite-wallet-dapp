@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { AxiosInterceptor, Layout, Utilities } from 'components';
 
-import { PageNotFound, Unlock } from 'pages';
-import { routeNames, routes } from 'routes';
+import { PageNotFound } from 'pages';
+import { routes } from 'routes';
 import { useSetupHrp } from './hooks';
 import { persistor, store } from './redux/store';
 
@@ -14,13 +14,20 @@ const AppContent = () => {
   return (
     <Layout>
       <Routes>
-        <Route path={routeNames.unlock} element={<Unlock />} />
         {routes.map((route) => (
           <Route
+            key={`route-key-${route.path}`}
             path={route.path}
-            key={`route-key-'${route.path}`}
             element={<route.component />}
-          />
+          >
+            {route.children?.map((child) => (
+              <Route
+                key={`route-key-${route.path}-${child.path}`}
+                path={child.path}
+                element={<child.component />}
+              />
+            ))}
+          </Route>
         ))}
         <Route path='*' element={<PageNotFound />} />
       </Routes>

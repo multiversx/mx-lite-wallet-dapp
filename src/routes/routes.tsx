@@ -26,24 +26,27 @@ import { IssueToken } from '../pages/IssueToken/IssueToken';
 
 export interface RouteType {
   authenticatedRoute?: boolean;
-  path: RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum;
+  path: RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum | string;
   title: string;
   component: React.ComponentType;
+  children?: RouteType[];
 }
 
 const routesObject: Record<
-  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
+  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum | string,
   RouteType
 > = {
   [RouteNamesEnum.home]: {
     path: RouteNamesEnum.home,
     title: 'Home',
-    component: Home
-  },
-  [RouteNamesEnum.unlock]: {
-    path: RouteNamesEnum.unlock,
-    title: 'Unlock',
-    component: Unlock
+    component: Home,
+    children: [
+      {
+        path: RouteNamesEnum.unlock,
+        title: 'Unlock',
+        component: Unlock
+      }
+    ]
   },
   [RouteNamesEnum.logout]: {
     path: RouteNamesEnum.logout,
