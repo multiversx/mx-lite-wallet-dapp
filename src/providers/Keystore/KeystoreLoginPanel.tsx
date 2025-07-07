@@ -1,11 +1,19 @@
 import { createRoot, Root } from 'react-dom/client';
 import { KeystorePanel } from 'components/KeystorePanel';
-import PanelWrapper from 'components/PanelWrapper/PanelWrapper';
+import { PanelWrapper } from 'components/PanelWrapper';
 
 interface KeystoreLoginPanelState {
   root: Root;
   isOpen: boolean;
-  resolve: ((value: { privateKey: string; address: string }) => void) | null;
+  resolve:
+    | ((value: {
+        privateKey: string;
+        address: string;
+        keystoreFile?: string;
+        keystoreFileName?: string;
+        addressIndex?: number;
+      }) => void)
+    | null;
   anchor: HTMLElement | undefined;
 }
 
@@ -40,48 +48,70 @@ export class KeystoreLoginPanel {
   }
 
   private _renderPanel(options?: {
-    needsAddress: boolean;
+    needsAddress?: boolean;
     anchor?: HTMLElement;
+    savedKeystoreFile?: string;
+    keystoreFileName?: string;
   }) {
     if (!this._currentPanel) {
       return;
     }
 
+    const onSubmit = (values: {
+      privateKey: string;
+      address: string;
+      keystoreFile?: string;
+      keystoreFileName?: string;
+      addressIndex?: number;
+    }) => {
+      if (!this._currentPanel) {
+        return;
+      }
+
+      this._currentPanel.isOpen = false;
+      this._currentPanel.resolve?.(values);
+      this._renderPanel();
+    };
+
+    const onClose = () => {
+      if (!this._currentPanel) {
+        return;
+      }
+
+      this._currentPanel.isOpen = false;
+      this._currentPanel.resolve?.({ privateKey: '', address: '' });
+      this._renderPanel();
+    };
+
     this._currentPanel.root.render(
       <PanelWrapper
         isOpen={this._currentPanel.isOpen}
-        onSubmit={(values: { privateKey: string; address: string }) => {
-          if (!this._currentPanel) {
-            return;
-          }
-
-          this._currentPanel.isOpen = false;
-          this._currentPanel.resolve?.(values);
-          this._renderPanel();
-        }}
-        onClose={() => {
-          if (!this._currentPanel) {
-            return;
-          }
-
-          this._currentPanel.isOpen = false;
-          this._currentPanel.resolve?.({ privateKey: '', address: '' });
-          this._renderPanel();
-        }}
+        onClose={onClose}
         anchor={this._currentPanel.anchor}
         panelTitle='Keystore Login'
-        PanelComponent={KeystorePanel}
-        needsAddress={options?.needsAddress}
-      />
+      >
+        <KeystorePanel
+          onSubmit={onSubmit}
+          onClose={onClose}
+          needsAddress={options?.needsAddress}
+          savedKeystoreFile={options?.savedKeystoreFile}
+          keystoreFileName={options?.keystoreFileName}
+        />
+      </PanelWrapper>
     );
   }
 
   public showPanel(options?: {
-    needsAddress: boolean;
+    needsAddress?: boolean;
     anchor?: HTMLElement;
+    savedKeystoreFile?: string;
+    keystoreFileName?: string;
   }): Promise<{
     privateKey: string;
     address: string;
+    keystoreFile?: string;
+    keystoreFileName?: string;
+    addressIndex?: number;
   }> {
     return new Promise((resolve) => {
       if (!this._currentPanel) {

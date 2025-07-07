@@ -12,6 +12,8 @@ import {
   UserSigner
 } from 'lib';
 import { KeystoreLoginPanel } from './KeystoreLoginPanel';
+import { setKeystoreLogin } from '../../redux/slices/account';
+import { store } from '../../redux/store';
 
 const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
@@ -103,17 +105,34 @@ export class KeystoreProvider implements IProvider {
     signature: string;
   }> {
     return new Promise(async (resolve, reject) => {
-      const { address, privateKey: userPrivateKey } =
-        await this.panel.showPanel({
-          needsAddress: true,
-          anchor: this._anchor
-        });
+      const {
+        address,
+        privateKey: userPrivateKey,
+        keystoreFile,
+        keystoreFileName,
+        addressIndex
+      } = await this.panel.showPanel({
+        needsAddress: true,
+        anchor: this._anchor
+      });
 
       if (!address || !userPrivateKey) {
         return reject('User cancelled login');
       }
 
       privateKey = userPrivateKey;
+
+      if (keystoreFile) {
+        store.dispatch(
+          setKeystoreLogin({
+            privateKey: userPrivateKey,
+            keystoreFile: keystoreFile,
+            keystoreFileName: keystoreFileName || '',
+            addressIndex: addressIndex || 0
+          })
+        );
+      }
+
       this.setAccount({
         address
       });
@@ -182,7 +201,14 @@ export class KeystoreProvider implements IProvider {
 
   private async _getPrivateKey(action: string) {
     if (!privateKey) {
-      const { privateKey: userPrivateKey } = await this.panel.showPanel();
+      const state = store.getState();
+      const savedKeystoreFile = state.account.keystoreFile;
+      const savedKeystoreFileName = state.account.keystoreFileName;
+
+      const { privateKey: userPrivateKey } = await this.panel.showPanel({
+        savedKeystoreFile,
+        keystoreFileName: savedKeystoreFileName
+      });
 
       if (!userPrivateKey) {
         await this.logout();

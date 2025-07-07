@@ -1,28 +1,20 @@
-import React from 'react';
+import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 import { SidePanel } from 'components';
 
-export interface PanelWrapperProps {
+export interface PanelWrapperProps extends PropsWithChildren {
   isOpen: boolean;
-  onSubmit: (values: { privateKey: string; address: string }) => void;
   onClose: () => void;
   anchor?: HTMLElement;
   panelTitle: string;
-  PanelComponent: React.ComponentType<{
-    onSubmit: (values: { privateKey: string; address: string }) => void;
-    onClose: () => void;
-  }>;
-  needsAddress?: boolean;
 }
 
 export const PanelWrapper = ({
   isOpen,
-  onSubmit,
   onClose,
   anchor,
   panelTitle,
-  PanelComponent,
-  needsAddress
+  children
 }: PanelWrapperProps) => {
   const panelContent = (
     <div
@@ -36,11 +28,7 @@ export const PanelWrapper = ({
         alignItems: 'stretch'
       }}
     >
-      <PanelComponent
-        onSubmit={onSubmit}
-        onClose={onClose}
-        needsAddress={needsAddress}
-      />
+      {children}
     </div>
   );
 

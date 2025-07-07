@@ -1,4 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import {
+  useCallback,
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent
+} from 'react';
 import { Button, AddressScreens } from 'components';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { accessWallet } from '../../providers/Keystore/accessWallet';
@@ -75,24 +81,46 @@ const styles = {
 };
 
 interface KeystorePanelProps {
-  onSubmit: (values: { privateKey: string; address: string }) => void;
+  onSubmit: (values: {
+    privateKey: string;
+    address: string;
+    keystoreFile?: string;
+    keystoreFileName?: string;
+    addressIndex?: number;
+  }) => void;
   onClose: () => void;
   needsAddress?: boolean;
+  savedKeystoreFile?: string;
+  keystoreFileName?: string;
 }
 
 export const KeystorePanel = ({
   onSubmit,
   onClose,
-  needsAddress
+  needsAddress,
+  savedKeystoreFile,
+  keystoreFileName
 }: KeystorePanelProps) => {
-  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const [fileName, setFileName] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
-  const [error, setError] = React.useState<string>('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [showAddressSelection, setShowAddressSelection] = useState(false);
   const [keystoreData, setKeystoreData] = useState<Record<string, any> | null>(
     null
   );
+  const [savedFileContent, setSavedFileContent] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (savedKeystoreFile) {
+      try {
+        setFileName(keystoreFileName || 'keystore.json');
+        setSavedFileContent(savedKeystoreFile);
+      } catch (e) {
+        console.error('Error parsing saved keystore file', e);
+      }
+    }
+  }, [savedKeystoreFile, keystoreFileName]);
 
   const handleClose = useCallback(() => {
     setSelectedFile(null);
@@ -104,19 +132,20 @@ export const KeystorePanel = ({
     onClose();
   }, [onClose]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedFile(file);
       setFileName(file.name);
       setError('');
+      setSavedFileContent(null);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!selectedFile) {
+    if (!selectedFile && !savedFileContent) {
       setError('Please select a keystore file');
       return;
     }
@@ -126,7 +155,14 @@ export const KeystorePanel = ({
       return;
     }
 
-    const keystoreDataParsed = await parseKeystoreJSON(selectedFile);
+    let keystoreDataParsed;
+
+    if (selectedFile) {
+      keystoreDataParsed = await parseKeystoreJSON(selectedFile);
+    } else if (savedFileContent) {
+      keystoreDataParsed = JSON.parse(savedFileContent);
+    }
+
     if (!keystoreDataParsed) {
       setError('Invalid keystore file format');
       return;
@@ -143,19 +179,23 @@ export const KeystorePanel = ({
       return;
     }
 
-    if (keystoreDataParsed.kind === 'mnemonic') {
+    if (keystoreDataParsed.kind === 'mnemonic' && needsAddress) {
       setKeystoreData(keystoreDataParsed);
       setShowAddressSelection(true);
-    } else {
-      onSubmit({
-        privateKey: walletData.privateKey,
-        address: walletData.address
-      });
+
+      return;
     }
+
+    onSubmit({
+      privateKey: walletData.privateKey,
+      address: walletData.address,
+      keystoreFile: savedFileContent || JSON.stringify(keystoreDataParsed),
+      keystoreFileName: fileName
+    });
   };
 
   const handleConfirmSelectedAddress = useCallback(
-    (account: { index: number }) => {
+    (account: { index: number; address: string }) => {
       if (!account || !keystoreData) return;
       const walletData = accessWallet({
         kdContent: keystoreData,
@@ -165,11 +205,14 @@ export const KeystorePanel = ({
       if (walletData) {
         onSubmit({
           privateKey: walletData.privateKey,
-          address: walletData.address
+          address: walletData.address,
+          keystoreFile: savedFileContent || JSON.stringify(keystoreData),
+          keystoreFileName: fileName,
+          addressIndex: account.index
         });
       }
     },
-    [keystoreData, password, onSubmit]
+    [keystoreData, password, onSubmit, savedFileContent, fileName]
   );
 
   if (needsAddress && showAddressSelection && keystoreData) {

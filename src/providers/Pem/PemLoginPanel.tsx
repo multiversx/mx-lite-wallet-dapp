@@ -44,31 +44,35 @@ export class PemLoginPanel {
       return;
     }
 
+    const onSubmit = (values: { privateKey: string; address: string }) => {
+      if (!this._currentPanel) {
+        return;
+      }
+
+      this._currentPanel.isOpen = false;
+      this._currentPanel.resolve?.(values);
+      this._renderPanel();
+    };
+
+    const onClose = () => {
+      if (!this._currentPanel) {
+        return;
+      }
+
+      this._currentPanel.isOpen = false;
+      this._currentPanel.resolve?.({ privateKey: '', address: '' });
+      this._renderPanel();
+    };
+
     this._currentPanel.root.render(
       <PanelWrapper
         isOpen={this._currentPanel.isOpen}
-        onSubmit={(values: { privateKey: string; address: string }) => {
-          if (!this._currentPanel) {
-            return;
-          }
-
-          this._currentPanel.isOpen = false;
-          this._currentPanel.resolve?.(values);
-          this._renderPanel();
-        }}
-        onClose={() => {
-          if (!this._currentPanel) {
-            return;
-          }
-
-          this._currentPanel.isOpen = false;
-          this._currentPanel.resolve?.({ privateKey: '', address: '' });
-          this._renderPanel();
-        }}
+        onClose={onClose}
         anchor={this._currentPanel.anchor}
         panelTitle='PEM Login'
-        PanelComponent={PemPanel}
-      />
+      >
+        <PemPanel onSubmit={onSubmit} onClose={onClose} />
+      </PanelWrapper>
     );
   }
 
