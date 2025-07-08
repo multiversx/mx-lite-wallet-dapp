@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { parsePem } from 'providers/Pem/parsePem';
@@ -79,9 +79,9 @@ interface PemPanelProps {
 }
 
 export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
-  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const [fileName, setFileName] = React.useState<string>('');
-  const [error, setError] = React.useState<string>('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handleClose = useCallback(() => {
     setSelectedFile(null);

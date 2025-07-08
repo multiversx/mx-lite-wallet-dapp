@@ -55,5 +55,5 @@ export interface PageStatePropsType extends WithClassnameType {
   iconSize?: SizeProp;
   iconBgClass?: string;
   action?: ReactNode;
-  description?: string | ReactNode;
+  description?: ReactNode;
 }
