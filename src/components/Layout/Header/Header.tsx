@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, MxLink, NetworkSwitcher } from 'components';
 import { getAccountProvider, useGetIsLoggedIn } from 'lib';
@@ -12,7 +11,7 @@ export const Header = () => {
   const navigate = useNavigate();
   const provider = getAccountProvider();
 
-  const handleLogout = useCallback(async () => {
+  const handleLogout = async () => {
     try {
       await provider?.logout?.();
     } catch (e) {
@@ -20,7 +19,7 @@ export const Header = () => {
     } finally {
       navigate(RouteNamesEnum.home);
     }
-  }, [provider, navigate]);
+  };
 
   return (
     <header className='flex flex-row align-center justify-between pl-6 pr-6 pt-6'>

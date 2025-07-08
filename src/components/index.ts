@@ -10,7 +10,6 @@ export * from './Label';
 export * from './Layout';
 export * from './Loader';
 export * from './MissingNativeAuthError';
-export * from './Modal';
 export * from './MxLink';
 export * from './NetworkSwitcher';
 export * from './OutputContainer';
