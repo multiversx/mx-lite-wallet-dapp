@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyToDapp } from 'hooks';
-import { SignedSessionType } from 'lib';
 import {
   WindowProviderResponseEnums,
   SignMessageStatusEnum,
@@ -13,7 +12,7 @@ import { routeNames } from 'routes';
 
 interface GetReplyDataPropsType {
   isSuccess: boolean;
-  signedMessageInfo: SignedSessionType;
+  signedMessageInfo: { signature?: string; status: string };
 }
 
 export const useSignMessageCompleted = () => {

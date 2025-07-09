@@ -8,16 +8,14 @@ import {
   useSignTxSchema
 } from 'hooks';
 import {
+  WindowProviderRequestEnums,
+  WindowProviderResponseEnums,
+  RequestMessageType,
   getLoginHookData,
   getSignHookData,
   getSignMessageHookData,
-  removeAllTransactionsToSign,
-  removeAllSignedTransactions,
   Transaction,
-  useGetLoginInfo,
-  WindowProviderRequestEnums,
-  WindowProviderResponseEnums,
-  RequestMessageType
+  useGetLoginInfo
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
@@ -103,7 +101,7 @@ export const PostMessageListener = () => {
 
       case WindowProviderRequestEnums.signTransactionsRequest: {
         const transactions = payload.map((plainTransactionObject) =>
-          Transaction.fromPlainObject(plainTransactionObject)
+          Transaction.newFromPlainObject(plainTransactionObject)
         );
 
         const payloadQueryString = buildTransactionsQueryString({
@@ -176,9 +174,6 @@ export const PostMessageListener = () => {
       case WindowProviderResponseEnums.cancelResponse:
       case WindowProviderRequestEnums.cancelAction: {
         if (isInWebview) {
-          removeAllTransactionsToSign();
-          removeAllSignedTransactions();
-
           return;
         }
 

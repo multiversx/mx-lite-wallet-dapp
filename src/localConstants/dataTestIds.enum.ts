@@ -25,7 +25,7 @@ export enum DataTestIdsEnum {
   contractInput = 'contractInput',
   createPasswordForm = 'createPasswordForm',
   createWalletBtn = 'createWalletBtn',
-  createWalletModal = 'createWalletModal',
+  createWalletPanel = 'createWalletPanel',
   dappModal = 'dappModal',
   dataInput = 'dataInput',
   disclaimerCheck = 'disclaimerCheck',
@@ -53,7 +53,7 @@ export enum DataTestIdsEnum {
   mnemonicWords = 'mnemonicWords',
   mnemonicsDisclaimer = 'mnemonicsDisclaimer',
   modalSubtitle = 'modalSubtitle',
-  modalTitle = 'modalTitle',
+  panelTitle = 'panelTitle',
   nameError = 'nameError',
   nameInput = 'nameInput',
   networkSwitcher = 'networkSwitcher',
@@ -99,5 +99,13 @@ export enum DataTestIdsEnum {
   testnet = 'testnet',
   amountInput0 = 'amountInput0',
   sendNFtTypeInput0 = 'sendNFtTypeInput0',
-  transactionDetailsToastBody = 'transactionDetailsToastBody'
+  transactionDetailsToastBody = 'transactionDetailsToastBody',
+  pemProvider = 'pemProvider',
+  keystoreProvider = 'keystoreProvider',
+  pemLoginPanel = 'pemLoginPanel',
+  keystoreLoginPanel = 'keystoreLoginPanel',
+  addressSelectionPanel = 'addressSelectionPanel',
+  addressTableItem = 'addressTableItem',
+  selectAddressBtn = 'selectAddressBtn',
+  backToKeystoreBtn = 'backToKeystoreBtn'
 }

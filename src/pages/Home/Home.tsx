@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 
 export const Home = () => {
@@ -28,6 +29,7 @@ export const Home = () => {
           <div className='h-4/6 bg-mvx-white bg-contain bg-no-repeat w-1/2 bg-center' />
         </div>
       </PageWrapper>
+      <Outlet />
     </AuthRedirectWrapper>
   );
 };

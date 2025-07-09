@@ -3,7 +3,9 @@ import {
   TRANSACTIONS_ENDPOINT,
   ServerTransactionType
 } from 'lib';
+
 import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
+
 import { RootApi } from 'redux/rootApi';
 import { getBaseURL } from 'utils';
 

@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyWithCancelled } from 'hooks';
-import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
 import {
   useGetAccountInfo,
-  useGetSignedTransactions,
   SignedTransactionType,
-  TransactionBatchStatusesEnum
+  TransactionBatchStatusesEnum,
+  transactionsSliceSelector,
+  clearCompletedTransactions
 } from 'lib';
 
 import { hookSelector } from 'redux/selectors';
@@ -26,6 +26,7 @@ import { mapSignedTransactions } from '../helpers';
 */
 export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
   const { hookUrl, callbackUrl } = useSelector(hookSelector);
+  const signedTransactions = useSelector(transactionsSliceSelector);
 
   const replyWithSignedTransactions = useReplyWithSignedTransactions();
   const navigate = useNavigate();
@@ -33,14 +34,10 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
   const replyWithCancelled = useReplyWithCancelled({
     caller: 'useSignTransactions'
   });
-  const dispatch = useDispatch();
-  const removeAllTransactions = useAbortAndRemoveAllTxs();
 
-  const { signedTransactions } = useGetSignedTransactions();
-  const {
-    account: { address },
-    ledgerAccount
-  } = useGetAccountInfo();
+  const dispatch = useDispatch();
+
+  const { address, ledgerAccount } = useGetAccountInfo();
   const [state, setState] = useState<ValidateAndSignTxsReturnType>({
     multiSignTxs: [],
     txErrors: {},
@@ -117,7 +114,7 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
     }
 
     dispatch(resetHook());
-    removeAllTransactions();
+    clearCompletedTransactions();
 
     navigate(routeNames.dashboard);
   };

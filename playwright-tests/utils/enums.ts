@@ -63,7 +63,7 @@ export enum KeystoreIndexEnum {
 
 export enum GlobalSelectorsEnum {
   sendTrxBtn = 'sendTrxBtn',
-  modalTitle = 'modalTitle',
+  panelTitle = 'panelTitle',
   continueBtn = 'continueBtn',
   amount = 'amount',
   confirmData = 'confirmData',

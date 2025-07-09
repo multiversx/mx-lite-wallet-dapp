@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState } from 'react';
-import { readFromClipboard } from 'components';
+import { readFromClipboard } from 'utils';
 import { mnemonicWords } from '../../../helpers';
 import { SelectOptionType, WordType } from '../../../types';
 import { extractValidWordsFromText } from '../extractValidWordsFromText';

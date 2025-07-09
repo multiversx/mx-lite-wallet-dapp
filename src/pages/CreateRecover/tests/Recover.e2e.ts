@@ -111,7 +111,7 @@ describe('Recover page tests', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.submitButton));
 
     await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.modalTitle,
+      dataTestId: DataTestIdsEnum.panelTitle,
       text: 'Wallet created!'
     });
   });

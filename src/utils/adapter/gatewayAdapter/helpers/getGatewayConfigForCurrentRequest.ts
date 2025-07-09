@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
-import { matchPath } from 'lib';
+import { matchPath } from 'react-router-dom';
 import { getCurrentNetwork } from 'utils';
 import { apiRoutes, endpointMap } from './apiToGatewayEndpointMap';
 

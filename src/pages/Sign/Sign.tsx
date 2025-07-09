@@ -3,14 +3,15 @@ import uniq from 'lodash/uniq';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyWithCancelled } from 'hooks';
-import { useAbortAndRemoveAllTxs } from 'hooks/useAbortAndRemoveAllTx';
 import {
-  useGetAccount,
-  useGetAccountFromApi,
-  useGetLoginInfo,
-  checkIsValidSender
+  useGetAccountInfo,
+  ProviderTypeEnum,
+  getAccountFromApi,
+  getAccountProvider,
+  checkIsValidSender,
+  useGetNetworkConfig,
+  clearCompletedTransactions
 } from 'lib';
-import { LoginMethodsEnum } from 'lib';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
@@ -22,13 +23,14 @@ import { useValidateAndSignTxs } from './hooks';
 */
 export const Sign = () => {
   const { hookUrl } = useSelector(hookSelector);
-  const { loginMethod } = useGetLoginInfo();
+  const provider = getAccountProvider();
+  const providerType = provider.getType();
   const replyWithCancelled = useReplyWithCancelled({
     caller: 'Sign'
   });
 
-  const { address } = useGetAccount();
-  const removeAllTransactions = useAbortAndRemoveAllTxs();
+  const { address } = useGetAccountInfo();
+  const { network } = useGetNetworkConfig();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,16 +47,19 @@ export const Sign = () => {
   const sender = senderAddresses?.[0];
 
   // Skip account fetching if the sender is missing or same as current account
-  const { data: senderAccount } = useGetAccountFromApi(
-    !sender || sender === address ? null : sender
-  );
 
   const validateHook = async () => {
     const hasNoTransactions = rawTxs.length === 0;
+    const senderAddress = !sender || sender === address ? undefined : sender;
 
     if (hasNoTransactions) {
       return;
     }
+
+    const senderAccount = await getAccountFromApi({
+      address: senderAddress,
+      baseURL: network.apiAddress
+    });
 
     const redirectPathname = routeNames.dashboard;
     const invalidHook = !hookUrl || hasErrors;
@@ -73,7 +78,7 @@ export const Sign = () => {
     }
 
     if (invalidHook || senderAddresses.length > 1 || !isValidSender) {
-      removeAllTransactions();
+      clearCompletedTransactions();
       dispatch(resetHook());
       navigate(redirectPathname);
     }
@@ -86,7 +91,7 @@ export const Sign = () => {
     }
 
     validateHook();
-  }, [rawTxs, senderAccount]);
+  }, [rawTxs, sender, address, network.apiAddress]);
 
   const handleClose: MouseEventHandler<HTMLElement> = (event) => {
     event.preventDefault();
@@ -119,12 +124,10 @@ export const Sign = () => {
     );
   }
 
-  const noSpinner = [
-    LoginMethodsEnum.extension,
-    LoginMethodsEnum.walletconnectv2
-  ].includes(loginMethod);
-
-  if (noSpinner) {
+  if (
+    providerType === ProviderTypeEnum.extension ||
+    providerType === ProviderTypeEnum.walletConnect
+  ) {
     return null;
   }
 

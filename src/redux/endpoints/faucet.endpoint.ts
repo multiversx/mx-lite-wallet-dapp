@@ -1,15 +1,17 @@
+// All @multiversx/sdk-dapp-form imports removed for migration. Add equivalents from sdk-dapp-utils or custom logic if needed.
+
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import {
   TOKENS_ENDPOINT,
+  getEgldLabel,
+  formatAmount,
+  stringIsInteger,
   DECIMALS,
   DIGITS,
-  ZERO,
-  formatAmount,
-  getEgldLabel,
-  stringIsInteger,
-  PartialTokenType
+  ZERO
 } from 'lib';
+
 import { RootApi } from 'redux/rootApi';
 import { getAxiosConfig, getExtrasApi } from 'utils';
 
@@ -67,7 +69,7 @@ const faucetEndpoints = RootApi.injectEndpoints({
           return { error: tokenData.error as FetchBaseQueryError };
         }
 
-        const { decimals } = tokenData.data as PartialTokenType;
+        const { decimals } = tokenData.data as { decimals: number };
 
         const denominatedTokenAmount = formatAmount({
           input: tokenAmount,

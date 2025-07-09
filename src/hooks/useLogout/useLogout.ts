@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout, WindowProviderResponseEnums } from 'lib';
+import { getAccountProvider, WindowProviderResponseEnums } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { logoutAction } from 'redux/commonActions';
 import { hookSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { useReplyToDapp } from '../useReplyToDapp';
 
-const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
 const options = {
   /*
    * @param {boolean} [shouldBroadcastLogoutAcrossTabs=true]
@@ -28,6 +27,7 @@ export const useLogout = () => {
   const navigate = useNavigate();
   const { type: hook } = useSelector(hookSelector);
   const replyToDapp = useReplyToDapp();
+  const provider = getAccountProvider();
 
   const onRedirect = () => {
     dispatch(logoutAction());
@@ -52,14 +52,8 @@ export const useLogout = () => {
 
   options.shouldBroadcastLogoutAcrossTabs = hook !== HooksEnum.logout;
 
-  return () =>
-    logout(
-      routeNames.unlock,
-      /*
-       * following are optional params. Feel free to edit them in your implementation
-       */
-      onRedirect,
-      shouldAttemptReLogin,
-      options
-    );
+  return async () => {
+    await provider.logout(options);
+    onRedirect();
+  };
 };
