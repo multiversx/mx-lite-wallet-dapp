@@ -5,30 +5,21 @@ import {
   TransactionManager,
   IPlainTransactionObject,
   parseSignUrl,
-  validateSignTransactions
+  validateSignTransactions,
+  getAccountProvider,
+  Transaction
 } from 'lib';
 import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFromRaw';
 
-interface ValidatedTxsStateType {
-  executeAfterSign?: string;
-  multiSignTxs: any[]; // TODO: Define proper type
-  rawTxs: IPlainTransactionObject[];
+export interface ValidateAndSignTxsReturnType {
+  sessionId: string | null;
+  signedTransactions: Transaction[];
   txErrors: { [key: string]: string };
-  txsDataTokens: { [key: string]: any }; // TODO: Define proper type
-  multiSigContract?: string | null;
 }
 
-export interface ValidateAndSignTxsReturnType extends ValidatedTxsStateType {
-  sessionId: string | null;
-}
-
-const emptyState: ValidatedTxsStateType & {
-  sessionId: string | null;
-} = {
-  multiSignTxs: [],
+const emptyState: ValidateAndSignTxsReturnType = {
+  signedTransactions: [],
   txErrors: {},
-  txsDataTokens: {},
-  rawTxs: [],
   sessionId: null
 };
 
@@ -45,6 +36,8 @@ export const useSignHookTransactions = () => {
     baseURL: apiAddress,
     timeout: parseInt(String(apiTimeout))
   };
+
+  const provider = getAccountProvider();
 
   const signHookTransactions = async (
     hookUrl: string
@@ -85,19 +78,20 @@ export const useSignHookTransactions = () => {
       transactionDuration: 10000
     };
 
-    const partialState = {
-      executeAfterSign,
-      multiSignTxs: txData.parsedTransactions,
-      rawTxs,
-      txErrors: txData.errors,
-      txsDataTokens: txData.txsDataTokens
-    };
-
     const txManager = TransactionManager.getInstance();
+
+    const signedTransactions =
+      await provider.signTransactions(mappedTransactions);
+
+    const partialState: ValidateAndSignTxsReturnType = {
+      sessionId: null,
+      txErrors: txData.errors,
+      signedTransactions
+    };
 
     if (executeAfterSign === 'true') {
       // Send as batch transactions
-      const sentTransactions = await txManager.send([mappedTransactions]);
+      const sentTransactions = await txManager.send([signedTransactions]);
       const sessionId = await txManager.track(sentTransactions, {
         transactionsDisplayInfo,
         disableToasts: false
@@ -114,17 +108,7 @@ export const useSignHookTransactions = () => {
       };
     }
 
-    // Send as individual transactions
-    const sentTransactions = await txManager.send(mappedTransactions);
-    const sessionId = await txManager.track(sentTransactions, {
-      transactionsDisplayInfo,
-      disableToasts: false
-    });
-
-    return {
-      ...partialState,
-      sessionId
-    };
+    return partialState;
   };
 
   return signHookTransactions;

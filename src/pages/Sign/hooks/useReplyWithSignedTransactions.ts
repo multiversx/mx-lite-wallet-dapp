@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import {
   replyToDapp,
-  IPlainTransactionObject,
-  WindowProviderResponseEnums
+  WindowProviderResponseEnums,
+  IPlainTransactionObject
 } from 'lib';
 import { hookSelector } from 'redux/selectors';
 

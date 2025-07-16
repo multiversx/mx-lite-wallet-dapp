@@ -3,15 +3,14 @@ import {
   GAS_LIMIT,
   GAS_PRICE,
   ZERO,
-  IPlainTransactionObject,
   TransactionOptions,
-  TransactionVersion
+  TransactionVersion,
+  Transaction,
+  IPlainTransactionObject
 } from 'lib';
-import { TransactionSignatureDataType } from 'types';
 
 export interface MapSignedTransactionsParamsType {
-  txs: IPlainTransactionObject[];
-  signatureData: TransactionSignatureDataType[];
+  signedTransactions: Transaction[];
   address: string;
   isLedgerWithHashSign: boolean;
 }
@@ -19,23 +18,22 @@ export interface MapSignedTransactionsParamsType {
 export const mapSignedTransactions = ({
   address,
   isLedgerWithHashSign,
-  signatureData,
-  txs
-}: MapSignedTransactionsParamsType) =>
-  txs.map((tx, i) => {
-    const parsedTx = omit(tx, 'token');
-
-    const { signature } = signatureData[i];
+  signedTransactions
+}: MapSignedTransactionsParamsType): IPlainTransactionObject[] =>
+  signedTransactions.map((tx) => {
+    const plainTx = tx.toPlainObject();
+    const parsedTx = omit(plainTx, 'token');
 
     return {
       ...parsedTx,
-      value: tx.value || ZERO,
+      value: tx.value.toString() || ZERO,
       gasLimit: Number(tx.gasLimit || String(GAS_LIMIT)),
       gasPrice: Number(tx.gasPrice || GAS_PRICE),
-      receiver: tx.receiver || address,
-      data: window.opener ? tx.data : encodeURIComponent(tx.data ?? ''),
-      sender: tx.sender || address,
-      signature,
+      receiver: tx.receiver.toBech32() || address,
+      data: window.opener
+        ? plainTx.data
+        : encodeURIComponent(plainTx.data ?? ''),
+      sender: tx.sender.toBech32() || address,
       ...(isLedgerWithHashSign
         ? {
             version: TransactionVersion.withTxOptions().valueOf(),
