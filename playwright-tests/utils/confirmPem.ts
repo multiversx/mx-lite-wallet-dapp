@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
+import { LoginFilesEnum } from './enums';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum';
-import { LoginFilesEnum } from '../utils/enums.ts';
 
 type ConfirmPemType = {
   page: Page;

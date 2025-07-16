@@ -79,7 +79,9 @@ export const HookValidationOutcome = ({
             type: WindowProviderResponseEnums.loginResponse,
             payload: {
               data: {
-                address
+                address,
+                signature: '' // or the actual signature if available
+                // Optionally add: accessToken, multisig, impersonate if needed
               }
             }
           });
@@ -93,5 +95,5 @@ export const HookValidationOutcome = ({
   }
 
   // Display nothing while in 'pending' status
-  return <div className='flex-fill'>&nbsp;</div>;
+  return null;
 };

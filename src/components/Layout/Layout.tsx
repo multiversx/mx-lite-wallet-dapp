@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { AuthRedirectWrapper } from 'components/AuthRedirectWrapper';
+import { AuthRedirectWrapper } from 'wrappers/AuthRedirectWrapper';
 import { Footer } from './Footer';
 import { Header } from './Header';
 

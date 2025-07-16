@@ -2,14 +2,16 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UnlockPanelManager, useGetLoginInfo } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
+import { useUnlockRedirect } from './hooks';
 
 export const Unlock = () => {
+  const onUnlockRedirect = useUnlockRedirect();
   const navigate = useNavigate();
   const { isLoggedIn } = useGetLoginInfo();
 
   const unlockPanelManager = UnlockPanelManager.init({
     loginHandler: () => {
-      navigate(RouteNamesEnum.dashboard);
+      onUnlockRedirect();
     },
     onClose: () => {
       navigate(RouteNamesEnum.home);
