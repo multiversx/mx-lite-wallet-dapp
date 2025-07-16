@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useGetAccount } from 'lib';
-import { HooksEnum } from 'localConstants';
+import { HooksEnum, HooksPageEnum } from 'localConstants';
 import {
   accessTokenRedirectRouteSelector,
   hookSelector
@@ -10,9 +10,10 @@ import { routeNames } from 'routes';
 export interface UseRedirectPathnameProps {
   impersonateConfirmed?: boolean;
   canImpersonate?: boolean;
+  isHook?: boolean;
 }
 
-export const useRedirectPathname = () => {
+export const useRedirectPathname = (props?: UseRedirectPathnameProps) => {
   const { type: hook } = useSelector(hookSelector);
   const accessTokenRedirectRoute = useSelector(
     accessTokenRedirectRouteSelector
@@ -25,6 +26,10 @@ export const useRedirectPathname = () => {
     switch (hook) {
       case HooksEnum.sign:
         return routeNames.sign;
+      case HooksEnum.signMessage:
+        return props?.isHook
+          ? routeNames.signMessage
+          : HooksPageEnum.signMessage;
       case HooksEnum.login: {
         if (!isLoggedIn) {
           return routeNames.unlock;

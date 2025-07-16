@@ -1,17 +1,35 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import {
   faArrowsRotate,
   faBroom,
   faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Button, OutputContainer, FeaturePageLayout } from 'components';
-import { MxLink } from 'components/MxLink/MxLink';
-import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
-import { routeNames } from 'routes/routes';
+import { useReplyToDapp, useReplyWithCancelled } from 'hooks';
+import {
+  Address,
+  getAccountProvider,
+  Message,
+  useGetAccount,
+  parseQueryParams,
+  WindowProviderResponseEnums,
+  SignMessageStatusEnum
+} from 'lib';
+import { hookSelector } from 'redux/selectors';
+import { resetHook } from 'redux/slices';
+import { routeNames } from 'routes';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {
+  const { hookUrl } = useSelector(hookSelector);
+  const dispatch = useDispatch();
+  const replyToDapp = useReplyToDapp();
+  const replyWithCancelled = useReplyWithCancelled({
+    caller: 'SignMessage'
+  });
   const [message, setMessage] = useState('');
   const [signedMessage, setSignedMessage] = useState<Message | null>(null);
   const [state, setState] = useState<'pending' | 'success' | 'error'>(
@@ -20,6 +38,14 @@ export const SignMessage = () => {
   const [signature, setSignature] = useState('');
   const { address } = useGetAccount();
   const provider = getAccountProvider();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (hookUrl) {
+      const hookParams = parseQueryParams(hookUrl);
+      setMessage(hookParams.message as string);
+    }
+  }, [hookUrl]);
 
   const handleSubmit = async () => {
     try {
@@ -31,16 +57,58 @@ export const SignMessage = () => {
       const signedMessageResult = await provider.signMessage(messageToSign);
 
       if (!signedMessageResult?.signature) {
+        if (message) {
+          replyToDapp({
+            type: WindowProviderResponseEnums.signMessageResponse,
+            payload: {
+              data: {
+                status: SignMessageStatusEnum.failed
+              }
+            }
+          });
+          dispatch(resetHook());
+        }
+
         setState('error');
         return;
       }
 
+      const signatureHex = Buffer.from(signedMessageResult.signature).toString(
+        'hex'
+      );
+
+      if (message && hookUrl) {
+        replyToDapp({
+          type: WindowProviderResponseEnums.signMessageResponse,
+          payload: {
+            data: {
+              signature: signatureHex,
+              status: SignMessageStatusEnum.signed
+            }
+          }
+        });
+
+        dispatch(resetHook());
+      }
+
       setState('success');
-      setSignature(Buffer.from(signedMessageResult?.signature).toString('hex'));
+      setSignature(signatureHex);
       setSignedMessage(signedMessageResult);
       setMessage('');
     } catch (error) {
       console.error(error);
+
+      if (message && hookUrl) {
+        replyToDapp({
+          type: WindowProviderResponseEnums.signMessageResponse,
+          payload: {
+            data: {
+              status: SignMessageStatusEnum.failed
+            }
+          }
+        });
+        dispatch(resetHook());
+      }
       setState('error');
     }
   };
@@ -50,6 +118,15 @@ export const SignMessage = () => {
     e.stopPropagation();
     setSignature('');
     setState('pending');
+  };
+
+  const handleCancel = () => {
+    dispatch(resetHook());
+    navigate(routeNames.dashboard);
+
+    if (hookUrl) {
+      replyWithCancelled();
+    }
   };
 
   return (
@@ -106,7 +183,7 @@ export const SignMessage = () => {
                   Sign
                 </>
               </Button>
-              <MxLink to={routeNames.dashboard}>Cancel</MxLink>
+              <Button onClick={handleCancel}>Cancel</Button>
             </>
           )}
         </div>

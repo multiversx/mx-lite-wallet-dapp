@@ -1,13 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { Loader } from 'components';
 import { useReplyToDapp, useRedirectPathname } from 'hooks';
 import {
   useGetAccount,
   WindowProviderResponseEnums,
   getAccountProvider,
-  ProviderTypeEnum,
-  loginInfoSelector
+  ProviderTypeEnum
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
@@ -28,19 +26,16 @@ export const HookValidationOutcome = ({
   const { search } = useLocation();
   const provider = getAccountProvider();
   const providerType = provider.getType();
-  const { isWalletConnectV2Initialized } = useSelector(loginInfoSelector);
   const { type: registeredHook } = useSelector(hookSelector);
-  const { pathname: redirectPathname } = useRedirectPathname();
+  const { pathname: redirectPathname } = useRedirectPathname({
+    isHook: true
+  });
   const { address } = useGetAccount();
   const replyToDapp = useReplyToDapp();
 
   const isValid = validUrl === HookStateEnum.valid;
   const isInvalid = validUrl === HookStateEnum.invalid;
   const isPending = validUrl === HookStateEnum.pending;
-
-  if (isWalletConnectV2Initialized) {
-    return <Loader />;
-  }
 
   if (isPending) {
     return null;
