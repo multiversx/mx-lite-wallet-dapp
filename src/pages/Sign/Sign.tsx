@@ -36,12 +36,12 @@ export const Sign = () => {
 
   // The useValidateAndSignTxs hook is used to validate, sign, and reply with signed transactions
   // but, since we only need to show errors in this page, if any, we just use the rawTxs and txErrors objects
-  const { rawTxs, txErrors } = useValidateAndSignTxs();
+  const { signedTransactions, txErrors } = useValidateAndSignTxs();
 
   const hasErrors = Object.keys(txErrors).length > 0;
 
   const senderAddresses = uniq(
-    rawTxs.map((tx) => tx.sender).filter((sender) => sender)
+    signedTransactions.map((tx) => tx.sender).filter((sender) => sender)
   );
 
   const sender = senderAddresses?.[0];
@@ -49,8 +49,9 @@ export const Sign = () => {
   // Skip account fetching if the sender is missing or same as current account
 
   const validateHook = async () => {
-    const hasNoTransactions = rawTxs.length === 0;
-    const senderAddress = !sender || sender === address ? undefined : sender;
+    const hasNoTransactions = signedTransactions.length === 0;
+    const senderAddress =
+      !sender || sender.toBech32() === address ? undefined : sender.toBech32();
 
     if (hasNoTransactions) {
       return;
@@ -91,7 +92,7 @@ export const Sign = () => {
     }
 
     validateHook();
-  }, [rawTxs, sender, address, network.apiAddress]);
+  }, [signedTransactions, sender, address, network.apiAddress]);
 
   const handleClose: MouseEventHandler<HTMLElement> = (event) => {
     event.preventDefault();

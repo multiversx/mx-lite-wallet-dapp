@@ -2,18 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyWithCancelled } from 'hooks';
-import {
-  useGetAccountInfo,
-  SignedTransactionType,
-  TransactionBatchStatusesEnum,
-  transactionsSliceSelector,
-  clearCompletedTransactions
-} from 'lib';
+import { useGetAccountInfo, clearCompletedTransactions } from 'lib';
 
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { TransactionSignatureDataType } from 'types';
 import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
 import {
   ValidateAndSignTxsReturnType,
@@ -26,8 +19,6 @@ import { mapSignedTransactions } from '../helpers';
 */
 export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
   const { hookUrl, callbackUrl } = useSelector(hookSelector);
-  const signedTransactions = useSelector(transactionsSliceSelector);
-
   const replyWithSignedTransactions = useReplyWithSignedTransactions();
   const navigate = useNavigate();
 
@@ -39,70 +30,24 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
 
   const { address, ledgerAccount } = useGetAccountInfo();
   const [state, setState] = useState<ValidateAndSignTxsReturnType>({
-    multiSignTxs: [],
+    signedTransactions: [],
     txErrors: {},
-    txsDataTokens: {},
-    rawTxs: [],
     sessionId: null
   });
 
   const signHookTransactions = useSignHookTransactions();
 
-  const sendReplyToDapp = () => {
-    if (state.sessionId == null) {
-      return [];
-    }
+  const validateAndSign = async () => {
+    const { signedTransactions } = await signHookTransactions(hookUrl);
 
-    const sessionObject = signedTransactions[state.sessionId];
-
-    if (sessionObject == null) {
-      return [];
-    }
-
-    const signedTxs: SignedTransactionType[] = sessionObject.transactions ?? [];
-
-    const status = sessionObject.status;
-
-    if (
-      status === TransactionBatchStatusesEnum.cancelled ||
-      status === TransactionBatchStatusesEnum.fail ||
-      status === TransactionBatchStatusesEnum.invalid
-    ) {
+    if (!signedTransactions || signedTransactions.length === 0) {
       replyWithCancelled();
-    }
-
-    if (!signedTxs) {
-      return [];
-    }
-
-    const txsSignatures = signedTxs
-      .filter((tx) => Boolean(tx.signature))
-      .map(({ options, signature, version }) => {
-        const txSignature: TransactionSignatureDataType = {
-          signature: String(signature),
-          version: String(version),
-          options: String(options)
-        };
-
-        return txSignature;
-      });
-
-    if (txsSignatures.length === 0) {
-      return [];
-    }
-
-    const txs = state.rawTxs;
-
-    const signingEnabled =
-      txs.length > 0 && txsSignatures.length === txs.length;
-
-    if (!signingEnabled) {
       return;
     }
 
+    setState({ ...state, signedTransactions });
     const transactions = mapSignedTransactions({
-      txs,
-      signatureData: txsSignatures,
+      signedTransactions,
       address,
       isLedgerWithHashSign: Boolean(ledgerAccount?.version)
     });
@@ -119,20 +64,11 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
     navigate(routeNames.dashboard);
   };
 
-  const validateAndSign = async () => {
-    const newState = await signHookTransactions(hookUrl);
-    setState(newState);
-  };
-
-  // 1. Validate and sign transactions
   useEffect(() => {
-    validateAndSign();
+    if (hookUrl) {
+      validateAndSign();
+    }
   }, [hookUrl]);
-
-  // 2. Reply with signed transactions
-  useEffect(() => {
-    sendReplyToDapp();
-  }, [signedTransactions, state]);
 
   return state;
 };
