@@ -1380,9 +1380,9 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.5.1"
 
-"@fortawesome/fontawesome-svg-core@>= 6.7.2":
+"@fortawesome/fontawesome-svg-core@>= 6.7.2", "@fortawesome/fontawesome-svg-core@>=6.7.2":
   version "6.7.2"
-  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.7.2.tgz"
+  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.7.2.tgz#0ac6013724d5cc327c1eb81335b91300a4fce2f2"
   integrity sha512-yxtOBWDrdi5DD5o1pmVdq3WMCvnobT0LU6R8RyyVXPvFRd2o79/0NCuQoCjNTeZz9EzA9xS3JxNWfv54RIHFEA==
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.7.2"
@@ -1394,9 +1394,9 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.5.1"
 
-"@fortawesome/free-solid-svg-icons@>= 6.7.2":
+"@fortawesome/free-solid-svg-icons@>= 6.7.2", "@fortawesome/free-solid-svg-icons@>=6.7.2":
   version "6.7.2"
-  resolved "https://registry.npmjs.org/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.7.2.tgz"
+  resolved "https://registry.npmjs.org/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.7.2.tgz#fe25883b5eb8464a82918599950d283c465b57f6"
   integrity sha512-GsBrnOzU8uj0LECDfD5zomZJIjrPhIlWU82AHwa2s40FKH+kcxQaBvBo3Z4TxyZHIyX8XTDxsyA33/Vx9eFuQA==
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.7.2"
@@ -1881,6 +1881,11 @@
   resolved "https://registry.npmjs.org/@lit/react/-/react-1.0.7.tgz"
   integrity sha512-cencnwwLXQKiKxjfFzSgZRngcWJzUDZi/04E0fSaF86wZgchMdvTyu+lE36DrUfvuus3bH8+xLPrhM1cTjwpzw==
 
+"@lit/react@^1.0.7":
+  version "1.0.8"
+  resolved "https://registry.npmjs.org/@lit/react/-/react-1.0.8.tgz#b3e229173b7b57d550909bf95d8f3da1a9510557"
+  integrity sha512-p2+YcF+JE67SRX3mMlJ1TKCSTsgyOVdAwd/nxp3NuV1+Cb6MWALbN6nT7Ld4tpmYofcE5kcaSY1YBB9erY+6fw==
+
 "@metamask/json-rpc-engine@^7.3.2":
   version "7.3.3"
   resolved "https://registry.npmjs.org/@metamask/json-rpc-engine/-/json-rpc-engine-7.3.3.tgz"
@@ -1996,7 +2001,7 @@
   resolved "https://registry.npmjs.org/@multiversx/sdk-bls-wasm/-/sdk-bls-wasm-0.3.5.tgz"
   integrity sha512-c0tIdQUnbBLSt6NYU+OpeGPYdL0+GV547HeHT8Xc0BKQ7Cj0v82QUoA2QRtWrR1G4MNZmLsIacZSsf6DrIS2Bw==
 
-"@multiversx/sdk-core@14.2.2", "@multiversx/sdk-core@^14.x":
+"@multiversx/sdk-core@^14.x":
   version "14.2.2"
   resolved "https://registry.npmjs.org/@multiversx/sdk-core/-/sdk-core-14.2.2.tgz"
   integrity sha512-/iAZgjRAaXg+nvOwhvoTZ9oRq81c73AUWIFlXOK4PPHf6mfAHGU84Cn8iKJdzNEIwnoYeK42kLhY2rHmxfoO6Q==
@@ -2019,15 +2024,11 @@
     axios "^1.7.4"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-form@^3.0.0-alpha.0":
-  version "3.0.0-alpha.0"
-  resolved "http://localhost:4873/@multiversx/sdk-dapp-form/-/sdk-dapp-form-3.0.0-alpha.0.tgz"
-  integrity sha512-qokSR2iaDkc7D/Ukf0JaCV9KokmcPiSSglNBRSJv4ED8cROgzhB48k2R47xTRQ/E4gYLvu4zvw9qKuZU3WmgqQ==
+"@multiversx/sdk-dapp-form@3.0.0-alpha.1":
+  version "3.0.0-alpha.1"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-form/-/sdk-dapp-form-3.0.0-alpha.1.tgz#cbb9c87eba7ffee1afabe7156020d69a5e38bdcf"
+  integrity sha512-TijxbdEZXU+/AuudqJKRkCaGgjIlFvwxUj+tk743oduvr+kSQ+hT1GUjU+izW2pijNHNA3XTVJHoZ4jbvXf0DA==
   dependencies:
-    "@multiversx/sdk-core" "14.2.2"
-    "@multiversx/sdk-dapp" "5.0.0-alpha.9"
-    "@multiversx/sdk-dapp-ui" "0.0.7"
-    "@multiversx/sdk-dapp-utils" "2.0.0"
     anchorme "2.1.2"
     bech32 "2.0.0"
     bignumber.js "9.x"
@@ -2044,14 +2045,14 @@
     classnames "2.3.2"
     react-select "5.4.0"
 
-"@multiversx/sdk-dapp-ui@0.0.7", "@multiversx/sdk-dapp-ui@>=0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.7.tgz"
-  integrity sha512-5bTTY62JYvb9Zo0Z/WBl6ZxMjzvm4lF9K0Ntq9IAG8a0E9nDs7zcWc2gOB8vXYvHN0CL6WINXIqNT1da9KtzBw==
+"@multiversx/sdk-dapp-ui@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.11.tgz#69e149dcbba8bb47bb04b693f1408bcb95ddd62d"
+  integrity sha512-FI+Kjri8rf+XEUIr2ne2AKW0QnkQyzdSjlG6cAOn/LnwPinfx9mP4jyTWQjdgglvO7p2/RjHPz8iL0AOVDQedA==
   dependencies:
     "@fortawesome/fontawesome-svg-core" ">= 6.7.2"
     "@fortawesome/free-solid-svg-icons" ">= 6.7.2"
-    "@multiversx/sdk-dapp-utils" ">= 1.0.4"
+    "@rollup/plugin-image" "^3.0.3"
     "@stencil/react-output-target" "0.8.2"
     classnames ">= 2.5.1"
     lodash.inrange "^3.3.0"
@@ -2059,29 +2060,42 @@
     qrcode ">= 1.5.4"
     sass-embedded "^1.85.1"
 
-"@multiversx/sdk-dapp-utils@2.0.0", "@multiversx/sdk-dapp-utils@>= 1.0.4", "@multiversx/sdk-dapp-utils@^2.x":
+"@multiversx/sdk-dapp-ui@>=0.0.15":
+  version "0.0.15"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.15.tgz#39099540967007bd7657448a8c4c8e31e34405ca"
+  integrity sha512-JYh96I/XqC9/LELxlNMjcY/OuVrQpSsFjQAXahFBGHPugrcHu186H73hZ+QndjoJ+1f/Fglv9wv6B6m3Xu77Bg==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" ">=6.7.2"
+    "@fortawesome/free-solid-svg-icons" ">=6.7.2"
+    "@rollup/plugin-image" "^3.0.3"
+    "@stencil/react-output-target" "1.2.0"
+    classnames ">=2.5.1"
+    lodash.inrange "^3.3.0"
+    lodash.range "^3.2.0"
+    qrcode ">=1.5.4"
+    sass-embedded "^1.85.1"
+
+"@multiversx/sdk-dapp-utils@2.0.0":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.0.tgz"
   integrity sha512-NcaQUgXrjDqjKJgbUj1eM11ID7sDJRVFamjEA/VO4qquP8jBOrSeW0ltvppHElZGC/A14tNDERPbZQkrLIa2KQ==
 
-"@multiversx/sdk-dapp@5.0.0-alpha.9":
-  version "5.0.0-alpha.9"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.9.tgz"
-  integrity sha512-VFX6ShK6d0OlmgopkQQk28ohMsoZblUCaNNcLrKosW8hWv7stCqpPhKIE1c3GOdWGfZ+VJXWvS9tc1iWOlVJpQ==
+"@multiversx/sdk-dapp@^5.x":
+  version "5.0.4"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-5.0.4.tgz#a779e10a076e70d9e2ea78cacb8e24af97071696"
+  integrity sha512-L4QeMXo79vRPLgqzTo9wNemI558hXf7g8Q2TSy0vARSYx6Av0c4zbLT44nkPxlCbFw0i2waICYX7Lt9WkgwSZw==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
-    "@multiversx/sdk-core" "^14.x"
-    "@multiversx/sdk-dapp-utils" "^2.x"
     "@multiversx/sdk-extension-provider" "5.0.0"
     "@multiversx/sdk-hw-provider" "8.0.0"
     "@multiversx/sdk-metamask-provider" "2.0.0"
-    "@multiversx/sdk-native-auth-client" "1.0.9"
+    "@multiversx/sdk-native-auth-client" "2.0.1"
     "@multiversx/sdk-wallet" "4.6.0"
-    "@multiversx/sdk-wallet-connect-provider" "6.0.1"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "3.1.1"
+    "@multiversx/sdk-wallet-connect-provider" "6.0.2"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "3.1.3"
     "@multiversx/sdk-web-wallet-iframe-provider" "3.0.3"
     "@multiversx/sdk-web-wallet-provider" "5.0.0"
-    "@multiversx/sdk-webview-provider" "3.1.1"
+    "@multiversx/sdk-webview-provider" "3.1.2"
     immer "10.1.1"
     linkifyjs "4.3.1"
     lodash.isempty "4.4.0"
@@ -2094,7 +2108,7 @@
     socket.io-client "4.7.5"
     zustand "4.4.7"
   optionalDependencies:
-    "@multiversx/sdk-dapp-ui" ">=0.0.7"
+    "@multiversx/sdk-dapp-ui" ">=0.0.15"
 
 "@multiversx/sdk-extension-provider@5.0.0":
   version "5.0.0"
@@ -2132,12 +2146,10 @@
     "@metamask/providers" "16.0.0"
     protobufjs "7.4.0"
 
-"@multiversx/sdk-native-auth-client@1.0.9":
-  version "1.0.9"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-native-auth-client/-/sdk-native-auth-client-1.0.9.tgz"
-  integrity sha512-q1/cDRKz7QQsr8lQskUsfGkqJbIut772/MBX52Td4OTGg/G1HAm2xsELe+06y7L537A2rqz5/W9KkJ5yWt968g==
-  dependencies:
-    axios "^1.7.4"
+"@multiversx/sdk-native-auth-client@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-native-auth-client/-/sdk-native-auth-client-2.0.1.tgz#9d8444a6f98aad6498aa0950dd70208eb56f8b71"
+  integrity sha512-J4RxpsfNnWBKOPz0vvhnReSf8V6mci11Pe3NT2awhrpBhtAvkSBUGIzgoGVf/eumrhyReRmKyMjo+u4UhGokbg==
 
 "@multiversx/sdk-transaction-decoder@1.0.2":
   version "1.0.2"
@@ -2146,13 +2158,13 @@
   dependencies:
     bech32 "^2.0.0"
 
-"@multiversx/sdk-wallet-connect-provider@6.0.1":
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-wallet-connect-provider/-/sdk-wallet-connect-provider-6.0.1.tgz"
-  integrity sha512-D0Ide3sN6LtLCM9KICnxV5og0M+1QGRCRPzadfggVC5DQCREro4CVBmChQy79WcnKx275xNUExyFEW64r5PLhg==
+"@multiversx/sdk-wallet-connect-provider@6.0.2":
+  version "6.0.2"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-wallet-connect-provider/-/sdk-wallet-connect-provider-6.0.2.tgz#99634ac03bdb153b134b8d9af0dd38915e6e4e23"
+  integrity sha512-ap0tIwKWXesdYiJR4Xo9veNb6Idd47EbOV5VqPjc2ipnfPgTwQETxDW3ackTkxxR7M2MjXjv8JQ824+Bx8Ej1g==
   dependencies:
-    "@walletconnect/sign-client" "2.19.1"
-    "@walletconnect/utils" "2.19.1"
+    "@walletconnect/sign-client" "2.20.2"
+    "@walletconnect/utils" "2.20.2"
     bech32 "1.1.4"
 
 "@multiversx/sdk-wallet@4.6.0":
@@ -2180,10 +2192,10 @@
   dependencies:
     qs "6.11.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-3.1.1.tgz"
-  integrity sha512-1hw9Z7HwceQXk6XpOIvYSwmIxDrdoIhUNzLP4VGvsVHJcLw7mqbhA+txXqqevCgB61VmHBV6FNLRWp6U6JvgEw==
+"@multiversx/sdk-web-wallet-cross-window-provider@3.1.3":
+  version "3.1.3"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-3.1.3.tgz#f15c365b0cb0e5d67e0de470693d7693df871962"
+  integrity sha512-GcK7dPMBuP2YtThAtGVRJ3n6n6KvVAGhegFT7JM8yAE8Y7lwU0Aq0Bvop0ElJIwdXAAOJi0Q0KPGPdHM2BuuJA==
   dependencies:
     qs "6.11.2"
 
@@ -2203,10 +2215,10 @@
   dependencies:
     qs "6.10.3"
 
-"@multiversx/sdk-webview-provider@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-webview-provider/-/sdk-webview-provider-3.1.1.tgz"
-  integrity sha512-HwGL0m4DAirw087MZyGUcq1mWR1tTzommpdhMhhPQLNeeUJT+uZKTIAbBEHef7wehxSPp15QVCrI6uoOOPN+jA==
+"@multiversx/sdk-webview-provider@3.1.2":
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-webview-provider/-/sdk-webview-provider-3.1.2.tgz#d65ca0bc2fece8dcc5a97fa30f0a1986f84ca491"
+  integrity sha512-3461dHVlEKWJb4/FCuoyCvuO8EAZqdGW6k7K47nb0O0kuDC4hXgjVk70lPRX3TSyFyQCpOJ988U5eRW0EPCQEA==
 
 "@napi-rs/wasm-runtime@^0.2.5", "@napi-rs/wasm-runtime@^0.2.9":
   version "0.2.11"
@@ -2616,6 +2628,14 @@
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.9.0.tgz"
   integrity sha512-bV63itrKBC0zdT27qYm6SDZHlkXwFL1xMBuhkn+X7l0+IIhNaH5wuuvZKp6eKhCD4KFhujhfhCT1YxXW6esUIA==
 
+"@rollup/plugin-image@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/@rollup/plugin-image/-/plugin-image-3.0.3.tgz#025b557180bae20f2349ff5130ef2114169feaac"
+  integrity sha512-qXWQwsXpvD4trSb8PeFPFajp8JLpRtqqOeNYRUKnEQNHm7e5UP7fuSRcbjQAJ7wDZBbnJvSdY5ujNBQd9B1iFg==
+  dependencies:
+    "@rollup/pluginutils" "^5.0.1"
+    mini-svg-data-uri "^1.4.4"
+
 "@rollup/plugin-inject@^5.0.3":
   version "5.0.5"
   resolved "https://registry.npmjs.org/@rollup/plugin-inject/-/plugin-inject-5.0.5.tgz"
@@ -2758,6 +2778,16 @@
     "@lit/react" "^1.0.4"
     html-react-parser "^5.1.10"
     style-object-to-css-string "^1.0.0"
+    ts-morph "^22.0.0"
+
+"@stencil/react-output-target@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/@stencil/react-output-target/-/react-output-target-1.2.0.tgz#a5c48c182d7efcce4559786a5f06ae1caef81922"
+  integrity sha512-xDNpWdRg897T3Diy5V2d8dZUdjhc4QJ/5JZdTVyv3/e9UICdJPfCY6eKp/dWWgYlJ9AUE6GLHOI1iePZmLY12A==
+  dependencies:
+    "@lit/react" "^1.0.7"
+    html-react-parser "^5.2.2"
+    react-style-stringify "^1.2.0"
     ts-morph "^22.0.0"
 
 "@svgr/babel-plugin-add-jsx-attribute@8.0.0":
@@ -3485,10 +3515,10 @@
     "@types/babel__core" "^7.20.2"
     react-refresh "^0.14.0"
 
-"@walletconnect/core@2.19.1":
-  version "2.19.1"
-  resolved "https://registry.npmjs.org/@walletconnect/core/-/core-2.19.1.tgz"
-  integrity sha512-rMvpZS0tQXR/ivzOxN1GkHvw3jRRMlI/jRX5g7ZteLgg2L0ZcANsFvAU5IxILxIKcIkTCloF9TcfloKVbK3qmw==
+"@walletconnect/core@2.20.2":
+  version "2.20.2"
+  resolved "https://registry.npmjs.org/@walletconnect/core/-/core-2.20.2.tgz#525cdea073d75d49571350945bc8165d9fd88ab5"
+  integrity sha512-48XnarxQQrpJ0KZJOjit56DxuzfVRYUdL8XVMvUh/ZNUiX2FB5w6YuljUUeTLfYOf04Et6qhVGEUkmX3W+9/8w==
   dependencies:
     "@walletconnect/heartbeat" "1.2.2"
     "@walletconnect/jsonrpc-provider" "1.0.14"
@@ -3501,8 +3531,8 @@
     "@walletconnect/relay-auth" "1.1.0"
     "@walletconnect/safe-json" "1.0.2"
     "@walletconnect/time" "1.0.2"
-    "@walletconnect/types" "2.19.1"
-    "@walletconnect/utils" "2.19.1"
+    "@walletconnect/types" "2.20.2"
+    "@walletconnect/utils" "2.20.2"
     "@walletconnect/window-getters" "1.0.1"
     es-toolkit "1.33.0"
     events "3.3.0"
@@ -3610,19 +3640,19 @@
   dependencies:
     tslib "1.14.1"
 
-"@walletconnect/sign-client@2.19.1":
-  version "2.19.1"
-  resolved "https://registry.npmjs.org/@walletconnect/sign-client/-/sign-client-2.19.1.tgz"
-  integrity sha512-OgBHRPo423S02ceN3lAzcZ3MYb1XuLyTTkKqLmKp/icYZCyRzm3/ynqJDKndiBLJ5LTic0y07LiZilnliYqlvw==
+"@walletconnect/sign-client@2.20.2":
+  version "2.20.2"
+  resolved "https://registry.npmjs.org/@walletconnect/sign-client/-/sign-client-2.20.2.tgz#21da7b5221799b0a20361a966b04c3bf525562fb"
+  integrity sha512-KyeDToypZ1OjCbij4Jx0cAg46bMwZ6zCKt0HzCkqENcex3Zchs7xBp9r8GtfEMGw+PUnXwqrhzmLBH0x/43oIQ==
   dependencies:
-    "@walletconnect/core" "2.19.1"
+    "@walletconnect/core" "2.20.2"
     "@walletconnect/events" "1.0.1"
     "@walletconnect/heartbeat" "1.2.2"
     "@walletconnect/jsonrpc-utils" "1.0.8"
     "@walletconnect/logger" "2.1.2"
     "@walletconnect/time" "1.0.2"
-    "@walletconnect/types" "2.19.1"
-    "@walletconnect/utils" "2.19.1"
+    "@walletconnect/types" "2.20.2"
+    "@walletconnect/utils" "2.20.2"
     events "3.3.0"
 
 "@walletconnect/time@1.0.2", "@walletconnect/time@^1.0.2":
@@ -3632,10 +3662,10 @@
   dependencies:
     tslib "1.14.1"
 
-"@walletconnect/types@2.19.1":
-  version "2.19.1"
-  resolved "https://registry.npmjs.org/@walletconnect/types/-/types-2.19.1.tgz"
-  integrity sha512-XWWGLioddH7MjxhyGhylL7VVariVON2XatJq/hy0kSGJ1hdp31z194nHN5ly9M495J9Hw8lcYjGXpsgeKvgxzw==
+"@walletconnect/types@2.20.2":
+  version "2.20.2"
+  resolved "https://registry.npmjs.org/@walletconnect/types/-/types-2.20.2.tgz#3d6ea4fe973f62aa8488138ec5c07694cce71624"
+  integrity sha512-XPPbJM/mGU05i6jUxhC3yI/YvhSF6TYJQ5SXTWM53lVe6hs6ukvlEhPctu9ZBTGwGFhwPXIjtK/eWx+v4WY5iw==
   dependencies:
     "@walletconnect/events" "1.0.1"
     "@walletconnect/heartbeat" "1.2.2"
@@ -3644,10 +3674,10 @@
     "@walletconnect/logger" "2.1.2"
     events "3.3.0"
 
-"@walletconnect/utils@2.19.1":
-  version "2.19.1"
-  resolved "https://registry.npmjs.org/@walletconnect/utils/-/utils-2.19.1.tgz"
-  integrity sha512-aOwcg+Hpph8niJSXLqkU25pmLR49B8ECXp5gFQDW5IeVgXHoOoK7w8a79GBhIBheMLlIt1322sTKQ7Rq5KzzFg==
+"@walletconnect/utils@2.20.2":
+  version "2.20.2"
+  resolved "https://registry.npmjs.org/@walletconnect/utils/-/utils-2.20.2.tgz#f79ba4759238a4ca32e46d226e897d2f727b9832"
+  integrity sha512-2uRUDvpYSIJFYcr1WIuiFy6CEszLF030o6W8aDMkGk9/MfAZYEJQHMJcjWyaNMPHLJT0POR5lPaqkYOpuyPIQQ==
   dependencies:
     "@noble/ciphers" "1.2.1"
     "@noble/curves" "1.8.1"
@@ -3658,12 +3688,11 @@
     "@walletconnect/relay-auth" "1.1.0"
     "@walletconnect/safe-json" "1.0.2"
     "@walletconnect/time" "1.0.2"
-    "@walletconnect/types" "2.19.1"
+    "@walletconnect/types" "2.20.2"
     "@walletconnect/window-getters" "1.0.1"
     "@walletconnect/window-metadata" "1.0.1"
     bs58 "6.0.0"
     detect-browser "5.3.0"
-    elliptic "6.6.1"
     query-string "7.1.3"
     uint8arrays "3.1.0"
     viem "2.23.2"
@@ -4567,9 +4596,9 @@ classnames@2.3.2:
   resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
-"classnames@>= 2.5.1", classnames@^2.3.2:
+"classnames@>= 2.5.1", classnames@>=2.5.1, classnames@^2.3.2:
   version "2.5.1"
-  resolved "https://registry.npmjs.org/classnames/-/classnames-2.5.1.tgz"
+  resolved "https://registry.npmjs.org/classnames/-/classnames-2.5.1.tgz#ba774c614be0f016da105c858e7159eae8e7687b"
   integrity sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==
 
 cli-width@^4.1.0:
@@ -5233,7 +5262,7 @@ electron-to-chromium@^1.5.160:
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.167.tgz"
   integrity sha512-LxcRvnYO5ez2bMOFpbuuVuAI5QNeY1ncVytE/KXaL6ZNfzX1yPlAO0nSOyIHx2fVAuUprMqPs/TdVhUFZy7SIQ==
 
-elliptic@6.6.1, elliptic@^6.5.3, elliptic@^6.5.5:
+elliptic@^6.5.3, elliptic@^6.5.5:
   version "6.6.1"
   resolved "https://registry.npmjs.org/elliptic/-/elliptic-6.6.1.tgz"
   integrity sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==
@@ -6459,9 +6488,9 @@ html-escaper@^2.0.0:
   resolved "https://registry.npmjs.org/html-escaper/-/html-escaper-2.0.2.tgz"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
-html-react-parser@^5.1.10:
+html-react-parser@^5.1.10, html-react-parser@^5.2.2:
   version "5.2.5"
-  resolved "https://registry.npmjs.org/html-react-parser/-/html-react-parser-5.2.5.tgz"
+  resolved "https://registry.npmjs.org/html-react-parser/-/html-react-parser-5.2.5.tgz#4a0d62c129d5d5c63cc49f986c946552d737190c"
   integrity sha512-bRPdv8KTqG9CEQPMNGksDqmbiRfVQeOidry8pVetdh/1jQ1Edx4KX5m0lWvDD89Pt4CqTYjK1BLz6NoNVxN/Uw==
   dependencies:
     domhandler "5.0.3"
@@ -7935,6 +7964,11 @@ min-indent@^1.0.0:
   resolved "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
+mini-svg-data-uri@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.npmjs.org/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz#8ab0aabcdf8c29ad5693ca595af19dd2ead09939"
+  integrity sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==
+
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz"
@@ -8945,9 +8979,9 @@ qr.js@0.0.0:
   resolved "https://registry.npmjs.org/qr.js/-/qr.js-0.0.0.tgz"
   integrity sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==
 
-"qrcode@>= 1.5.4":
+"qrcode@>= 1.5.4", qrcode@>=1.5.4:
   version "1.5.4"
-  resolved "https://registry.npmjs.org/qrcode/-/qrcode-1.5.4.tgz"
+  resolved "https://registry.npmjs.org/qrcode/-/qrcode-1.5.4.tgz#5cb81d86eb57c675febb08cf007fff963405da88"
   integrity sha512-1ca71Zgiu6ORjHqFBDpnSMTR2ReToX4l1Au1VFLyVeBTFavzQnv5JxMFr3ukHVKpSrSA2MCk0lNJSykjUfz7Zg==
   dependencies:
     dijkstrajs "^1.0.1"
@@ -9169,6 +9203,13 @@ react-select@5.8.0:
     prop-types "^15.6.0"
     react-transition-group "^4.3.0"
     use-isomorphic-layout-effect "^1.1.2"
+
+react-style-stringify@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/react-style-stringify/-/react-style-stringify-1.2.0.tgz#d6ffc475dde8e9f8e3014f383f942666e8fb983a"
+  integrity sha512-88JZckqgbfXJaGcDQoTFKRmBwHBF0Ddaxz3PL9Q+vywAJruBY+NdN+ZiKSBe7r/pWtjbt0naZdtH5oNI1X3FLA==
+  dependencies:
+    "@emotion/unitless" "^0.10.0"
 
 react-tooltip@5.7.2:
   version "5.7.2"

@@ -5,7 +5,7 @@ import { useReplyToDapp } from 'hooks';
 import {
   WindowProviderResponseEnums,
   SignMessageStatusEnum,
-  ExtendedReplyWithPostMessageType
+  ReplyWithPostMessageType
 } from 'lib';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
@@ -33,7 +33,7 @@ export const useSignMessageCompleted = () => {
             ]
         };
 
-        const replyData: ExtendedReplyWithPostMessageType = {
+        const replyData: ReplyWithPostMessageType = {
           type: WindowProviderResponseEnums.signMessageResponse,
           payload: {
             data

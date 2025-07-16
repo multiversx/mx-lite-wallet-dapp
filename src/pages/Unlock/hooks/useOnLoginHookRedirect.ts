@@ -31,7 +31,7 @@ export const useOnLoginHookRedirect = () => {
       payload: {
         data: {
           address: urlParams.address,
-          signature: urlParams.signature
+          signature: urlParams.signature ?? ''
         }
       }
     });
