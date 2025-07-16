@@ -8,16 +8,16 @@ import {
   useSignTxSchema
 } from 'hooks';
 import {
-  WindowProviderRequestEnums,
-  WindowProviderResponseEnums,
-  RequestMessageType,
   getLoginHookData,
   getSignHookData,
   getSignMessageHookData,
+  RequestMessageType,
   Transaction,
-  useGetLoginInfo
+  useGetLoginInfo,
+  WindowProviderRequestEnums,
+  WindowProviderResponseEnums
 } from 'lib';
-import { HooksEnum } from 'localConstants';
+import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
 import { getIsInWebview } from 'utils/app';
@@ -30,6 +30,7 @@ import {
 let isListenerAdded = false;
 let isHandShakeSent = false;
 let handshakeEstablished = false;
+let handshakeSession = Date.now().toString();
 const isReload = getIsReload();
 
 export const PostMessageListener = () => {
@@ -116,17 +117,15 @@ export const PostMessageListener = () => {
           return;
         }
 
-        const hookType = HooksEnum.sign;
-
         dispatch(
           setHook({
-            type: hookType,
+            type: HooksEnum.sign,
             hookUrl: data.hookUrl,
             callbackUrl
           })
         );
 
-        navigate(routeNames.sign);
+        navigate(HooksPageEnum.sign);
         break;
       }
 
@@ -151,12 +150,17 @@ export const PostMessageListener = () => {
           })
         );
 
-        navigate(routeNames.signMessage);
+        navigate(HooksPageEnum.signMessage);
         break;
       }
 
       case WindowProviderRequestEnums.finalizeHandshakeRequest: {
         handshakeEstablished = true;
+        handshakeSession = payload || handshakeSession || Date.now().toString();
+        replyToDapp({
+          type: WindowProviderResponseEnums.finalizeHandshakeResponse,
+          payload: { data: handshakeSession }
+        });
         break;
       }
 
@@ -187,15 +191,6 @@ export const PostMessageListener = () => {
     }
   };
 
-  useEffect(() => {
-    if (isListenerAdded) {
-      return;
-    }
-
-    window.addEventListener('message', messageListener);
-    isListenerAdded = true;
-  }, []);
-
   const closeHandshake = () => {
     replyWithCancelled({ shouldResetHook: false });
     replyToDapp({
@@ -207,6 +202,11 @@ export const PostMessageListener = () => {
   };
 
   useEffect(() => {
+    if (!isListenerAdded) {
+      window.addEventListener('message', messageListener);
+      isListenerAdded = true;
+    }
+
     if (!window.opener) {
       return;
     }
@@ -224,11 +224,17 @@ export const PostMessageListener = () => {
     replyToDapp({
       type: WindowProviderResponseEnums.handshakeResponse,
       payload: {
-        data: 'true'
+        data: handshakeSession
       }
     });
 
     isHandShakeSent = true;
+
+    return () => {
+      window.removeEventListener('message', messageListener);
+      window.removeEventListener('beforeunload', closeHandshake);
+      isListenerAdded = false;
+    };
   }, []);
 
   return null;
