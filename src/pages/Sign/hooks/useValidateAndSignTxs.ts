@@ -55,12 +55,29 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
     const isValidHook = Boolean(callbackUrl);
 
     if (isValidHook) {
-      replyWithSignedTransactions(transactions);
+      try {
+        const callbackUrlObj = new URL(callbackUrl);
+        const isSameOrigin = callbackUrlObj.origin === window.origin;
+        const redirectPath = `${callbackUrlObj.pathname}${callbackUrlObj.search}`;
+
+        dispatch(resetHook());
+        clearCompletedTransactions();
+
+        if (isSameOrigin) {
+          navigate(redirectPath);
+
+          return;
+        }
+
+        replyWithSignedTransactions(transactions);
+        return;
+      } catch (err) {
+        console.error('Invalid callbackUrl', err);
+      }
     }
 
     dispatch(resetHook());
     clearCompletedTransactions();
-
     navigate(routeNames.dashboard);
   };
 
