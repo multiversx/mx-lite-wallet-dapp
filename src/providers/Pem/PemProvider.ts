@@ -11,6 +11,7 @@ import {
   UserSecretKey,
   UserSigner
 } from 'lib';
+import { IFileProviderOptions } from 'types/providers';
 import { PemLoginPanel } from './PemLoginPanel';
 
 const notInitializedError = (caller: string) => () => {
@@ -26,7 +27,7 @@ export class PemProvider implements IProvider {
     address: ''
   };
 
-  constructor(options?: { address?: string; anchor?: HTMLElement }) {
+  constructor(options?: IFileProviderOptions) {
     this._anchor = options?.anchor;
     if (options?.address) {
       this.setAccount({

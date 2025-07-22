@@ -30,7 +30,7 @@ export const Widget = ({
   widget: MxWidget,
   props = {}
 }: WidgetType) => {
-  const { isWebProvider } = useIsWebProvider();
+  const isWebProvider = useIsWebProvider();
   const callbackRoute = anchor
     ? getCallbackRoute({ anchor, isWebProvider })
     : '';

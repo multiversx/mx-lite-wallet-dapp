@@ -19,7 +19,7 @@ const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
 };
 
-class CustomProvider implements IProvider {
+class FileProvider implements IProvider {
   private privateKey: string | null = null;
 
   setPrivateKey(key: string | null): void {
@@ -119,7 +119,7 @@ class CustomProvider implements IProvider {
     return signedTransactions;
   }
 }
-export const provider = new CustomProvider();
+export const provider = new FileProvider();
 
 export const setProviderPrivateKey = (key: string | null) =>
   provider.setPrivateKey(key);

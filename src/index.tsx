@@ -1,37 +1,29 @@
 import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
 import { initApp } from 'lib';
+import { IFileProvider, IFileProviderOptions } from 'types';
 import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
 import { App } from './App';
 import 'utils/adapter/gatewayAdapter';
 import { KeystoreProvider } from './providers/Keystore/KeystoreProvider';
 import { PemProvider } from './providers/Pem/PemProvider';
 
-interface ICustomProvider {
-  name: string;
-  type: string;
-  iconUrl: string;
-  constructor: (options?: any) => Promise<any>;
-  dataTestId?: string;
-}
-
-const providers: ICustomProvider[] = [
+const providers: IFileProvider[] = [
   {
     name: 'PEM File',
     type: 'pemProvider',
     iconUrl: `${window.location.origin}/pem-icon.svg`,
-    constructor: async (options?: any) => new PemProvider(options)
+    constructor: async (options?: IFileProviderOptions) =>
+      new PemProvider(options)
   },
   {
     name: 'Keystore File',
     type: 'keystoreProvider',
     iconUrl: `${window.location.origin}/keystore-icon.svg`,
-    constructor: async (options?: any) => new KeystoreProvider(options)
+    constructor: async (options?: IFileProviderOptions) =>
+      new KeystoreProvider(options)
   }
 ];
-
-(window as any).multiversx = {};
-(window as any).multiversx.providers = providers;
 
 const activeNetwork = getCurrentNetwork();
 const config = {
@@ -43,7 +35,8 @@ const config = {
       walletAddress: activeNetwork.walletAddress || window.location.origin
     },
     successfulToastLifetime: 5000
-  }
+  },
+  customProviders: providers
 };
 
 async function start() {

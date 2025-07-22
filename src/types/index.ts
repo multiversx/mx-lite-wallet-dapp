@@ -4,3 +4,4 @@ export * from './send.types';
 export * from './transaction.types';
 export * from './widget.types';
 export * from './withClassName.types';
+export * from './providers';

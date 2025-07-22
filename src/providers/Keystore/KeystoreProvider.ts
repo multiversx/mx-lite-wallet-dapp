@@ -11,6 +11,7 @@ import {
   UserSecretKey,
   UserSigner
 } from 'lib';
+import { IFileProviderOptions } from 'types/providers';
 import { KeystoreLoginPanel } from './KeystoreLoginPanel';
 import { setKeystoreLogin } from '../../redux/slices/account';
 import { store } from '../../redux/store';
@@ -28,7 +29,7 @@ export class KeystoreProvider implements IProvider {
     address: ''
   };
 
-  constructor(options?: { address?: string; anchor?: HTMLElement }) {
+  constructor(options?: IFileProviderOptions) {
     this._anchor = options?.anchor;
     if (options?.address) {
       this.setAccount({

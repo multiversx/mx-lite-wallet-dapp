@@ -5,5 +5,5 @@ export const useIsWebProvider = () => {
   const providerType = provider.getType();
   const isWebProvider = providerType === ProviderTypeEnum.webview;
 
-  return { isWebProvider };
+  return isWebProvider;
 };
