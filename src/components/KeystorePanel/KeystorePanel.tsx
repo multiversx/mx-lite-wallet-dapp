@@ -72,13 +72,15 @@ export const KeystorePanel = ({
   const [savedFileContent, setSavedFileContent] = useState<string | null>(null);
 
   useEffect(() => {
-    if (savedKeystoreFile) {
-      try {
-        setFileName(keystoreFileName || 'keystore.json');
-        setSavedFileContent(savedKeystoreFile);
-      } catch (e) {
-        console.error('Error parsing saved keystore file', e);
-      }
+    if (!savedKeystoreFile) {
+      return;
+    }
+
+    try {
+      setFileName(keystoreFileName || 'keystore.json');
+      setSavedFileContent(savedKeystoreFile);
+    } catch (e) {
+      console.error('Error parsing saved keystore file', e);
     }
   }, [savedKeystoreFile, keystoreFileName]);
 
@@ -187,7 +189,7 @@ export const KeystorePanel = ({
           kdContent={keystoreData}
           accessPassVal={password}
           onConfirmSelectedAddress={handleConfirmSelectedAddress}
-          className='p-0'
+          className="p-0"
         />
       </div>
     );
@@ -199,10 +201,10 @@ export const KeystorePanel = ({
       onClose={handleClose}
       fileName={fileName}
       onFileChange={handleFileChange}
-      fileLabel='Keystore File'
-      fileAccept='.json'
-      fileInputId='keystore-file-input'
-      placeholder='Click here to select a keystore file'
+      fileLabel="Keystore File"
+      fileAccept=".json"
+      fileInputId="keystore-file-input"
+      placeholder="Click here to select a keystore file"
       dataTestId={DataTestIdsEnum.keystoreLoginPanel}
       fileUploadTestId={DataTestIdsEnum.keystoreBtn}
       initialValues={{ file: null, password }}
@@ -213,12 +215,12 @@ export const KeystorePanel = ({
             Password
             <input
               style={styles.input}
-              type='password'
+              type="password"
               value={formikProps.values.password}
               onChange={formikProps.handleChange}
               onBlur={formikProps.handleBlur}
-              name='password'
-              placeholder='Enter keystore password'
+              name="password"
+              placeholder="Enter keystore password"
               required
               data-testid={DataTestIdsEnum.accessPass}
             />
