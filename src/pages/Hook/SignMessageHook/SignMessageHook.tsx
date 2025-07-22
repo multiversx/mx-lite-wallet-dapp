@@ -23,14 +23,7 @@ export const SignMessageHook = () => {
     HookStateEnum.pending
   );
 
-  // Removed automatic sign execution; signing will be handled in SignMessage page
-
   useEffect(() => {
-    console.log('data', data);
-    console.log('hookUrl', hookUrl);
-    console.log('pathname', pathname);
-    console.log('search', search);
-
     if (data == null) {
       return setValidUrl(HookStateEnum.invalid);
     }

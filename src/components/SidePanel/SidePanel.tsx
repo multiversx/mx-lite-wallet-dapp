@@ -2,7 +2,7 @@ import { ReactNode, useCallback } from 'react';
 import { MvxSidePanel } from '@multiversx/sdk-dapp-ui/react';
 
 // Define the component props based on the MvxSidePanel interface
-export interface SidePanelProps {
+export interface ISidePanelProps {
   isOpen?: boolean;
   panelTitle?: string;
   panelClassName?: string;
@@ -22,7 +22,7 @@ export const SidePanel = ({
   children,
   onClose,
   onBack
-}: SidePanelProps) => {
+}: ISidePanelProps) => {
   const handleClose = useCallback(() => {
     onClose?.();
   }, [onClose]);

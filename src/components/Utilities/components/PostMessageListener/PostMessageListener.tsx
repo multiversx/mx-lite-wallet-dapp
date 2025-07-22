@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getIsInWebview } from 'utils/app';
 import {
   useLogout,
   useReplyToDapp,
@@ -20,7 +21,6 @@ import {
 import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
-import { getIsInWebview } from 'utils/app';
 import {
   buildTransactionsQueryString,
   buildWalletQueryString,

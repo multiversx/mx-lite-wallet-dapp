@@ -19,6 +19,10 @@ const notInitializedError = (caller: string) => () => {
 
 let privateKey = '';
 
+export const setProviderPrivateKey = (key: string | null) => {
+  privateKey = key || '';
+};
+
 export abstract class FileProvider implements IProvider {
   protected _anchor?: HTMLElement;
   protected _account: IDAppProviderAccount = {
@@ -179,7 +183,7 @@ export abstract class FileProvider implements IProvider {
 
   protected async _getPrivateKey(action: string): Promise<string> {
     if (!privateKey) {
-      const result = await this.showReauthPanel();
+      const result = await this.showReloginPanel();
 
       if (!result.privateKey) {
         await this.logout();
@@ -197,7 +201,7 @@ export abstract class FileProvider implements IProvider {
     [key: string]: any;
   }>;
 
-  protected abstract showReauthPanel(): Promise<{
+  protected abstract showReloginPanel(): Promise<{
     privateKey: string;
     [key: string]: any;
   }>;

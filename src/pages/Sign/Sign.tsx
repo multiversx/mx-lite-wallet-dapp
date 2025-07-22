@@ -9,8 +9,7 @@ import {
   getAccountFromApi,
   getAccountProvider,
   checkIsValidSender,
-  useGetNetworkConfig,
-  clearCompletedTransactions
+  useGetNetworkConfig
 } from 'lib';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
@@ -79,7 +78,6 @@ export const Sign = () => {
     }
 
     if (invalidHook || senderAddresses.length > 1 || !isValidSender) {
-      clearCompletedTransactions();
       dispatch(resetHook());
       navigate(redirectPathname);
     }

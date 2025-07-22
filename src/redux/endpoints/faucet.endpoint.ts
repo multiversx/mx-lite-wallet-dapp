@@ -1,5 +1,3 @@
-// All @multiversx/sdk-dapp-form imports removed for migration. Add equivalents from sdk-dapp-utils or custom logic if needed.
-
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import {

@@ -5,7 +5,7 @@ import {
   ChangeEvent,
   FormEvent
 } from 'react';
-import { Button, AddressScreens } from 'components';
+import { AddressScreens } from 'components';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { accessWallet } from '../../providers/Keystore/accessWallet';
 import { parseKeystoreJSON } from '../../providers/Keystore/parseKeystoreJSON';
@@ -80,7 +80,7 @@ const styles = {
   }
 };
 
-interface IKeystorePanelProps {
+interface KeystorePanelProps {
   onSubmit: (values: {
     privateKey: string;
     address: string;
@@ -100,7 +100,7 @@ export const KeystorePanel = ({
   needsAddress,
   savedKeystoreFile,
   keystoreFileName
-}: IKeystorePanelProps) => {
+}: KeystorePanelProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -218,7 +218,7 @@ export const KeystorePanel = ({
   if (needsAddress && showAddressSelection && keystoreData) {
     return (
       <div
-        style={styles.container}
+        className='w-full h-full max-w-md mx-auto py-6 flex flex-col items-stretch'
         data-testid={DataTestIdsEnum.addressSelectionPanel}
       >
         <AddressScreens
@@ -232,17 +232,11 @@ export const KeystorePanel = ({
   }
 
   return (
-    <div
-      style={styles.container}
-      data-testid={DataTestIdsEnum.keystoreLoginPanel}
-    >
+    <div style={styles.container} data-testid={DataTestIdsEnum.keystoreLoginPanel}>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div>
           <label style={styles.label}>Keystore File</label>
-          <div
-            style={styles.fileUpload}
-            data-testid={DataTestIdsEnum.keystoreBtn}
-          >
+          <div style={styles.fileUpload} data-testid={DataTestIdsEnum.keystoreBtn}>
             <input
               type='file'
               accept='.json'
@@ -284,21 +278,21 @@ export const KeystorePanel = ({
         </div>
         {error && <div style={styles.error}>{error}</div>}
         <div style={styles.buttonGroup}>
-          <Button
+          <button
             onClick={handleClose}
             style={styles.button}
             data-testid={DataTestIdsEnum.cancelBtn}
             type='button'
           >
             Cancel
-          </Button>
-          <Button
+          </button>
+          <button
             type='submit'
             style={styles.button}
             data-testid={DataTestIdsEnum.submitButton}
           >
             Login
-          </Button>
+          </button>
         </div>
       </form>
     </div>

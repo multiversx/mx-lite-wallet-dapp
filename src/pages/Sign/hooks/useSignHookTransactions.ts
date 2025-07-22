@@ -42,11 +42,9 @@ export const useSignHookTransactions = () => {
   const signHookTransactions = async (
     hookUrl: string
   ): Promise<ValidateAndSignTxsReturnType> => {
-    // 1. get the raw transactions
     const { txs: rawTxs, executeAfterSign } =
       parseSignUrl<IPlainTransactionObject>(hookUrl);
 
-    // Step 1. Validate the transactions
     const txData = await validateSignTransactions({
       extractedTxs: rawTxs,
       address,
@@ -63,7 +61,6 @@ export const useSignHookTransactions = () => {
       };
     }
 
-    // Step 2. Send individual or batch transactions
     const mappedTransactions = createNewTransactionsFromRaw({
       address,
       chainId,
@@ -90,15 +87,14 @@ export const useSignHookTransactions = () => {
     };
 
     if (executeAfterSign === 'true') {
-      // Send as batch transactions
-      const sentTransactions = await txManager.send([signedTransactions]);
+      const sentTransactions = await txManager.send(signedTransactions);
       const sessionId = await txManager.track(sentTransactions, {
         transactionsDisplayInfo,
         disableToasts: false
       });
 
       if (!sessionId) {
-        console.error('Batch transactions session id is invalid');
+        console.error('Transactions session id is invalid');
         return emptyState;
       }
 

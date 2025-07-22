@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyWithCancelled } from 'hooks';
-import { useGetAccountInfo, clearCompletedTransactions } from 'lib';
+import { useGetAccountInfo } from 'lib';
 
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
@@ -61,7 +61,6 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
         const redirectPath = `${callbackUrlObj.pathname}${callbackUrlObj.search}`;
 
         dispatch(resetHook());
-        clearCompletedTransactions();
 
         if (isSameOrigin) {
           navigate(redirectPath);
@@ -77,7 +76,6 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
     }
 
     dispatch(resetHook());
-    clearCompletedTransactions();
     navigate(routeNames.dashboard);
   };
 

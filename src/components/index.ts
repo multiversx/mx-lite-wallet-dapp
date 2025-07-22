@@ -3,6 +3,7 @@ export * from './AxiosInterceptor';
 export * from './Button';
 export * from './Card';
 export * from './Dropdown';
+export * from './FileLoginPanel';
 export * from './KeystorePanel';
 export * from './PemPanel';
 export * from './Label';

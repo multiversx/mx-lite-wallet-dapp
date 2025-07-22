@@ -13,7 +13,7 @@ export class KeystoreProvider extends FileProvider {
   }
 
   getType(): ProviderType {
-    return 'keystoreProvider' as unknown as ProviderType;
+    return '' as unknown as ProviderType;
   }
 
   protected async showLoginPanel(): Promise<{
@@ -29,7 +29,7 @@ export class KeystoreProvider extends FileProvider {
     });
   }
 
-  protected async showReauthPanel(): Promise<{
+  protected async showReloginPanel(): Promise<{
     privateKey: string;
   }> {
     const state = store.getState();

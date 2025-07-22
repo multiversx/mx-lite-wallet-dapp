@@ -10,9 +10,7 @@ export const Unlock = () => {
   const { isLoggedIn } = useGetLoginInfo();
 
   const unlockPanelManager = UnlockPanelManager.init({
-    loginHandler: () => {
-      onUnlockRedirect();
-    },
+    loginHandler: onUnlockRedirect,
     onClose: () => {
       navigate(RouteNamesEnum.home);
     }

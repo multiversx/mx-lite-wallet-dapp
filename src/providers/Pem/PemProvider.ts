@@ -11,7 +11,7 @@ export class PemProvider extends FileProvider {
   }
 
   getType(): ProviderType {
-    return 'pemProvider' as unknown as ProviderType;
+    return '' as unknown as ProviderType;
   }
 
   protected async showLoginPanel(): Promise<{
@@ -24,7 +24,7 @@ export class PemProvider extends FileProvider {
     });
   }
 
-  protected async showReauthPanel(): Promise<{
+  protected async showReloginPanel(): Promise<{
     privateKey: string;
   }> {
     return await this.panel.showPanel();

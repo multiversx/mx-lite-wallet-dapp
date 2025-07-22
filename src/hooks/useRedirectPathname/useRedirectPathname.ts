@@ -7,13 +7,13 @@ import {
 } from 'redux/selectors';
 import { routeNames } from 'routes';
 
-export interface UseRedirectPathnameProps {
+export interface IUseRedirectPathnameProps {
   impersonateConfirmed?: boolean;
   canImpersonate?: boolean;
   isHook?: boolean;
 }
 
-export const useRedirectPathname = (props?: UseRedirectPathnameProps) => {
+export const useRedirectPathname = (props?: IUseRedirectPathnameProps) => {
   const { type: hook } = useSelector(hookSelector);
   const accessTokenRedirectRoute = useSelector(
     accessTokenRedirectRouteSelector

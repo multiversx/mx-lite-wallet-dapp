@@ -1,6 +1,5 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, ReactNode } from 'react';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import { parsePem } from 'providers/Pem/parsePem';
 
 const styles = {
   container: {
@@ -72,87 +71,74 @@ const styles = {
   }
 };
 
-interface PemPanelProps {
-  onSubmit: (values: { privateKey: string; address: string }) => void;
+export interface FileLoginPanelProps {
+  onSubmit: (e: FormEvent) => void;
   onClose: () => void;
+  fileName: string;
+  error: string;
+  onFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  fileLabel: string;
+  fileAccept: string;
+  fileInputId: string;
+  placeholder: string;
+  dataTestId: string;
+  fileUploadTestId: string;
+  children?: ReactNode;
 }
 
-export const PemPanel = ({ onSubmit, onClose }: PemPanelProps) => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileName, setFileName] = useState<string>('');
-  const [error, setError] = useState<string>('');
-
-  const handleClose = useCallback(() => {
-    setSelectedFile(null);
-    setFileName('');
-    setError('');
-    onClose();
-  }, [onClose]);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      setFileName(file.name);
-      setError('');
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!selectedFile) {
-      setError('Please select a PEM file');
-      return;
-    }
-
-    const pemData = await parsePem(selectedFile);
-    if (!pemData) {
-      setError('Invalid PEM file format');
-      return;
-    }
-
-    onSubmit({
-      privateKey: pemData.privateKey,
-      address: pemData.address
-    });
-  };
-
+export const FileLoginPanel = ({
+  onSubmit,
+  onClose,
+  fileName,
+  error,
+  onFileChange,
+  fileLabel,
+  fileAccept,
+  fileInputId,
+  placeholder,
+  dataTestId,
+  fileUploadTestId,
+  children
+}: FileLoginPanelProps) => {
   return (
-    <div style={styles.container} data-testid={DataTestIdsEnum.pemLoginPanel}>
-      <form onSubmit={handleSubmit} style={styles.form}>
+    <div style={styles.container} data-testid={dataTestId}>
+      <form onSubmit={onSubmit} style={styles.form}>
         <div>
-          <label style={styles.label}>PEM File</label>
-          <div style={styles.fileUpload} data-testid={DataTestIdsEnum.pemBtn}>
+          <label style={styles.label}>{fileLabel}</label>
+          <div style={styles.fileUpload} data-testid={fileUploadTestId}>
             <input
               type='file'
-              accept='.pem'
-              onChange={handleFileChange}
+              accept={fileAccept}
+              onChange={onFileChange}
               style={{ display: 'none' }}
-              id='pem-file-input-panel'
+              id={fileInputId}
               data-testid={DataTestIdsEnum.walletFile}
             />
             <label
-              htmlFor='pem-file-input-panel'
+              htmlFor={fileInputId}
               style={{ cursor: 'pointer', width: '100%', display: 'block' }}
             >
               {fileName ? (
                 <div>
-                  <div>✓ PEM file loaded</div>
+                  <div>✓ {fileLabel} loaded</div>
                   <div style={{ fontSize: '14px', color: '#aaa' }}>
                     {fileName}
                   </div>
                 </div>
               ) : (
-                'Click here to select a PEM file'
+                placeholder
               )}
             </label>
           </div>
         </div>
+
+        {children}
+
         {error && <div style={styles.error}>{error}</div>}
+
         <div style={styles.buttonGroup}>
           <button
-            onClick={handleClose}
+            onClick={onClose}
             style={styles.button}
             data-testid={DataTestIdsEnum.cancelBtn}
             type='button'

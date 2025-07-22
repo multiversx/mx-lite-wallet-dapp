@@ -2,25 +2,25 @@ import { createRoot, Root } from 'react-dom/client';
 import { KeystorePanel } from 'components/KeystorePanel';
 import { PanelWrapper } from 'components/PanelWrapper';
 
-interface KeystoreLoginPanelState {
+interface IKeystoreLoginPanelState {
   root: Root;
   isOpen: boolean;
-  resolve:
-    | ((value: {
-        privateKey: string;
-        address: string;
-        keystoreFile?: string;
-        keystoreFileName?: string;
-        addressIndex?: number;
-      }) => void)
-    | null;
+  resolveFn: ((value: IKeystorePanelReturn) => void) | null;
   anchor: HTMLElement | undefined;
+}
+
+interface IKeystorePanelReturn {
+  privateKey: string;
+  address: string;
+  keystoreFile?: string;
+  keystoreFileName?: string;
+  addressIndex?: number;
 }
 
 export class KeystoreLoginPanel {
   private static instance: KeystoreLoginPanel;
   private _panelRoot: HTMLDivElement;
-  private _currentPanel: KeystoreLoginPanelState | null = null;
+  private _currentPanel: IKeystoreLoginPanelState | null = null;
 
   private constructor() {
     this._panelRoot = document.createElement('div');
@@ -40,7 +40,7 @@ export class KeystoreLoginPanel {
     this._currentPanel = {
       root,
       isOpen: false,
-      resolve: null,
+      resolveFn: null,
       anchor: undefined
     };
 
@@ -69,7 +69,7 @@ export class KeystoreLoginPanel {
       }
 
       this._currentPanel.isOpen = false;
-      this._currentPanel.resolve?.(values);
+      this._currentPanel.resolveFn?.(values);
       this._renderPanel();
     };
 
@@ -79,7 +79,7 @@ export class KeystoreLoginPanel {
       }
 
       this._currentPanel.isOpen = false;
-      this._currentPanel.resolve?.({ privateKey: '', address: '' });
+      this._currentPanel.resolveFn?.({ privateKey: '', address: '' });
       this._renderPanel();
     };
 
@@ -106,19 +106,13 @@ export class KeystoreLoginPanel {
     anchor?: HTMLElement;
     savedKeystoreFile?: string;
     keystoreFileName?: string;
-  }): Promise<{
-    privateKey: string;
-    address: string;
-    keystoreFile?: string;
-    keystoreFileName?: string;
-    addressIndex?: number;
-  }> {
+  }): Promise<IKeystorePanelReturn> {
     return new Promise((resolve) => {
       if (!this._currentPanel) {
         return Promise.reject(new Error('Panel not initialized'));
       }
 
-      this._currentPanel.resolve = resolve;
+      this._currentPanel.resolveFn = resolve;
       this._currentPanel.isOpen = true;
       this._currentPanel.anchor = options?.anchor;
       this._renderPanel(options);

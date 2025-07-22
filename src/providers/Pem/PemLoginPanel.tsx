@@ -2,17 +2,22 @@ import { createRoot, Root } from 'react-dom/client';
 import PanelWrapper from 'components/PanelWrapper/PanelWrapper';
 import { PemPanel } from 'components/PemPanel';
 
-interface PemLoginPanelState {
+interface IPemLoginPanelState {
   root: Root;
   isOpen: boolean;
-  resolve: ((value: { privateKey: string; address: string }) => void) | null;
+  resolveFn: ((value: IPemPanelReturn) => void) | null;
   anchor: HTMLElement | undefined;
+}
+
+interface IPemPanelReturn {
+  privateKey: string;
+  address: string;
 }
 
 export class PemLoginPanel {
   private static instance: PemLoginPanel;
   private _panelRoot: HTMLDivElement;
-  private _currentPanel: PemLoginPanelState | null = null;
+  private _currentPanel: IPemLoginPanelState | null = null;
 
   private constructor() {
     this._panelRoot = document.createElement('div');
@@ -32,7 +37,7 @@ export class PemLoginPanel {
     this._currentPanel = {
       root,
       isOpen: false,
-      resolve: null,
+      resolveFn: null,
       anchor: undefined
     };
 
@@ -50,7 +55,7 @@ export class PemLoginPanel {
       }
 
       this._currentPanel.isOpen = false;
-      this._currentPanel.resolve?.(values);
+      this._currentPanel.resolveFn?.(values);
       this._renderPanel();
     };
 
@@ -60,7 +65,7 @@ export class PemLoginPanel {
       }
 
       this._currentPanel.isOpen = false;
-      this._currentPanel.resolve?.({ privateKey: '', address: '' });
+      this._currentPanel.resolveFn?.({ privateKey: '', address: '' });
       this._renderPanel();
     };
 
@@ -79,16 +84,13 @@ export class PemLoginPanel {
   public showPanel(options?: {
     needsAddress: boolean;
     anchor?: HTMLElement;
-  }): Promise<{
-    privateKey: string;
-    address: string;
-  }> {
+  }): Promise<IPemPanelReturn> {
     return new Promise((resolve) => {
       if (!this._currentPanel) {
         return Promise.reject(new Error('Panel not initialized'));
       }
 
-      this._currentPanel.resolve = resolve;
+      this._currentPanel.resolveFn = resolve;
       this._currentPanel.isOpen = true;
       this._currentPanel.anchor = options?.anchor;
       this._renderPanel();
