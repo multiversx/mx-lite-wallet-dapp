@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { FileLoginPanel } from 'components/FileLoginPanel';
+import { FileLoginPanel, FileLoginFormValues } from 'components/FileLoginPanel';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { parsePem } from 'providers/Pem/parsePem';
 
@@ -29,15 +29,15 @@ export const PemPanel = ({ onSubmit, onClose }: IPemPanelProps) => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (values: FileLoginFormValues) => {
+    const file = values.file || selectedFile;
 
-    if (!selectedFile) {
+    if (!file) {
       setError('Please select a PEM file');
       return;
     }
 
-    const pemData = await parsePem(selectedFile);
+    const pemData = await parsePem(file);
     if (!pemData) {
       setError('Invalid PEM file format');
       return;
@@ -54,7 +54,6 @@ export const PemPanel = ({ onSubmit, onClose }: IPemPanelProps) => {
       onSubmit={handleSubmit}
       onClose={handleClose}
       fileName={fileName}
-      error={error}
       onFileChange={handleFileChange}
       fileLabel='PEM File'
       fileAccept='.pem'
@@ -62,6 +61,12 @@ export const PemPanel = ({ onSubmit, onClose }: IPemPanelProps) => {
       placeholder='Click here to select a PEM file'
       dataTestId={DataTestIdsEnum.pemLoginPanel}
       fileUploadTestId={DataTestIdsEnum.pemBtn}
-    />
+    >
+      {error && (
+        <div style={{ color: 'red', fontSize: '14px', marginTop: '4px' }}>
+          {error}
+        </div>
+      )}
+    </FileLoginPanel>
   );
 };

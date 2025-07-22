@@ -1,5 +1,7 @@
-import { ChangeEvent, FormEvent, ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
+import { Formik, Form, FormikProps } from 'formik';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
+import { fileLoginFormSchema } from 'utils';
 
 const styles = {
   container: {
@@ -71,11 +73,15 @@ const styles = {
   }
 };
 
+export interface FileLoginFormValues {
+  file: File | null;
+  password: string;
+}
+
 export interface FileLoginPanelProps {
-  onSubmit: (e: FormEvent) => void;
+  onSubmit: (values: FileLoginFormValues) => void;
   onClose: () => void;
   fileName: string;
-  error: string;
   onFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   fileLabel: string;
   fileAccept: string;
@@ -83,14 +89,14 @@ export interface FileLoginPanelProps {
   placeholder: string;
   dataTestId: string;
   fileUploadTestId: string;
-  children?: ReactNode;
+  children?: ReactNode | ((formikProps: FormikProps<FileLoginFormValues>) => ReactNode);
+  initialValues?: Partial<FileLoginFormValues>;
 }
 
 export const FileLoginPanel = ({
   onSubmit,
   onClose,
   fileName,
-  error,
   onFileChange,
   fileLabel,
   fileAccept,
@@ -98,62 +104,85 @@ export const FileLoginPanel = ({
   placeholder,
   dataTestId,
   fileUploadTestId,
-  children
+  children,
+  initialValues = { file: null, password: '' }
 }: FileLoginPanelProps) => {
+  const defaultInitialValues: FileLoginFormValues = {
+    file: null,
+    password: '',
+    ...initialValues
+  };
+
   return (
     <div style={styles.container} data-testid={dataTestId}>
-      <form onSubmit={onSubmit} style={styles.form}>
-        <div>
-          <label style={styles.label}>{fileLabel}</label>
-          <div style={styles.fileUpload} data-testid={fileUploadTestId}>
-            <input
-              type='file'
-              accept={fileAccept}
-              onChange={onFileChange}
-              style={{ display: 'none' }}
-              id={fileInputId}
-              data-testid={DataTestIdsEnum.walletFile}
-            />
-            <label
-              htmlFor={fileInputId}
-              style={{ cursor: 'pointer', width: '100%', display: 'block' }}
-            >
-              {fileName ? (
-                <div>
-                  <div>✓ {fileLabel} loaded</div>
-                  <div style={{ fontSize: '14px', color: '#aaa' }}>
-                    {fileName}
-                  </div>
-                </div>
-              ) : (
-                placeholder
+      <Formik
+        initialValues={defaultInitialValues}
+        validationSchema={fileLoginFormSchema()}
+        onSubmit={onSubmit}
+      >
+        {(formikProps: FormikProps<FileLoginFormValues>) => (
+          <Form style={styles.form}>
+            <div>
+              <label style={styles.label}>{fileLabel}</label>
+              <div style={styles.fileUpload} data-testid={fileUploadTestId}>
+                <input
+                  type='file'
+                  accept={fileAccept}
+                  onChange={(e) => {
+                    onFileChange(e);
+                    const file = e.target.files?.[0] || null;
+                    formikProps.setFieldValue('file', file);
+                  }}
+                  style={{ display: 'none' }}
+                  id={fileInputId}
+                  data-testid={DataTestIdsEnum.walletFile}
+                />
+                <label
+                  htmlFor={fileInputId}
+                  style={{ cursor: 'pointer', width: '100%', display: 'block' }}
+                >
+                  {fileName ? (
+                    <div>
+                      <div>✓ {fileLabel} loaded</div>
+                      <div style={{ fontSize: '14px', color: '#aaa' }}>
+                        {fileName}
+                      </div>
+                    </div>
+                  ) : (
+                    placeholder
+                  )}
+                </label>
+              </div>
+              {formikProps.errors.file && formikProps.touched.file && (
+                <div style={styles.error}>{formikProps.errors.file}</div>
               )}
-            </label>
-          </div>
-        </div>
+            </div>
 
-        {children}
+            {children && typeof children === 'function'
+              ? children(formikProps)
+              : children}
 
-        {error && <div style={styles.error}>{error}</div>}
-
-        <div style={styles.buttonGroup}>
-          <button
-            onClick={onClose}
-            style={styles.button}
-            data-testid={DataTestIdsEnum.cancelBtn}
-            type='button'
-          >
-            Cancel
-          </button>
-          <button
-            type='submit'
-            style={styles.button}
-            data-testid={DataTestIdsEnum.submitButton}
-          >
-            Login
-          </button>
-        </div>
-      </form>
+            <div style={styles.buttonGroup}>
+              <button
+                onClick={onClose}
+                style={styles.button}
+                data-testid={DataTestIdsEnum.cancelBtn}
+                type='button'
+              >
+                Cancel
+              </button>
+              <button
+                type='submit'
+                style={styles.button}
+                data-testid={DataTestIdsEnum.submitButton}
+                disabled={!formikProps.isValid || formikProps.isSubmitting}
+              >
+                Login
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

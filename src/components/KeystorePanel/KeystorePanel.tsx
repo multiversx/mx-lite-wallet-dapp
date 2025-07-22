@@ -1,12 +1,6 @@
-import {
-  useCallback,
-  useState,
-  useEffect,
-  ChangeEvent,
-  FormEvent
-} from 'react';
+import { useCallback, useState, useEffect, ChangeEvent } from 'react';
 import { AddressScreens } from 'components';
-import { FileLoginPanel } from 'components/FileLoginPanel';
+import { FileLoginPanel, FileLoginFormValues } from 'components/FileLoginPanel';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { accessWallet } from '../../providers/Keystore/accessWallet';
 import { parseKeystoreJSON } from '../../providers/Keystore/parseKeystoreJSON';
@@ -38,6 +32,11 @@ const styles = {
     color: '#fff',
     marginBottom: '4px',
     display: 'block'
+  },
+  error: {
+    color: 'red',
+    fontSize: '14px',
+    marginTop: '4px'
   }
 };
 
@@ -103,23 +102,24 @@ export const KeystorePanel = ({
     }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (values: FileLoginFormValues) => {
+    const file = values.file || selectedFile;
+    const submittedPassword = values.password || password;
 
-    if (!selectedFile && !savedFileContent) {
+    if (!file && !savedFileContent) {
       setError('Please select a keystore file');
       return;
     }
 
-    if (!password) {
+    if (!submittedPassword) {
       setError('Please enter your keystore password');
       return;
     }
 
     let keystoreDataParsed;
 
-    if (selectedFile) {
-      keystoreDataParsed = await parseKeystoreJSON(selectedFile);
+    if (file) {
+      keystoreDataParsed = await parseKeystoreJSON(file);
     } else if (savedFileContent) {
       keystoreDataParsed = JSON.parse(savedFileContent);
     }
@@ -131,7 +131,7 @@ export const KeystorePanel = ({
 
     const walletData = accessWallet({
       kdContent: keystoreDataParsed,
-      accessPassVal: password,
+      accessPassVal: submittedPassword,
       index: 0
     });
 
@@ -142,6 +142,7 @@ export const KeystorePanel = ({
 
     if (keystoreDataParsed.kind === 'mnemonic' && needsAddress) {
       setKeystoreData(keystoreDataParsed);
+      setPassword(submittedPassword);
       setShowAddressSelection(true);
 
       return;
@@ -197,7 +198,6 @@ export const KeystorePanel = ({
       onSubmit={handleSubmit}
       onClose={handleClose}
       fileName={fileName}
-      error={error}
       onFileChange={handleFileChange}
       fileLabel='Keystore File'
       fileAccept='.json'
@@ -205,21 +205,30 @@ export const KeystorePanel = ({
       placeholder='Click here to select a keystore file'
       dataTestId={DataTestIdsEnum.keystoreLoginPanel}
       fileUploadTestId={DataTestIdsEnum.keystoreBtn}
+      initialValues={{ file: null, password }}
     >
-      <div>
-        <label style={styles.label}>
-          Password
-          <input
-            style={styles.input}
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder='Enter keystore password'
-            required
-            data-testid={DataTestIdsEnum.accessPass}
-          />
-        </label>
-      </div>
+      {(formikProps) => (
+        <div>
+          <label style={styles.label}>
+            Password
+            <input
+              style={styles.input}
+              type='password'
+              value={formikProps.values.password}
+              onChange={formikProps.handleChange}
+              onBlur={formikProps.handleBlur}
+              name='password'
+              placeholder='Enter keystore password'
+              required
+              data-testid={DataTestIdsEnum.accessPass}
+            />
+          </label>
+          {formikProps.errors.password && formikProps.touched.password && (
+            <div style={styles.error}>{formikProps.errors.password}</div>
+          )}
+          {error && <div style={styles.error}>{error}</div>}
+        </div>
+      )}
     </FileLoginPanel>
   );
 };
