@@ -89,7 +89,9 @@ export interface FileLoginPanelProps {
   placeholder: string;
   dataTestId: string;
   fileUploadTestId: string;
-  children?: ReactNode | ((formikProps: FormikProps<FileLoginFormValues>) => ReactNode);
+  children?:
+    | ReactNode
+    | ((formikProps: FormikProps<FileLoginFormValues>) => ReactNode);
   initialValues?: Partial<FileLoginFormValues>;
 }
 
