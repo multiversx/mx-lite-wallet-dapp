@@ -5,7 +5,7 @@ import { PanelWrapper } from 'components/PanelWrapper';
 interface IKeystoreLoginPanelState {
   root: Root;
   isOpen: boolean;
-  resolveFn: ((value: IKeystorePanelReturn) => void) | null;
+  resolveFn: ((resolvedValue: IKeystorePanelReturn) => void) | null;
   anchor: HTMLElement | undefined;
 }
 

@@ -1,3 +1,4 @@
+import { FeaturePageLayout } from 'components';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
@@ -68,7 +69,11 @@ const routesObject: Record<
     path: RouteNamesEnum.send,
     authenticatedRoute: true,
     title: 'Send',
-    component: () => <Send />
+    component: () => (
+      <FeaturePageLayout title='Send'>
+        <Send />
+      </FeaturePageLayout>
+    )
   },
   [RouteNamesEnum.sign]: {
     path: RouteNamesEnum.sign,
@@ -78,37 +83,65 @@ const routesObject: Record<
   [RouteNamesEnum.signMessage]: {
     path: RouteNamesEnum.signMessage,
     title: 'Sign Message',
-    component: () => <SignMessage />
+    component: () => (
+      <FeaturePageLayout title='Sign Message'>
+        <SignMessage />
+      </FeaturePageLayout>
+    )
   },
   [RouteNamesEnum.sovereignTransfer]: {
     path: RouteNamesEnum.sovereignTransfer,
     title: 'Sovereign Transfer',
-    component: () => <SovereignTransfer />
+    component: () => (
+      <FeaturePageLayout title='Sovereign Transfer'>
+        <SovereignTransfer />
+      </FeaturePageLayout>
+    )
   },
   [RouteNamesEnum.issueToken]: {
     path: RouteNamesEnum.issueToken,
     title: 'Issue Token',
-    component: () => <IssueToken />
+    component: () => (
+      <FeaturePageLayout title='Issue Token'>
+        <IssueToken />
+      </FeaturePageLayout>
+    )
   },
   [RouteNamesEnum.issueCollection]: {
     path: RouteNamesEnum.issueCollection,
     title: 'Issue Collection',
-    component: () => <IssueCollection />
+    component: () => (
+      <FeaturePageLayout title='Issue Collection'>
+        <IssueCollection />
+      </FeaturePageLayout>
+    )
   },
   [RouteNamesEnum.createNft]: {
     path: RouteNamesEnum.createNft,
     title: 'Create NFT',
-    component: () => <IssueNft />
+    component: () => (
+      <FeaturePageLayout title='Create NFT'>
+        <IssueNft />
+      </FeaturePageLayout>
+    )
   },
   [RouteNamesEnum.registerToken]: {
     path: RouteNamesEnum.registerToken,
     title: 'Register Token',
-    component: () => <RegisterToken />
+    component: () => (
+      <FeaturePageLayout title='Register Sovereign Token'>
+        <RegisterToken />
+      </FeaturePageLayout>
+    )
   },
   [RouteNamesEnum.faucet]: {
     path: RouteNamesEnum.faucet,
-    title: '',
-    component: () => <Faucet />
+    title: 'Faucet',
+    component: () => (
+      <FeaturePageLayout title='Faucet'>
+        <Faucet />
+      </FeaturePageLayout>
+    )
   },
   [HooksPageEnum.login]: {
     path: HooksPageEnum.login,

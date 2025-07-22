@@ -98,7 +98,6 @@ export const Sign = () => {
   };
 
   if (hasErrors) {
-    // TODO: Add a modal container
     return (
       <div className='sign w-100 px-4 pb-4 d-flex align-items-center flex-column gap-4 justify-content-center'>
         <>

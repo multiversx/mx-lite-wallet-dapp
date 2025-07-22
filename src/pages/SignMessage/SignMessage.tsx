@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, OutputContainer, FeaturePageLayout } from 'components';
+import { Button, OutputContainer } from 'components';
 import { useReplyToDapp, useReplyWithCancelled } from 'hooks';
 import {
   Address,
@@ -130,64 +130,62 @@ export const SignMessage = () => {
   };
 
   return (
-    <FeaturePageLayout title='Sign Message'>
-      <div className='flex flex-col gap-6'>
-        <OutputContainer className='p-0 m-0 border-none'>
-          {!['success', 'error'].includes(state) && (
-            <textarea
-              placeholder='Write message here'
-              className='resize-none w-full h-32 rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-blue-500 text-gray-800'
-              value={message}
-              onChange={(event) => {
-                setMessage(event.currentTarget.value);
-              }}
-            />
-          )}
+    <div className='flex flex-col gap-6'>
+      <OutputContainer className='p-0 m-0 border-none'>
+        {!['success', 'error'].includes(state) && (
+          <textarea
+            placeholder='Write message here'
+            className='resize-none w-full h-32 rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-blue-500 text-gray-800'
+            value={message}
+            onChange={(event) => {
+              setMessage(event.currentTarget.value);
+            }}
+          />
+        )}
 
-          {state === 'success' && signedMessage != null && (
-            <SignSuccess
-              message={signedMessage}
-              signature={signature}
-              address={address}
-            />
-          )}
+        {state === 'success' && signedMessage != null && (
+          <SignSuccess
+            message={signedMessage}
+            signature={signature}
+            address={address}
+          />
+        )}
 
-          {state === 'error' && <SignFailure />}
-        </OutputContainer>
-        <div className='flex gap-2 items-center justify-center'>
-          {['success', 'error'].includes(state) ? (
-            <>
-              <Button
-                data-testid='closeTransactionSuccessBtn'
-                id='closeButton'
-                onClick={handleClear}
-              >
-                <>
-                  <FontAwesomeIcon
-                    icon={state === 'success' ? faBroom : faArrowsRotate}
-                    className='mr-1'
-                  />
-                  {state === 'error' ? 'Try again' : 'Clear'}
-                </>
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button
-                data-testid='signMsgBtn'
-                onClick={handleSubmit}
-                disabled={!message.trim()}
-              >
-                <>
-                  <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
-                  Sign
-                </>
-              </Button>
-              <Button onClick={handleCancel}>Cancel</Button>
-            </>
-          )}
-        </div>
+        {state === 'error' && <SignFailure />}
+      </OutputContainer>
+      <div className='flex gap-2 items-center justify-center'>
+        {['success', 'error'].includes(state) ? (
+          <>
+            <Button
+              data-testid='closeTransactionSuccessBtn'
+              id='closeButton'
+              onClick={handleClear}
+            >
+              <>
+                <FontAwesomeIcon
+                  icon={state === 'success' ? faBroom : faArrowsRotate}
+                  className='mr-1'
+                />
+                {state === 'error' ? 'Try again' : 'Clear'}
+              </>
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              data-testid='signMsgBtn'
+              onClick={handleSubmit}
+              disabled={!message.trim()}
+            >
+              <>
+                <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
+                Sign
+              </>
+            </Button>
+            <Button onClick={handleCancel}>Cancel</Button>
+          </>
+        )}
       </div>
-    </FeaturePageLayout>
+    </div>
   );
 };

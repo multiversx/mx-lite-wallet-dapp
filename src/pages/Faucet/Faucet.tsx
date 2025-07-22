@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button, FeaturePageLayout } from 'components';
+import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { RootState } from 'redux/store';
 import { routeNames } from 'routes';
@@ -23,7 +23,7 @@ export const Faucet = () => {
   };
 
   return (
-    <FeaturePageLayout title='Faucet'>
+    <>
       <FaucetContent />
       <Button
         data-testid={DataTestIdsEnum.cancelFaucetBtn}
@@ -33,6 +33,6 @@ export const Faucet = () => {
       >
         Cancel
       </Button>
-    </FeaturePageLayout>
+    </>
   );
 };

@@ -5,7 +5,7 @@ import { PemPanel } from 'components/PemPanel';
 interface IPemLoginPanelState {
   root: Root;
   isOpen: boolean;
-  resolveFn: ((value: IPemPanelReturn) => void) | null;
+  resolveFn: ((resolvedValue: IPemPanelReturn) => void) | null;
   anchor: HTMLElement | undefined;
 }
 
