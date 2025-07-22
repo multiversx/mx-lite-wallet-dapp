@@ -93,6 +93,7 @@ export interface FileLoginPanelProps {
     | ReactNode
     | ((formikProps: FormikProps<FileLoginFormValues>) => ReactNode);
   initialValues?: Partial<FileLoginFormValues>;
+  error?: string;
 }
 
 export const FileLoginPanel = ({
@@ -107,7 +108,8 @@ export const FileLoginPanel = ({
   dataTestId,
   fileUploadTestId,
   children,
-  initialValues = { file: null, password: '' }
+  initialValues = { file: null, password: '' },
+  error
 }: FileLoginPanelProps) => {
   const defaultInitialValues: FileLoginFormValues = {
     file: null,
@@ -158,11 +160,12 @@ export const FileLoginPanel = ({
               {formikProps.errors.file && formikProps.touched.file && (
                 <div style={styles.error}>{formikProps.errors.file}</div>
               )}
+              {error && <div style={styles.error}>{error}</div>}
             </div>
 
-            {children && typeof children === 'function'
-              ? children(formikProps)
-              : children}
+            {children &&
+              typeof children === 'function' &&
+              children(formikProps)}
 
             <div style={styles.buttonGroup}>
               <button

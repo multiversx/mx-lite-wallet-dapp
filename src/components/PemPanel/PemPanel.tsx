@@ -61,12 +61,8 @@ export const PemPanel = ({ onSubmit, onClose }: IPemPanelProps) => {
       placeholder='Click here to select a PEM file'
       dataTestId={DataTestIdsEnum.pemLoginPanel}
       fileUploadTestId={DataTestIdsEnum.pemBtn}
-    >
-      {error && (
-        <div style={{ color: 'red', fontSize: '14px', marginTop: '4px' }}>
-          {error}
-        </div>
-      )}
-    </FileLoginPanel>
+      initialValues={{ file: null, password: '' }}
+      error={error}
+    />
   );
 };
