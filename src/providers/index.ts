@@ -1,3 +1,4 @@
+export * from './FileProvider';
 export * from './Pem/PemProvider';
 export * from './Keystore/KeystoreProvider';
 export * from './Pem/PemLoginPanel';

@@ -80,7 +80,7 @@ const styles = {
   }
 };
 
-interface KeystorePanelProps {
+interface IKeystorePanelProps {
   onSubmit: (values: {
     privateKey: string;
     address: string;
@@ -100,7 +100,7 @@ export const KeystorePanel = ({
   needsAddress,
   savedKeystoreFile,
   keystoreFileName
-}: KeystorePanelProps) => {
+}: IKeystorePanelProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const [password, setPassword] = useState<string>('');

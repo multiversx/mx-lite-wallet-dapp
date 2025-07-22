@@ -1,199 +1,46 @@
 import { ProviderType } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
-import {
-  Address,
-  IDAppProviderAccount,
-  IProvider,
-  Message,
-  MessageComputer,
-  signTransactions,
-  Transaction,
-  TransactionComputer,
-  UserSecretKey,
-  UserSigner
-} from 'lib';
 import { IFileProviderOptions } from 'types/providers';
 import { PemLoginPanel } from './PemLoginPanel';
+import { FileProvider } from '../FileProvider';
 
-const notInitializedError = (caller: string) => () => {
-  throw new Error(`Unable to perform ${caller}, Provider not initialized`);
-};
-
-let privateKey = '';
-
-export class PemProvider implements IProvider {
+export class PemProvider extends FileProvider {
   private panel = PemLoginPanel.getInstance();
-  private _anchor?: HTMLElement;
-  private _account: IDAppProviderAccount = {
-    address: ''
-  };
 
   constructor(options?: IFileProviderOptions) {
-    this._anchor = options?.anchor;
-    if (options?.address) {
-      this.setAccount({
-        address: options.address
-      });
-    }
-  }
-
-  isInitialized() {
-    return Boolean(this._account.address);
-  }
-
-  isConnected(): boolean {
-    return Boolean(privateKey);
-  }
-
-  getTokenLoginSignature(): string | undefined {
-    return this._account.signature;
-  }
-
-  setAccount(value: IDAppProviderAccount) {
-    this._account = value;
-  }
-
-  getAccount(): IDAppProviderAccount | null {
-    return this._account;
-  }
-
-  async getAddress(): Promise<string | undefined> {
-    return this._account.address;
-  }
-
-  async init() {
-    return true;
+    super(options);
   }
 
   getType(): ProviderType {
     return 'pemProvider' as unknown as ProviderType;
   }
 
-  async signTransaction(transaction: Transaction) {
-    const _privateKey = await this._getPrivateKey('signTransaction');
-    const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
-    const transactionComputer = new TransactionComputer();
-    const bytesToSign = transactionComputer.computeBytesForSigning(transaction);
-    const signature = await signer.sign(bytesToSign);
-    transaction.signature = new Uint8Array(signature);
-
-    return transaction;
-  }
-
-  private async _signTransactions(transactions: Transaction[]) {
-    const signedTransactions: Transaction[] = [];
-    for (const transaction of transactions) {
-      const signedTransaction = await this.signTransaction(transaction);
-      signedTransactions.push(signedTransaction);
-    }
-    return signedTransactions;
-  }
-
-  async signTransactions(transactions: Transaction[]) {
-    const hasPrivateKey = await this._getPrivateKey('signTransactions');
-    if (!hasPrivateKey) {
-      throw Error('Unable to sign transactions.');
-    }
-    return signTransactions({
-      transactions,
-      handleSign: this._signTransactions.bind(this)
-    });
-  }
-
-  async login(options?: { token?: string }): Promise<{
+  protected async showLoginPanel(): Promise<{
     address: string;
-    signature: string;
+    privateKey: string;
   }> {
-    return new Promise(async (resolve, reject) => {
-      const { address, privateKey: userPrivateKey } =
-        await this.panel.showPanel({
-          needsAddress: true,
-          anchor: this._anchor
-        });
-
-      if (!address || !userPrivateKey) {
-        return reject('User cancelled login');
-      }
-
-      privateKey = userPrivateKey;
-      this.setAccount({
-        address
-      });
-      const token = options?.token;
-
-      if (!token) {
-        resolve({
-          address,
-          signature: ''
-        });
-        return;
-      }
-
-      const message = `${address}${token}{}`;
-      const msg = new Message({
-        address: new Address(address),
-        data: new TextEncoder().encode(message)
-      });
-      const signedMessage = await this.signMessage(msg);
-
-      if (!signedMessage.signature) {
-        resolve({
-          address,
-          signature: ''
-        });
-        return;
-      }
-
-      const signature = Array.from(signedMessage.signature)
-        .map((b) => b.toString(16).padStart(2, '0'))
-        .join('');
-
-      this.setAccount({
-        address,
-        signature
-      });
-
-      resolve({
-        address,
-        signature
-      });
+    return await this.panel.showPanel({
+      needsAddress: true,
+      anchor: this._anchor
     });
   }
 
-  async logout() {
-    privateKey = '';
-    this._account = {
-      address: ''
-    };
-    return true;
+  protected async showReauthPanel(): Promise<{
+    privateKey: string;
+  }> {
+    return await this.panel.showPanel();
   }
 
-  async signMessage(message: Message) {
-    const _privateKey = await this._getPrivateKey('signMessage');
-
-    const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
-    const messageComputer = new MessageComputer();
-
-    const messageToSign = new Uint8Array(
-      messageComputer.computeBytesForSigning(message)
-    );
-
-    const signature = await signer.sign(new Uint8Array(messageToSign));
-    message.signature = new Uint8Array(signature);
-
-    return message;
+  protected handleLoginResult(): void {
+    // PEM provider doesn't need to store additional login data
   }
 
-  private async _getPrivateKey(action: string) {
-    if (!privateKey) {
-      const { privateKey: userPrivateKey } = await this.panel.showPanel();
+  protected encodeMessage(message: string): Uint8Array {
+    return new TextEncoder().encode(message);
+  }
 
-      if (!userPrivateKey) {
-        await this.logout();
-        return notInitializedError(action)();
-      }
-
-      privateKey = userPrivateKey;
-    }
-    return privateKey;
+  protected formatSignature(signature: Uint8Array): string {
+    return Array.from(signature)
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
   }
 }

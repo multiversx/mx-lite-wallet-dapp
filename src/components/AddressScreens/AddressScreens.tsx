@@ -71,11 +71,7 @@ export const AddressScreens = ({
   }, [loadAccounts, startIndex]);
 
   const handleAccessWallet = useCallback(() => {
-    console.log('handleAccessWallet', selectedIndex);
-    console.log('accounts', accounts);
     if (selectedIndex == null || !accounts[selectedIndex]) return;
-
-    console.log('handleAccessWallet', accounts[selectedIndex]);
 
     onConfirmSelectedAddress(accounts[selectedIndex]);
   }, [selectedIndex, accounts, onConfirmSelectedAddress]);

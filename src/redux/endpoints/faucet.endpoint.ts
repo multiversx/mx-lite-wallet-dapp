@@ -9,7 +9,8 @@ import {
   stringIsInteger,
   DECIMALS,
   DIGITS,
-  ZERO
+  ZERO,
+  PartialNftType
 } from 'lib';
 
 import { RootApi } from 'redux/rootApi';
@@ -69,7 +70,7 @@ const faucetEndpoints = RootApi.injectEndpoints({
           return { error: tokenData.error as FetchBaseQueryError };
         }
 
-        const { decimals } = tokenData.data as { decimals: number };
+        const { decimals } = tokenData.data as PartialNftType;
 
         const denominatedTokenAmount = formatAmount({
           input: tokenAmount,

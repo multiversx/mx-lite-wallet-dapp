@@ -8,10 +8,6 @@ export const buildTransactionsQueryString = ({
   transactions: Transaction[];
   callbackUrl?: string;
 }): string => {
-  console.log('[buildTransactionsQueryString] Input:', {
-    transactionCount: transactions.length,
-    callbackUrl
-  });
   const jsonToSend: Record<string, (string | number | undefined)[]> = {};
   transactions.map((tx) => {
     const plainTx = processBase64Fields(tx.toPlainObject()).decode();
@@ -35,6 +31,5 @@ export const buildTransactionsQueryString = ({
     }
   });
 
-  console.log('[buildTransactionsQueryString] Result:', result);
   return result;
 };
