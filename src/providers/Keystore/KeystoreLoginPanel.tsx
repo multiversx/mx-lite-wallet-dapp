@@ -1,15 +1,9 @@
-import { createRoot, Root } from 'react-dom/client';
+import { ReactElement } from 'react';
 import { KeystorePanel } from 'components/KeystorePanel';
 import { PanelWrapper } from 'components/PanelWrapper';
+import { BaseFileLoginPanel, BaseFileLoginReturn } from '../BaseFileLoginPanel';
 
-interface IKeystoreLoginPanelState {
-  root: Root;
-  isOpen: boolean;
-  resolveFn: ((resolvedValue: IKeystorePanelReturn) => void) | null;
-  anchor: HTMLElement | undefined;
-}
-
-interface IKeystorePanelReturn {
+interface IKeystorePanelReturn extends BaseFileLoginReturn {
   privateKey: string;
   address: string;
   keystoreFile?: string;
@@ -17,15 +11,21 @@ interface IKeystorePanelReturn {
   addressIndex?: number;
 }
 
-export class KeystoreLoginPanel {
+interface IKeystoreLoginOptions {
+  needsAddress?: boolean;
+  anchor?: HTMLElement;
+  savedKeystoreFile?: string;
+  keystoreFileName?: string;
+}
+
+export class KeystoreLoginPanel extends BaseFileLoginPanel<
+  IKeystorePanelReturn,
+  IKeystoreLoginOptions
+> {
   private static instance: KeystoreLoginPanel;
-  private _panelRoot: HTMLDivElement;
-  private _currentPanel: IKeystoreLoginPanelState | null = null;
 
   private constructor() {
-    this._panelRoot = document.createElement('div');
-    document.body.appendChild(this._panelRoot);
-    this._initializePanel();
+    super();
   }
 
   public static getInstance(): KeystoreLoginPanel {
@@ -35,59 +35,24 @@ export class KeystoreLoginPanel {
     return KeystoreLoginPanel.instance;
   }
 
-  private _initializePanel() {
-    const root = createRoot(this._panelRoot);
-    this._currentPanel = {
-      root,
-      isOpen: false,
-      resolveFn: null,
-      anchor: undefined
-    };
-
-    this._renderPanel();
-  }
-
-  private _renderPanel(options?: {
-    needsAddress?: boolean;
-    anchor?: HTMLElement;
-    savedKeystoreFile?: string;
-    keystoreFileName?: string;
-  }) {
-    if (!this._currentPanel) {
-      return;
-    }
-
-    const onSubmit = (values: {
-      privateKey: string;
-      address: string;
-      keystoreFile?: string;
-      keystoreFileName?: string;
-      addressIndex?: number;
-    }) => {
-      if (!this._currentPanel) {
-        return;
-      }
-
-      this._currentPanel.isOpen = false;
-      this._currentPanel.resolveFn?.(values);
-      this._renderPanel();
-    };
-
-    const onClose = () => {
-      if (!this._currentPanel) {
-        return;
-      }
-
-      this._currentPanel.isOpen = false;
-      this._currentPanel.resolveFn?.({ privateKey: '', address: '' });
-      this._renderPanel();
-    };
-
-    this._currentPanel.root.render(
+  protected renderPanelContent({
+    isOpen,
+    onSubmit,
+    onClose,
+    anchor,
+    options
+  }: {
+    isOpen: boolean;
+    onSubmit: (values: IKeystorePanelReturn) => void;
+    onClose: () => void;
+    anchor: HTMLElement | undefined;
+    options?: IKeystoreLoginOptions;
+  }): ReactElement {
+    return (
       <PanelWrapper
-        isOpen={this._currentPanel.isOpen}
+        isOpen={isOpen}
         onClose={onClose}
-        anchor={this._currentPanel.anchor}
+        anchor={anchor}
         panelTitle='Keystore Login'
       >
         <KeystorePanel
@@ -101,21 +66,7 @@ export class KeystoreLoginPanel {
     );
   }
 
-  public showPanel(options?: {
-    needsAddress?: boolean;
-    anchor?: HTMLElement;
-    savedKeystoreFile?: string;
-    keystoreFileName?: string;
-  }): Promise<IKeystorePanelReturn> {
-    return new Promise((resolve) => {
-      if (!this._currentPanel) {
-        return Promise.reject(new Error('Panel not initialized'));
-      }
-
-      this._currentPanel.resolveFn = resolve;
-      this._currentPanel.isOpen = true;
-      this._currentPanel.anchor = options?.anchor;
-      this._renderPanel(options);
-    });
+  protected getDefaultCloseValues(): IKeystorePanelReturn {
+    return { privateKey: '', address: '' };
   }
 }

@@ -27,14 +27,14 @@ import { IssueToken } from '../pages/IssueToken/IssueToken';
 
 export interface RouteType {
   authenticatedRoute?: boolean;
-  path: RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum | string;
+  path: RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum;
   title: string;
   component: React.ComponentType;
   children?: RouteType[];
 }
 
 const routesObject: Record<
-  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum | string,
+  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
   RouteType
 > = {
   [RouteNamesEnum.home]: {
@@ -129,7 +129,7 @@ const routesObject: Record<
     path: RouteNamesEnum.registerToken,
     title: 'Register Token',
     component: () => (
-      <FeaturePageLayout title='Register Sovereign Token'>
+      <FeaturePageLayout title="Register Sovereign Token">
         <RegisterToken />
       </FeaturePageLayout>
     )
@@ -138,7 +138,7 @@ const routesObject: Record<
     path: RouteNamesEnum.faucet,
     title: 'Faucet',
     component: () => (
-      <FeaturePageLayout title='Faucet'>
+      <FeaturePageLayout title="Faucet">
         <Faucet />
       </FeaturePageLayout>
     )
