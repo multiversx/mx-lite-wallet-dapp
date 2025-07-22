@@ -1,4 +1,4 @@
-import { Address } from 'lib';
+import { Address } from 'lib/sdkCore';
 
 export const addressIsErd = (address: string) => {
   try {
