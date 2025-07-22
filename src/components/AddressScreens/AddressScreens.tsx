@@ -1,28 +1,19 @@
 import { useEffect, useState, useCallback } from 'react';
 import { MvxAddressTable } from '@multiversx/sdk-dapp-ui/react';
+import type {
+  IndexedAccountType,
+  IAddressTableData
+} from '@multiversx/sdk-dapp-ui/types/types/address-table.types';
 import { type MvxAddressTable as MvxAddressTablePropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-address-table';
 import type { AccessWalletType } from '../../providers/Keystore/accessWallet';
 import { getKeystoreAddresses } from '../../providers/Keystore/getKeystoreAddresses';
-
-export interface IAccount {
-  address: string;
-  balance: string;
-  usdValue?: string;
-  index: number;
-}
-export interface IAccountScreenData {
-  accounts: IAccount[];
-  startIndex: number;
-  addressesPerPage: number;
-  isLoading: boolean;
-}
 
 export interface AddressScreensPropsType
   extends Partial<MvxAddressTablePropsType> {
   kdContent: AccessWalletType['kdContent'];
   accessPassVal: string;
   addressesPerPage?: number;
-  onConfirmSelectedAddress: (account: IAccount) => void;
+  onConfirmSelectedAddress: (account: IndexedAccountType) => void;
   onPageChange?: (pageIndex: number) => void;
 }
 
@@ -36,7 +27,7 @@ export const AddressScreens = ({
   onConfirmSelectedAddress,
   className
 }: AddressScreensPropsType) => {
-  const [accounts, setAccounts] = useState<IAccount[]>([]);
+  const [accounts, setAccounts] = useState<IndexedAccountType[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -94,7 +85,7 @@ export const AddressScreens = ({
     }
   }, []);
 
-  const accountScreenData: IAccountScreenData = {
+  const accountScreenData: IAddressTableData = {
     accounts,
     startIndex,
     addressesPerPage,
