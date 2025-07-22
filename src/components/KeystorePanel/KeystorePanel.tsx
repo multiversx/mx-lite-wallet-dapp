@@ -6,6 +6,7 @@ import {
   FormEvent
 } from 'react';
 import { AddressScreens } from 'components';
+import { FileLoginPanel } from 'components/FileLoginPanel';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { accessWallet } from '../../providers/Keystore/accessWallet';
 import { parseKeystoreJSON } from '../../providers/Keystore/parseKeystoreJSON';
@@ -21,12 +22,6 @@ const styles = {
     flexDirection: 'column' as const,
     alignItems: 'stretch'
   },
-  form: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: '20px',
-    width: '100%'
-  },
   input: {
     padding: '10px',
     marginTop: '6px',
@@ -37,50 +32,16 @@ const styles = {
     color: '#fff',
     fontSize: '16px'
   },
-  buttonGroup: {
-    display: 'flex',
-    gap: '12px',
-    justifyContent: 'flex-end',
-    marginTop: '10px'
-  },
-  button: {
-    backgroundColor: '#232326',
-    color: '#fff',
-    padding: '10px 24px',
-    borderRadius: '8px',
-    border: '1px solid #333',
-    cursor: 'pointer',
-    fontSize: '16px',
-    fontWeight: 500,
-    transition: 'background 0.2s, border 0.2s'
-  },
-  fileUpload: {
-    border: '2px dashed #333',
-    borderRadius: '8px',
-    padding: '18px',
-    textAlign: 'center' as const,
-    cursor: 'pointer',
-    background: '#232326',
-    color: '#fff',
-    fontSize: '16px',
-    marginTop: '6px'
-  },
   label: {
     fontWeight: 500,
     fontSize: '15px',
     color: '#fff',
     marginBottom: '4px',
     display: 'block'
-  },
-  error: {
-    color: 'red',
-    fontSize: '14px',
-    marginTop: '-10px',
-    marginBottom: '10px'
   }
 };
 
-interface KeystorePanelProps {
+interface IKeystorePanelProps {
   onSubmit: (values: {
     privateKey: string;
     address: string;
@@ -100,7 +61,7 @@ export const KeystorePanel = ({
   needsAddress,
   savedKeystoreFile,
   keystoreFileName
-}: KeystorePanelProps) => {
+}: IKeystorePanelProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -218,7 +179,7 @@ export const KeystorePanel = ({
   if (needsAddress && showAddressSelection && keystoreData) {
     return (
       <div
-        className='w-full h-full max-w-md mx-auto py-6 flex flex-col items-stretch'
+        style={styles.container}
         data-testid={DataTestIdsEnum.addressSelectionPanel}
       >
         <AddressScreens
@@ -232,69 +193,33 @@ export const KeystorePanel = ({
   }
 
   return (
-    <div style={styles.container} data-testid={DataTestIdsEnum.keystoreLoginPanel}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div>
-          <label style={styles.label}>Keystore File</label>
-          <div style={styles.fileUpload} data-testid={DataTestIdsEnum.keystoreBtn}>
-            <input
-              type='file'
-              accept='.json'
-              onChange={handleFileChange}
-              style={{ display: 'none' }}
-              id='keystore-file-input'
-              data-testid={DataTestIdsEnum.walletFile}
-            />
-            <label
-              htmlFor='keystore-file-input'
-              style={{ cursor: 'pointer', width: '100%', display: 'block' }}
-            >
-              {fileName ? (
-                <div>
-                  <div>✓ Keystore file loaded</div>
-                  <div style={{ fontSize: '14px', color: '#aaa' }}>
-                    {fileName}
-                  </div>
-                </div>
-              ) : (
-                'Click here to select a keystore file'
-              )}
-            </label>
-          </div>
-        </div>
-        <div>
-          <label style={styles.label}>
-            Password
-            <input
-              style={styles.input}
-              type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder='Enter keystore password'
-              required
-              data-testid={DataTestIdsEnum.accessPass}
-            />
-          </label>
-        </div>
-        {error && <div style={styles.error}>{error}</div>}
-        <div style={styles.buttonGroup}>
-          <button
-            onClick={handleClose}
-            style={styles.button}
-            data-testid={DataTestIdsEnum.cancelBtn}
-            type='button'
-          >
-            Cancel
-          </button>
-          <button
-            type='submit'
-            style={styles.button}
-            data-testid={DataTestIdsEnum.submitButton}
-          >
-            Login
-          </button>
-        </div>
-      </form>
-    </div>
+    <FileLoginPanel
+      onSubmit={handleSubmit}
+      onClose={handleClose}
+      fileName={fileName}
+      error={error}
+      onFileChange={handleFileChange}
+      fileLabel='Keystore File'
+      fileAccept='.json'
+      fileInputId='keystore-file-input'
+      placeholder='Click here to select a keystore file'
+      dataTestId={DataTestIdsEnum.keystoreLoginPanel}
+      fileUploadTestId={DataTestIdsEnum.keystoreBtn}
+    >
+      <div>
+        <label style={styles.label}>
+          Password
+          <input
+            style={styles.input}
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Enter keystore password'
+            required
+            data-testid={DataTestIdsEnum.accessPass}
+          />
+        </label>
+      </div>
+    </FileLoginPanel>
   );
 };
