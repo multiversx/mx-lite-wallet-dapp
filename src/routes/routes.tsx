@@ -33,9 +33,8 @@ export interface RouteType {
   children?: RouteType[];
 }
 
-const routesObject: Record<
-  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
-  RouteType
+const routesObject: Partial<
+  Record<RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum, RouteType>
 > = {
   [RouteNamesEnum.home]: {
     path: RouteNamesEnum.home,
@@ -129,7 +128,7 @@ const routesObject: Record<
     path: RouteNamesEnum.registerToken,
     title: 'Register Token',
     component: () => (
-      <FeaturePageLayout title="Register Sovereign Token">
+      <FeaturePageLayout title='Register Sovereign Token'>
         <RegisterToken />
       </FeaturePageLayout>
     )
@@ -138,7 +137,7 @@ const routesObject: Record<
     path: RouteNamesEnum.faucet,
     title: 'Faucet',
     component: () => (
-      <FeaturePageLayout title="Faucet">
+      <FeaturePageLayout title='Faucet'>
         <Faucet />
       </FeaturePageLayout>
     )
