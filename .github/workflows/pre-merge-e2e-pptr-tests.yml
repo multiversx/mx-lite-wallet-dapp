@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   run-unit-tests:
-    runs-on: ubuntu-latest
+    runs-on: runner-dapp
     steps:
       - uses: actions/checkout@v3
         with:
