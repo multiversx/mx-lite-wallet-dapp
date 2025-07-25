@@ -1,23 +1,16 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
   changeInputText,
   expectAndSignTransaction,
   expectInputToHaveValue,
-  getByDataTestId,
-  loginWithKeystore
+  getByDataTestId
 } from 'utils/testUtils/puppeteer';
+import { navigateToIssueTokenPage } from './helpers';
 
 describe('Issue Token test', () => {
   it('should create a new token with all settings checked successfully', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
-      waitUntil: 'domcontentloaded'
-    });
-
-    await loginWithKeystore();
-    await page.click(getByDataTestId(DataTestIdsEnum.issueTokenBtn));
-    await expect(page.url()).toEqual(`${WALLET_SOURCE_ORIGIN}/issue-token`);
+    await navigateToIssueTokenPage();
 
     await changeInputText({
       dataTestId: DataTestIdsEnum.tokenNameInput,
