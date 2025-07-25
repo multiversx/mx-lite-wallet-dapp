@@ -1,6 +1,5 @@
 import {
-  DEFAULT_PAGE_LOAD_DELAY_MS,
-  WALLET_SOURCE_ORIGIN
+  DEFAULT_PAGE_LOAD_DELAY_MS
 } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
@@ -11,19 +10,13 @@ import {
   expectInputToHaveValue,
   expectToBeChecked,
   getByDataTestId,
-  loginWithKeystore,
   sleep
 } from 'utils/testUtils/puppeteer';
+import { navigateToRegisterTokenPage } from './helpers';
 
 describe('Register ESDT Token test', () => {
   it('should register an ESDT token from sovereign to testnet successfully', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
-      waitUntil: 'domcontentloaded'
-    });
-
-    await loginWithKeystore();
-    await page.click(getByDataTestId(DataTestIdsEnum.registerTokenBtn));
-    await expect(page.url()).toEqual(`${WALLET_SOURCE_ORIGIN}/register-token`);
+    await navigateToRegisterTokenPage();
 
     await expectToBeChecked({
       dataTestId: DataTestIdsEnum.sendEsdtTypeInput,
