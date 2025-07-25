@@ -3,27 +3,16 @@ import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
   expectElementToContainText,
-  getByDataTestId,
-  loginWithKeystore
+  getByDataTestId
 } from 'utils/testUtils/puppeteer';
+import { navigateToIssueCollectionPage } from './helpers';
 
 describe('Issue NFT Collection test', () => {
   it('should create a new NFT collection successfully', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
-      waitUntil: 'domcontentloaded'
-    });
-
-    await loginWithKeystore();
-    await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
+    await navigateToIssueCollectionPage();
     await expect(page.url()).toEqual(
       `${WALLET_SOURCE_ORIGIN}/issue-collection`
     );
-
-    const createCollectionBtn = await page.waitForSelector(
-      getByDataTestId(DataTestIdsEnum.issueCollectionBtn)
-    );
-
-    await createCollectionBtn?.click();
     await changeInputText({
       dataTestId: DataTestIdsEnum.tokenNameInput,
       shouldOverride: true,

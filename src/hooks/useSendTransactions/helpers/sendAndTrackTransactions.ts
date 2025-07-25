@@ -35,9 +35,15 @@ export const sendAndTrackTransactions = async ({
     }
   };
 
-  const signedTransactions = await signTxs(transactions);
-  const sentTransactions = await txManager.send(signedTransactions);
-  const sessionId = await txManager.track(sentTransactions, options);
+  try {
+    const signedTransactions = await signTxs(transactions);
+    const sentTransactions = await txManager.send(signedTransactions);
+    const sessionId = await txManager.track(sentTransactions, options);
 
-  return sessionId;
+    return sessionId;
+  } catch (error) {
+    console.error(error);
+
+    return null;
+  }
 };

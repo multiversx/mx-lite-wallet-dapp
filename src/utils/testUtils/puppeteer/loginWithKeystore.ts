@@ -1,8 +1,12 @@
-import { DEFAULT_PASSWORD, keystoreAccount } from '__mocks__';
+import {
+  DEFAULT_PASSWORD,
+  DEFAULT_PAGE_LOAD_DELAY_MS,
+  keystoreAccount
+} from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainText } from './expectElementToContainText';
-import { getByDataTestId } from './getByDataTestId';
 import { getByTestIdDeep } from './getByDataTestIdDeep';
+import { sleep } from './sleep';
 import { uploadFile } from './uploadFile';
 
 export const loginWithKeystore = async (props?: {
@@ -28,9 +32,12 @@ export const loginWithKeystore = async (props?: {
   await keystoreProviderBtn.click();
 
   // Wait for the keystore login panel to appear
-  await parent.waitForSelector(
-    getByDataTestId(DataTestIdsEnum.keystoreLoginPanel)
+  const keystoreLoginPanel = await getByTestIdDeep(
+    parent,
+    DataTestIdsEnum.keystoreLoginPanel
   );
+
+  expect(keystoreLoginPanel).toBeDefined();
 
   // Upload the keystore file
   await uploadFile({
@@ -59,6 +66,8 @@ export const loginWithKeystore = async (props?: {
 
   const confirmBtn = await getByTestIdDeep(parent, DataTestIdsEnum.confirmBtn);
   await confirmBtn.click();
+
+  await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
 
   if (props?.skipLoggedInCheck) {
     return;

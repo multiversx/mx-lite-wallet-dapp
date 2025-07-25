@@ -1,40 +1,15 @@
-import {
-  DEFAULT_PAGE_LOAD_DELAY_MS,
-  WALLET_SOURCE_ORIGIN
-} from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
   expectElementToContainText,
   expectInputToHaveValue,
-  getByDataTestId,
-  loginWithKeystore
+  getByDataTestId
 } from 'utils/testUtils/puppeteer';
-import { sleep } from 'utils/testUtils/puppeteer/sleep';
+import { navigateToIssueCollectionPage } from './helpers';
 
 describe('Issue Collection form validation test', () => {
   it('should show errors and not create collection when data is invalid', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
-      waitUntil: 'domcontentloaded'
-    });
-
-    await loginWithKeystore();
-    const issueCollectionBtn = await page.waitForSelector(
-      getByDataTestId(DataTestIdsEnum.issueCollectionBtn)
-    );
-
-    await issueCollectionBtn?.click();
-
-    await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
-    await expect(page.url()).toEqual(
-      `${WALLET_SOURCE_ORIGIN}/issue-collection`
-    );
-
-    const createCollectionBtn = await page.waitForSelector(
-      getByDataTestId(DataTestIdsEnum.issueCollectionBtn)
-    );
-
-    await createCollectionBtn?.click();
+    await navigateToIssueCollectionPage();
     await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.tokenNameError,

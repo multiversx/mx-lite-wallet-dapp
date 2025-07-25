@@ -31,6 +31,20 @@ export const handlers = [
     mockResponse(keystoreAccount)
   ),
   http.get(
+    `${testNetwork.apiAddress}/blocks`,
+    mockResponse([
+      {
+        hash: '6d3ff1d52f18d056a524c0f18549e4e931c2349a8833d6067b42277012de6565'
+      }
+    ])
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/blocks/latest`,
+    mockResponse({
+      hash: 'cb94247aa2bf73f8879e1934892ba756eaa35192d275c035b71cf23de97df4ff'
+    })
+  ),
+  http.get(
     `${testNetwork.apiAddress}/accounts/${emptyWalletAccount.address}`,
     mockResponse(emptyWalletAccount)
   ),
@@ -48,6 +62,10 @@ export const handlers = [
   ),
   http.post(
     `${testNetwork.apiAddress}/accounts/${keystoreAccount.address}/transactions`,
+    mockResponse(pendingTransactionKeystoreWallet)
+  ),
+  http.post(
+    `${testNetwork.apiAddress}/transactions`,
     mockResponse(pendingTransactionKeystoreWallet)
   ),
   http.get(

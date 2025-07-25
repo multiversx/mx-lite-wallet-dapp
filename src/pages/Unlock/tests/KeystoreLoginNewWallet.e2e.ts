@@ -5,7 +5,6 @@ import {
 } from '__mocks__/data/emptyWallet';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
-  changeInputText,
   expectElementToContainText,
   getByTestIdDeep,
   uploadFile
@@ -24,6 +23,13 @@ describe('New wallet login with keystore test', () => {
 
     expect(keystoreProviderBtn).toBeDefined();
     await keystoreProviderBtn.click();
+
+    const keystoreLoginPanel = await getByTestIdDeep(
+      page,
+      DataTestIdsEnum.keystoreLoginPanel
+    );
+
+    expect(keystoreLoginPanel).toBeDefined();
 
     await uploadFile({
       dataTestId: DataTestIdsEnum.walletFile,

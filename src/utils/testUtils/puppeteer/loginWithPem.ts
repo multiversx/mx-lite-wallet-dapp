@@ -1,7 +1,6 @@
 import { pemAccount } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainText } from './expectElementToContainText';
-import { getByDataTestId } from './getByDataTestId';
 import { getByTestIdDeep } from './getByDataTestIdDeep';
 import { uploadFile } from './uploadFile';
 
@@ -26,7 +25,12 @@ export const loginWithPem = async (props?: {
   await pemProviderBtn.click();
 
   // Wait for the PEM login panel to appear
-  await parent.waitForSelector(getByDataTestId(DataTestIdsEnum.pemLoginPanel));
+  const pemLoginPanel = await getByTestIdDeep(
+    parent,
+    DataTestIdsEnum.pemLoginPanel
+  );
+
+  expect(pemLoginPanel).toBeDefined();
 
   // Upload the PEM file
   await uploadFile({
