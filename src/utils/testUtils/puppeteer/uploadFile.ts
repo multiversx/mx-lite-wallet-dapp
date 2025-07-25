@@ -1,5 +1,5 @@
 import { DEFAULT_DELAY_MS } from '__mocks__/data/constants';
-import { getByDataTestId } from './getByDataTestId';
+import { getByTestIdDeep } from './getByDataTestIdDeep';
 import { sleep } from './sleep';
 
 export const uploadFile = async ({
@@ -11,12 +11,9 @@ export const uploadFile = async ({
   filePath: string;
   parent?: typeof page;
 }) => {
-  const uploadKeystoreElement = await parent.waitForSelector(
-    getByDataTestId(dataTestId)
-  );
-
+  const uploadKeystoreElement = await getByTestIdDeep(parent, dataTestId);
   await uploadKeystoreElement?.uploadFile(filePath);
-  await uploadKeystoreElement?.evaluate((upload) =>
+  await uploadKeystoreElement?.evaluate((upload: any) =>
     upload.dispatchEvent(new Event('change', { bubbles: true }))
   );
 

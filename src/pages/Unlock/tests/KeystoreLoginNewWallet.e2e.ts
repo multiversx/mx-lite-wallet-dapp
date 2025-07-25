@@ -7,8 +7,7 @@ import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
   expectElementToContainText,
-  expectToBeChecked,
-  getByDataTestId,
+  getByTestIdDeep,
   uploadFile
 } from 'utils/testUtils/puppeteer';
 
@@ -18,32 +17,42 @@ describe('New wallet login with keystore test', () => {
       waitUntil: 'domcontentloaded'
     });
 
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.keystoreBtn));
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/unlock`);
-    await page.click(getByDataTestId(DataTestIdsEnum.keystoreBtn));
+    const keystoreProviderBtn = await getByTestIdDeep(
+      page,
+      DataTestIdsEnum.keystoreProvider
+    );
+
+    expect(keystoreProviderBtn).toBeDefined();
+    await keystoreProviderBtn.click();
 
     await uploadFile({
       dataTestId: DataTestIdsEnum.walletFile,
       filePath: 'src/__mocks__/data/emptyWallet/emptyWalletKeystore.json'
     });
 
-    await changeInputText({
-      dataTestId: DataTestIdsEnum.accessPass,
-      text: emptyWalletPassword
-    });
+    const passwordInput = await getByTestIdDeep(
+      page,
+      DataTestIdsEnum.accessPass
+    );
 
-    await page.click(getByDataTestId(DataTestIdsEnum.submitButton));
-    const dataTestId = `check_${emptyWalletAccount.address}`;
-    await page.waitForSelector(getByDataTestId(dataTestId));
+    await passwordInput.type(emptyWalletPassword);
+    const submitBtn = await getByTestIdDeep(page, DataTestIdsEnum.submitButton);
+    expect(submitBtn).toBeDefined();
+    await submitBtn.click();
 
-    await expectToBeChecked({
-      dataTestId,
-      isChecked: true
-    });
+    const addressTableItem = await getByTestIdDeep(
+      page,
+      `addressTableItem-${emptyWalletAccount.address}`
+    );
+    expect(addressTableItem).toBeDefined();
+    await addressTableItem.click();
 
-    await page.click(getByDataTestId(DataTestIdsEnum.confirmBtn));
+    const confirmBtn = await getByTestIdDeep(page, DataTestIdsEnum.confirmBtn);
+    await confirmBtn.click();
+
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.userAddress,
+      parent: page,
       text: emptyWalletAccount.address
     });
 

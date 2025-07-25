@@ -32,7 +32,8 @@ const config = {
     nativeAuth: true,
     network: {
       ...activeNetwork,
-      walletAddress: activeNetwork.walletAddress || window.location.origin
+      walletAddress:
+        activeNetwork.walletAddress || 'https://devnet-wallet.multiversx.com'
     },
     successfulToastLifetime: 5000
   },

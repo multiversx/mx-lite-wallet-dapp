@@ -2,34 +2,51 @@ import { pemAccount } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainText } from './expectElementToContainText';
 import { getByDataTestId } from './getByDataTestId';
+import { getByTestIdDeep } from './getByDataTestIdDeep';
 import { uploadFile } from './uploadFile';
 
-export const loginWithPem = async () => {
-  const filePath = 'src/__mocks__/data/testPemWallet/account.pem';
-
-  // Click the Connect button to open the unlock panel
-  const connectBtn = await page.waitForSelector(
-    getByDataTestId(DataTestIdsEnum.connectBtn)
-  );
-
-  await connectBtn.click();
+export const loginWithPem = async (props?: {
+  address?: string;
+  filePath?: string;
+  parent?: any;
+  skipLoggedInCheck?: boolean;
+}) => {
+  const address = props?.address ?? pemAccount.address;
+  const parent = props?.parent ?? page;
+  const filePath =
+    props?.filePath ?? 'src/__mocks__/data/testPemWallet/account.pem';
 
   // Click the pemProvider button in the unlock panel
-  const pemProviderBtn = await page.waitForSelector(
-    getByDataTestId(DataTestIdsEnum.pemProvider)
+  const pemProviderBtn = await getByTestIdDeep(
+    parent,
+    DataTestIdsEnum.pemProvider
   );
 
+  expect(pemProviderBtn).toBeDefined();
   await pemProviderBtn.click();
 
   // Wait for the PEM login panel to appear
-  await page.waitForSelector(getByDataTestId(DataTestIdsEnum.pemLoginPanel));
+  await parent.waitForSelector(getByDataTestId(DataTestIdsEnum.pemLoginPanel));
 
   // Upload the PEM file
-  await uploadFile({ dataTestId: DataTestIdsEnum.walletFile, filePath });
-  await page.click(getByDataTestId(DataTestIdsEnum.submitButton));
+  await uploadFile({
+    dataTestId: DataTestIdsEnum.walletFile,
+    filePath,
+    parent
+  });
+
+  const submitBtn = await getByTestIdDeep(parent, DataTestIdsEnum.submitButton);
+  expect(submitBtn).toBeDefined();
+
+  await submitBtn.click();
+
+  if (props?.skipLoggedInCheck) {
+    return;
+  }
 
   await expectElementToContainText({
     dataTestId: DataTestIdsEnum.userAddress,
-    text: pemAccount.address
+    parent,
+    text: address
   });
 };

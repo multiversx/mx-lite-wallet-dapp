@@ -1,4 +1,7 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
+import {
+  DEFAULT_PAGE_LOAD_DELAY_MS,
+  WALLET_SOURCE_ORIGIN
+} from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -7,6 +10,7 @@ import {
   getByDataTestId,
   loginWithKeystore
 } from 'utils/testUtils/puppeteer';
+import { sleep } from 'utils/testUtils/puppeteer/sleep';
 
 describe('Issue Collection form validation test', () => {
   it('should show errors and not create collection when data is invalid', async () => {
@@ -15,7 +19,13 @@ describe('Issue Collection form validation test', () => {
     });
 
     await loginWithKeystore();
-    await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
+    const issueCollectionBtn = await page.waitForSelector(
+      getByDataTestId(DataTestIdsEnum.issueCollectionBtn)
+    );
+
+    await issueCollectionBtn?.click();
+
+    await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
     await expect(page.url()).toEqual(
       `${WALLET_SOURCE_ORIGIN}/issue-collection`
     );

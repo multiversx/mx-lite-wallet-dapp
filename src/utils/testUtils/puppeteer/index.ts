@@ -4,6 +4,7 @@ export * from './expectElementToContainText';
 export * from './expectInputToHaveValue';
 export * from './expectToBeChecked';
 export * from './getByDataTestId';
+export * from './getByDataTestIdDeep';
 export * from './loginWithKeystore';
 export * from './loginWithPem';
 export * from './sleep';
