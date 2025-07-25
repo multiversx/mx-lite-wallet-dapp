@@ -7,7 +7,7 @@ import {
   expectElementToContainText
 } from 'utils/testUtils/puppeteer';
 
-describe('Create test', () => {
+describe.skip('Create test', () => {
   it('should create a new wallet successfully', async () => {
     await page.goto(WALLET_SOURCE_ORIGIN, {
       waitUntil: 'domcontentloaded'

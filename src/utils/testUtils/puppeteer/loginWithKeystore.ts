@@ -5,6 +5,7 @@ import {
 } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainText } from './expectElementToContainText';
+import { getByDataTestId } from './getByDataTestId';
 import { getByTestIdDeep } from './getByDataTestIdDeep';
 import { sleep } from './sleep';
 import { uploadFile } from './uploadFile';
@@ -67,7 +68,7 @@ export const loginWithKeystore = async (props?: {
   const confirmBtn = await getByTestIdDeep(parent, DataTestIdsEnum.confirmBtn);
   await confirmBtn.click();
 
-  await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
+  await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
 
   if (props?.skipLoggedInCheck) {
     return;
@@ -78,4 +79,6 @@ export const loginWithKeystore = async (props?: {
     parent,
     text: address
   });
+
+  await page.click(getByDataTestId(DataTestIdsEnum.userAddress));
 };

@@ -8,14 +8,14 @@ export const navigateToIssueCollectionPage = async () => {
   });
 
   await loginWithKeystore();
-  
+
   const issueCollectionBtn = await page.waitForSelector(
     getByDataTestId(DataTestIdsEnum.issueCollectionBtn)
   );
 
   expect(issueCollectionBtn).toBeDefined();
   await issueCollectionBtn.click();
-  
+
   const createCollectionBtn = await page.waitForSelector(
     getByDataTestId(DataTestIdsEnum.issueCollectionBtn)
   );

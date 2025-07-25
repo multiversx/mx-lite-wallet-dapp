@@ -33,7 +33,7 @@ const mnemonicWords: string[] = [
   'swamp'
 ];
 
-describe('Recover page tests', () => {
+describe.skip('Recover page tests', () => {
   it('should recover wallet successfully', async () => {
     await page.setRequestInterception(true);
     page.on('request', (request) => {

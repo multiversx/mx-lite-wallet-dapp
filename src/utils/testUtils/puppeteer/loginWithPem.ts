@@ -1,7 +1,9 @@
-import { pemAccount } from '__mocks__';
+import { DEFAULT_PAGE_LOAD_DELAY_MS, pemAccount } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainText } from './expectElementToContainText';
+import { getByDataTestId } from './getByDataTestId';
 import { getByTestIdDeep } from './getByDataTestIdDeep';
+import { sleep } from './sleep';
 import { uploadFile } from './uploadFile';
 
 export const loginWithPem = async (props?: {
@@ -41,8 +43,8 @@ export const loginWithPem = async (props?: {
 
   const submitBtn = await getByTestIdDeep(parent, DataTestIdsEnum.submitButton);
   expect(submitBtn).toBeDefined();
-
   await submitBtn.click();
+  await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
 
   if (props?.skipLoggedInCheck) {
     return;
@@ -53,4 +55,6 @@ export const loginWithPem = async (props?: {
     parent,
     text: address
   });
+
+  await page.click(getByDataTestId(DataTestIdsEnum.userAddress));
 };

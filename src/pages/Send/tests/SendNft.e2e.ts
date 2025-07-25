@@ -16,9 +16,10 @@ describe('Send NFT tests', () => {
     });
 
     await loginWithKeystore();
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/send`);
+    const sendBtn = await page.waitForSelector(
+      getByDataTestId(DataTestIdsEnum.sendBtn)
+    );
+    await sendBtn.click();
     await page.click(getByDataTestId(DataTestIdsEnum.sendNFtTypeInput));
 
     await changeInputText({

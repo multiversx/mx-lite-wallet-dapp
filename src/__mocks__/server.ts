@@ -15,7 +15,8 @@ import {
   faucetSettings,
   keystoreWalletCollections,
   pendingTransactionKeystoreWallet,
-  emptyWalletAccount
+  emptyWalletAccount,
+  transactions
 } from './data';
 import { issueContract } from './data/issueContract';
 import { mockResponse } from './serverUtils';
@@ -67,6 +68,10 @@ export const handlers = [
   http.post(
     `${testNetwork.apiAddress}/transactions`,
     mockResponse(pendingTransactionKeystoreWallet)
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/transactions`,
+    mockResponse(transactions)
   ),
   http.get(
     `${testNetwork.apiAddress}/accounts/${pemAccount.address}`,

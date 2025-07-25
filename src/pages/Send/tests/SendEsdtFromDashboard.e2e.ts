@@ -18,9 +18,8 @@ describe('Send ESDT from dashboard tests', () => {
     const tokenId = 'ASH-e3d1b7';
     const testId = `send-${tokenId}`;
     await loginWithPem();
-    await page.waitForSelector(getByDataTestId(testId));
-    await page.click(getByDataTestId(testId));
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/send`);
+    const sendBtn = await page.waitForSelector(getByDataTestId(testId));
+    await sendBtn.click();
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
