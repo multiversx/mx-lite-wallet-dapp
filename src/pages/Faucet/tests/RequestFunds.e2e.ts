@@ -21,8 +21,8 @@ describe('Request funds tests', () => {
 
     await requestFundsButton.click();
     await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.faucetPage,
-      text: 'WEGLD FaucetYou can request 40 WEGLD every 24 hoursRequest TokensCancel'
+      dataTestId: DataTestIdsEnum.modalSubtitle,
+      text: 'You can request 40 WEGLD every 24 hours'
     });
 
     // Request funds

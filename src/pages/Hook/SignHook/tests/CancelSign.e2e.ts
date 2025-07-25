@@ -15,7 +15,7 @@ describe('Cancel sign transaction test', () => {
       }
     );
 
-    await loginWithKeystore({ skipLoggedInCheck: true });
+    await loginWithKeystore();
     await page.waitForSelector(getByDataTestId(DataTestIdsEnum.dappModal));
     expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/sign`);
 

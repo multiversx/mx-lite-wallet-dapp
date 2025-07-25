@@ -19,12 +19,19 @@ describe('Sovereign transfer test', () => {
     });
 
     await loginWithKeystore();
-    await page.click(getByDataTestId(DataTestIdsEnum.sovereignTransferBtn));
-    await expect(page.url()).toEqual(
-      `${WALLET_SOURCE_ORIGIN}/sovereign-transfer`
+    const sovereignTransferBtn = await page.waitForSelector(
+      getByDataTestId(DataTestIdsEnum.sovereignTransferBtn)
     );
 
-    await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
+    expect(sovereignTransferBtn).toBeDefined();
+    await sovereignTransferBtn.click();
+
+    const sendBtn = await page.waitForSelector(
+      getByDataTestId(DataTestIdsEnum.sendBtn)
+    );
+
+    expect(sendBtn).toBeDefined();
+    await sendBtn.click();
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.contractError,

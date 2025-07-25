@@ -11,7 +11,7 @@ describe('Cancel sign message tests', () => {
       }
     );
 
-    await loginWithKeystore({ skipLoggedInCheck: true });
+    await loginWithKeystore();
     await page.waitForSelector(
       getByDataTestId(DataTestIdsEnum.signMessagePage)
     );

@@ -10,7 +10,6 @@ export const loginWithPem = async (props?: {
   address?: string;
   filePath?: string;
   parent?: any;
-  skipLoggedInCheck?: boolean;
 }) => {
   const address = props?.address ?? pemAccount.address;
   const parent = props?.parent ?? page;
@@ -45,10 +44,6 @@ export const loginWithPem = async (props?: {
   expect(submitBtn).toBeDefined();
   await submitBtn.click();
   await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
-
-  if (props?.skipLoggedInCheck) {
-    return;
-  }
 
   await expectElementToContainText({
     dataTestId: DataTestIdsEnum.userAddress,

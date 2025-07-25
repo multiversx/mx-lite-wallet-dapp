@@ -14,7 +14,7 @@ describe('Login hook without token test', () => {
       }
     );
 
-    await loginWithKeystore({ skipLoggedInCheck: true });
+    await loginWithKeystore();
     await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
 
     expect(page.url()).toMatch(
