@@ -6,6 +6,7 @@ import {
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToBeDisabled,
   expectElementToContainText,
   expectInputToHaveValue,
@@ -71,9 +72,6 @@ describe('Send ESDT tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction();
   });
 });

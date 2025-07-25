@@ -3,7 +3,7 @@ import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
   changeInputText,
-  expectElementToContainText,
+  expectAndSignTransaction,
   expectInputToHaveValue,
   getByDataTestId,
   loginWithKeystore
@@ -65,9 +65,6 @@ describe('Issue Token test', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.issueTokenBtn));
 
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction();
   });
 });

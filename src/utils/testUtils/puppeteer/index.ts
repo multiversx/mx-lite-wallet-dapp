@@ -1,4 +1,5 @@
 export * from './changeInputText';
+export * from './expectAndSignTransaction';
 export * from './expectElementToBeDisabled';
 export * from './expectElementToContainText';
 export * from './expectInputToHaveValue';

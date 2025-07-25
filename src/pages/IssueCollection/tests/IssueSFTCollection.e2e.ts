@@ -2,7 +2,7 @@ import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
-  expectElementToContainText,
+  expectAndSignTransaction,
   getByDataTestId
 } from 'utils/testUtils/puppeteer';
 import { navigateToIssueCollectionPage } from './helpers';
@@ -25,9 +25,6 @@ describe('Issue SFT Collection test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction();
   });
 });

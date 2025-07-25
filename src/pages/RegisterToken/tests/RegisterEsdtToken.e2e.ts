@@ -6,6 +6,7 @@ import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToContainText,
   expectInputToHaveValue,
   expectToBeChecked,
@@ -43,10 +44,7 @@ describe('Register ESDT Token test', () => {
     await page.type('#react-select-3-input', 'MEX');
     await page.keyboard.press('Enter');
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction();
 
     await sleep(2 * DEFAULT_PAGE_LOAD_DELAY_MS);
     await expectElementToContainText({

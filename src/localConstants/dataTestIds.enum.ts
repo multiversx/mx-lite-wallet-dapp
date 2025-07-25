@@ -107,5 +107,6 @@ export enum DataTestIdsEnum {
   addressSelectionPanel = 'addressSelectionPanel',
   addressTableItem = 'addressTableItem',
   selectAddressBtn = 'selectAddressBtn',
-  backToKeystoreBtn = 'backToKeystoreBtn'
+  backToKeystoreBtn = 'backToKeystoreBtn',
+  sidePanel = 'sidePanel'
 }

@@ -3,6 +3,7 @@ import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToBeDisabled,
   expectElementToContainText,
   expectInputToHaveValue,
@@ -179,9 +180,6 @@ describe('Sovereign transfer test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction();
   });
 });

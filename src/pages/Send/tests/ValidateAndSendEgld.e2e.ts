@@ -2,6 +2,7 @@ import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToContainText,
   expectInputToHaveValue,
   expectToBeChecked,
@@ -95,9 +96,6 @@ describe('Validate and send EGLD tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction();
   });
 });
