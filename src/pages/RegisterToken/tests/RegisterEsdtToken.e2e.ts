@@ -1,6 +1,4 @@
-import {
-  DEFAULT_PAGE_LOAD_DELAY_MS
-} from '__mocks__/data';
+import { DEFAULT_PAGE_LOAD_DELAY_MS } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
