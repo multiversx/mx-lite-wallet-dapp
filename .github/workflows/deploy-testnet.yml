@@ -19,10 +19,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '18.x'
-      - name: Setup yarn
-        run: npm install -g yarn
-      - run: yarn install
-      - run: yarn build-testnet
+      - name: Setup pnpm
+        run: npm install -g pnpm
+      - run: pnpm install
+      - run: pnpm build-testnet
         env:
           CI: false
       - name: Configure AWS Credentials
