@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import range from 'lodash/range';
 import { Mnemonic, UserSecretKey, UserWallet } from 'lib';
 import { AccessWalletType } from './accessWallet';
 
@@ -26,7 +26,7 @@ export const getKeystoreAddresses = ({
   const mnemonicObj = UserWallet.decryptMnemonic(kdContent, accessPassVal);
   const startIndex = index * count;
   const endIndex = startIndex + count;
-  return _.range(startIndex, endIndex).map((currentIndex) => {
+  return range(startIndex, endIndex).map((currentIndex) => {
     return getAddressAndPrivateKeyForIndex(mnemonicObj, currentIndex);
   });
 };
