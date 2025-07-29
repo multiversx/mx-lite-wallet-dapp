@@ -9,7 +9,8 @@ import {
   Transaction,
   TransactionComputer,
   UserSecretKey,
-  UserSigner
+  UserSigner,
+  setProviderType
 } from 'lib';
 import { IFileProviderOptions } from 'types/providers';
 
@@ -117,6 +118,8 @@ export abstract class FileProvider implements IProvider {
       this.setAccount({
         address: loginResult.address
       });
+
+      setProviderType(this.getType());
 
       const token = options?.token;
 

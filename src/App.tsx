@@ -5,12 +5,9 @@ import { AxiosInterceptor, Layout, Utilities } from 'components';
 
 import { PageNotFound } from 'pages';
 import { routes } from 'routes';
-import { useSetupHrp } from './hooks';
 import { persistor, store } from './redux/store';
 
 const AppContent = () => {
-  useSetupHrp();
-
   return (
     <Layout>
       <Routes>
