@@ -1,4 +1,4 @@
 export const testNetwork = {
-  apiAddress: 'https://api-sovereign-test.elrond.ro',
-  extrasApiAddress: 'https://extras-api-sovereign-test.elrond.ro'
+  apiAddress: 'https://vibeox-api.multiversx.com',
+  extrasApiAddress: 'https://vibeox-extras-api.multiversx.com'
 };

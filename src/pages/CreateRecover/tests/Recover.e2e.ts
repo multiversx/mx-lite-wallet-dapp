@@ -33,6 +33,7 @@ const mnemonicWords: string[] = [
   'swamp'
 ];
 
+// TODO: Implement Create and Recover in Unlock panel
 describe.skip('Recover page tests', () => {
   it('should recover wallet successfully', async () => {
     await page.setRequestInterception(true);

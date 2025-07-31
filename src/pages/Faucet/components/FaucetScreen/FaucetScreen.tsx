@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Button, FeaturePageLayout } from 'components';
-import { getEgldLabel } from 'lib';
+import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetSettingsReturnType } from 'redux/endpoints';
 
@@ -18,7 +17,6 @@ export const FaucetScreen = ({
 }: FaucetScreenPropsType) => {
   const [captcha, setCaptcha] = useState('');
   const [requestDisabled, setRequestDisabled] = useState(false);
-  const egldLabel = getEgldLabel();
 
   const onRecaptchaChange = (value: string | null) => {
     setRequestDisabled(!value);
@@ -33,30 +31,28 @@ export const FaucetScreen = ({
   };
 
   return (
-    <FeaturePageLayout title={`${egldLabel} Faucet`}>
-      <div className='flex flex-col items-center pb-5'>
-        <p
-          className='text-sm text-gray-400 mb-10'
-          data-testid={DataTestIdsEnum.modalSubtitle}
-        >
-          You can request {settings.token} every 24 hours
-        </p>
+    <div className='flex flex-col items-center pb-5'>
+      <p
+        className='text-sm text-gray-400 mb-10'
+        data-testid={DataTestIdsEnum.modalSubtitle}
+      >
+        You can request {settings.token} every 24 hours
+      </p>
 
-        {!settings.recaptchaBypass && sitekey && (
-          <div className='mb-10' data-testid={DataTestIdsEnum.captcha}>
-            <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} />
-          </div>
-        )}
+      {!settings.recaptchaBypass && sitekey && (
+        <div className='mb-10' data-testid={DataTestIdsEnum.captcha}>
+          <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} />
+        </div>
+      )}
 
-        <Button
-          data-testid={DataTestIdsEnum.requestFundsButton}
-          disabled={requestDisabled}
-          id={DataTestIdsEnum.requestFundsButton}
-          onClick={handleRequestTokens}
-        >
-          Request Tokens
-        </Button>
-      </div>
-    </FeaturePageLayout>
+      <Button
+        data-testid={DataTestIdsEnum.requestFundsButton}
+        disabled={requestDisabled}
+        id={DataTestIdsEnum.requestFundsButton}
+        onClick={handleRequestTokens}
+      >
+        Request Tokens
+      </Button>
+    </div>
   );
 };

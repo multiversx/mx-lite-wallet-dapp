@@ -25,7 +25,10 @@ export const AuthRedirectWrapper = ({
   }
 
   const shouldGoToUnlock =
-    !isLoggedIn && pathname !== routeNames.unlock && (requireAuth || hook);
+    !isLoggedIn &&
+    pathname !== routeNames.unlock &&
+    requireAuth &&
+    !(pathname.includes('hook') || hook); // Already redirected via HookValiationOutcome
 
   if (shouldGoToUnlock) {
     return <Navigate to={`${routeNames.unlock}${search}`} />;

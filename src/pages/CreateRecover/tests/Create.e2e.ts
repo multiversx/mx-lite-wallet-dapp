@@ -7,6 +7,7 @@ import {
   expectElementToContainText
 } from 'utils/testUtils/puppeteer';
 
+// TODO: Implement Create and Recover in Unlock panel
 describe.skip('Create test', () => {
   it('should create a new wallet successfully', async () => {
     await page.goto(WALLET_SOURCE_ORIGIN, {

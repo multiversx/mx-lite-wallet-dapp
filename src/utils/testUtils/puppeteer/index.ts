@@ -10,3 +10,4 @@ export * from './loginWithKeystore';
 export * from './loginWithPem';
 export * from './sleep';
 export * from './uploadFile';
+export * from './waitForUrlToMatch';

@@ -1,9 +1,8 @@
+import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import {
-  DEFAULT_PAGE_LOAD_DELAY_MS,
-  keystoreAccount,
-  WALLET_SOURCE_ORIGIN
-} from '__mocks__';
-import { loginWithKeystore, sleep } from 'utils/testUtils/puppeteer';
+  loginWithKeystore,
+  waitForUrlToMatch
+} from 'utils/testUtils/puppeteer';
 
 describe('Login hook without token test', () => {
   it('should login without token and redirect to the callbackUrl', async () => {
@@ -14,11 +13,8 @@ describe('Login hook without token test', () => {
       }
     );
 
-    await loginWithKeystore();
-    await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
-
-    expect(page.url()).toMatch(
-      `https://devnet.xexchange.com/dashboard?address=${keystoreAccount.address}`
-    );
+    await loginWithKeystore({ skipLoginCheck: true });
+    const expectedUrl = `https://devnet.xexchange.com/dashboard?address=${keystoreAccount.address}`;
+    await waitForUrlToMatch({ expectedUrl });
   });
 });

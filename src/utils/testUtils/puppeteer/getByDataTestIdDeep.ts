@@ -8,7 +8,7 @@ import { sleep } from './sleep';
  *
  * @param {import('puppeteer').Page} page - The Puppeteer Page instance.
  * @param {string} testId - The value of the data-testid attribute to search for.
- * @returns {Promise<import('puppeteer').ElementHandle|null>} - Handle to the found element, or null.
+ * @returns {Promise<ElementHandle|null>} - Handle to the found element, or null.
  */
 export const getByTestIdDeep = async (page: any, dataTestId: string) => {
   await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);

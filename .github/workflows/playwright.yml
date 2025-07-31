@@ -7,7 +7,15 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
+      - name: Fix permissions
+        run: |
+          sudo chown -R $USER:$USER ${{ github.workspace }}
+          sudo chmod -R 755 ${{ github.workspace }}
+        continue-on-error: true
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          clean: true
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*

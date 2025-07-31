@@ -15,6 +15,7 @@ export const loginWithKeystore = async (props?: {
   filePath?: string;
   parent?: any;
   password?: string;
+  skipLoginCheck?: boolean;
 }) => {
   const address = props?.address ?? keystoreAccount.address;
   const parent = props?.parent ?? page;
@@ -66,6 +67,10 @@ export const loginWithKeystore = async (props?: {
 
   const confirmBtn = await getByTestIdDeep(parent, DataTestIdsEnum.confirmBtn);
   await confirmBtn.click();
+
+  if (props?.skipLoginCheck) {
+    return;
+  }
 
   await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
 

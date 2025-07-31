@@ -40,7 +40,7 @@ export const Sign = () => {
   const hasErrors = Object.keys(txErrors).length > 0;
 
   const senderAddresses = uniq(
-    signedTransactions.map((tx) => tx.sender).filter((sender) => sender)
+    signedTransactions?.map((tx) => tx.sender).filter((sender) => sender) ?? []
   );
 
   const sender = senderAddresses?.[0];
@@ -48,7 +48,7 @@ export const Sign = () => {
   // Skip account fetching if the sender is missing or same as current account
 
   const validateHook = async () => {
-    const hasNoTransactions = signedTransactions.length === 0;
+    const hasNoTransactions = signedTransactions?.length === 0;
     const senderAddress =
       !sender || sender.toBech32() === address ? undefined : sender.toBech32();
 

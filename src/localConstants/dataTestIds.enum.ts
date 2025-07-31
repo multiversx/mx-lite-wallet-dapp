@@ -108,5 +108,11 @@ export enum DataTestIdsEnum {
   addressTableItem = 'addressTableItem',
   selectAddressBtn = 'selectAddressBtn',
   backToKeystoreBtn = 'backToKeystoreBtn',
-  sidePanel = 'sidePanel'
+  sidePanel = 'sidePanel',
+  signTransactionsHeaderOrigin = 'signTransactionsHeaderOrigin',
+  signTransactionsOverviewAmountRow = 'signTransactionsOverviewAmountRow',
+  signTransactionsOverviewInteractorRow = 'signTransactionsOverviewInteractorRow',
+  signTransactionsFooterIdentity = 'signTransactionsFooterIdentity',
+  signCancelBtn = 'signCancelBtn',
+  signNextTransactionBtn = 'signNextTransactionBtn'
 }

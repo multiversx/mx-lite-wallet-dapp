@@ -232,7 +232,7 @@ export const pemWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'Test',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1TZExucWFWRjdFVWNTaUZmOXppenU5NWZ1RHptakRKd1MxVzJkeVRSU2JRZw=='
@@ -265,7 +265,7 @@ export const pemWalletNfts = [
     nonce: 2,
     type: 'NonFungibleESDT',
     name: 'Test2',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1WODhtV0VXN3hnVHpqZFRXaEtpMmZHMXFkTW10YkN6eVZxaldwUEhEdmJoUQ=='
@@ -298,7 +298,7 @@ export const pemWalletNfts = [
     nonce: 6,
     type: 'NonFungibleESDT',
     name: 'Test',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1kS2pEQ1daQzN2RHZ5amZvQkJYQmd4Z1ZQejNUMzJnNTV6RTlRMjJZcmZmZw=='
@@ -331,7 +331,7 @@ export const pemWalletNfts = [
     nonce: 7,
     type: 'NonFungibleESDT',
     name: 'test',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1RZzJZVVhYemE1Z0xoc3BMR2l2VmN1ODl1TWVyTTNnOFhjcm44ZWo4MVA3UQ=='
@@ -364,7 +364,7 @@ export const pemWalletNfts = [
     nonce: 8,
     type: 'NonFungibleESDT',
     name: 'TEST',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1kS2pEQ1daQzN2RHZ5amZvQkJYQmd4Z1ZQejNUMzJnNTV6RTlRMjJZcmZmZw=='
@@ -397,7 +397,7 @@ export const pemWalletNfts = [
     nonce: 9,
     type: 'NonFungibleESDT',
     name: 'test',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1kS2pEQ1daQzN2RHZ5amZvQkJYQmd4Z1ZQejNUMzJnNTV6RTlRMjJZcmZmZw=='
@@ -430,7 +430,7 @@ export const pemWalletNfts = [
     nonce: 10,
     type: 'NonFungibleESDT',
     name: 'dada',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1TZzREUWVGZXFYdmltUFlxWThTYXBVdlNpSmZVampZUzhoSzYxWWs5OFlkdQ=='
@@ -461,7 +461,7 @@ export const pemWalletNfts = [
     nonce: 11,
     type: 'NonFungibleESDT',
     name: 'sasa',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 5,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1TZExucWFWRjdFVWNTaUZmOXppenU5NWZ1RHptakRKd1MxVzJkeVRSU2JRZw=='
@@ -493,7 +493,7 @@ export const pemWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'General',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1iWHZiMmJDNlR1NGlRTEZFOGUyR1RKdUhnTEJmdTRZYVFBRTYzcFFkVHp5Qg=='
@@ -525,7 +525,7 @@ export const pemWalletNfts = [
     nonce: 2,
     type: 'SemiFungibleESDT',
     name: 'TEST',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 25,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1TN3E5Q1lxcGg4Q05uU0hQd3h1Q1ZUTk1OQ1lqVENTNDJlUjI0ZTZaZGR5Qw=='
@@ -563,7 +563,7 @@ export const pemWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'test',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 25,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hZ1lzOTRNQXVGeFRYOGVSVFVBMmpObjhhRVlWbXZmdTFkTkdrQlM0TE5HVA=='
@@ -598,7 +598,7 @@ export const pemWalletNfts = [
     nonce: 2,
     type: 'SemiFungibleESDT',
     name: 'test2',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 25,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1ZeHFIQ1VtNVNRY29DYjZWemI3bnNWZVhzQm5iR1k5ZkdaTGROdHVFaHl1Wg=='
@@ -633,7 +633,7 @@ export const pemWalletNfts = [
     nonce: 3,
     type: 'SemiFungibleESDT',
     name: 'test',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 25,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1Tb1NUN3hRbWRzTUFxamFGRHNWVUZjdEM2UHhLcDNUUW9SWTgyS0dmNWFYcA=='
@@ -671,7 +671,7 @@ export const pemWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'TEST31',
-    creator: 'erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha',
+    creator: 'vibe1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltqn7mkrw',
     royalties: 25,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1TN3E5Q1lxcGg4Q05uU0hQd3h1Q1ZUTk1OQ1lqVENTNDJlUjI0ZTZaZGR5Qw=='

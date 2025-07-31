@@ -13,7 +13,7 @@ import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFr
 
 export interface ValidateAndSignTxsReturnType {
   sessionId: string | null;
-  signedTransactions: Transaction[];
+  signedTransactions: Transaction[] | null;
   txErrors: { [key: string]: string };
 }
 
@@ -77,34 +77,39 @@ export const useSignHookTransactions = () => {
 
     const txManager = TransactionManager.getInstance();
 
-    const signedTransactions =
-      await provider.signTransactions(mappedTransactions);
+    try {
+      const signedTransactions =
+        await provider.signTransactions(mappedTransactions);
 
-    const partialState: ValidateAndSignTxsReturnType = {
-      sessionId: null,
-      txErrors: txData.errors,
-      signedTransactions
-    };
+      const partialState: ValidateAndSignTxsReturnType = {
+        sessionId: null,
+        txErrors: txData.errors,
+        signedTransactions
+      };
 
-    if (executeAfterSign === 'true') {
-      const sentTransactions = await txManager.send(signedTransactions);
-      const sessionId = await txManager.track(sentTransactions, {
-        transactionsDisplayInfo,
-        disableToasts: false
-      });
+      if (executeAfterSign === 'true') {
+        const sentTransactions = await txManager.send(signedTransactions);
+        const sessionId = await txManager.track(sentTransactions, {
+          transactionsDisplayInfo,
+          disableToasts: false
+        });
 
-      if (!sessionId) {
-        console.error('Transactions session id is invalid');
-        return emptyState;
+        if (!sessionId) {
+          console.error('Transactions session id is invalid');
+          return emptyState;
+        }
+
+        return {
+          ...partialState,
+          sessionId
+        };
       }
 
-      return {
-        ...partialState,
-        sessionId
-      };
+      return partialState;
+    } catch (error) {
+      console.error(error);
+      return emptyState;
     }
-
-    return partialState;
   };
 
   return signHookTransactions;

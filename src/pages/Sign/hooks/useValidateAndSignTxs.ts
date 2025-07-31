@@ -30,7 +30,7 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
 
   const { address, ledgerAccount } = useGetAccountInfo();
   const [state, setState] = useState<ValidateAndSignTxsReturnType>({
-    signedTransactions: [],
+    signedTransactions: null,
     txErrors: {},
     sessionId: null
   });
