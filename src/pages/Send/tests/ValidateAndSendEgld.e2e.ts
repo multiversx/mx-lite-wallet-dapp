@@ -26,7 +26,7 @@ describe('Validate and send EGLD tests', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
-      text: 'Available: 4.559443050404540691 WEGLD'
+      text: 'Available: 4.559443050404540691 VIBE'
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
@@ -96,6 +96,16 @@ describe('Validate and send EGLD tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '0.050000000000000000',
+        usdAmount: '0.00',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: 'webteam',
+        gasPrice: '0.0000001 VIBE',
+        gasLimit: '60.137.000',
+        data: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
+      }
+    ]);
   });
 });

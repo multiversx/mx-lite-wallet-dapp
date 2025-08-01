@@ -1,3 +1,4 @@
+import { keystoreAccount } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -48,6 +49,16 @@ describe('Issue NFT test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.issueNftBtn));
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '0',
+        usdAmount: '0.00',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: 'webteam',
+        gasPrice: '0.0000001 VIBE',
+        gasLimit: '3.153.008',
+        data: 'ESDTNFTCreate@5346542d333834313038@01@4e4654544f4b454e@03e8@@@'
+      }
+    ]);
   });
 });

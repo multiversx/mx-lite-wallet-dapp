@@ -1,4 +1,4 @@
-import { DEFAULT_PAGE_LOAD_DELAY_MS } from '__mocks__/data';
+import { DEFAULT_PAGE_LOAD_DELAY_MS, keystoreAccount } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
@@ -11,6 +11,9 @@ import {
   sleep
 } from 'utils/testUtils/puppeteer';
 import { navigateToRegisterTokenPage } from './helpers';
+
+const contractAddress =
+  'vibe1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa';
 
 describe('Register NFT Token test', () => {
   it('should register an NFT token from sovereign to testnet successfully', async () => {
@@ -30,18 +33,28 @@ describe('Register NFT Token test', () => {
     await changeInputText({
       dataTestId: DataTestIdsEnum.contractInput,
       shouldOverride: true,
-      text: 'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa'
+      text: contractAddress
     });
 
     await expectInputToHaveValue({
       dataTestId: DataTestIdsEnum.contractInput,
-      value: 'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa'
+      value: contractAddress
     });
 
     await page.type('#react-select-3-input', 'SFT');
     await page.keyboard.press('Enter');
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '0.050000000000000000',
+        usdAmount: '0.00',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: 'webteam',
+        gasPrice: '0.0000001 VIBE',
+        gasLimit: '60.137.000',
+        data: 'registerAndSetAllRoles@53465454455354434f4c@534654@534654@'
+      }
+    ]);
 
     await sleep(2 * DEFAULT_PAGE_LOAD_DELAY_MS);
     await expectElementToContainText({

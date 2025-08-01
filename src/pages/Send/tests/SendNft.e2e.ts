@@ -85,6 +85,16 @@ describe('Send NFT tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '0.050000000000000000',
+        usdAmount: '0.00',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: 'webteam',
+        gasPrice: '0.0000001 VIBE',
+        gasLimit: '60.137.000',
+        data: 'ESDTNFTTransfer@4348524953544d41532d323764336532@01@01@6e224118d9068ae626878a1cfbebcb6a95a4715db86d1b51e06a04226cf30fd6'
+      }
+    ]);
   });
 });

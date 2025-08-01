@@ -2,6 +2,7 @@ import { WALLET_SOURCE_ORIGIN, keystoreAccount } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   expectElementToContainText,
+  expectElementToContainTextDeep,
   getByDataTestId,
   loginWithKeystore
 } from 'utils/testUtils/puppeteer';
@@ -17,6 +18,27 @@ describe('Sign hook test', () => {
 
     await loginWithKeystore({
       skipLoginCheck: true
+    });
+
+    // Check sign screen info
+    await expectElementToContainTextDeep({
+      dataTestId: DataTestIdsEnum.signTransactionsHeaderOrigin,
+      text: `Request from${WALLET_SOURCE_ORIGIN}`
+    });
+
+    await expectElementToContainTextDeep({
+      dataTestId: DataTestIdsEnum.signTransactionsOverviewAmountRow,
+      text: 'Send0 VIBE= $0.00'
+    });
+
+    await expectElementToContainTextDeep({
+      dataTestId: DataTestIdsEnum.signTransactionsOverviewInteractorRow,
+      text: `To${keystoreAccount.address}`
+    });
+
+    await expectElementToContainTextDeep({
+      dataTestId: DataTestIdsEnum.signTransactionsFooterIdentity,
+      text: 'Sign with@webteam'
     });
 
     // Continue with new sign page

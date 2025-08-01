@@ -1,4 +1,8 @@
-import { emptyWalletAccount, WALLET_SOURCE_ORIGIN } from '__mocks__/data';
+import {
+  emptyWalletAccount,
+  keystoreAccount,
+  WALLET_SOURCE_ORIGIN
+} from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
@@ -11,6 +15,9 @@ import {
   getByDataTestId,
   loginWithKeystore
 } from 'utils/testUtils/puppeteer';
+
+const contractAddress =
+  'vibe1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa';
 
 describe('Sovereign transfer test', () => {
   it('should transfer ESDT and NFT tokens on sovereign successfully', async () => {
@@ -56,12 +63,12 @@ describe('Sovereign transfer test', () => {
     await changeInputText({
       dataTestId: DataTestIdsEnum.contractInput,
       shouldOverride: true,
-      text: 'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa'
+      text: contractAddress
     });
 
     await expectInputToHaveValue({
       dataTestId: DataTestIdsEnum.contractInput,
-      value: 'erd1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa'
+      value: contractAddress
     });
 
     await changeInputText({
@@ -187,6 +194,16 @@ describe('Sovereign transfer test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '0.050000000000000000',
+        usdAmount: '0.00',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: 'webteam',
+        gasPrice: '0.0000001 VIBE',
+        gasLimit: '60.137.000',
+        data: 'transfer@53465454455354434f4c@534654@534654@'
+      }
+    ]);
   });
 });

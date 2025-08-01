@@ -68,7 +68,6 @@ export const HookValidationOutcome = ({
       }
 
       default: {
-        console.log(hook);
         if (hook === HooksEnum.login && callbackUrl) {
           // The user is logged in and must return to the dapp if the callbackURL is provided
           replyToDapp({

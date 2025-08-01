@@ -1,4 +1,4 @@
-import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { keystoreAccount, pemAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -65,6 +65,16 @@ describe('Send ESDT from dashboard tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '1',
+        usdAmount: '0.00',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: pemAccount.address,
+        gasPrice: '0.0000001 VIBE',
+        gasLimit: '60.137.000',
+        data: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
+      }
+    ]);
   });
 });

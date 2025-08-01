@@ -25,6 +25,17 @@ describe('Issue SFT Collection test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '0.050000000000000000',
+        usdAmount: '0.00',
+        receiverAddress:
+          'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0',
+        signerAddress: 'webteam',
+        gasPrice: '0.0000001 VIBE',
+        gasLimit: '60.137.000',
+        data: 'registerAndSetAllRoles@53465454455354434f4c@534654@534654@'
+      }
+    ]);
   });
 });

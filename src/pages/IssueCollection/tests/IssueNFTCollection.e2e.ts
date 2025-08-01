@@ -26,6 +26,17 @@ describe('Issue NFT Collection test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
-    await expectAndSignTransaction();
+    await expectAndSignTransaction([
+      {
+        amount: '0.050000000000000000',
+        usdAmount: '0.00',
+        receiverAddress:
+          'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0',
+        signerAddress: 'webteam',
+        gasPrice: '0.000000001',
+        gasLimit: '60.152.000',
+        data: 'registerAndSetAllRoles@54455354434f4c4c454354494f4e@54455354@4e4654@'
+      }
+    ]);
   });
 });

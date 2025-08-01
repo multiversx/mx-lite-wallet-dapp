@@ -18,6 +18,7 @@ import {
   WindowProviderResponseEnums,
   SignMessageStatusEnum
 } from 'lib';
+import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
 import { routeNames } from 'routes';
@@ -173,7 +174,7 @@ export const SignMessage = () => {
         ) : (
           <>
             <Button
-              data-testid='signMsgBtn'
+              data-testid={DataTestIdsEnum.signMessageBtn}
               onClick={handleSubmit}
               disabled={!message.trim()}
             >
@@ -182,7 +183,12 @@ export const SignMessage = () => {
                 Sign
               </>
             </Button>
-            <Button onClick={handleCancel}>Cancel</Button>
+            <Button
+              data-testid={DataTestIdsEnum.cancelSignMessageBtn}
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
           </>
         )}
       </div>
