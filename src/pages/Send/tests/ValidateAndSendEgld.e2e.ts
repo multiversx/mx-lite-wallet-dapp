@@ -101,8 +101,8 @@ describe('Validate and send EGLD tests', () => {
         amount: '0.050000000000000000',
         usdAmount: '0.00',
         receiverAddress: keystoreAccount.address,
-        signerAddress: 'webteam',
-        gasPrice: '0.0000001 VIBE',
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
         gasLimit: '60.137.000',
         data: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
       }

@@ -31,8 +31,8 @@ describe('Issue SFT Collection test', () => {
         usdAmount: '0.00',
         receiverAddress:
           'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0',
-        signerAddress: 'webteam',
-        gasPrice: '0.0000001 VIBE',
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
         gasLimit: '60.137.000',
         data: 'registerAndSetAllRoles@53465454455354434f4c@534654@534654@'
       }

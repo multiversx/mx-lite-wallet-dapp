@@ -32,7 +32,6 @@ export const expectAndSignTransaction = async (
       data
     } = info;
 
-    // await jestPuppeteer.debug();
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsHeaderOrigin,
       text: `Request from${requestOrigin}`
@@ -50,7 +49,7 @@ export const expectAndSignTransaction = async (
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsFooterIdentity,
-      text: `Sign with@${signerAddress}`
+      text: `Sign with${signerAddress}`
     });
 
     const signTransactionsAdvancedTab = await getByTestIdDeep(
@@ -62,12 +61,12 @@ export const expectAndSignTransaction = async (
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsAdvancedGasPrice,
-      text: `${gasPrice} EGLD`
+      text: `Gas Price${gasPrice} VIBE`
     });
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsAdvancedGasLimit,
-      text: `${gasLimit} EGLD`
+      text: `Gas Limit${gasLimit}`
     });
 
     await expectElementToContainTextDeep({
@@ -87,6 +86,6 @@ export const expectAndSignTransaction = async (
 
   await expectElementToContainTextDeep({
     dataTestId: DataTestIdsEnum.transactionToastContent,
-    text: 'Transaction sent successfully'
+    text: 'Sent VIBE'
   });
 };

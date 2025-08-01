@@ -49,8 +49,8 @@ describe('Register NFT Token test', () => {
         amount: '0.050000000000000000',
         usdAmount: '0.00',
         receiverAddress: keystoreAccount.address,
-        signerAddress: 'webteam',
-        gasPrice: '0.0000001 VIBE',
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
         gasLimit: '60.137.000',
         data: 'registerAndSetAllRoles@53465454455354434f4c@534654@534654@'
       }

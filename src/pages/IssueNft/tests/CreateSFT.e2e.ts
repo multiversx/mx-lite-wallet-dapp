@@ -70,8 +70,8 @@ describe('Issue SFT test', () => {
         amount: '0',
         usdAmount: '0.00',
         receiverAddress: keystoreAccount.address,
-        signerAddress: 'webteam',
-        gasPrice: '0.0000001 VIBE',
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
         gasLimit: '3.153.008',
         data: 'ESDTNFTCreate@5346542d333834313038@64@534654544f4b454e@03e8@@@'
       }

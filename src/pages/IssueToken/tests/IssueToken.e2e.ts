@@ -64,8 +64,8 @@ describe('Issue Token test', () => {
         usdAmount: '0.00',
         receiverAddress:
           'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0',
-        signerAddress: 'webteam',
-        gasPrice: '0.0000001 VIBE',
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
         gasLimit: '60.423.500',
         data: 'issue@54455354544f4b454e@544f4b454e@3635c9adc5dea00000@12@63616e467265657a65@74727565@63616e57697065@74727565@63616e5061757365@74727565@63616e4368616e67654f776e6572@74727565@63616e55706772616465@74727565@63616e4164645370656369616c526f6c6573@74727565'
       }
