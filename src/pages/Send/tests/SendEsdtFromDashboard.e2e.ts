@@ -68,7 +68,6 @@ describe('Send ESDT from dashboard tests', () => {
     await expectAndSignTransaction([
       {
         amount: '1',
-        usdAmount: '0.00',
         receiverAddress: keystoreAccount.address,
         signerAddress: pemAccount.address,
         gasPrice: '0.000000001',

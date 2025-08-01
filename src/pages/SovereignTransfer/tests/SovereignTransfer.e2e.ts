@@ -197,7 +197,6 @@ describe('Sovereign transfer test', () => {
     await expectAndSignTransaction([
       {
         amount: '0.050000000000000000',
-        usdAmount: '0.00',
         receiverAddress: keystoreAccount.address,
         signerAddress: '@webteam',
         gasPrice: '0.000000001',

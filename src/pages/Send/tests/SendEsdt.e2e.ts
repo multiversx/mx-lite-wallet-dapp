@@ -76,11 +76,10 @@ describe('Send ESDT tests', () => {
     await expectAndSignTransaction([
       {
         amount: '1',
-        usdAmount: '0.00',
         receiverAddress: keystoreAccount.address,
         signerAddress: pemAccount.address,
         gasPrice: '0.000000001',
-        gasLimit: '60.137.000',
+        gasLimit: '1.000.000',
         data: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
       }
     ]);

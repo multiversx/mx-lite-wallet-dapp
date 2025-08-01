@@ -1,4 +1,4 @@
-import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { keystoreAccount, pemAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -98,13 +98,12 @@ describe('Validate and send EGLD tests', () => {
 
     await expectAndSignTransaction([
       {
-        amount: '0.050000000000000000',
-        usdAmount: '0.00',
+        amount: '0',
         receiverAddress: keystoreAccount.address,
-        signerAddress: '@webteam',
+        signerAddress: pemAccount.address,
         gasPrice: '0.000000001',
-        gasLimit: '60.137.000',
-        data: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
+        gasLimit: '87.500',
+        data: 'Sending empty transaction'
       }
     ]);
   });

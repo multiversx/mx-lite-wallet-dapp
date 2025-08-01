@@ -9,7 +9,6 @@ import { sleep } from './sleep';
 
 interface ISignTransactionInfo {
   amount: string;
-  usdAmount: string;
   requestOrigin?: string;
   receiverAddress: string;
   signerAddress: string;
@@ -23,7 +22,6 @@ export const expectAndSignTransaction = async (
   for (const info of transactionsInfo) {
     const {
       amount,
-      usdAmount,
       requestOrigin = WALLET_SOURCE_ORIGIN,
       receiverAddress,
       signerAddress,
@@ -39,7 +37,7 @@ export const expectAndSignTransaction = async (
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsOverviewAmountRow,
-      text: `Send${amount} VIBE≈ $${usdAmount}`
+      text: `Send${amount} VIBE`
     });
 
     await expectElementToContainTextDeep({

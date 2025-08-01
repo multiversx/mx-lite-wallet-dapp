@@ -68,7 +68,6 @@ describe('Issue SFT test', () => {
     await expectAndSignTransaction([
       {
         amount: '0',
-        usdAmount: '0.00',
         receiverAddress: keystoreAccount.address,
         signerAddress: '@webteam',
         gasPrice: '0.000000001',
