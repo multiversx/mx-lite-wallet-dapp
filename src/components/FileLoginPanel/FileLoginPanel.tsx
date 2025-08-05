@@ -94,6 +94,7 @@ export interface FileLoginPanelProps {
     | ((formikProps: FormikProps<FileLoginFormValues>) => ReactNode);
   initialValues?: Partial<FileLoginFormValues>;
   error?: string;
+  skipValidation?: boolean;
 }
 
 export const FileLoginPanel = ({
@@ -109,7 +110,8 @@ export const FileLoginPanel = ({
   fileUploadTestId,
   children,
   initialValues = { file: null, password: '' },
-  error
+  error,
+  skipValidation = false
 }: FileLoginPanelProps) => {
   const defaultInitialValues: FileLoginFormValues = {
     file: null,
@@ -121,7 +123,7 @@ export const FileLoginPanel = ({
     <div style={styles.container} data-testid={dataTestId}>
       <Formik
         initialValues={defaultInitialValues}
-        validationSchema={fileLoginFormSchema()}
+        validationSchema={skipValidation ? undefined : fileLoginFormSchema()}
         onSubmit={onSubmit}
       >
         {(formikProps: FormikProps<FileLoginFormValues>) => (
@@ -180,7 +182,11 @@ export const FileLoginPanel = ({
                 type='submit'
                 style={styles.button}
                 data-testid={DataTestIdsEnum.submitButton}
-                disabled={!formikProps.isValid || formikProps.isSubmitting}
+                disabled={
+                  skipValidation
+                    ? formikProps.isSubmitting
+                    : !formikProps.isValid || formikProps.isSubmitting
+                }
               >
                 Login
               </button>

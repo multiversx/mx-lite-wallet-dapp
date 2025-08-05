@@ -207,7 +207,11 @@ export const KeystorePanel = ({
       placeholder='Click here to select a keystore file'
       dataTestId={DataTestIdsEnum.keystoreLoginPanel}
       fileUploadTestId={DataTestIdsEnum.keystoreBtn}
-      initialValues={{ file: null, password }}
+      initialValues={{
+        file: savedFileContent ? new File([savedFileContent], fileName) : null,
+        password
+      }}
+      skipValidation={Boolean(savedFileContent)}
     >
       {(formikProps) => (
         <div>
