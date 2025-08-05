@@ -230,7 +230,7 @@ describe('Sovereign transfer test', () => {
         action: 'deposit',
         receiverLabel: 'App',
         dataHighlight:
-          '465706f736974@05579ce6988a9aed36ca7229746071a6b8f603f97025f15ed16c71758b6adcd9'
+          '6465706f736974@df8d569c7ab4ab179d41cb8f89519705dd142eda414a37d6ada80c079e410691'
       }
     ]);
   });
