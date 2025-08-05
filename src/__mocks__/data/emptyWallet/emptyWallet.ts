@@ -1,6 +1,6 @@
 export const emptyWalletPassword = 'juxbit-7dusku-miskIs';
 export const emptyWalletAccount = {
-  address: 'vibe1q4teee5c32dw6dk2wg5hgcr356u0vqlewqjlzhk3d3chtzm2mnvsqkpl4w',
+  address: 'vibe1m7x4d8r6kj43082pew8cj5vhqhw3gtk6g99r044d4qxq08jpq6gs8x4xh4',
   balance: '0',
   nonce: 0,
   timestamp: 0,
