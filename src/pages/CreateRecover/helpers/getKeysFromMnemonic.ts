@@ -14,7 +14,7 @@ export const getKeysFromMnemonic = ({
   const secretKeyHex = deriveKey.hex();
   const secretKey = UserSecretKey.fromString(secretKeyHex);
   const address = secretKey.generatePublicKey().toAddress();
-  const publicKey = address.bech32();
+  const publicKey = address.toBech32();
   const privateKey = UserWallet.fromMnemonic({
     password,
     mnemonic

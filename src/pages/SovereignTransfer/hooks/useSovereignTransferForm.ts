@@ -107,7 +107,7 @@ export const useSovereignTransferForm = () => {
       )
     }),
     onSubmit: async (values) => {
-      const transaction = getSovereignTransferTransaction({
+      const transaction = await getSovereignTransferTransaction({
         address,
         chainId,
         tokens: allTokens,
