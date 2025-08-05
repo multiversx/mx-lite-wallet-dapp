@@ -34,7 +34,8 @@
     "test-pptr-localhost": "JEST_PPTR_RETRY_TIMES=0 HEADLESS=false jest --config=jest-puppeteer.localhost.js",
     "run-playwright": "npm run playwright test --workers=10",
     "test": "jest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+     "install-verdaccio": "pnpm remove @multiversx/sdk-dapp && pnpm install @multiversx/sdk-dapp@5.0.11 --registry http://localhost:4873"
   },
   "browserslist": [
     ">0.2%",
