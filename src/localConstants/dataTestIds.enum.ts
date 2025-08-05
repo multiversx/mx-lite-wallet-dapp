@@ -119,5 +119,8 @@ export enum DataTestIdsEnum {
   signTransactionsAdvancedGasPrice = 'signTransactionsAdvancedGasPrice',
   signTransactionsAdvancedGasLimit = 'signTransactionsAdvancedGasLimit',
   signTransactionsAdvancedDataHighlight = 'signTransactionsAdvancedDataHighlight',
-  transactionToastContent = 'transactionToastContent'
+  signTransactionsAdvancedData = 'signTransactionsAdvancedData',
+  transactionToastContent = 'transactionToastContent',
+  signTransactionsHeaderPagerText = 'signTransactionsHeaderPagerText',
+  signTransactionsOverviewActionRow = 'signTransactionsOverviewActionRow'
 }

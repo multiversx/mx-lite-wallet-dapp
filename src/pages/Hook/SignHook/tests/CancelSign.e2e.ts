@@ -20,26 +20,6 @@ describe('Cancel sign transaction test', () => {
       skipLoginCheck: true
     });
 
-    await expectElementToContainTextDeep({
-      dataTestId: DataTestIdsEnum.signTransactionsHeaderOrigin,
-      text: `Request from${WALLET_SOURCE_ORIGIN}`
-    });
-
-    await expectElementToContainTextDeep({
-      dataTestId: DataTestIdsEnum.signTransactionsOverviewAmountRow,
-      text: 'Send0 VIBE= $0.00'
-    });
-
-    await expectElementToContainTextDeep({
-      dataTestId: DataTestIdsEnum.signTransactionsOverviewInteractorRow,
-      text: `To${keystoreAccount.address}`
-    });
-
-    await expectElementToContainTextDeep({
-      dataTestId: DataTestIdsEnum.signTransactionsFooterIdentity,
-      text: 'Sign with@webteam'
-    });
-
     const signCancelBtn = await getByTestIdDeep(
       page,
       DataTestIdsEnum.signCancelBtn

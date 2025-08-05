@@ -18,38 +18,42 @@ describe('Sign hook test', () => {
       skipLoginCheck: true
     });
 
-    await expectAndSignTransaction([
-      {
-        amount: '0',
-        receiverAddress:
-          'vibe1q4teee5c32dw6dk2wg5hgcr356u0vqlewqjlzhk3d3chtzm2mnvsqkpl4w',
-        signerAddress: '@webteam',
-        gasPrice: '0.000000001',
-        gasLimit: '7.000.000',
-        data: 'MultiESDTNFTTransfer@000000000000000005006704c51b25a956ddbc643189ba7945b413890d4f0fd6@02@444d452d626465326238@01@01@444d452d626465326238@01@01@6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09'
-      },
-      {
-        amount: '0',
-        receiverAddress:
-          'vibe1q4teee5c32dw6dk2wg5hgcr356u0vqlewqjlzhk3d3chtzm2mnvsqkpl4w',
-        signerAddress: '@webteam',
-        gasPrice: '0.000000001',
-        gasLimit: '7.000.000',
-        data: 'MultiESDTNFTTransfer@000000000000000005006704c51b25a956ddbc643189ba7945b413890d4f0fd6@02@444d452d626465326238@01@01@444d452d626465326238@01@01@6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09'
-      },
-      {
-        amount: '0',
-        receiverAddress:
-          'vibe1q4teee5c32dw6dk2wg5hgcr356u0vqlewqjlzhk3d3chtzm2mnvsqkpl4w',
-        signerAddress: '@webteam',
-        gasPrice: '0.000000001',
-        gasLimit: '7.000.000',
-        data: 'MultiESDTNFTTransfer@000000000000000005006704c51b25a956ddbc643189ba7945b413890d4f0fd6@02@444d452d626465326238@01@01@444d452d626465326238@01@01@6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09'
-      }
-    ]);
+    const mainTx = {
+      amount: '0.000000000000000001',
+      receiverAddress: keystoreAccount.address,
+      signerAddress: '@webteam',
+      gasPrice: '0.000000001',
+      gasLimit: '7.000.000',
+      data: 'MultiESDTNFTTransfer@000000000000000005006704c51b25a956ddbc643189ba7945b413890d4f0fd6@02@444d452d626465326238@01@01@444d452d626465326238@01@01@6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09',
+      dataHighlight: ''
+    };
+
+    await expectAndSignTransaction(
+      [
+        {
+          ...mainTx,
+          dataHighlight: '444d452d626465326238@01@01'
+        },
+        {
+          ...mainTx,
+          dataHighlight: '444d452d626465326238@01@01'
+        },
+        {
+          ...mainTx,
+          action: 'ActionnftDistribution',
+          amount: '0',
+          amountLabel: 'Amount',
+          receiverLabel: 'App',
+          dataHighlight:
+            '6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09'
+        }
+      ],
+      true
+    );
 
     await waitForUrlToMatch({
-      expectedUrl: `https://devnet.xexchange.com/?nonce[0]=786&value[0]=0&receiver[0]=${keystoreAccount.address}&sender[0]=${keystoreAccount.address}&gasPrice[0]=1000000000&gasLimit[0]=7000000&data[0]=MultiESDTNFTTransfer@000000000000000005006704c51b25a956ddbc643189ba7945b413890d4f0fd6@02@444d452d626465326238@01@01@444d452d626465326238@01@01@6e6674446973747269627574696f6e@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09@ee62513ef30aede25b3366b6e3219ee18084026f36d6105299ee9963b1338f09&chainID[0]=S&version[0]=1&signature[0]=d55db9d86615793cc9b8eda80beff789ef1212f1869d4d7ae104b3688cc488559fb9071d357a9772b451b19d25bf8facbcc83a65df895490aeb8e115a37b5700&walletProviderStatus=transactionsSigned`
+      expectedUrl:
+        'https://devnet.xexchange.com/?nonce[0]=2529&value[0]=0&receiver[0]=vibe1q4teee5c32dw6dk2wg5hgcr356u0vqlewqjlzhk3d3chtzm2mnvsqkpl4w&sender[0]=vibe1q4teee5c32dw6dk2wg5hgcr356u0vqlewqjlzhk3d3chtzm2mnvsqkpl4w&gasPrice[0]=1000000000&gasLimit[0]=7000000&data[0]=TXVsdGlFU0RUTkZUVHJhbnNmZXJAMDAwMDAwMDAwMDAwMDAwMDA1MDA2NzA0YzUxYjI1YTk1NmRkYmM2NDMxODliYTc5NDViNDEzODkwZDRmMGZkNkAwMkA0NDRkNDUyZDYyNjQ2NTMyNjIzOEAwMUAwMUA0NDRkNDUyZDYyNjQ2NTMyNjIzOEAwMUAwMUA2ZTY2NzQ0NDY5NzM3NDcyNjk2Mjc1NzQ2OTZmNmVAZWU2MjUxM2VmMzBhZWRlMjViMzM2NmI2ZTMyMTllZTE4MDg0MDI2ZjM2ZDYxMDUyOTllZTk5NjNiMTMzOGYwOUBlZTYyNTEzZWYzMGFlZGUyNWIzMzY2YjZlMzIxOWVlMTgwODQwMjZmMzZkNjEwNTI5OWVlOTk2M2IxMzM4ZjA5&chainID[0]=V&version[0]=1&signature[0]=7135288b2b66b63d950de067c931d8b54b7a2de00fe34b9ba00ce17ef50aaf7717157706a20c6d97cda85737d7da5f885fd7b6fcac4bc1eb42ebf92056025409&walletProviderStatus=transactionsSigned'
     });
   });
 });

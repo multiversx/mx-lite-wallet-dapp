@@ -1,4 +1,9 @@
 import { MouseEventHandler, useEffect } from 'react';
+import {
+  faCheckCircle,
+  faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import uniq from 'lodash/uniq';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +41,6 @@ export const Sign = () => {
   // The useValidateAndSignTxs hook is used to validate, sign, and reply with signed transactions
   // but, since we only need to show errors in this page, if any, we just use the rawTxs and txErrors objects
   const { signedTransactions, txErrors } = useValidateAndSignTxs();
-
   const hasErrors = Object.keys(txErrors).length > 0;
 
   const senderAddresses = uniq(
@@ -126,8 +130,54 @@ export const Sign = () => {
     providerType === ProviderTypeEnum.extension ||
     providerType === ProviderTypeEnum.walletConnect
   ) {
-    return null;
+    return (
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center px-4'>
+        <div className='max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center'>
+          <div className='w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6'>
+            <FontAwesomeIcon
+              icon={faCheckCircle}
+              className='text-blue-600 text-3xl'
+            />
+          </div>
+          <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+            Transaction in Progress
+          </h2>
+          <p className='text-gray-600 mb-6'>
+            Please check your wallet extension or WalletConnect to confirm the
+            transaction.
+          </p>
+          <div className='flex items-center justify-center space-x-2 text-blue-600'>
+            <div className='w-2 h-2 bg-blue-600 rounded-full animate-bounce'></div>
+            <div
+              className='w-2 h-2 bg-blue-600 rounded-full animate-bounce'
+              style={{ animationDelay: '0.1s' }}
+            ></div>
+            <div
+              className='w-2 h-2 bg-blue-600 rounded-full animate-bounce'
+              style={{ animationDelay: '0.2s' }}
+            ></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  return null;
+  return (
+    <div className='min-h-screen flex items-center justify-center px-4'>
+      <div className='max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center'>
+        <div className='w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6'>
+          <FontAwesomeIcon
+            icon={faExclamationTriangle}
+            className='text-yellow-600 text-3xl'
+          />
+        </div>
+        <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+          Processing Transaction
+        </h2>
+        <p className='text-gray-600'>
+          Your transaction is being processed. Please wait...
+        </p>
+      </div>
+    </div>
+  );
 };

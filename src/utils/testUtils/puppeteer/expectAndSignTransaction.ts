@@ -9,26 +9,49 @@ import { sleep } from './sleep';
 
 interface ISignTransactionInfo {
   amount: string;
+  amountLabel?: string;
+  receiverLabel?: string;
   requestOrigin?: string;
   receiverAddress: string;
   signerAddress: string;
   gasPrice: string;
   gasLimit: string;
   data: string;
+  dataHighlight?: string;
+  action?: string;
 }
 export const expectAndSignTransaction = async (
-  transactionsInfo: ISignTransactionInfo[]
+  transactionsInfo: ISignTransactionInfo[],
+  isHook?: boolean
 ) => {
-  for (const info of transactionsInfo) {
+  for (const [index, info] of transactionsInfo.entries()) {
+    if (transactionsInfo.length > 1) {
+      await expectElementToContainTextDeep({
+        dataTestId: DataTestIdsEnum.signTransactionsHeaderPagerText,
+        text: `Transaction${index + 1}of${transactionsInfo.length}`
+      });
+    }
+
     const {
       amount,
+      amountLabel = 'Send',
+      receiverLabel = 'To',
       requestOrigin = WALLET_SOURCE_ORIGIN,
       receiverAddress,
       signerAddress,
       gasPrice,
       gasLimit,
-      data
+      data,
+      dataHighlight,
+      action
     } = info;
+
+    const signTransactionsOverviewTab = await getByTestIdDeep(
+      page,
+      `${DataTestIdsEnum.signTransactionsTab}-overview`
+    );
+
+    await signTransactionsOverviewTab.click();
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsHeaderOrigin,
@@ -37,13 +60,20 @@ export const expectAndSignTransaction = async (
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsOverviewAmountRow,
-      text: `Send${amount} VIBE`
+      text: `${amountLabel}${amount} VIBE`
     });
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsOverviewInteractorRow,
-      text: `To${receiverAddress}`
+      text: `${receiverLabel}${receiverAddress}`
     });
+
+    if (action) {
+      await expectElementToContainTextDeep({
+        dataTestId: DataTestIdsEnum.signTransactionsOverviewActionRow,
+        text: action
+      });
+    }
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsFooterIdentity,
@@ -68,9 +98,16 @@ export const expectAndSignTransaction = async (
     });
 
     await expectElementToContainTextDeep({
-      dataTestId: DataTestIdsEnum.signTransactionsAdvancedDataHighlight,
+      dataTestId: DataTestIdsEnum.signTransactionsAdvancedData,
       text: data
     });
+
+    if (dataHighlight) {
+      await expectElementToContainTextDeep({
+        dataTestId: DataTestIdsEnum.signTransactionsAdvancedDataHighlight,
+        text: dataHighlight
+      });
+    }
 
     const signNextTransactionBtn = await getByTestIdDeep(
       page,
@@ -78,9 +115,12 @@ export const expectAndSignTransaction = async (
     );
 
     await signNextTransactionBtn.click();
+    await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
   }
 
-  await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
+  if (isHook) {
+    return;
+  }
 
   await expectElementToContainTextDeep({
     dataTestId: DataTestIdsEnum.transactionToastContent,
