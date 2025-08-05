@@ -26,9 +26,9 @@ const config = {
   setupFilesAfterEnv: ['./src/setupPuppeteerTests.ts'],
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/src'],
-  bail: 0,
+  bail: 1,
   workerIdleMemoryLimit: '512MB',
-  maxWorkers: isHeadless ? 4 : 1,
+  maxWorkers: isHeadless ? 2 : 1,
   launch: {
     slowMo: 0,
     headless: isHeadless,
