@@ -15,7 +15,13 @@ export const createNewTransactionsFromRaw = ({
     transactions
   });
 
-  return preparedRawTransactions.map((tx) =>
-    Transaction.newFromPlainObject(tx)
-  );
+  return preparedRawTransactions.map((tx) => {
+    const newTx = {
+      ...tx,
+      data: Buffer.from(tx.data ?? '').toString('base64')
+    };
+
+    const transaction = Transaction.newFromPlainObject(newTx);
+    return transaction;
+  });
 };
