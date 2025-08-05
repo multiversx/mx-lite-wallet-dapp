@@ -1,7 +1,6 @@
 import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
-  expectElementToContainTextDeep,
   getByTestIdDeep,
   loginWithKeystore,
   waitForUrlToMatch

@@ -616,7 +616,7 @@ export const keystoreWalletNfts = [
     nonce: 3,
     type: 'NonFungibleESDT',
     name: 'dafdsaf #1',
-    creator: 'erd1qqqqqqqqqqqqqpgq9pp32ey4wthxzkepfp785870v4u78grwu00sw0hhff',
+    creator: 'vibe1qqqqqqqqqqqqqpgq9pp32ey4wthxzkepfp785870v4u78grwu00sw0hhff',
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1QdVlHb2E2d3phcVA3RHltNzNyMmFacFVaZXB4TEN0VUc4S1Q4OEtrdVBBNy8xLm1wNA==',
@@ -826,7 +826,7 @@ export const keystoreWalletNfts = [
     nonce: 4,
     type: 'MetaESDT',
     name: 'EGLDMEXLPStakedLK',
-    creator: 'erd1qqqqqqqqqqqqqpgqqjpfmappkpzq6kdju3mkqepk3d2kcymu0n4srd45sa',
+    creator: 'vibe1qqqqqqqqqqqqqpgqqjpfmappkpzq6kdju3mkqepk3d2kcymu0n4srd45sa',
     isWhitelistedStorage: false,
     balance: '194220587180463958',
     decimals: 18,
@@ -904,7 +904,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'fifa',
-    creator: 'erd18a4j3avufn5cqxjarwah8es4du3t9t2pp0qx0r7yft2k06eyj5qq99mhgm',
+    creator: 'vibe18a4j3avufn5cqxjarwah8es4du3t9t2pp0qx0r7yft2k06eyj5qq99mhgm',
     royalties: 0.03,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -937,7 +937,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'one',
-    creator: 'erd1c8ldzp8f58qda5xx9h5lhd9thqxrx3gz506dfttx590cm2k0jges84y2a4',
+    creator: 'vibe1c8ldzp8f58qda5xx9h5lhd9thqxrx3gz506dfttx590cm2k0jges84y2a4',
     royalties: 0.01,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -969,7 +969,7 @@ export const keystoreWalletNfts = [
     nonce: 2,
     type: 'NonFungibleESDT',
     name: 'two',
-    creator: 'erd1c8ldzp8f58qda5xx9h5lhd9thqxrx3gz506dfttx590cm2k0jges84y2a4',
+    creator: 'vibe1c8ldzp8f58qda5xx9h5lhd9thqxrx3gz506dfttx590cm2k0jges84y2a4',
     royalties: 0.02,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='
@@ -1155,7 +1155,7 @@ export const keystoreWalletNfts = [
     nonce: 9,
     type: 'MetaESDT',
     name: 'MEX-a659d0',
-    creator: 'erd1qqqqqqqqqqqqqpgq2l97gw2j4wnlem4y2rx7dudqlssjtwpu0n4sd0u3w2',
+    creator: 'vibe1qqqqqqqqqqqqqpgq2l97gw2j4wnlem4y2rx7dudqlssjtwpu0n4sd0u3w2',
     isWhitelistedStorage: false,
     balance: '21000000000000000000',
     decimals: 18,
@@ -1238,7 +1238,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'testName',
-    creator: 'erd1spyavw0956vq68xj8y4tenjpq2wd5a9p2c6j8gsz7ztyrnpxrruqzu66jx',
+    creator: 'vibe1spyavw0956vq68xj8y4tenjpq2wd5a9p2c6j8gsz7ztyrnpxrruqzu66jx',
     royalties: 0,
     uris: [
       'aHR0cHM6Ly9oaXBzLmhlYXJzdGFwcHMuY29tL2htZy1wcm9kL2ltYWdlcy9iaXJ0aGRheS1jYWtlLWRlY29yYXRlZC13aXRoLWNvbG9yZnVsLXNwcmlua2xlcy1hbmQtcm95YWx0eS1mcmVlLWltYWdlLTE2NTM1MDkzNDguanBn',
@@ -1303,7 +1303,7 @@ export const keystoreWalletNfts = [
     nonce: 2,
     type: 'MetaESDT',
     name: 'MetaStakedUtrustLK',
-    creator: 'erd1qqqqqqqqqqqqqpgqqwn0qa7ft4tew05r0zcd0c5hay5mp6np0n4ss8jm86',
+    creator: 'vibe1qqqqqqqqqqqqqpgqqwn0qa7ft4tew05r0zcd0c5hay5mp6np0n4ss8jm86',
     isWhitelistedStorage: false,
     balance: '229787701242046374333',
     decimals: 18,
@@ -1316,7 +1316,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'MetaESDT',
     name: 'MetaStakedUtrustLK',
-    creator: 'erd1qqqqqqqqqqqqqpgqteg56fufpkfwzwjdhlethwmnnj9mglrz0n4std9j7u',
+    creator: 'vibe1qqqqqqqqqqqqqpgqteg56fufpkfwzwjdhlethwmnnj9mglrz0n4std9j7u',
     isWhitelistedStorage: false,
     balance: '685665541372495556479',
     decimals: 18,
@@ -1851,7 +1851,7 @@ export const keystoreWalletNfts = [
     nonce: 1,
     type: 'NonFungibleESDT',
     name: 'test',
-    creator: 'erd1e240yhcqzvh8sh3r3dtmunu833ukxyfu5kufkk0nh6ett8wfwphsdawwve',
+    creator: 'vibe1e240yhcqzvh8sh3r3dtmunu833ukxyfu5kufkk0nh6ett8wfwphsdawwve',
     royalties: 0.02,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1hdHE3MlE3VURlb2ZvY0xhZFlRRVRzRjUyU1VRMVVxTHBpRVp1U1dkWTNVeQ=='

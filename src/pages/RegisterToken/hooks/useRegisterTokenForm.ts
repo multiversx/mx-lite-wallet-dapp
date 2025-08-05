@@ -1,5 +1,6 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
 
@@ -17,9 +18,10 @@ import {
   accountSelector,
   getState
 } from 'lib';
+import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
-import { capitalize, addressIsErd } from 'utils';
+import { capitalize, addressIsHrp } from 'utils';
 import { sleep } from 'utils/testUtils/puppeteer';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';
@@ -40,6 +42,9 @@ export const useRegisterTokenForm = () => {
   const navigate = useNavigate();
   const { account } = useGetAccountInfo();
 
+  const {
+    activeNetwork: { hrp }
+  } = useSelector(networkSelector);
   const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
@@ -74,7 +79,7 @@ export const useRegisterTokenForm = () => {
         .test(
           'addressIsValid',
           'Address is invalid',
-          (value) => !value || addressIsValid(value) || addressIsErd(value)
+          (value) => !value || addressIsValid(value) || addressIsHrp(value, hrp)
         )
         .required('Contract is required'),
       [RegisterTokenFormFieldsEnum.token]: object()

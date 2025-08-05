@@ -17,7 +17,7 @@ import {
 } from 'utils/testUtils/puppeteer';
 
 const contractAddress =
-  'vibe1qqqqqqqqqqqqqpgqfcm6l6rd42hwhskmk4thlp9kz58npfq50gfqdrthqa';
+  'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0';
 
 describe('Sovereign transfer test', () => {
   it('should transfer ESDT and NFT tokens on sovereign successfully', async () => {
@@ -194,14 +194,43 @@ describe('Sovereign transfer test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
+
+    const mainTx = {
+      amount: '0.000000000000000001',
+      receiverAddress: keystoreAccount.address,
+      signerAddress: '@webteam',
+      gasPrice: '0.000000001',
+      gasLimit: '100.000.000',
+      data: 'MultiESDTNFTTransfer@000000000000000000010000000000000000000000000000000000000002ffff@04@425453542d313135346332@@01@4153482d653364316237@@1bc16d674ec80000@4e46542d663765636164@01@01@4348524953544d41532d323764336532@01@05@6465706f736974@05579ce6988a9aed36ca7229746071a6b8f603f97025f15ed16c71758b6adcd9'
+    };
+
     await expectAndSignTransaction([
       {
-        amount: '0.050000000000000000',
-        receiverAddress: keystoreAccount.address,
-        signerAddress: '@webteam',
-        gasPrice: '0.000000001',
-        gasLimit: '60.137.000',
-        data: 'transfer@53465454455354434f4c@534654@534654@'
+        ...mainTx,
+        dataHighlight: '425453542d313135346332@@01'
+      },
+      {
+        ...mainTx,
+        amount: '2',
+        dataHighlight: '4153482d653364316237@@1bc16d674ec80000'
+      },
+      {
+        ...mainTx,
+        dataHighlight: '4e46542d663765636164@01@01'
+      },
+      {
+        ...mainTx,
+        amount: '0.000000000000000005',
+        dataHighlight: '4348524953544d41532d323764336532@01@05'
+      },
+      {
+        ...mainTx,
+        amount: '0',
+        amountLabel: 'Amount',
+        action: 'deposit',
+        receiverLabel: 'App',
+        dataHighlight:
+          '465706f736974@05579ce6988a9aed36ca7229746071a6b8f603f97025f15ed16c71758b6adcd9'
       }
     ]);
   });
