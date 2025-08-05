@@ -87,7 +87,7 @@ describe('Send NFT tests', () => {
       {
         amount: '0',
         receiverAddress: keystoreAccount.address,
-        signerAddress: keystoreAccount.address,
+        signerAddress: '@webteam',
         gasPrice: '0.000000001',
         gasLimit: '87.500',
         data: 'Sending empty transaction'
