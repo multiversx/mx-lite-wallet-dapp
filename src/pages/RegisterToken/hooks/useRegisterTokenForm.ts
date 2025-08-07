@@ -22,7 +22,6 @@ import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { capitalize, addressIsHrp } from 'utils';
-import { sleep } from 'utils/testUtils/puppeteer';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
@@ -108,7 +107,6 @@ export const useRegisterTokenForm = () => {
       });
 
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
-      await sleep(1000);
       const { nonce } = accountSelector(getState());
       transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
