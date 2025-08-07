@@ -32,8 +32,7 @@ const config = {
     nativeAuth: true,
     network: {
       ...activeNetwork,
-      walletAddress:
-        activeNetwork.walletAddress || 'https://devnet-wallet.multiversx.com'
+      walletAddress: activeNetwork.walletAddress
     },
     successfulToastLifetime: 5000
   },

@@ -1,6 +1,10 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useReplyToDapp, useRedirectPathname } from 'hooks';
+import {
+  useReplyToDapp,
+  useRedirectPathname,
+  useSignWithRedirect
+} from 'hooks';
 import {
   useGetAccount,
   WindowProviderResponseEnums,
@@ -27,12 +31,9 @@ export const HookValidationOutcome = ({
   const provider = getAccountProvider();
   const providerType = provider.getType();
   const { type: registeredHook } = useSelector(hookSelector);
-  const { pathname: redirectPathname } = useRedirectPathname({
-    isHook: true
-  });
+  const { pathname: redirectPathname } = useRedirectPathname();
   const { address } = useGetAccount();
   const replyToDapp = useReplyToDapp();
-
   const isValid = validUrl === HookStateEnum.valid;
   const isInvalid = validUrl === HookStateEnum.invalid;
   const isPending = validUrl === HookStateEnum.pending;

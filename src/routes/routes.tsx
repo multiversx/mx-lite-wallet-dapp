@@ -12,7 +12,6 @@ import {
   SignMessage,
   SignMessageHook,
   Send,
-  Sign,
   SovereignTransfer,
   RegisterToken,
   IssueNft,
@@ -75,11 +74,6 @@ const routesObject: Partial<
         <Send />
       </FeaturePageLayout>
     )
-  },
-  [RouteNamesEnum.sign]: {
-    path: RouteNamesEnum.sign,
-    title: 'Sign',
-    component: () => <Sign />
   },
   [RouteNamesEnum.signMessage]: {
     path: RouteNamesEnum.signMessage,

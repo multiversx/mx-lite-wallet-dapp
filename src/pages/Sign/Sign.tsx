@@ -126,8 +126,6 @@ export const Sign = () => {
     );
   }
 
-  // TODO: Use child route and show dashboard bg
-
   if (
     providerType === ProviderTypeEnum.extension ||
     providerType === ProviderTypeEnum.walletConnect

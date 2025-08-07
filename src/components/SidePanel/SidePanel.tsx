@@ -1,4 +1,4 @@
-import { ReactNode, useCallback } from 'react';
+import { ReactNode } from 'react';
 import { MvxSidePanel } from '@multiversx/sdk-dapp-ui/react';
 
 // Define the component props based on the MvxSidePanel interface
@@ -22,26 +22,16 @@ export const SidePanel = ({
   children,
   onClose,
   onBack
-}: ISidePanelProps) => {
-  const handleClose = useCallback(() => {
-    onClose?.();
-  }, [onClose]);
-
-  const handleBack = useCallback(() => {
-    onBack?.();
-  }, [onBack]);
-
-  return (
-    <MvxSidePanel
-      isOpen={isOpen}
-      panelTitle={panelTitle}
-      panelClassName={panelClassName}
-      hasBackButton={hasBackButton}
-      showHeader={showHeader}
-      onClose={handleClose}
-      onBack={handleBack}
-    >
-      {children}
-    </MvxSidePanel>
-  );
-};
+}: ISidePanelProps) => (
+  <MvxSidePanel
+    isOpen={isOpen}
+    panelTitle={panelTitle}
+    panelClassName={panelClassName}
+    hasBackButton={hasBackButton}
+    showHeader={showHeader}
+    onClose={onClose}
+    onBack={onBack}
+  >
+    {children}
+  </MvxSidePanel>
+);

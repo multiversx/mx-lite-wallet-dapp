@@ -9,8 +9,7 @@ import {
   Transaction,
   TransactionComputer,
   UserSecretKey,
-  UserSigner,
-  setProviderType
+  UserSigner
 } from 'lib';
 import { IFileProviderOptions } from 'types/providers';
 
