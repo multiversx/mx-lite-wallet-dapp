@@ -1,7 +1,7 @@
 import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
 import { initApp } from 'lib';
-import { IFileProvider, IFileProviderOptions } from 'types';
+import { FileProviderEnum, IFileProvider, IFileProviderOptions } from 'types';
 import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
 import { App } from './App';
 import 'utils/adapter/gatewayAdapter';
@@ -11,15 +11,15 @@ import { PemProvider } from './providers/Pem/PemProvider';
 const providers: IFileProvider[] = [
   {
     name: 'PEM File',
-    type: 'pemProvider',
-    iconUrl: `${window.location.origin}/pem-icon.svg`,
+    type: FileProviderEnum.PEM,
+    iconUrl: `${window.location.origin}/favicon-32x32.png`,
     constructor: async (options?: IFileProviderOptions) =>
       new PemProvider(options)
   },
   {
     name: 'Keystore File',
-    type: 'keystoreProvider',
-    iconUrl: `${window.location.origin}/keystore-icon.svg`,
+    type: FileProviderEnum.KEYSTORE,
+    iconUrl: `${window.location.origin}/favicon-32x32.png`,
     constructor: async (options?: IFileProviderOptions) =>
       new KeystoreProvider(options)
   }

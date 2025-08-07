@@ -1,3 +1,1 @@
-import { IssueNftForm } from './components';
-
-export const IssueNft = () => <IssueNftForm />;
+export { IssueNftForm as IssueNft } from './components';

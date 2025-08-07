@@ -33,6 +33,8 @@ export interface RouteType {
   children?: RouteType[];
 }
 
+// TODO: Implement layouts enum and apply with switch case
+
 const routesObject: Partial<
   Record<RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum, RouteType>
 > = {

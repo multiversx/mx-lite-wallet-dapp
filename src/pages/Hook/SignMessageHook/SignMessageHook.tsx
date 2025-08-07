@@ -13,11 +13,10 @@ export const SignMessageHook = () => {
   const { pathname, search } = useLocation();
   const { hookUrl } = useSelector(hookSelector);
 
-  const data = useMemo(() => {
-    return search.length > 0
-      ? getSignMessageHookData(search)
-      : getSignMessageHookData(hookUrl);
-  }, [pathname]);
+  const data = useMemo(
+    () => getSignMessageHookData(search.length > 0 ? search : hookUrl),
+    [pathname]
+  );
 
   const [validUrl, setValidUrl] = useState<HookStateEnum>(
     HookStateEnum.pending

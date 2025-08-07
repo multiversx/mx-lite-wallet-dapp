@@ -1,3 +1,1 @@
-import { IssueTokenForm } from './components';
-
-export const IssueToken = () => <IssueTokenForm />;
+export { IssueTokenForm as IssueToken } from './components';

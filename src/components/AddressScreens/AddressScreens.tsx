@@ -29,7 +29,7 @@ export const AddressScreens = ({
 }: AddressScreensPropsType) => {
   const [accounts, setAccounts] = useState<IndexedAccountType[]>([]);
   const [startIndex, setStartIndex] = useState(0);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number>();
   const [isLoading, setIsLoading] = useState(false);
 
   const loadAccounts = useCallback(() => {
@@ -58,7 +58,7 @@ export const AddressScreens = ({
 
   useEffect(() => {
     loadAccounts();
-    setSelectedIndex(null);
+    setSelectedIndex(undefined);
   }, [loadAccounts, startIndex]);
 
   const handleAccessWallet = useCallback(() => {
@@ -80,7 +80,7 @@ export const AddressScreens = ({
 
     if (typeof pageIdx === 'number') {
       setStartIndex(pageIdx);
-      setSelectedIndex(null);
+      setSelectedIndex(undefined);
       onPageChange?.(pageIdx);
     }
   }, []);
@@ -95,7 +95,7 @@ export const AddressScreens = ({
   return (
     <MvxAddressTable
       className={className}
-      selectedIndex={selectedIndex ?? undefined}
+      selectedIndex={selectedIndex}
       accountScreenData={accountScreenData}
       onAccessWallet={handleAccessWallet}
       onSelectAccount={handleSelectAccount}

@@ -160,7 +160,9 @@ export const KeystorePanel = ({
 
   const handleConfirmSelectedAddress = useCallback(
     (account: { index: number; address: string }) => {
-      if (!account || !keystoreData) return;
+      if (!account || !keystoreData) {
+        return;
+      }
       const walletData = accessWallet({
         kdContent: keystoreData,
         accessPassVal: password,

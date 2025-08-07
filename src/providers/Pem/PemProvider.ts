@@ -1,5 +1,5 @@
 import { ProviderType } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
-import { IFileProviderOptions } from 'types/providers';
+import { FileProviderEnum, IFileProviderOptions } from 'types/providers';
 import { PemLoginPanel } from './PemLoginPanel';
 import { FileProvider } from '../FileProvider';
 
@@ -11,7 +11,7 @@ export class PemProvider extends FileProvider {
   }
 
   getType(): ProviderType {
-    return 'pemProvider' as unknown as ProviderType;
+    return FileProviderEnum.PEM as unknown as ProviderType;
   }
 
   protected async showLoginPanel(): Promise<{

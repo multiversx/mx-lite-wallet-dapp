@@ -1,3 +1,1 @@
-import { SendForm } from './components';
-
-export const Send = () => <SendForm />;
+export { SendForm as Send } from './components';

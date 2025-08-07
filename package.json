@@ -35,7 +35,7 @@
     "run-playwright": "npm run playwright test --workers=10",
     "test": "jest",
     "preview": "vite preview",
-     "install-verdaccio": "pnpm remove @multiversx/sdk-dapp && pnpm install @multiversx/sdk-dapp@5.0.11 --registry http://localhost:4873"
+     "install-verdaccio": "pnpm remove @multiversx/sdk-dapp && pnpm install @multiversx/sdk-dapp@latest --registry http://localhost:4873"
   },
   "browserslist": [
     ">0.2%",

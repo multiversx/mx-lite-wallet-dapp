@@ -119,7 +119,7 @@ export abstract class FileProvider implements IProvider {
         address: loginResult.address
       });
 
-      setProviderType(this.getType());
+      // setProviderType(this.getType());
 
       const token = options?.token;
 

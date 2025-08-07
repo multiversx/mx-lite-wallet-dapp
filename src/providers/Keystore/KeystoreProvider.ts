@@ -1,5 +1,5 @@
 import { ProviderType } from 'lib';
-import { IFileProviderOptions } from 'types/providers';
+import { FileProviderEnum, IFileProviderOptions } from 'types/providers';
 import { KeystoreLoginPanel } from './KeystoreLoginPanel';
 import { setKeystoreLogin } from '../../redux/slices/account';
 import { store } from '../../redux/store';
@@ -13,7 +13,7 @@ export class KeystoreProvider extends FileProvider {
   }
 
   getType(): ProviderType {
-    return 'keystoreProvider' as unknown as ProviderType;
+    return FileProviderEnum.KEYSTORE as unknown as ProviderType;
   }
 
   protected async showLoginPanel(): Promise<{

@@ -16,7 +16,7 @@ export type SendAndTrackTransactionsType = {
 export const sendAndTrackTransactions = async ({
   transactions,
   options
-}: SendAndTrackTransactionsType) => {
+}: SendAndTrackTransactionsType): Promise<string | null> => {
   const txManager = TransactionManager.getInstance();
   const provider = getAccountProvider();
 
