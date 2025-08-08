@@ -22,10 +22,10 @@ importers:
         version: 14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)
       '@multiversx/sdk-dapp':
         specifier: ^5.x
-        version: 5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)
+        version: 5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)
       '@multiversx/sdk-dapp-form':
         specifier: ^3.x
-        version: 3.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 3.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@multiversx/sdk-dapp-ui':
         specifier: ^0.x
         version: 0.0.23(@stencil/core@4.36.2)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)
@@ -34,7 +34,7 @@ importers:
         version: 2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
       '@multiversx/sdk-js-web-wallet-io':
         specifier: ^3.x
-        version: 3.1.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(axios@1.7.4)(bignumber.js@9.0.2)
+        version: 3.1.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(axios@1.10.0)(bignumber.js@9.0.2)
       '@multiversx/sdk-web-wallet-cross-window-provider':
         specifier: ^3.x
         version: 3.2.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
@@ -42,8 +42,8 @@ importers:
         specifier: 1.9.1
         version: 1.9.1(react-redux@8.0.5(@types/react-dom@18.2.18)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1))(react@18.2.0)
       axios:
-        specifier: 1.7.4
-        version: 1.7.4
+        specifier: 1.10.0
+        version: 1.10.0
       bignumber.js:
         specifier: 9.0.2
         version: 9.0.2
@@ -2739,11 +2739,11 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
+  axios@1.10.0:
+    resolution: {integrity: sha512-/1xYAC4MP/HEG+3duIhFr4ZQXR4sQXOIe+o6sdqzeykGLx6Upp/1p8MHqhINOvGeP7xyNHe7tsiJByc4SSVUxw==}
+
   axios@1.11.0:
     resolution: {integrity: sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==}
-
-  axios@1.7.4:
-    resolution: {integrity: sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==}
 
   b4a@1.6.7:
     resolution: {integrity: sha512-OnAYlL5b7LEkALw87fUVafQw5rVR9RjwGd4KUwNQ6DrrNmaVaUCgLipfVlzrPQ4tWOR9P0IXGNOx50jYCCdSJg==}
@@ -2965,8 +2965,8 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
 
-  caniuse-lite@1.0.30001731:
-    resolution: {integrity: sha512-lDdp2/wrOmTRWuoB5DpfNkC0rJDU8DqRa6nYL6HK6sytw70QMopt/NIc/9SM7ylItlBWfACXk0tEn37UWM/+mg==}
+  caniuse-lite@1.0.30001733:
+    resolution: {integrity: sha512-e4QKw/O2Kavj2VQTKZWrwzkt3IxOmIlU6ajRb6LP64LHpBo1J67k2Hi4Vu/TgJWsNtynurfS0uK3MaUTCPfu5Q==}
 
   chalk@3.0.0:
     resolution: {integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==}
@@ -3399,8 +3399,8 @@ packages:
   ed2curve@0.3.0:
     resolution: {integrity: sha512-8w2fmmq3hv9rCrcI7g9hms2pMunQr1JINfcjwR9tAyZqhtyaMN991lF/ZfHfr5tzZQ8c7y7aBgZbjfbd0fjFwQ==}
 
-  electron-to-chromium@1.5.198:
-    resolution: {integrity: sha512-G5COfnp3w+ydVu80yprgWSfmfQaYRh9DOxfhAxstLyetKaLyl55QrNjx8C38Pc/C+RaDmb1M0Lk8wPEMQ+bGgQ==}
+  electron-to-chromium@1.5.199:
+    resolution: {integrity: sha512-3gl0S7zQd88kCAZRO/DnxtBKuhMO4h0EaQIN3YgZfV6+pW+5+bf2AdQeHNESCoaQqo/gjGVYEf2YM4O5HJQqpQ==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -8208,18 +8208,18 @@ snapshots:
       uuid: 8.3.2
     optionalDependencies:
       '@multiversx/sdk-bls-wasm': 0.3.5
-      axios: 1.11.0
+      axios: 1.10.0
       bip39: 3.1.0
     transitivePeerDependencies:
       - debug
 
-  '@multiversx/sdk-dapp-form@3.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@multiversx/sdk-dapp-form@3.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@multiversx/sdk-core': 14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)
-      '@multiversx/sdk-dapp': 5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)
+      '@multiversx/sdk-dapp': 5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)
       '@multiversx/sdk-dapp-utils': 2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
       anchorme: 2.1.2
-      axios: 1.7.4
+      axios: 1.10.0
       bech32: 2.0.0
       bignumber.js: 9.0.2
       formik: 2.2.9(react@18.2.0)
@@ -8262,7 +8262,7 @@ snapshots:
     dependencies:
       '@multiversx/sdk-core': 14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)
 
-  '@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)':
+  '@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)':
     dependencies:
       '@lifeomic/axios-fetch': 3.0.1
       '@multiversx/sdk-core': 14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)
@@ -8270,14 +8270,14 @@ snapshots:
       '@multiversx/sdk-extension-provider': 5.0.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
       '@multiversx/sdk-hw-provider': 8.0.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
       '@multiversx/sdk-metamask-provider': 2.0.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
-      '@multiversx/sdk-native-auth-client': 2.0.1(axios@1.7.4)
+      '@multiversx/sdk-native-auth-client': 2.0.1(axios@1.10.0)
       '@multiversx/sdk-wallet': 4.6.0
       '@multiversx/sdk-wallet-connect-provider': 6.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(typescript@5.2.2)(zod@3.23.8)
       '@multiversx/sdk-web-wallet-cross-window-provider': 3.1.3(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
       '@multiversx/sdk-web-wallet-iframe-provider': 3.0.3(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-web-wallet-cross-window-provider@3.1.3(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))
       '@multiversx/sdk-web-wallet-provider': 5.0.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
       '@multiversx/sdk-webview-provider': 3.1.3(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-web-wallet-cross-window-provider@3.1.3(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))
-      axios: 1.7.4
+      axios: 1.10.0
       bignumber.js: 9.0.2
       immer: 10.1.1
       linkifyjs: 4.3.1
@@ -8338,13 +8338,13 @@ snapshots:
       buffer: 6.0.3
       platform: 1.3.6
 
-  '@multiversx/sdk-js-web-wallet-io@3.1.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(axios@1.7.4)(bignumber.js@9.0.2)':
+  '@multiversx/sdk-js-web-wallet-io@3.1.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@multiversx/sdk-dapp@5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(axios@1.10.0)(bignumber.js@9.0.2)':
     dependencies:
       '@multiversx/sdk-core': 14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)
-      '@multiversx/sdk-dapp': 5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.7.4)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)
+      '@multiversx/sdk-dapp': 5.0.13(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))(@multiversx/sdk-dapp-utils@2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0)))(@stencil/core@4.36.2)(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.0.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@3.29.5)(typescript@5.2.2)(zod@3.23.8)
       '@multiversx/sdk-dapp-utils': 2.0.2(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
       '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.0(@multiversx/sdk-core@14.2.9(bignumber.js@9.0.2)(protobufjs@7.4.0))
-      axios: 1.7.4
+      axios: 1.10.0
       bignumber.js: 9.0.2
       lodash: 4.17.21
       qs: 6.12.1
@@ -8358,9 +8358,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@multiversx/sdk-native-auth-client@2.0.1(axios@1.7.4)':
+  '@multiversx/sdk-native-auth-client@2.0.1(axios@1.10.0)':
     dependencies:
-      axios: 1.7.4
+      axios: 1.10.0
 
   '@multiversx/sdk-transaction-decoder@1.0.2':
     dependencies:
@@ -9777,7 +9777,7 @@ snapshots:
   autoprefixer@10.4.16(postcss@8.4.30):
     dependencies:
       browserslist: 4.25.1
-      caniuse-lite: 1.0.30001731
+      caniuse-lite: 1.0.30001733
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.1
@@ -9788,7 +9788,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axios@1.11.0:
+  axios@1.10.0:
     dependencies:
       follow-redirects: 1.15.11
       form-data: 4.0.4
@@ -9796,7 +9796,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  axios@1.7.4:
+  axios@1.11.0:
     dependencies:
       follow-redirects: 1.15.11
       form-data: 4.0.4
@@ -10026,8 +10026,8 @@ snapshots:
 
   browserslist@4.25.1:
     dependencies:
-      caniuse-lite: 1.0.30001731
-      electron-to-chromium: 1.5.198
+      caniuse-lite: 1.0.30001733
+      electron-to-chromium: 1.5.199
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.1)
 
@@ -10090,7 +10090,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001731: {}
+  caniuse-lite@1.0.30001733: {}
 
   chalk@3.0.0:
     dependencies:
@@ -10534,7 +10534,7 @@ snapshots:
     dependencies:
       tweetnacl: 1.0.3
 
-  electron-to-chromium@1.5.198: {}
+  electron-to-chromium@1.5.199: {}
 
   elliptic@6.6.1:
     dependencies:
@@ -12351,7 +12351,7 @@ snapshots:
 
   md5.js@1.3.5:
     dependencies:
-      hash-base: 3.0.5
+      hash-base: 3.1.0
       inherits: 2.0.4
       safe-buffer: 5.2.1
 
@@ -14186,7 +14186,7 @@ snapshots:
 
   wait-on@7.2.0:
     dependencies:
-      axios: 1.7.4
+      axios: 1.10.0
       joi: 17.13.3
       lodash: 4.17.21
       minimist: 1.2.8

@@ -9,7 +9,7 @@ import {
 } from 'lib';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
-import { useValidateAndSignTxs } from '../../pages/Sign/hooks';
+import { useValidateAndSignTxs } from './hooks';
 import { useReplyWithCancelled } from '../useReplyWithCancelled';
 
 export const useSignWithRedirect = () => {
@@ -52,7 +52,9 @@ export const useSignWithRedirect = () => {
       console.error('Invalid hook');
     }
 
-    if (senderAddresses.length > 1) {
+    const hasMultipleSenders = senderAddresses.length > 1;
+
+    if (hasMultipleSenders) {
       console.error('Multiple senders are not allowed');
     }
 
@@ -60,7 +62,7 @@ export const useSignWithRedirect = () => {
       console.error(`Sender not allowed: ${sender}`);
     }
 
-    if (invalidHook || senderAddresses.length > 1 || !isValidSender) {
+    if (invalidHook || hasMultipleSenders || !isValidSender) {
       dispatch(resetHook());
     }
   };
