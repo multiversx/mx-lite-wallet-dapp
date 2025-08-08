@@ -27,24 +27,35 @@ export class PemLoginPanel extends BaseFileLoginPanel<
     if (!PemLoginPanel.instance) {
       PemLoginPanel.instance = new PemLoginPanel();
     }
+
     return PemLoginPanel.instance;
+  }
+
+  public static destroyInstance(): void {
+    if (PemLoginPanel.instance) {
+      PemLoginPanel.instance.destroy();
+      PemLoginPanel.instance = null as any;
+    }
   }
 
   protected renderPanelContent({
     isOpen,
     onSubmit,
     onClose,
+    onBack,
     anchor
   }: {
     isOpen: boolean;
     onSubmit: (values: IPemPanelReturn) => void;
     onClose: () => void;
+    onBack: () => void;
     anchor: HTMLElement | undefined;
   }): ReactElement {
     return (
       <PanelWrapper
         isOpen={isOpen}
         onClose={onClose}
+        onBack={onBack}
         anchor={anchor}
         panelTitle='PEM Login'
       >

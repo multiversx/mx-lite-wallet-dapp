@@ -7,6 +7,7 @@ export interface PanelWrapperProps extends PropsWithChildren {
   onClose: () => void;
   anchor?: HTMLElement;
   panelTitle: string;
+  onBack?: () => void;
 }
 
 export const PanelWrapper = ({
@@ -14,7 +15,8 @@ export const PanelWrapper = ({
   onClose,
   anchor,
   panelTitle,
-  children
+  children,
+  onBack
 }: PanelWrapperProps) => {
   const panelContent = (
     <div
@@ -36,12 +38,23 @@ export const PanelWrapper = ({
     return createPortal(panelContent, anchor);
   }
 
+  const handleBack = () => {
+    console.log('handleBack');
+    onBack?.();
+  };
+
+  const handleClose = () => {
+    console.log('handleClose');
+    onClose();
+  };
+
   return (
     <SidePanel
       isOpen={isOpen}
       panelTitle={panelTitle}
       showHeader={true}
-      onClose={onClose}
+      onClose={handleClose}
+      onBack={handleBack}
     >
       {panelContent}
     </SidePanel>

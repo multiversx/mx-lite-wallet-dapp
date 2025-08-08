@@ -1,11 +1,9 @@
 import {
-  DEFAULT_PAGE_LOAD_DELAY_MS,
   WALLET_SOURCE_ORIGIN
 } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainTextDeep } from './expectElementToContainText';
 import { getByTestIdDeep } from './getByDataTestIdDeep';
-import { sleep } from './sleep';
 
 interface ISignTransactionInfo {
   amount: string;
@@ -115,7 +113,6 @@ export const expectAndSignTransaction = async (
     );
 
     await signNextTransactionBtn.click();
-    await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
   }
 
   if (isHook) {

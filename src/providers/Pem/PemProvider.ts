@@ -1,4 +1,4 @@
-import { ProviderType } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+import { ProviderType } from 'lib';
 import { FileProviderEnum, IFileProviderOptions } from 'types/providers';
 import { PemLoginPanel } from './PemLoginPanel';
 import { FileProvider } from '../FileProvider';

@@ -63,10 +63,15 @@ export abstract class BaseFileLoginPanel<
       this._renderPanel(options);
     };
 
+    const onBack = () => {
+      console.log('onBack');
+    };
+
     this._currentPanel.root.render(
       this.renderPanelContent({
         isOpen: this._currentPanel.isOpen,
         onSubmit,
+        onBack,
         onClose,
         anchor: this._currentPanel.anchor,
         options
@@ -78,6 +83,7 @@ export abstract class BaseFileLoginPanel<
     isOpen: boolean;
     onSubmit: (values: TReturn) => void;
     onClose: () => void;
+    onBack: () => void;
     anchor: HTMLElement | undefined;
     options?: TOptions;
   }): ReactElement;
@@ -95,5 +101,16 @@ export abstract class BaseFileLoginPanel<
       this._currentPanel.anchor = (options as any)?.anchor;
       this._renderPanel(options);
     });
+  }
+
+  public destroy(): void {
+    if (this._currentPanel) {
+      this._currentPanel.root.unmount();
+      this._currentPanel = null;
+    }
+
+    if (this._panelRoot && this._panelRoot.parentNode) {
+      this._panelRoot.parentNode.removeChild(this._panelRoot);
+    }
   }
 }

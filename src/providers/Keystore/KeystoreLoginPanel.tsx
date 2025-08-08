@@ -32,19 +32,29 @@ export class KeystoreLoginPanel extends BaseFileLoginPanel<
     if (!KeystoreLoginPanel.instance) {
       KeystoreLoginPanel.instance = new KeystoreLoginPanel();
     }
+
     return KeystoreLoginPanel.instance;
+  }
+
+  public static destroyInstance(): void {
+    if (KeystoreLoginPanel.instance) {
+      KeystoreLoginPanel.instance.destroy();
+      KeystoreLoginPanel.instance = null as any;
+    }
   }
 
   protected renderPanelContent({
     isOpen,
     onSubmit,
     onClose,
+    onBack,
     anchor,
     options
   }: {
     isOpen: boolean;
     onSubmit: (values: IKeystorePanelReturn) => void;
     onClose: () => void;
+    onBack: () => void;
     anchor: HTMLElement | undefined;
     options?: IKeystoreLoginOptions;
   }): ReactElement {
@@ -52,6 +62,7 @@ export class KeystoreLoginPanel extends BaseFileLoginPanel<
       <PanelWrapper
         isOpen={isOpen}
         onClose={onClose}
+        onBack={onBack}
         anchor={anchor}
         panelTitle='Keystore Login'
       >

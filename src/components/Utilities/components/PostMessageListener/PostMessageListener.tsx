@@ -165,7 +165,7 @@ export const PostMessageListener = () => {
       }
 
       case WindowProviderRequestEnums.logoutRequest: {
-        navigate(routeNames.logout);
+        navigate(HooksPageEnum.logout);
         break;
       }
 

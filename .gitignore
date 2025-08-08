@@ -28,7 +28,6 @@ CLAUDE.md
 .claude
 .cursor
 .bmad-core
-docs/
 
 npm-debug.log*
 yarn-debug.log*
