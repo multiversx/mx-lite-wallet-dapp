@@ -21,7 +21,9 @@ export const sendAndTrackTransactions = async ({
   const provider = getAccountProvider();
 
   // Support both single and batch transactions
-  const signTxs = async (txs: Transaction[] | Transaction[][]) => {
+  const signTxs = async (
+    txs: Transaction[] | Transaction[][]
+  ): Promise<Transaction[] | Transaction[][]> => {
     if (Array.isArray(txs[0])) {
       // Batch of batches
       return Promise.all(
