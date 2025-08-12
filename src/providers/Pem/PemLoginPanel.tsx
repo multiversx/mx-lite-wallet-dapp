@@ -13,6 +13,13 @@ interface IPemLoginOptions {
   anchor?: HTMLElement;
 }
 
+interface IRenderPanelContentProps {
+  isOpen: boolean;
+  onSubmit: (values: IPemPanelReturn) => void;
+  onClose: () => void;
+  anchor: HTMLElement | undefined;
+}
+
 export class PemLoginPanel extends BaseFileLoginPanel<
   IPemPanelReturn,
   IPemLoginOptions
@@ -42,20 +49,12 @@ export class PemLoginPanel extends BaseFileLoginPanel<
     isOpen,
     onSubmit,
     onClose,
-    onBack,
     anchor
-  }: {
-    isOpen: boolean;
-    onSubmit: (values: IPemPanelReturn) => void;
-    onClose: () => void;
-    onBack: () => void;
-    anchor: HTMLElement | undefined;
-  }): ReactElement {
+  }: IRenderPanelContentProps): ReactElement {
     return (
       <PanelWrapper
         isOpen={isOpen}
         onClose={onClose}
-        onBack={onBack}
         anchor={anchor}
         panelTitle='PEM Login'
       >

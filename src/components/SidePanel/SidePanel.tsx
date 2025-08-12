@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 import { MvxSidePanel } from '@multiversx/sdk-dapp-ui/react';
-
-// Define the component props based on the MvxSidePanel interface
 export interface ISidePanelProps {
   isOpen?: boolean;
   panelTitle?: string;
@@ -10,7 +8,6 @@ export interface ISidePanelProps {
   showHeader?: boolean;
   children?: ReactNode;
   onClose?: () => void;
-  onBack?: () => void;
 }
 
 export const SidePanel = ({
@@ -20,8 +17,7 @@ export const SidePanel = ({
   hasBackButton = false,
   showHeader = true,
   children,
-  onClose,
-  onBack
+  onClose
 }: ISidePanelProps) => (
   <MvxSidePanel
     isOpen={isOpen}
@@ -30,7 +26,6 @@ export const SidePanel = ({
     hasBackButton={hasBackButton}
     showHeader={showHeader}
     onClose={onClose}
-    onBack={onBack}
   >
     {children}
   </MvxSidePanel>

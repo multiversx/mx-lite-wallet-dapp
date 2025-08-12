@@ -5,18 +5,16 @@ import { SidePanel } from 'components';
 export interface PanelWrapperProps extends PropsWithChildren {
   isOpen: boolean;
   onClose: () => void;
-  anchor?: HTMLElement;
   panelTitle: string;
-  onBack?: () => void;
+  anchor?: HTMLElement;
 }
 
 export const PanelWrapper = ({
   isOpen,
   onClose,
-  anchor,
   panelTitle,
   children,
-  onBack
+  anchor
 }: PanelWrapperProps) => {
   const panelContent = (
     <div
@@ -38,23 +36,12 @@ export const PanelWrapper = ({
     return createPortal(panelContent, anchor);
   }
 
-  const handleBack = () => {
-    console.log('handleBack');
-    onBack?.();
-  };
-
-  const handleClose = () => {
-    console.log('handleClose');
-    onClose();
-  };
-
   return (
     <SidePanel
       isOpen={isOpen}
       panelTitle={panelTitle}
       showHeader={true}
-      onClose={handleClose}
-      onBack={handleBack}
+      onClose={onClose}
     >
       {panelContent}
     </SidePanel>

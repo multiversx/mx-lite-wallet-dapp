@@ -18,6 +18,14 @@ interface IKeystoreLoginOptions {
   keystoreFileName?: string;
 }
 
+interface IRenderPanelContentProps {
+  isOpen: boolean;
+  onSubmit: (values: IKeystorePanelReturn) => void;
+  onClose: () => void;
+  anchor: HTMLElement | undefined;
+  options?: IKeystoreLoginOptions;
+}
+
 export class KeystoreLoginPanel extends BaseFileLoginPanel<
   IKeystorePanelReturn,
   IKeystoreLoginOptions
@@ -47,22 +55,13 @@ export class KeystoreLoginPanel extends BaseFileLoginPanel<
     isOpen,
     onSubmit,
     onClose,
-    onBack,
     anchor,
     options
-  }: {
-    isOpen: boolean;
-    onSubmit: (values: IKeystorePanelReturn) => void;
-    onClose: () => void;
-    onBack: () => void;
-    anchor: HTMLElement | undefined;
-    options?: IKeystoreLoginOptions;
-  }): ReactElement {
+  }: IRenderPanelContentProps): ReactElement {
     return (
       <PanelWrapper
         isOpen={isOpen}
         onClose={onClose}
-        onBack={onBack}
         anchor={anchor}
         panelTitle='Keystore Login'
       >

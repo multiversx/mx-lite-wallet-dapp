@@ -189,7 +189,8 @@ export abstract class FileProvider implements IProvider {
 
       if (!result.privateKey) {
         await this.logout();
-        return notInitializedError(action)();
+        const throwError = notInitializedError(action);
+        return throwError();
       }
 
       privateKey = result.privateKey;
