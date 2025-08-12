@@ -32,23 +32,12 @@ export class KeystoreLoginPanel extends BaseFileLoginPanel<
 > {
   private static instance: KeystoreLoginPanel;
 
-  private constructor() {
-    super();
-  }
-
   public static getInstance(): KeystoreLoginPanel {
     if (!KeystoreLoginPanel.instance) {
       KeystoreLoginPanel.instance = new KeystoreLoginPanel();
     }
 
     return KeystoreLoginPanel.instance;
-  }
-
-  public static destroyInstance(): void {
-    if (KeystoreLoginPanel.instance) {
-      KeystoreLoginPanel.instance.destroy();
-      KeystoreLoginPanel.instance = null as any;
-    }
   }
 
   protected renderPanelContent({

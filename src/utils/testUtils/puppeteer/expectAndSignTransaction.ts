@@ -1,6 +1,4 @@
-import {
-  WALLET_SOURCE_ORIGIN
-} from '__mocks__/data';
+import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainTextDeep } from './expectElementToContainText';
 import { getByTestIdDeep } from './getByDataTestIdDeep';

@@ -26,23 +26,12 @@ export class PemLoginPanel extends BaseFileLoginPanel<
 > {
   private static instance: PemLoginPanel;
 
-  private constructor() {
-    super();
-  }
-
   public static getInstance(): PemLoginPanel {
     if (!PemLoginPanel.instance) {
       PemLoginPanel.instance = new PemLoginPanel();
     }
 
     return PemLoginPanel.instance;
-  }
-
-  public static destroyInstance(): void {
-    if (PemLoginPanel.instance) {
-      PemLoginPanel.instance.destroy();
-      PemLoginPanel.instance = null as any;
-    }
   }
 
   protected renderPanelContent({
