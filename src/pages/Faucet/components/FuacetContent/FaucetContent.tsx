@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Loader, getEgldLabel, refreshAccount, useGetAccountInfo } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
+import { Loader } from 'components';
+import { refreshAccount, useGetAccountInfo } from 'lib';
 import {
   useGetFaucetSettingsQuery,
   useRequestFundsMutation
@@ -16,7 +16,6 @@ export const FaucetContent = () => {
   const [requestFailed, setRequestFailed] = useState('');
   const { websocketEvent } = useGetAccountInfo();
   const { data: settings, error: settingsError } = useGetFaucetSettingsQuery();
-  const egldLabel = getEgldLabel();
 
   useEffect(() => {
     if (isSuccess && fundsReceived) {
@@ -44,17 +43,7 @@ export const FaucetContent = () => {
   }
 
   if (!settings?.token) {
-    return (
-      <div className='flex flex-col'>
-        <h1
-          className='text-2xl whitespace-nowrap mt-2'
-          data-testid={DataTestIdsEnum.faucetTitle}
-        >
-          {egldLabel} Faucet
-        </h1>
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
   if (requestFailed) {

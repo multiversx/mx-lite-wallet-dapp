@@ -1,1 +1,1 @@
-export * from './useIsWebProvider';
+export * from './useIsWebviewProvider';

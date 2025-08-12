@@ -4,7 +4,7 @@ export const pemWalletTokens = [
     identifier: 'ASH-e3d1b7',
     name: 'ASH',
     ticker: 'ASH',
-    owner: 'erd1f0dwxpl3vxe936cla2mkky7nym4g3xn4vgfz497dpupqul8uktzshxqj5l',
+    owner: 'vibe1f0dwxpl3vxe936cla2mkky7nym4g3xn4vgfz497dpupqul8uktzshxqj5l',
     decimals: 18,
     isPaused: false,
     assets: {
@@ -70,7 +70,7 @@ export const pemWalletTokens = [
     identifier: 'WEGLD-a28c59',
     name: 'WrappedEGLD',
     ticker: 'WEGLD',
-    owner: 'erd1x39tc3q3nn72ecjnmcz7x0qp09kp97t080x99dgyhx7zh95j0n4szskhlv',
+    owner: 'vibe1x39tc3q3nn72ecjnmcz7x0qp09kp97t080x99dgyhx7zh95j0n4szskhlv',
     decimals: 18,
     isPaused: false,
     assets: {

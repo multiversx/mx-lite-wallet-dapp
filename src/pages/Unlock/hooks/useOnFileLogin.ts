@@ -2,12 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { useRedirectPathname } from 'hooks';
-import {
-  getToken,
-  loginWithExternalProvider,
-  useLoginService,
-  useGetAccountInfo
-} from 'lib';
+import { Message, Address, useGetAccount } from 'lib';
+import { nativeAuth } from 'lib';
 import { hookSelector } from 'redux/selectors';
 
 import {
@@ -15,7 +11,7 @@ import {
   setExternalNativeAuthToken,
   setTokenLogin
 } from 'redux/slices';
-import { useGetNativeAuthConfig } from './useGetNativeAuthConfig';
+
 import { signMessage } from '../helpers';
 
 interface UseOnLoginType {
@@ -29,16 +25,18 @@ export const generateTokenSignature = ({
   loginToken,
   privateKey
 }: UseOnLoginType) => {
-  const message = `${address}${loginToken}{}`;
+  const message = new Message({
+    address: new Address(address),
+    data: new TextEncoder().encode(`${address}${loginToken}`)
+  });
+
   return signMessage({ message, privateKey });
 };
 
 export const useOnFileLogin = () => {
   const dispatch = useDispatch();
   const { loginToken, hasNativeAuthToken } = useSelector(hookSelector);
-  const { address: loggedInAddress } = useGetAccountInfo();
-  const nativeAuthConfig = useGetNativeAuthConfig();
-  const loginService = useLoginService(nativeAuthConfig);
+  const { address: loggedInAddress } = useGetAccount();
   const navigate = useNavigate();
   const { getRedirectPathname } = useRedirectPathname();
 
@@ -66,11 +64,14 @@ export const useOnFileLogin = () => {
         return;
       }
 
-      signature = Buffer.from(msg.signature).toString('hex');
+      signature = Array.from(msg.signature)
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
     }
 
     if (loginToken && hasNativeAuthToken) {
-      const externalNativeAuthToken = getToken({
+      const nativeAuthService = nativeAuth();
+      const externalNativeAuthToken = nativeAuthService.getToken({
         address,
         token: loginToken,
         signature
@@ -79,17 +80,8 @@ export const useOnFileLogin = () => {
       dispatch(setExternalNativeAuthToken(externalNativeAuthToken));
     } else if (token) {
       dispatch(setTokenLogin({ loginToken: token, signature }));
-
-      if (signature) {
-        loginService.setLoginToken(token);
-        loginService.setTokenLoginInfo({
-          signature,
-          address
-        });
-      }
     }
 
-    loginWithExternalProvider(address);
     dispatch(setAccountAddress(address));
 
     if (noRedirect) {

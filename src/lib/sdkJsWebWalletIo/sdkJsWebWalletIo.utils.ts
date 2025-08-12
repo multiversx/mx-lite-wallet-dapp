@@ -8,3 +8,4 @@ export {
 } from '@multiversx/sdk-js-web-wallet-io/out/hooks/helpers/sign';
 export { getLogoutHookData } from '@multiversx/sdk-js-web-wallet-io/out/hooks/logoutHook/getLogoutHookData';
 export { parseQueryParams } from '@multiversx/sdk-js-web-wallet-io/out/helpers/navigation/parseQueryParams';
+export { replyToDapp } from '@multiversx/sdk-js-web-wallet-io/out/replyToDapp/replyToDapp';

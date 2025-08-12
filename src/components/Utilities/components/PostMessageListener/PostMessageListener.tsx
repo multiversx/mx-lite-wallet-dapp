@@ -11,15 +11,13 @@ import {
   getLoginHookData,
   getSignHookData,
   getSignMessageHookData,
-  removeAllTransactionsToSign,
-  removeAllSignedTransactions,
+  RequestMessageType,
   Transaction,
   useGetLoginInfo,
   WindowProviderRequestEnums,
-  WindowProviderResponseEnums,
-  RequestMessageType
+  WindowProviderResponseEnums
 } from 'lib';
-import { HooksEnum } from 'localConstants';
+import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { routeNames } from 'routes';
 import { getIsInWebview } from 'utils/app';
@@ -32,6 +30,7 @@ import {
 let isListenerAdded = false;
 let isHandShakeSent = false;
 let handshakeEstablished = false;
+let handshakeSession = Date.now().toString();
 const isReload = getIsReload();
 
 export const PostMessageListener = () => {
@@ -103,7 +102,7 @@ export const PostMessageListener = () => {
 
       case WindowProviderRequestEnums.signTransactionsRequest: {
         const transactions = payload.map((plainTransactionObject) =>
-          Transaction.fromPlainObject(plainTransactionObject)
+          Transaction.newFromPlainObject(plainTransactionObject)
         );
 
         const payloadQueryString = buildTransactionsQueryString({
@@ -118,17 +117,15 @@ export const PostMessageListener = () => {
           return;
         }
 
-        const hookType = HooksEnum.sign;
-
         dispatch(
           setHook({
-            type: hookType,
+            type: HooksEnum.sign,
             hookUrl: data.hookUrl,
             callbackUrl
           })
         );
 
-        navigate(routeNames.sign);
+        navigate(HooksPageEnum.sign);
         break;
       }
 
@@ -153,17 +150,22 @@ export const PostMessageListener = () => {
           })
         );
 
-        navigate(routeNames.signMessage);
+        navigate(HooksPageEnum.signMessage);
         break;
       }
 
       case WindowProviderRequestEnums.finalizeHandshakeRequest: {
         handshakeEstablished = true;
+        handshakeSession = payload || handshakeSession || Date.now().toString();
+        replyToDapp({
+          type: WindowProviderResponseEnums.finalizeHandshakeResponse,
+          payload: { data: handshakeSession }
+        });
         break;
       }
 
       case WindowProviderRequestEnums.logoutRequest: {
-        navigate(routeNames.logout);
+        navigate(HooksPageEnum.logout);
         break;
       }
 
@@ -176,9 +178,6 @@ export const PostMessageListener = () => {
       case WindowProviderResponseEnums.cancelResponse:
       case WindowProviderRequestEnums.cancelAction: {
         if (isInWebview) {
-          removeAllTransactionsToSign();
-          removeAllSignedTransactions();
-
           return;
         }
 
@@ -192,15 +191,6 @@ export const PostMessageListener = () => {
     }
   };
 
-  useEffect(() => {
-    if (isListenerAdded) {
-      return;
-    }
-
-    window.addEventListener('message', messageListener);
-    isListenerAdded = true;
-  }, []);
-
   const closeHandshake = () => {
     replyWithCancelled({ shouldResetHook: false });
     replyToDapp({
@@ -212,6 +202,11 @@ export const PostMessageListener = () => {
   };
 
   useEffect(() => {
+    if (!isListenerAdded) {
+      window.addEventListener('message', messageListener);
+      isListenerAdded = true;
+    }
+
     if (!window.opener) {
       return;
     }
@@ -229,11 +224,17 @@ export const PostMessageListener = () => {
     replyToDapp({
       type: WindowProviderResponseEnums.handshakeResponse,
       payload: {
-        data: 'true'
+        data: handshakeSession
       }
     });
 
     isHandShakeSent = true;
+
+    return () => {
+      window.removeEventListener('message', messageListener);
+      window.removeEventListener('beforeunload', closeHandshake);
+      isListenerAdded = false;
+    };
   }, []);
 
   return null;

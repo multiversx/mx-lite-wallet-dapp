@@ -9,5 +9,5 @@ export * from './useReplyWithCancelled';
 export * from './useScrollToElement';
 export * from './useSendTransactions';
 export * from './useSignTxSchema';
+export * from './useSignWithRedirect';
 export * from './withPageTitle';
-export * from './useSetupHrp';

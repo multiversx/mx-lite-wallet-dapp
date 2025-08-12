@@ -1,5 +1,4 @@
-import { faWarning } from '@fortawesome/free-solid-svg-icons';
-import { addNewCustomToast, CustomToastType } from 'lib';
+import { createCustomToast } from 'lib';
 import {
   CUSTOM_TOAST_DEFAULT_DURATION,
   IS_DEVELOPMENT,
@@ -24,18 +23,13 @@ const createNotification = () => {
 
   isToastVisible = true;
 
-  const newToast: CustomToastType = {
+  createCustomToast({
     toastId: 'axiosError' + Date.now(),
-    type: 'custom',
+    icon: 'warning',
+    iconClassName: 'bg-warning',
     message: 'Your funds are safe.',
-    duration: CUSTOM_TOAST_DEFAULT_DURATION,
-    title: 'Failed to display some information.',
-    status: 'Please try again later.',
-    icon: faWarning,
-    iconClassName: 'bg-warning'
-  };
-
-  addNewCustomToast(newToast);
+    title: 'Failed to display some information.'
+  });
 
   setTimeout(() => {
     isToastVisible = false;

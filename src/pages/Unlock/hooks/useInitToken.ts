@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetLoginInfo, useGetNetworkConfig, useLoginService } from 'lib';
+import { useGetLoginInfo, useGetNetworkConfig, nativeAuth } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { setToken } from 'redux/slices';
@@ -12,10 +12,6 @@ export const useInitToken = () => {
     network: { apiAddress }
   } = useGetNetworkConfig();
 
-  const loginService = useLoginService({
-    apiAddress
-  });
-
   const getInitToken = async () => {
     if (hook === HooksEnum.login) {
       dispatch(setToken(loginToken ?? ''));
@@ -24,7 +20,15 @@ export const useInitToken = () => {
 
     if (!isLoggedIn) {
       try {
-        const newToken = await loginService.getNativeAuthLoginToken();
+        const nativeAuthClient = nativeAuth({
+          apiAddress,
+          origin: window.location.origin
+        });
+
+        const newToken = await nativeAuthClient.initialize({
+          noCache: true
+        });
+
         dispatch(setToken(newToken));
         return newToken;
       } catch (err) {

@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { confirmPem } from './confirmPem';
+import { LoginFilesEnum } from './enums';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum';
-import { LoginFilesEnum } from '../utils/enums.ts';
 
 type LoginType = {
   page: Page;

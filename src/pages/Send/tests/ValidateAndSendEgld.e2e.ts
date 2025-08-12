@@ -1,7 +1,8 @@
-import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { keystoreAccount, pemAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToContainText,
   expectInputToHaveValue,
   expectToBeChecked,
@@ -16,13 +17,16 @@ describe('Validate and send EGLD tests', () => {
     });
 
     await loginWithPem();
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/send`);
+    const sendBtn = await page.waitForSelector(
+      getByDataTestId(DataTestIdsEnum.sendBtn)
+    );
+
+    expect(sendBtn).toBeDefined();
+    await sendBtn.click();
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
-      text: 'Available: 4.559443050404540691 WEGLD'
+      text: 'Available: 4.559443050404540691 VIBE'
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
@@ -92,9 +96,15 @@ describe('Validate and send EGLD tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction([
+      {
+        amount: '0',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: pemAccount.address,
+        gasPrice: '0.000000001',
+        gasLimit: '87.500',
+        data: 'Sending empty transaction'
+      }
+    ]);
   });
 });

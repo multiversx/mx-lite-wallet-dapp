@@ -5,7 +5,7 @@ export const pendingTransactionKeystoreWallet = {
   gasLimit: 50000,
   gasPrice: 1000000000,
   nonce: 158,
-  receiver: 'erd1qqqqqqqqqqqqqpgqxwakt2g7u9atsnr03gqcgmhcv38pt7mkd94q6shuwt',
+  receiver: 'vibe1qqqqqqqqqqqqqpgqxwakt2g7u9atsnr03gqcgmhcv38pt7mkd94q6shuwt',
   receiverShard: 0,
   sender: keystoreAccount.address,
   senderShard: 1,

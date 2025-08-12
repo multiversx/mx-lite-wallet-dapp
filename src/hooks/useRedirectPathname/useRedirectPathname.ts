@@ -7,9 +7,10 @@ import {
 } from 'redux/selectors';
 import { routeNames } from 'routes';
 
-export interface UseRedirectPathnameProps {
+export interface IUseRedirectPathnameProps {
   impersonateConfirmed?: boolean;
   canImpersonate?: boolean;
+  isHook?: boolean;
 }
 
 export const useRedirectPathname = () => {
@@ -23,8 +24,6 @@ export const useRedirectPathname = () => {
 
   const getRedirectPathname = () => {
     switch (hook) {
-      case HooksEnum.sign:
-        return routeNames.sign;
       case HooksEnum.signMessage:
         return routeNames.signMessage;
       case HooksEnum.login: {

@@ -1,6 +1,8 @@
 import qs from 'qs';
 
-export const buildWalletQueryString = (options: { params?: any }): string => {
+export const buildWalletQueryString = (options: {
+  params?: Record<string, unknown>;
+}): string => {
   const callbackUrl = options.params?.callbackUrl ?? window.location?.href;
   const params = { ...options.params };
   delete params.callbackUrl;

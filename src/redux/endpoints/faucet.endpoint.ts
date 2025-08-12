@@ -2,14 +2,15 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import {
   TOKENS_ENDPOINT,
+  getEgldLabel,
+  formatAmount,
+  stringIsInteger,
   DECIMALS,
   DIGITS,
   ZERO,
-  formatAmount,
-  getEgldLabel,
-  stringIsInteger,
-  PartialTokenType
+  PartialNftType
 } from 'lib';
+
 import { RootApi } from 'redux/rootApi';
 import { getAxiosConfig, getExtrasApi } from 'utils';
 
@@ -67,7 +68,7 @@ const faucetEndpoints = RootApi.injectEndpoints({
           return { error: tokenData.error as FetchBaseQueryError };
         }
 
-        const { decimals } = tokenData.data as PartialTokenType;
+        const { decimals } = tokenData.data as PartialNftType;
 
         const denominatedTokenAmount = formatAmount({
           input: tokenAmount,

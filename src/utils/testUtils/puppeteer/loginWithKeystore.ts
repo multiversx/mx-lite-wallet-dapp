@@ -1,9 +1,13 @@
-import { DEFAULT_PASSWORD, keystoreAccount } from '__mocks__';
+import {
+  DEFAULT_PASSWORD,
+  DEFAULT_PAGE_LOAD_DELAY_MS,
+  keystoreAccount
+} from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import { changeInputText } from './changeInputText';
 import { expectElementToContainText } from './expectElementToContainText';
-import { expectToBeChecked } from './expectToBeChecked';
 import { getByDataTestId } from './getByDataTestId';
+import { getByTestIdDeep } from './getByDataTestIdDeep';
+import { sleep } from './sleep';
 import { uploadFile } from './uploadFile';
 
 export const loginWithKeystore = async (props?: {
@@ -11,7 +15,7 @@ export const loginWithKeystore = async (props?: {
   filePath?: string;
   parent?: any;
   password?: string;
-  skipLoggedInCheck?: boolean;
+  skipLoginCheck?: boolean;
 }) => {
   const address = props?.address ?? keystoreAccount.address;
   const parent = props?.parent ?? page;
@@ -19,40 +23,62 @@ export const loginWithKeystore = async (props?: {
   const filePath =
     props?.filePath ?? 'src/__mocks__/data/testKeystoreWallet/account.json';
 
-  await parent.waitForSelector(getByDataTestId(DataTestIdsEnum.keystoreBtn));
-  await parent.click(getByDataTestId(DataTestIdsEnum.keystoreBtn));
+  // Click the keystoreProvider button in the unlock panel
+  const keystoreProviderBtn = await getByTestIdDeep(
+    parent,
+    DataTestIdsEnum.keystoreProvider
+  );
+
+  expect(keystoreProviderBtn).toBeDefined();
+  await keystoreProviderBtn.click();
+
+  // Wait for the keystore login panel to appear
+  const keystoreLoginPanel = await getByTestIdDeep(
+    parent,
+    DataTestIdsEnum.keystoreLoginPanel
+  );
+
+  expect(keystoreLoginPanel).toBeDefined();
+
+  // Upload the keystore file
   await uploadFile({
     dataTestId: DataTestIdsEnum.walletFile,
     filePath,
     parent
   });
 
-  await changeInputText({
-    dataTestId: DataTestIdsEnum.accessPass,
+  const passwordInput = await getByTestIdDeep(
     parent,
-    text: password
-  });
+    DataTestIdsEnum.accessPass
+  );
 
-  await parent.click(getByDataTestId(DataTestIdsEnum.submitButton));
-  const dataTestId = `check_${address}`;
-  await parent.waitForSelector(getByDataTestId(dataTestId));
-  await parent.click(getByDataTestId(dataTestId));
+  await passwordInput.type(password);
+  const submitBtn = await getByTestIdDeep(parent, DataTestIdsEnum.submitButton);
+  expect(submitBtn).toBeDefined();
 
-  await expectToBeChecked({
-    dataTestId,
-    isChecked: true,
-    parent
-  });
+  await submitBtn.click();
+  const addressTableItem = await getByTestIdDeep(
+    parent,
+    `addressTableItem-${address}`
+  );
 
-  await parent.click(getByDataTestId(DataTestIdsEnum.confirmBtn));
+  expect(addressTableItem).toBeDefined();
+  await addressTableItem.click();
 
-  if (props?.skipLoggedInCheck) {
+  const confirmBtn = await getByTestIdDeep(parent, DataTestIdsEnum.confirmBtn);
+  await confirmBtn.click();
+
+  if (props?.skipLoginCheck) {
     return;
   }
+
+  await sleep(DEFAULT_PAGE_LOAD_DELAY_MS * 2);
 
   await expectElementToContainText({
     dataTestId: DataTestIdsEnum.userAddress,
     parent,
     text: address
   });
+
+  await page.click(getByDataTestId(DataTestIdsEnum.userAddress));
 };

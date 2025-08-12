@@ -67,7 +67,7 @@ export const useIssueTokenForm = () => {
         )
     }),
     onSubmit: async (values) => {
-      const transaction = factory.createTransactionForIssuingFungible(
+      const transaction = await factory.createTransactionForIssuingFungible(
         new Address(address),
         {
           tokenName: values.tokenName,

@@ -1,12 +1,13 @@
 import {
   ACCOUNTS_ENDPOINT,
-  NFTS_ENDPOINT,
-  ROLES_ENDPOINT,
   COLLECTIONS_ENDPOINT,
-  PartialNftType,
-  CollectionType
+  NFTS_ENDPOINT,
+  ROLES_ENDPOINT
 } from 'lib';
+import { CollectionType } from 'lib';
+import { PartialNftType } from 'lib';
 import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
+
 import { GetNftsType } from 'types';
 import { getBaseURL } from 'utils';
 import { RootApi } from '../rootApi';

@@ -52,7 +52,7 @@ export const useIssueCollectionForm = () => {
     }),
     onSubmit: async (values) => {
       const transaction =
-        factory.createTransactionForRegisteringAndSettingRoles(
+        await factory.createTransactionForRegisteringAndSettingRoles(
           new Address(address),
           {
             tokenName: values.tokenName,

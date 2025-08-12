@@ -1,11 +1,13 @@
 import {
   DEFAULT_DELAY_MS,
   keystoreAccount,
+  pemAccount,
   WALLET_SOURCE_ORIGIN
 } from '__mocks__';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToBeDisabled,
   expectElementToContainText,
   expectInputToHaveValue,
@@ -21,9 +23,10 @@ describe('Send ESDT tests', () => {
     });
 
     await loginWithPem();
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.sendBtn));
-    await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/send`);
+    const sendBtn = await page.waitForSelector(
+      getByDataTestId(DataTestIdsEnum.sendBtn)
+    );
+    await sendBtn.click();
 
     await changeInputText({
       dataTestId: DataTestIdsEnum.receiverInput,
@@ -70,9 +73,15 @@ describe('Send ESDT tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction([
+      {
+        amount: '1',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: pemAccount.address,
+        gasPrice: '0.000000001',
+        gasLimit: '1.000.000',
+        data: 'ESDTTransfer@4153482d653364316237@0de0b6b3a7640000'
+      }
+    ]);
   });
 });

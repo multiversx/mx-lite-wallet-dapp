@@ -1,13 +1,15 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useReplyToDapp, useRedirectPathname } from 'hooks';
-import { Loader } from 'lib';
+import {
+  useReplyToDapp,
+  useRedirectPathname,
+  useSignWithRedirect
+} from 'hooks';
 import {
   useGetAccount,
-  useGetIsWalletConnectV2Initialized,
-  useGetLoginInfo,
   WindowProviderResponseEnums,
-  LoginMethodsEnum
+  getAccountProvider,
+  ProviderTypeEnum
 } from 'lib';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
@@ -26,20 +28,15 @@ export const HookValidationOutcome = ({
   validUrl
 }: HookValidationOutcomePropsType) => {
   const { search } = useLocation();
-  const { loginMethod } = useGetLoginInfo();
-  const isWalletConnectV2Initializing = useGetIsWalletConnectV2Initialized();
+  const provider = getAccountProvider();
+  const providerType = provider.getType();
   const { type: registeredHook } = useSelector(hookSelector);
   const { pathname: redirectPathname } = useRedirectPathname();
   const { address } = useGetAccount();
   const replyToDapp = useReplyToDapp();
-
   const isValid = validUrl === HookStateEnum.valid;
   const isInvalid = validUrl === HookStateEnum.invalid;
   const isPending = validUrl === HookStateEnum.pending;
-
-  if (isWalletConnectV2Initializing) {
-    return <Loader />;
-  }
 
   if (isPending) {
     return null;
@@ -65,8 +62,8 @@ export const HookValidationOutcome = ({
       registeredHook
     )
   ) {
-    switch (loginMethod) {
-      case LoginMethodsEnum.none: {
+    switch (providerType) {
+      case ProviderTypeEnum.none: {
         // The user must login before we can sign
         return <Navigate to={routeNames.unlock} replace />;
       }
@@ -78,7 +75,9 @@ export const HookValidationOutcome = ({
             type: WindowProviderResponseEnums.loginResponse,
             payload: {
               data: {
-                address
+                address,
+                signature: '' // or the actual signature if available
+                // Optionally add: accessToken, multisig, impersonate if needed
               }
             }
           });
@@ -92,5 +91,5 @@ export const HookValidationOutcome = ({
   }
 
   // Display nothing while in 'pending' status
-  return <div className='flex-fill'>&nbsp;</div>;
+  return null;
 };

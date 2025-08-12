@@ -1,7 +1,9 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
+
 import { object, string } from 'yup';
 import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
 import { networks } from 'config';
@@ -10,16 +12,16 @@ import {
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,
   TESTNET_CHAIN_ID,
+  EnvironmentsEnum,
   addressIsValid,
   useGetAccountInfo,
   accountSelector,
-  sdkDappStore
+  getState
 } from 'lib';
-import { EnvironmentsEnum } from 'lib';
+import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
-import { capitalize, addressIsErd } from 'utils';
-import { sleep } from 'utils/testUtils/puppeteer';
+import { capitalize, addressIsHrp } from 'utils';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
@@ -39,6 +41,9 @@ export const useRegisterTokenForm = () => {
   const navigate = useNavigate();
   const { account } = useGetAccountInfo();
 
+  const {
+    activeNetwork: { hrp }
+  } = useSelector(networkSelector);
   const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
@@ -73,7 +78,7 @@ export const useRegisterTokenForm = () => {
         .test(
           'addressIsValid',
           'Address is invalid',
-          (value) => !value || addressIsValid(value) || addressIsErd(value)
+          (value) => !value || addressIsValid(value) || addressIsHrp(value, hrp)
         )
         .required('Contract is required'),
       [RegisterTokenFormFieldsEnum.token]: object()
@@ -102,8 +107,7 @@ export const useRegisterTokenForm = () => {
       });
 
       await switchNetwork(NetworkChainIdMap[transaction.chainID]);
-      await sleep(1000);
-      const { nonce } = accountSelector(sdkDappStore.getState());
+      const { nonce } = accountSelector(getState());
       transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
       navigate(routeNames.dashboard);

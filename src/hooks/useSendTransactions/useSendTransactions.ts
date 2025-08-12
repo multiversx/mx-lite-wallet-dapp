@@ -1,22 +1,17 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TransactionBatchStatusesEnum } from 'lib';
 
 import {
-  extractSessionId,
-  removeTransactionsToSign,
-  sendBatchTransactionsSdkDapp,
-  sendTransactions as sendTransactionsSdkDapp,
-  useGetAccountInfo,
-  useGetAccountProvider,
-  useGetActiveTransactionsStatus,
-  useGetPendingTransactions,
+  getAccountProvider,
+  ProviderTypeEnum,
   Transaction,
-  LoginMethodsEnum,
-  SendBatchTransactionsPropsType,
-  SendTransactionsPropsType,
-  TransactionsDisplayInfoType
+  TransactionsDisplayInfoType,
+  useGetAccountInfo,
+  useGetPendingTransactions,
+  getActiveTransactionsStatus
 } from 'lib';
+
+import { sendAndTrackTransactions } from './helpers/sendAndTrackTransactions';
 
 interface SendTransactionsParamsType {
   redirectRoute?: string;
@@ -28,27 +23,13 @@ export function useSendTransactions(params?: SendTransactionsParamsType) {
     account: { nonce }
   } = useGetAccountInfo();
   const navigate = useNavigate();
-  const { pendingTransactions } = useGetPendingTransactions();
-  const { fail, timedOut } = useGetActiveTransactionsStatus();
-  const { providerType } = useGetAccountProvider();
-  const [localState, setLocalState] = useState<{
-    setIsFormSubmitted?: React.Dispatch<React.SetStateAction<boolean>>;
-  }>({});
+  const pendingTransactions = useGetPendingTransactions();
+  const provider = getAccountProvider();
+  const providerType = provider.getType();
 
-  const [sessionId, setSessionId] = useState<string | null>(null);
+  const shouldRemoveUsernames = providerType === ProviderTypeEnum.walletConnect;
 
-  const shouldRemoveUsernames =
-    providerType === LoginMethodsEnum.walletconnectv2;
-
-  const sendTransactions = async (
-    transactions: Transaction[],
-    cancelInProvider?: Dispatch<SetStateAction<boolean>>
-  ) => {
-    setLocalState({
-      setIsFormSubmitted: cancelInProvider
-    });
-
-    // TODO: Undo when xPortal with usernames is launched
+  const sendTransactions = async (transactions: Transaction[]) => {
     const mappedTransactions = transactions.map((tx, index) => {
       if (!params?.skipAddNonce) {
         tx.nonce = BigInt(nonce + index);
@@ -64,93 +45,61 @@ export function useSendTransactions(params?: SendTransactionsParamsType) {
       return Transaction.newFromPlainObject(plainTransactionObject);
     });
 
-    const props: SendTransactionsPropsType = {
-      transactions: mappedTransactions,
-      signWithoutSending: false,
-      transactionsDisplayInfo: {
-        successMessage: 'Transactions successfully sent',
-        submittedMessage: 'Success',
-        processingMessage: 'Processing transactions'
-      },
-      redirectAfterSign: false
+    const transactionsDisplayInfo: TransactionsDisplayInfoType = {
+      successMessage: 'Transactions successfully sent',
+      submittedMessage: 'Success',
+      processingMessage: 'Processing transactions'
     };
 
-    const { sessionId: sendSessionId } = await sendTransactionsSdkDapp(props);
-
-    setSessionId(sendSessionId);
+    await sendAndTrackTransactions({
+      transactions: mappedTransactions,
+      options: {
+        transactionsDisplayInfo
+      }
+    });
   };
 
   const sendBatchTransactions = async ({
     transactions,
-    transactionsDisplayInfo,
-    cancelInProvider
+    transactionsDisplayInfo
   }: {
     transactions: Transaction[][];
     transactionsDisplayInfo?: TransactionsDisplayInfoType;
-    cancelInProvider?: Dispatch<SetStateAction<boolean>>;
   }) => {
-    setLocalState({
-      setIsFormSubmitted: cancelInProvider
-    });
-
-    const props: SendBatchTransactionsPropsType = {
-      transactions,
-      signWithoutSending: false,
-      transactionsDisplayInfo: transactionsDisplayInfo ?? {
-        successMessage: 'Transactions successful',
-        errorMessage: 'An error has occurred',
-        submittedMessage: 'Success',
-        processingMessage: 'Processing transactions',
-        transactionDuration: 10000
-      },
-      redirectAfterSign: false
+    const defaultTransactionsDisplayInfo: TransactionsDisplayInfoType = {
+      successMessage: 'Transactions successful',
+      errorMessage: 'An error has occurred',
+      submittedMessage: 'Success',
+      processingMessage: 'Processing transactions',
+      transactionDuration: 10000
     };
 
-    const { batchId } = await sendBatchTransactionsSdkDapp(props);
-    const batchSessionId = extractSessionId(batchId);
-
-    if (!batchSessionId) {
-      console.error('Batch transactions session id is invalid');
-      return;
-    }
-
-    setSessionId(batchSessionId.toString());
+    await sendAndTrackTransactions({
+      transactions,
+      options: {
+        transactionsDisplayInfo:
+          transactionsDisplayInfo ?? defaultTransactionsDisplayInfo
+      }
+    });
   };
 
   useEffect(() => {
-    const hasFailedTransactions = fail || timedOut;
-
-    if (!hasFailedTransactions) {
+    if (!pendingTransactions || !params?.redirectRoute) {
       return;
     }
 
-    // go back from confirm screen to send screen
-    localState.setIsFormSubmitted?.(false);
-
-    if (sessionId) {
-      removeTransactionsToSign(sessionId);
-    }
-  }, [fail, timedOut]);
-
-  useEffect(() => {
-    if (!sessionId || !pendingTransactions || !params?.redirectRoute) {
-      return;
-    }
-
-    const canNavigate =
-      pendingTransactions[sessionId]?.status ===
-      TransactionBatchStatusesEnum.sent;
+    const status = getActiveTransactionsStatus();
+    const canNavigate = status.success;
 
     if (!canNavigate) {
       return;
     }
 
     return navigate(params?.redirectRoute);
-  }, [pendingTransactions, sessionId]);
+  }, [pendingTransactions]);
 
   return {
     sendTransactions,
-    sendBatchTransactions,
-    sessionId
+    sendBatchTransactions
   };
 }

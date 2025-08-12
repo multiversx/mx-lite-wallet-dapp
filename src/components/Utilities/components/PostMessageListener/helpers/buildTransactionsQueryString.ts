@@ -24,7 +24,12 @@ export const buildTransactionsQueryString = ({
     }
   });
 
-  return buildWalletQueryString({
-    params: { ...jsonToSend, callbackUrl }
+  const result = buildWalletQueryString({
+    params: {
+      ...jsonToSend,
+      ...(callbackUrl ? { callbackUrl } : {})
+    }
   });
+
+  return result;
 };
