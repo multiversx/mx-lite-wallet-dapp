@@ -16,7 +16,9 @@ import {
   addressIsValid,
   useGetAccountInfo,
   accountSelector,
-  getState
+  getState,
+  Message,
+  getAccountProvider
 } from 'lib';
 import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
@@ -53,11 +55,28 @@ export const useRegisterTokenForm = () => {
     useRefreshNativeAuthTokenForNetwork();
 
   const switchNetwork = async (networkId: string) => {
+    const provider = getAccountProvider();
+
+    if (!provider || typeof provider.signMessage !== 'function') {
+      throw new Error('No provider available for signing message');
+    }
+
+    const signMessageCallback = async (
+      messageToSign: Message
+    ): Promise<Message> => {
+      const signedMessage = await provider.signMessage(messageToSign);
+
+      if (!signedMessage) {
+        throw new Error('Failed to sign message - no signature returned');
+      }
+
+      return signedMessage;
+    };
+
     await refreshNativeAuthTokenForNetwork({
       networkId,
       origin: window.location.origin,
-      signMessageCallback: (messageToSign) => Promise.resolve(messageToSign),
-      preventPageReload: true
+      signMessageCallback
     });
   };
 
