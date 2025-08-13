@@ -6,6 +6,7 @@ export interface NetworkType {
   apiAddress: string;
   default: boolean;
   extrasApi: string;
+  explorerAddress: string;
   faucet?: boolean;
   hasRegisterToken?: boolean;
   hasSovereignTransfer?: boolean;
@@ -21,6 +22,8 @@ export interface NetworkType {
 interface NetworkSliceType {
   defaultNetwork: NetworkType;
   activeNetwork: NetworkType;
+  previousNetwork?: NetworkType;
+  isNetworkSwitching: boolean;
 }
 
 export const emptyNetwork: NetworkType = {
@@ -30,6 +33,7 @@ export const emptyNetwork: NetworkType = {
   gatewayUrl: '',
   id: 'not-configured',
   name: 'NOT CONFIGURED',
+  explorerAddress: '',
   sampleAuthenticatedDomains: [],
   sovereignContractAddress: '',
   walletAddress: '',
@@ -42,7 +46,9 @@ export const getInitialState = (): NetworkSliceType => {
 
   return {
     defaultNetwork,
-    activeNetwork: defaultNetwork
+    activeNetwork: defaultNetwork,
+    previousNetwork: undefined,
+    isNetworkSwitching: false
   };
 };
 
@@ -50,6 +56,10 @@ export const networkSlice = createSlice({
   name: 'networkSlice',
   initialState: getInitialState(),
   reducers: {
+    startNetworkSwitch: (state: NetworkSliceType) => {
+      state.previousNetwork = state.activeNetwork;
+      state.isNetworkSwitching = true;
+    },
     changeNetwork: (
       state: NetworkSliceType,
       action: PayloadAction<NetworkType>
@@ -57,10 +67,27 @@ export const networkSlice = createSlice({
       state.activeNetwork = {
         ...action.payload
       };
+      state.isNetworkSwitching = false;
+    },
+    revertNetworkSwitch: (state: NetworkSliceType) => {
+      if (state.previousNetwork) {
+        state.activeNetwork = state.previousNetwork;
+      }
+      state.isNetworkSwitching = false;
+      state.previousNetwork = undefined;
+    },
+    completeNetworkSwitch: (state: NetworkSliceType) => {
+      state.isNetworkSwitching = false;
+      state.previousNetwork = undefined;
     }
   }
 });
 
-export const { changeNetwork } = networkSlice.actions;
+export const {
+  changeNetwork,
+  startNetworkSwitch,
+  revertNetworkSwitch,
+  completeNetworkSwitch
+} = networkSlice.actions;
 
 export const networkReducer = networkSlice.reducer;

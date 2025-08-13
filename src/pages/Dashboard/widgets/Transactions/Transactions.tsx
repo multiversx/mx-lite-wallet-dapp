@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { OutputContainer } from 'components';
 import { getActiveTransactionsStatus, TransactionsTable } from 'lib';
+import { networkSelector } from 'redux/selectors';
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';
 
 export const Transactions = (props: TransactionsPropsType) => {
   const { isLoading, getTransactions, transactions } =
     useGetTransactions(props);
+  const { activeNetwork } = useSelector(networkSelector);
 
   const { success } = getActiveTransactionsStatus();
 
@@ -14,11 +17,11 @@ export const Transactions = (props: TransactionsPropsType) => {
     if (success) {
       getTransactions();
     }
-  }, [success]);
+  }, [success, activeNetwork.id]);
 
   useEffect(() => {
     getTransactions();
-  }, []);
+  }, [activeNetwork.id]);
 
   if (!isLoading && transactions.length === 0) {
     return (

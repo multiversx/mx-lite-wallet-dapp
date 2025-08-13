@@ -13,6 +13,7 @@ export const networks: NetworkType[] = [
     sampleAuthenticatedDomains: ['START_SAMPLE_AUTHENTICATED_DOMAINS_STOP'],
     sovereignContractAddress: 'START_SOVEREIGN_CONTRACT_ADDR_STOP',
     walletAddress: 'START_WALLET_ADDRESS_STOP',
+    explorerAddress: 'START_EXPLORER_ADDRESS_STOP',
     WEGLDid: 'START_WEGLD_ID_STOP'
   },
   {
@@ -25,6 +26,7 @@ export const networks: NetworkType[] = [
     sampleAuthenticatedDomains: ['START2_SAMPLE_AUTHENTICATED_DOMAINS_STOP2'],
     sovereignContractAddress: 'START2_SOVEREIGN_CONTRACT_ADDR_STOP2',
     walletAddress: 'START2_WALLET_ADDRESS_STOP2',
+    explorerAddress: 'START2_EXPLORER_ADDRESS_STOP2',
     WEGLDid: 'START2_WEGLD_ID_STOP2'
   }
 ];

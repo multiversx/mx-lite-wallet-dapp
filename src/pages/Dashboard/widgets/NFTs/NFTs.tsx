@@ -1,18 +1,23 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { MxLink, OutputContainer } from 'components';
 import { useGetAccountInfo } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
+import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { NFTRow } from './components';
 
 export const NFTs = () => {
   const { websocketEvent, address } = useGetAccountInfo();
+  const { activeNetwork } = useSelector(networkSelector);
   const [fetchNFTs, { data: nftsData, isLoading }] = useLazyGetNftsQuery();
 
   useEffect(() => {
-    fetchNFTs({ address });
-  }, [address, websocketEvent]);
+    if (address) {
+      fetchNFTs({ address });
+    }
+  }, [address, websocketEvent, activeNetwork.id]);
 
   if (!isLoading && nftsData?.length === 0) {
     return (

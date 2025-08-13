@@ -29,6 +29,7 @@ export const networks: NetworkType[] = [
     hrp: 'vibe',
     faucet: true,
     hasRegisterToken: true,
-    hasSovereignTransfer: true
+    hasSovereignTransfer: true,
+    explorerAddress: 'https://vibeox-explorer.multiversx.com'
   }
 ];

@@ -1,13 +1,15 @@
 import { useSelector } from 'react-redux';
 import { networks } from 'config';
 import { networkSelector } from 'redux/selectors';
-import { useRefreshNativeAuthTokenForNetwork } from './hooks';
+import { validateNetworkSwitch } from './helpers';
+import { useRefreshNativeAuthTokenForNetwork, useSignMessage } from './hooks';
 import { Dropdown, DropdownOption } from '../Dropdown';
 
 export const NetworkSwitcher = () => {
-  const { activeNetwork } = useSelector(networkSelector);
+  const { activeNetwork, isNetworkSwitching } = useSelector(networkSelector);
   const refreshNativeAuthTokenForNetwork =
     useRefreshNativeAuthTokenForNetwork();
+  const signMessage = useSignMessage();
 
   const networkOptions = networks.map((network) => ({
     label: network.name,
@@ -25,21 +27,41 @@ export const NetworkSwitcher = () => {
     );
 
     if (!selectedNetwork) {
+      console.error('Selected network not found:', option.value);
       return;
     }
 
-    await refreshNativeAuthTokenForNetwork({
-      networkId: selectedNetwork.id,
-      origin: window.location.origin,
-      signMessageCallback: (messageToSign) => Promise.resolve(messageToSign)
-    });
+    const validation = validateNetworkSwitch(
+      activeNetwork,
+      selectedNetwork,
+      isNetworkSwitching
+    );
+
+    if (!validation.isValid) {
+      console.warn('Network switch validation failed:', validation.error);
+      return;
+    }
+
+    try {
+      await refreshNativeAuthTokenForNetwork({
+        networkId: selectedNetwork.id,
+        origin: window.location.origin,
+        signMessageCallback: signMessage
+      });
+      console.log('Successfully switched to network:', selectedNetwork.name);
+    } catch (error) {
+      console.error('Network switch failed:', error);
+      // Could add toast notification here for user feedback
+    }
   };
 
   return (
-    <Dropdown
-      initialOption={currentNetwork}
-      options={networkOptions}
-      onSelectOption={handleNetworkSwitch}
-    />
+    <div className={isNetworkSwitching ? 'opacity-50 cursor-not-allowed' : ''}>
+      <Dropdown
+        initialOption={currentNetwork}
+        options={networkOptions}
+        onSelectOption={handleNetworkSwitch}
+      />
+    </div>
   );
 };

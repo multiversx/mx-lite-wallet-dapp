@@ -16,6 +16,7 @@ export const networks: NetworkType[] = [
     sampleAuthenticatedDomains: [''],
     sovereignContractAddress: '',
     walletAddress: 'https://devnet-wallet.multiversx.com',
+    explorerAddress: 'https://devnet-explorer.multiversx.com',
     WEGLDid: ''
   }
 ];
