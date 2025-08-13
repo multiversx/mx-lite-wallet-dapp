@@ -125,7 +125,14 @@ export const useRegisterTokenForm = () => {
         token
       });
 
-      await switchNetwork(NetworkChainIdMap[transaction.chainID]);
+      /**
+       * TODO: Uncomment when we have more details
+       * Strange how ir worked before
+       * 1. Get vibe HRP transactions
+       * 2. Switch to testnet for example (now we have erd HRP)
+       * 3. APIs try to fetch vibe HRP account for sender and receiver validation from testnet (X fail)
+       */
+      // await switchNetwork(NetworkChainIdMap[transaction.chainID]);
       const { nonce } = accountSelector(getState());
       transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
