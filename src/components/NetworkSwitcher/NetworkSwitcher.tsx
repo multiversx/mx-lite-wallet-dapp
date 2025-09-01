@@ -51,7 +51,6 @@ export const NetworkSwitcher = () => {
       console.log('Successfully switched to network:', selectedNetwork.name);
     } catch (error) {
       console.error('Network switch failed:', error);
-      // Could add toast notification here for user feedback
     }
   };
 
