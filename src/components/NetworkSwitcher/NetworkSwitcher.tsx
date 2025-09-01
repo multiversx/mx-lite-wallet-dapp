@@ -33,8 +33,7 @@ export const NetworkSwitcher = () => {
 
     const validation = validateNetworkSwitch({
       currentNetwork: activeNetwork,
-      targetNetwork: selectedNetwork,
-      isNetworkSwitching
+      targetNetwork: selectedNetwork
     });
 
     if (!validation.isValid) {

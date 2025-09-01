@@ -3,7 +3,6 @@ import { NetworkType } from 'redux/slices';
 interface INetworkSwitchValidationParams {
   currentNetwork: NetworkType;
   targetNetwork: NetworkType;
-  isNetworkSwitching: boolean;
 }
 
 interface INetworkSwitchValidationReturn {
@@ -13,16 +12,8 @@ interface INetworkSwitchValidationReturn {
 
 export const validateNetworkSwitch = ({
   currentNetwork,
-  targetNetwork,
-  isNetworkSwitching
+  targetNetwork
 }: INetworkSwitchValidationParams): INetworkSwitchValidationReturn => {
-  if (isNetworkSwitching) {
-    return {
-      isValid: false,
-      error: 'Network switch already in progress'
-    };
-  }
-
   if (!targetNetwork || !targetNetwork.id) {
     return {
       isValid: false,
