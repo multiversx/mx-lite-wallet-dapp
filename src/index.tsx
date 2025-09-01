@@ -33,7 +33,6 @@ const getInitialNetwork = () => {
       const parsedState = JSON.parse(storedNetworkState);
       if (parsedState.activeNetwork) {
         const activeNetworkData = JSON.parse(parsedState.activeNetwork);
-        // Find the network in our config that matches the stored one
         const matchingNetwork = networks.find(
           (network) => network.id === activeNetworkData.id
         );

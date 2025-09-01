@@ -1,15 +1,21 @@
 import { NetworkType } from 'redux/slices';
 
-interface NetworkSwitchValidation {
+interface INetworkSwitchValidationParams {
+  currentNetwork: NetworkType;
+  targetNetwork: NetworkType;
+  isNetworkSwitching: boolean;
+}
+
+interface INetworkSwitchValidationReturn {
   isValid: boolean;
   error?: string;
 }
 
-export const validateNetworkSwitch = (
-  currentNetwork: NetworkType,
-  targetNetwork: NetworkType,
-  isNetworkSwitching: boolean
-): NetworkSwitchValidation => {
+export const validateNetworkSwitch = ({
+  currentNetwork,
+  targetNetwork,
+  isNetworkSwitching
+}: INetworkSwitchValidationParams): INetworkSwitchValidationReturn => {
   if (isNetworkSwitching) {
     return {
       isValid: false,
