@@ -31,11 +31,11 @@ export const NetworkSwitcher = () => {
       return;
     }
 
-    const validation = validateNetworkSwitch(
-      activeNetwork,
-      selectedNetwork,
+    const validation = validateNetworkSwitch({
+      currentNetwork: activeNetwork,
+      targetNetwork: selectedNetwork,
       isNetworkSwitching
-    );
+    });
 
     if (!validation.isValid) {
       console.warn('Network switch validation failed:', validation.error);
@@ -48,7 +48,6 @@ export const NetworkSwitcher = () => {
         origin: window.location.origin,
         signMessageCallback: signMessage
       });
-      console.log('Successfully switched to network:', selectedNetwork.name);
     } catch (error) {
       console.error('Network switch failed:', error);
     }
