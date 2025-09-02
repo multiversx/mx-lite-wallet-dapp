@@ -6,14 +6,15 @@ import { useRefreshNativeAuthTokenForNetwork, useSignMessage } from './hooks';
 import { Dropdown, DropdownOption } from '../Dropdown';
 
 export const NetworkSwitcher = () => {
-  const { activeNetwork, isNetworkSwitching } = useSelector(networkSelector);
+  const { activeNetwork } = useSelector(networkSelector);
   const refreshNativeAuthTokenForNetwork =
     useRefreshNativeAuthTokenForNetwork();
   const signMessage = useSignMessage();
 
   const networkOptions = networks.map((network) => ({
     label: network.name,
-    value: network.id
+    value: network.id,
+    disabled: network.id === activeNetwork.id
   }));
 
   const currentNetwork = {
@@ -53,12 +54,10 @@ export const NetworkSwitcher = () => {
   };
 
   return (
-    <div className={isNetworkSwitching ? 'opacity-50 cursor-not-allowed' : ''}>
-      <Dropdown
-        initialOption={currentNetwork}
-        options={networkOptions}
-        onSelectOption={handleNetworkSwitch}
-      />
-    </div>
+    <Dropdown
+      initialOption={currentNetwork}
+      options={networkOptions}
+      onSelectOption={handleNetworkSwitch}
+    />
   );
 };

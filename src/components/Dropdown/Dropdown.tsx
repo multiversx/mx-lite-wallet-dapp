@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { DataTestIdsEnum } from 'localConstants';
 import { Button } from '../Button';
 
 export interface DropdownOption {
   label: string;
   value: string;
+  disabled?: boolean;
 }
 
 interface DropdownPropsType {
@@ -61,10 +63,17 @@ export const Dropdown = ({
           <div className='py-1' role='none'>
             {options.map((option, index) => (
               <Button
-                className='w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                className={classNames(
+                  'w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900',
+                  {
+                    'disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-200 disabled:hover:text-gray-500':
+                      option.disabled
+                  }
+                )}
                 data-testid={option.value}
                 key={`${option.value}-${index}`}
                 onClick={handleSelectOption(option)}
+                disabled={option.disabled}
               >
                 {option.label}
               </Button>

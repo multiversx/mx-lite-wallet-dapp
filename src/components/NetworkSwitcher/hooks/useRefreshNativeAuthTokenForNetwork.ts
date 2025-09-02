@@ -9,16 +9,11 @@ import {
 } from 'lib';
 import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
 import { RootApi } from 'redux/rootApi';
-import {
-  changeNetwork,
-  startNetworkSwitch,
-  revertNetworkSwitch
-} from 'redux/slices';
-import { AppDispatch } from 'redux/store';
+import { changeNetwork } from 'redux/slices';
 
 export const useRefreshNativeAuthTokenForNetwork = () => {
   const nativeAuthConfig = useGetNativeAuthConfig();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const { setNativeAuthTokenInterceptors } = useSetNativeAuthInterceptors();
 
   return async ({
@@ -37,7 +32,6 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     }
 
     try {
-      dispatch(startNetworkSwitch());
       dispatch(RootApi.util.resetApiState());
       await initializeNetwork({
         customNetworkConfig: {
@@ -61,7 +55,6 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
       await refreshAccount();
     } catch (error) {
       console.error('Could not refresh nativeAuth token', error);
-      dispatch(revertNetworkSwitch());
       throw error;
     }
   };
