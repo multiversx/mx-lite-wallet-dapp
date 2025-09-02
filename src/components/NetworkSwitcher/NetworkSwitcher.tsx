@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { networks } from 'config';
 import { networkSelector } from 'redux/selectors';
-import { validateNetworkSwitch } from './helpers';
 import { useRefreshNativeAuthTokenForNetwork, useSignMessage } from './hooks';
 import { Dropdown, DropdownOption } from '../Dropdown';
 
@@ -29,16 +28,6 @@ export const NetworkSwitcher = () => {
 
     if (!selectedNetwork) {
       console.error('Selected network not found:', option.value);
-      return;
-    }
-
-    const validation = validateNetworkSwitch({
-      currentNetwork: activeNetwork,
-      targetNetwork: selectedNetwork
-    });
-
-    if (!validation.isValid) {
-      console.warn('Network switch validation failed:', validation.error);
       return;
     }
 

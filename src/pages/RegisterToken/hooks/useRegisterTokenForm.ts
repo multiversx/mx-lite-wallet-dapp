@@ -42,10 +42,7 @@ const NetworkChainIdMap: Record<string, EnvironmentsEnum> = {
 export const useRegisterTokenForm = () => {
   const navigate = useNavigate();
   const { account } = useGetAccountInfo();
-
-  const {
-    activeNetwork: { hrp }
-  } = useSelector(networkSelector);
+  const { activeNetwork } = useSelector(networkSelector);
   const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
@@ -97,7 +94,7 @@ export const useRegisterTokenForm = () => {
         .test(
           'addressIsValid',
           'Address is invalid',
-          (value) => !value || addressIsValid(value) || addressIsHrp(value, hrp)
+          (value) => !value || addressIsValid(value) || addressIsHrp(value)
         )
         .required('Contract is required'),
       [RegisterTokenFormFieldsEnum.token]: object()
@@ -119,20 +116,15 @@ export const useRegisterTokenForm = () => {
         return;
       }
 
+      await switchNetwork(NetworkChainIdMap[values.chainId.value]);
+
       const transaction = getRegisterTokenTransaction({
         ...account,
         values,
         token
       });
 
-      /**
-       * TODO: Uncomment when we have more details
-       * Strange how ir worked before
-       * 1. Get vibe HRP transactions
-       * 2. Switch to testnet for example (now we have erd HRP)
-       * 3. APIs try to fetch vibe HRP account for sender and receiver validation from testnet (X fail)
-       */
-      // await switchNetwork(NetworkChainIdMap[transaction.chainID]);
+      await switchNetwork(activeNetwork.id);
       const { nonce } = accountSelector(getState());
       transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
