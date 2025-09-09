@@ -1,5 +1,8 @@
+import { MouseEvent } from 'react';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { MxLink, PageState } from 'components';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { PageState } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { CreateRecoverDownloadType } from '../CreateRecoverDownload';
@@ -12,22 +15,28 @@ export const CreateRecoverDownloadScreen = ({
   hasDownload = true,
   accessWalletBtnLabel = 'Access Wallet'
 }: CreateRecoverDownloadType) => {
+  const navigate = useNavigate();
+
+  const handleAccessWallet = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.unlock);
+  };
+
   return (
     <>
       <div className='flex flex-col items-center justify-center gap-4 w-full mt-4'>
         <PageState
           icon={faCheckCircle}
-          iconClass='fa-3x text-blue-600'
+          iconClass='fa-3x text-neutral-500'
           description={infoSection}
         />
 
-        <MxLink
-          className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+        <MvxButton
           data-testid={DataTestIdsEnum.accessWalletBtn}
-          to={routeNames.unlock}
+          onClick={handleAccessWallet}
         >
-          {accessWalletBtnLabel}
-        </MxLink>
+          <span className='font-normal text-sm'>{accessWalletBtnLabel}</span>
+        </MvxButton>
 
         {hasDownload && (
           <ReDownloadButton

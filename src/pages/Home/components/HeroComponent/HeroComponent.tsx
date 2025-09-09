@@ -125,7 +125,9 @@ export const HeroComponent = () => {
         </div>
 
         <div className={styles.heroSectionTopButtons}>
-          <MvxButton onClick={handleLogIn}>Connect Wallet</MvxButton>
+          <MvxButton onClick={handleLogIn} size='small'>
+            Connect Wallet
+          </MvxButton>
 
           <a
             href={DOCUMENTATION_LINK}

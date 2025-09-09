@@ -24,7 +24,7 @@ export const CreateRecoverPassword = ({
 }: CreateRecoverPasswordPropsType) => {
   const infoSection = (
     <p
-      className='text-sm text-gray-400 mb-10'
+      className='text-sm text-secondary mb-10'
       data-testid={DataTestIdsEnum.modalSubtitle}
     >
       The wallet made a secret key for you and stored it in a file. Protect your

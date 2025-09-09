@@ -23,7 +23,7 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
   };
 
   return (
-    <div className='flex items-center justify-between'>
+    <div className='flex items-center justify-between border border-secondary rounded-xl p-2'>
       <div className='flex items-center space-x-4'>
         {logo ? (
           <img src={logo} alt={token.ticker} className='w-8 h-8' />

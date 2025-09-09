@@ -106,7 +106,7 @@ export const Header = () => {
         className='flex items-center justify-between'
         to={isLoggedIn ? RouteNamesEnum.dashboard : RouteNamesEnum.home}
       >
-        <MultiversXLogo className='w-full h-6' />
+        <MultiversXLogo className='max-w-2/3 lg:max-w-full lg:w-full h-6' />
       </MxLink>
 
       <nav className={styles.headerNavigation}>
@@ -171,7 +171,11 @@ export const Header = () => {
           </div>
         )}
 
-        {!isLoggedIn && <MvxButton onClick={handleLogIn}>Connect</MvxButton>}
+        {!isLoggedIn && (
+          <MvxButton onClick={handleLogIn} size='small'>
+            Connect
+          </MvxButton>
+        )}
       </nav>
     </header>
   );

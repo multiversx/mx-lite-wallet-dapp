@@ -39,9 +39,12 @@ export const CreateDisclaimerScreen = ({
           </div>
         )}
 
-        <div>
+        <div className='text-primary'>
           <p>
-            <FontAwesomeIcon icon={faInfoCircle} className='primary' />{' '}
+            <FontAwesomeIcon
+              icon={faInfoCircle}
+              className='primary text-link'
+            />{' '}
             Blockchains do not have a “Reset Password” feature. All you get is a
             Secret Phrase - make sure to keep it safe.
           </p>
@@ -92,14 +95,16 @@ export const CreateDisclaimerScreen = ({
         id='createWalletBtn'
         onClick={disclaimerContinueHandler}
         type='submit'
+        className='bg-btn-primary px-4 h-10 rounded-xl text-btn-primary cursor-pointer hover:opacity-75'
       >
         Continue
       </Button>
 
-      <div className='flex flex-col items-center justify-center mt-1 gap-1'>
+      <div className='flex flex-col items-center justify-center mt-1 gap-1 text-primary'>
         <p>Already have a wallet?</p>
+
         <MxLink
-          className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+          className='text-primary underline decoration-dotted hover:decoration-solid'
           to={routeNames.unlock}
         >
           Access it

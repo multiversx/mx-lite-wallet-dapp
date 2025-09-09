@@ -8,7 +8,6 @@ import { routeNames } from 'routes';
 
 export const FaucetButton = () => {
   const { activeNetwork } = useSelector(networkSelector);
-  console.log(activeNetwork);
   const navigate = useNavigate();
 
   const handleRequestFunds = (event: MouseEvent<HTMLButtonElement>) => {

@@ -1,16 +1,14 @@
-import { MouseEvent, ReactNode, useState } from 'react';
-import { faChevronUp, faWallet } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ReactNode, useState } from 'react';
 import {
-  MvxButton,
-  MvxDataWithExplorerLink,
-  MvxFormatAmount
-} from '@multiversx/sdk-dapp-ui/react';
+  faChevronUp,
+  faLayerGroup,
+  faWallet
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MvxFormatAmount, MvxTrim } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
 import QRCode from 'react-qr-code';
 
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import XLogo from 'assets/img/x-logo.svg?react';
 import { Label } from 'components';
 import {
@@ -20,10 +18,8 @@ import {
   DIGITS,
   DECIMALS
 } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
-import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
-import { networkSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
+import { Username } from './components';
+import { useGetUserHerotag } from './hooks/useGetUserHerotag';
 
 interface AccountDetailsType {
   icon: ReactNode | string;
@@ -53,27 +49,9 @@ const styles = {
 export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-  const { activeNetwork } = useSelector(networkSelector);
-  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork as any;
-  const explorerAddress = network.explorerAddress;
-  const navigate = useNavigate();
+  const [herotag, profileUrl] = useGetUserHerotag(address);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
-
-  const handleSend = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate(routeNames.send);
-  };
-
-  const handleSovereignTransfer = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate(routeNames.sovereignTransfer);
-  };
-
-  const handleRegisterToken = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate(routeNames.registerToken);
-  };
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -97,12 +75,37 @@ export const Account = () => {
       ),
       label: 'Address',
       value: (
-        <MvxDataWithExplorerLink
-          data={address}
-          withTooltip={true}
-          explorerLink={`${explorerAddress}/accounts/${address}`}
+        <MvxTrim
+          text={address}
+          className={styles.connectedAccountDetailsTrimAddress}
         />
       )
+    },
+    {
+      icon: herotag ? (
+        profileUrl ? (
+          <img
+            src={profileUrl}
+            className={styles.connectedAccountDetailsHerotag}
+          />
+        ) : (
+          herotag.slice(0, 3)
+        )
+      ) : (
+        '@'
+      ),
+      label: 'Herotag',
+      value: <Username address={address} />
+    },
+    {
+      icon: (
+        <FontAwesomeIcon
+          icon={faLayerGroup}
+          className={styles.connectedAccountDetailsIcon}
+        />
+      ),
+      label: 'Shard',
+      value: account.shard
     },
     {
       icon: <XLogo className={styles.connectedAccountDetailsXLogo} />,
@@ -165,38 +168,6 @@ export const Account = () => {
             </p>
           </div>
         ))}
-      </div>
-
-      <div className='flex flex-row flex-wrap gap-4'>
-        <FaucetButton />
-
-        <MvxButton
-          onClick={handleSend}
-          data-testid={DataTestIdsEnum.sendBtn}
-          size='small'
-        >
-          <span className='text-sm font-normal'>Send</span>
-        </MvxButton>
-
-        {hasSovereignTransfer && (
-          <MvxButton
-            onClick={handleSovereignTransfer}
-            data-testid={DataTestIdsEnum.sovereignTransferBtn}
-            size='small'
-          >
-            <span className='text-sm font-normal'>Sovereign Transfer</span>
-          </MvxButton>
-        )}
-
-        {hasRegisterToken && (
-          <MvxButton
-            onClick={handleRegisterToken}
-            data-testid={DataTestIdsEnum.registerTokenBtn}
-            size='small'
-          >
-            <span className='text-sm font-normal'>Register Token</span>
-          </MvxButton>
-        )}
       </div>
     </div>
   );

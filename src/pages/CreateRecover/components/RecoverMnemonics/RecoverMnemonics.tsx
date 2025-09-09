@@ -1,9 +1,12 @@
+import { MouseEvent } from 'react';
 import { faClose, faPaste } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
 import { DraggableArea } from 'react-draggable-tags';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
+import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { RecoverMnemonicsPropsType, useRecoverMnemonics } from './hooks';
@@ -24,6 +27,12 @@ export const RecoverMnemonics = ({
     words,
     reorderWords
   } = useRecoverMnemonics({ onNext, setMnemonic });
+  const navigate = useNavigate();
+
+  const handleBackToUnlock = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.unlock);
+  };
 
   const mnemonicWordsOptions: SelectOptionType[] = allMnemonicWords.map(
     (word) => ({
@@ -33,17 +42,14 @@ export const RecoverMnemonics = ({
   );
 
   const goToUnlockSection = (
-    <MxLink
-      className='text-blue-400 underline decoration-dotted hover:decoration-solid'
-      to={routeNames.unlock}
-    >
+    <MvxButton onClick={handleBackToUnlock} variant='secondary'>
       Back to unlock
-    </MxLink>
+    </MvxButton>
   );
 
   return (
     <div className='flex flex-col items-center justify-center gap-4 w-full'>
-      <p className='text-sm text-gray-400 w-full text-center'>
+      <p className='text-sm text-secondary w-full text-center'>
         Type in the words of your Secret Phrase in the right order, <br /> press
         „Enter” after each one.
       </p>
@@ -69,13 +75,13 @@ export const RecoverMnemonics = ({
 
         <div className='w-full flex flex-col items-center gap-4'>
           <div className='w-full'>
-            <label className='block text-sm font-bold mb-2'>
+            <label className='block text-primary text-sm font-normal mb-2'>
               Secret Phrase
             </label>
 
             <div
               className={classNames(
-                'bg-gray-100 border border-gray-200 p-4 relative h-full',
+                'bg-secondary border border-secondary rounded-xl p-4 relative h-full',
                 { 'border-red-600': error, 'p-8': words.length === 0 }
               )}
             >
@@ -83,7 +89,7 @@ export const RecoverMnemonics = ({
                 tags={words}
                 render={({ tag: word }: any) => (
                   <div
-                    className='flex flex-row items-center justify-center p-2 gap-1 bg-gray-500 border border-gray-200 text-white rounded text-sm'
+                    className='flex flex-row items-center justify-center p-2 gap-1 bg-secondary border border-secondary text-primary rounded-lg text-sm'
                     data-testid={word.content}
                   >
                     <span>{word.id}</span>
@@ -101,7 +107,7 @@ export const RecoverMnemonics = ({
                 onClick={handlePasteWords}
                 data-testid={DataTestIdsEnum.pasteMnemonicBtn}
                 className={classNames(
-                  'text-gray-400 absolute right-0 bottom-0 m-2',
+                  'text-secondary absolute right-0 bottom-0 m-2',
                   {
                     hidden: words.length > 0
                   }
@@ -118,7 +124,7 @@ export const RecoverMnemonics = ({
 
           <div className='w-full'>
             <label
-              className='block text-sm font-bold mb-2'
+              className='block text-sm font-normal text-primary mb-2'
               htmlFor={DataTestIdsEnum.mnemonicInput}
             >
               Type here
@@ -140,6 +146,7 @@ export const RecoverMnemonics = ({
         onClick={onSubmit}
         id='goToPassword'
         data-testid={DataTestIdsEnum.submitButton}
+        className='bg-btn-primary text-btn-primary px-4 h-10 rounded-xl hover:opacity-75 cursor-pointer'
       >
         Continue
       </Button>

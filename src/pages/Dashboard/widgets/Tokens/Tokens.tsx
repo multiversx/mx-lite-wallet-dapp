@@ -51,9 +51,11 @@ export const Tokens = () => {
   return (
     <div id={ItemsIdentifiersEnum.tokens} className={styles.tokensContainer}>
       <OutputContainer isLoading={isLoading}>
-        {tokens?.map((token: TokenType) => (
-          <TokenRow key={token.identifier} token={token} />
-        ))}
+        <div className='flex flex-col gap-2'>
+          {tokens?.map((token: TokenType) => (
+            <TokenRow key={token.identifier} token={token} />
+          ))}
+        </div>
       </OutputContainer>
 
       <MvxButton

@@ -5,9 +5,10 @@ import {
   faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, OutputContainer } from 'components';
+import { OutputContainer } from 'components';
 import { useReplyToDapp, useReplyWithCancelled } from 'hooks';
 import {
   Address,
@@ -136,7 +137,7 @@ export const SignMessage = () => {
         {!['success', 'error'].includes(state) && (
           <textarea
             placeholder='Write message here'
-            className='resize-none w-full h-32 rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-blue-500 text-gray-800'
+            className='resize-none w-full h-32 rounded-lg border border-secondary p-3 text-secondary'
             value={message}
             onChange={(event) => {
               setMessage(event.currentTarget.value);
@@ -157,7 +158,7 @@ export const SignMessage = () => {
       <div className='flex gap-2 items-center justify-center'>
         {['success', 'error'].includes(state) ? (
           <>
-            <Button
+            <MvxButton
               data-testid='closeTransactionSuccessBtn'
               id='closeButton'
               onClick={handleClear}
@@ -169,11 +170,11 @@ export const SignMessage = () => {
                 />
                 {state === 'error' ? 'Try again' : 'Clear'}
               </>
-            </Button>
+            </MvxButton>
           </>
         ) : (
           <>
-            <Button
+            <MvxButton
               data-testid={DataTestIdsEnum.signMessageBtn}
               onClick={handleSubmit}
               disabled={!message.trim()}
@@ -182,13 +183,15 @@ export const SignMessage = () => {
                 <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
                 Sign
               </>
-            </Button>
-            <Button
+            </MvxButton>
+
+            <MvxButton
               data-testid={DataTestIdsEnum.cancelSignMessageBtn}
               onClick={handleCancel}
+              variant='secondary'
             >
               Cancel
-            </Button>
+            </MvxButton>
           </>
         )}
       </div>

@@ -1,4 +1,5 @@
 import { MouseEventHandler, useState } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { Formik } from 'formik';
 import Select from 'react-select';
 import { Button } from 'components';
@@ -66,7 +67,7 @@ export const CreateQuiz = ({
           >
             <div className='w-full flex flex-col items-center justify-center mb-10'>
               <p
-                className='text-sm text-gray-400 mb-10'
+                className='text-sm text-secondary mb-10'
                 data-testid={DataTestIdsEnum.modalSubtitle}
               >
                 Enter the words from your Secret Phrase as indicated below.
@@ -80,7 +81,7 @@ export const CreateQuiz = ({
                     <div key={ordinal} className='w-full'>
                       <label
                         htmlFor={ordinal}
-                        className='block text-sm font-bold mb-2'
+                        className='block text-sm text-primary font-normal mb-2'
                       >
                         Word{' '}
                         <span data-testid={`${ordinal}Label`}>
@@ -92,7 +93,7 @@ export const CreateQuiz = ({
                       </label>
 
                       <Select
-                        className='text-sm text-gray-700 placeholder-gray-400'
+                        className='text-sm text-neutral-800 placeholder-neutral-500'
                         inputId={ordinal}
                         options={mnemonicWordsOptions as any[]}
                         name={ordinal}
@@ -115,6 +116,7 @@ export const CreateQuiz = ({
             </div>
 
             <Button
+              className='bg-btn-primary text-btn-primary px-4 h-10 rounded-xl cursor-pointer hover:opacity-75'
               data-testid={DataTestIdsEnum.goToDownloadButton}
               disabled={isSubmitting}
               id='createWalletBtn'
@@ -123,13 +125,13 @@ export const CreateQuiz = ({
               Continue
             </Button>
 
-            <Button
-              className='text-blue-400 underline decoration-dotted hover:decoration-solid'
+            <MvxButton
               data-testid={DataTestIdsEnum.backToWordsButton}
               onClick={onBack}
+              variant='secondary'
             >
               Back to words
-            </Button>
+            </MvxButton>
           </form>
         );
       }}

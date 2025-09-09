@@ -1,5 +1,8 @@
 import { FunctionComponent, SVGProps, useState } from 'react';
 import {
+  faArrowRight,
+  faArrowRightArrowLeft,
+  faArrowUp,
   faChevronUp,
   faCoins,
   faCubes,
@@ -10,7 +13,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
+import { networkSelector } from 'redux/selectors';
+import { routeNames } from 'routes';
 
 // prettier-ignore
 const styles = {
@@ -32,41 +39,23 @@ interface SideMenuPropsType {
 interface MenuItemsType {
   title: string;
   icon?: IconDefinition | FunctionComponent<SVGProps<SVGSVGElement>>;
-  id: ItemsIdentifiersEnum;
+  id?: ItemsIdentifiersEnum;
+  route?: string;
+  visible?: boolean;
 }
-
-const menuItems: MenuItemsType[] = [
-  {
-    title: 'Tokens',
-    icon: faCoins,
-    id: ItemsIdentifiersEnum.tokens
-  },
-  {
-    title: 'NFTs',
-    icon: faCubes,
-    id: ItemsIdentifiersEnum.nfts
-  },
-  {
-    title: 'Sign message',
-    icon: faPenNib,
-    id: ItemsIdentifiersEnum.signMessage
-  },
-  {
-    title: 'Transactions',
-    icon: faRectangleList,
-    id: ItemsIdentifiersEnum.transactions
-  }
-];
 
 export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState(ItemsIdentifiersEnum.tokens);
+  const navigate = useNavigate();
+  const { activeNetwork } = useSelector(networkSelector);
+  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork as any;
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  const handleMenuItemClick = (id: ItemsIdentifiersEnum) => {
+  const handleScrollToItem = (id: ItemsIdentifiersEnum) => {
     setIsOpen(false);
     const target = document.getElementById(id);
     if (target) {
@@ -74,6 +63,18 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
       window.scrollTo({ top: y, behavior: 'smooth' });
 
       setActiveItem(id);
+    }
+  };
+
+  const handleRouteRedirect = (route: string) => {
+    navigate(route);
+  };
+
+  const handleMenuItemClick = (item: MenuItemsType) => {
+    if (item.route) {
+      handleRouteRedirect(item.route);
+    } else if (item.id) {
+      handleScrollToItem(item.id);
     }
   };
 
@@ -85,6 +86,57 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
     const IconComponent = icon;
     return <IconComponent />;
   };
+
+  const menuItems: MenuItemsType[] = [
+    {
+      title: 'Tokens',
+      icon: faCoins,
+      id: ItemsIdentifiersEnum.tokens,
+      visible: true
+    },
+    {
+      title: 'NFTs',
+      icon: faCubes,
+      id: ItemsIdentifiersEnum.nfts,
+      visible: true
+    },
+    {
+      title: 'Sign message',
+      icon: faPenNib,
+      id: ItemsIdentifiersEnum.signMessage,
+      visible: true
+    },
+    {
+      title: 'Transactions',
+      icon: faRectangleList,
+      id: ItemsIdentifiersEnum.transactions,
+      visible: true
+    },
+    {
+      title: 'Send',
+      icon: faArrowUp,
+      route: routeNames.send,
+      visible: true
+    },
+    {
+      title: 'Sovereign Transfer',
+      icon: faArrowRight,
+      route: routeNames.sovereignTransfer,
+      visible: hasSovereignTransfer
+    },
+    {
+      title: 'Register Token',
+      icon: faArrowRight,
+      route: routeNames.registerToken,
+      visible: hasRegisterToken
+    },
+    {
+      title: 'Request Funds',
+      icon: faArrowRightArrowLeft,
+      route: routeNames.faucet,
+      visible: activeNetwork.faucet
+    }
+  ];
 
   return (
     <div className={styles.sideMenuContainer}>
@@ -105,19 +157,22 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
           [styles.sideMenuItemsHidden]: isCollapsed
         })}
       >
-        {menuItems.map((item) => (
-          <div
-            key={item.id}
-            onClick={() => handleMenuItemClick(item.id)}
-            className={classNames(styles.sideMenuItem, {
-              [styles.sideMenuItemActive]: item.id === activeItem
-            })}
-          >
-            {item.icon && setItemIcon(item.icon)}
+        {menuItems.map(
+          (item) =>
+            item.visible && (
+              <div
+                key={item.id}
+                onClick={() => handleMenuItemClick(item)}
+                className={classNames(styles.sideMenuItem, {
+                  [styles.sideMenuItemActive]: item.id === activeItem
+                })}
+              >
+                {item.icon && setItemIcon(item.icon)}
 
-            <div className={styles.sideMenuItemTitle}>{item.title}</div>
-          </div>
-        ))}
+                <div className={styles.sideMenuItemTitle}>{item.title}</div>
+              </div>
+            )
+        )}
       </div>
     </div>
   );
