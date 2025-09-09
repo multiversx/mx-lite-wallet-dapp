@@ -1,5 +1,8 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
-import { Button, MxLink } from 'components';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'components';
 import { NftEnumType } from 'lib';
 import { CollectionTypeByNftEnum, DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
@@ -9,6 +12,8 @@ import { IssueCollectionFieldsEnum } from '../types';
 
 export const IssueCollectionForm = () => {
   const formik = useIssueCollectionForm();
+  const navigate = useNavigate();
+
   const nft =
     CollectionTypeByNftEnum[NftEnumType.NonFungibleESDT].toUpperCase();
 
@@ -24,6 +29,11 @@ export const IssueCollectionForm = () => {
     IssueCollectionFieldsEnum.tokenTicker
   );
 
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -34,7 +44,7 @@ export const IssueCollectionForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenType}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Type:
           </label>
@@ -52,7 +62,10 @@ export const IssueCollectionForm = () => {
                 type='radio'
                 value={nft}
               />
-              <label htmlFor={nft} className='text-sm'>
+              <label
+                htmlFor={nft}
+                className='text-sm font-medium text-primary transition-all duration-200 ease-out mb-2'
+              >
                 {nft}
               </label>
             </div>
@@ -69,7 +82,10 @@ export const IssueCollectionForm = () => {
                 type='radio'
                 value={sft}
               />
-              <label htmlFor={sft} className='text-sm'>
+              <label
+                htmlFor={sft}
+                className='text-sm font-medium text-primary transition-all duration-200 ease-out mb-2'
+              >
                 {sft}
               </label>
             </div>
@@ -78,13 +94,13 @@ export const IssueCollectionForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenName}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Collection name:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': tokenNameHasError
               }
@@ -109,13 +125,13 @@ export const IssueCollectionForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenTicker}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Collection ticker:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': tokenTickerHasError
               }
@@ -138,21 +154,22 @@ export const IssueCollectionForm = () => {
           )}
         </div>
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-4 h-10 cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.issueCollectionBtn}
           type='submit'
         >
-          Issue
+          Send
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          onClick={handleCancel}
+          variant='secondary'
         >
           Cancel
-        </MxLink>
+        </MvxButton>
       </div>
     </form>
   );

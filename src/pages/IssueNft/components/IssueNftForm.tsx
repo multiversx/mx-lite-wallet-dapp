@@ -1,6 +1,9 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
+import { Button } from 'components';
 import { NftEnumType } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
@@ -12,12 +15,19 @@ export const IssueNftForm = () => {
   const { formik, isLoading, collections, selectedCollection } =
     useIssueNftForm();
 
+  const navigate = useNavigate();
+
   const checkFormHasError = getFormHasError(formik);
   const nameHasError = checkFormHasError(IssueNftFieldsEnum.name);
   const quantityHasError = checkFormHasError(IssueNftFieldsEnum.quantity);
   const royaltiesHasError = checkFormHasError(IssueNftFieldsEnum.royalties);
   const imageUrlHasError = checkFormHasError(IssueNftFieldsEnum.imageUrl);
   const collectionHasError = checkFormHasError(IssueNftFieldsEnum.collection);
+
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
 
   return (
     <form
@@ -29,7 +39,7 @@ export const IssueNftForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueNftFieldsEnum.collection}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Collection:
           </label>
@@ -59,13 +69,13 @@ export const IssueNftForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueNftFieldsEnum.name}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Name:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': nameHasError
               }
@@ -124,13 +134,13 @@ export const IssueNftForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueNftFieldsEnum.royalties}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Royalties:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': royaltiesHasError
               }
@@ -156,13 +166,13 @@ export const IssueNftForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueNftFieldsEnum.imageUrl}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Image URL:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': imageUrlHasError
               }
@@ -185,21 +195,22 @@ export const IssueNftForm = () => {
           )}
         </div>
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-4 h-10 text-sm cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.issueNftBtn}
           type='submit'
         >
           Create
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          onClick={handleCancel}
+          variant='secondary'
         >
           Cancel
-        </MxLink>
+        </MvxButton>
       </div>
     </form>
   );

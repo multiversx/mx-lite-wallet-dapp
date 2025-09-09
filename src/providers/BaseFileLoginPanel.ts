@@ -50,7 +50,7 @@ export abstract class BaseFileLoginPanel<
           onClose: handleClose,
           anchor: (options as any)?.anchor,
           options
-        })
+        }) as any
       );
 
       // Then immediately update to isOpen: true to trigger the show animation
@@ -62,7 +62,7 @@ export abstract class BaseFileLoginPanel<
             onClose: handleClose,
             anchor: (options as any)?.anchor,
             options
-          })
+          }) as any
         );
       }, 0);
     });

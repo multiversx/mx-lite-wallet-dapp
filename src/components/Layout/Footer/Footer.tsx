@@ -21,24 +21,18 @@ export const Footer = () => {
   }, []);
 
   return (
-    <footer className='mx-auto w-full max-w-prose pb-6 pl-6 pr-6 text-center text-gray-400'>
-      <div className='flex flex-col items-center text sm text-gray-400'>
-        <a
-          className='text-gray-400 text-sm hover:cursor-pointer hover:underline'
-          href='/disclaimer'
-        >
-          Disclaimer
-        </a>
+    <footer className='mx-auto w-full max-w-prose p-6 text-center text-neutral-500'>
+      <div className='flex flex-col items-center text sm text-neutral-500'>
         <a
           target='_blank'
-          className='flex items-center text-sm hover:underline'
+          className=' flex items-center justify-center gap-1 text-sm text-neutral-500'
           href='https://multiversx.com/'
         >
-          Made with <HeartIcon className='mx-1 fill-gray-400' /> by the
+          Made with <HeartIcon className='mx-1 fill-neutral-500' /> by the
           MultiversX team
         </a>
         {walletVersion && (
-          <span className='text-sm text-gray-400'>
+          <span className='text-sm text-neutral-500'>
             Build {version}-{walletVersion}
           </span>
         )}

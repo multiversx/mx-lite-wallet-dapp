@@ -1,4 +1,5 @@
 import './styles/globals.css';
+import './styles/tailwind.css';
 import { createRoot } from 'react-dom/client';
 import { initApp } from 'lib';
 import { FileProviderEnum, IFileProvider, IFileProviderOptions } from 'types';
@@ -52,7 +53,7 @@ async function start() {
   initApp(config).then(() => {
     const container = document.getElementById('root');
     const root = createRoot(container as HTMLElement);
-    root.render(<App />);
+    root.render((<App />) as any);
   });
 }
 

@@ -18,3 +18,5 @@ export * from './PasswordVisibilityToggle';
 export * from './ProgressBar';
 export * from './SidePanel';
 export * from './Utilities';
+export * from './Drawer';
+export * from './Tooltip';

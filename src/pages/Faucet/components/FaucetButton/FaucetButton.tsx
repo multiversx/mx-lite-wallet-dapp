@@ -1,23 +1,32 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { useSelector } from 'react-redux';
-import { MxLink } from 'components';
+import { useNavigate } from 'react-router-dom';
 import { DataTestIdsEnum } from 'localConstants';
 import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 
 export const FaucetButton = () => {
   const { activeNetwork } = useSelector(networkSelector);
+  console.log(activeNetwork);
+  const navigate = useNavigate();
+
+  const handleRequestFunds = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.faucet);
+  };
 
   if (!activeNetwork.faucet) {
     return null;
   }
 
   return (
-    <MxLink
-      className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+    <MvxButton
       data-testid={DataTestIdsEnum.faucetBtn}
-      to={routeNames.faucet}
+      onClick={handleRequestFunds}
+      size='small'
     >
-      Request Funds
-    </MxLink>
+      <span className='text-sm font-normal'>Request Funds</span>
+    </MvxButton>
   );
 };

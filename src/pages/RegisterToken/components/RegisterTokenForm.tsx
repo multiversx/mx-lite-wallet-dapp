@@ -1,6 +1,9 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
+import { Button } from 'components';
 import {
   DEVNET_CHAIN_ID,
   MAINNET_CHAIN_ID,
@@ -24,6 +27,8 @@ export const RegisterTokenForm = () => {
     tokenOptions
   } = useRegisterTokenForm();
 
+  const navigate = useNavigate();
+
   const chainOptions = [
     {
       label: capitalize(EnvironmentsEnum.devnet),
@@ -44,19 +49,24 @@ export const RegisterTokenForm = () => {
     RegisterTokenFormFieldsEnum.contract
   );
 
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className='flex flex-col gap-4 h-full'>
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.contract}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Receiver:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': hasContractError
               }
@@ -81,7 +91,7 @@ export const RegisterTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.type}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Type:
           </label>
@@ -97,7 +107,10 @@ export const RegisterTokenForm = () => {
                 type='radio'
                 value={SendTypeEnum.esdt}
               />
-              <label htmlFor={SendTypeEnum.esdt} className='text-sm'>
+              <label
+                htmlFor={SendTypeEnum.esdt}
+                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+              >
                 {SendTypeEnum.esdt}
               </label>
             </div>
@@ -112,7 +125,10 @@ export const RegisterTokenForm = () => {
                 type='radio'
                 value={SendTypeEnum.nft}
               />
-              <label htmlFor={SendTypeEnum.nft} className='text-sm'>
+              <label
+                htmlFor={SendTypeEnum.nft}
+                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+              >
                 {SendTypeEnum.nft}
               </label>
             </div>
@@ -121,7 +137,7 @@ export const RegisterTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.chainId}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Chain:
           </label>
@@ -144,7 +160,7 @@ export const RegisterTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.token}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Token:
           </label>
@@ -165,21 +181,22 @@ export const RegisterTokenForm = () => {
           </div>
         </div>
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-4 h-10 text-sm cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >
           Send
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          onClick={handleCancel}
+          variant='secondary'
         >
           Cancel
-        </MxLink>
+        </MvxButton>
       </div>
     </form>
   );

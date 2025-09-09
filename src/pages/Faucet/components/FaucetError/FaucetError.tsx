@@ -5,7 +5,7 @@ import { DataTestIdsEnum } from 'localConstants';
 
 export const FaucetError = ({ message }: { message: string }) => (
   <FeaturePageLayout title='Failed'>
-    <div className='flex flex-col items-center pb-5'>
+    <div className='flex flex-col items-center'>
       <FontAwesomeIcon
         className='text-red-500 mt-5 mb-1'
         size='4x'

@@ -1,6 +1,9 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
+import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
@@ -26,6 +29,12 @@ export const SendForm = () => {
   const amountHasError = checkFormHasError(FormFieldsEnum.amount);
   const tokenHasError = checkFormHasError(FormFieldsEnum.token);
   const gasLimitHasError = checkFormHasError(FormFieldsEnum.gasLimit);
+  const navigate = useNavigate();
+
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -33,13 +42,13 @@ export const SendForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={FormFieldsEnum.receiver}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Receiver:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': receiverHasError
               }
@@ -64,7 +73,7 @@ export const SendForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={FormFieldsEnum.type}
-            className='block text-sm font-bold mb-2'
+            className='block font-medium text-primary transition-all duration-200 ease-out mb-2'
           >
             Type:
           </label>
@@ -80,7 +89,10 @@ export const SendForm = () => {
                 type='radio'
                 value={SendTypeEnum.esdt}
               />
-              <label htmlFor={SendTypeEnum.esdt} className='text-sm'>
+              <label
+                htmlFor={SendTypeEnum.esdt}
+                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+              >
                 {SendTypeEnum.esdt}
               </label>
             </div>
@@ -95,7 +107,10 @@ export const SendForm = () => {
                 type='radio'
                 value={SendTypeEnum.nft}
               />
-              <label htmlFor={SendTypeEnum.nft} className='text-sm'>
+              <label
+                htmlFor={SendTypeEnum.nft}
+                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+              >
                 {SendTypeEnum.nft}
               </label>
             </div>
@@ -104,7 +119,7 @@ export const SendForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={FormFieldsEnum.amount}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Amount:
           </label>
@@ -112,7 +127,7 @@ export const SendForm = () => {
             <div className='flex flex-col w-full'>
               <input
                 className={classNames(
-                  'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+                  'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
                   {
                     'border-red-600': amountHasError
                   }
@@ -130,7 +145,7 @@ export const SendForm = () => {
               {formik.values[FormFieldsEnum.token] &&
                 !formik.errors[FormFieldsEnum.amount] && (
                   <div
-                    className='text-sm text-gray-400 mt-1'
+                    className='text-sm text-neutral-500 mt-1'
                     data-testid={DataTestIdsEnum.availableAmount}
                   >
                     Available: {availableAmount}{' '}
@@ -148,7 +163,7 @@ export const SendForm = () => {
             </div>
             <div className='flex flex-col w-1/2'>
               <Select
-                className='text-sm text-gray-700 placeholder-gray-400'
+                className='text-sm !text-primary !fill-red-500 placeholder-neutral-500'
                 isLoading={isLoading}
                 options={tokenOptions}
                 name={FormFieldsEnum.token}
@@ -174,13 +189,13 @@ export const SendForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={FormFieldsEnum.gasLimit}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Gas Limit:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': gasLimitHasError
               }
@@ -207,12 +222,12 @@ export const SendForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={FormFieldsEnum.data}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Data:
           </label>
           <textarea
-            className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+            className='block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary'
             data-testid={DataTestIdsEnum.dataInput}
             disabled={!isEgldToken}
             id={FormFieldsEnum.data}
@@ -224,21 +239,22 @@ export const SendForm = () => {
           />
         </div>
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center justify-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-4 h-10 cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >
           Send
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          onClick={handleCancel}
+          variant='secondary'
         >
           Cancel
-        </MxLink>
+        </MvxButton>
       </div>
     </form>
   );

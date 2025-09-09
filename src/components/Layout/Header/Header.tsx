@@ -1,28 +1,107 @@
+import { MouseEvent } from 'react';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import {
+  faBell,
+  faCreditCard,
+  faPowerOff,
+  IconDefinition
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  MvxButton,
+  MvxDataWithExplorerLink
+} from '@multiversx/sdk-dapp-ui/react';
+import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import { Button, MxLink, NetworkSwitcher } from 'components';
-import { getAccountProvider, useGetIsLoggedIn } from 'lib';
+
+import { MxLink } from 'components/MxLink';
+import { NetworkSwitcher } from 'components/NetworkSwitcher';
+import { Tooltip } from 'components/Tooltip';
+import { GITHUB_REPO_URL } from 'config';
+import {
+  getAccountProvider,
+  NotificationsFeedManager,
+  useGetAccountInfo,
+  useGetIsLoggedIn,
+  useGetNetworkConfig
+} from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-import { ConnectButton } from './components';
-import { NotificationsButton } from './components/NotificationsButton';
+
+import { ThemeTooltip } from './components';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 
-export const Header = () => {
-  const isLoggedIn = useGetIsLoggedIn();
-  const navigate = useNavigate();
-  const provider = getAccountProvider();
+// prettier-ignore
+const styles = {
+  header: 'header flex items-center justify-between px-4 h-16 md:h-20 md:px-10',
+  headerLogo: 'header-logo cursor-pointer transition-opacity duration-200 hover:opacity-75',
+  headerNavigation: 'header-navigation flex items-center gap-2 lg:gap-4',
+  headerNavigationButtons: 'header-navigation-buttons flex gap-2 lg:gap-4',
+  headerNavigationButton: 'header-navigation-button flex justify-center items-center w-8 lg:w-10 h-8 lg:h-10 rounded-xl cursor-pointer relative after:rounded-xl after:absolute after:bg-btn-variant hover:after:bg-btn-hover  after:transition-all after:duration-200 after:ease-out after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none hover:after:opacity-100',
+  headerNavigationButtonIcon: 'header-navigation-button-icon flex justify-center relative text-xs lg:text-base z-1 items-center text-tertiary',
+  headerNavigationTooltip: 'header-navigation-tooltip p-1 leading-none whitespace-nowrap text-tertiary',
+  headerNavigationNetwork: 'header-navigation-network h-8  rounded-xl lg:h-10 relative w-28 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-btn-variant after:rounded-lg after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
+  headerNavigationNetworkLabel: 'header-navigation-network-label relative z-1',
+  headerNavigationConnect: 'header-navigation-connect h-8 lg:h-10',
+  headerNavigationAddress: 'header-navigation-address h-8 lg:h-10 w-8 lg:w-full text-primary justify-center text-xs rounded-xl lg:text-base lg:pr-4 lg:pl-5 max-w-100 flex relative lg:border lg:border-secondary lg:rounded-full items-center gap-3 after:absolute after:bg-btn-tertiary after:rounded-xl lg:after:rounded-full after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
+  headerNavigationAddressWallet: 'header-navigation-address-wallet relative z-1 text-accent hidden lg:flex!',
+  headerNavigationAddressExplorer: 'header-navigation-address-explorer min-w-0 relative z-1 hidden lg:block!',
+  headerNavigationAddressLogout: 'header-navigation-address-logout text-tertiary cursor-pointer relative z-1 transition-all duration-200 ease-out hover:text-accent',
+} satisfies Record<string, string>;
 
-  const handleLogout = async () => {
-    try {
-      await provider?.logout?.();
-    } catch (e) {
-      console.error('Logout failed', e);
-    } finally {
-      navigate(RouteNamesEnum.home);
-    }
+interface HeaderBrowseButtonType {
+  handleClick: (event: MouseEvent<HTMLDivElement>) => void;
+  icon: IconDefinition;
+  isVisible: boolean;
+  label: string;
+}
+
+export const Header = () => {
+  const { network } = useGetNetworkConfig();
+  const { address } = useGetAccountInfo();
+
+  const isLoggedIn = useGetIsLoggedIn();
+  const provider = getAccountProvider();
+  const navigate = useNavigate();
+  const explorerAddress = network.explorerAddress;
+
+  const handleLogout = async (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    await provider.logout();
+    navigate(RouteNamesEnum.home);
   };
 
+  const handleGitHubBrowsing = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    window.open(GITHUB_REPO_URL);
+  };
+
+  const handleLogIn = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(RouteNamesEnum.unlock);
+  };
+
+  const handleNotificationsBrowsing = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    NotificationsFeedManager.getInstance().openNotificationsFeed();
+  };
+
+  const headerBrowseButtons: HeaderBrowseButtonType[] = [
+    {
+      label: 'GitHub',
+      handleClick: handleGitHubBrowsing,
+      icon: faGithub as IconDefinition,
+      isVisible: true
+    },
+    {
+      label: 'Notifications',
+      handleClick: handleNotificationsBrowsing,
+      icon: faBell,
+      isVisible: isLoggedIn
+    }
+  ];
+
   return (
-    <header className='flex flex-row align-center justify-between pl-6 pr-6 pt-6'>
+    <header className={styles.header}>
       <MxLink
         className='flex items-center justify-between'
         to={isLoggedIn ? RouteNamesEnum.dashboard : RouteNamesEnum.home}
@@ -30,24 +109,69 @@ export const Header = () => {
         <MultiversXLogo className='w-full h-6' />
       </MxLink>
 
-      <nav className='h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
-        <div className='flex justify-end container mx-auto items-center gap-2'>
-          <NetworkSwitcher />
+      <nav className={styles.headerNavigation}>
+        <ThemeTooltip />
 
-          {isLoggedIn && (
-            <>
-              <NotificationsButton />
-              <Button
-                onClick={handleLogout}
-                className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
+        <div className={styles.headerNavigationButtons}>
+          {headerBrowseButtons.map((headerBrowseButton) => (
+            <Tooltip
+              identifier={`header-${headerBrowseButton.label}-button`}
+              key={`header-${headerBrowseButton.label}-button`}
+              content={headerBrowseButton.label}
+              place='bottom'
+            >
+              <div
+                onClick={headerBrowseButton.handleClick}
+                className={classNames(styles.headerNavigationButton, {
+                  hidden: !headerBrowseButton.isVisible
+                })}
               >
-                Close
-              </Button>
-            </>
-          )}
-
-          {!isLoggedIn && <ConnectButton />}
+                <FontAwesomeIcon
+                  className={styles.headerNavigationButtonIcon}
+                  icon={headerBrowseButton.icon}
+                />
+              </div>
+            </Tooltip>
+          ))}
         </div>
+
+        <div className={styles.headerNavigationNetwork}>
+          <div className={styles.headerNavigationNetworkLabel}>
+            <NetworkSwitcher />
+          </div>
+        </div>
+
+        {isLoggedIn && (
+          <div className={styles.headerNavigationAddress}>
+            <FontAwesomeIcon
+              icon={faCreditCard}
+              className={styles.headerNavigationAddressWallet}
+            />
+
+            <div className={styles.headerNavigationAddressExplorer}>
+              <MvxDataWithExplorerLink
+                data={address}
+                withTooltip={true}
+                explorerLink={`${explorerAddress}/accounts/${address}`}
+              />
+            </div>
+
+            <Tooltip
+              place='bottom'
+              identifier='disconnect-tooltip-identifier'
+              content='Disconnect'
+            >
+              <div
+                onClick={handleLogout}
+                className={styles.headerNavigationAddressLogout}
+              >
+                <FontAwesomeIcon icon={faPowerOff} />
+              </div>
+            </Tooltip>
+          </div>
+        )}
+
+        {!isLoggedIn && <MvxButton onClick={handleLogIn}>Connect</MvxButton>}
       </nav>
     </header>
   );

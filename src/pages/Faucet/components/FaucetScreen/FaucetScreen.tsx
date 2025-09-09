@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetSettingsReturnType } from 'redux/endpoints';
 
@@ -31,9 +31,9 @@ export const FaucetScreen = ({
   };
 
   return (
-    <div className='flex flex-col items-center pb-5'>
+    <div className='flex flex-col items-center'>
       <p
-        className='text-sm text-gray-400 mb-10'
+        className='text-sm text-neutral-500 mb-10'
         data-testid={DataTestIdsEnum.modalSubtitle}
       >
         You can request {settings.token} every 24 hours
@@ -45,14 +45,15 @@ export const FaucetScreen = ({
         </div>
       )}
 
-      <Button
+      <MvxButton
         data-testid={DataTestIdsEnum.requestFundsButton}
         disabled={requestDisabled}
         id={DataTestIdsEnum.requestFundsButton}
         onClick={handleRequestTokens}
+        size='small'
       >
-        Request Tokens
-      </Button>
+        <span className='text-sm font-normal'>Request Tokens</span>
+      </MvxButton>
     </div>
   );
 };

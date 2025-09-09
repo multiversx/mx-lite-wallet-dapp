@@ -1,7 +1,9 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
+import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
@@ -24,10 +26,17 @@ export const SovereignTransferForm = () => {
     isLoading
   } = useSovereignTransferForm();
 
+  const navigate = useNavigate();
+
   const checkFormHasError = getFormHasError(formik);
   const contractHasError = checkFormHasError(
     SovereignTransferFormFieldsEnum.contract
   );
+
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -35,13 +44,13 @@ export const SovereignTransferForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={SovereignTransferFormFieldsEnum.contract}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Contract:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': contractHasError
               }
@@ -66,13 +75,13 @@ export const SovereignTransferForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={SovereignTransferFormFieldsEnum.receiver}
-            className='block text-sm font-bold mb-2'
+            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
           >
             Receiver:
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': checkFormHasError(
                   SovereignTransferFormFieldsEnum.receiver
@@ -162,11 +171,11 @@ export const SovereignTransferForm = () => {
             const hasAmountError = tokenTouched?.amount && tokenError?.amount;
 
             return (
-              <div className='flex flex-col' key={index}>
+              <div className='flex flex-col gap-2' key={index}>
                 <div className='flex flex-col'>
                   <label
                     htmlFor={SovereignTransferFormFieldsEnum.type}
-                    className='block text-sm font-bold mb-2'
+                    className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
                   >
                     Type:
                   </label>
@@ -182,7 +191,10 @@ export const SovereignTransferForm = () => {
                         type='radio'
                         value={SendTypeEnum.esdt}
                       />
-                      <label htmlFor={SendTypeEnum.esdt} className='text-sm'>
+                      <label
+                        htmlFor={SendTypeEnum.esdt}
+                        className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                      >
                         {SendTypeEnum.esdt}
                       </label>
                     </div>
@@ -197,16 +209,20 @@ export const SovereignTransferForm = () => {
                         type='radio'
                         value={SendTypeEnum.nft}
                       />
-                      <label htmlFor={SendTypeEnum.nft} className='text-sm'>
+                      <label
+                        htmlFor={SendTypeEnum.nft}
+                        className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                      >
                         {SendTypeEnum.nft}
                       </label>
                     </div>
                   </div>
                 </div>
+
                 <div className='flex flex-col'>
                   <label
                     htmlFor={amountFieldName}
-                    className='block text-sm font-bold mb-2'
+                    className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
                   >
                     Amount:
                   </label>
@@ -214,7 +230,7 @@ export const SovereignTransferForm = () => {
                     <div className='flex flex-col w-full'>
                       <input
                         className={classNames(
-                          'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
+                          'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
                           {
                             'border-red-600': hasAmountError
                           }
@@ -231,7 +247,7 @@ export const SovereignTransferForm = () => {
                       />
                       {!hasAmountError && (
                         <div
-                          className='text-sm text-gray-400 mt-1'
+                          className='text-sm text-neutral-500 mt-1'
                           data-testid={`${DataTestIdsEnum.availableAmount}${index}`}
                         >
                           Available: {availableAmount}{' '}
@@ -283,15 +299,16 @@ export const SovereignTransferForm = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className='flex flex-row gap-2'>
                   {index === array.length - 1 && (
-                    <Button
-                      className='mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white'
+                    <MvxButton
                       data-testid={DataTestIdsEnum.addTokenBtn}
                       onClick={handleAddToken}
+                      size='small'
                     >
-                      Add token
-                    </Button>
+                      <span className='text-sm font-normal'>Add token</span>
+                    </MvxButton>
                   )}
                   {index > 0 && (
                     <Button
@@ -308,21 +325,22 @@ export const SovereignTransferForm = () => {
           }
         )}
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-4 h-10 text-sm cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >
           Send
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          variant='secondary'
+          onClick={handleCancel}
         >
           Cancel
-        </MxLink>
+        </MvxButton>
       </div>
     </form>
   );
