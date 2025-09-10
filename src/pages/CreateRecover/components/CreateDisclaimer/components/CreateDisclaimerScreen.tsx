@@ -43,13 +43,13 @@ export const CreateDisclaimerScreen = ({
           <p>
             <FontAwesomeIcon
               icon={faInfoCircle}
-              className='primary text-link'
+              className='primary text-accent'
             />{' '}
             Blockchains do not have a “Reset Password” feature. All you get is a
             Secret Phrase - make sure to keep it safe.
           </p>
 
-          <div className='mt-2 p-2'>
+          <div className='mt-2 p-2 text-secondary'>
             <div>
               <input
                 type='checkbox'
@@ -57,7 +57,7 @@ export const CreateDisclaimerScreen = ({
                 data-testid={DataTestIdsEnum.check}
                 ref={safetyRef}
                 onChange={handleCheckboxChange}
-                className='mr-2'
+                className='mr-2 accent-accent'
               />
 
               <label
@@ -76,7 +76,7 @@ export const CreateDisclaimerScreen = ({
                 data-testid={DataTestIdsEnum.checkNetwork}
                 ref={networkRef}
                 onChange={handleNetworkCheckboxChange}
-                className='mr-2'
+                className='mr-2 accent-accent'
               />
 
               <label htmlFor='check-testnet'>
@@ -100,16 +100,9 @@ export const CreateDisclaimerScreen = ({
         Continue
       </Button>
 
-      <div className='flex flex-col items-center justify-center mt-1 gap-1 text-primary'>
-        <p>Already have a wallet?</p>
-
-        <MxLink
-          className='text-primary underline decoration-dotted hover:decoration-solid'
-          to={routeNames.unlock}
-        >
-          Access it
-        </MxLink>
-      </div>
+      <MxLink className='text-accent hover:opacity-75' to={routeNames.unlock}>
+        Already have a wallet? Access it
+      </MxLink>
     </div>
   );
 };

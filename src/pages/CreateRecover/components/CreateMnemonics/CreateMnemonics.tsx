@@ -1,8 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
-import { CopyButton } from 'lib';
+import { MvxButton, MvxCopyButton } from '@multiversx/sdk-dapp-ui/react';
 import { DataTestIdsEnum } from 'localConstants';
 
 interface CreateMnemonicsPropsType {
@@ -52,7 +51,7 @@ export const CreateMnemonics = ({
           <p data-testid={DataTestIdsEnum.mnemonicsDisclaimer}>
             <FontAwesomeIcon
               icon={faInfoCircle}
-              className='primary text-link'
+              className='primary text-accent'
             />{' '}
             <span className='text-primary'>
               Write down these words in this exact order. You can use them to
@@ -76,8 +75,8 @@ export const CreateMnemonics = ({
             </div>
           ))}
 
-          <CopyButton
-            className='text-link absolute right-0 bottom-0 m-2'
+          <MvxCopyButton
+            className='text-link absolute right-2 bottom-2'
             text={textToCopy}
           />
         </div>
@@ -88,13 +87,13 @@ export const CreateMnemonics = ({
             id='check'
             data-testid={DataTestIdsEnum.check}
             onChange={handleCheckboxChange}
-            className='mr-2'
+            className='mr-2 accent-accent'
           />
 
           <label
             htmlFor='check'
             data-testid={DataTestIdsEnum.mnemonicCheck}
-            className='text-primary'
+            className='text-secondary'
           >
             I confirm I have written down and safely stored my secret phrase.
           </label>

@@ -81,7 +81,7 @@ export const CreateQuiz = ({
                     <div key={ordinal} className='w-full'>
                       <label
                         htmlFor={ordinal}
-                        className='block text-sm text-primary font-normal mb-2'
+                        className='block text-sm text-secondary font-normal mb-2'
                       >
                         Word{' '}
                         <span data-testid={`${ordinal}Label`}>
@@ -93,7 +93,23 @@ export const CreateQuiz = ({
                       </label>
 
                       <Select
-                        className='text-sm text-neutral-800 placeholder-neutral-500'
+                        classNames={{
+                          control: () =>
+                            '!text-sm !bg-secondary !text-primary !border-secondary !rounded-xl',
+                          placeholder: () => '!text-secondary',
+                          singleValue: () => '!text-primary',
+                          menu: () =>
+                            '!bg-secondary border !border-secondary !rounded-xl px-1',
+                          option: ({ isFocused, isSelected }) =>
+                            [
+                              '!cursor-pointer !text-sm ',
+                              isFocused
+                                ? '!bg-primary !text-accent !rounded-lg'
+                                : '!bg-secondary !text-secondary',
+                              isSelected ? '!bg-primary !text-accent' : ''
+                            ].join(' '),
+                          input: () => '!text-primary'
+                        }}
                         inputId={ordinal}
                         options={mnemonicWordsOptions as any[]}
                         name={ordinal}

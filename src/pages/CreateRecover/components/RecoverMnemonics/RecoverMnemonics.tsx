@@ -75,7 +75,7 @@ export const RecoverMnemonics = ({
 
         <div className='w-full flex flex-col items-center gap-4'>
           <div className='w-full'>
-            <label className='block text-primary text-sm font-normal mb-2'>
+            <label className='block text-secondary text-sm font-normal mb-2'>
               Secret Phrase
             </label>
 
@@ -113,7 +113,10 @@ export const RecoverMnemonics = ({
                   }
                 )}
               >
-                <FontAwesomeIcon icon={faPaste} />
+                <FontAwesomeIcon
+                  icon={faPaste}
+                  className='cursor-pointer text-link hover:text-accent'
+                />
               </button>
             </div>
 
@@ -124,13 +127,30 @@ export const RecoverMnemonics = ({
 
           <div className='w-full'>
             <label
-              className='block text-sm font-normal text-primary mb-2'
+              className='block text-sm font-normal text-secondary mb-2'
               htmlFor={DataTestIdsEnum.mnemonicInput}
             >
               Type here
             </label>
+
             <Select
-              className='text-sm text-gray-700 placeholder-gray-400'
+              classNames={{
+                control: () =>
+                  '!text-sm !bg-secondary !text-primary !border-secondary !rounded-xl',
+                placeholder: () => '!text-secondary',
+                singleValue: () => '!text-primary',
+                menu: () =>
+                  '!bg-secondary border !border-secondary !rounded-xl px-1',
+                option: ({ isFocused, isSelected }) =>
+                  [
+                    '!cursor-pointer !text-sm ',
+                    isFocused
+                      ? '!bg-primary !text-accent !rounded-lg'
+                      : '!bg-secondary !text-secondary',
+                    isSelected ? '!bg-primary !text-accent' : ''
+                  ].join(' '),
+                input: () => '!text-primary'
+              }}
               inputId={DataTestIdsEnum.mnemonicInput}
               name={DataTestIdsEnum.mnemonicInput}
               onChange={handleAddTag as any}

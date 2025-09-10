@@ -1,5 +1,5 @@
 import { MouseEvent } from 'react';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { PageState } from 'components';
@@ -26,8 +26,8 @@ export const CreateRecoverDownloadScreen = ({
     <>
       <div className='flex flex-col items-center justify-center gap-4 w-full mt-4'>
         <PageState
-          icon={faCheckCircle}
-          iconClass='fa-3x text-neutral-500'
+          icon={faCircleCheck}
+          iconClass='fa-3x !text-accent'
           description={infoSection}
         />
 

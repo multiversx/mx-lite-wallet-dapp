@@ -15,7 +15,7 @@ export const ReDownloadButton = ({
   };
 
   return (
-    <MvxButton onClick={download} variant='neutral'>
+    <MvxButton onClick={download} variant='secondary'>
       <span className='font-normal text-sm'>Download keystore file again</span>
     </MvxButton>
   );

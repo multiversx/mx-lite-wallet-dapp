@@ -46,7 +46,7 @@ export const CreateRecoverPasswordFormFields = ({
             <div key={field.name} className='w-full flex flex-col relative'>
               <label
                 htmlFor={field.name}
-                className='block text-sm font-normal mb-2 text-primary'
+                className='block text-sm font-normal mb-2 text-secondary'
               >
                 {field.label}
               </label>
