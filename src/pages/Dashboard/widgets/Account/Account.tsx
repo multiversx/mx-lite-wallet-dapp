@@ -65,6 +65,10 @@ export const Account = () => {
       input: account.balance
     });
 
+  const img = profileUrl && (
+    <img src={profileUrl} className={styles.connectedAccountDetailsHerotag} />
+  );
+
   const accountDetails: AccountDetailsType[] = [
     {
       icon: (
@@ -82,18 +86,7 @@ export const Account = () => {
       )
     },
     {
-      icon: herotag ? (
-        profileUrl ? (
-          <img
-            src={profileUrl}
-            className={styles.connectedAccountDetailsHerotag}
-          />
-        ) : (
-          herotag.slice(0, 3)
-        )
-      ) : (
-        '@'
-      ),
+      icon: herotag ? img || herotag.slice(0, 3) : '@',
       label: 'Herotag',
       value: <Username address={address} />
     },
