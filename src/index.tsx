@@ -53,7 +53,7 @@ async function start() {
   initApp(config).then(() => {
     const container = document.getElementById('root');
     const root = createRoot(container as HTMLElement);
-    root.render((<App />) as any);
+    root.render(<App />);
   });
 }
 

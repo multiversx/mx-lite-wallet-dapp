@@ -33,7 +33,7 @@ export const PanelWrapper = ({
   );
 
   if (anchor) {
-    return createPortal(panelContent as any, anchor);
+    return createPortal(panelContent, anchor);
   }
 
   return (
