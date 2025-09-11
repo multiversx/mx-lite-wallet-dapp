@@ -39,7 +39,7 @@ const styles = {
 } satisfies Record<string, string>;
 
 interface LeftPanelPropsType {
-  isOpen: boolean;
+  isOpen?: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
 

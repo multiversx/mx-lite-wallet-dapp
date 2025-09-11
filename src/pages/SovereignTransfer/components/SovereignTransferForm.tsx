@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import { Button } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
+import { DataTestIdsEnum, SELECT_CLASSNAMES } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { getFormHasError } from 'utils';
@@ -13,6 +13,13 @@ import {
   SovereignTransferFormFieldsEnum,
   SovereignTransferTokenType
 } from '../types';
+
+// prettier-ignore
+const styles = {
+  sovereignTransferLabel: 'text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  sovereignTransferInput: 'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
+  sovereignTransferTypeOption: 'text-sm text-primary font-normal bg-secondary transition-all duration-300'
+} satisfies Record<string, string>;
 
 export const SovereignTransferForm = () => {
   const {
@@ -44,17 +51,14 @@ export const SovereignTransferForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={SovereignTransferFormFieldsEnum.contract}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.sovereignTransferLabel}
           >
             Contract:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': contractHasError
-              }
-            )}
+            className={classNames(styles.sovereignTransferInput, {
+              'border-red-600': contractHasError
+            })}
             data-testid={DataTestIdsEnum.contractInput}
             id={SovereignTransferFormFieldsEnum.contract}
             name={SovereignTransferFormFieldsEnum.contract}
@@ -75,19 +79,16 @@ export const SovereignTransferForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={SovereignTransferFormFieldsEnum.receiver}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.sovereignTransferLabel}
           >
             Receiver:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': checkFormHasError(
-                  SovereignTransferFormFieldsEnum.receiver
-                )
-              }
-            )}
+            className={classNames(styles.sovereignTransferInput, {
+              'border-red-600': checkFormHasError(
+                SovereignTransferFormFieldsEnum.receiver
+              )
+            })}
             data-testid={DataTestIdsEnum.receiverInput}
             id={SovereignTransferFormFieldsEnum.receiver}
             name={SovereignTransferFormFieldsEnum.receiver}
@@ -175,7 +176,7 @@ export const SovereignTransferForm = () => {
                 <div className='flex flex-col'>
                   <label
                     htmlFor={SovereignTransferFormFieldsEnum.type}
-                    className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+                    className={styles.sovereignTransferLabel}
                   >
                     Type:
                   </label>
@@ -193,7 +194,7 @@ export const SovereignTransferForm = () => {
                       />
                       <label
                         htmlFor={SendTypeEnum.esdt}
-                        className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                        className={styles.sovereignTransferTypeOption}
                       >
                         {SendTypeEnum.esdt}
                       </label>
@@ -211,7 +212,7 @@ export const SovereignTransferForm = () => {
                       />
                       <label
                         htmlFor={SendTypeEnum.nft}
-                        className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                        className={styles.sovereignTransferTypeOption}
                       >
                         {SendTypeEnum.nft}
                       </label>
@@ -222,19 +223,16 @@ export const SovereignTransferForm = () => {
                 <div className='flex flex-col'>
                   <label
                     htmlFor={amountFieldName}
-                    className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+                    className={styles.sovereignTransferLabel}
                   >
                     Amount:
                   </label>
                   <div className='flex flex-row gap-2'>
                     <div className='flex flex-col w-full'>
                       <input
-                        className={classNames(
-                          'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-                          {
-                            'border-red-600': hasAmountError
-                          }
-                        )}
+                        className={classNames(styles.sovereignTransferInput, {
+                          'border-red-600': hasAmountError
+                        })}
                         disabled={isNFT && !canEditNftAmount}
                         data-testid={`${DataTestIdsEnum.amountInput}${index}`}
                         id={amountFieldName}
@@ -265,23 +263,7 @@ export const SovereignTransferForm = () => {
                     </div>
                     <div className='flex flex-col w-1/2'>
                       <Select
-                        classNames={{
-                          control: () =>
-                            'text-sm !bg-secondary !text-primary !border-secondary !rounded-xl',
-                          placeholder: () => '!text-secondary',
-                          singleValue: () => '!text-primary',
-                          menu: () =>
-                            '!bg-secondary border !border-secondary !rounded-xl px-1',
-                          option: ({ isFocused, isSelected }) =>
-                            [
-                              '!cursor-pointer !text-sm ',
-                              isFocused
-                                ? '!bg-primary !text-accent !rounded-lg'
-                                : '!bg-secondary !text-secondary',
-                              isSelected ? '!bg-primary !text-accent' : ''
-                            ].join(' '),
-                          input: () => '!text-primary'
-                        }}
+                        classNames={SELECT_CLASSNAMES}
                         isLoading={isLoading}
                         options={tokenOptions}
                         name={tokenFieldName}

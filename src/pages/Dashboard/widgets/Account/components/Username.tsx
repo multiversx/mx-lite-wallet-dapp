@@ -15,7 +15,7 @@ export const Username = (props: {
 }) => {
   const { address } = props;
 
-  const [herotag] = useGetUserHerotag(address);
+  const { herotag } = useGetUserHerotag(address);
 
   return (
     <p className={styles.usernameContainer}>

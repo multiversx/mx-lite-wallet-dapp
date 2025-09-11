@@ -22,7 +22,7 @@ import { Username } from './components';
 import { useGetUserHerotag } from './hooks/useGetUserHerotag';
 
 interface AccountDetailsType {
-  icon: ReactNode | string;
+  icon: ReactNode;
   label: string;
   value: string | ReactNode;
 }
@@ -49,7 +49,7 @@ const styles = {
 export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-  const [herotag, profileUrl] = useGetUserHerotag(address);
+  const { herotag, profileUrl } = useGetUserHerotag(address);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 

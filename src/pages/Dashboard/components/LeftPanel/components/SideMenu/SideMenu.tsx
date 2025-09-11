@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
+import { ItemIcon } from './components';
 
 // prettier-ignore
 const styles = {
@@ -76,15 +77,6 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
     } else if (item.id) {
       handleScrollToItem(item.id);
     }
-  };
-
-  const setItemIcon = (
-    icon: IconDefinition | FunctionComponent<SVGProps<SVGSVGElement>>
-  ) => {
-    if ('iconName' in icon) return <FontAwesomeIcon icon={icon} />;
-
-    const IconComponent = icon;
-    return <IconComponent />;
   };
 
   const menuItems: MenuItemsType[] = [
@@ -167,7 +159,7 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
                   [styles.sideMenuItemActive]: item.id === activeItem
                 })}
               >
-                {item.icon && setItemIcon(item.icon)}
+                {item.icon && <ItemIcon icon={item.icon} />}
 
                 <div className={styles.sideMenuItemTitle}>{item.title}</div>
               </div>

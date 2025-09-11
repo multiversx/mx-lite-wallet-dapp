@@ -4,12 +4,20 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import { Button } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
+import { DataTestIdsEnum, SELECT_CLASSNAMES } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { getFormHasError } from 'utils';
 import { useSendForm } from '../hooks';
 import { FormFieldsEnum } from '../types';
+
+// prettier-ignore
+const styles = {
+  sendInput: 'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
+  sendInputError: 'text-red-600 text-sm mt-1',
+  sendLabel: 'text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  sendTypeOption: 'text-sm text-primary font-normal bg-secondary transition-all duration-300'
+} satisfies Record<string, string>;
 
 export const SendForm = () => {
   const {
@@ -40,19 +48,13 @@ export const SendForm = () => {
     <form onSubmit={formik.handleSubmit}>
       <div className='flex flex-col gap-4 h-full'>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.receiver}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.receiver} className={styles.sendLabel}>
             Receiver:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': receiverHasError
-              }
-            )}
+            className={classNames(styles.sendInput, {
+              'border-red-600': receiverHasError
+            })}
             data-testid={DataTestIdsEnum.receiverInput}
             id={FormFieldsEnum.receiver}
             name={FormFieldsEnum.receiver}
@@ -63,7 +65,7 @@ export const SendForm = () => {
           />
           {receiverHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.sendInputError}
               data-testid={DataTestIdsEnum.receiverError}
             >
               {formik.errors[FormFieldsEnum.receiver]}
@@ -71,10 +73,7 @@ export const SendForm = () => {
           )}
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.type}
-            className='block font-medium text-primary transition-all duration-200 ease-out mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.type} className={styles.sendLabel}>
             Type:
           </label>
           <div className='flex flex-row gap-4'>
@@ -91,7 +90,7 @@ export const SendForm = () => {
               />
               <label
                 htmlFor={SendTypeEnum.esdt}
-                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                className={styles.sendTypeOption}
               >
                 {SendTypeEnum.esdt}
               </label>
@@ -109,7 +108,7 @@ export const SendForm = () => {
               />
               <label
                 htmlFor={SendTypeEnum.nft}
-                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                className={styles.sendTypeOption}
               >
                 {SendTypeEnum.nft}
               </label>
@@ -117,21 +116,15 @@ export const SendForm = () => {
           </div>
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.amount}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.amount} className={styles.sendLabel}>
             Amount:
           </label>
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col w-full'>
               <input
-                className={classNames(
-                  'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-                  {
-                    'border-red-600': amountHasError
-                  }
-                )}
+                className={classNames(styles.sendInput, {
+                  'border-red-600': amountHasError
+                })}
                 disabled={isNFT && !canEditNftAmount}
                 data-testid={DataTestIdsEnum.amountInput}
                 id={FormFieldsEnum.amount}
@@ -154,7 +147,7 @@ export const SendForm = () => {
                 )}
               {amountHasError && (
                 <div
-                  className='text-red-600 text-sm mt-1'
+                  className={styles.sendInputError}
                   data-testid={DataTestIdsEnum.amountError}
                 >
                   {formik.errors[FormFieldsEnum.amount]}
@@ -163,23 +156,7 @@ export const SendForm = () => {
             </div>
             <div className='flex flex-col w-1/2'>
               <Select
-                classNames={{
-                  control: () =>
-                    'text-sm !bg-secondary !text-primary !border-secondary !rounded-xl',
-                  placeholder: () => '!text-secondary',
-                  singleValue: () => '!text-primary',
-                  menu: () =>
-                    '!bg-secondary border !border-secondary !rounded-xl px-1',
-                  option: ({ isFocused, isSelected }) =>
-                    [
-                      '!cursor-pointer !text-sm ',
-                      isFocused
-                        ? '!bg-primary !text-accent !rounded-lg'
-                        : '!bg-secondary !text-secondary',
-                      isSelected ? '!bg-primary !text-accent' : ''
-                    ].join(' '),
-                  input: () => '!text-primary'
-                }}
+                classNames={SELECT_CLASSNAMES}
                 isLoading={isLoading}
                 options={tokenOptions}
                 name={FormFieldsEnum.token}
@@ -193,7 +170,7 @@ export const SendForm = () => {
               />
               {tokenHasError && (
                 <div
-                  className='text-red-600 text-sm mt-1'
+                  className={styles.sendInputError}
                   data-testid={DataTestIdsEnum.tokenError}
                 >
                   {formik.errors[FormFieldsEnum.token]}
@@ -203,19 +180,13 @@ export const SendForm = () => {
           </div>
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.gasLimit}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.gasLimit} className={styles.sendLabel}>
             Gas Limit:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': gasLimitHasError
-              }
-            )}
+            className={classNames(styles.sendInput, {
+              'border-red-600': gasLimitHasError
+            })}
             data-testid={DataTestIdsEnum.gasLimitInput}
             disabled={!isEgldToken}
             id={FormFieldsEnum.gasLimit}
@@ -228,7 +199,7 @@ export const SendForm = () => {
           />
           {gasLimitHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.sendInputError}
               data-testid={DataTestIdsEnum.gasLimitError}
             >
               {formik.errors[FormFieldsEnum.gasLimit]}
@@ -236,14 +207,11 @@ export const SendForm = () => {
           )}
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.data}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.data} className={styles.sendLabel}>
             Data:
           </label>
           <textarea
-            className='block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary'
+            className={styles.sendInput}
             data-testid={DataTestIdsEnum.dataInput}
             disabled={!isEgldToken}
             id={FormFieldsEnum.data}

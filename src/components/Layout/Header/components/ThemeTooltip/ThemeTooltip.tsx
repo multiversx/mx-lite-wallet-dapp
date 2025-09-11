@@ -5,16 +5,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-
 import { Tooltip } from 'components';
-
 import { ThemeTooltipDots } from './components';
-
-interface ThemeTooltipOptionType {
-  label: string;
-  identifier: string;
-  dotColors: string[];
-}
 
 // prettier-ignore
 const styles = {
@@ -31,28 +23,34 @@ const styles = {
   themeTooltipOptionArrow: 'theme-tooltip-option-arrow ml-auto duration-200 transition-all ease-out opacity-0 text-link group-hover:opacity-100'
 } satisfies Record<string, string>;
 
+interface ThemeTooltipOptionType {
+  label: string;
+  identifier: string;
+  dotColors: string[];
+}
+
+const themeOptions: ThemeTooltipOptionType[] = [
+  {
+    label: 'TealLab',
+    identifier: 'mvx:dark-theme',
+    dotColors: ['#23F7DD', '#262626', '#B6B3AF', '#FFFFFF']
+  },
+  {
+    label: 'VibeMode',
+    identifier: 'mvx:vibe-theme',
+    dotColors: ['#471150', '#5A2A62', '#D200FA', '#FFFFFF']
+  },
+  {
+    label: 'BrightLight',
+    identifier: 'mvx:light-theme',
+    dotColors: ['#000000', '#A5A5A5', '#E2DEDC', '#F3EFED']
+  }
+];
+
 export const ThemeTooltip = () => {
   const [rootTheme, setRootTheme] = useState(
     document.documentElement.getAttribute('data-mvx-theme')
   );
-
-  const themeOptions: ThemeTooltipOptionType[] = [
-    {
-      label: 'TealLab',
-      identifier: 'mvx:dark-theme',
-      dotColors: ['#23F7DD', '#262626', '#B6B3AF', '#FFFFFF']
-    },
-    {
-      label: 'VibeMode',
-      identifier: 'mvx:vibe-theme',
-      dotColors: ['#471150', '#5A2A62', '#D200FA', '#FFFFFF']
-    },
-    {
-      label: 'BrightLight',
-      identifier: 'mvx:light-theme',
-      dotColors: ['#000000', '#A5A5A5', '#E2DEDC', '#F3EFED']
-    }
-  ];
 
   const activeTheme = themeOptions.find(
     (themeOption) => themeOption.identifier === rootTheme

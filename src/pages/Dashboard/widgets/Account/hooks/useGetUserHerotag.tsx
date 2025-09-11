@@ -35,5 +35,5 @@ export const useGetUserHerotag = (address: string) => {
     fetchUserProfileUrl();
   }, [address]);
 
-  return [herotag, profileUrl];
+  return { herotag, profileUrl };
 };

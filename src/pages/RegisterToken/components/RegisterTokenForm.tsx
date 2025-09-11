@@ -10,7 +10,7 @@ import {
   TESTNET_CHAIN_ID,
   EnvironmentsEnum
 } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
+import { DataTestIdsEnum, SELECT_CLASSNAMES } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { capitalize, getFormHasError } from 'utils';
@@ -143,23 +143,7 @@ export const RegisterTokenForm = () => {
           </label>
           <div className='flex flex-col'>
             <Select
-              classNames={{
-                control: () =>
-                  '!text-sm !bg-secondary !text-primary !border-secondary !rounded-xl',
-                placeholder: () => '!text-secondary',
-                singleValue: () => '!text-primary',
-                menu: () =>
-                  '!bg-secondary border !border-secondary !rounded-xl px-1',
-                option: ({ isFocused, isSelected }) =>
-                  [
-                    '!cursor-pointer !text-sm ',
-                    isFocused
-                      ? '!bg-primary !text-accent !rounded-lg'
-                      : '!bg-secondary !text-secondary',
-                    isSelected ? '!bg-primary !text-accent' : ''
-                  ].join(' '),
-                input: () => '!text-primary'
-              }}
+              classNames={SELECT_CLASSNAMES}
               options={chainOptions}
               name={RegisterTokenFormFieldsEnum.chainId}
               onChange={handleChainChange}
@@ -182,23 +166,7 @@ export const RegisterTokenForm = () => {
           </label>
           <div className='flex flex-col'>
             <Select
-              classNames={{
-                control: () =>
-                  '!text-sm !bg-secondary !text-primary !border-secondary !rounded-xl',
-                placeholder: () => '!text-secondary',
-                singleValue: () => '!text-primary',
-                menu: () =>
-                  '!bg-secondary border !border-secondary !rounded-xl px-1',
-                option: ({ isFocused, isSelected }) =>
-                  [
-                    '!cursor-pointer !text-sm ',
-                    isFocused
-                      ? '!bg-primary !text-accent !rounded-lg'
-                      : '!bg-secondary !text-secondary',
-                    isSelected ? '!bg-primary !text-accent' : ''
-                  ].join(' '),
-                input: () => '!text-primary'
-              }}
+              classNames={SELECT_CLASSNAMES}
               isLoading={isLoading}
               options={tokenOptions}
               name={RegisterTokenFormFieldsEnum.token}

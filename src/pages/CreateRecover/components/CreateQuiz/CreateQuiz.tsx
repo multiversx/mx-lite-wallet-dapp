@@ -3,7 +3,7 @@ import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { Formik } from 'formik';
 import Select from 'react-select';
 import { Button } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
+import { DataTestIdsEnum, SELECT_CLASSNAMES } from 'localConstants';
 import { getCompareObject } from './getCompareObject';
 import { mnemonicValidation } from './mnemonicValidation';
 import { randomThree } from './randomThree';
@@ -93,23 +93,7 @@ export const CreateQuiz = ({
                       </label>
 
                       <Select
-                        classNames={{
-                          control: () =>
-                            '!text-sm !bg-secondary !text-primary !border-secondary !rounded-xl',
-                          placeholder: () => '!text-secondary',
-                          singleValue: () => '!text-primary',
-                          menu: () =>
-                            '!bg-secondary border !border-secondary !rounded-xl px-1',
-                          option: ({ isFocused, isSelected }) =>
-                            [
-                              '!cursor-pointer !text-sm ',
-                              isFocused
-                                ? '!bg-primary !text-accent !rounded-lg'
-                                : '!bg-secondary !text-secondary',
-                              isSelected ? '!bg-primary !text-accent' : ''
-                            ].join(' '),
-                          input: () => '!text-primary'
-                        }}
+                        classNames={SELECT_CLASSNAMES}
                         inputId={ordinal}
                         options={mnemonicWordsOptions as any[]}
                         name={ordinal}

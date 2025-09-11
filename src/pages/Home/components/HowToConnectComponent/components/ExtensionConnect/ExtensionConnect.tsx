@@ -7,10 +7,6 @@ import ChromeLogo from 'assets/img/chrome-logo.svg?react';
 import Circles from 'assets/img/circles.svg?react';
 import extensionImage from 'assets/img/extension-image.png';
 import FirefoxLogo from 'assets/img/firefox-logo.svg?react';
-import WalletBraveLogo from 'assets/img/wallet-brave-logo.svg?react';
-import WalletChromeLogo from 'assets/img/wallet-chrome-logo.svg?react';
-import WalletFirefoxLogo from 'assets/img/wallet-firefox-logo.svg?react';
-import WalletIcon from 'assets/img/web-wallet-icon.svg?react';
 
 import {
   BrowserEnum,
@@ -18,7 +14,7 @@ import {
   FIREFOX_ADDON_LINK
 } from 'localConstants';
 import { getDetectedBrowser } from 'pages/Home/helpers';
-import { BrowserFrame } from './components';
+import { BrowserFrame, BrowserIcon } from './components';
 
 // prettier-ignore
 const styles = {
@@ -51,25 +47,10 @@ export const ExtensionConnect = () => {
   const detectedBrowser = getDetectedBrowser();
   const isFirefox = detectedBrowser === BrowserEnum.Firefox;
 
-  const getBrowserIcon = (browser?: BrowserEnum) => {
-    switch (browser) {
-      case BrowserEnum.Firefox:
-        return <WalletFirefoxLogo />;
-      case BrowserEnum.Brave:
-        return <WalletBraveLogo />;
-      case BrowserEnum.Chrome:
-        return <WalletChromeLogo />;
-      default:
-        return <WalletIcon />;
-    }
-  };
-
-  const icon = getBrowserIcon(detectedBrowser);
-
   return (
     <div className={styles.extensionCardContainer}>
       <div className={styles.extensionCardContent}>
-        {icon}
+        <BrowserIcon browser={detectedBrowser} />
 
         <div className={styles.extensionCardText}>
           <h2 className={styles.extensionCardTitle}>
