@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useState } from 'react';
 import {
   faArrowsRotate,
   faBroom,
-  faFileSignature
+  faPenNib
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
@@ -180,8 +180,8 @@ export const SignMessage = () => {
               disabled={!message.trim()}
             >
               <>
-                <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
-                Sign
+                <FontAwesomeIcon icon={faPenNib} className='mr-1' />
+                <span className='text-sm font-normal'>Sign</span>
               </>
             </MvxButton>
 
@@ -190,7 +190,7 @@ export const SignMessage = () => {
               onClick={handleCancel}
               variant='secondary'
             >
-              Cancel
+              <span className='font-normal'>Cancel</span>
             </MvxButton>
           </>
         )}

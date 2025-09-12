@@ -91,7 +91,7 @@ export const CreateRecoverPasswordFormFields = ({
       </div>
 
       <Button
-        className='bg-btn-primary text-btn-primary px-4 h-10 rounded-xl cursor-pointer hover:opacity-75'
+        className='bg-btn-primary text-btn-primary px-6 h-12 text-sm font-normal rounded-xl cursor-pointer hover:opacity-75'
         data-testid={DataTestIdsEnum.submitButton}
         disabled={!formikProps.isValid}
         id='createWalletBtn'

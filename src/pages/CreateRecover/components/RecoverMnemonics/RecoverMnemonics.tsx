@@ -44,7 +44,7 @@ export const RecoverMnemonics = ({
 
   const goToUnlockSection = (
     <MvxButton onClick={handleBackToUnlock} variant='secondary'>
-      Back to unlock
+      <span className='font-normal'>Back to unlock</span>
     </MvxButton>
   );
 
@@ -151,7 +151,7 @@ export const RecoverMnemonics = ({
         onClick={onSubmit}
         id='goToPassword'
         data-testid={DataTestIdsEnum.submitButton}
-        className='bg-btn-primary text-btn-primary px-4 h-10 rounded-xl hover:opacity-75 cursor-pointer'
+        className='bg-btn-primary text-btn-primary px-6 h-12 text-sm rounded-xl hover:opacity-75 cursor-pointer'
       >
         Continue
       </Button>

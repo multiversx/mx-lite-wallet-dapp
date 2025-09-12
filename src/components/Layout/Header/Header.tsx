@@ -2,8 +2,8 @@ import { MouseEvent } from 'react';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
   faBell,
-  faCreditCard,
   faPowerOff,
+  faWallet,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +25,6 @@ import {
   useGetNetworkConfig
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-import { ThemeTooltip } from './components';
 import { styles } from './header.styles';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 
@@ -91,8 +90,6 @@ export const Header = () => {
       </MxLink>
 
       <nav className={styles.headerNavigation}>
-        <ThemeTooltip />
-
         <div className={styles.headerNavigationButtons}>
           {headerBrowseButtons.map((headerBrowseButton) => (
             <Tooltip
@@ -125,7 +122,7 @@ export const Header = () => {
         {isLoggedIn && (
           <div className={styles.headerNavigationAddress}>
             <FontAwesomeIcon
-              icon={faCreditCard}
+              icon={faWallet}
               className={styles.headerNavigationAddressWallet}
             />
 
@@ -152,11 +149,7 @@ export const Header = () => {
           </div>
         )}
 
-        {!isLoggedIn && (
-          <MvxButton onClick={handleLogIn} size='small'>
-            Connect
-          </MvxButton>
-        )}
+        {!isLoggedIn && <MvxButton onClick={handleLogIn}>Connect</MvxButton>}
       </nav>
     </header>
   );

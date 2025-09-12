@@ -117,7 +117,6 @@ export const SignMessage = () => {
             data-testid='closeTransactionSuccessBtn'
             id='closeButton'
             onClick={handleClear}
-            size='small'
           >
             <FontAwesomeIcon
               icon={state === 'success' ? faBroom : faArrowsRotate}
@@ -129,11 +128,7 @@ export const SignMessage = () => {
             </span>
           </MvxButton>
         ) : (
-          <MvxButton
-            data-testid='signMsgBtn'
-            onClick={handleSubmit}
-            size='small'
-          >
+          <MvxButton data-testid='signMsgBtn' onClick={handleSubmit}>
             <FontAwesomeIcon
               icon={faPenNib}
               className={styles.signButtonContent}

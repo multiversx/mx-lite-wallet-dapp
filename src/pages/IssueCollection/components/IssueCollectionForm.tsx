@@ -156,7 +156,7 @@ export const IssueCollectionForm = () => {
       </div>
       <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-4 h-10 cursor-pointer hover:opacity-75'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-6 h-12 cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.issueCollectionBtn}
           type='submit'
         >
@@ -168,7 +168,7 @@ export const IssueCollectionForm = () => {
           onClick={handleCancel}
           variant='secondary'
         >
-          Cancel
+          <span className='font-normal'>Cancel</span>
         </MvxButton>
       </div>
     </form>

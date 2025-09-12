@@ -95,7 +95,7 @@ export const CreateDisclaimerScreen = ({
         id='createWalletBtn'
         onClick={disclaimerContinueHandler}
         type='submit'
-        className='bg-btn-primary px-4 h-10 rounded-xl text-btn-primary cursor-pointer hover:opacity-75'
+        className='bg-btn-primary px-6 h-12 rounded-xl text-btn-primary cursor-pointer hover:opacity-75'
       >
         Continue
       </Button>

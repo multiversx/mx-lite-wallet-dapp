@@ -183,7 +183,7 @@ export const RegisterTokenForm = () => {
       </div>
       <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-4 h-10 text-sm cursor-pointer hover:opacity-75'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >
@@ -195,7 +195,7 @@ export const RegisterTokenForm = () => {
           onClick={handleCancel}
           variant='secondary'
         >
-          Cancel
+          <span className='font-normal'>Cancel</span>
         </MvxButton>
       </div>
     </form>

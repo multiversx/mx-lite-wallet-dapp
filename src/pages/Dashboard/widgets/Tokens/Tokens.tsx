@@ -30,7 +30,7 @@ export const Tokens = () => {
     fetchTokens(address);
   }, [address, websocketEvent]);
 
-  if (!isLoading && tokens?.length === 0) {
+  if ((!isLoading && tokens?.length === 0) || tokens == null) {
     return (
       <div id={ItemsIdentifiersEnum.tokens} className={styles.tokensContainer}>
         <OutputContainer>
@@ -40,7 +40,6 @@ export const Tokens = () => {
         <MvxButton
           onClick={handleIssueToken}
           data-testid={DataTestIdsEnum.issueTokenBtn}
-          size='small'
         >
           <span className='text-sm font-normal'>Issue Token</span>
         </MvxButton>
@@ -61,7 +60,6 @@ export const Tokens = () => {
       <MvxButton
         onClick={handleIssueToken}
         data-testid={DataTestIdsEnum.issueTokenBtn}
-        size='small'
       >
         <span className='text-sm font-normal'>Issue Token</span>
       </MvxButton>

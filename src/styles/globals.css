@@ -27,3 +27,9 @@
 * {
   font-family: 'Satoshi', sans-serif;
 }
+
+mvx-button {
+  --mvx-button-bg-primary: #007CFF;
+  --mvx-button-text-primary: #fff; 
+  --mvx-button-text-secondary: #007CFF;
+}

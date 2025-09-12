@@ -32,7 +32,7 @@ export const Faucet = () => {
         onClick={handleFaucetCloseFlow}
         variant='secondary'
       >
-        Cancel
+        <span className='font-normal'>Cancel</span>
       </MvxButton>
     </div>
   );

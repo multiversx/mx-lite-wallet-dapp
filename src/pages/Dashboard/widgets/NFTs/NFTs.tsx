@@ -28,7 +28,7 @@ export const NFTs = () => {
     fetchNFTs({ address });
   }, [address, websocketEvent]);
 
-  if (!isLoading && nftsData?.length === 0) {
+  if ((!isLoading && nftsData?.length === 0) || nftsData == null) {
     return (
       <div id={ItemsIdentifiersEnum.nfts} className='flex flex-col'>
         <OutputContainer>
@@ -39,7 +39,6 @@ export const NFTs = () => {
           <MvxButton
             data-testid={DataTestIdsEnum.issueNftBtn}
             onClick={handleCreateNft}
-            size='small'
           >
             <span className='text-sm font-normal'>Create NFT</span>
           </MvxButton>
@@ -47,7 +46,6 @@ export const NFTs = () => {
           <MvxButton
             data-testid={DataTestIdsEnum.issueCollectionBtn}
             onClick={handleIssueCollection}
-            size='small'
           >
             <span className='text-sm font-normal'>Issue Collection</span>
           </MvxButton>
@@ -69,7 +67,6 @@ export const NFTs = () => {
         <MvxButton
           data-testid={DataTestIdsEnum.issueNftBtn}
           onClick={handleCreateNft}
-          size='small'
         >
           <span className='text-sm font-normal'>Create NFT</span>
         </MvxButton>
@@ -77,7 +74,6 @@ export const NFTs = () => {
         <MvxButton
           data-testid={DataTestIdsEnum.issueCollectionBtn}
           onClick={handleIssueCollection}
-          size='small'
         >
           <span className='text-sm font-normal'>Issue Collection</span>
         </MvxButton>

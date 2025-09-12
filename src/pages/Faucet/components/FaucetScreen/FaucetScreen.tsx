@@ -50,7 +50,6 @@ export const FaucetScreen = ({
         disabled={requestDisabled}
         id={DataTestIdsEnum.requestFundsButton}
         onClick={handleRequestTokens}
-        size='small'
       >
         <span className='text-sm font-normal'>Request Tokens</span>
       </MvxButton>

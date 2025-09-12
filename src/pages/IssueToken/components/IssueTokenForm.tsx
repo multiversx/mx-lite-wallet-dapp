@@ -169,7 +169,7 @@ export const IssueTokenForm = () => {
       </div>
       <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-4 h-10 cursor-pointer hover:opacity-75'
+          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 cursor-pointer hover:opacity-75'
           data-testid={DataTestIdsEnum.issueTokenBtn}
           type='submit'
         >
@@ -181,7 +181,7 @@ export const IssueTokenForm = () => {
           onClick={handleCancel}
           variant='secondary'
         >
-          Cancel
+          <span className='font-normal'>Cancel</span>
         </MvxButton>
       </div>
     </form>

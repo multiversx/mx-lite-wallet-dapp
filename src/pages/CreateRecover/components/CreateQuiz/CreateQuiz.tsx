@@ -116,7 +116,7 @@ export const CreateQuiz = ({
             </div>
 
             <Button
-              className='bg-btn-primary text-btn-primary px-4 h-10 rounded-xl cursor-pointer hover:opacity-75'
+              className='bg-btn-primary text-btn-primary px-6 h-12 rounded-xl cursor-pointer hover:opacity-75 text-sm font-normal'
               data-testid={DataTestIdsEnum.goToDownloadButton}
               disabled={isSubmitting}
               id='createWalletBtn'
@@ -130,7 +130,7 @@ export const CreateQuiz = ({
               onClick={onBack}
               variant='secondary'
             >
-              Back to words
+              <span className='font-normal'>Back to words</span>
             </MvxButton>
           </form>
         );
