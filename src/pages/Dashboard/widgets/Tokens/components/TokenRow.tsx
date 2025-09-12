@@ -7,6 +7,12 @@ import { FormatAmount, TokenType } from 'lib';
 import { SearchParamsEnum } from 'localConstants';
 import { sendRouteBuilder } from 'routes';
 
+// prettier-ignore
+const styles = {
+  tokenRowContainer: 'token-row-container flex items-center justify-between border border-secondary rounded-xl p-2',
+  tokenRowContent: 'token-row-content flex items-center space-x-4'
+} satisfies Record<string, string>;
+
 export const TokenRow = ({ token }: { token: TokenType }) => {
   const navigate = useNavigate();
   const logo = token.assets?.svgUrl;
@@ -23,8 +29,8 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
   };
 
   return (
-    <div className='flex items-center justify-between border border-secondary rounded-xl p-2'>
-      <div className='flex items-center space-x-4'>
+    <div className={styles.tokenRowContainer}>
+      <div className={styles.tokenRowContent}>
         {logo ? (
           <img src={logo} alt={token.ticker} className='w-8 h-8' />
         ) : (
@@ -34,7 +40,7 @@ export const TokenRow = ({ token }: { token: TokenType }) => {
         <div>{token.ticker}</div>
       </div>
 
-      <div className='flex items-center space-x-4'>
+      <div className={styles.tokenRowContent}>
         {token.balance && (
           <div className='text-right'>
             <FormatAmount value={token.balance} showLabel={false} />

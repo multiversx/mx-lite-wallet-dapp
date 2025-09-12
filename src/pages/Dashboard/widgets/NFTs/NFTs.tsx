@@ -9,6 +9,14 @@ import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { routeNames } from 'routes';
 import { NFTRow } from './components';
 
+// prettier-ignore
+const styles = {
+  nftsContainer: 'nfts-container flex flex-col',
+  nftsButtonText: 'nfts-button-text text-sm font-normal',
+  nftsButtonContainer: 'nfts-button-container mt-5 flex flex-row gap-4',
+  nftsDataContainer: 'nfts-data-container p-0 max-h-screen flex flex-wrap justify-center gap-3 py-3'
+} satisfies Record<string, string>;
+
 export const NFTs = () => {
   const { websocketEvent, address } = useGetAccountInfo();
   const [fetchNFTs, { data: nftsData, isLoading }] = useLazyGetNftsQuery();
@@ -30,24 +38,24 @@ export const NFTs = () => {
 
   if ((!isLoading && nftsData?.length === 0) || nftsData == null) {
     return (
-      <div id={ItemsIdentifiersEnum.nfts} className='flex flex-col'>
+      <div id={ItemsIdentifiersEnum.nfts} className={styles.nftsContainer}>
         <OutputContainer>
           <p>No NFTs found</p>
         </OutputContainer>
 
-        <div className='mt-5 flex flex-row gap-4'>
+        <div className={styles.nftsButtonContainer}>
           <MvxButton
             data-testid={DataTestIdsEnum.issueNftBtn}
             onClick={handleCreateNft}
           >
-            <span className='text-sm font-normal'>Create NFT</span>
+            <span className={styles.nftsButtonText}>Create NFT</span>
           </MvxButton>
 
           <MvxButton
             data-testid={DataTestIdsEnum.issueCollectionBtn}
             onClick={handleIssueCollection}
           >
-            <span className='text-sm font-normal'>Issue Collection</span>
+            <span className={styles.nftsButtonText}>Issue Collection</span>
           </MvxButton>
         </div>
       </div>
@@ -55,27 +63,27 @@ export const NFTs = () => {
   }
 
   return (
-    <div id={ItemsIdentifiersEnum.nfts} className='flex flex-col'>
+    <div id={ItemsIdentifiersEnum.nfts} className={styles.nftsContainer}>
       <OutputContainer
         isLoading={isLoading}
-        className='p-0 max-h-screen flex flex-wrap justify-center gap-3 py-3'
+        className={styles.nftsDataContainer}
       >
         {nftsData?.map((nft) => <NFTRow key={nft.identifier} nft={nft} />)}
       </OutputContainer>
 
-      <div className='mt-5 flex flex-row gap-4'>
+      <div className={styles.nftsButtonContainer}>
         <MvxButton
           data-testid={DataTestIdsEnum.issueNftBtn}
           onClick={handleCreateNft}
         >
-          <span className='text-sm font-normal'>Create NFT</span>
+          <span className={styles.nftsButtonText}>Create NFT</span>
         </MvxButton>
 
         <MvxButton
           data-testid={DataTestIdsEnum.issueCollectionBtn}
           onClick={handleIssueCollection}
         >
-          <span className='text-sm font-normal'>Issue Collection</span>
+          <span className={styles.nftsButtonText}>Issue Collection</span>
         </MvxButton>
       </div>
     </div>

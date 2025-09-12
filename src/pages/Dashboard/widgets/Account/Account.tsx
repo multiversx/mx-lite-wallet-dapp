@@ -121,9 +121,9 @@ export const Account = () => {
           [styles.connectedAccountDetailsHidden]: isCollapsed
         })}
       >
-        <div className='my-1 flex justify-center sm:hidden'>
+        <div className={styles.connectedAccountQRCodeContainer}>
           <QRCode
-            className='rounded-lg border-8 border-white bg-white'
+            className={styles.connectedAccountQRCode}
             value={address ?? ''}
             size={200}
             fgColor='#030712'

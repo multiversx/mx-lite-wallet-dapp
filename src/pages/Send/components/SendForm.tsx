@@ -13,10 +13,11 @@ import { FormFieldsEnum } from '../types';
 
 // prettier-ignore
 const styles = {
-  sendInput: 'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-  sendInputError: 'text-red-600 text-sm mt-1',
-  sendLabel: 'text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
-  sendTypeOption: 'text-sm text-primary font-normal bg-secondary transition-all duration-300'
+  sendInput: 'send-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
+  sendInputError: 'send-input-error text-red-600 text-sm mt-1',
+  sendLabel: 'send-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  sendTypeOption: 'send-type-option text-sm text-primary font-normal bg-secondary transition-all duration-300',
+  sendButton: 'send-button mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-6 h-12 cursor-pointer hover:opacity-75'
 } satisfies Record<string, string>;
 
 export const SendForm = () => {
@@ -225,7 +226,7 @@ export const SendForm = () => {
       </div>
       <div className='mt-4 flex flex-col items-center justify-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-6 h-12 cursor-pointer hover:opacity-75'
+          className={styles.sendButton}
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >

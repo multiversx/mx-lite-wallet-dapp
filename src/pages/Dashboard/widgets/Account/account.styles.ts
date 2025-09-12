@@ -14,5 +14,7 @@ export const styles = {
   connectedAccountDetailsIcon: 'connected-account-details-icon w-6 h-6',
   connectedAccountDetailsHerotag: 'connected-account-details-herotag rounded-full',
   connectedAccountDetailsXLogo: 'connected-account-details-xlogo fill-primary w-6 h-6 transition-all duration-200 ease-out',
-  connectedAccountDetailsTrimAddress: 'w-max'
+  connectedAccountDetailsTrimAddress: 'w-max',
+  connectedAccountQRCodeContainer: 'my-1 flex justify-center sm:hidden',
+  connectedAccountQRCode: 'rounded-lg border-8 border-white bg-white'
 } satisfies Record<string, string>;

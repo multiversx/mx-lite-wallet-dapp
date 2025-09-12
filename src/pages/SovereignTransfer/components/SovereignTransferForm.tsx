@@ -16,9 +16,11 @@ import {
 
 // prettier-ignore
 const styles = {
-  sovereignTransferLabel: 'text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
-  sovereignTransferInput: 'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-  sovereignTransferTypeOption: 'text-sm text-primary font-normal bg-secondary transition-all duration-300'
+  sovereignTransferLabel: 'sovereign-transfer-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  sovereignTransferInput: 'sovereign-transfer-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
+  sovereignTransferTypeOption: 'sovereign-transfer-type-option text-sm text-primary font-normal bg-secondary transition-all duration-300',
+  removeTokenButton: 'remove-token-button rounded-lg bg-red-600 px-6 h-12 text-sm cursor-pointer text-btn-primary font-normal hover:opacity-75',
+  sendButton: 'send-button mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75'
 } satisfies Record<string, string>;
 
 export const SovereignTransferForm = () => {
@@ -309,7 +311,7 @@ export const SovereignTransferForm = () => {
                   )}
                   {index > 0 && (
                     <Button
-                      className='rounded-lg bg-red-600 px-6 h-12 text-sm cursor-pointer text-btn-primary font-normal hover:opacity-75'
+                      className={styles.removeTokenButton}
                       data-testid={`${DataTestIdsEnum.removeTokenBtn}${index}`}
                       onClick={handleRemoveToken(index)}
                     >
@@ -324,7 +326,7 @@ export const SovereignTransferForm = () => {
       </div>
       <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75'
+          className={styles.sendButton}
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >

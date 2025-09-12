@@ -17,6 +17,13 @@ import { capitalize, getFormHasError } from 'utils';
 import { useRegisterTokenForm } from '../hooks';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
+// prettier-ignore
+export const styles = {
+  registerTokenLabel: 'register-token-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  registerTokenSendButton: 'register-token-send-butto mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75',
+  registerTokenOption: 'register-token-option text-sm text-primary font-normal bg-secondary transition-all duration-300'
+} satisfies Record<string, string>;
+
 export const RegisterTokenForm = () => {
   const {
     formik,
@@ -60,7 +67,7 @@ export const RegisterTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.contract}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.registerTokenLabel}
           >
             Receiver:
           </label>
@@ -91,7 +98,7 @@ export const RegisterTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.type}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.registerTokenLabel}
           >
             Type:
           </label>
@@ -109,7 +116,7 @@ export const RegisterTokenForm = () => {
               />
               <label
                 htmlFor={SendTypeEnum.esdt}
-                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                className={styles.registerTokenOption}
               >
                 {SendTypeEnum.esdt}
               </label>
@@ -127,7 +134,7 @@ export const RegisterTokenForm = () => {
               />
               <label
                 htmlFor={SendTypeEnum.nft}
-                className='text-sm text-primary font-normal bg-secondary transition-all duration-300'
+                className={styles.registerTokenOption}
               >
                 {SendTypeEnum.nft}
               </label>
@@ -137,7 +144,7 @@ export const RegisterTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.chainId}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.registerTokenLabel}
           >
             Chain:
           </label>
@@ -160,7 +167,7 @@ export const RegisterTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={RegisterTokenFormFieldsEnum.token}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.registerTokenLabel}
           >
             Token:
           </label>
@@ -183,7 +190,7 @@ export const RegisterTokenForm = () => {
       </div>
       <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75'
+          className={styles.registerTokenSendButton}
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >

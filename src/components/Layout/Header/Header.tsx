@@ -86,7 +86,7 @@ export const Header = () => {
         className='flex items-center justify-between'
         to={isLoggedIn ? RouteNamesEnum.dashboard : RouteNamesEnum.home}
       >
-        <MultiversXLogo className='max-w-2/3 lg:max-w-full lg:w-full h-6' />
+        <MultiversXLogo className={styles.headerLogo} />
       </MxLink>
 
       <nav className={styles.headerNavigation}>

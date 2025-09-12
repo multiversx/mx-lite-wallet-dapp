@@ -7,6 +7,7 @@ import { NftEnumType } from 'lib';
 import { CollectionTypeByNftEnum, DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { getFormHasError } from 'utils';
+import { styles } from './issueCollection.styles';
 import { useIssueCollectionForm } from '../hooks';
 import { IssueCollectionFieldsEnum } from '../types';
 
@@ -38,13 +39,13 @@ export const IssueCollectionForm = () => {
     <form
       onSubmit={formik.handleSubmit}
       noValidate
-      className='d-flex flex-column'
+      className={styles.issueCollectionContainer}
     >
-      <div className='flex flex-col gap-4 h-full'>
+      <div className={styles.issueCollectionFields}>
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenType}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.issueCollectionLabel}
           >
             Type:
           </label>
@@ -62,10 +63,7 @@ export const IssueCollectionForm = () => {
                 type='radio'
                 value={nft}
               />
-              <label
-                htmlFor={nft}
-                className='text-sm font-medium text-primary transition-all duration-200 ease-out mb-2'
-              >
+              <label htmlFor={nft} className={styles.issueCollectionOption}>
                 {nft}
               </label>
             </div>
@@ -82,10 +80,7 @@ export const IssueCollectionForm = () => {
                 type='radio'
                 value={sft}
               />
-              <label
-                htmlFor={sft}
-                className='text-sm font-medium text-primary transition-all duration-200 ease-out mb-2'
-              >
+              <label htmlFor={sft} className={styles.issueCollectionOption}>
                 {sft}
               </label>
             </div>
@@ -94,17 +89,14 @@ export const IssueCollectionForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenName}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.issueCollectionLabel}
           >
             Collection name:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': tokenNameHasError
-              }
-            )}
+            className={classNames(styles.issueCollectionInput, {
+              'border-red-600': tokenNameHasError
+            })}
             data-testid={DataTestIdsEnum.tokenNameInput}
             id={IssueCollectionFieldsEnum.tokenName}
             name={IssueCollectionFieldsEnum.tokenName}
@@ -115,7 +107,7 @@ export const IssueCollectionForm = () => {
           />
           {tokenNameHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.issueCollectionTokenTickerError}
               data-testid={DataTestIdsEnum.tokenNameError}
             >
               {formik.errors[IssueCollectionFieldsEnum.tokenName]}
@@ -125,17 +117,15 @@ export const IssueCollectionForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenTicker}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.issueCollectionLabel}
           >
             Collection ticker:
           </label>
+
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': tokenTickerHasError
-              }
-            )}
+            className={classNames(styles.issueCollectionInput, {
+              'border-red-600': tokenTickerHasError
+            })}
             data-testid={DataTestIdsEnum.tokenTickerInput}
             id={IssueCollectionFieldsEnum.tokenTicker}
             name={IssueCollectionFieldsEnum.tokenTicker}
@@ -146,7 +136,7 @@ export const IssueCollectionForm = () => {
           />
           {tokenTickerHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.issueCollectionTokenTickerError}
               data-testid={DataTestIdsEnum.tokenTickerError}
             >
               {formik.errors[IssueCollectionFieldsEnum.tokenTicker]}
@@ -154,9 +144,10 @@ export const IssueCollectionForm = () => {
           )}
         </div>
       </div>
-      <div className='mt-4 flex flex-col items-center'>
+
+      <div className={styles.issueCollectionButtons}>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-6 h-12 cursor-pointer hover:opacity-75'
+          className={styles.issueCollectionSendButton}
           data-testid={DataTestIdsEnum.issueCollectionBtn}
           type='submit'
         >

@@ -13,7 +13,8 @@ import { TokenRow } from './components';
 const styles = {
   tokensContainer: 'batch-tx flex flex-col gap-6',
   buttonsContainer: 'buttons-container flex flex-col md:flex-row gap-2 items-start',
-  batchTxButton: 'batch-tx-button text-sm font-normal'
+  batchTxButton: 'batch-tx-button text-sm font-normal',
+  tokensRowsContainer: 'tokens-rows-container flex flex-col gap-2'
 } satisfies Record<string, string>;
 
 export const Tokens = () => {
@@ -50,7 +51,7 @@ export const Tokens = () => {
   return (
     <div id={ItemsIdentifiersEnum.tokens} className={styles.tokensContainer}>
       <OutputContainer isLoading={isLoading}>
-        <div className='flex flex-col gap-2'>
+        <div className={styles.tokensRowsContainer}>
           {tokens?.map((token: TokenType) => (
             <TokenRow key={token.identifier} token={token} />
           ))}

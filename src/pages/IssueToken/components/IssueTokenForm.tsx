@@ -10,6 +10,14 @@ import { getFormHasError } from 'utils';
 import { useIssueTokenForm } from '../hooks';
 import { IssueTokenFieldsEnum } from '../types';
 
+// prettier-ignore
+export const styles = {
+  issueTokenLabel: 'issue-token-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  issueTokenInput: 'issue-token-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
+  issueButton: 'mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 cursor-pointer hover:opacity-75'
+
+} satisfies Record<string, string>;
+
 export const IssueTokenForm = () => {
   const formik = useIssueTokenForm();
   const navigate = useNavigate();
@@ -43,17 +51,14 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.tokenName}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.issueTokenLabel}
           >
             Token name:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': tokenNameHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': tokenNameHasError
+            })}
             data-testid={DataTestIdsEnum.tokenNameInput}
             id={IssueTokenFieldsEnum.tokenName}
             name={IssueTokenFieldsEnum.tokenName}
@@ -74,17 +79,14 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.tokenTicker}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.issueTokenLabel}
           >
             Token ticker:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': tokenTickerHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': tokenTickerHasError
+            })}
             data-testid={DataTestIdsEnum.tokenTickerInput}
             id={IssueTokenFieldsEnum.tokenTicker}
             name={IssueTokenFieldsEnum.tokenTicker}
@@ -105,17 +107,15 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.mintedValue}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.issueTokenLabel}
           >
             Mint amount:
           </label>
+
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': mintedValueHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': mintedValueHasError
+            })}
             data-testid={DataTestIdsEnum.mintedValueInput}
             id={IssueTokenFieldsEnum.mintedValue}
             name={IssueTokenFieldsEnum.mintedValue}
@@ -137,17 +137,14 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.numDecimals}
-            className='text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2'
+            className={styles.issueTokenLabel}
           >
             Token decimals:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
-              {
-                'border-red-600': numDecimalsHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': numDecimalsHasError
+            })}
             data-testid={DataTestIdsEnum.numDecimalsInput}
             id={IssueTokenFieldsEnum.numDecimals}
             name={IssueTokenFieldsEnum.numDecimals}
@@ -169,7 +166,7 @@ export const IssueTokenForm = () => {
       </div>
       <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 cursor-pointer hover:opacity-75'
+          className={styles.issueButton}
           data-testid={DataTestIdsEnum.issueTokenBtn}
           type='submit'
         >
