@@ -11,7 +11,10 @@ export const PasswordVisibilityToggle = ({
   isVisible,
   onVisibilityChange
 }: PasswordVisibilityTogglePropsType) => (
-  <span className='password-visibility-toggle' onClick={onVisibilityChange}>
+  <span
+    className='password-visibility-toggle text-secondary'
+    onClick={onVisibilityChange}
+  >
     <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} />
   </span>
 );

@@ -1,7 +1,12 @@
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import { Loader } from 'components';
 import { WithClassnameType } from 'types';
+
+// prettier-ignore
+const styles = {
+  outputContainer: 'output-container text-sm text-primary font-normal bg-secondary transition-all duration-200 ease-in-out rounded-xl overflow-scroll'
+} satisfies Record<string, string>;
 
 interface OutputContainerPropsType
   extends PropsWithChildren,
@@ -9,18 +14,16 @@ interface OutputContainerPropsType
   isLoading?: boolean;
 }
 
-export const OutputContainer = (props: OutputContainerPropsType) => {
-  const { children, isLoading = false, className = 'p-4' } = props;
-
-  return (
-    <div
-      className={classNames(
-        'text-sm border border-gray-200 rounded overflow-auto output-container',
-        className
-      )}
-      data-testid={props['data-testid']}
-    >
-      {isLoading ? <Loader /> : children}
-    </div>
-  );
-};
+export const OutputContainer = ({
+  children,
+  isLoading = false,
+  className = 'p-4',
+  'data-testid': dataTestId
+}: OutputContainerPropsType) => (
+  <div
+    data-testid={dataTestId}
+    className={classNames(styles.outputContainer, className)}
+  >
+    {isLoading ? <Loader /> : children}
+  </div>
+);

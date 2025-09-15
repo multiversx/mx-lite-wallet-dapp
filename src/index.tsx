@@ -1,4 +1,5 @@
 import './styles/globals.css';
+import './styles/tailwind.css';
 import { createRoot } from 'react-dom/client';
 import { initApp } from 'lib';
 import { FileProviderEnum, IFileProvider, IFileProviderOptions } from 'types';

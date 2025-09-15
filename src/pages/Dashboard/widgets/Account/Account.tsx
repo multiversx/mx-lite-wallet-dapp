@@ -1,115 +1,148 @@
+import { ReactNode, useState } from 'react';
+import {
+  faChevronUp,
+  faLayerGroup,
+  faWallet
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MvxFormatAmount, MvxTrim } from '@multiversx/sdk-dapp-ui/react';
+import classNames from 'classnames';
 import QRCode from 'react-qr-code';
 
-import { useSelector } from 'react-redux';
-import { MxLink } from 'components';
+import { ReactComponent as XLogo } from 'assets/img/x-logo.svg';
+import { Label } from 'components';
 import {
   useGetAccountInfo,
-  FormatAmount,
-  CopyButton,
-  useGetNetworkConfig
+  useGetNetworkConfig,
+  FormatAmountController,
+  DIGITS,
+  DECIMALS
 } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
-import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
-import { networkSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
+import { styles } from './account.styles';
+import { Username } from './components';
+import { useGetUserHerotag } from './hooks/useGetUserHerotag';
+
+interface AccountDetailsType {
+  icon: ReactNode;
+  label: string;
+  value: string | ReactNode;
+}
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-  const { activeNetwork } = useSelector(networkSelector);
-  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork as any;
-  const explorerAddress = network.explorerAddress;
+  const { herotag, profileUrl } = useGetUserHerotag(address);
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const { isValid, valueDecimal, valueInteger, label } =
+    FormatAmountController.getData({
+      digits: DIGITS,
+      decimals: DECIMALS,
+      egldLabel: network.egldLabel,
+      input: account.balance
+    });
+
+  const img = profileUrl && (
+    <img src={profileUrl} className={styles.connectedAccountDetailsHerotag} />
+  );
+
+  const accountDetails: AccountDetailsType[] = [
+    {
+      icon: (
+        <FontAwesomeIcon
+          icon={faWallet}
+          className={styles.connectedAccountDetailsIcon}
+        />
+      ),
+      label: 'Address',
+      value: (
+        <MvxTrim
+          text={address}
+          className={styles.connectedAccountDetailsTrimAddress}
+        />
+      )
+    },
+    {
+      icon: herotag ? img || herotag.slice(0, 3) : '@',
+      label: 'Herotag',
+      value: <Username address={address} />
+    },
+    {
+      icon: (
+        <FontAwesomeIcon
+          icon={faLayerGroup}
+          className={styles.connectedAccountDetailsIcon}
+        />
+      ),
+      label: 'Shard',
+      value: account.shard
+    },
+    {
+      icon: <XLogo className={styles.connectedAccountDetailsXLogo} />,
+      label: 'Balance',
+      value: (
+        <MvxFormatAmount
+          isValid={isValid}
+          valueInteger={valueInteger}
+          valueDecimal={valueDecimal}
+          label={label}
+          data-testid='balance'
+          decimalClass='opacity-70'
+          labelClass='opacity-70'
+        />
+      )
+    }
+  ];
 
   return (
-    <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
-      <div className='flex flex-col gap-6 sm:flex-row'>
-        <div className='flex grow flex-col gap-4 overflow-hidden'>
-          <div className='overflow-hidden text-ellipsis text-xl font-medium xs:text-2xl'>
-            Account
-          </div>
-          <div>
-            <div className='text-sm text-gray-400'>Your address:</div>
-            <div
-              className='overflow-hidden break-all text-sm'
-              data-testid={DataTestIdsEnum.userAddress}
-            >
-              {address}
-              <CopyButton text={address} />
-            </div>
-          </div>
-          <div className='my-1 flex justify-center sm:hidden'>
-            <QRCode
-              className='rounded-lg border-8 border-white bg-white'
-              value={address ?? ''}
-              size={200}
-              fgColor='#030712'
-            />
-          </div>
-          <div>
-            <div className='text-sm text-gray-400'>Your balance:</div>
-            <div className='flex items-center justify-center sm:justify-start'>
-              <div className='flex items-center justify-start gap-2 '>
-                <span className='text-xl'>
-                  <FormatAmount
-                    value={account.balance}
-                    egldLabel={network.egldLabel}
-                    data-testid='balance'
-                  />
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className='flex flex-row flex-wrap gap-4'>
-            <a
-              href={`${explorerAddress}/accounts/${address}`}
-              target='_blank'
-              className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-            >
-              Open in Explorer
-            </a>
-            <FaucetButton />
-            <MxLink
-              className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-              data-testid={DataTestIdsEnum.sendBtn}
-              to={routeNames.send}
-            >
-              Send
-            </MxLink>
-            <MxLink
-              className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-              data-testid={DataTestIdsEnum.signMessageBtn}
-              to={routeNames.signMessage}
-            >
-              Sign Message
-            </MxLink>
-            {hasSovereignTransfer && (
-              <MxLink
-                className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-                data-testid={DataTestIdsEnum.sovereignTransferBtn}
-                to={routeNames.sovereignTransfer}
-              >
-                Sovereign Transfer
-              </MxLink>
-            )}
-            {hasRegisterToken && (
-              <MxLink
-                className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-                data-testid={DataTestIdsEnum.registerTokenBtn}
-                to={routeNames.registerToken}
-              >
-                Register Token
-              </MxLink>
-            )}
-          </div>
-        </div>
-        <div className='mb-2 hidden justify-center sm:block'>
+    <div className={styles.connectedAccountContainer}>
+      <div className={styles.connectedAccountHeader}>
+        <h2 className={styles.connectedAccountHeaderTitle}>
+          Connected account details
+        </h2>
+
+        <FontAwesomeIcon
+          icon={faChevronUp}
+          className={classNames(styles.connectedAccountHeaderIcon, {
+            [styles.connectedAccountHeaderIconRotated]: isCollapsed
+          })}
+          onClick={toggleCollapse}
+        />
+      </div>
+
+      <div
+        data-testid='topInfo'
+        className={classNames(styles.connectedAccountDetails, {
+          [styles.connectedAccountDetailsHidden]: isCollapsed
+        })}
+      >
+        <div className={styles.connectedAccountQRCodeContainer}>
           <QRCode
-            className='rounded-lg border-8 border-white bg-white'
+            className={styles.connectedAccountQRCode}
             value={address ?? ''}
-            size={120}
+            size={200}
             fgColor='#030712'
           />
         </div>
+        {accountDetails.map((accountDetail, index) => (
+          <div key={index} className={styles.connectedAccountInfo}>
+            <div className={styles.connectedAccountInfoIcon}>
+              {accountDetail.icon}
+            </div>
+
+            <p className={styles.connectedAccountInfoText}>
+              <Label>{accountDetail.label}</Label>
+              <span className={styles.connectedAccountInfoTextValue}>
+                {accountDetail.value}
+              </span>
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,12 +1,24 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
+import { Button } from 'components';
+import { DataTestIdsEnum, SELECT_CLASSNAMES } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { getFormHasError } from 'utils';
 import { useSendForm } from '../hooks';
 import { FormFieldsEnum } from '../types';
+
+// prettier-ignore
+const styles = {
+  sendInput: 'send-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-200 rounded-xl placeholder-neutral-500 border border-secondary',
+  sendInputError: 'send-input-error text-red-600 text-sm mt-1',
+  sendLabel: 'send-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  sendTypeOption: 'send-type-option text-sm text-primary font-normal bg-secondary transition-all duration-200',
+  sendButton: 'send-button mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal text-sm px-6 h-12 cursor-pointer hover:opacity-75'
+} satisfies Record<string, string>;
 
 export const SendForm = () => {
   const {
@@ -26,24 +38,24 @@ export const SendForm = () => {
   const amountHasError = checkFormHasError(FormFieldsEnum.amount);
   const tokenHasError = checkFormHasError(FormFieldsEnum.token);
   const gasLimitHasError = checkFormHasError(FormFieldsEnum.gasLimit);
+  const navigate = useNavigate();
+
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className='flex flex-col gap-4 h-full'>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.receiver}
-            className='block text-sm font-bold mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.receiver} className={styles.sendLabel}>
             Receiver:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': receiverHasError
-              }
-            )}
+            className={classNames(styles.sendInput, {
+              'border-red-600': receiverHasError
+            })}
             data-testid={DataTestIdsEnum.receiverInput}
             id={FormFieldsEnum.receiver}
             name={FormFieldsEnum.receiver}
@@ -54,7 +66,7 @@ export const SendForm = () => {
           />
           {receiverHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.sendInputError}
               data-testid={DataTestIdsEnum.receiverError}
             >
               {formik.errors[FormFieldsEnum.receiver]}
@@ -62,10 +74,7 @@ export const SendForm = () => {
           )}
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.type}
-            className='block text-sm font-bold mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.type} className={styles.sendLabel}>
             Type:
           </label>
           <div className='flex flex-row gap-4'>
@@ -80,7 +89,10 @@ export const SendForm = () => {
                 type='radio'
                 value={SendTypeEnum.esdt}
               />
-              <label htmlFor={SendTypeEnum.esdt} className='text-sm'>
+              <label
+                htmlFor={SendTypeEnum.esdt}
+                className={styles.sendTypeOption}
+              >
                 {SendTypeEnum.esdt}
               </label>
             </div>
@@ -95,28 +107,25 @@ export const SendForm = () => {
                 type='radio'
                 value={SendTypeEnum.nft}
               />
-              <label htmlFor={SendTypeEnum.nft} className='text-sm'>
+              <label
+                htmlFor={SendTypeEnum.nft}
+                className={styles.sendTypeOption}
+              >
                 {SendTypeEnum.nft}
               </label>
             </div>
           </div>
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.amount}
-            className='block text-sm font-bold mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.amount} className={styles.sendLabel}>
             Amount:
           </label>
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col w-full'>
               <input
-                className={classNames(
-                  'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-                  {
-                    'border-red-600': amountHasError
-                  }
-                )}
+                className={classNames(styles.sendInput, {
+                  'border-red-600': amountHasError
+                })}
                 disabled={isNFT && !canEditNftAmount}
                 data-testid={DataTestIdsEnum.amountInput}
                 id={FormFieldsEnum.amount}
@@ -130,7 +139,7 @@ export const SendForm = () => {
               {formik.values[FormFieldsEnum.token] &&
                 !formik.errors[FormFieldsEnum.amount] && (
                   <div
-                    className='text-sm text-gray-400 mt-1'
+                    className='text-sm text-neutral-500 mt-1'
                     data-testid={DataTestIdsEnum.availableAmount}
                   >
                     Available: {availableAmount}{' '}
@@ -139,7 +148,7 @@ export const SendForm = () => {
                 )}
               {amountHasError && (
                 <div
-                  className='text-red-600 text-sm mt-1'
+                  className={styles.sendInputError}
                   data-testid={DataTestIdsEnum.amountError}
                 >
                   {formik.errors[FormFieldsEnum.amount]}
@@ -148,7 +157,7 @@ export const SendForm = () => {
             </div>
             <div className='flex flex-col w-1/2'>
               <Select
-                className='text-sm text-gray-700 placeholder-gray-400'
+                classNames={SELECT_CLASSNAMES}
                 isLoading={isLoading}
                 options={tokenOptions}
                 name={FormFieldsEnum.token}
@@ -162,7 +171,7 @@ export const SendForm = () => {
               />
               {tokenHasError && (
                 <div
-                  className='text-red-600 text-sm mt-1'
+                  className={styles.sendInputError}
                   data-testid={DataTestIdsEnum.tokenError}
                 >
                   {formik.errors[FormFieldsEnum.token]}
@@ -172,19 +181,13 @@ export const SendForm = () => {
           </div>
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.gasLimit}
-            className='block text-sm font-bold mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.gasLimit} className={styles.sendLabel}>
             Gas Limit:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': gasLimitHasError
-              }
-            )}
+            className={classNames(styles.sendInput, {
+              'border-red-600': gasLimitHasError
+            })}
             data-testid={DataTestIdsEnum.gasLimitInput}
             disabled={!isEgldToken}
             id={FormFieldsEnum.gasLimit}
@@ -197,7 +200,7 @@ export const SendForm = () => {
           />
           {gasLimitHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.sendInputError}
               data-testid={DataTestIdsEnum.gasLimitError}
             >
               {formik.errors[FormFieldsEnum.gasLimit]}
@@ -205,14 +208,11 @@ export const SendForm = () => {
           )}
         </div>
         <div className='flex flex-col'>
-          <label
-            htmlFor={FormFieldsEnum.data}
-            className='block text-sm font-bold mb-2'
-          >
+          <label htmlFor={FormFieldsEnum.data} className={styles.sendLabel}>
             Data:
           </label>
           <textarea
-            className='block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded'
+            className={styles.sendInput}
             data-testid={DataTestIdsEnum.dataInput}
             disabled={!isEgldToken}
             id={FormFieldsEnum.data}
@@ -224,21 +224,22 @@ export const SendForm = () => {
           />
         </div>
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center justify-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className={styles.sendButton}
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >
           Send
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          onClick={handleCancel}
+          variant='secondary'
         >
-          Cancel
-        </MxLink>
+          <span className='font-normal'>Cancel</span>
+        </MvxButton>
       </div>
     </form>
   );

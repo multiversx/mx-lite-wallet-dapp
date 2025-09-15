@@ -16,7 +16,7 @@ export const Button = ({
   disabled = false,
   type = 'button',
   id,
-  className = 'inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed',
+  className = 'inline-block rounded-xl px-6 h-12 text-center hover:no-underline my-0 bg-btn-primary text-btn-primary cursor-pointer hover:opacity-75 mr-0 disabled:bg-none disabled:text-neutral-500 disabled:cursor-not-allowed',
   dataTestId,
   ...otherProps
 }: ButtonType) => {

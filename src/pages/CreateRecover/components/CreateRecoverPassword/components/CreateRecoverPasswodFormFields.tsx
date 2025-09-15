@@ -46,14 +46,14 @@ export const CreateRecoverPasswordFormFields = ({
             <div key={field.name} className='w-full flex flex-col relative'>
               <label
                 htmlFor={field.name}
-                className='block text-sm font-bold mb-2'
+                className='block text-sm font-normal mb-2 text-secondary'
               >
                 {field.label}
               </label>
               <input
                 autoFocus={index === 0}
                 className={classNames(
-                  'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded relative',
+                  'block w-full p-2 text-sm text-primary placeholder-neutral-500 border border-secondary rounded-xl relative',
                   {
                     'border-red-600': hasError
                   }
@@ -80,7 +80,7 @@ export const CreateRecoverPasswordFormFields = ({
               )}
 
               {!hasError && (
-                <span className='text-sm text-gray-400 mt-1'>
+                <span className='text-sm text-secondary mt-1'>
                   At least 8 characters, an uppercase letter, a symbol & a
                   number.
                 </span>
@@ -91,6 +91,7 @@ export const CreateRecoverPasswordFormFields = ({
       </div>
 
       <Button
+        className='bg-btn-primary text-btn-primary px-6 h-12 text-sm font-normal rounded-xl cursor-pointer hover:opacity-75'
         data-testid={DataTestIdsEnum.submitButton}
         disabled={!formikProps.isValid}
         id='createWalletBtn'

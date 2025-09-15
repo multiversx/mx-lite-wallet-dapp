@@ -1,14 +1,20 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
-import { Button, MxLink } from 'components';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'components';
 import { NftEnumType } from 'lib';
 import { CollectionTypeByNftEnum, DataTestIdsEnum } from 'localConstants';
 import { routeNames } from 'routes';
 import { getFormHasError } from 'utils';
+import { styles } from './issueCollection.styles';
 import { useIssueCollectionForm } from '../hooks';
 import { IssueCollectionFieldsEnum } from '../types';
 
 export const IssueCollectionForm = () => {
   const formik = useIssueCollectionForm();
+  const navigate = useNavigate();
+
   const nft =
     CollectionTypeByNftEnum[NftEnumType.NonFungibleESDT].toUpperCase();
 
@@ -24,17 +30,22 @@ export const IssueCollectionForm = () => {
     IssueCollectionFieldsEnum.tokenTicker
   );
 
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
+
   return (
     <form
       onSubmit={formik.handleSubmit}
       noValidate
-      className='d-flex flex-column'
+      className={styles.issueCollectionContainer}
     >
-      <div className='flex flex-col gap-4 h-full'>
+      <div className={styles.issueCollectionFields}>
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenType}
-            className='block text-sm font-bold mb-2'
+            className={styles.issueCollectionLabel}
           >
             Type:
           </label>
@@ -52,7 +63,7 @@ export const IssueCollectionForm = () => {
                 type='radio'
                 value={nft}
               />
-              <label htmlFor={nft} className='text-sm'>
+              <label htmlFor={nft} className={styles.issueCollectionOption}>
                 {nft}
               </label>
             </div>
@@ -69,7 +80,7 @@ export const IssueCollectionForm = () => {
                 type='radio'
                 value={sft}
               />
-              <label htmlFor={sft} className='text-sm'>
+              <label htmlFor={sft} className={styles.issueCollectionOption}>
                 {sft}
               </label>
             </div>
@@ -78,17 +89,14 @@ export const IssueCollectionForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenName}
-            className='block text-sm font-bold mb-2'
+            className={styles.issueCollectionLabel}
           >
             Collection name:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': tokenNameHasError
-              }
-            )}
+            className={classNames(styles.issueCollectionInput, {
+              'border-red-600': tokenNameHasError
+            })}
             data-testid={DataTestIdsEnum.tokenNameInput}
             id={IssueCollectionFieldsEnum.tokenName}
             name={IssueCollectionFieldsEnum.tokenName}
@@ -99,7 +107,7 @@ export const IssueCollectionForm = () => {
           />
           {tokenNameHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.issueCollectionTokenTickerError}
               data-testid={DataTestIdsEnum.tokenNameError}
             >
               {formik.errors[IssueCollectionFieldsEnum.tokenName]}
@@ -109,17 +117,15 @@ export const IssueCollectionForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueCollectionFieldsEnum.tokenTicker}
-            className='block text-sm font-bold mb-2'
+            className={styles.issueCollectionLabel}
           >
             Collection ticker:
           </label>
+
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': tokenTickerHasError
-              }
-            )}
+            className={classNames(styles.issueCollectionInput, {
+              'border-red-600': tokenTickerHasError
+            })}
             data-testid={DataTestIdsEnum.tokenTickerInput}
             id={IssueCollectionFieldsEnum.tokenTicker}
             name={IssueCollectionFieldsEnum.tokenTicker}
@@ -130,7 +136,7 @@ export const IssueCollectionForm = () => {
           />
           {tokenTickerHasError && (
             <div
-              className='text-red-600 text-sm mt-1'
+              className={styles.issueCollectionTokenTickerError}
               data-testid={DataTestIdsEnum.tokenTickerError}
             >
               {formik.errors[IssueCollectionFieldsEnum.tokenTicker]}
@@ -138,21 +144,23 @@ export const IssueCollectionForm = () => {
           )}
         </div>
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+
+      <div className={styles.issueCollectionButtons}>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className={styles.issueCollectionSendButton}
           data-testid={DataTestIdsEnum.issueCollectionBtn}
           type='submit'
         >
-          Issue
+          Send
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          onClick={handleCancel}
+          variant='secondary'
         >
-          Cancel
-        </MxLink>
+          <span className='font-normal'>Cancel</span>
+        </MvxButton>
       </div>
     </form>
   );

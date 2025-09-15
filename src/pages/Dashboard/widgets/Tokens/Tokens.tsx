@@ -1,54 +1,69 @@
-import { useEffect } from 'react';
-import { MxLink, OutputContainer } from 'components';
+import { MouseEvent, useEffect } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { OutputContainer } from 'components';
 import { useGetAccountInfo, TokenType } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
+import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { routeNames } from 'routes';
 import { TokenRow } from './components';
 
+// prettier-ignore
+const styles = {
+  tokensContainer: 'batch-tx flex flex-col gap-6 transition-all duration-200 ease-in-out',
+  buttonsContainer: 'buttons-container flex flex-col md:flex-row gap-2 items-start',
+  batchTxButton: 'batch-tx-button text-sm font-normal',
+  tokensRowsContainer: 'tokens-rows-container flex flex-col gap-2 transition-all duration-200 ease-in-out',
+} satisfies Record<string, string>;
+
 export const Tokens = () => {
   const { websocketEvent, address } = useGetAccountInfo();
   const [fetchTokens, { data: tokens, isLoading }] = useLazyGetTokensQuery();
+  const navigate = useNavigate();
+
+  const handleIssueToken = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.issueToken);
+  };
 
   useEffect(() => {
     fetchTokens(address);
   }, [address, websocketEvent]);
 
-  if (!isLoading && tokens?.length === 0) {
+  if ((!isLoading && tokens?.length === 0) || tokens == null) {
     return (
-      <div className='flex flex-col'>
+      <div id={ItemsIdentifiersEnum.tokens} className={styles.tokensContainer}>
         <OutputContainer>
-          <p className='text-gray-400'>No tokens found</p>
+          <p>No tokens found</p>
         </OutputContainer>
-        <div className='mt-5'>
-          <MxLink
-            className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-            data-testid={DataTestIdsEnum.issueTokenBtn}
-            to={routeNames.issueToken}
-          >
-            Issue Token
-          </MxLink>
-        </div>
+
+        <MvxButton
+          onClick={handleIssueToken}
+          data-testid={DataTestIdsEnum.issueTokenBtn}
+        >
+          <span className='text-sm font-normal'>Issue Token</span>
+        </MvxButton>
       </div>
     );
   }
 
   return (
-    <div className='flex flex-col'>
-      <OutputContainer isLoading={isLoading} className='p-0'>
-        {tokens?.map((token: TokenType) => (
-          <TokenRow key={token.identifier} token={token} />
-        ))}
+    <div id={ItemsIdentifiersEnum.tokens} className={styles.tokensContainer}>
+      <OutputContainer isLoading={isLoading}>
+        <div className={styles.tokensRowsContainer}>
+          {tokens?.map((token: TokenType) => (
+            <TokenRow key={token.identifier} token={token} />
+          ))}
+        </div>
       </OutputContainer>
-      <div className='mt-5'>
-        <MxLink
-          className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
-          data-testid={DataTestIdsEnum.issueTokenBtn}
-          to={routeNames.issueToken}
-        >
-          Issue Token
-        </MxLink>
-      </div>
+
+      <MvxButton
+        onClick={handleIssueToken}
+        data-testid={DataTestIdsEnum.issueTokenBtn}
+      >
+        <span className='text-sm font-normal'>Issue Token</span>
+      </MvxButton>
     </div>
   );
 };

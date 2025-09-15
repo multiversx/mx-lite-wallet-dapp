@@ -62,7 +62,7 @@ export abstract class BaseFileLoginPanel<
             onClose: handleClose,
             anchor: (options as any)?.anchor,
             options
-          })
+          }) as any
         );
       }, 0);
     });

@@ -1,6 +1,6 @@
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 import { RootState } from 'redux/store';
 import { routeNames } from 'routes';
@@ -23,16 +23,17 @@ export const Faucet = () => {
   };
 
   return (
-    <>
+    <div className='flex flex-col items-center'>
       <FaucetContent />
-      <Button
+
+      <MvxButton
         data-testid={DataTestIdsEnum.cancelFaucetBtn}
-        className='mx-auto text-blue-600 text-sm'
         id='closeButton'
         onClick={handleFaucetCloseFlow}
+        variant='secondary'
       >
-        Cancel
-      </Button>
-    </>
+        <span className='font-normal'>Cancel</span>
+      </MvxButton>
+    </div>
   );
 };

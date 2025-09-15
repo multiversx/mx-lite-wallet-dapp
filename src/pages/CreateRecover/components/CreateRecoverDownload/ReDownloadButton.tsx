@@ -1,4 +1,4 @@
-import { Button } from 'components';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { downloadFile } from '../../helpers';
 
 export interface ReDownloadButtonPropsType extends React.PropsWithChildren {
@@ -14,5 +14,9 @@ export const ReDownloadButton = ({
     downloadFile({ data: keystoreString, name: address, fileType: 'json' });
   };
 
-  return <Button onClick={download}>Download keystore file again</Button>;
+  return (
+    <MvxButton onClick={download} variant='secondary'>
+      <span className='font-normal text-sm'>Download keystore file again</span>
+    </MvxButton>
+  );
 };

@@ -28,7 +28,7 @@ export const CreateRecoverDownload = ({
 
   const infoSection = (
     <p
-      className='text-gray-400 mb-10'
+      className='text-primary mb-10'
       data-testid={DataTestIdsEnum.modalSubtitle}
     >
       Great work. You downloaded the Keystore file. <br /> Save it, you’ll need

@@ -63,11 +63,11 @@ export const CreateRecover = () => {
           <FontAwesomeIcon icon={faArrowLeft} />
         </button>
       )}
-      <div className='flex flex-col items-center justify-center p-6'>
+      <div className='flex flex-col items-center justify-center p-6 lg:min-w-180 lg:max-w-180 lg:min-h-186 lg:max-h-186 bg-primary rounded-xl border border-secondary'>
         <div className='flex flex-col items-center justify-center gap-4 max-w-full w-1/2 mb-4'>
           <ProgressBar progress={progressBarPercentageFill} />
           <h1
-            className='text-2xl whitespace-nowrap mt-2'
+            className='text-2xl whitespace-nowrap mt-2 text-primary'
             data-testid={DataTestIdsEnum.panelTitle}
           >
             {currentTitle}

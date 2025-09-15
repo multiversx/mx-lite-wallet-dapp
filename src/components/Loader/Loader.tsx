@@ -7,7 +7,7 @@ export const Loader = () => {
       <FontAwesomeIcon
         icon={faSpinner}
         spin
-        className='text-4xl text-blue-500'
+        className='text-4xl text-neutral-500'
       />
     </div>
   );

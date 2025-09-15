@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import HeartIcon from 'assets/img/heart.svg?react';
+import { ReactComponent as HeartIcon } from 'assets/img/heart.svg';
 
+import { styles } from './footer.styles';
 import { version } from '../../../../package.json';
 
 export const Footer = () => {
@@ -21,24 +22,23 @@ export const Footer = () => {
   }, []);
 
   return (
-    <footer className='mx-auto w-full max-w-prose pb-6 pl-6 pr-6 text-center text-gray-400'>
-      <div className='flex flex-col items-center text sm text-gray-400'>
-        <a
-          className='text-gray-400 text-sm hover:cursor-pointer hover:underline'
-          href='/disclaimer'
-        >
+    <footer className={styles.footer}>
+      <div className={styles.footerContainer}>
+        <a className={styles.footerDisclaimer} href='/disclaimer'>
           Disclaimer
         </a>
+
         <a
           target='_blank'
-          className='flex items-center text-sm hover:underline'
+          className={styles.footerSecondRow}
           href='https://multiversx.com/'
         >
-          Made with <HeartIcon className='mx-1 fill-gray-400' /> by the
+          Made with <HeartIcon className={styles.footerHeart} /> by the
           MultiversX team
         </a>
+
         {walletVersion && (
-          <span className='text-sm text-gray-400'>
+          <span className={styles.footerBuild}>
             Build {version}-{walletVersion}
           </span>
         )}

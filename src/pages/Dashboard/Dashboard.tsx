@@ -1,10 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { useScrollToElement, useSignWithRedirect } from 'hooks';
 import { refreshAccount, useGetAccountInfo } from 'lib';
 import { WidgetType } from 'types/widget.types';
 import { AuthRedirectWrapper } from 'wrappers';
-import { Widget } from './components';
-import { Account, NFTs, Tokens, Transactions } from './widgets';
+import { LeftPanel } from './components/LeftPanel';
+import { Widget } from './components/Widget';
+import { styles } from './dashboard.styles';
+import { NFTs, SignMessage, Tokens, Transactions } from './widgets';
 
 const WIDGETS: WidgetType[] = [
   {
@@ -22,6 +25,12 @@ const WIDGETS: WidgetType[] = [
       'https://api.multiversx.com/#/accounts/AccountController_getAccountNfts'
   },
   {
+    title: 'Sign message',
+    widget: SignMessage,
+    description: 'Message signing using the connected account',
+    reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1'
+  },
+  {
     title: 'Transactions',
     widget: Transactions,
     description: 'Transactions list for the connected account',
@@ -31,6 +40,7 @@ const WIDGETS: WidgetType[] = [
 ];
 
 export const Dashboard = () => {
+  const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
   useScrollToElement();
   const { websocketEvent } = useGetAccountInfo();
   useSignWithRedirect();
@@ -41,11 +51,31 @@ export const Dashboard = () => {
 
   return (
     <AuthRedirectWrapper>
-      <div className='flex flex-col gap-6 max-w-3xl w-full'>
-        <Account />
-        {WIDGETS.map((element) => (
-          <Widget key={element.title} {...element} />
-        ))}
+      <div className={styles.dashboardContainer}>
+        <div
+          className={classNames(
+            styles.mobilePanelContainer,
+            styles.desktopPanelContainer
+          )}
+        >
+          <LeftPanel
+            isOpen={isMobilePanelOpen}
+            setIsOpen={setIsMobilePanelOpen}
+          />
+        </div>
+
+        <div
+          className={classNames(styles.dashboardContent, {
+            [styles.dashboardContentMobilePanelOpen]: isMobilePanelOpen
+          })}
+          style={{ backgroundImage: 'url(src/assets/img/background.svg)' }}
+        >
+          <div className={styles.dashboardWidgets}>
+            {WIDGETS.map((element) => (
+              <Widget key={element.title} {...element} />
+            ))}
+          </div>
+        </div>
       </div>
     </AuthRedirectWrapper>
   );

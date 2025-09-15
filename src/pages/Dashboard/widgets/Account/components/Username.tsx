@@ -1,21 +1,28 @@
-import { Label } from 'components/Label';
-import { trimUsernameDomain, AccountType } from 'lib';
+import { AccountType, trimUsernameDomain } from 'lib';
 import { ProfileType } from 'types';
 
-export const Username = (props: {
-  account: AccountType | ProfileType | null;
-}) => {
-  const { account } = props;
+import { useGetUserHerotag } from '../hooks/useGetUserHerotag';
 
-  if (!account) {
-    return null;
-  }
+// prettier-ignore
+const styles = {
+  usernameContainer: 'username-container flex gap-0.5',
+  herotag: 'herotag text-accent transition-all duration-200 ease-out'
+} satisfies Record<string, string>;
+
+export const Username = (props: {
+  account?: AccountType | ProfileType | null;
+  address: string;
+}) => {
+  const { address } = props;
+
+  const { herotag } = useGetUserHerotag(address);
 
   return (
-    <p>
-      <Label>Herotag: </Label>
-      <span daata-testid='heroTag'>
-        {account.username ? trimUsernameDomain(account.username) : 'N/A'}
+    <p className={styles.usernameContainer}>
+      <span className={styles.herotag}>{herotag ? '@' : ''}</span>
+
+      <span data-testid='heroTag'>
+        {herotag ? trimUsernameDomain(herotag) : 'N/A'}
       </span>
     </p>
   );

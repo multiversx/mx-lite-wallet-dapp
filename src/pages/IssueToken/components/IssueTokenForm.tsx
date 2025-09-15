@@ -1,5 +1,8 @@
+import { MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
-import { Button, MxLink } from 'components';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'components';
 import { DataTestIdsEnum } from 'localConstants';
 
 import { routeNames } from 'routes';
@@ -7,8 +10,17 @@ import { getFormHasError } from 'utils';
 import { useIssueTokenForm } from '../hooks';
 import { IssueTokenFieldsEnum } from '../types';
 
+// prettier-ignore
+export const styles = {
+  issueTokenLabel: 'issue-token-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  issueTokenInput: 'issue-token-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-200 rounded-xl placeholder-neutral-500 border border-secondary',
+  issueButton: 'mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 cursor-pointer hover:opacity-75'
+
+} satisfies Record<string, string>;
+
 export const IssueTokenForm = () => {
   const formik = useIssueTokenForm();
+  const navigate = useNavigate();
 
   const checkFormHasError = getFormHasError(formik);
   const tokenNameHasError = checkFormHasError(IssueTokenFieldsEnum.tokenName);
@@ -24,6 +36,11 @@ export const IssueTokenForm = () => {
     IssueTokenFieldsEnum.numDecimals
   );
 
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -34,17 +51,14 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.tokenName}
-            className='block text-sm font-bold mb-2'
+            className={styles.issueTokenLabel}
           >
             Token name:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': tokenNameHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': tokenNameHasError
+            })}
             data-testid={DataTestIdsEnum.tokenNameInput}
             id={IssueTokenFieldsEnum.tokenName}
             name={IssueTokenFieldsEnum.tokenName}
@@ -65,17 +79,14 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.tokenTicker}
-            className='block text-sm font-bold mb-2'
+            className={styles.issueTokenLabel}
           >
             Token ticker:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': tokenTickerHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': tokenTickerHasError
+            })}
             data-testid={DataTestIdsEnum.tokenTickerInput}
             id={IssueTokenFieldsEnum.tokenTicker}
             name={IssueTokenFieldsEnum.tokenTicker}
@@ -96,17 +107,15 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.mintedValue}
-            className='block text-sm font-bold mb-2'
+            className={styles.issueTokenLabel}
           >
             Mint amount:
           </label>
+
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': mintedValueHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': mintedValueHasError
+            })}
             data-testid={DataTestIdsEnum.mintedValueInput}
             id={IssueTokenFieldsEnum.mintedValue}
             name={IssueTokenFieldsEnum.mintedValue}
@@ -128,17 +137,14 @@ export const IssueTokenForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={IssueTokenFieldsEnum.numDecimals}
-            className='block text-sm font-bold mb-2'
+            className={styles.issueTokenLabel}
           >
             Token decimals:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': numDecimalsHasError
-              }
-            )}
+            className={classNames(styles.issueTokenInput, {
+              'border-red-600': numDecimalsHasError
+            })}
             data-testid={DataTestIdsEnum.numDecimalsInput}
             id={IssueTokenFieldsEnum.numDecimals}
             name={IssueTokenFieldsEnum.numDecimals}
@@ -158,21 +164,22 @@ export const IssueTokenForm = () => {
           )}
         </div>
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className={styles.issueButton}
           data-testid={DataTestIdsEnum.issueTokenBtn}
           type='submit'
         >
           Issue
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          onClick={handleCancel}
+          variant='secondary'
         >
-          Cancel
-        </MxLink>
+          <span className='font-normal'>Cancel</span>
+        </MvxButton>
       </div>
     </form>
   );

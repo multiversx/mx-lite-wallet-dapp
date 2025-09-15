@@ -1,8 +1,21 @@
+import {
+  faArrowRightLong,
+  faChevronDown
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+
 import { useSelector } from 'react-redux';
+import { Tooltip } from 'components';
 import { networks } from 'config';
 import { networkSelector } from 'redux/selectors';
 import { useRefreshNativeAuthTokenForNetwork } from './hooks';
-import { Dropdown, DropdownOption } from '../Dropdown';
+import { styles } from './networkSwitcher.styles';
+
+export interface DropdownOption {
+  label: string;
+  value: string;
+}
 
 export const NetworkSwitcher = () => {
   const { activeNetwork } = useSelector(networkSelector);
@@ -36,10 +49,51 @@ export const NetworkSwitcher = () => {
   };
 
   return (
-    <Dropdown
-      initialOption={currentNetwork}
-      options={networkOptions}
-      onSelectOption={handleNetworkSwitch}
-    />
+    <Tooltip
+      place='bottom'
+      clickable={true}
+      hasDrawer={true}
+      drawerTitle='Choose Network'
+      identifier='network-tooltip-identifier'
+      className={styles.networkTooltip}
+      content={
+        <div className={styles.networkTooltipOptions}>
+          {networkOptions.map((networkOption) => (
+            <div
+              key={`network-${networkOption.value}-option`}
+              onClick={() => handleNetworkSwitch(networkOption)}
+              className={classNames(styles.networkTooltipOption, {
+                [styles.networkTooltipOptionActive]:
+                  networkOption.value === currentNetwork.value
+              })}
+            >
+              <div className={styles.networkTooltipOptionLabel}>
+                {networkOption.label}
+              </div>
+
+              {networkOption.value !== currentNetwork.value && (
+                <FontAwesomeIcon
+                  icon={faArrowRightLong}
+                  className={styles.networkTooltipOptionArrow}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      }
+    >
+      <div className={styles.networkTooltipTrigger}>
+        <div className={styles.networkTooltipSelectedLabel}>
+          {currentNetwork.label}
+        </div>
+
+        <FontAwesomeIcon
+          icon={faChevronDown}
+          className={classNames(styles.networkTooltipTriggerIcon, {
+            [styles.networkTooltipTriggerIconRotated]: false
+          })}
+        />
+      </div>
+    </Tooltip>
   );
 };

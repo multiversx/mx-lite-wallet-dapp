@@ -1,8 +1,10 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, MouseEvent } from 'react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
+import { Button } from 'components';
+import { DataTestIdsEnum, SELECT_CLASSNAMES } from 'localConstants';
 import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { getFormHasError } from 'utils';
@@ -11,6 +13,15 @@ import {
   SovereignTransferFormFieldsEnum,
   SovereignTransferTokenType
 } from '../types';
+
+// prettier-ignore
+const styles = {
+  sovereignTransferLabel: 'sovereign-transfer-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
+  sovereignTransferInput: 'sovereign-transfer-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-200 rounded-xl placeholder-neutral-500 border border-secondary',
+  sovereignTransferTypeOption: 'sovereign-transfer-type-option text-sm text-primary font-normal bg-secondary transition-all duration-200',
+  removeTokenButton: 'remove-token-button rounded-lg bg-red-600 px-6 h-12 text-sm cursor-pointer text-btn-primary font-normal hover:opacity-75',
+  sendButton: 'send-button mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75'
+} satisfies Record<string, string>;
 
 export const SovereignTransferForm = () => {
   const {
@@ -24,10 +35,17 @@ export const SovereignTransferForm = () => {
     isLoading
   } = useSovereignTransferForm();
 
+  const navigate = useNavigate();
+
   const checkFormHasError = getFormHasError(formik);
   const contractHasError = checkFormHasError(
     SovereignTransferFormFieldsEnum.contract
   );
+
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(routeNames.dashboard);
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -35,17 +53,14 @@ export const SovereignTransferForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={SovereignTransferFormFieldsEnum.contract}
-            className='block text-sm font-bold mb-2'
+            className={styles.sovereignTransferLabel}
           >
             Contract:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': contractHasError
-              }
-            )}
+            className={classNames(styles.sovereignTransferInput, {
+              'border-red-600': contractHasError
+            })}
             data-testid={DataTestIdsEnum.contractInput}
             id={SovereignTransferFormFieldsEnum.contract}
             name={SovereignTransferFormFieldsEnum.contract}
@@ -66,19 +81,16 @@ export const SovereignTransferForm = () => {
         <div className='flex flex-col'>
           <label
             htmlFor={SovereignTransferFormFieldsEnum.receiver}
-            className='block text-sm font-bold mb-2'
+            className={styles.sovereignTransferLabel}
           >
             Receiver:
           </label>
           <input
-            className={classNames(
-              'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-              {
-                'border-red-600': checkFormHasError(
-                  SovereignTransferFormFieldsEnum.receiver
-                )
-              }
-            )}
+            className={classNames(styles.sovereignTransferInput, {
+              'border-red-600': checkFormHasError(
+                SovereignTransferFormFieldsEnum.receiver
+              )
+            })}
             data-testid={DataTestIdsEnum.receiverInput}
             id={SovereignTransferFormFieldsEnum.receiver}
             name={SovereignTransferFormFieldsEnum.receiver}
@@ -162,11 +174,11 @@ export const SovereignTransferForm = () => {
             const hasAmountError = tokenTouched?.amount && tokenError?.amount;
 
             return (
-              <div className='flex flex-col' key={index}>
+              <div className='flex flex-col gap-2' key={index}>
                 <div className='flex flex-col'>
                   <label
                     htmlFor={SovereignTransferFormFieldsEnum.type}
-                    className='block text-sm font-bold mb-2'
+                    className={styles.sovereignTransferLabel}
                   >
                     Type:
                   </label>
@@ -182,7 +194,10 @@ export const SovereignTransferForm = () => {
                         type='radio'
                         value={SendTypeEnum.esdt}
                       />
-                      <label htmlFor={SendTypeEnum.esdt} className='text-sm'>
+                      <label
+                        htmlFor={SendTypeEnum.esdt}
+                        className={styles.sovereignTransferTypeOption}
+                      >
                         {SendTypeEnum.esdt}
                       </label>
                     </div>
@@ -197,28 +212,29 @@ export const SovereignTransferForm = () => {
                         type='radio'
                         value={SendTypeEnum.nft}
                       />
-                      <label htmlFor={SendTypeEnum.nft} className='text-sm'>
+                      <label
+                        htmlFor={SendTypeEnum.nft}
+                        className={styles.sovereignTransferTypeOption}
+                      >
                         {SendTypeEnum.nft}
                       </label>
                     </div>
                   </div>
                 </div>
+
                 <div className='flex flex-col'>
                   <label
                     htmlFor={amountFieldName}
-                    className='block text-sm font-bold mb-2'
+                    className={styles.sovereignTransferLabel}
                   >
                     Amount:
                   </label>
                   <div className='flex flex-row gap-2'>
                     <div className='flex flex-col w-full'>
                       <input
-                        className={classNames(
-                          'block w-full p-2 text-sm text-gray-700 placeholder-gray-400 border border-gray-300 rounded',
-                          {
-                            'border-red-600': hasAmountError
-                          }
-                        )}
+                        className={classNames(styles.sovereignTransferInput, {
+                          'border-red-600': hasAmountError
+                        })}
                         disabled={isNFT && !canEditNftAmount}
                         data-testid={`${DataTestIdsEnum.amountInput}${index}`}
                         id={amountFieldName}
@@ -231,7 +247,7 @@ export const SovereignTransferForm = () => {
                       />
                       {!hasAmountError && (
                         <div
-                          className='text-sm text-gray-400 mt-1'
+                          className='text-sm text-neutral-500 mt-1'
                           data-testid={`${DataTestIdsEnum.availableAmount}${index}`}
                         >
                           Available: {availableAmount}{' '}
@@ -249,7 +265,7 @@ export const SovereignTransferForm = () => {
                     </div>
                     <div className='flex flex-col w-1/2'>
                       <Select
-                        className='text-sm text-gray-700 placeholder-gray-400'
+                        classNames={SELECT_CLASSNAMES}
                         isLoading={isLoading}
                         options={tokenOptions}
                         name={tokenFieldName}
@@ -283,19 +299,19 @@ export const SovereignTransferForm = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className='flex flex-row gap-2'>
                   {index === array.length - 1 && (
-                    <Button
-                      className='mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white'
+                    <MvxButton
                       data-testid={DataTestIdsEnum.addTokenBtn}
                       onClick={handleAddToken}
                     >
-                      Add token
-                    </Button>
+                      <span className='text-sm font-normal'>Add token</span>
+                    </MvxButton>
                   )}
                   {index > 0 && (
                     <Button
-                      className='mt-4 rounded-lg bg-red-600 px-4 py-2 text-white'
+                      className={styles.removeTokenButton}
                       data-testid={`${DataTestIdsEnum.removeTokenBtn}${index}`}
                       onClick={handleRemoveToken(index)}
                     >
@@ -308,21 +324,22 @@ export const SovereignTransferForm = () => {
           }
         )}
       </div>
-      <div className='mt-4 flex flex-col align-middle'>
+      <div className='mt-4 flex flex-col items-center'>
         <Button
-          className='mt-4 mx-auto rounded-lg bg-blue-600 px-4 py-2 text-white'
+          className={styles.sendButton}
           data-testid={DataTestIdsEnum.sendBtn}
           type='submit'
         >
           Send
         </Button>
-        <MxLink
-          className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
+
+        <MvxButton
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          variant='secondary'
+          onClick={handleCancel}
         >
-          Cancel
-        </MxLink>
+          <span className='font-normal'>Cancel</span>
+        </MvxButton>
       </div>
     </form>
   );
