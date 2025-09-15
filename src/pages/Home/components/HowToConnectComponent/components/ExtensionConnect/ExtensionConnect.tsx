@@ -1,12 +1,12 @@
 import { FunctionComponent, SVGProps } from 'react';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ArcLogo from 'assets/img/arc-logo.svg?react';
-import BraveLogo from 'assets/img/brave-logo.svg?react';
-import ChromeLogo from 'assets/img/chrome-logo.svg?react';
-import Circles from 'assets/img/circles.svg?react';
+import { ReactComponent as ArcLogo } from 'assets/img/arc-logo.svg';
+import { ReactComponent as BraveLogo } from 'assets/img/brave-logo.svg';
+import { ReactComponent as ChromeLogo } from 'assets/img/chrome-logo.svg';
+import { ReactComponent as Circles } from 'assets/img/circles.svg';
 import extensionImage from 'assets/img/extension-image.png';
-import FirefoxLogo from 'assets/img/firefox-logo.svg?react';
+import { ReactComponent as FirefoxLogo } from 'assets/img/firefox-logo.svg';
 
 import {
   BrowserEnum,

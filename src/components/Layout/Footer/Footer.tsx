@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import HeartIcon from 'assets/img/heart.svg?react';
+import { ReactComponent as HeartIcon } from 'assets/img/heart.svg';
 
 import { styles } from './footer.styles';
 import { version } from '../../../../package.json';

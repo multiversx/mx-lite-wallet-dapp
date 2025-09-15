@@ -1,8 +1,8 @@
-import LedgerIcon from 'assets/img/ledger-icon.svg?react';
-// import MetamaskIcon from 'assets/img/metamask-icon.svg?react';
-// import PasskeyIcon from 'assets/img/passkey-icon.svg?react';
-import WebWalletIcon from 'assets/img/web-wallet-icon.svg?react';
-import XPortalIcon from 'assets/img/xportal-icon.svg?react';
+import { ReactComponent as LedgerIcon } from 'assets/img/ledger-icon.svg';
+// import { ReactComponent as MetamaskIcon } from 'assets/img/metamask-icon.svg';
+// import { ReactComponent as PasskeyIcon } from 'assets/img/passkey-icon.svg';
+import { ReactComponent as WebWalletIcon } from 'assets/img/web-wallet-icon.svg';
+import { ReactComponent as XPortalIcon } from 'assets/img/xportal-icon.svg';
 import {
   // BrowserEnum,
   // CHROME_METAMASK_EXTENSION_LINK,

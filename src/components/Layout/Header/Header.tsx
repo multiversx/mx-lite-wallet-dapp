@@ -26,7 +26,7 @@ import {
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import { styles } from './header.styles';
-import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
+import { ReactComponent as MultiversXLogo } from '../../../assets/img/multiversx-logo.svg';
 
 interface HeaderBrowseButtonType {
   handleClick: (event: MouseEvent<HTMLDivElement>) => void;

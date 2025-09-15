@@ -1,4 +1,4 @@
-import X from 'assets/img/x.svg?react';
+import { ReactComponent as X } from 'assets/img/x.svg';
 import { styles } from './browserFrame.styles';
 
 export const BrowserFrame = () => (

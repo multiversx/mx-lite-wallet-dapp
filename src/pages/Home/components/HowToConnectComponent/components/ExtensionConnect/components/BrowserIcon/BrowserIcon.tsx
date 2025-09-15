@@ -1,7 +1,7 @@
-import WalletBraveLogo from 'assets/img/wallet-brave-logo.svg?react';
-import WalletChromeLogo from 'assets/img/wallet-chrome-logo.svg?react';
-import WalletFirefoxLogo from 'assets/img/wallet-firefox-logo.svg?react';
-import WalletIcon from 'assets/img/web-wallet-icon.svg?react';
+import { ReactComponent as WalletBraveLogo } from 'assets/img/wallet-brave-logo.svg';
+import { ReactComponent as WalletChromeLogo } from 'assets/img/wallet-chrome-logo.svg';
+import { ReactComponent as WalletFirefoxLogo } from 'assets/img/wallet-firefox-logo.svg';
+import { ReactComponent as WalletIcon } from 'assets/img/web-wallet-icon.svg';
 import { BrowserEnum } from 'localConstants';
 
 interface BrowserIconPropsType {

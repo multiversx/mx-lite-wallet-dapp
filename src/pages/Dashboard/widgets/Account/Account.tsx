@@ -9,7 +9,7 @@ import { MvxFormatAmount, MvxTrim } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
 import QRCode from 'react-qr-code';
 
-import XLogo from 'assets/img/x-logo.svg?react';
+import { ReactComponent as XLogo } from 'assets/img/x-logo.svg';
 import { Label } from 'components';
 import {
   useGetAccountInfo,

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MvxDataWithExplorerLink } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import IconExpand from 'assets/img/expand-up-down.svg?react';
+import { ReactComponent as IconExpand } from 'assets/img/expand-up-down.svg';
 import {
   ACCOUNTS_ENDPOINT,
   getAccountProvider,
@@ -18,7 +18,7 @@ import { RouteNamesEnum } from 'localConstants';
 
 import { SideMenu } from './components';
 import { styles } from './leftPanel.styles';
-import MultiversXLogo from '../../../../assets/img/multiversx-logo.svg?react';
+import { ReactComponent as MultiversXLogo } from '../../../../assets/img/multiversx-logo.svg';
 import { Account } from '../../widgets';
 
 interface LeftPanelPropsType {

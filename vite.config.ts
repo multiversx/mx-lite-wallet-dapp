@@ -29,7 +29,12 @@ export default defineConfig({
     react(),
     basicSsl(),
     tsconfigPaths(),
-    svgrPlugin(),
+    svgrPlugin({
+      svgrOptions: {
+        exportType: 'named'
+      },
+      include: '**/*.svg'
+    }),
     nodePolyfills({
       globals: { Buffer: true, global: true, process: true }
     })
