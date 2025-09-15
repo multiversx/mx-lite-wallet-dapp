@@ -16,7 +16,7 @@ export const styles = {
   issueNftFormContainer: 'd-flex flex-column',
   issueNftFormLabel: 'issue-nft-form-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
   createButton: 'create-button mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75',
-  issueNftFormInput: 'issue-nft-form-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary'
+  issueNftFormInput: 'issue-nft-form-input block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-200 rounded-xl placeholder-neutral-500 border border-secondary'
 } satisfies Record<string, string>;
 
 export const IssueNftForm = () => {

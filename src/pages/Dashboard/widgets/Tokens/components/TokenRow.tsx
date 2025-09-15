@@ -9,8 +9,8 @@ import { sendRouteBuilder } from 'routes';
 
 // prettier-ignore
 const styles = {
-  tokenRowContainer: 'token-row-container flex items-center justify-between border border-secondary rounded-xl p-2',
-  tokenRowContent: 'token-row-content flex items-center space-x-4'
+  tokenRowContainer: 'token-row-container flex items-center justify-between border border-secondary rounded-xl p-2 transition-all duration-200 ease-in-out',
+  tokenRowContent: 'token-row-content flex items-center space-x-4 transition-all duration-200 ease-in-out'
 } satisfies Record<string, string>;
 
 export const TokenRow = ({ token }: { token: TokenType }) => {

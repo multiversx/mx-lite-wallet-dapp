@@ -21,7 +21,7 @@ import { RegisterTokenFormFieldsEnum } from '../types';
 export const styles = {
   registerTokenLabel: 'register-token-label text-lg font-medium text-secondary transition-all duration-200 ease-out block mb-2',
   registerTokenSendButton: 'register-token-send-butto mt-4 mx-auto rounded-lg bg-btn-primary text-btn-primary font-normal px-6 h-12 text-sm cursor-pointer hover:opacity-75',
-  registerTokenOption: 'register-token-option text-sm text-primary font-normal bg-secondary transition-all duration-300'
+  registerTokenOption: 'register-token-option text-sm text-primary font-normal bg-secondary transition-all duration-200'
 } satisfies Record<string, string>;
 
 export const RegisterTokenForm = () => {
@@ -73,7 +73,7 @@ export const RegisterTokenForm = () => {
           </label>
           <input
             className={classNames(
-              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl placeholder-neutral-500 border border-secondary',
+              'block w-full p-2 text-sm text-primary font-normal bg-secondary transition-all duration-200 rounded-xl placeholder-neutral-500 border border-secondary',
               {
                 'border-red-600': hasContractError
               }
