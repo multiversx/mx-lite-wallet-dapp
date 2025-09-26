@@ -28,7 +28,7 @@ const config = {
   modulePaths: ['<rootDir>/src'],
   bail: 1,
   workerIdleMemoryLimit: '512MB',
-  maxWorkers: isHeadless ? 2 : 1,
+  maxWorkers: isHeadless ? '100%' : 1,
   launch: {
     slowMo: 0,
     headless: isHeadless,

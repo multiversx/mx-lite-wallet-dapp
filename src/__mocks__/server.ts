@@ -1,6 +1,7 @@
 import { http } from 'msw';
 import { setupWorker } from 'msw/browser';
 
+import { GAS_LIMIT } from 'lib';
 import {
   testNetwork,
   keystoreAccount,
@@ -109,6 +110,14 @@ export const handlers = [
     `${testNetwork.extrasApiAddress}/faucet`,
     mockResponse({
       status: 'success'
+    })
+  ),
+  http.get(
+    `${testNetwork.apiAddress}/transactions/ppu/0`,
+    mockResponse({
+      lastBlock: 0,
+      fast: GAS_LIMIT,
+      faster: GAS_LIMIT
     })
   )
 ];
