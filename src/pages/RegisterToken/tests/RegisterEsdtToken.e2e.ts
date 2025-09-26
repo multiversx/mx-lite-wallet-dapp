@@ -37,14 +37,27 @@ describe('Register ESDT Token test', () => {
     await page.keyboard.press('Enter');
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
+    const mainTx = {
+      amount: '0.0500',
+      receiverAddress: keystoreAccount.address,
+      signerAddress: '@webteam',
+      gasPrice: '0.000000001',
+      gasLimit: '100.000.000',
+      data: 'DatarawtextdecimalsmartMultiESDTNFTTransfer@000000000000000000010000000000000000000000000000000000000002ffff@01@45474c442d303030303030@@b1a2bc2ec50000@7265676973746572546f6b656e@45474c444d4558464c2d326564373833@01@45474c444d45584c505374616b65644c4b@326564373833@12'
+    };
+
     await expectAndSignTransaction([
       {
-        amount: '0.0500',
-        receiverAddress: keystoreAccount.address,
-        signerAddress: '@webteam',
-        gasPrice: '0.000000001',
-        gasLimit: '100.000.000',
-        data: 'registerToken@45474c444d4558464c2d326564373833@1@45474c444d45584c505374616b65644c4b@326564373833@12'
+        ...mainTx,
+        dataHighlight: '45474c442d303030303030@@b1a2bc2ec50000'
+      },
+      {
+        ...mainTx,
+        amount: '0',
+        amountLabel: 'Amount',
+        receiverLabel: 'App',
+        dataHighlight:
+          '7265676973746572546f6b656e@45474c444d4558464c2d326564373833@01@45474c444d45584c505374616b65644c4b@326564373833@12'
       }
     ]);
   });
