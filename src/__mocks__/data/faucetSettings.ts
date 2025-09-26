@@ -1,5 +1,5 @@
 export const faucetSettings = {
-  address: 'vibe1xgzak3d6wcpyk83c3ne0n05khdz026e8p0rg8qu65dly706kfmxs0qecax',
+  address: 'erd1faxfn48tf07f6tp7ek0cvc9r8mqqy3e2qngscrrwz9j6j9jddjustsh56l',
   amount: '40000000000000000000',
   recaptchaBypass: true
 };

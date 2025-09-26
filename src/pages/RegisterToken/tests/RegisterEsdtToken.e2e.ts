@@ -13,7 +13,7 @@ import {
 import { navigateToRegisterTokenPage } from './helpers';
 
 const contractAddress =
-  'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0';
+  'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u';
 
 describe('Register ESDT Token test', () => {
   it('should register an ESDT token from sovereign to testnet successfully', async () => {

@@ -30,7 +30,7 @@ describe('Issue NFT Collection test', () => {
       {
         amount: '0.050000000000000000',
         receiverAddress:
-          'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0',
+          'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u',
         signerAddress: '@webteam',
         gasPrice: '0.000000001',
         gasLimit: '60.152.000',

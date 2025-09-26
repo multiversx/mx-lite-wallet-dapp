@@ -17,7 +17,7 @@ import {
 } from 'utils/testUtils/puppeteer';
 
 const contractAddress =
-  'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0';
+  'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u';
 
 describe('Sovereign transfer test', () => {
   it('should transfer ESDT and NFT tokens on sovereign successfully', async () => {
@@ -196,7 +196,7 @@ describe('Sovereign transfer test', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
     const mainTx = {
-      amount: '0.000000000000000001',
+      amount: '0',
       receiverAddress: keystoreAccount.address,
       signerAddress: '@webteam',
       gasPrice: '0.000000001',
@@ -220,7 +220,7 @@ describe('Sovereign transfer test', () => {
       },
       {
         ...mainTx,
-        amount: '0.000000000000000005',
+        amount: '0',
         dataHighlight: '4348524953544d41532d323764336532@01@05'
       },
       {

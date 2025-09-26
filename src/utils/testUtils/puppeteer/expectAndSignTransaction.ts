@@ -56,7 +56,7 @@ export const expectAndSignTransaction = async (
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsOverviewAmountRow,
-      text: `${amountLabel}${amount} VIBE`
+      text: `${amountLabel}${amount} SOV`
     });
 
     await expectElementToContainTextDeep({
@@ -85,7 +85,7 @@ export const expectAndSignTransaction = async (
 
     await expectElementToContainTextDeep({
       dataTestId: DataTestIdsEnum.signTransactionsAdvancedGasPrice,
-      text: `Gas Price${gasPrice} VIBE`
+      text: `Gas Price${gasPrice} SOV`
     });
 
     await expectElementToContainTextDeep({
@@ -119,6 +119,6 @@ export const expectAndSignTransaction = async (
 
   await expectElementToContainTextDeep({
     dataTestId: DataTestIdsEnum.transactionToastContent,
-    text: 'Sent VIBE'
+    text: 'Sent SOV'
   });
 };

@@ -11,7 +11,6 @@ import {
   parseAmount
 } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { getCurrentNetwork } from 'utils';
 import { SovereignTransferFormType } from '../types';
 
 export const getSovereignTransferTransaction = ({
@@ -26,7 +25,6 @@ export const getSovereignTransferTransaction = ({
   tokens: (PartialNftType | TokenType)[];
 }) => {
   const egldLabel = getEgldLabel();
-  const { WEGLDid } = getCurrentNetwork();
   const factoryConfig = new TransactionsFactoryConfig({ chainID: chainId });
   const factory = new SmartContractTransactionsFactory({
     config: factoryConfig
@@ -44,7 +42,12 @@ export const getSovereignTransferTransaction = ({
 
       if (!realToken) {
         return new TokenTransfer({
-          token: new Token({ identifier: token.token?.value }),
+          token: new Token({
+            identifier:
+              token.token?.value === egldLabel
+                ? 'EGLD-000000'
+                : token.token?.value
+          }),
           amount: BigInt(token.amount)
         });
       }
@@ -54,8 +57,8 @@ export const getSovereignTransferTransaction = ({
       return new TokenTransfer({
         token: new Token({
           identifier:
-            realToken.identifier === egldLabel && WEGLDid
-              ? WEGLDid
+            realToken.identifier === egldLabel
+              ? 'EGLD-000000'
               : realToken.identifier,
           nonce: nonce ? BigInt(nonce) : undefined
         }),

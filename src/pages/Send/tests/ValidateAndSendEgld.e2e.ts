@@ -26,7 +26,7 @@ describe('Validate and send EGLD tests', () => {
 
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.availableAmount,
-      text: 'Available: 4.559443050404540691 VIBE'
+      text: 'Available: 4.559443050404540691 SOV'
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
