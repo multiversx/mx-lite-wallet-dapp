@@ -1,18 +1,21 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { MxLink, OutputContainer } from 'components';
 import { useGetAccountInfo, TokenType } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
+import { networkSelector } from 'redux/selectors';
 import { routeNames } from 'routes';
 import { TokenRow } from './components';
 
 export const Tokens = () => {
   const { websocketEvent, address } = useGetAccountInfo();
   const [fetchTokens, { data: tokens, isLoading }] = useLazyGetTokensQuery();
+  const { activeNetwork } = useSelector(networkSelector);
 
   useEffect(() => {
     fetchTokens(address);
-  }, [address, websocketEvent]);
+  }, [address, websocketEvent, activeNetwork]);
 
   if (!isLoading && tokens?.length === 0) {
     return (

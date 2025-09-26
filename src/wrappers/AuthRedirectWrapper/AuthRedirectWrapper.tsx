@@ -27,6 +27,7 @@ export const AuthRedirectWrapper = ({
   const shouldGoToUnlock =
     !isLoggedIn &&
     pathname !== routeNames.unlock &&
+    pathname !== routeNames.home &&
     requireAuth &&
     !(pathname.includes('hook') || hook); // Already redirected via HookValiationOutcome
 

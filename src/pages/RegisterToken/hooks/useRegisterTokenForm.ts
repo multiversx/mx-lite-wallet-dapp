@@ -4,10 +4,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { object, string } from 'yup';
-import { networks } from 'config';
 import { useSendTransactions } from 'hooks';
 import {
-  EnvironmentsEnum,
   addressIsValid,
   useGetAccountInfo,
   accountSelector,
@@ -26,7 +24,7 @@ export const useRegisterTokenForm = () => {
   const navigate = useNavigate();
   const { account } = useGetAccountInfo();
   const {
-    activeNetwork: { hrp }
+    activeNetwork: { hrp, sovereignContractAddress }
   } = useSelector(networkSelector);
 
   const {
@@ -38,13 +36,10 @@ export const useRegisterTokenForm = () => {
   const { tokenOptions, isLoading, tokens } = useRegisterTokenOptions(sendType);
 
   const defaultTokenOption = tokenOptions?.[0];
-  const testnetContract =
-    networks.find((network) => network.id === EnvironmentsEnum.testnet)
-      ?.sovereignContractAddress ?? '';
 
   const formik = useFormik({
     initialValues: {
-      [RegisterTokenFormFieldsEnum.contract]: testnetContract,
+      [RegisterTokenFormFieldsEnum.contract]: sovereignContractAddress,
       [RegisterTokenFormFieldsEnum.token]: defaultTokenOption,
       [RegisterTokenFormFieldsEnum.type]: SendTypeEnum.esdt
     },
@@ -88,7 +83,10 @@ export const useRegisterTokenForm = () => {
 
   const resetForm = () => {
     formik.setFieldValue(RegisterTokenFormFieldsEnum.token, defaultTokenOption);
-    formik.setFieldValue(RegisterTokenFormFieldsEnum.contract, testnetContract);
+    formik.setFieldValue(
+      RegisterTokenFormFieldsEnum.contract,
+      sovereignContractAddress
+    );
   };
 
   const handleOnSendTypeChange: (
