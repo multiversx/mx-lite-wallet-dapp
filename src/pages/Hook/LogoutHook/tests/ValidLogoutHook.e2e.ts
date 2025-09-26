@@ -1,4 +1,4 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { waitForUrlToMatch } from 'utils/testUtils/puppeteer';
 
 describe('Valid logout hook tests', () => {

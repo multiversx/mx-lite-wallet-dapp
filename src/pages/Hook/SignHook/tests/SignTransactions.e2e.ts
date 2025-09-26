@@ -1,4 +1,4 @@
-import { WALLET_SOURCE_ORIGIN, keystoreAccount } from '__mocks__';
+import { WALLET_SOURCE_ORIGIN, keystoreAccount } from '__mocks__/data';
 import {
   expectAndSignTransaction,
   loginWithKeystore,

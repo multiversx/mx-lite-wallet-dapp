@@ -1,4 +1,4 @@
-import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   getByTestIdDeep,

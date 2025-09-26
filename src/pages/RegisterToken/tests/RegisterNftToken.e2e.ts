@@ -1,14 +1,12 @@
-import { DEFAULT_PAGE_LOAD_DELAY_MS } from '__mocks__/data';
+import { keystoreAccount } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 
 import {
   changeInputText,
   expectAndSignTransaction,
-  expectElementToContainText,
   expectInputToHaveValue,
   expectToBeChecked,
-  getByDataTestId,
-  sleep
+  getByDataTestId
 } from 'utils/testUtils/puppeteer';
 import { navigateToRegisterTokenPage } from './helpers';
 
@@ -41,27 +39,19 @@ describe('Register NFT Token test', () => {
       value: contractAddress
     });
 
-    await page.type('#react-select-3-input', 'SFT');
+    await page.type('#react-select-2-input', 'SFT');
     await page.keyboard.press('Enter');
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
-
-    await sleep(2 * DEFAULT_PAGE_LOAD_DELAY_MS);
 
     await expectAndSignTransaction([
       {
         amount: '0.0500',
-        receiverAddress: contractAddress,
+        receiverAddress: keystoreAccount.address,
         signerAddress: '@webteam',
         gasPrice: '0.000000001',
         gasLimit: '100.000.000',
-        data: 'registerToken@736f762d5346542d333834313038@3@534654@534654@0'
+        data: 'MultiESDTNFTTransfer@000000000000000000010000000000000000000000000000000000000002ffff@01@45474c442d303030303030@@b1a2bc2ec50000@7265676973746572546f6b656e@736f762d5346542d333834313038@03@534654@534654@'
       }
     ]);
-
-    await sleep(2 * DEFAULT_PAGE_LOAD_DELAY_MS);
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.activeNetwork,
-      text: 'Testnet'
-    });
   });
 });

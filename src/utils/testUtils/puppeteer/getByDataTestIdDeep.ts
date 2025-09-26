@@ -1,4 +1,4 @@
-import { DEFAULT_PAGE_LOAD_DELAY_MS } from '__mocks__';
+import { DEFAULT_PAGE_LOAD_DELAY_MS } from '__mocks__/data';
 import { sleep } from './sleep';
 
 /**

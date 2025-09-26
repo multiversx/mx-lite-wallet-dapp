@@ -101,7 +101,7 @@ describe('Sovereign transfer test', () => {
       isChecked: true
     });
 
-    await page.type('#react-select-3-input', 'BurnTest');
+    await page.type('#react-select-2-input', 'BurnTest');
     await page.keyboard.press('Enter');
     await changeInputText({
       dataTestId: `${DataTestIdsEnum.amountInput}1`,
