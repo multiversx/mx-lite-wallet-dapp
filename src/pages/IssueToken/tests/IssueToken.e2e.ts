@@ -60,7 +60,7 @@ describe('Issue Token test', () => {
 
     await expectAndSignTransaction([
       {
-        amount: '0.050000000000000000',
+        amount: '0.0500',
         receiverAddress:
           'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u',
         signerAddress: '@webteam',

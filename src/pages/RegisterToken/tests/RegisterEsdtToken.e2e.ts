@@ -43,7 +43,7 @@ describe('Register ESDT Token test', () => {
 
     await expectAndSignTransaction([
       {
-        amount: '0.050000000000000000',
+        amount: '0.0500',
         receiverAddress: contractAddress,
         signerAddress: '@webteam',
         gasPrice: '0.000000001',

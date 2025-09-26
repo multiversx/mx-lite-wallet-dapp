@@ -28,7 +28,7 @@ describe('Issue NFT Collection test', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
     await expectAndSignTransaction([
       {
-        amount: '0.050000000000000000',
+        amount: '0.0500',
         receiverAddress:
           'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u',
         signerAddress: '@webteam',
