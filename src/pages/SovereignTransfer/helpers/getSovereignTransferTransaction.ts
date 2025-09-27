@@ -8,22 +8,25 @@ import {
   TokenType,
   getEgldLabel,
   PartialNftType,
-  parseAmount
+  parseAmount,
+  EnvironmentsEnum
 } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { SovereignTransferFormType } from '../types';
+
+interface GetSovereignTransferTransactionPropsType {
+  address: string;
+  chainId: EnvironmentsEnum;
+  values: SovereignTransferFormType;
+  tokens: (PartialNftType | TokenType)[];
+}
 
 export const getSovereignTransferTransaction = ({
   address,
   chainId,
   values,
   tokens
-}: {
-  address: string;
-  chainId: string;
-  values: SovereignTransferFormType;
-  tokens: (PartialNftType | TokenType)[];
-}) => {
+}: GetSovereignTransferTransactionPropsType) => {
   const egldLabel = getEgldLabel();
   const factoryConfig = new TransactionsFactoryConfig({ chainID: chainId });
   const factory = new SmartContractTransactionsFactory({
@@ -40,26 +43,31 @@ export const getSovereignTransferTransaction = ({
         ({ identifier }) => identifier === token.token?.value
       );
 
+      const isSovereign = Object.values(EnvironmentsEnum).includes(chainId);
+
       if (!realToken) {
+        const tokenValue = token.token?.value;
+
         return new TokenTransfer({
           token: new Token({
             identifier:
-              token.token?.value === egldLabel
+              tokenValue === egldLabel && !isSovereign
                 ? 'EGLD-000000'
-                : token.token?.value
+                : tokenValue
           }),
           amount: BigInt(token.amount)
         });
       }
 
       const nonce = (realToken as PartialNftType).nonce;
+      const tokenValue = realToken.identifier;
 
       return new TokenTransfer({
         token: new Token({
           identifier:
-            realToken.identifier === egldLabel
+            tokenValue === egldLabel && !isSovereign
               ? 'EGLD-000000'
-              : realToken.identifier,
+              : tokenValue,
           nonce: nonce ? BigInt(nonce) : undefined
         }),
         amount: BigInt(
