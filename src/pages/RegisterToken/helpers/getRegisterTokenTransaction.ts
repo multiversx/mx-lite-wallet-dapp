@@ -1,14 +1,18 @@
-import { GAS_PRICE, prepareTransaction } from 'lib';
 import {
+  Address,
+  TokenTransfer,
+  SmartContractTransactionsFactory,
+  Token,
+  TransactionsFactoryConfig,
   NftEnumType,
   PartialNftType,
   TokenType,
   EsdtEnumType,
-  CollectionType
+  CollectionType,
+  StringValue,
+  U32Value
 } from 'lib';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { stringToHex } from 'utils/operations/toHex';
-import { numberToHex } from 'utils/operations/toHex';
 import { RegisterTokenFormType } from '../types';
 
 const TokenTypeMap: Record<string, number> = {
@@ -18,19 +22,19 @@ const TokenTypeMap: Record<string, number> = {
   [NftEnumType.SemiFungibleESDT]: 3
 };
 
-export const getRegisterTokenTransaction = ({
-  address,
-  balance,
-  nonce,
-  values,
-  token
-}: {
+export interface GetRegisterTokenTransactionParamsType {
   address: string;
-  balance: string;
-  nonce: number;
+  chainId: string;
   values: RegisterTokenFormType;
   token: PartialNftType | TokenType | CollectionType;
-}) => {
+}
+
+export const getRegisterTokenTransaction = ({
+  address,
+  chainId,
+  values,
+  token
+}: GetRegisterTokenTransactionParamsType) => {
   const nft = token as PartialNftType;
   const isNft = Boolean(nft.nonce);
   const tokenIdentifier =
@@ -40,25 +44,29 @@ export const getRegisterTokenTransaction = ({
   const tokenTicker = token.ticker?.split('-')[1];
   const tokenDecimals = token.decimals || 0;
 
-  const args = [
-    stringToHex(isNft ? nft.collection : tokenIdentifier),
-    numberToHex(tokenType),
-    stringToHex(tokenName),
-    stringToHex(tokenTicker),
-    numberToHex(tokenDecimals)
-  ].join('@');
+  const factoryConfig = new TransactionsFactoryConfig({ chainID: chainId });
+  const factory = new SmartContractTransactionsFactory({
+    config: factoryConfig
+  });
 
-  const data = `registerToken@${args}`;
+  const egldTokenTransfer = new TokenTransfer({
+    token: new Token({ identifier: 'EGLD-000000' }),
+    amount: BigInt('50000000000000000') // 0.05 EGLD in wei
+  });
 
-  return prepareTransaction({
-    amount: '0.05',
-    balance,
-    chainId: values.chainId.value,
-    data,
-    gasLimit: SOVEREIGN_TRANSFER_GAS_LIMIT.toString(),
-    gasPrice: GAS_PRICE.toString(),
-    nonce,
-    receiver: values.contract,
-    sender: address
+  const functionArgs = [
+    new StringValue(isNft ? nft.collection : tokenIdentifier),
+    new U32Value(tokenType),
+    new StringValue(tokenName),
+    new StringValue(tokenTicker ?? ''),
+    new U32Value(tokenDecimals)
+  ];
+
+  return factory.createTransactionForExecute(new Address(address), {
+    contract: Address.newFromBech32(values.contract),
+    function: 'registerToken',
+    gasLimit: BigInt(SOVEREIGN_TRANSFER_GAS_LIMIT),
+    arguments: functionArgs,
+    tokenTransfers: [egldTokenTransfer]
   });
 };

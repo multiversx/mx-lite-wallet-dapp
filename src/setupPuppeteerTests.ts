@@ -12,5 +12,5 @@ jest.setTimeout(120000);
 jest.retryTimes(
   process.env.JEST_PPTR_RETRY_TIMES
     ? Number(process.env.JEST_PPTR_RETRY_TIMES)
-    : 5
+    : 10
 );

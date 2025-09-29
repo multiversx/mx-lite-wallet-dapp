@@ -1,8 +1,5 @@
-import { LibraryConfig } from '@multiversx/sdk-core/out';
 import { NetworkType } from 'redux/slices';
 import { sharedNetworks } from './sharedNetworks';
-
-LibraryConfig.DefaultAddressHrp = 'vibe';
 
 export * from './sharedConfig';
 
@@ -21,12 +18,12 @@ export const networks: NetworkType[] = [
   {
     ...sovereignNetwork,
     default: true,
-    walletAddress: 'https://vibeox-wallet.multiversx.com',
-    id: 'vibechain',
-    name: 'VibeChain',
-    apiAddress: 'https://vibeox-api.multiversx.com',
-    extrasApi: 'https://vibeox-extras-api.multiversx.com',
-    hrp: 'vibe',
+    walletAddress: 'https://wallet-sovereign-test.elrond.ro/unlock',
+    id: 'sovereign',
+    name: 'Sovereign',
+    apiAddress: 'https://api-sovereign-test.elrond.ro',
+    extrasApi: 'https://extras-api-sovereign-test.elrond.ro',
+    hrp: 'erd',
     faucet: true,
     hasRegisterToken: true,
     hasSovereignTransfer: true

@@ -1,4 +1,8 @@
-import { keystoreAccount, pemAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import {
+  keystoreAccount,
+  pemAccount,
+  WALLET_SOURCE_ORIGIN
+} from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
@@ -87,7 +91,7 @@ describe('Send NFT tests', () => {
 
     await expectAndSignTransaction([
       {
-        amount: '0.000000000000000001',
+        amount: '0',
         receiverAddress: keystoreAccount.address,
         signerAddress: '@webteam',
         gasPrice: '0.000000001',

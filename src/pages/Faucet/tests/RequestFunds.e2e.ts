@@ -22,7 +22,7 @@ describe('Request funds tests', () => {
     await requestFundsButton.click();
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.modalSubtitle,
-      text: 'You can request 40 VIBE every 24 hours'
+      text: 'You can request 40 SOV every 24 hours'
     });
 
     // Request funds
@@ -32,7 +32,7 @@ describe('Request funds tests', () => {
     // Verify success message
     await expectElementToContainText({
       dataTestId: DataTestIdsEnum.faucetSuccessMessage,
-      text: '40 VIBE have been sent to your address.'
+      text: '40 SOV have been sent to your address.'
     });
   });
 });

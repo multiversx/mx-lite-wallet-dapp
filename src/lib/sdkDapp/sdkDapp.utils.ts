@@ -21,3 +21,5 @@ export { getInterpretedTransaction } from '@multiversx/sdk-dapp/out/utils/transa
 export { getTransactions } from '@multiversx/sdk-dapp/out/apiCalls/transactions/getTransactions';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
 export { checkIsValidSender } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/getCommonData/helpers/checkIsValidSender';
+export { setNativeAuthConfig } from '@multiversx/sdk-dapp/out/store/actions/config/configActions';
+export { getDefaultNativeAuthConfig } from '@multiversx/sdk-dapp/out/services/nativeAuth/methods/getDefaultNativeAuthConfig';

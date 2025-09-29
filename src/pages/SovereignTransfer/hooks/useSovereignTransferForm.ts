@@ -3,7 +3,12 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { array, number, object, string } from 'yup';
 import { useSendTransactions, useTokenOptions } from 'hooks';
-import { addressIsValid, useGetAccount, useGetNetworkConfig } from 'lib';
+import {
+  addressIsValid,
+  EnvironmentsEnum,
+  useGetAccount,
+  useGetNetworkConfig
+} from 'lib';
 import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';
 import { addressIsHrp, getSelectedTokenBalance } from 'utils';
@@ -109,7 +114,7 @@ export const useSovereignTransferForm = () => {
     onSubmit: async (values) => {
       const transaction = await getSovereignTransferTransaction({
         address,
-        chainId,
+        chainId: chainId as EnvironmentsEnum,
         tokens: allTokens,
         values
       });

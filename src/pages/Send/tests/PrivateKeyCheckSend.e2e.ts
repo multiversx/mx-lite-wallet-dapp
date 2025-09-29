@@ -3,7 +3,7 @@ import {
   DEFAULT_PASSWORD,
   keystoreAccount,
   WALLET_SOURCE_ORIGIN
-} from '__mocks__';
+} from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,

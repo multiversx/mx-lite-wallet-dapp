@@ -2,7 +2,7 @@ import {
   DEFAULT_PASSWORD,
   DEFAULT_PAGE_LOAD_DELAY_MS,
   keystoreAccount
-} from '__mocks__';
+} from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { expectElementToContainText } from './expectElementToContainText';
 import { getByDataTestId } from './getByDataTestId';

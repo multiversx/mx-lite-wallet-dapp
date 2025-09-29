@@ -17,7 +17,7 @@ import {
 } from 'utils/testUtils/puppeteer';
 
 const contractAddress =
-  'vibe1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls2szsw0';
+  'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u';
 
 describe('Sovereign transfer test', () => {
   it('should transfer ESDT and NFT tokens on sovereign successfully', async () => {
@@ -101,7 +101,7 @@ describe('Sovereign transfer test', () => {
       isChecked: true
     });
 
-    await page.type('#react-select-3-input', 'BurnTest');
+    await page.type('#react-select-2-input', 'BurnTest');
     await page.keyboard.press('Enter');
     await changeInputText({
       dataTestId: `${DataTestIdsEnum.amountInput}1`,
@@ -196,18 +196,18 @@ describe('Sovereign transfer test', () => {
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
     const mainTx = {
-      amount: '0.000000000000000001',
+      amount: '0',
       receiverAddress: keystoreAccount.address,
       signerAddress: '@webteam',
       gasPrice: '0.000000001',
       gasLimit: '100.000.000',
-      data: 'MultiESDTNFTTransfer@000000000000000000010000000000000000000000000000000000000002ffff@04@425453542d313135346332@@01@4153482d653364316237@@1bc16d674ec80000@4e46542d663765636164@01@01@4348524953544d41532d323764336532@01@05@6465706f736974@df8d569c7ab4ab179d41cb8f89519705dd142eda414a37d6ada80c079e410691'
+      data: 'DatarawtextdecimalsmartMultiESDTNFTTransfer@000000000000000000010000000000000000000000000000000000000002ffff@04@425453542d313135346332@@@4153482d653364316237@@1bc16d674ec80000@4e46542d663765636164@01@01@4348524953544d41532d323764336532@01@05@6465706f736974@df8d569c7ab4ab179d41cb8f89519705dd142eda414a37d6ada80c079e410691'
     };
 
     await expectAndSignTransaction([
       {
         ...mainTx,
-        dataHighlight: '425453542d313135346332@@01'
+        dataHighlight: '425453542d313135346332@@'
       },
       {
         ...mainTx,
@@ -220,7 +220,7 @@ describe('Sovereign transfer test', () => {
       },
       {
         ...mainTx,
-        amount: '0.000000000000000005',
+        amount: '0',
         dataHighlight: '4348524953544d41532d323764336532@01@05'
       },
       {
