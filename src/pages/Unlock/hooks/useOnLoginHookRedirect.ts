@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useReplyToDapp } from 'hooks';
 import { useGetAccount, useGetLoginInfo } from 'lib/sdkDapp/sdkDapp.hooks';
 import { decodeNativeAuthToken } from 'lib/sdkDapp/sdkDapp.utils';
-import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider/sdkDappWebWalletCrossWindowProvider.types';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
 import { accountSelector, hookSelector } from 'redux/selectors';
 
 export const useOnLoginHookRedirect = () => {
