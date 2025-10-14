@@ -1,4 +1,4 @@
-import { createCustomToast } from 'lib';
+import { createCustomToast } from 'lib/sdkDapp';
 import {
   CUSTOM_TOAST_DEFAULT_DURATION,
   IS_DEVELOPMENT,

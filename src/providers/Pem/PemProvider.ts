@@ -1,4 +1,4 @@
-import { ProviderType } from 'lib';
+import { ProviderType } from 'lib/sdkDapp';
 import { FileProviderEnum, IFileProviderOptions } from 'types/providers';
 import { PemLoginPanel } from './PemLoginPanel';
 import { FileProvider } from '../FileProvider';

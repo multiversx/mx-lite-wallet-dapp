@@ -1,4 +1,5 @@
-import { signTxSchema, useGetNetworkConfig } from 'lib';
+import { useGetNetworkConfig } from 'lib/sdkDapp';
+import { signTxSchema } from 'lib/sdkJsWebWalletIo';
 
 export function useSignTxSchema() {
   const {

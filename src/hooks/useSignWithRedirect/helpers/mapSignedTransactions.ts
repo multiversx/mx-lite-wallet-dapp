@@ -1,13 +1,12 @@
 import omit from 'lodash/omit';
 import {
-  GAS_LIMIT,
-  GAS_PRICE,
-  ZERO,
   TransactionOptions,
   TransactionVersion,
   Transaction,
   IPlainTransactionObject
-} from 'lib';
+} from 'lib/sdkCore';
+import { GAS_LIMIT, GAS_PRICE } from 'lib/sdkDapp';
+import { ZERO } from 'lib/sdkDappUtils';
 
 export interface MapSignedTransactionsParamsType {
   signedTransactions: Transaction[];

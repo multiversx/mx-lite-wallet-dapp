@@ -1,5 +1,5 @@
 import { string } from 'yup';
-import { Mnemonic } from 'lib';
+import { Mnemonic } from 'lib/sdkCore';
 
 export const mnemonicSchema = () =>
   string()

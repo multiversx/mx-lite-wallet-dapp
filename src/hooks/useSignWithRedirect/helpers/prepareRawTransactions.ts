@@ -1,4 +1,5 @@
-import { stringIsInteger, IPlainTransactionObject } from 'lib';
+import { IPlainTransactionObject } from 'lib/sdkCore';
+import { stringIsInteger } from 'lib/sdkDappUtils';
 
 export interface CreateNewTransactionsFromRawParamsType {
   address: string;

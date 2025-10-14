@@ -1,9 +1,9 @@
+import { Transaction } from 'lib/sdkCore';
 import {
-  Transaction,
   TransactionManager,
   TransactionsDisplayInfoType,
   getAccountProvider
-} from 'lib';
+} from 'lib/sdkDapp';
 
 export type SendAndTrackTransactionsType = {
   transactions: Transaction[] | Transaction[][];

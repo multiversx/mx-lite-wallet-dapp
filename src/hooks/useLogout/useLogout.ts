@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getAccountProvider, WindowProviderResponseEnums } from 'lib';
-import { HooksEnum } from 'localConstants';
+import { getAccountProvider } from 'lib/sdkDapp';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { HooksEnum, RouteNamesEnum } from 'localConstants';
 import { logoutAction } from 'redux/commonActions';
 import { hookSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
 import { useReplyToDapp } from '../useReplyToDapp';
 
 const options = {
@@ -37,7 +37,7 @@ export const useLogout = () => {
     const shouldReplyToDapp = window.opener;
 
     if (!shouldReplyToDapp) {
-      return navigate(routeNames.unlock);
+      return navigate(RouteNamesEnum.unlock);
     }
 
     replyToDapp({

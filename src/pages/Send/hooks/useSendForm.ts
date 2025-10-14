@@ -5,20 +5,22 @@ import { useSearchParams } from 'react-router-dom';
 import { number, object, string } from 'yup';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import {
-  prepareTransaction,
   getEgldLabel,
   useGetAccountInfo,
   useGetNetworkConfig,
+  addressIsValid,
+  GAS_LIMIT,
+  GAS_PRICE
+} from 'lib/sdkDapp';
+import {
+  prepareTransaction,
   computeNftDataField,
   computeTokenDataField,
   calculateNftGasLimit,
-  addressIsValid,
   calculateGasLimit,
-  PartialNftType,
-  DECIMALS,
-  GAS_LIMIT,
-  GAS_PRICE
-} from 'lib';
+  PartialNftType
+} from 'lib/sdkDappForm';
+import { DECIMALS } from 'lib/sdkDappUtils';
 import { SearchParamsEnum } from 'localConstants';
 import { SendTypeEnum, TokenOptionType } from 'types';
 import { getSelectedTokenBalance } from 'utils';

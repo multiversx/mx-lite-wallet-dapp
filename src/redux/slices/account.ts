@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TokenLoginType } from 'lib';
+import { TokenLoginType } from 'lib/sdkDapp';
 import { setProviderPrivateKey } from 'providers/FileProvider';
 import { logoutAction } from 'redux/commonActions';
 

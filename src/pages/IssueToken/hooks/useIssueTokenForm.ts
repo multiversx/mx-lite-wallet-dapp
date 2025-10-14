@@ -1,17 +1,15 @@
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
+import { maxDecimals } from 'lib/sdkDapp/sdkDapp.utils';
+import { stringIsFloat, parseAmount } from 'lib/sdkDappUtils/sdkDappUtils';
+import { DECIMALS } from 'lib/sdkDappUtils/sdkDappUtils.constants';
 import {
-  useGetAccount,
-  useGetNetworkConfig,
-  maxDecimals,
-  stringIsFloat,
   Address,
   TokenManagementTransactionsFactory,
-  TransactionsFactoryConfig,
-  parseAmount,
-  DECIMALS
-} from 'lib';
+  TransactionsFactoryConfig
+} from 'lib/sdkCore';
 
 import { IssueTokenFieldsEnum } from '../types';
 

@@ -1,16 +1,14 @@
 import {
   Address,
-  IDAppProviderAccount,
-  IProvider,
-  ProviderType,
   Message,
   MessageComputer,
-  signTransactions,
   Transaction,
   TransactionComputer,
   UserSecretKey,
   UserSigner
-} from 'lib';
+} from 'lib/sdkCore';
+import { IProvider, ProviderType, signTransactions } from 'lib/sdkDapp';
+import { IDAppProviderAccount } from 'lib/sdkDappUtils';
 import { IFileProviderOptions } from 'types/providers';
 
 const notInitializedError = (caller: string) => () => {

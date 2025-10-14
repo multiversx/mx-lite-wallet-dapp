@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button } from 'components';
+import { Button } from 'components/Button';
 import { DataTestIdsEnum } from 'localConstants';
 import { RootState } from 'redux/store';
-import { routeNames } from 'routes';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { FaucetContent } from './components/FuacetContent/FaucetContent';
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 
@@ -15,11 +15,11 @@ export const Faucet = () => {
 
   if (!hasFaucet || !activeNetwork.faucet) {
     // Faucet does not work without google recaptcha key, unless recaptchaBypass is specified (sovereign)
-    return <Navigate to={routeNames.dashboard} />;
+    return <Navigate to={RouteNamesEnum.dashboard} />;
   }
 
   const handleFaucetCloseFlow = () => {
-    navigate(routeNames.dashboard);
+    navigate(RouteNamesEnum.dashboard);
   };
 
   return (

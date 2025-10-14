@@ -1,4 +1,5 @@
-import { IPlainTransactionObject, Transaction, processBase64Fields } from 'lib';
+import { IPlainTransactionObject, Transaction } from 'lib/sdkCore';
+import { processBase64Fields } from 'lib/sdkJsWebWalletIo';
 import { buildWalletQueryString } from './buildWalletQueryString';
 
 export const buildTransactionsQueryString = ({

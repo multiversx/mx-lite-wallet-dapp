@@ -4,13 +4,11 @@ import {
   TokenTransfer,
   SmartContractTransactionsFactory,
   Token,
-  TransactionsFactoryConfig,
-  TokenType,
-  getEgldLabel,
-  PartialNftType,
-  parseAmount,
-  EnvironmentsEnum
-} from 'lib';
+  TransactionsFactoryConfig
+} from 'lib/sdkCore';
+import { TokenType, EnvironmentsEnum, getEgldLabel } from 'lib/sdkDapp';
+import { PartialNftType } from 'lib/sdkDappForm';
+import { parseAmount } from 'lib/sdkDappUtils';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { SovereignTransferFormType } from '../types';
 

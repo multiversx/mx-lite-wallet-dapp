@@ -7,13 +7,12 @@ import {
 } from 'hooks';
 import {
   useGetAccount,
-  WindowProviderResponseEnums,
   getAccountProvider,
   ProviderTypeEnum
-} from 'lib';
-import { HooksEnum } from 'localConstants';
+} from 'lib/sdkDapp';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { HooksEnum, RouteNamesEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
 import { HookStateEnum } from '../types';
 
 interface HookValidationOutcomePropsType {
@@ -47,7 +46,7 @@ export const HookValidationOutcome = ({
     if (
       [HooksEnum.login, HooksEnum.sign, HooksEnum.signMessage].includes(hook)
     ) {
-      return <Navigate to={routeNames.unlock} replace />;
+      return <Navigate to={RouteNamesEnum.unlock} replace />;
     }
 
     // The hook URL is invalid and are returning to the previous route
@@ -65,7 +64,7 @@ export const HookValidationOutcome = ({
     switch (providerType) {
       case ProviderTypeEnum.none: {
         // The user must login before we can sign
-        return <Navigate to={routeNames.unlock} replace />;
+        return <Navigate to={RouteNamesEnum.unlock} replace />;
       }
 
       default: {

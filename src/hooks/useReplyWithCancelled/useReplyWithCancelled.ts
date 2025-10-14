@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { useGetAccount, WindowProviderResponseEnums } from 'lib';
+import { useGetAccount } from 'lib/sdkDapp';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
 import { resetHook } from 'redux/slices';
 import { useReplyToDapp } from '../useReplyToDapp';
 

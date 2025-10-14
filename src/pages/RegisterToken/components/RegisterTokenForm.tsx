@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
-import { DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
+import { Button } from 'components/Button';
+import { MxLink } from 'components/MxLink';
+import { DataTestIdsEnum, RouteNamesEnum } from 'localConstants';
 import { SendTypeEnum } from 'types';
 import { getFormHasError } from 'utils';
 import { useRegisterTokenForm } from '../hooks';
@@ -126,7 +126,7 @@ export const RegisterTokenForm = () => {
         <MxLink
           className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          to={RouteNamesEnum.dashboard}
         >
           Cancel
         </MxLink>

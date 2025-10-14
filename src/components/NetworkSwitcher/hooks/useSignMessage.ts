@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { getAccountProvider, Message } from 'lib';
+import { getAccountProvider } from 'lib/sdkDapp';
+import { Message } from 'lib/sdkCore';
 
 export const useSignMessage = () => {
   const provider = getAccountProvider();

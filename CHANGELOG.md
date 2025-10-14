@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed circular dependencies](https://github.com/multiversx/mx-lite-wallet-dapp/pull/104)
 - [Update sovereign transfer and register token logic](https://github.com/multiversx/mx-lite-wallet-dapp/pull/103)
 - [Refactor @multiversx imports from helpers and moved to utils](https://github.com/multiversx/mx-lite-wallet-dapp/pull/99)
 - [Migrate to sdk-dapp V5](https://github.com/multiversx/mx-lite-wallet-dapp/pull/98)

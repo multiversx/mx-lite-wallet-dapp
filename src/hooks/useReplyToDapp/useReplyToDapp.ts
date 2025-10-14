@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { replyToDapp } from 'lib';
-import type { ReplyWithPostMessageType } from 'lib/sdkDappWebWalletCrossWindowProvider/sdkDappWebWalletCrossWindowProvider.types';
+import type { ReplyWithPostMessageType } from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { replyToDapp } from 'lib/sdkJsWebWalletIo';
 import { hookSelector } from 'redux/selectors/hook';
 
 let lastReplyPayload = '';

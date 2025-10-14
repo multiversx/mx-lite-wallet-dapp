@@ -1,14 +1,15 @@
 import type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';
+import { Transaction, IPlainTransactionObject } from 'lib/sdkCore';
 import {
   useGetAccountInfo,
-  useGetNetworkConfig,
+  useGetNetworkConfig
+} from 'lib/sdkDapp/sdkDapp.hooks';
+import {
   TransactionManager,
-  IPlainTransactionObject,
-  parseSignUrl,
-  validateSignTransactions,
-  getAccountProvider,
-  Transaction
-} from 'lib';
+  getAccountProvider
+} from 'lib/sdkDapp/sdkDapp.utils';
+import { parseSignUrl } from 'lib/sdkJsWebWalletIo/sdkJsWebWalletIo.utils';
+import { validateSignTransactions } from 'lib/sdkDappForm/sdkDappForm.utils';
 import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFromRaw';
 
 export interface ValidateAndSignTxsReturnType {

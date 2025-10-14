@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetLoginInfo, useGetNetworkConfig, nativeAuth } from 'lib';
+import { useGetLoginInfo, useGetNetworkConfig, nativeAuth } from 'lib/sdkDapp';
 import { HooksEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
 import { setToken } from 'redux/slices';

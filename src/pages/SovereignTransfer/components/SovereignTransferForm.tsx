@@ -1,9 +1,10 @@
 import { ChangeEventHandler } from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
+import { Button } from 'components/Button';
+import { MxLink } from 'components/MxLink';
 import { DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { SendTypeEnum } from 'types';
 import { getFormHasError } from 'utils';
 import { useSovereignTransferForm } from '../hooks';
@@ -319,7 +320,7 @@ export const SovereignTransferForm = () => {
         <MxLink
           className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          to={RouteNamesEnum.dashboard}
         >
           Cancel
         </MxLink>

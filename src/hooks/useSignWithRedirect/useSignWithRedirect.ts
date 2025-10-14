@@ -3,14 +3,14 @@ import uniq from 'lodash/uniq';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useGetAccountInfo,
-  getAccountFromApi,
+  useGetNetworkConfig,
   checkIsValidSender,
-  useGetNetworkConfig
-} from 'lib';
-import { hookSelector } from 'redux/selectors';
-import { resetHook } from 'redux/slices';
-import { useValidateAndSignTxs } from './hooks';
-import { useReplyWithCancelled } from '../useReplyWithCancelled';
+  getAccountFromApi
+} from 'lib/sdkDapp';
+import { useValidateAndSignTxs } from './hooks/useValidateAndSignTxs';
+import { hookSelector } from '../../redux/selectors/hook';
+import { resetHook } from '../../redux/slices/hook';
+import { useReplyWithCancelled } from '../useReplyWithCancelled/useReplyWithCancelled';
 
 export const useSignWithRedirect = () => {
   const { hookUrl } = useSelector(hookSelector);

@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
+import { useGetAccountInfo, TokenType } from 'lib/sdkDapp';
 import { useSelector } from 'react-redux';
-import { MxLink, OutputContainer } from 'components';
-import { useGetAccountInfo, TokenType } from 'lib';
+import { MxLink } from 'components/MxLink';
+import { OutputContainer } from 'components/OutputContainer';
 import { DataTestIdsEnum } from 'localConstants';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { useLazyGetTokensQuery } from 'redux/endpoints';
 import { networkSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
 import { TokenRow } from './components';
 
 export const Tokens = () => {
@@ -27,7 +28,7 @@ export const Tokens = () => {
           <MxLink
             className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             data-testid={DataTestIdsEnum.issueTokenBtn}
-            to={routeNames.issueToken}
+            to={RouteNamesEnum.issueToken}
           >
             Issue Token
           </MxLink>
@@ -47,7 +48,7 @@ export const Tokens = () => {
         <MxLink
           className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
           data-testid={DataTestIdsEnum.issueTokenBtn}
-          to={routeNames.issueToken}
+          to={RouteNamesEnum.issueToken}
         >
           Issue Token
         </MxLink>

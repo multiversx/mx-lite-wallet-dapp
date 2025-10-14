@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useGetTokensWithEgld } from 'hooks';
-import { useGetAccountInfo, getEgldLabel } from 'lib';
+import { useGetAccountInfo, getEgldLabel } from 'lib/sdkDapp';
 import { useLazyGetCollectionsQuery } from 'redux/endpoints';
 import { SendTypeEnum, TokenOptionType } from 'types';
 

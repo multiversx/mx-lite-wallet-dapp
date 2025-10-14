@@ -1,11 +1,6 @@
-import {
-  formatAmount,
-  getEgldLabel,
-  DECIMALS,
-  DIGITS,
-  TokenType,
-  PartialNftType
-} from 'lib';
+import { formatAmount, DECIMALS, DIGITS } from 'lib/sdkDappUtils';
+import { getEgldLabel, TokenType } from 'lib/sdkDapp';
+import { PartialNftType } from 'lib/sdkDappForm';
 
 export const getSelectedTokenBalance = ({
   isNFT,

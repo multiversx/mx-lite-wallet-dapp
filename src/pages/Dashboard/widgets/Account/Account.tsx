@@ -1,17 +1,17 @@
 import QRCode from 'react-qr-code';
 
 import { useSelector } from 'react-redux';
-import { MxLink } from 'components';
+import { MxLink } from 'components/MxLink';
 import {
   useGetAccountInfo,
   FormatAmount,
   CopyButton,
   useGetNetworkConfig
-} from 'lib';
+} from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
+import { RouteNamesEnum } from 'localConstants/routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
@@ -71,14 +71,14 @@ export const Account = () => {
             <MxLink
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.sendBtn}
-              to={routeNames.send}
+              to={RouteNamesEnum.send}
             >
               Send
             </MxLink>
             <MxLink
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.signMessageBtn}
-              to={routeNames.signMessage}
+              to={RouteNamesEnum.signMessage}
             >
               Sign Message
             </MxLink>
@@ -86,7 +86,7 @@ export const Account = () => {
               <MxLink
                 className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
                 data-testid={DataTestIdsEnum.sovereignTransferBtn}
-                to={routeNames.sovereignTransfer}
+                to={RouteNamesEnum.sovereignTransfer}
               >
                 Sovereign Transfer
               </MxLink>
@@ -95,7 +95,7 @@ export const Account = () => {
               <MxLink
                 className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
                 data-testid={DataTestIdsEnum.registerTokenBtn}
-                to={routeNames.registerToken}
+                to={RouteNamesEnum.registerToken}
               >
                 Register Token
               </MxLink>

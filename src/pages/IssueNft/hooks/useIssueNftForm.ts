@@ -5,12 +5,14 @@ import { number, object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
 import {
   useGetAccount,
-  useGetNetworkConfig,
+  useGetNetworkConfig
+} from 'lib/sdkDapp';
+import {
   Address,
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig
-} from 'lib';
-import { CollectionType } from 'lib';
+} from 'lib/sdkCore';
+import { CollectionType } from 'lib/sdkDapp';
 import { useGetCollectionsQuery } from 'redux/endpoints';
 import { IssueNftFieldsEnum } from '../types';
 

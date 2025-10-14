@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
 import {
-  addressIsValid,
   useGetAccountInfo,
-  accountSelector,
-  getState,
   useGetNetworkConfig
-} from 'lib';
+} from 'lib/sdkDapp/sdkDapp.hooks';
+import { addressIsValid } from 'lib/sdkDapp/sdkDapp.utils';
+import { accountSelector } from 'lib/sdkDapp/sdkDapp.selectors';
+import { getState } from 'lib/sdkDapp/sdkDapp.store';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { networkSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
 import { SendTypeEnum } from 'types';
 import { addressIsHrp } from 'utils';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
@@ -77,7 +77,7 @@ export const useRegisterTokenForm = () => {
       const { nonce } = accountSelector(getState());
       transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
-      navigate(routeNames.dashboard);
+      navigate(RouteNamesEnum.dashboard);
     }
   });
 

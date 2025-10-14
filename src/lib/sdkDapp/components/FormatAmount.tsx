@@ -1,9 +1,9 @@
 import { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers';
 import { MvxFormatAmount } from '@multiversx/sdk-dapp-ui/react';
 import type { MvxFormatAmount as MvxFormatAmountPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-format-amount';
-import { WithClassnameType } from 'types';
-import { useGetNetworkConfig } from '../../sdkDapp';
-import { DECIMALS, DIGITS } from '../../sdkDappUtils';
+import { WithClassnameType } from '../../../types/withClassName.types';
+import { DECIMALS, DIGITS } from '../../sdkDappUtils/sdkDappUtils.constants';
+import { useGetNetworkConfig } from '../sdkDapp.hooks';
 
 interface FormatAmountPropsType
   extends Partial<MvxFormatAmountPropsType>,

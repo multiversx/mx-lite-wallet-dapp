@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Loader } from 'components';
-import { refreshAccount, useGetAccountInfo } from 'lib';
+import { Loader } from 'components/Loader';
+import { refreshAccount, useGetAccountInfo } from 'lib/sdkDapp';
 import {
   useGetFaucetSettingsQuery,
   useRequestFundsMutation

@@ -1,6 +1,6 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ProgressBar } from 'components';
+import { ProgressBar } from 'components/ProgressBar';
 import { DataTestIdsEnum } from 'localConstants';
 import {
   CreateDisclaimer,

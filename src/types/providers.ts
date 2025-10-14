@@ -1,4 +1,4 @@
-import { IProvider } from 'lib';
+import { IProvider } from 'lib/sdkDapp/sdkDapp.types';
 
 export interface IFileProvider {
   name: string;

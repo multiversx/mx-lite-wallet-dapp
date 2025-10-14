@@ -1,6 +1,6 @@
-import { Label } from 'components';
-import { CopyButton } from 'lib';
-import { Message } from 'lib';
+import { Label } from 'components/Label';
+import { Message } from 'lib/sdkCore';
+import { CopyButton } from 'lib/sdkDapp';
 import { decodeMessage } from '../helpers';
 
 interface VerifyMessagePropsType {

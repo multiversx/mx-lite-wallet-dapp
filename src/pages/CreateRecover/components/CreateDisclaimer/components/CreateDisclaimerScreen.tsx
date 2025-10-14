@@ -1,9 +1,10 @@
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, MxLink } from 'components';
-import { getEgldLabel } from 'lib';
+import { Button } from 'components/Button';
+import { MxLink } from 'components/MxLink';
+import { getEgldLabel } from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { isChromeIOS } from '../../../helpers';
 import { CreateDisclaimerReturnType } from '../hooks';
 
@@ -100,7 +101,7 @@ export const CreateDisclaimerScreen = ({
         <p>Already have a wallet?</p>
         <MxLink
           className='text-blue-400 underline decoration-dotted hover:decoration-solid'
-          to={routeNames.unlock}
+          to={RouteNamesEnum.unlock}
         >
           Access it
         </MxLink>

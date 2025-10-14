@@ -7,19 +7,20 @@ import {
   useReplyWithCancelled,
   useSignTxSchema
 } from 'hooks';
+import { Transaction } from 'lib/sdkCore';
+import { useGetLoginInfo } from 'lib/sdkDapp';
+import {
+  RequestMessageType,
+  WindowProviderRequestEnums,
+  WindowProviderResponseEnums
+} from 'lib/sdkDappWebWalletCrossWindowProvider';
 import {
   getLoginHookData,
   getSignHookData,
-  getSignMessageHookData,
-  RequestMessageType,
-  Transaction,
-  useGetLoginInfo,
-  WindowProviderRequestEnums,
-  WindowProviderResponseEnums
-} from 'lib';
-import { HooksEnum, HooksPageEnum } from 'localConstants';
+  getSignMessageHookData
+} from 'lib/sdkJsWebWalletIo';
+import { HooksEnum, HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
-import { routeNames } from 'routes';
 import { getIsInWebview } from 'utils/app';
 import {
   buildTransactionsQueryString,
@@ -96,7 +97,7 @@ export const PostMessageListener = () => {
           })
         );
 
-        navigate(routeNames.unlock);
+        navigate(RouteNamesEnum.unlock);
         break;
       }
 

@@ -6,9 +6,9 @@ import {
   WindowProviderResponseEnums,
   SignMessageStatusEnum,
   ReplyWithPostMessageType
-} from 'lib';
+} from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { resetHook } from 'redux/slices';
-import { routeNames } from 'routes';
 
 interface GetReplyDataPropsType {
   isSuccess: boolean;
@@ -42,7 +42,7 @@ export const useSignMessageCompleted = () => {
 
         replyToDapp(replyData);
         dispatch(resetHook());
-        navigate(routeNames.dashboard);
+        navigate(RouteNamesEnum.dashboard);
       } catch (e) {
         console.error('Something went wrong: ', e);
       }
