@@ -1,7 +1,7 @@
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from '../../../Button/Button';
 import { NotificationsFeedManager } from 'lib/sdkDapp/sdkDapp.utils';
+import { Button } from '../../../Button/Button';
 
 export const NotificationsButton = () => {
   const handleOpenNotificationsFeed = () => {

@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { MxLink } from 'components/MxLink';
 import { DataTestIdsEnum } from 'localConstants';
-import { networkSelector } from 'redux/selectors';
 import { RouteNamesEnum } from 'localConstants/routes';
+import { networkSelector } from 'redux/selectors';
 
 export const FaucetButton = () => {
   const { activeNetwork } = useSelector(networkSelector);

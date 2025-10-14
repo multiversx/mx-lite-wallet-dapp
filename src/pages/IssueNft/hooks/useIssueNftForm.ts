@@ -4,14 +4,11 @@ import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
 import {
-  useGetAccount,
-  useGetNetworkConfig
-} from 'lib/sdkDapp';
-import {
   Address,
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig
 } from 'lib/sdkCore';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDapp';
 import { CollectionType } from 'lib/sdkDapp';
 import { useGetCollectionsQuery } from 'redux/endpoints';
 import { IssueNftFieldsEnum } from '../types';

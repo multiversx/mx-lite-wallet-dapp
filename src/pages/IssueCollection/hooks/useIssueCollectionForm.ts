@@ -1,12 +1,12 @@
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
-import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDapp';
 import {
   Address,
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig
 } from 'lib/sdkCore';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDapp';
 import { NftEnumType } from 'lib/sdkDapp';
 import { CollectionTypeByNftEnum } from 'localConstants';
 import { IssueCollectionFieldsEnum } from '../types';

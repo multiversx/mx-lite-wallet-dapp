@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useGetAccountInfo, TokenType } from 'lib/sdkDapp';
 import { useSelector } from 'react-redux';
 import { MxLink } from 'components/MxLink';
 import { OutputContainer } from 'components/OutputContainer';
+import { useGetAccountInfo, TokenType } from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
 import { RouteNamesEnum } from 'localConstants/routes';
 import { useLazyGetTokensQuery } from 'redux/endpoints';

@@ -4,9 +4,9 @@ import { MxLink } from 'components/MxLink';
 import { OutputContainer } from 'components/OutputContainer';
 import { useGetAccountInfo } from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { networkSelector } from 'redux/selectors';
-import { RouteNamesEnum } from 'localConstants/routes';
 import { NFTRow } from './components';
 
 export const NFTs = () => {

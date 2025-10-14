@@ -9,9 +9,9 @@ import {
   useGetNetworkConfig
 } from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';
-import { RouteNamesEnum } from 'localConstants/routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();

@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Button } from 'components/Button';
 import { DataTestIdsEnum } from 'localConstants';
-import { RootState } from 'redux/store';
 import { RouteNamesEnum } from 'localConstants/routes';
+import { RootState } from 'redux/store';
 import { FaucetContent } from './components/FuacetContent/FaucetContent';
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 

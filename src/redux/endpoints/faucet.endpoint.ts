@@ -2,13 +2,13 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
 import { TOKENS_ENDPOINT } from 'lib/sdkDapp/sdkDapp.constants';
 import { getEgldLabel } from 'lib/sdkDapp/sdkDapp.utils';
+import { PartialNftType } from 'lib/sdkDappForm/sdkDappForm.types';
 import { formatAmount, stringIsInteger } from 'lib/sdkDappUtils/sdkDappUtils';
 import {
   DECIMALS,
   DIGITS,
   ZERO
 } from 'lib/sdkDappUtils/sdkDappUtils.constants';
-import { PartialNftType } from 'lib/sdkDappForm/sdkDappForm.types';
 
 import { RootApi } from 'redux/rootApi';
 import { getAxiosConfig, getExtrasApi } from 'utils';

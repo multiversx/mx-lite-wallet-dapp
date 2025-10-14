@@ -7,9 +7,9 @@ import {
   checkIsValidSender,
   getAccountFromApi
 } from 'lib/sdkDapp';
+import { hookSelector } from 'redux/selectors/hook';
+import { resetHook } from 'redux/slices/hook';
 import { useValidateAndSignTxs } from './hooks/useValidateAndSignTxs';
-import { hookSelector } from '../../redux/selectors/hook';
-import { resetHook } from '../../redux/slices/hook';
 import { useReplyWithCancelled } from '../useReplyWithCancelled/useReplyWithCancelled';
 
 export const useSignWithRedirect = () => {

@@ -1,8 +1,8 @@
 import { ProviderType } from 'lib/sdkDapp';
+import { setKeystoreLogin } from 'redux/slices/account';
+import { store } from 'redux/store';
 import { FileProviderEnum, IFileProviderOptions } from 'types/providers';
 import { KeystoreLoginPanel } from './KeystoreLoginPanel';
-import { setKeystoreLogin } from '../../redux/slices/account';
-import { store } from '../../redux/store';
 import { FileProvider } from '../FileProvider';
 
 export class KeystoreProvider extends FileProvider {

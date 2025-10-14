@@ -5,7 +5,7 @@ import {
   useGetNetworkConfig
 } from 'lib/sdkDapp/sdkDapp.hooks';
 import { TokenType } from 'lib/sdkDapp/sdkDapp.types';
-import { useLazyGetTokensQuery } from '../../redux/endpoints/tokens.endpoint';
+import { useLazyGetTokensQuery } from 'redux/endpoints/tokens.endpoint';
 
 const defaultValues = {
   owner: '',

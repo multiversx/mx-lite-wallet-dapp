@@ -9,9 +9,9 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib/sdkDapp/sdkDapp.hooks';
-import { addressIsValid } from 'lib/sdkDapp/sdkDapp.utils';
 import { accountSelector } from 'lib/sdkDapp/sdkDapp.selectors';
 import { getState } from 'lib/sdkDapp/sdkDapp.store';
+import { addressIsValid } from 'lib/sdkDapp/sdkDapp.utils';
 import { RouteNamesEnum } from 'localConstants/routes';
 import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';

@@ -1,6 +1,10 @@
 import { useSelector } from 'react-redux';
 import { networks } from 'config';
-import { initializeNetwork, EnvironmentsEnum, refreshAccount } from 'lib/sdkDapp';
+import {
+  initializeNetwork,
+  EnvironmentsEnum,
+  refreshAccount
+} from 'lib/sdkDapp';
 import { networkSelector } from 'redux/selectors';
 import { useRefreshNativeAuthTokenForNetwork } from './hooks';
 import { useSignMessage } from './hooks/useSignMessage';

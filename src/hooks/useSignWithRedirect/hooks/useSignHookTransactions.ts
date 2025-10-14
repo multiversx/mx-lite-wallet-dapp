@@ -8,8 +8,8 @@ import {
   TransactionManager,
   getAccountProvider
 } from 'lib/sdkDapp/sdkDapp.utils';
-import { parseSignUrl } from 'lib/sdkJsWebWalletIo/sdkJsWebWalletIo.utils';
 import { validateSignTransactions } from 'lib/sdkDappForm/sdkDappForm.utils';
+import { parseSignUrl } from 'lib/sdkJsWebWalletIo/sdkJsWebWalletIo.utils';
 import { createNewTransactionsFromRaw } from '../helpers/createNewTransactionsFromRaw';
 
 export interface ValidateAndSignTxsReturnType {

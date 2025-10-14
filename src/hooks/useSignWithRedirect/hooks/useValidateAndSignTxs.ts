@@ -8,10 +8,10 @@ import {
   ValidateAndSignTxsReturnType,
   useSignHookTransactions
 } from './useSignHookTransactions';
-import { hookSelector } from '../../../redux/selectors/hook';
-import { resetHook } from '../../../redux/slices/hook';
 import { useReplyWithCancelled } from '../../useReplyWithCancelled/useReplyWithCancelled';
 import { mapSignedTransactions } from '../helpers/mapSignedTransactions';
+import { hookSelector } from '../redux/selectors/hook';
+import { resetHook } from '../redux/slices/hook';
 
 /*
   This is a hook that validates and signs transactions as a two-step process
