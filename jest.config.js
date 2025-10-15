@@ -25,6 +25,7 @@ module.exports = {
     'ts',
     'web.js',
     'js',
+    'jsx',
     'cjs',
     'mjs',
     'web.ts',
