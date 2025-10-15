@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useGetAccountInfo } from 'lib/sdkDapp/sdkDapp.hooks';
 import { RouteNamesEnum } from 'localConstants/routes/routeNames.enums';
+import { hookSelector } from 'redux/selectors/hook';
+import { resetHook } from 'redux/slices/hook';
 import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
 import {
   ValidateAndSignTxsReturnType,
@@ -10,8 +12,6 @@ import {
 } from './useSignHookTransactions';
 import { useReplyWithCancelled } from '../../useReplyWithCancelled/useReplyWithCancelled';
 import { mapSignedTransactions } from '../helpers/mapSignedTransactions';
-import { hookSelector } from '../redux/selectors/hook';
-import { resetHook } from '../redux/slices/hook';
 
 /*
   This is a hook that validates and signs transactions as a two-step process
