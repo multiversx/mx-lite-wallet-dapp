@@ -2,9 +2,9 @@ import { MouseEvent } from 'react';
 import { faArrowUp, faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import { FormatAmount, TokenType } from 'lib';
+import { FormatAmount, TokenType } from 'lib/sdkDapp';
 import { SearchParamsEnum } from 'localConstants';
-import { sendRouteBuilder } from 'routes';
+import { sendRouteBuilder } from 'utils/routes';
 
 export const TokenRow = ({ token }: { token: TokenType }) => {
   const navigate = useNavigate();

@@ -7,21 +7,20 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, OutputContainer } from 'components';
+import { Button } from 'components/Button';
+import { OutputContainer } from 'components/OutputContainer';
 import { useReplyToDapp, useReplyWithCancelled } from 'hooks';
+import { Address, Message } from 'lib/sdkCore';
+import { getAccountProvider, useGetAccount } from 'lib/sdkDapp';
 import {
-  Address,
-  getAccountProvider,
-  Message,
-  useGetAccount,
-  parseQueryParams,
   WindowProviderResponseEnums,
   SignMessageStatusEnum
-} from 'lib';
+} from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { parseQueryParams } from 'lib/sdkJsWebWalletIo';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { hookSelector } from 'redux/selectors';
 import { resetHook } from 'redux/slices';
-import { routeNames } from 'routes';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {
@@ -123,7 +122,7 @@ export const SignMessage = () => {
 
   const handleCancel = () => {
     dispatch(resetHook());
-    navigate(routeNames.dashboard);
+    navigate(RouteNamesEnum.dashboard);
 
     if (hookUrl) {
       replyWithCancelled();

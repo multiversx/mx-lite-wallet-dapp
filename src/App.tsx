@@ -1,7 +1,9 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import { AxiosInterceptor, Layout, Utilities } from 'components';
+import { AxiosInterceptor } from 'components/AxiosInterceptor';
+import { Layout } from 'components/Layout';
+import { Utilities } from 'components/Utilities';
 
 import { PageNotFound } from 'pages';
 import { routes } from 'routes';

@@ -1,4 +1,4 @@
-import { FeaturePageLayout } from 'components';
+import { FeaturePageLayout } from 'components/Layout/FeaturePageLayout';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
@@ -26,7 +26,7 @@ import { IssueToken } from '../pages/IssueToken/IssueToken';
 
 export interface RouteType {
   authenticatedRoute?: boolean;
-  path: RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum;
+  path: string;
   title: string;
   component: React.ComponentType;
   children?: RouteType[];
@@ -162,28 +162,3 @@ const routesObject: Partial<
 };
 
 export const routes: RouteType[] = Object.values(routesObject);
-
-export const routeNames = Object.keys(RouteNamesEnum).reduce(
-  (acc, key) => {
-    const name = key as keyof typeof RouteNamesEnum;
-    return {
-      ...acc,
-      [name]: RouteNamesEnum[name]
-    };
-  },
-  {} as { [key in keyof typeof RouteNamesEnum]: string }
-);
-
-export const sendRouteBuilder = (params?: Record<string, string>) => {
-  const url = new URL(`${window.location.origin}${RouteNamesEnum.send}`);
-
-  if (!params) {
-    return url.pathname;
-  }
-
-  for (const key in params) {
-    url.searchParams.set(key, params[key]);
-  }
-
-  return `${url.pathname}?${url.searchParams}`;
-};

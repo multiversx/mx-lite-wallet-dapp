@@ -2,14 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from 'hooks';
-import {
-  getLogoutHookData,
-  replyToDapp,
-  WindowProviderResponseEnums
-} from 'lib';
-import { HooksEnum, HooksPageEnum } from 'localConstants';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { getLogoutHookData, replyToDapp } from 'lib/sdkJsWebWalletIo';
+import { HooksEnum, HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
-import { routeNames } from 'routes';
 import { HookValidationOutcome } from '../HookValidationOutcome';
 import { HookStateEnum } from '../types';
 
@@ -34,7 +30,7 @@ export const LogoutHook = () => {
     if (!data) {
       console.error('hook data is missing');
       setValidUrl(HookStateEnum.invalid);
-      return navigate(routeNames.logout, {
+      return navigate(RouteNamesEnum.logout, {
         state: { caller: 'LogoutHook' }
       });
     }

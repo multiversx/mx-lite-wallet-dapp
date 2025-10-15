@@ -8,7 +8,7 @@ import {
   EnvironmentsEnum,
   useGetAccount,
   useGetNetworkConfig
-} from 'lib';
+} from 'lib/sdkDapp';
 import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';
 import { addressIsHrp, getSelectedTokenBalance } from 'utils';

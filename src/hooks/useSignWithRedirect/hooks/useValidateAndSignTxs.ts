@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useReplyWithCancelled } from 'hooks';
-import { useGetAccountInfo } from 'lib';
-
-import { hookSelector } from 'redux/selectors';
-import { resetHook } from 'redux/slices';
-import { routeNames } from 'routes';
+import { useGetAccountInfo } from 'lib/sdkDapp/sdkDapp.hooks';
+import { RouteNamesEnum } from 'localConstants/routes/routeNames.enums';
+import { hookSelector } from 'redux/selectors/hook';
+import { resetHook } from 'redux/slices/hook';
 import { useReplyWithSignedTransactions } from './useReplyWithSignedTransactions';
 import {
   ValidateAndSignTxsReturnType,
   useSignHookTransactions
 } from './useSignHookTransactions';
-import { mapSignedTransactions } from '../helpers';
+import { useReplyWithCancelled } from '../../useReplyWithCancelled/useReplyWithCancelled';
+import { mapSignedTransactions } from '../helpers/mapSignedTransactions';
 
 /*
   This is a hook that validates and signs transactions as a two-step process
@@ -76,7 +75,7 @@ export const useValidateAndSignTxs = (): ValidateAndSignTxsReturnType => {
     }
 
     dispatch(resetHook());
-    navigate(routeNames.dashboard);
+    navigate(RouteNamesEnum.dashboard);
   };
 
   useEffect(() => {

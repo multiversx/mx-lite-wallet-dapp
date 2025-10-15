@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useSignTxSchema } from 'hooks/useSignTxSchema';
-import { getSignHookData } from 'lib';
+import { getSignHookData } from 'lib/sdkJsWebWalletIo';
 import { HooksEnum, HooksPageEnum } from 'localConstants';
 import { setHook } from 'redux/slices';
 import { HookValidationOutcome } from '../HookValidationOutcome';

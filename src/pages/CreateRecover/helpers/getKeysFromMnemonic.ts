@@ -1,4 +1,4 @@
-import { UserSecretKey, UserWallet, Mnemonic } from 'lib';
+import { UserSecretKey, UserWallet, Mnemonic } from 'lib/sdkCore';
 
 interface GetKeysFromMnemonicParamsType {
   mnemonic: string;

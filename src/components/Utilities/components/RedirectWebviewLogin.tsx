@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { decodeNativeAuthToken, useGetIsLoggedIn } from 'lib';
+import { decodeNativeAuthToken, useGetIsLoggedIn } from 'lib/sdkDapp';
 import { ACCESS_TOKEN_KEY } from 'localConstants/misc';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { accessTokenRedirectRouteSelector } from 'redux/selectors';
 import { setAccessTokenRedirectRoute } from 'redux/slices';
-import { routeNames } from 'routes';
 
 export const RedirectWebviewLogin = () => {
   const [searchParams] = useSearchParams();
@@ -19,12 +19,12 @@ export const RedirectWebviewLogin = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const isDoneLoggingIn = isLoggedIn && pathname === routeNames.dashboard;
+    const isDoneLoggingIn = isLoggedIn && pathname === RouteNamesEnum.dashboard;
 
     if (
       isDoneLoggingIn &&
       accessTokenRedirectRoute &&
-      accessTokenRedirectRoute !== routeNames.dashboard
+      accessTokenRedirectRoute !== RouteNamesEnum.dashboard
     ) {
       dispatch(setAccessTokenRedirectRoute(''));
       navigate(accessTokenRedirectRoute);
@@ -38,16 +38,20 @@ export const RedirectWebviewLogin = () => {
     }
 
     const isNativeAuthToken = decodeNativeAuthToken(accessToken);
-    const isValidRoute = Object.values(routeNames).includes(pathname);
+    const isValidRoute = Object.values(RouteNamesEnum).includes(
+      pathname as RouteNamesEnum
+    );
     const shouldSetRedirectPathname =
       isNativeAuthToken &&
       isValidRoute &&
-      ![routeNames.unlock, routeNames.logout].includes(pathname);
+      ![RouteNamesEnum.unlock, RouteNamesEnum.logout].includes(
+        pathname as RouteNamesEnum
+      );
 
     if (shouldSetRedirectPathname) {
       const redirectPathname =
-        !pathname || pathname === routeNames.home
-          ? routeNames.dashboard
+        !pathname || pathname === RouteNamesEnum.home
+          ? RouteNamesEnum.dashboard
           : pathname;
 
       dispatch(setAccessTokenRedirectRoute(redirectPathname));

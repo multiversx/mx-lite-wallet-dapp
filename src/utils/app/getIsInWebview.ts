@@ -1,4 +1,4 @@
-import { getAccountProvider } from 'lib';
+import { getAccountProvider } from 'lib/sdkDapp';
 import { accountSelector } from 'redux/selectors';
 import { RootState, store } from 'redux/store';
 

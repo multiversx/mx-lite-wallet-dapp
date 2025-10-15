@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { useGetLoginInfo } from 'lib';
+import { useGetLoginInfo } from 'lib/sdkDapp';
 import { IS_TEST } from 'localConstants';
 import { accountSelector } from 'redux/selectors';
 import { retry } from 'utils';

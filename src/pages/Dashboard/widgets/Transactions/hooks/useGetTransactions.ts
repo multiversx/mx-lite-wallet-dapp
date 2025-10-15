@@ -6,7 +6,7 @@ import {
   ServerTransactionType,
   useGetAccount,
   useGetNetworkConfig
-} from 'lib';
+} from 'lib/sdkDapp';
 import { TransactionsPropsType } from '../types';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {

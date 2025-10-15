@@ -4,14 +4,16 @@ import {
   SmartContractTransactionsFactory,
   Token,
   TransactionsFactoryConfig,
-  NftEnumType,
-  PartialNftType,
-  TokenType,
-  EsdtEnumType,
-  CollectionType,
   StringValue,
   U32Value
-} from 'lib';
+} from 'lib/sdkCore';
+import {
+  NftEnumType,
+  TokenType,
+  EsdtEnumType,
+  CollectionType
+} from 'lib/sdkDapp';
+import { PartialNftType } from 'lib/sdkDappForm';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
 import { RegisterTokenFormType } from '../types';
 

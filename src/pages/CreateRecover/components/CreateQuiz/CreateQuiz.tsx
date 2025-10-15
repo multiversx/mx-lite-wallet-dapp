@@ -1,7 +1,7 @@
 import { MouseEventHandler, useState } from 'react';
 import { Formik } from 'formik';
 import Select from 'react-select';
-import { Button } from 'components';
+import { Button } from 'components/Button';
 import { DataTestIdsEnum } from 'localConstants';
 import { getCompareObject } from './getCompareObject';
 import { mnemonicValidation } from './mnemonicValidation';

@@ -1,4 +1,5 @@
 export * from './api';
+export * from './network';
 export * from './profile.types';
 export * from './send.types';
 export * from './transaction.types';

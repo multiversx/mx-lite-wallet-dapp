@@ -1,4 +1,4 @@
-import { NetworkType } from '../redux/slices';
+import { NetworkType } from 'types/network';
 
 export * from './sharedConfig';
 

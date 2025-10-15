@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Transaction } from 'lib/sdkCore';
 import {
   getAccountProvider,
   ProviderTypeEnum,
-  Transaction,
   TransactionsDisplayInfoType,
   useGetAccountInfo,
   useGetPendingTransactions,
   getActiveTransactionsStatus
-} from 'lib';
+} from 'lib/sdkDapp';
 
 import { sendAndTrackTransactions } from './helpers/sendAndTrackTransactions';
 

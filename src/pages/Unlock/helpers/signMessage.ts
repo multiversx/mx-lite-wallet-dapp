@@ -1,4 +1,9 @@
-import { Message, UserSecretKey, UserSigner, MessageComputer } from 'lib';
+import {
+  Message,
+  UserSecretKey,
+  UserSigner,
+  MessageComputer
+} from 'lib/sdkCore';
 
 interface SignMessageParams {
   message: Message;

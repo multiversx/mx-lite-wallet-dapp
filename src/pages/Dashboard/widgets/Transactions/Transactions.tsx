@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { OutputContainer } from 'components';
-import { getActiveTransactionsStatus, TransactionsTable } from 'lib';
+import { OutputContainer } from 'components/OutputContainer';
+import { getActiveTransactionsStatus, TransactionsTable } from 'lib/sdkDapp';
 import { networkSelector } from 'redux/selectors';
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';

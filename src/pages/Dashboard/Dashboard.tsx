@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useScrollToElement, useSignWithRedirect } from 'hooks';
-import { refreshAccount, useGetAccountInfo } from 'lib';
+import { refreshAccount, useGetAccountInfo } from 'lib/sdkDapp';
 import { WidgetType } from 'types/widget.types';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Widget } from './components';

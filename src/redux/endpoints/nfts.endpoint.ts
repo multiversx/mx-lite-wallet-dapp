@@ -2,10 +2,10 @@ import {
   ACCOUNTS_ENDPOINT,
   COLLECTIONS_ENDPOINT,
   NFTS_ENDPOINT,
-  ROLES_ENDPOINT
-} from 'lib';
-import { CollectionType } from 'lib';
-import { PartialNftType } from 'lib';
+  ROLES_ENDPOINT,
+  CollectionType
+} from 'lib/sdkDapp';
+import { PartialNftType } from 'lib/sdkDappForm';
 import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
 
 import { GetNftsType } from 'types';

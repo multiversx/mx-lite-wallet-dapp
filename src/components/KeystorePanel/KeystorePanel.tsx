@@ -1,9 +1,12 @@
 import { useCallback, useState, useEffect, ChangeEvent } from 'react';
-import { AddressScreens } from 'components';
-import { FileLoginPanel, FileLoginFormValues } from 'components/FileLoginPanel';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import { accessWallet } from '../../providers/Keystore/accessWallet';
 import { parseKeystoreJSON } from '../../providers/Keystore/parseKeystoreJSON';
+import { AddressScreens } from '../AddressScreens/AddressScreens';
+import {
+  FileLoginPanel,
+  FileLoginFormValues
+} from '../FileLoginPanel/FileLoginPanel';
 
 const styles = {
   container: {

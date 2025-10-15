@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from 'components';
-import { CopyButton } from 'lib';
+import { Button } from 'components/Button';
+import { CopyButton } from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
 
 interface CreateMnemonicsPropsType {

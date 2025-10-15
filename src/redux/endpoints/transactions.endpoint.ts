@@ -2,7 +2,7 @@ import {
   ACCOUNTS_ENDPOINT,
   TRANSACTIONS_ENDPOINT,
   ServerTransactionType
-} from 'lib';
+} from 'lib/sdkDapp';
 
 import { API_CACHE_DURATION_SECONDS, MAX_API_SIZE } from 'localConstants';
 

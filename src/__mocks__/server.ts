@@ -1,7 +1,7 @@
 import { http } from 'msw';
 import { setupWorker } from 'msw/browser';
 
-import { GAS_LIMIT } from 'lib';
+import { GAS_LIMIT } from 'lib/sdkDapp';
 import {
   testNetwork,
   keystoreAccount,

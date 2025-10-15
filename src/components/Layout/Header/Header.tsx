@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, MxLink, NetworkSwitcher } from 'components';
-import { getAccountProvider, useGetIsLoggedIn } from 'lib';
-import { RouteNamesEnum } from 'localConstants';
-import { ConnectButton } from './components';
+import { useGetIsLoggedIn } from 'lib/sdkDapp/sdkDapp.hooks';
+import { getAccountProvider } from 'lib/sdkDapp/sdkDapp.utils';
+import { RouteNamesEnum } from 'localConstants/routes/routeNames.enums';
+import { ConnectButton } from './components/ConnectButton';
 import { NotificationsButton } from './components/NotificationsButton';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
+import { Button } from '../../Button/Button';
+import { MxLink } from '../../MxLink/MxLink';
+import { NetworkSwitcher } from '../../NetworkSwitcher/NetworkSwitcher';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();

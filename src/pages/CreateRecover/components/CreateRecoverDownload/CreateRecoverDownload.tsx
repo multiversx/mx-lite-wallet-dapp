@@ -1,16 +1,8 @@
-import { ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 import { DataTestIdsEnum, IS_TEST } from 'localConstants';
-
-import { CreateRecoverDownloadScreen } from './components';
+import { CreateRecoverDownloadScreen } from './CreateRecoverDownloadScreen';
+import { CreateRecoverDownloadType } from './types';
 import { downloadFile } from '../../helpers';
-
-export interface CreateRecoverDownloadType {
-  accessWalletBtnLabel?: string;
-  createdAddress: string;
-  hasDownload?: boolean;
-  infoSection?: ReactNode;
-  keystoreString: string;
-}
 
 export const CreateRecoverDownload = ({
   keystoreString,

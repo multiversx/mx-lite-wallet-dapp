@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
-import { SidePanel } from 'components';
+import { SidePanel } from '../SidePanel';
 
 export interface PanelWrapperProps extends PropsWithChildren {
   isOpen: boolean;

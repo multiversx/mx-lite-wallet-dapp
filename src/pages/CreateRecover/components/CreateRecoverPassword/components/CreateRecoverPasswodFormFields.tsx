@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { Button, PasswordVisibilityToggle } from 'components';
+import { Button } from 'components/Button';
+import { PasswordVisibilityToggle } from 'components/PasswordVisibilityToggle';
 import { useBooleanStateToggle } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
 import { getFormHasError } from 'utils';

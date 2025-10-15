@@ -1,12 +1,8 @@
-import {
-  DEFAULT_PAGE_LOAD_DELAY_MS,
-  WALLET_SOURCE_ORIGIN
-} from '__mocks__/data';
+import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   getByDataTestId,
   loginWithKeystore,
-  sleep,
   waitForUrlToMatch
 } from 'utils/testUtils/puppeteer';
 
@@ -20,7 +16,10 @@ describe('Cancel sign message tests', () => {
     );
 
     await loginWithKeystore({ skipLoginCheck: true });
-    await sleep(DEFAULT_PAGE_LOAD_DELAY_MS);
+
+    await waitForUrlToMatch({
+      expectedUrl: `${WALLET_SOURCE_ORIGIN}/sign-message`
+    });
 
     const signMessageBtn = await page.waitForSelector(
       getByDataTestId(DataTestIdsEnum.signMessageBtn)

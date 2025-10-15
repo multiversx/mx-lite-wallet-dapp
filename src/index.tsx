@@ -1,6 +1,6 @@
 import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
-import { initApp } from 'lib';
+import { initApp } from 'lib/sdkDapp';
 import { FileProviderEnum, IFileProvider, IFileProviderOptions } from 'types';
 import { getCurrentNetwork } from 'utils/api/getCurrentNetwork';
 import { App } from './App';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Button } from 'components';
+import { Button } from 'components/Button';
 import { DataTestIdsEnum } from 'localConstants';
 import { FaucetSettingsReturnType } from 'redux/endpoints';
 

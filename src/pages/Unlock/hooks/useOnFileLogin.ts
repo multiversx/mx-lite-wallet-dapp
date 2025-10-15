@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { useRedirectPathname } from 'hooks';
-import { Message, Address, useGetAccount } from 'lib';
-import { nativeAuth } from 'lib';
+import { Message, Address } from 'lib/sdkCore';
+import { useGetAccount, nativeAuth } from 'lib/sdkDapp';
 import { hookSelector } from 'redux/selectors';
 
 import {

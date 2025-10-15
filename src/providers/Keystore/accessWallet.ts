@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { UserSecretKey, UserWallet } from 'lib';
+import { UserSecretKey, UserWallet } from 'lib/sdkCore';
 
 export interface AccessWalletType {
   kdContent: { [key: string]: any };

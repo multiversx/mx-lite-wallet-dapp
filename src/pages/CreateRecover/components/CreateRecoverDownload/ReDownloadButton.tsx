@@ -1,4 +1,4 @@
-import { Button } from 'components';
+import { Button } from 'components/Button';
 import { downloadFile } from '../../helpers';
 
 export interface ReDownloadButtonPropsType extends React.PropsWithChildren {

@@ -1,9 +1,7 @@
 import { useSelector } from 'react-redux';
-import {
-  replyToDapp,
-  WindowProviderResponseEnums,
-  IPlainTransactionObject
-} from 'lib';
+import { IPlainTransactionObject } from 'lib/sdkCore';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { replyToDapp } from 'lib/sdkJsWebWalletIo';
 import { hookSelector } from 'redux/selectors';
 
 interface ReplyWithSignedTransactionsType {

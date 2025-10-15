@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { DraggableArea } from 'react-draggable-tags';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
+import { Button } from 'components/Button';
+import { MxLink } from 'components/MxLink';
 import { DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { RecoverMnemonicsPropsType, useRecoverMnemonics } from './hooks';
 import { isChromeIOS, mnemonicWords as allMnemonicWords } from '../../helpers';
 import { SelectOptionType } from '../../types';
@@ -35,7 +36,7 @@ export const RecoverMnemonics = ({
   const goToUnlockSection = (
     <MxLink
       className='text-blue-400 underline decoration-dotted hover:decoration-solid'
-      to={routeNames.unlock}
+      to={RouteNamesEnum.unlock}
     >
       Back to unlock
     </MxLink>

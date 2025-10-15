@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { MxLink, OutputContainer } from 'components';
-import { useGetAccountInfo } from 'lib';
+import { MxLink } from 'components/MxLink';
+import { OutputContainer } from 'components/OutputContainer';
+import { useGetAccountInfo } from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
 import { networkSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
 import { NFTRow } from './components';
 
 export const NFTs = () => {
@@ -27,14 +28,14 @@ export const NFTs = () => {
           <MxLink
             className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             data-testid={DataTestIdsEnum.issueNftBtn}
-            to={routeNames.createNft}
+            to={RouteNamesEnum.createNft}
           >
             Create NFT
           </MxLink>
           <MxLink
             className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             data-testid={DataTestIdsEnum.issueCollectionBtn}
-            to={routeNames.issueCollection}
+            to={RouteNamesEnum.issueCollection}
           >
             Issue Collection
           </MxLink>
@@ -55,14 +56,14 @@ export const NFTs = () => {
         <MxLink
           className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
           data-testid={DataTestIdsEnum.issueNftBtn}
-          to={routeNames.createNft}
+          to={RouteNamesEnum.createNft}
         >
           Create NFT
         </MxLink>
         <MxLink
           className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
           data-testid={DataTestIdsEnum.issueCollectionBtn}
-          to={routeNames.issueCollection}
+          to={RouteNamesEnum.issueCollection}
         >
           Issue Collection
         </MxLink>

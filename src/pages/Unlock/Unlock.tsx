@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UnlockPanelManager, useGetLoginInfo } from 'lib';
-import { RouteNamesEnum } from 'localConstants';
+import { UnlockPanelManager, useGetLoginInfo } from 'lib/sdkDapp';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { useUnlockRedirect } from './hooks';
 
 export const Unlock = () => {

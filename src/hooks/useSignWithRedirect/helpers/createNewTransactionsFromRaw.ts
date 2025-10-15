@@ -1,4 +1,4 @@
-import { Transaction } from 'lib';
+import { Transaction } from 'lib/sdkCore';
 import {
   CreateNewTransactionsFromRawParamsType,
   prepareRawTransactions
