@@ -3,26 +3,27 @@ import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSearchParams } from 'react-router-dom';
 import { number, object, string } from 'yup';
-import { getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
 import {
-  prepareTransaction,
   getEgldLabel,
   useGetAccountInfo,
   useGetNetworkConfig,
+  addressIsValid,
+  GAS_LIMIT,
+  GAS_PRICE
+} from 'lib/sdkDapp';
+import {
+  prepareTransaction,
   computeNftDataField,
   computeTokenDataField,
   calculateNftGasLimit,
-  addressIsValid,
-  calculateGasLimit
-} from 'lib';
-import {
-  DECIMALS,
-  GAS_LIMIT,
-  GAS_PRICE,
-  SearchParamsEnum
-} from 'localConstants';
-import { SendTypeEnum, TokenOptionType, PartialNftType } from 'types';
+  calculateGasLimit,
+  PartialNftType
+} from 'lib/sdkDappForm';
+import { DECIMALS } from 'lib/sdkDappUtils';
+import { SearchParamsEnum } from 'localConstants';
+import { SendTypeEnum, TokenOptionType } from 'types';
+import { getSelectedTokenBalance } from 'utils';
 import { FormFieldsEnum } from '../types';
 
 export const useSendForm = () => {

@@ -1,9 +1,7 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
-import { ModalContainer, ProgressBar } from 'components';
+import { ProgressBar } from 'components/ProgressBar';
 import { DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
 import {
   CreateDisclaimer,
   CreateMnemonics,
@@ -30,12 +28,7 @@ export const CreateRecover = () => {
     setKeystoreString,
     setMnemonic
   } = useCreateRecoverState();
-  const navigate = useNavigate();
   const progressBarPercentageFill = Math.round((currentStep * 100) / steps);
-
-  const handleOnClose = () => {
-    navigate(routeNames.unlock);
-  };
 
   const stepComponents = [
     ...(isCreateRoute
@@ -58,11 +51,9 @@ export const CreateRecover = () => {
   ];
 
   return (
-    <ModalContainer
-      className='login-modal'
-      data-testid={DataTestIdsEnum.createWalletModal}
-      onClose={handleOnClose}
-      visible
+    <div
+      className='login-panel'
+      data-testid={DataTestIdsEnum.createWalletPanel}
     >
       {showBackButton && (
         <button
@@ -77,7 +68,7 @@ export const CreateRecover = () => {
           <ProgressBar progress={progressBarPercentageFill} />
           <h1
             className='text-2xl whitespace-nowrap mt-2'
-            data-testid={DataTestIdsEnum.modalTitle}
+            data-testid={DataTestIdsEnum.panelTitle}
           >
             {currentTitle}
           </h1>
@@ -85,6 +76,6 @@ export const CreateRecover = () => {
 
         {stepComponents[currentStep]}
       </div>
-    </ModalContainer>
+    </div>
   );
 };

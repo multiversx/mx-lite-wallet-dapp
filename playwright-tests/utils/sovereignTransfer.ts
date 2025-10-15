@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
+import { AccountStatesEnum, GlobalDataEnum } from './enums';
 import { DataTestIdsEnum } from '../../src/localConstants/dataTestIds.enum';
-import { AccountStatesEnum, GlobalDataEnum } from '../utils/enums.ts';
 
 type SovereignTransferType = {
   page: Page;

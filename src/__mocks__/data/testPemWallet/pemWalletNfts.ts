@@ -1,4 +1,4 @@
-import { keystoreAccount } from '../testKeystoreWallet';
+import { pemAccount } from './pemAccount';
 
 export const pemWalletNfts = [
   {
@@ -8,7 +8,7 @@ export const pemWalletNfts = [
     nonce: 1,
     type: 'SemiFungibleESDT',
     name: 'Day One',
-    creator: keystoreAccount.address,
+    creator: pemAccount.address,
     royalties: 6,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1iZkd4d1dER25VTmNXNHIxRHdQdkU5aFJtMTl2azZQdmtGSG1pQnJjSEsyVw=='

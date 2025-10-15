@@ -2,22 +2,27 @@ import BigNumber from 'bignumber.js';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { array, number, object, string } from 'yup';
-import { addressIsErd, getSelectedTokenBalance } from 'helpers';
 import { useSendTransactions, useTokenOptions } from 'hooks';
-import { addressIsValid, useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import {
+  addressIsValid,
+  EnvironmentsEnum,
+  useGetAccount,
+  useGetNetworkConfig
+} from 'lib/sdkDapp';
 import { networkSelector } from 'redux/selectors';
 import { SendTypeEnum } from 'types';
+import { addressIsHrp, getSelectedTokenBalance } from 'utils';
 import { getSovereignTransferTransaction } from '../helpers';
 import { SovereignTransferFormFieldsEnum } from '../types';
 
 export const useSovereignTransferForm = () => {
-  const { address } = useGetAccountInfo();
+  const { address } = useGetAccount();
   const {
     network: { chainId }
   } = useGetNetworkConfig();
 
   const {
-    activeNetwork: { sovereignContractAddress }
+    activeNetwork: { sovereignContractAddress, hrp }
   } = useSelector(networkSelector);
 
   const { sendTransactions } = useSendTransactions();
@@ -51,14 +56,14 @@ export const useSovereignTransferForm = () => {
         .test(
           'addressIsValid',
           'Address is invalid',
-          (value) => !value || addressIsValid(value) || addressIsErd(value)
+          (value) => !value || addressIsValid(value) || addressIsHrp(value, hrp)
         )
         .required('Receiver is required'),
       [SovereignTransferFormFieldsEnum.contract]: string()
         .test(
           'addressIsValid',
           'Contract is invalid',
-          (value) => !value || addressIsValid(value)
+          (value) => !value || addressIsValid(value) || addressIsHrp(value, hrp)
         )
         .required('Contract is required'),
       [SovereignTransferFormFieldsEnum.tokens]: array().of(
@@ -107,9 +112,9 @@ export const useSovereignTransferForm = () => {
       )
     }),
     onSubmit: async (values) => {
-      const transaction = getSovereignTransferTransaction({
+      const transaction = await getSovereignTransferTransaction({
         address,
-        chainId,
+        chainId: chainId as EnvironmentsEnum,
         tokens: allTokens,
         values
       });

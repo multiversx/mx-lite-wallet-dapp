@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { useGetAccount } from 'lib';
+import { PropsWithChildren, useEffect } from 'react';
+import { useGetAccount } from 'lib/sdkDapp';
 import {
   handleError,
   useSetNativeAuthInterceptors,
   useSetResponseInterceptors
 } from './helpers';
 
-export const AxiosInterceptor = ({ children }: React.PropsWithChildren) => {
+export const AxiosInterceptor = ({ children }: PropsWithChildren) => {
   const { setNativeAuthTokenInterceptors, nativeAuthToken } =
     useSetNativeAuthInterceptors();
   const { address } = useGetAccount();

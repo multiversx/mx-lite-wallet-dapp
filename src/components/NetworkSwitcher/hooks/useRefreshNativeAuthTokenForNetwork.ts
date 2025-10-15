@@ -1,25 +1,27 @@
 import { useDispatch } from 'react-redux';
 import { useSetNativeAuthInterceptors } from 'components/AxiosInterceptor/helpers';
 import { networks } from 'config';
-import { useLoginService, Message } from 'lib';
-import { useGetNativeAuthConfig } from 'pages/Unlock/hooks';
+import { Message } from 'lib/sdkCore';
+import {
+  setNativeAuthConfig,
+  refreshNativeAuthTokenLogin,
+  getDefaultNativeAuthConfig,
+  useGetLoginInfo
+} from 'lib/sdkDapp';
 import { changeNetwork } from 'redux/slices';
 
 export const useRefreshNativeAuthTokenForNetwork = () => {
-  const nativeAuthConfig = useGetNativeAuthConfig();
-  const loginService = useLoginService(nativeAuthConfig);
   const dispatch = useDispatch();
   const { setNativeAuthTokenInterceptors } = useSetNativeAuthInterceptors();
+  const { isLoggedIn } = useGetLoginInfo();
 
   return async ({
+    apiAddress,
     networkId,
-    origin,
-    preventPageReload,
     signMessageCallback
   }: {
     networkId: string;
-    origin: string;
-    preventPageReload?: boolean;
+    apiAddress: string;
     signMessageCallback: (messageToSign: Message) => Promise<Message>;
   }) => {
     const foundNetwork = networks.find(({ id }) => id === networkId);
@@ -29,26 +31,23 @@ export const useRefreshNativeAuthTokenForNetwork = () => {
     }
 
     try {
-      const nativeAuthToken = await loginService.refreshNativeAuthTokenLogin({
-        signMessageCallback,
-        nativeAuthClientConfig: {
-          origin,
-          apiAddress: foundNetwork?.apiAddress,
-          expirySeconds: 86400
-        }
-      });
+      const nativeAuthConfig = getDefaultNativeAuthConfig({ apiAddress });
+      setNativeAuthConfig(nativeAuthConfig);
 
-      setNativeAuthTokenInterceptors(nativeAuthToken);
+      if (isLoggedIn) {
+        const nativeAuthToken = await refreshNativeAuthTokenLogin({
+          signMessageCallback: signMessageCallback,
+          nativeAuthClientConfig: {
+            apiAddress
+          }
+        });
+
+        setNativeAuthTokenInterceptors(nativeAuthToken);
+      }
     } catch (error) {
       console.error('Could not refresh nativeAuth token', error);
     }
 
     dispatch(changeNetwork(foundNetwork));
-
-    if (!preventPageReload) {
-      setTimeout(() => {
-        window.location.reload();
-      });
-    }
   };
 };

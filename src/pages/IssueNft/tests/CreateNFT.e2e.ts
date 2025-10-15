@@ -1,23 +1,17 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
+import { keystoreAccount } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToContainText,
   expectInputToHaveValue,
-  getByDataTestId,
-  loginWithKeystore
+  getByDataTestId
 } from 'utils/testUtils/puppeteer';
+import { navigateToIssueNftPage } from './helpers';
 
 describe('Issue NFT test', () => {
   it('should create a new NFT successfully', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
-      waitUntil: 'domcontentloaded'
-    });
-
-    await loginWithKeystore();
-    await page.click(getByDataTestId(DataTestIdsEnum.issueNftBtn));
-    await expect(page.url()).toEqual(`${WALLET_SOURCE_ORIGIN}/create-nft`);
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.issueNftBtn));
+    await navigateToIssueNftPage();
     await page.keyboard.press('Tab');
     await page.type('#react-select-2-input', 'SFT');
     await page.keyboard.press('Enter');
@@ -55,9 +49,15 @@ describe('Issue NFT test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.issueNftBtn));
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction([
+      {
+        amount: '0',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
+        gasLimit: '3.153.008',
+        data: 'ESDTNFTCreate@5346542d333834313038@01@4e4654544f4b454e@03e8@@@'
+      }
+    ]);
   });
 });

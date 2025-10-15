@@ -2,17 +2,15 @@ import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
 import {
-  useGetAccount,
-  useGetNetworkConfig,
-  maxDecimals,
-  stringIsFloat,
   Address,
   TokenManagementTransactionsFactory,
-  TransactionsFactoryConfig,
-  parseAmount
-} from 'lib';
+  TransactionsFactoryConfig
+} from 'lib/sdkCore';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
+import { maxDecimals } from 'lib/sdkDapp/sdkDapp.utils';
+import { stringIsFloat, parseAmount } from 'lib/sdkDappUtils/sdkDappUtils';
+import { DECIMALS } from 'lib/sdkDappUtils/sdkDappUtils.constants';
 
-import { DECIMALS } from 'localConstants';
 import { IssueTokenFieldsEnum } from '../types';
 
 export const useIssueTokenForm = () => {
@@ -67,7 +65,7 @@ export const useIssueTokenForm = () => {
         )
     }),
     onSubmit: async (values) => {
-      const transaction = factory.createTransactionForIssuingFungible(
+      const transaction = await factory.createTransactionForIssuingFungible(
         new Address(address),
         {
           tokenName: values.tokenName,

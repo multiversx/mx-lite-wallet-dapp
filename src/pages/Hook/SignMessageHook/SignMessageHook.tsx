@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getSignMessageHookData } from 'lib';
-import { HooksEnum, HooksPageEnum } from 'localConstants';
+import { getSignMessageHookData } from 'lib/sdkJsWebWalletIo';
+import { HooksEnum } from 'localConstants';
+import { hookSelector } from 'redux/selectors';
 import { setHook } from 'redux/slices';
 import { HookValidationOutcome } from '../HookValidationOutcome';
 import { HookStateEnum } from '../types';
@@ -10,12 +11,12 @@ import { HookStateEnum } from '../types';
 export const SignMessageHook = () => {
   const dispatch = useDispatch();
   const { pathname, search } = useLocation();
+  const { hookUrl } = useSelector(hookSelector);
 
-  const data = useMemo(() => {
-    return pathname.includes(HooksPageEnum.signMessage)
-      ? getSignMessageHookData(search)
-      : null;
-  }, [pathname]);
+  const data = useMemo(
+    () => getSignMessageHookData(search.length > 0 ? search : hookUrl),
+    [pathname]
+  );
 
   const [validUrl, setValidUrl] = useState<HookStateEnum>(
     HookStateEnum.pending
@@ -26,13 +27,15 @@ export const SignMessageHook = () => {
       return setValidUrl(HookStateEnum.invalid);
     }
 
-    dispatch(
-      setHook({
-        type: HooksEnum.signMessage,
-        hookUrl: data.hookUrl,
-        callbackUrl: data.callbackUrl ?? ''
-      })
-    );
+    if (data.hookUrl !== hookUrl) {
+      dispatch(
+        setHook({
+          type: HooksEnum.signMessage,
+          hookUrl: data.hookUrl,
+          callbackUrl: data.callbackUrl ?? ''
+        })
+      );
+    }
 
     setValidUrl(HookStateEnum.valid);
   }, []);

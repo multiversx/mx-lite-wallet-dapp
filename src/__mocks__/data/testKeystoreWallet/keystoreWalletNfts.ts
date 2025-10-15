@@ -616,7 +616,7 @@ export const keystoreWalletNfts = [
     nonce: 3,
     type: 'NonFungibleESDT',
     name: 'dafdsaf #1',
-    creator: 'erd1qqqqqqqqqqqqqpgq9pp32ey4wthxzkepfp785870v4u78grwu00sw0hhff',
+    creator: 'erd1qqqqqqqqqqqqqpgqulfjgnppljkypgw0qh9sypzjlzkrn47hlfpswnrxzk',
     royalties: 0.05,
     uris: [
       'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1QdVlHb2E2d3phcVA3RHltNzNyMmFacFVaZXB4TEN0VUc4S1Q4OEtrdVBBNy8xLm1wNA==',

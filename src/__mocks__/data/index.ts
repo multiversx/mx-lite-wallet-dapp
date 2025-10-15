@@ -7,3 +7,4 @@ export * from './testKeystoreWallet';
 export * from './testNetwork';
 export * from './testPemWallet';
 export * from './testPemWalletGuarded';
+export * from './transactions';

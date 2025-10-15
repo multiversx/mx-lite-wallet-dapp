@@ -1,7 +1,12 @@
-import { pemAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import {
+  keystoreAccount,
+  pemAccount,
+  WALLET_SOURCE_ORIGIN
+} from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
+  expectAndSignTransaction,
   expectElementToBeDisabled,
   expectElementToContainText,
   expectInputToHaveValue,
@@ -19,9 +24,8 @@ describe('Send NFT tests', () => {
     const tokenId = 'CHRISTMAS-27d3e2-01';
     const testId = `send-${tokenId}`;
     await loginWithKeystore();
-    await page.waitForSelector(getByDataTestId(testId));
-    await page.click(getByDataTestId(testId));
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/send`);
+    const sendBtn = await page.waitForSelector(getByDataTestId(testId));
+    await sendBtn.click();
 
     await expectToBeChecked({
       dataTestId: DataTestIdsEnum.sendNFtTypeInput,
@@ -77,9 +81,15 @@ describe('Send NFT tests', () => {
 
     await page.click(getByDataTestId(DataTestIdsEnum.sendBtn));
 
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction([
+      {
+        amount: '0',
+        receiverAddress: keystoreAccount.address,
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
+        gasLimit: '1.000.000',
+        data: 'ESDTNFTTransfer@4348524953544d41532d323764336532@01@01@6e224118d9068ae626878a1cfbebcb6a95a4715db86d1b51e06a04226cf30fd6'
+      }
+    ]);
   });
 });

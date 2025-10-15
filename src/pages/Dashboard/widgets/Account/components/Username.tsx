@@ -1,6 +1,6 @@
 import { Label } from 'components/Label';
-import { trimUsernameDomain } from 'lib';
-import { AccountType, ProfileType } from 'types';
+import { trimUsernameDomain, AccountType } from 'lib/sdkDapp';
+import { ProfileType } from 'types';
 
 export const Username = (props: {
   account: AccountType | ProfileType | null;

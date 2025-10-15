@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { Button, MxLink } from 'components';
-import { getFormHasError } from 'helpers';
+import { Button } from 'components/Button';
+import { MxLink } from 'components/MxLink';
+import { NftEnumType } from 'lib/sdkDapp';
 import { CollectionTypeByNftEnum, DataTestIdsEnum } from 'localConstants';
-import { routeNames } from 'routes';
-import { NftEnumType } from 'types';
+import { RouteNamesEnum } from 'localConstants/routes';
+import { getFormHasError } from 'utils';
 import { useIssueCollectionForm } from '../hooks';
 import { IssueCollectionFieldsEnum } from '../types';
 
@@ -46,7 +47,6 @@ export const IssueCollectionForm = () => {
                 }
                 className='mr-2'
                 data-testid={DataTestIdsEnum.nftTypeInput}
-                defaultChecked
                 id={nft}
                 name={IssueCollectionFieldsEnum.tokenType}
                 onChange={formik.handleChange}
@@ -150,7 +150,7 @@ export const IssueCollectionForm = () => {
         <MxLink
           className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          to={RouteNamesEnum.dashboard}
         >
           Cancel
         </MxLink>

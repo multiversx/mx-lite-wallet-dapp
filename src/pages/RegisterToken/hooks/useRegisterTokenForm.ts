@@ -1,68 +1,45 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { SingleValue } from 'react-select';
+
 import { object, string } from 'yup';
-import { useRefreshNativeAuthTokenForNetwork } from 'components/NetworkSwitcher/hooks';
-import { networks } from 'config';
-import { capitalize, addressIsErd } from 'helpers';
 import { useSendTransactions } from 'hooks';
-import { addressIsValid, useGetAccountInfo } from 'lib';
 import {
-  DEVNET_CHAIN_ID,
-  MAINNET_CHAIN_ID,
-  TESTNET_CHAIN_ID
-} from 'localConstants';
-import { accountSelector } from 'redux/sdkDapp.selectors';
-import { sdkDappStore } from 'redux/sdkDapp.store';
-import { routeNames } from 'routes';
-import { EnvironmentsEnum, SendTypeEnum } from 'types';
-import { sleep } from 'utils/testUtils/puppeteer';
+  useGetAccountInfo,
+  useGetNetworkConfig
+} from 'lib/sdkDapp/sdkDapp.hooks';
+import { accountSelector } from 'lib/sdkDapp/sdkDapp.selectors';
+import { getState } from 'lib/sdkDapp/sdkDapp.store';
+import { addressIsValid } from 'lib/sdkDapp/sdkDapp.utils';
+import { RouteNamesEnum } from 'localConstants/routes';
+import { networkSelector } from 'redux/selectors';
+import { SendTypeEnum } from 'types';
+import { addressIsHrp } from 'utils';
 import { useRegisterTokenOptions } from './useRegisterTokenOptions';
 import { getRegisterTokenTransaction } from '../helpers';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
-const defaultChain = {
-  label: capitalize(EnvironmentsEnum.testnet),
-  value: TESTNET_CHAIN_ID
-};
-
-const NetworkChainIdMap: Record<string, EnvironmentsEnum> = {
-  [MAINNET_CHAIN_ID]: EnvironmentsEnum.mainnet,
-  [DEVNET_CHAIN_ID]: EnvironmentsEnum.devnet,
-  [TESTNET_CHAIN_ID]: EnvironmentsEnum.testnet
-};
-
 export const useRegisterTokenForm = () => {
   const navigate = useNavigate();
   const { account } = useGetAccountInfo();
+  const {
+    activeNetwork: { hrp, sovereignContractAddress }
+  } = useSelector(networkSelector);
 
+  const {
+    network: { chainId }
+  } = useGetNetworkConfig();
   const { sendTransactions } = useSendTransactions({ skipAddNonce: true });
   const [sendType, setSendType] = useState(SendTypeEnum.esdt);
   const isNFT = sendType === SendTypeEnum.nft;
   const { tokenOptions, isLoading, tokens } = useRegisterTokenOptions(sendType);
 
-  const refreshNativeAuthTokenForNetwork =
-    useRefreshNativeAuthTokenForNetwork();
-
-  const switchNetwork = async (networkId: string) => {
-    await refreshNativeAuthTokenForNetwork({
-      networkId,
-      origin: window.location.origin,
-      signMessageCallback: (messageToSign) => Promise.resolve(messageToSign),
-      preventPageReload: true
-    });
-  };
-
   const defaultTokenOption = tokenOptions?.[0];
-  const testnetContract =
-    networks.find((network) => network.id === EnvironmentsEnum.testnet)
-      ?.sovereignContractAddress ?? '';
 
   const formik = useFormik({
     initialValues: {
-      [RegisterTokenFormFieldsEnum.contract]: testnetContract,
-      [RegisterTokenFormFieldsEnum.chainId]: defaultChain,
+      [RegisterTokenFormFieldsEnum.contract]: sovereignContractAddress,
       [RegisterTokenFormFieldsEnum.token]: defaultTokenOption,
       [RegisterTokenFormFieldsEnum.type]: SendTypeEnum.esdt
     },
@@ -71,15 +48,12 @@ export const useRegisterTokenForm = () => {
         .test(
           'addressIsValid',
           'Address is invalid',
-          (value) => !value || addressIsValid(value) || addressIsErd(value)
+          (value) => !value || addressIsValid(value) || addressIsHrp(value, hrp)
         )
         .required('Contract is required'),
       [RegisterTokenFormFieldsEnum.token]: object()
         .nullable()
         .required('Token is required'),
-      [RegisterTokenFormFieldsEnum.chainId]: object()
-        .nullable()
-        .required('Chain is required'),
       [RegisterTokenFormFieldsEnum.type]: string().required('Type is required')
     }),
     onSubmit: async (values) => {
@@ -94,24 +68,25 @@ export const useRegisterTokenForm = () => {
       }
 
       const transaction = getRegisterTokenTransaction({
-        ...account,
+        address: account.address,
+        chainId,
         values,
         token
       });
 
-      await switchNetwork(NetworkChainIdMap[transaction.chainID]);
-      await sleep(1000);
-      const { nonce } = accountSelector(sdkDappStore.getState());
+      const { nonce } = accountSelector(getState());
       transaction.nonce = BigInt(nonce);
       await sendTransactions([transaction]);
-      navigate(routeNames.dashboard);
+      navigate(RouteNamesEnum.dashboard);
     }
   });
 
   const resetForm = () => {
     formik.setFieldValue(RegisterTokenFormFieldsEnum.token, defaultTokenOption);
-    formik.setFieldValue(RegisterTokenFormFieldsEnum.chainId, defaultChain);
-    formik.setFieldValue(RegisterTokenFormFieldsEnum.contract, testnetContract);
+    formik.setFieldValue(
+      RegisterTokenFormFieldsEnum.contract,
+      sovereignContractAddress
+    );
   };
 
   const handleOnSendTypeChange: (
@@ -122,25 +97,6 @@ export const useRegisterTokenForm = () => {
 
       return formik.handleChange(event);
     };
-
-  const handleChainChange = (
-    option: SingleValue<{ label: string; value: string }>
-  ) => {
-    formik.setFieldValue(RegisterTokenFormFieldsEnum.chainId, option);
-
-    if (!option) {
-      return;
-    }
-
-    const selectedNetwork = networks.find(
-      (network) => network.id === option.label.toLowerCase()
-    );
-
-    formik.setFieldValue(
-      RegisterTokenFormFieldsEnum.contract,
-      selectedNetwork?.sovereignContractAddress ?? ''
-    );
-  };
 
   useEffect(() => {
     const formTokenValue =
@@ -159,7 +115,6 @@ export const useRegisterTokenForm = () => {
   return {
     formik,
     handleOnSendTypeChange,
-    handleChainChange,
     isLoading,
     isNFT,
     tokenOptions

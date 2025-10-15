@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCurrentNetwork } from 'helpers';
+import { getCurrentNetwork } from 'utils';
 import { getGatewayConfigForCurrentRequest } from './helpers/getGatewayConfigForCurrentRequest';
 import { getGatewayResponse } from './helpers/getGatewayResponse';
 

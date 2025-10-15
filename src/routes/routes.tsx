@@ -1,4 +1,4 @@
-import { PrivateKeyCheckWrapper } from 'components/PrivateKeyCheckWrapper/PrivateKeyCheckWrapper';
+import { FeaturePageLayout } from 'components/Layout/FeaturePageLayout';
 import { HooksPageEnum, RouteNamesEnum } from 'localConstants';
 import {
   Dashboard,
@@ -12,13 +12,11 @@ import {
   SignMessage,
   SignMessageHook,
   Send,
-  Sign,
   SovereignTransfer,
   RegisterToken,
   IssueNft,
   Faucet
 } from 'pages';
-import { RouteType } from 'types/sdkDapp.types';
 import {
   CreateRecoverRoutes,
   CreateRecoverRoutesEnum
@@ -26,23 +24,30 @@ import {
 import { IssueCollection } from '../pages/IssueCollection/IssueCollection';
 import { IssueToken } from '../pages/IssueToken/IssueToken';
 
-export interface RouteWithTitleType extends RouteType {
+export interface RouteType {
+  authenticatedRoute?: boolean;
+  path: string;
   title: string;
+  component: React.ComponentType;
+  children?: RouteType[];
 }
 
-const routesObject: Record<
-  RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum,
-  RouteWithTitleType
+// TODO: Implement layouts enum and apply with switch case
+
+const routesObject: Partial<
+  Record<RouteNamesEnum | HooksPageEnum | CreateRecoverRoutesEnum, RouteType>
 > = {
   [RouteNamesEnum.home]: {
     path: RouteNamesEnum.home,
     title: 'Home',
-    component: Home
-  },
-  [RouteNamesEnum.unlock]: {
-    path: RouteNamesEnum.unlock,
-    title: 'Unlock',
-    component: Unlock
+    component: Home,
+    children: [
+      {
+        path: RouteNamesEnum.unlock,
+        title: 'Unlock',
+        component: Unlock
+      }
+    ]
   },
   [RouteNamesEnum.logout]: {
     path: RouteNamesEnum.logout,
@@ -65,81 +70,72 @@ const routesObject: Record<
     authenticatedRoute: true,
     title: 'Send',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Send'>
         <Send />
-      </PrivateKeyCheckWrapper>
-    )
-  },
-  [RouteNamesEnum.sign]: {
-    path: RouteNamesEnum.sign,
-    title: 'Sign',
-    component: () => (
-      <PrivateKeyCheckWrapper>
-        <Sign />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [RouteNamesEnum.signMessage]: {
     path: RouteNamesEnum.signMessage,
     title: 'Sign Message',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Sign Message'>
         <SignMessage />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [RouteNamesEnum.sovereignTransfer]: {
     path: RouteNamesEnum.sovereignTransfer,
     title: 'Sovereign Transfer',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Sovereign Transfer'>
         <SovereignTransfer />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [RouteNamesEnum.issueToken]: {
     path: RouteNamesEnum.issueToken,
     title: 'Issue Token',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Issue Token'>
         <IssueToken />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [RouteNamesEnum.issueCollection]: {
     path: RouteNamesEnum.issueCollection,
     title: 'Issue Collection',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Issue Collection'>
         <IssueCollection />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [RouteNamesEnum.createNft]: {
     path: RouteNamesEnum.createNft,
     title: 'Create NFT',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Create NFT'>
         <IssueNft />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [RouteNamesEnum.registerToken]: {
     path: RouteNamesEnum.registerToken,
     title: 'Register Token',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Register Sovereign Token'>
         <RegisterToken />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [RouteNamesEnum.faucet]: {
     path: RouteNamesEnum.faucet,
-    title: '',
+    title: 'Faucet',
     component: () => (
-      <PrivateKeyCheckWrapper>
+      <FeaturePageLayout title='Faucet'>
         <Faucet />
-      </PrivateKeyCheckWrapper>
+      </FeaturePageLayout>
     )
   },
   [HooksPageEnum.login]: {
@@ -165,29 +161,4 @@ const routesObject: Record<
   ...CreateRecoverRoutes
 };
 
-export const routes: RouteWithTitleType[] = Object.values(routesObject);
-
-export const routeNames = Object.keys(RouteNamesEnum).reduce(
-  (acc, key) => {
-    const name = key as keyof typeof RouteNamesEnum;
-    return {
-      ...acc,
-      [name]: RouteNamesEnum[name]
-    };
-  },
-  {} as { [key in keyof typeof RouteNamesEnum]: string }
-);
-
-export const sendRouteBuilder = (params?: Record<string, string>) => {
-  const url = new URL(`${window.location.origin}${RouteNamesEnum.send}`);
-
-  if (!params) {
-    return url.pathname;
-  }
-
-  for (const key in params) {
-    url.searchParams.set(key, params[key]);
-  }
-
-  return `${url.pathname}?${url.searchParams}`;
-};
+export const routes: RouteType[] = Object.values(routesObject);

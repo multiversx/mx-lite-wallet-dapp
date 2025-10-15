@@ -1,6 +1,10 @@
-import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import { getByDataTestId, loginWithKeystore } from 'utils/testUtils/puppeteer';
+import {
+  getByDataTestId,
+  loginWithKeystore,
+  waitForUrlToMatch
+} from 'utils/testUtils/puppeteer';
 
 describe('Cancel sign message tests', () => {
   it('should cancel sign message and redirect to callbackUrl with status cancelled', async () => {
@@ -11,16 +15,16 @@ describe('Cancel sign message tests', () => {
       }
     );
 
-    await loginWithKeystore({ skipLoggedInCheck: true });
-    await page.waitForSelector(
-      getByDataTestId(DataTestIdsEnum.signMessagePage)
+    await loginWithKeystore({ skipLoginCheck: true });
+
+    const cancelSignMessageBtn = await page.waitForSelector(
+      getByDataTestId(DataTestIdsEnum.cancelSignMessageBtn)
     );
 
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/sign-message`);
-    await page.click(getByDataTestId(DataTestIdsEnum.cancelSignMessageBtn));
+    await cancelSignMessageBtn.click();
 
-    expect(page.url()).toMatch(
-      `https://devnet.xexchange.com/?address=${keystoreAccount.address}&status=cancelled`
-    );
+    await waitForUrlToMatch({
+      expectedUrl: `https://devnet.xexchange.com/?address=${keystoreAccount.address}&status=cancelled`
+    });
   });
 });

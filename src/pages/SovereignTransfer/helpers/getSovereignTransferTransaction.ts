@@ -1,33 +1,31 @@
 import {
-  SmartContractTransactionsFactory,
-  TransactionsFactoryConfig,
-  Token
-} from '@multiversx/sdk-core';
-import {
-  getEgldLabel,
-  parseAmount,
   Address,
   AddressValue,
-  TokenTransfer
-} from 'lib';
+  TokenTransfer,
+  SmartContractTransactionsFactory,
+  Token,
+  TransactionsFactoryConfig
+} from 'lib/sdkCore';
+import { TokenType, EnvironmentsEnum, getEgldLabel } from 'lib/sdkDapp';
+import { PartialNftType } from 'lib/sdkDappForm';
+import { parseAmount } from 'lib/sdkDappUtils';
 import { SOVEREIGN_TRANSFER_GAS_LIMIT } from 'localConstants';
-import { PartialNftType, TokenType } from 'types';
-import { getCurrentNetwork } from '../../../helpers';
 import { SovereignTransferFormType } from '../types';
+
+interface GetSovereignTransferTransactionPropsType {
+  address: string;
+  chainId: EnvironmentsEnum;
+  values: SovereignTransferFormType;
+  tokens: (PartialNftType | TokenType)[];
+}
 
 export const getSovereignTransferTransaction = ({
   address,
   chainId,
   values,
   tokens
-}: {
-  address: string;
-  chainId: string;
-  values: SovereignTransferFormType;
-  tokens: (PartialNftType | TokenType)[];
-}) => {
+}: GetSovereignTransferTransactionPropsType) => {
   const egldLabel = getEgldLabel();
-  const { WEGLDid = '' } = getCurrentNetwork();
   const factoryConfig = new TransactionsFactoryConfig({ chainID: chainId });
   const factory = new SmartContractTransactionsFactory({
     config: factoryConfig
@@ -43,19 +41,31 @@ export const getSovereignTransferTransaction = ({
         ({ identifier }) => identifier === token.token?.value
       );
 
+      const isSovereign = Object.values(EnvironmentsEnum).includes(chainId);
+
       if (!realToken) {
+        const tokenValue = token.token?.value;
+
         return new TokenTransfer({
-          token: new Token({ identifier: token.token?.value }),
+          token: new Token({
+            identifier:
+              tokenValue === egldLabel && !isSovereign
+                ? 'EGLD-000000'
+                : tokenValue
+          }),
           amount: BigInt(token.amount)
         });
       }
 
       const nonce = (realToken as PartialNftType).nonce;
+      const tokenValue = realToken.identifier;
 
       return new TokenTransfer({
         token: new Token({
           identifier:
-            realToken.identifier === egldLabel ? WEGLDid : realToken.identifier,
+            tokenValue === egldLabel && !isSovereign
+              ? 'EGLD-000000'
+              : tokenValue,
           nonce: nonce ? BigInt(nonce) : undefined
         }),
         amount: BigInt(

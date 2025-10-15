@@ -1,10 +1,17 @@
-import { PartialTokenType } from '@multiversx/sdk-dapp-form';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { faucetSettingEndpoint, faucetEndpoint } from 'config';
-import { getAxiosConfig, getExtrasApi } from 'helpers';
-import { formatAmount, getEgldLabel, stringIsInteger } from 'lib';
-import { DECIMALS, DIGITS, TOKENS_ENDPOINT, ZERO } from 'localConstants';
+import { TOKENS_ENDPOINT } from 'lib/sdkDapp/sdkDapp.constants';
+import { getEgldLabel } from 'lib/sdkDapp/sdkDapp.utils';
+import { PartialNftType } from 'lib/sdkDappForm/sdkDappForm.types';
+import { formatAmount, stringIsInteger } from 'lib/sdkDappUtils/sdkDappUtils';
+import {
+  DECIMALS,
+  DIGITS,
+  ZERO
+} from 'lib/sdkDappUtils/sdkDappUtils.constants';
+
 import { RootApi } from 'redux/rootApi';
+import { getAxiosConfig, getExtrasApi } from 'utils';
 
 interface FaucetSettingsType {
   address: string;
@@ -60,7 +67,7 @@ const faucetEndpoints = RootApi.injectEndpoints({
           return { error: tokenData.error as FetchBaseQueryError };
         }
 
-        const { decimals } = tokenData.data as PartialTokenType;
+        const { decimals } = tokenData.data as PartialNftType;
 
         const denominatedTokenAmount = formatAmount({
           input: tokenAmount,

@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useReplyToDapp } from 'hooks';
-import { useGetAccount, useGetLoginInfo, decodeNativeAuthToken } from 'lib';
+import { useGetAccount, useGetLoginInfo } from 'lib/sdkDapp/sdkDapp.hooks';
+import { decodeNativeAuthToken } from 'lib/sdkDapp/sdkDapp.utils';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
 import { accountSelector, hookSelector } from 'redux/selectors';
-import { WindowProviderResponseEnums } from 'types';
 
 export const useOnLoginHookRedirect = () => {
   const { callbackUrl } = useSelector(hookSelector);
@@ -31,7 +32,7 @@ export const useOnLoginHookRedirect = () => {
       payload: {
         data: {
           address: urlParams.address,
-          signature: urlParams.signature
+          signature: urlParams.signature ?? ''
         }
       }
     });

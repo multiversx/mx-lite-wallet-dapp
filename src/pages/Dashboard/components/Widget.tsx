@@ -1,5 +1,5 @@
 import { Card } from 'components/Card';
-import { useIsWebProvider } from 'hooks';
+import { useIsWebviewProvider } from 'hooks';
 import { WidgetType } from 'types/widget.types';
 
 const getCallbackRoute = ({
@@ -30,7 +30,7 @@ export const Widget = ({
   widget: MxWidget,
   props = {}
 }: WidgetType) => {
-  const { isWebProvider } = useIsWebProvider();
+  const isWebProvider = useIsWebviewProvider();
   const callbackRoute = anchor
     ? getCallbackRoute({ anchor, isWebProvider })
     : '';

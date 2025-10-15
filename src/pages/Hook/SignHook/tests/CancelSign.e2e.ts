@@ -1,9 +1,9 @@
-import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { keystoreAccount, WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
-  expectElementToContainText,
-  getByDataTestId,
-  loginWithKeystore
+  getByTestIdDeep,
+  loginWithKeystore,
+  waitForUrlToMatch
 } from 'utils/testUtils/puppeteer';
 
 describe('Cancel sign transaction test', () => {
@@ -15,19 +15,18 @@ describe('Cancel sign transaction test', () => {
       }
     );
 
-    await loginWithKeystore({ skipLoggedInCheck: true });
-    await page.waitForSelector(getByDataTestId(DataTestIdsEnum.dappModal));
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/sign`);
-
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.signStepTitle,
-      text: 'Signing Transaction 1 of 3'
+    await loginWithKeystore({
+      skipLoginCheck: true
     });
 
-    await page.click(getByDataTestId(DataTestIdsEnum.closeButton));
-
-    expect(page.url()).toMatch(
-      `https://devnet.xexchange.com/?address=${keystoreAccount.address}&status=cancelled`
+    const signCancelBtn = await getByTestIdDeep(
+      page,
+      DataTestIdsEnum.signCancelBtn
     );
+
+    await signCancelBtn.click();
+
+    const expectedUrl = `https://devnet.xexchange.com/?address=${keystoreAccount.address}&status=cancelled`;
+    await waitForUrlToMatch({ expectedUrl });
   });
 });

@@ -1,4 +1,5 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__';
+import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
+import { waitForUrlToMatch } from 'utils/testUtils/puppeteer';
 
 describe('Valid logout hook tests', () => {
   it('should logout and navigate to callbackURl', async () => {
@@ -9,6 +10,8 @@ describe('Valid logout hook tests', () => {
       }
     );
 
-    expect(page.url()).toMatch('https://devnet.xexchange.com/logout');
+    await waitForUrlToMatch({
+      expectedUrl: 'https://devnet.xexchange.com/logout'
+    });
   });
 });

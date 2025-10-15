@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux';
-import { useGetAccount } from 'lib';
-import { HooksEnum } from 'localConstants';
+import { useGetAccount } from 'lib/sdkDapp';
+import { HooksEnum, RouteNamesEnum } from 'localConstants';
 import {
   accessTokenRedirectRouteSelector,
   hookSelector
 } from 'redux/selectors';
-import { routeNames } from 'routes';
 
-export interface UseRedirectPathnameProps {
+export interface IUseRedirectPathnameProps {
   impersonateConfirmed?: boolean;
   canImpersonate?: boolean;
+  isHook?: boolean;
 }
 
 export const useRedirectPathname = () => {
@@ -19,23 +19,21 @@ export const useRedirectPathname = () => {
   );
   const { address } = useGetAccount();
   const isLoggedIn = Boolean(address);
-  const defaultRedirect = accessTokenRedirectRoute || routeNames.dashboard;
+  const defaultRedirect = accessTokenRedirectRoute || RouteNamesEnum.dashboard;
 
   const getRedirectPathname = () => {
     switch (hook) {
-      case HooksEnum.sign:
-        return routeNames.sign;
       case HooksEnum.signMessage:
-        return routeNames.signMessage;
+        return RouteNamesEnum.signMessage;
       case HooksEnum.login: {
         if (!isLoggedIn) {
-          return routeNames.unlock;
+          return RouteNamesEnum.unlock;
         }
 
         return defaultRedirect;
       }
       case HooksEnum.logout:
-        return routeNames.unlock;
+        return RouteNamesEnum.unlock;
       default:
         return defaultRedirect;
     }

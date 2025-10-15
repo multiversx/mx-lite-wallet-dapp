@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { setProviderPrivateKey } from 'helpers/app/provider';
+import { TokenLoginType } from 'lib/sdkDapp';
+import { setProviderPrivateKey } from 'providers/FileProvider';
 import { logoutAction } from 'redux/commonActions';
-import { TokenLoginType } from 'types';
 
 export enum FileLoginEnum {
   pem = 'pem',
@@ -11,6 +11,7 @@ export enum FileLoginEnum {
 interface AccountSliceType {
   fileLogin: FileLoginEnum | null;
   keystoreFile: string;
+  keystoreFileName?: string;
   tokenLogin: TokenLoginType | null;
   token?: string;
   address?: string;
@@ -26,6 +27,7 @@ interface AccountSliceType {
 const initialState: AccountSliceType = {
   fileLogin: null,
   keystoreFile: '',
+  keystoreFileName: '',
   tokenLogin: null,
   addressIndex: null
 };
@@ -43,11 +45,15 @@ export const accountSlice = createSlice({
       action: PayloadAction<{
         keystoreFile: string;
         privateKey: string;
+        keystoreFileName?: string;
+        addressIndex?: number;
       }>
     ) => {
       setProviderPrivateKey(action.payload.privateKey);
       state.keystoreFile = action.payload.keystoreFile;
+      state.keystoreFileName = action.payload.keystoreFileName || '';
       state.fileLogin = FileLoginEnum.keystore;
+      state.addressIndex = action.payload.addressIndex || 0;
     },
     setAddressIndex: (
       state: AccountSliceType,

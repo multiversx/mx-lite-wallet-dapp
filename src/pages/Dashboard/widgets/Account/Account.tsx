@@ -1,23 +1,24 @@
 import QRCode from 'react-qr-code';
+
 import { useSelector } from 'react-redux';
-import { Copy, MxLink } from 'components';
-import { FormatAmount } from 'components/sdkDapp.components';
-import { useGetAccountInfo, useGetNetworkConfig } from 'lib';
-import { DataTestIdsEnum } from 'localConstants';
-import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
+import { MxLink } from 'components/MxLink';
 import {
-  explorerAddressSelector,
-  useSdkDappSelector
-} from 'redux/sdkDapp.store';
+  useGetAccountInfo,
+  FormatAmount,
+  CopyButton,
+  useGetNetworkConfig
+} from 'lib/sdkDapp';
+import { DataTestIdsEnum } from 'localConstants';
+import { RouteNamesEnum } from 'localConstants/routes';
+import { FaucetButton } from 'pages/Faucet/components/FaucetButton/FaucetButton';
 import { networkSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
-  const { activeNetwork } = useSelector(networkSelector);
   const { address, account } = useGetAccountInfo();
-  const explorerAddress = useSdkDappSelector(explorerAddressSelector);
-  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork;
+  const { activeNetwork } = useSelector(networkSelector);
+  const { hasRegisterToken, hasSovereignTransfer } = activeNetwork as any;
+  const explorerAddress = network.explorerAddress;
 
   return (
     <div className='rounded-xl bg-gray-950 p-6 text-white sm:text-left'>
@@ -33,7 +34,7 @@ export const Account = () => {
               data-testid={DataTestIdsEnum.userAddress}
             >
               {address}
-              <Copy value={address} />
+              <CopyButton text={address} />
             </div>
           </div>
           <div className='my-1 flex justify-center sm:hidden'>
@@ -70,14 +71,14 @@ export const Account = () => {
             <MxLink
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.sendBtn}
-              to={routeNames.send}
+              to={RouteNamesEnum.send}
             >
               Send
             </MxLink>
             <MxLink
               className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.signMessageBtn}
-              to={routeNames.signMessage}
+              to={RouteNamesEnum.signMessage}
             >
               Sign Message
             </MxLink>
@@ -85,7 +86,7 @@ export const Account = () => {
               <MxLink
                 className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
                 data-testid={DataTestIdsEnum.sovereignTransferBtn}
-                to={routeNames.sovereignTransfer}
+                to={RouteNamesEnum.sovereignTransfer}
               >
                 Sovereign Transfer
               </MxLink>
@@ -94,7 +95,7 @@ export const Account = () => {
               <MxLink
                 className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
                 data-testid={DataTestIdsEnum.registerTokenBtn}
-                to={routeNames.registerToken}
+                to={RouteNamesEnum.registerToken}
               >
                 Register Token
               </MxLink>

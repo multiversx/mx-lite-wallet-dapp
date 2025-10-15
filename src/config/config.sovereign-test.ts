@@ -1,11 +1,11 @@
-import { NetworkType } from 'redux/slices';
-import { sharedNetorks } from './sharedNetworks';
+import { NetworkType } from 'types/network';
+import { sharedNetworks } from './sharedNetworks';
 
 export * from './sharedConfig';
 
 // This config is used for puppeteer tests
 
-const sovereignNetwork = sharedNetorks.find(
+const sovereignNetwork = sharedNetworks.find(
   (network) => network.id === 'sovereign'
 );
 
@@ -14,15 +14,18 @@ if (!sovereignNetwork) {
 }
 
 export const networks: NetworkType[] = [
-  ...sharedNetorks.filter((network) => network.id !== 'sovereign'),
+  ...sharedNetworks.filter((network) => network.id !== 'sovereign'),
   {
     ...sovereignNetwork,
     default: true,
+    walletAddress: 'https://wallet-sovereign-test.elrond.ro/unlock',
+    id: 'sovereign',
+    name: 'Sovereign',
     apiAddress: 'https://api-sovereign-test.elrond.ro',
-    gatewayUrl: '',
     extrasApi: 'https://extras-api-sovereign-test.elrond.ro',
-    sampleAuthenticatedDomains: ['https://api-sovereign-test.elrond.ro'],
-    sovereignContractAddress: '',
-    walletAddress: 'https://wallet.voyager1.dev'
+    hrp: 'erd',
+    faucet: true,
+    hasRegisterToken: true,
+    hasSovereignTransfer: true
   }
 ];

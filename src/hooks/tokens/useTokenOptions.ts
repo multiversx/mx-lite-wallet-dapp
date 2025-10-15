@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from 'react';
-import { useGetTokensWithEgld } from 'hooks';
-import { getEgldLabel, useGetAccountInfo } from 'lib';
-import { useLazyGetNftsQuery } from 'redux/endpoints';
-import { SendTypeEnum, TokenOptionType } from 'types';
+import { useGetAccountInfo } from 'lib/sdkDapp/sdkDapp.hooks';
+import { getEgldLabel } from 'lib/sdkDapp/sdkDapp.utils';
+import { useLazyGetNftsQuery } from 'redux/endpoints/nfts.endpoint';
+import { SendTypeEnum, TokenOptionType } from 'types/send.types';
+import { useGetTokensWithEgld } from './useGetTokensWithEgld';
 
 export const useTokenOptions = ({
   sendType,

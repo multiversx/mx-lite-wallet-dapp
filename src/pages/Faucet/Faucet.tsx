@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button, PrivateKeyCheckWrapper } from 'components';
+import { Button } from 'components/Button';
 import { DataTestIdsEnum } from 'localConstants';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { RootState } from 'redux/store';
-import { routeNames } from 'routes';
 import { FaucetContent } from './components/FuacetContent/FaucetContent';
 const sitekey = import.meta.env.VITE_APP_GOOGLE_RECAPTCHA_KEY;
 
@@ -15,29 +15,24 @@ export const Faucet = () => {
 
   if (!hasFaucet || !activeNetwork.faucet) {
     // Faucet does not work without google recaptcha key, unless recaptchaBypass is specified (sovereign)
-    return <Navigate to={routeNames.dashboard} />;
+    return <Navigate to={RouteNamesEnum.dashboard} />;
   }
 
   const handleFaucetCloseFlow = () => {
-    navigate(routeNames.dashboard);
+    navigate(RouteNamesEnum.dashboard);
   };
 
   return (
-    <PrivateKeyCheckWrapper>
-      <div
-        className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'
-        data-testid={DataTestIdsEnum.faucetPage}
+    <>
+      <FaucetContent />
+      <Button
+        data-testid={DataTestIdsEnum.cancelFaucetBtn}
+        className='mx-auto text-blue-600 text-sm'
+        id='closeButton'
+        onClick={handleFaucetCloseFlow}
       >
-        <FaucetContent />
-        <Button
-          data-testid={DataTestIdsEnum.cancelFaucetBtn}
-          className='mx-auto text-blue-600 text-sm'
-          id='closeButton'
-          onClick={handleFaucetCloseFlow}
-        >
-          Cancel
-        </Button>
-      </div>
-    </PrivateKeyCheckWrapper>
+        Cancel
+      </Button>
+    </>
   );
 };

@@ -1,17 +1,18 @@
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { Loader } from 'components';
-import { useReplyToDapp, useRedirectPathname } from 'hooks';
+import {
+  useReplyToDapp,
+  useRedirectPathname,
+  useSignWithRedirect
+} from 'hooks';
 import {
   useGetAccount,
-  useGetIsWalletConnectV2Initialized,
-  useGetLoginInfo
-} from 'lib';
-import { HooksEnum } from 'localConstants';
+  getAccountProvider,
+  ProviderTypeEnum
+} from 'lib/sdkDapp';
+import { WindowProviderResponseEnums } from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { HooksEnum, RouteNamesEnum } from 'localConstants';
 import { hookSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
-import { WindowProviderResponseEnums } from 'types';
-import { LoginMethodsEnum } from 'types';
 import { HookStateEnum } from '../types';
 
 interface HookValidationOutcomePropsType {
@@ -26,20 +27,15 @@ export const HookValidationOutcome = ({
   validUrl
 }: HookValidationOutcomePropsType) => {
   const { search } = useLocation();
-  const { loginMethod } = useGetLoginInfo();
-  const isWalletConnectV2Initializing = useGetIsWalletConnectV2Initialized();
+  const provider = getAccountProvider();
+  const providerType = provider.getType();
   const { type: registeredHook } = useSelector(hookSelector);
   const { pathname: redirectPathname } = useRedirectPathname();
   const { address } = useGetAccount();
   const replyToDapp = useReplyToDapp();
-
   const isValid = validUrl === HookStateEnum.valid;
   const isInvalid = validUrl === HookStateEnum.invalid;
   const isPending = validUrl === HookStateEnum.pending;
-
-  if (isWalletConnectV2Initializing) {
-    return <Loader />;
-  }
 
   if (isPending) {
     return null;
@@ -50,7 +46,7 @@ export const HookValidationOutcome = ({
     if (
       [HooksEnum.login, HooksEnum.sign, HooksEnum.signMessage].includes(hook)
     ) {
-      return <Navigate to={routeNames.unlock} replace />;
+      return <Navigate to={RouteNamesEnum.unlock} replace />;
     }
 
     // The hook URL is invalid and are returning to the previous route
@@ -65,10 +61,10 @@ export const HookValidationOutcome = ({
       registeredHook
     )
   ) {
-    switch (loginMethod) {
-      case LoginMethodsEnum.none: {
+    switch (providerType) {
+      case ProviderTypeEnum.none: {
         // The user must login before we can sign
-        return <Navigate to={routeNames.unlock} replace />;
+        return <Navigate to={RouteNamesEnum.unlock} replace />;
       }
 
       default: {
@@ -78,7 +74,9 @@ export const HookValidationOutcome = ({
             type: WindowProviderResponseEnums.loginResponse,
             payload: {
               data: {
-                address
+                address,
+                signature: '' // or the actual signature if available
+                // Optionally add: accessToken, multisig, impersonate if needed
               }
             }
           });
@@ -92,5 +90,5 @@ export const HookValidationOutcome = ({
   }
 
   // Display nothing while in 'pending' status
-  return <div className='flex-fill'>&nbsp;</div>;
+  return null;
 };

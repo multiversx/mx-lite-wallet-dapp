@@ -1,19 +1,19 @@
 import { CreateRecover } from './CreateRecover';
-import { RouteType } from '../../types/sdkDapp.types';
 
 export enum CreateRecoverRoutesEnum {
   create = '/create',
   recover = '/recover'
 }
 
-export interface RouteWithTitleType extends RouteType {
+export interface RouteType {
+  authenticatedRoute?: boolean;
+  path: string;
   title: string;
+  component: React.ComponentType;
+  children?: RouteType[];
 }
 
-export const CreateRecoverRoutes: Record<
-  CreateRecoverRoutesEnum,
-  RouteWithTitleType
-> = {
+export const CreateRecoverRoutes: Record<CreateRecoverRoutesEnum, RouteType> = {
   [CreateRecoverRoutesEnum.create]: {
     path: CreateRecoverRoutesEnum.create,
     title: 'Create',

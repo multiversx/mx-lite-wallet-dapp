@@ -1,19 +1,18 @@
 import { useCallback } from 'react';
-import { SignedSessionType } from '@multiversx/sdk-dapp/reduxStore/slices';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useReplyToDapp } from 'hooks';
-import { resetHook } from 'redux/slices';
-import { routeNames } from 'routes';
 import {
   WindowProviderResponseEnums,
   SignMessageStatusEnum,
-  ExtendedReplyWithPostMessageType
-} from 'types';
+  ReplyWithPostMessageType
+} from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { RouteNamesEnum } from 'localConstants/routes';
+import { resetHook } from 'redux/slices';
 
 interface GetReplyDataPropsType {
   isSuccess: boolean;
-  signedMessageInfo: SignedSessionType;
+  signedMessageInfo: { signature?: string; status: string };
 }
 
 export const useSignMessageCompleted = () => {
@@ -28,10 +27,13 @@ export const useSignMessageCompleted = () => {
           ...(isSuccess
             ? { signature: signedMessageInfo.signature ?? '' }
             : {}),
-          status: SignMessageStatusEnum[signedMessageInfo.status]
+          status:
+            SignMessageStatusEnum[
+              signedMessageInfo.status as keyof typeof SignMessageStatusEnum
+            ]
         };
 
-        const replyData: ExtendedReplyWithPostMessageType = {
+        const replyData: ReplyWithPostMessageType = {
           type: WindowProviderResponseEnums.signMessageResponse,
           payload: {
             data
@@ -40,7 +42,7 @@ export const useSignMessageCompleted = () => {
 
         replyToDapp(replyData);
         dispatch(resetHook());
-        navigate(routeNames.dashboard);
+        navigate(RouteNamesEnum.dashboard);
       } catch (e) {
         console.error('Something went wrong: ', e);
       }

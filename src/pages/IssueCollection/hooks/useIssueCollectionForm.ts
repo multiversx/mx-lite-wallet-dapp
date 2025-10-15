@@ -2,15 +2,13 @@ import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
 import {
-  useGetAccount,
-  useGetNetworkConfig,
   Address,
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig
-} from 'lib';
-
+} from 'lib/sdkCore';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDapp';
+import { NftEnumType } from 'lib/sdkDapp';
 import { CollectionTypeByNftEnum } from 'localConstants';
-import { NftEnumType } from 'types';
 import { IssueCollectionFieldsEnum } from '../types';
 
 export const useIssueCollectionForm = () => {
@@ -52,7 +50,7 @@ export const useIssueCollectionForm = () => {
     }),
     onSubmit: async (values) => {
       const transaction =
-        factory.createTransactionForRegisteringAndSettingRoles(
+        await factory.createTransactionForRegisteringAndSettingRoles(
           new Address(address),
           {
             tokenName: values.tokenName,

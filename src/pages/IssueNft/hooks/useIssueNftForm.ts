@@ -4,14 +4,13 @@ import { useFormik } from 'formik';
 import { number, object, string } from 'yup';
 import { useSendTransactions } from 'hooks';
 import {
-  useGetAccount,
-  useGetNetworkConfig,
   Address,
   TokenManagementTransactionsFactory,
   TransactionsFactoryConfig
-} from 'lib';
+} from 'lib/sdkCore';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDapp';
+import { CollectionType } from 'lib/sdkDapp';
 import { useGetCollectionsQuery } from 'redux/endpoints';
-import { CollectionType } from 'types';
 import { IssueNftFieldsEnum } from '../types';
 
 export const useIssueNftForm = () => {
@@ -60,7 +59,7 @@ export const useIssueNftForm = () => {
       collection: object().nullable().required('Collection is required')
     }),
     onSubmit: async (values) => {
-      const transaction = factory.createTransactionForCreatingNFT(
+      const transaction = await factory.createTransactionForCreatingNFT(
         new Address(address),
         {
           name: values.name,

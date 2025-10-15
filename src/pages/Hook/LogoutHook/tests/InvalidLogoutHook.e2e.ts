@@ -1,6 +1,5 @@
-import { WALLET_SOURCE_ORIGIN } from '__mocks__';
-import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
-import { expectElementToContainText } from 'utils/testUtils/puppeteer';
+import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
+import { waitForUrlToMatch } from 'utils/testUtils/puppeteer';
 
 describe('Invalid logout hook tests', () => {
   it('should logout and navigate to unlock page when callbackUrl is missing', async () => {
@@ -8,11 +7,8 @@ describe('Invalid logout hook tests', () => {
       waitUntil: 'domcontentloaded'
     });
 
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.unlockPage,
-      text: 'Login'
+    await waitForUrlToMatch({
+      expectedUrl: `${WALLET_SOURCE_ORIGIN}/unlock`
     });
-
-    expect(page.url()).toMatch(`${WALLET_SOURCE_ORIGIN}/unlock`);
   });
 });

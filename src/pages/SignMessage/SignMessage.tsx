@@ -1,157 +1,195 @@
-import { useEffect, useState } from 'react';
-import type { MouseEvent } from 'react';
-import { faBroom, faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+import { MouseEvent, useEffect, useState } from 'react';
+import {
+  faArrowsRotate,
+  faBroom,
+  faFileSignature
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
-import { useReplyWithCancelled } from 'hooks';
+import { useReplyToDapp, useReplyWithCancelled } from 'hooks';
+import { Address, Message } from 'lib/sdkCore';
+import { getAccountProvider, useGetAccount } from 'lib/sdkDapp';
 import {
-  parseQueryParams,
-  useSignMessage,
-  useGetSignMessageSession
-} from 'lib';
-import { CANCELLED, DataTestIdsEnum, HooksEnum } from 'localConstants';
+  WindowProviderResponseEnums,
+  SignMessageStatusEnum
+} from 'lib/sdkDappWebWalletCrossWindowProvider';
+import { parseQueryParams } from 'lib/sdkJsWebWalletIo';
+import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { hookSelector } from 'redux/selectors';
-import { routeNames } from 'routes';
-import { SignedMessageStatusesEnum } from 'types';
+import { resetHook } from 'redux/slices';
 import { SignFailure, SignSuccess } from './components';
-import { useSignMessageCompleted } from './hooks';
 
 export const SignMessage = () => {
-  const { sessionId, signMessage, onAbort, onCancel } = useSignMessage();
-  const messageSession = useGetSignMessageSession(sessionId);
-  const { type: hook, callbackUrl, hookUrl } = useSelector(hookSelector);
-  const navigate = useNavigate();
+  const { hookUrl } = useSelector(hookSelector);
+  const dispatch = useDispatch();
+  const replyToDapp = useReplyToDapp();
   const replyWithCancelled = useReplyWithCancelled({
-    caller: 'SignModals'
+    caller: 'SignMessage'
   });
-  const signMessageCompleted = useSignMessageCompleted();
-
-  const isSignMessageHook = hook === HooksEnum.signMessage;
-
-  const [message, setMessage] = useState<string>(
-    isSignMessageHook ? String(parseQueryParams(hookUrl).message) : ''
+  const [message, setMessage] = useState('');
+  const [signedMessage, setSignedMessage] = useState<Message | null>(null);
+  const [state, setState] = useState<'pending' | 'success' | 'error'>(
+    'pending'
   );
-
-  const handleSubmit = (e: MouseEvent) => {
-    e.preventDefault();
-
-    if (messageSession) {
-      onAbort();
-    }
-
-    if (!message.trim()) {
-      return;
-    }
-
-    signMessage({
-      message,
-      callbackRoute: window.location.href
-    });
-  };
-
-  const isSuccess =
-    messageSession?.message &&
-    messageSession?.status === SignedMessageStatusesEnum.signed;
+  const [signature, setSignature] = useState('');
+  const { address } = useGetAccount();
+  const provider = getAccountProvider();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSuccess && isSignMessageHook) {
-      signMessageCompleted({ isSuccess, signedMessageInfo: messageSession });
+    if (hookUrl) {
+      const hookParams = parseQueryParams(hookUrl);
+      setMessage(hookParams.message as string);
     }
-  }, [isSuccess]);
+  }, [hookUrl]);
 
-  // Clear state on destroy
-  useEffect(
-    () => () => {
-      onAbort();
+  const handleSubmit = async () => {
+    try {
+      const messageToSign = new Message({
+        address: new Address(address),
+        data: new TextEncoder().encode(message)
+      });
+
+      const signedMessageResult = await provider.signMessage(messageToSign);
+
+      if (!signedMessageResult?.signature) {
+        if (message) {
+          replyToDapp({
+            type: WindowProviderResponseEnums.signMessageResponse,
+            payload: {
+              data: {
+                status: SignMessageStatusEnum.failed
+              }
+            }
+          });
+          dispatch(resetHook());
+        }
+
+        setState('error');
+        return;
+      }
+
+      const signatureHex = Buffer.from(signedMessageResult.signature).toString(
+        'hex'
+      );
+
+      if (message && hookUrl) {
+        replyToDapp({
+          type: WindowProviderResponseEnums.signMessageResponse,
+          payload: {
+            data: {
+              signature: signatureHex,
+              status: SignMessageStatusEnum.signed
+            }
+          }
+        });
+
+        dispatch(resetHook());
+      }
+
+      setState('success');
+      setSignature(signatureHex);
+      setSignedMessage(signedMessageResult);
       setMessage('');
-    },
-    []
-  );
+    } catch (error) {
+      console.error(error);
 
-  const handleSignMessageCloseFlow = () => {
-    if (!isSignMessageHook) {
-      onAbort();
-      navigate(routeNames.dashboard);
-      return;
+      if (message && hookUrl) {
+        replyToDapp({
+          type: WindowProviderResponseEnums.signMessageResponse,
+          payload: {
+            data: {
+              status: SignMessageStatusEnum.failed
+            }
+          }
+        });
+        dispatch(resetHook());
+      }
+      setState('error');
     }
-
-    onCancel({
-      errorMessage: CANCELLED,
-      callbackRoute: callbackUrl ?? window.location.href
-    });
-
-    replyWithCancelled();
-    navigate(routeNames.dashboard);
   };
 
-  const isError = messageSession
-    ? [
-        (SignedMessageStatusesEnum.cancelled, SignedMessageStatusesEnum.failed)
-      ].includes(messageSession.status) && messageSession?.message
-    : false;
+  const handleClear = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSignature('');
+    setState('pending');
+  };
+
+  const handleCancel = () => {
+    dispatch(resetHook());
+    navigate(RouteNamesEnum.dashboard);
+
+    if (hookUrl) {
+      replyWithCancelled();
+    }
+  };
 
   return (
-    <div
-      className='flex flex-col p-6 max-w-2xl w-full bg-white shadow-md rounded h-full'
-      data-testid={DataTestIdsEnum.signMessagePage}
-    >
-      <div className='flex flex-col gap-6'>
-        <h2 className='text-2xl font-bold p-2 mb-2 text-center'>
-          Sign Message
-        </h2>
-        <OutputContainer>
-          {!isSuccess && !isError && (
-            <textarea
-              placeholder='Write message here'
-              disabled={isSignMessageHook}
-              value={message}
-              className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-600'
-              onChange={(event) => setMessage(event.currentTarget.value)}
-            />
-          )}
+    <div className='flex flex-col gap-6'>
+      <OutputContainer className='p-0 m-0 border-none'>
+        {!['success', 'error'].includes(state) && (
+          <textarea
+            placeholder='Write message here'
+            className='resize-none w-full h-32 rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-blue-500 text-gray-800'
+            value={message}
+            onChange={(event) => {
+              setMessage(event.currentTarget.value);
+            }}
+          />
+        )}
 
-          {isSuccess && (
-            <SignSuccess messageToSign={messageSession?.message ?? ''} />
-          )}
+        {state === 'success' && signedMessage != null && (
+          <SignSuccess
+            message={signedMessage}
+            signature={signature}
+            address={address}
+          />
+        )}
 
-          {isError && <SignFailure />}
-        </OutputContainer>
-        <div className='my-2 flex flex-col gap-4'>
-          {isSuccess || isError ? (
+        {state === 'error' && <SignFailure />}
+      </OutputContainer>
+      <div className='flex gap-2 items-center justify-center'>
+        {['success', 'error'].includes(state) ? (
+          <>
             <Button
-              data-testid={DataTestIdsEnum.cancelSignMessageBtn}
-              className='mx-auto rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
+              data-testid='closeTransactionSuccessBtn'
               id='closeButton'
-              onClick={handleSignMessageCloseFlow}
+              onClick={handleClear}
             >
-              <FontAwesomeIcon
-                icon={isSuccess ? faBroom : faArrowsRotate}
-                className='mr-1'
-              />
-              {isError ? 'Try again' : 'Clear'}
+              <>
+                <FontAwesomeIcon
+                  icon={state === 'success' ? faBroom : faArrowsRotate}
+                  className='mr-1'
+                />
+                {state === 'error' ? 'Try again' : 'Clear'}
+              </>
             </Button>
-          ) : (
+          </>
+        ) : (
+          <>
             <Button
-              className='mx-auto rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
               data-testid={DataTestIdsEnum.signMessageBtn}
               onClick={handleSubmit}
+              disabled={!message.trim()}
             >
-              Sign Message
+              <>
+                <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
+                Sign
+              </>
             </Button>
-          )}
-
-          <Button
-            data-testid={DataTestIdsEnum.cancelSignMessageBtn}
-            className='mx-auto text-blue-600 text-sm'
-            id='closeButton'
-            onClick={handleSignMessageCloseFlow}
-          >
-            Cancel
-          </Button>
-        </div>
+            <Button
+              data-testid={DataTestIdsEnum.cancelSignMessageBtn}
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

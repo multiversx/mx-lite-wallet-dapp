@@ -2,28 +2,17 @@ import { WALLET_SOURCE_ORIGIN } from '__mocks__/data';
 import { DataTestIdsEnum } from 'localConstants/dataTestIds.enum';
 import {
   changeInputText,
-  expectElementToContainText,
-  getByDataTestId,
-  loginWithKeystore
+  expectAndSignTransaction,
+  getByDataTestId
 } from 'utils/testUtils/puppeteer';
+import { navigateToIssueCollectionPage } from './helpers';
 
 describe('Issue NFT Collection test', () => {
   it('should create a new NFT collection successfully', async () => {
-    await page.goto(`${WALLET_SOURCE_ORIGIN}/logout`, {
-      waitUntil: 'domcontentloaded'
-    });
-
-    await loginWithKeystore();
-    await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
+    await navigateToIssueCollectionPage();
     await expect(page.url()).toEqual(
       `${WALLET_SOURCE_ORIGIN}/issue-collection`
     );
-
-    const createCollectionBtn = await page.waitForSelector(
-      getByDataTestId(DataTestIdsEnum.issueCollectionBtn)
-    );
-
-    await createCollectionBtn?.click();
     await changeInputText({
       dataTestId: DataTestIdsEnum.tokenNameInput,
       shouldOverride: true,
@@ -37,9 +26,16 @@ describe('Issue NFT Collection test', () => {
     });
 
     await page.click(getByDataTestId(DataTestIdsEnum.issueCollectionBtn));
-    await expectElementToContainText({
-      dataTestId: DataTestIdsEnum.transactionToastTitle,
-      text: 'Processing transaction'
-    });
+    await expectAndSignTransaction([
+      {
+        amount: '0.0500',
+        receiverAddress:
+          'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u',
+        signerAddress: '@webteam',
+        gasPrice: '0.000000001',
+        gasLimit: '60.152.000',
+        data: 'registerAndSetAllRoles@54455354434f4c4c454354494f4e@54455354@4e4654@'
+      }
+    ]);
   });
 });

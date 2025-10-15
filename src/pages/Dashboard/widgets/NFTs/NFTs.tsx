@@ -1,18 +1,22 @@
 import { useEffect } from 'react';
-import { MxLink, OutputContainer } from 'components';
-import { useGetAccountInfo } from 'lib';
+import { useSelector } from 'react-redux';
+import { MxLink } from 'components/MxLink';
+import { OutputContainer } from 'components/OutputContainer';
+import { useGetAccountInfo } from 'lib/sdkDapp';
 import { DataTestIdsEnum } from 'localConstants';
+import { RouteNamesEnum } from 'localConstants/routes';
 import { useLazyGetNftsQuery } from 'redux/endpoints';
-import { routeNames } from 'routes';
+import { networkSelector } from 'redux/selectors';
 import { NFTRow } from './components';
 
 export const NFTs = () => {
   const { websocketEvent, address } = useGetAccountInfo();
   const [fetchNFTs, { data: nftsData, isLoading }] = useLazyGetNftsQuery();
+  const { activeNetwork } = useSelector(networkSelector);
 
   useEffect(() => {
     fetchNFTs({ address });
-  }, [address, websocketEvent]);
+  }, [address, websocketEvent, activeNetwork]);
 
   if (!isLoading && nftsData?.length === 0) {
     return (
@@ -24,14 +28,14 @@ export const NFTs = () => {
           <MxLink
             className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             data-testid={DataTestIdsEnum.issueNftBtn}
-            to={routeNames.createNft}
+            to={RouteNamesEnum.createNft}
           >
             Create NFT
           </MxLink>
           <MxLink
             className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
             data-testid={DataTestIdsEnum.issueCollectionBtn}
-            to={routeNames.issueCollection}
+            to={RouteNamesEnum.issueCollection}
           >
             Issue Collection
           </MxLink>
@@ -52,14 +56,14 @@ export const NFTs = () => {
         <MxLink
           className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
           data-testid={DataTestIdsEnum.issueNftBtn}
-          to={routeNames.createNft}
+          to={RouteNamesEnum.createNft}
         >
           Create NFT
         </MxLink>
         <MxLink
           className='inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm text-white'
           data-testid={DataTestIdsEnum.issueCollectionBtn}
-          to={routeNames.issueCollection}
+          to={RouteNamesEnum.issueCollection}
         >
           Issue Collection
         </MxLink>

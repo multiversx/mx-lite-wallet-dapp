@@ -1,42 +1,16 @@
 import classNames from 'classnames';
 import Select from 'react-select';
-import { Button, MxLink } from 'components';
-import { capitalize, getFormHasError } from 'helpers';
-import {
-  DataTestIdsEnum,
-  DEVNET_CHAIN_ID,
-  MAINNET_CHAIN_ID,
-  TESTNET_CHAIN_ID
-} from 'localConstants';
-import { routeNames } from 'routes';
-import { EnvironmentsEnum, SendTypeEnum } from 'types';
+import { Button } from 'components/Button';
+import { MxLink } from 'components/MxLink';
+import { DataTestIdsEnum, RouteNamesEnum } from 'localConstants';
+import { SendTypeEnum } from 'types';
+import { getFormHasError } from 'utils';
 import { useRegisterTokenForm } from '../hooks';
 import { RegisterTokenFormFieldsEnum } from '../types';
 
 export const RegisterTokenForm = () => {
-  const {
-    formik,
-    handleOnSendTypeChange,
-    handleChainChange,
-    isLoading,
-    isNFT,
-    tokenOptions
-  } = useRegisterTokenForm();
-
-  const chainOptions = [
-    {
-      label: capitalize(EnvironmentsEnum.devnet),
-      value: DEVNET_CHAIN_ID
-    },
-    {
-      label: capitalize(EnvironmentsEnum.testnet),
-      value: TESTNET_CHAIN_ID
-    },
-    {
-      label: capitalize(EnvironmentsEnum.mainnet),
-      value: MAINNET_CHAIN_ID
-    }
-  ];
+  const { formik, handleOnSendTypeChange, isLoading, isNFT, tokenOptions } =
+    useRegisterTokenForm();
 
   const checkFormHasError = getFormHasError(formik);
   const hasContractError = checkFormHasError(
@@ -119,29 +93,6 @@ export const RegisterTokenForm = () => {
         </div>
         <div className='flex flex-col'>
           <label
-            htmlFor={RegisterTokenFormFieldsEnum.chainId}
-            className='block text-sm font-bold mb-2'
-          >
-            Chain:
-          </label>
-          <div className='flex flex-col'>
-            <Select
-              className='text-sm text-gray-700 placeholder-gray-400'
-              options={chainOptions}
-              name={RegisterTokenFormFieldsEnum.chainId}
-              onChange={handleChainChange}
-              onBlur={() =>
-                formik.setFieldTouched(
-                  RegisterTokenFormFieldsEnum.chainId,
-                  true
-                )
-              }
-              value={formik.values[RegisterTokenFormFieldsEnum.chainId]}
-            />
-          </div>
-        </div>
-        <div className='flex flex-col'>
-          <label
             htmlFor={RegisterTokenFormFieldsEnum.token}
             className='block text-sm font-bold mb-2'
           >
@@ -175,7 +126,7 @@ export const RegisterTokenForm = () => {
         <MxLink
           className='block w-full mt-2 px-4 py-2 text-sm text-center text-blue-600'
           data-testid={DataTestIdsEnum.cancelBtn}
-          to={routeNames.dashboard}
+          to={RouteNamesEnum.dashboard}
         >
           Cancel
         </MxLink>
